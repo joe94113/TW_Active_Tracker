@@ -1,4 +1,4 @@
-name: Send Telegram Close Digest
+name: Send Close Notifications
 
 on:
   workflow_dispatch:
@@ -20,6 +20,7 @@ jobs:
       TZ: Asia/Taipei
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
     steps:
       - name: Checkout
@@ -30,5 +31,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Send close digest
+      - name: Send Telegram digest
         run: node scripts/send-telegram-brief.mjs
+
+      - name: Send Discord digest
+        run: node scripts/send-discord-brief.mjs
