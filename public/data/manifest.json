@@ -1,0 +1,1024 @@
+{
+  "appName": "台股主動通",
+  "generatedAt": "2026-04-11T05:39:36.749Z",
+  "generatedAtLocalDate": "2026-04-11",
+  "generatedAtLocalTime": "13:39:33",
+  "dashboardPath": "data/dashboard.json",
+  "overlapPath": "data/etf-overlap.json",
+  "trackedEtfs": [
+    {
+      "code": "00980A",
+      "name": "主動野村臺灣優選",
+      "fullName": "主動野村臺灣優選主動式交易所交易基金",
+      "provider": "nomura",
+      "providerLabel": "野村投信",
+      "sourceName": "野村投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00980A",
+      "trackingStatus": "已串接"
+    },
+    {
+      "code": "00982A",
+      "name": "主動群益台灣強棒",
+      "fullName": "主動群益台灣強棒主動式交易所交易基金",
+      "provider": "capital",
+      "providerLabel": "群益投信",
+      "sourceName": "群益投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/399/portfolio",
+      "trackingStatus": "已串接"
+    },
+    {
+      "code": "00981A",
+      "name": "主動統一台股增長",
+      "fullName": "主動統一台股增長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "統一投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00983A",
+      "name": "主動中信ARK創新",
+      "fullName": "主動中信ARK創新主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "中信投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00984A",
+      "name": "主動安聯台灣高息",
+      "fullName": "主動安聯台灣高息主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "安聯投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00985A",
+      "name": "主動野村台灣50",
+      "fullName": "主動野村台灣50主動式交易所交易基金",
+      "provider": "nomura",
+      "providerLabel": "野村投信",
+      "sourceName": "野村投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00985A",
+      "trackingStatus": "已串接"
+    },
+    {
+      "code": "00986A",
+      "name": "主動台新龍頭成長",
+      "fullName": "主動台新龍頭成長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "台新投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00986A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00982D",
+      "name": "主動富邦動態入息",
+      "fullName": "主動富邦動態入息主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "富邦投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00983D",
+      "name": "主動富邦複合收益",
+      "fullName": "主動富邦複合收益主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "富邦投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00989A",
+      "name": "主動摩根美國科技",
+      "fullName": "主動摩根美國科技主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "摩根投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00989A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00988A",
+      "name": "主動統一全球創新",
+      "fullName": "主動統一全球創新主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "統一投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00991A",
+      "name": "主動復華未來50",
+      "fullName": "主動復華未來50主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "復華投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00991A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00990A",
+      "name": "主動元大AI新經濟",
+      "fullName": "主動元大AI新經濟主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "元大投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00990A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00987A",
+      "name": "主動台新優勢成長",
+      "fullName": "主動台新優勢成長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "台新投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00987A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00992A",
+      "name": "主動群益科技創新",
+      "fullName": "主動群益科技創新主動式交易所交易基金",
+      "provider": "capital",
+      "providerLabel": "群益投信",
+      "sourceName": "群益投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/500/portfolio",
+      "trackingStatus": "已串接"
+    },
+    {
+      "code": "00994A",
+      "name": "主動第一金台股優",
+      "fullName": "主動第一金台股優主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "第一金投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00994A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00995A",
+      "name": "主動中信台灣卓越",
+      "fullName": "主動中信台灣卓越主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "中信投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00995A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00993A",
+      "name": "主動安聯台灣",
+      "fullName": "主動安聯台灣主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "安聯投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00993A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00984D",
+      "name": "主動聯博全球非投",
+      "fullName": "主動聯博全球非投主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "聯博投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984D",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00996A",
+      "name": "主動兆豐台灣豐收",
+      "fullName": "主動兆豐台灣豐收主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "兆豐投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00996A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00400A",
+      "name": "主動國泰動能高息",
+      "fullName": "主動國泰動能高息主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "國泰投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00400A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00401A",
+      "name": "主動摩根台灣鑫收",
+      "fullName": "主動摩根台灣鑫收主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "摩根投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00401A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00997A",
+      "name": "主動群益美國增長",
+      "fullName": "主動群益美國增長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "群益投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00997A",
+      "trackingStatus": "待串接"
+    }
+  ],
+  "latestOverview": [
+    {
+      "code": "00980A",
+      "name": "主動野村臺灣優選",
+      "fullName": "主動野村臺灣優選主動式交易所交易基金",
+      "provider": "nomura",
+      "providerLabel": "野村投信",
+      "sourceName": "野村投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00980A",
+      "trackingStatus": "已串接",
+      "disclosureDate": "2026-04-10",
+      "nav": 18.89,
+      "aum": 12832866134,
+      "holdingsCount": 50,
+      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：HTTP 502 Bad Gateway",
+      "changeSummary": {
+        "addedCount": 50,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00982A",
+      "name": "主動群益台灣強棒",
+      "fullName": "主動群益台灣強棒主動式交易所交易基金",
+      "provider": "capital",
+      "providerLabel": "群益投信",
+      "sourceName": "群益投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/399/portfolio",
+      "trackingStatus": "已串接",
+      "disclosureDate": "2026-04-13",
+      "nav": 18.17,
+      "aum": 33923222553,
+      "holdingsCount": 10,
+      "trackingMessage": "官方來源每日同步",
+      "changeSummary": {
+        "addedCount": 10,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00981A",
+      "name": "主動統一台股增長",
+      "fullName": "主動統一台股增長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "統一投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00983A",
+      "name": "主動中信ARK創新",
+      "fullName": "主動中信ARK創新主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "中信投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00984A",
+      "name": "主動安聯台灣高息",
+      "fullName": "主動安聯台灣高息主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "安聯投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00985A",
+      "name": "主動野村台灣50",
+      "fullName": "主動野村台灣50主動式交易所交易基金",
+      "provider": "nomura",
+      "providerLabel": "野村投信",
+      "sourceName": "野村投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00985A",
+      "trackingStatus": "已串接",
+      "disclosureDate": "2026-04-10",
+      "nav": 17.23,
+      "aum": 8880468706,
+      "holdingsCount": 51,
+      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：HTTP 502 Bad Gateway",
+      "changeSummary": {
+        "addedCount": 51,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00986A",
+      "name": "主動台新龍頭成長",
+      "fullName": "主動台新龍頭成長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "台新投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00986A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00982D",
+      "name": "主動富邦動態入息",
+      "fullName": "主動富邦動態入息主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "富邦投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00983D",
+      "name": "主動富邦複合收益",
+      "fullName": "主動富邦複合收益主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "富邦投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00989A",
+      "name": "主動摩根美國科技",
+      "fullName": "主動摩根美國科技主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "摩根投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00989A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00988A",
+      "name": "主動統一全球創新",
+      "fullName": "主動統一全球創新主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "統一投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00991A",
+      "name": "主動復華未來50",
+      "fullName": "主動復華未來50主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "復華投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00991A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00990A",
+      "name": "主動元大AI新經濟",
+      "fullName": "主動元大AI新經濟主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "元大投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00990A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00987A",
+      "name": "主動台新優勢成長",
+      "fullName": "主動台新優勢成長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "台新投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00987A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00992A",
+      "name": "主動群益科技創新",
+      "fullName": "主動群益科技創新主動式交易所交易基金",
+      "provider": "capital",
+      "providerLabel": "群益投信",
+      "sourceName": "群益投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/500/portfolio",
+      "trackingStatus": "已串接",
+      "disclosureDate": "2026-04-13",
+      "nav": 14.86,
+      "aum": 24305990758,
+      "holdingsCount": 10,
+      "trackingMessage": "官方來源每日同步",
+      "changeSummary": {
+        "addedCount": 10,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00994A",
+      "name": "主動第一金台股優",
+      "fullName": "主動第一金台股優主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "第一金投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00994A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00995A",
+      "name": "主動中信台灣卓越",
+      "fullName": "主動中信台灣卓越主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "中信投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00995A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00993A",
+      "name": "主動安聯台灣",
+      "fullName": "主動安聯台灣主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "安聯投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00993A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00984D",
+      "name": "主動聯博全球非投",
+      "fullName": "主動聯博全球非投主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "聯博投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984D",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00996A",
+      "name": "主動兆豐台灣豐收",
+      "fullName": "主動兆豐台灣豐收主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "兆豐投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00996A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00400A",
+      "name": "主動國泰動能高息",
+      "fullName": "主動國泰動能高息主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "國泰投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00400A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00401A",
+      "name": "主動摩根台灣鑫收",
+      "fullName": "主動摩根台灣鑫收主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "摩根投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00401A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    },
+    {
+      "code": "00997A",
+      "name": "主動群益美國增長",
+      "fullName": "主動群益美國增長主動式交易所交易基金",
+      "provider": "pending",
+      "providerLabel": "群益投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00997A",
+      "trackingStatus": "待串接",
+      "disclosureDate": null,
+      "nav": null,
+      "aum": null,
+      "holdingsCount": 0,
+      "trackingMessage": "官方持股來源待串接",
+      "changeSummary": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0
+      }
+    }
+  ],
+  "latestDisclosureDate": "2026-04-13",
+  "connectedCount": 4,
+  "pendingEtfs": [
+    {
+      "code": "00981A",
+      "name": "主動統一台股增長",
+      "fullName": "主動統一台股增長主動式交易所交易基金",
+      "providerLabel": "統一投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00983A",
+      "name": "主動中信ARK創新",
+      "fullName": "主動中信ARK創新主動式交易所交易基金",
+      "providerLabel": "中信投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00984A",
+      "name": "主動安聯台灣高息",
+      "fullName": "主動安聯台灣高息主動式交易所交易基金",
+      "providerLabel": "安聯投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00986A",
+      "name": "主動台新龍頭成長",
+      "fullName": "主動台新龍頭成長主動式交易所交易基金",
+      "providerLabel": "台新投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00986A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00982D",
+      "name": "主動富邦動態入息",
+      "fullName": "主動富邦動態入息主動式交易所交易基金",
+      "providerLabel": "富邦投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00983D",
+      "name": "主動富邦複合收益",
+      "fullName": "主動富邦複合收益主動式交易所交易基金",
+      "providerLabel": "富邦投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00989A",
+      "name": "主動摩根美國科技",
+      "fullName": "主動摩根美國科技主動式交易所交易基金",
+      "providerLabel": "摩根投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00989A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00988A",
+      "name": "主動統一全球創新",
+      "fullName": "主動統一全球創新主動式交易所交易基金",
+      "providerLabel": "統一投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00991A",
+      "name": "主動復華未來50",
+      "fullName": "主動復華未來50主動式交易所交易基金",
+      "providerLabel": "復華投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00991A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00990A",
+      "name": "主動元大AI新經濟",
+      "fullName": "主動元大AI新經濟主動式交易所交易基金",
+      "providerLabel": "元大投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00990A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00987A",
+      "name": "主動台新優勢成長",
+      "fullName": "主動台新優勢成長主動式交易所交易基金",
+      "providerLabel": "台新投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00987A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00994A",
+      "name": "主動第一金台股優",
+      "fullName": "主動第一金台股優主動式交易所交易基金",
+      "providerLabel": "第一金投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00994A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00995A",
+      "name": "主動中信台灣卓越",
+      "fullName": "主動中信台灣卓越主動式交易所交易基金",
+      "providerLabel": "中信投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00995A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00993A",
+      "name": "主動安聯台灣",
+      "fullName": "主動安聯台灣主動式交易所交易基金",
+      "providerLabel": "安聯投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00993A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00984D",
+      "name": "主動聯博全球非投",
+      "fullName": "主動聯博全球非投主動式交易所交易基金",
+      "providerLabel": "聯博投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984D",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00996A",
+      "name": "主動兆豐台灣豐收",
+      "fullName": "主動兆豐台灣豐收主動式交易所交易基金",
+      "providerLabel": "兆豐投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00996A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00400A",
+      "name": "主動國泰動能高息",
+      "fullName": "主動國泰動能高息主動式交易所交易基金",
+      "providerLabel": "國泰投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00400A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00401A",
+      "name": "主動摩根台灣鑫收",
+      "fullName": "主動摩根台灣鑫收主動式交易所交易基金",
+      "providerLabel": "摩根投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00401A",
+      "trackingStatus": "待串接"
+    },
+    {
+      "code": "00997A",
+      "name": "主動群益美國增長",
+      "fullName": "主動群益美國增長主動式交易所交易基金",
+      "providerLabel": "群益投信",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00997A",
+      "trackingStatus": "待串接"
+    }
+  ],
+  "failedEtfs": [],
+  "sources": [
+    {
+      "code": "00980A",
+      "sourceName": "野村投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00980A"
+    },
+    {
+      "code": "00982A",
+      "sourceName": "群益投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/399/portfolio"
+    },
+    {
+      "code": "00981A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A"
+    },
+    {
+      "code": "00983A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983A"
+    },
+    {
+      "code": "00984A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984A"
+    },
+    {
+      "code": "00985A",
+      "sourceName": "野村投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00985A"
+    },
+    {
+      "code": "00986A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00986A"
+    },
+    {
+      "code": "00982D",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D"
+    },
+    {
+      "code": "00983D",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D"
+    },
+    {
+      "code": "00989A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00989A"
+    },
+    {
+      "code": "00988A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A"
+    },
+    {
+      "code": "00991A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00991A"
+    },
+    {
+      "code": "00990A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00990A"
+    },
+    {
+      "code": "00987A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00987A"
+    },
+    {
+      "code": "00992A",
+      "sourceName": "群益投信 ETF 官方持股資料",
+      "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/500/portfolio"
+    },
+    {
+      "code": "00994A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00994A"
+    },
+    {
+      "code": "00995A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00995A"
+    },
+    {
+      "code": "00993A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00993A"
+    },
+    {
+      "code": "00984D",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00984D"
+    },
+    {
+      "code": "00996A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00996A"
+    },
+    {
+      "code": "00400A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00400A"
+    },
+    {
+      "code": "00401A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00401A"
+    },
+    {
+      "code": "00997A",
+      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
+      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00997A"
+    },
+    {
+      "code": "TWSE",
+      "sourceName": "TWSE OpenAPI",
+      "sourceUrl": "https://openapi.twse.com.tw/"
+    }
+  ],
+  "storagePolicy": "每檔 ETF 僅保留 latest.json、previous.json、diff-latest.json，方便和前一日比較。"
+}
