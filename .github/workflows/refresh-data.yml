@@ -1,31 +1,43 @@
-name: Refresh ETF Data
+name: Refresh Market Data
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 10 * * 1-5'
+    - cron: '*/15 1-6 * * 1-5'
+    - cron: '50 6 * * 1-5'
+    - cron: '20 7 * * 1-5'
+    - cron: '35 10 * * 1-5'
 
 permissions:
   contents: write
 
+concurrency:
+  group: refresh-market-data-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TZ: Asia/Taipei
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Update static ETF data
+      - name: Update static market data
         run: npm run data:update
 
       - name: Commit refreshed data
@@ -37,5 +49,6 @@ jobs:
             echo "No data changes"
             exit 0
           fi
-          git commit -m "chore: refresh ETF data"
-          git push
+          git commit -m "chore: refresh market data"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
