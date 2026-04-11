@@ -2,6 +2,13 @@
 import path from 'node:path';
 import vm from 'node:vm';
 import * as XLSX from 'xlsx';
+import {
+  buildIndicatorRows,
+  buildTechnicalSignalSummary,
+  calculateWindowReturn,
+  defaultIndicatorSettings,
+  summarizeSignalTitles,
+} from '../src/lib/technicalAnalysis.js';
 
 const 根目錄 = process.cwd();
 const 資料目錄 = path.join(根目錄, 'public', 'data');
@@ -1492,109 +1499,22 @@ async function 抓取期貨歷史日線(商品代碼, 優先日期 = null, month
   return 補上日線漲跌資料(rows);
 }
 
-function 計算簡單移動平均(資料, index, period) {
-  if (index + 1 < period) return null;
-  const subset = 資料.slice(index - period + 1, index + 1);
-  return subset.reduce((total, item) => total + (item.close ?? 0), 0) / period;
-}
-
-function 計算技術指標(日線資料) {
-  const 結果 = [];
-  const gains = [];
-  const losses = [];
-  let avgGain = null;
-  let avgLoss = null;
-  let kValue = 50;
-  let dValue = 50;
-  let ema12 = null;
-  let ema26 = null;
-  let signal = null;
-  const k12 = 2 / (12 + 1);
-  const k26 = 2 / (26 + 1);
-  const k9 = 2 / (9 + 1);
-
-  for (let index = 0; index < 日線資料.length; index += 1) {
-    const item = 日線資料[index];
-    const previous = 日線資料[index - 1];
-    const change = previous ? (item.close ?? 0) - (previous.close ?? 0) : 0;
-    const gain = Math.max(change, 0);
-    const loss = Math.max(-change, 0);
-
-    gains.push(gain);
-    losses.push(loss);
-
-    if (index === 14) {
-      avgGain = gains.slice(1, 15).reduce((total, value) => total + value, 0) / 14;
-      avgLoss = losses.slice(1, 15).reduce((total, value) => total + value, 0) / 14;
-    } else if (index > 14) {
-      avgGain = ((avgGain ?? 0) * 13 + gain) / 14;
-      avgLoss = ((avgLoss ?? 0) * 13 + loss) / 14;
-    }
-
-    const rsi14 =
-      avgGain === null || avgLoss === null
-        ? null
-        : avgLoss === 0
-          ? 100
-          : 100 - 100 / (1 + avgGain / avgLoss);
-
-    if (index >= 8) {
-      const recent = 日線資料.slice(index - 8, index + 1);
-      const highest = Math.max(...recent.map((entry) => entry.high ?? entry.close ?? 0));
-      const lowest = Math.min(...recent.map((entry) => entry.low ?? entry.close ?? 0));
-      const rsv = highest === lowest ? 50 : (((item.close ?? 0) - lowest) / (highest - lowest)) * 100;
-      kValue = (2 / 3) * kValue + (1 / 3) * rsv;
-      dValue = (2 / 3) * dValue + (1 / 3) * kValue;
-    }
-
-    ema12 = ema12 === null ? item.close : ema12 + (item.close - ema12) * k12;
-    ema26 = ema26 === null ? item.close : ema26 + (item.close - ema26) * k26;
-    const macd = ema12 !== null && ema26 !== null ? ema12 - ema26 : null;
-    signal = signal === null ? macd : signal + ((macd ?? 0) - signal) * k9;
-    const macdHist = macd !== null && signal !== null ? macd - signal : null;
-
-    結果.push({
-      ...item,
-      ma5: 計算簡單移動平均(日線資料, index, 5),
-      ma10: 計算簡單移動平均(日線資料, index, 10),
-      ma20: 計算簡單移動平均(日線資料, index, 20),
-      ma60: 計算簡單移動平均(日線資料, index, 60),
-      rsi14,
-      k9: index >= 8 ? kValue : null,
-      d9: index >= 8 ? dValue : null,
-      macd,
-      macdSignal: signal,
-      macdHist,
-    });
-  }
-
-  return 結果;
-}
-
-function 計算區間報酬(歷史資料, period) {
-  const latest = 歷史資料.at(-1);
-  const base = 歷史資料.at(-(period + 1));
-
-  if (!latest?.close || !base?.close) return null;
-  return ((latest.close - base.close) / base.close) * 100;
-}
-
 function 建立技術觀察摘要(name, 歷史資料) {
   const latest = 歷史資料.at(-1);
   if (!latest) return [];
   const bullets = [];
 
-  if (latest.close > (latest.ma20 ?? Infinity) && (latest.ma20 ?? 0) > (latest.ma60 ?? Infinity)) {
+  if (latest.close > (latest.maMedium ?? Infinity) && (latest.maMedium ?? 0) > (latest.maLong ?? Infinity)) {
     bullets.push(`${name} 目前站在 MA20 與 MA60 之上，短中期均線仍偏向多方排列。`);
-  } else if (latest.close < (latest.ma20 ?? -Infinity) && (latest.ma20 ?? 0) < (latest.ma60 ?? -Infinity)) {
+  } else if (latest.close < (latest.maMedium ?? -Infinity) && (latest.maMedium ?? 0) < (latest.maLong ?? -Infinity)) {
     bullets.push(`${name} 收盤落在 MA20 與 MA60 下方，現階段仍屬偏弱整理格局。`);
   } else {
     bullets.push(`${name} 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。`);
   }
 
-  if ((latest.rsi14 ?? 50) >= 70) {
+  if ((latest.rsi ?? 50) >= 70) {
     bullets.push('RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。');
-  } else if ((latest.rsi14 ?? 50) <= 30) {
+  } else if ((latest.rsi ?? 50) <= 30) {
     bullets.push('RSI14 落在偏低區，若出現量縮止跌，反而可以留意技術性反彈。');
   } else {
     bullets.push('RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。');
@@ -1606,7 +1526,7 @@ function 建立技術觀察摘要(name, 歷史資料) {
     bullets.push('MACD 柱體位於負值區，代表短線修正力道仍在。');
   }
 
-  const return20 = 計算區間報酬(歷史資料, 20);
+  const return20 = calculateWindowReturn(歷史資料, 20);
   if (return20 !== null) {
     bullets.push(`近 20 個交易日報酬 ${return20.toFixed(2)}%，可用來觀察波段資金是否持續留在主線。`);
   }
@@ -1615,8 +1535,21 @@ function 建立技術觀察摘要(name, 歷史資料) {
 }
 
 function 建立技術分析資料({ code, name, kind, 歷史資料 }) {
-  const enriched = 計算技術指標(歷史資料).slice(-120);
+  const settings = { ...defaultIndicatorSettings };
+  const enriched = buildIndicatorRows(歷史資料, settings)
+    .slice(-120)
+    .map((row) => ({
+      ...row,
+      ma5: row.maFast ?? null,
+      ma10: row.maShort ?? null,
+      ma20: row.maMedium ?? null,
+      ma60: row.maLong ?? null,
+      rsi14: row.rsi ?? null,
+      k9: row.stochasticK ?? null,
+      d9: row.stochasticD ?? null,
+    }));
   const latest = enriched.at(-1) ?? {};
+  const technicalSignals = buildTechnicalSignalSummary(enriched, settings, { name });
 
   return {
     code,
@@ -1624,23 +1557,33 @@ function 建立技術分析資料({ code, name, kind, 歷史資料 }) {
     kind,
     priceDate: latest.date ?? null,
     generatedAt: 取得現在ISO(),
+    indicatorSettings: settings,
     歷史資料: enriched,
+    technicalSignals,
+    訊號摘要: summarizeSignalTitles(technicalSignals),
     最新摘要: {
       close: latest.close ?? null,
       change: latest.change ?? null,
       changePercent: latest.changePercent ?? null,
       volume: latest.volume ?? null,
       turnover: latest.turnover ?? null,
-      return5: 計算區間報酬(enriched, 5),
-      return20: 計算區間報酬(enriched, 20),
-      return60: 計算區間報酬(enriched, 60),
+      return5: calculateWindowReturn(enriched, 5),
+      return20: calculateWindowReturn(enriched, 20),
+      return60: calculateWindowReturn(enriched, 60),
     },
     最新指標: {
+      maFast: latest.maFast ?? null,
+      maShort: latest.maShort ?? null,
+      maMedium: latest.maMedium ?? null,
+      maLong: latest.maLong ?? null,
       ma5: latest.ma5 ?? null,
       ma10: latest.ma10 ?? null,
       ma20: latest.ma20 ?? null,
       ma60: latest.ma60 ?? null,
+      rsi: latest.rsi ?? null,
       rsi14: latest.rsi14 ?? null,
+      stochasticK: latest.stochasticK ?? null,
+      stochasticD: latest.stochasticD ?? null,
       k9: latest.k9 ?? null,
       d9: latest.d9 ?? null,
       macd: latest.macd ?? null,
@@ -2906,6 +2849,7 @@ function 建立個股摘要資料({ code, name, 公司概況, 技術資料, 法�
     code,
     name,
     industryName: 公司概況?.產業名稱 ?? null,
+    priceDate: 技術資料?.priceDate ?? null,
     close: 技術資料?.最新摘要?.close ?? null,
     change: 技術資料?.最新摘要?.change ?? null,
     changePercent: 技術資料?.最新摘要?.changePercent ?? null,
@@ -2920,6 +2864,15 @@ function 建立個股摘要資料({ code, name, 公司概況, 技術資料, 法�
     retailRatio: 持股分散?.retailRatio ?? null,
     shortToMarginRatio: 融資融券?.shortToMarginRatio ?? null,
     activeEtfCount: 主動ETF曝光?.count ?? 0,
+    sparkline20: (技術資料?.歷史資料 ?? [])
+      .slice(-20)
+      .map((item) => Number(item.close))
+      .filter((value) => Number.isFinite(value) && value > 0),
+    technicalSignals: 技術資料?.technicalSignals ?? [],
+    technicalSignalTitles: 技術資料?.訊號摘要 ?? [],
+    topSignalTitle: 技術資料?.technicalSignals?.[0]?.title ?? null,
+    topSignalTone: 技術資料?.technicalSignals?.[0]?.tone ?? null,
+    signalCount: 技術資料?.technicalSignals?.length ?? 0,
   };
 }
 
@@ -3401,6 +3354,7 @@ async function main() {
     generatedAtLocalTime: 轉台北時間(現在),
     dashboardPath: 'data/dashboard.json',
     overlapPath: 'data/etf-overlap.json',
+    stockIndexPath: 'data/stocks/index.json',
     trackedEtfs: 追蹤ETF清單,
     latestOverview: 追蹤ETF清單.map((etf) => {
       const result = successes.find((item) => item.etf.code === etf.code);
@@ -3436,7 +3390,6 @@ async function main() {
     latestDisclosureDate: ETF重疊分析.最新揭露日期,
     connectedCount: successes.length,
     stockDetailCount: 個股候選清單.length,
-    trackedStocks: 個股摘要清單,
     pendingEtfs: pending,
     failedEtfs: failures,
     sources: [

@@ -6,6 +6,7 @@ import { useFavoriteStocks } from '../composables/useFavoriteStocks';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
 import IntradayChart from '../components/IntradayChart.vue';
+import MiniTrendChart from '../components/MiniTrendChart.vue';
 import TechnicalChart from '../components/TechnicalChart.vue';
 import { createStockRoute, isStockCode } from '../lib/stockRouting';
 import {
@@ -182,6 +183,15 @@ function getInstitutionalFlow(contract, identity) {
               </div>
               <button type="button" class="favorite-toggle is-active" @click="toggleFavorite(item.code)">已追蹤</button>
             </div>
+            <div class="favorite-trend-block">
+              <MiniTrendChart :values="item.sparkline20" :tone="item.topSignalTone ?? ((item.changePercent ?? 0) > 0 ? 'up' : (item.changePercent ?? 0) < 0 ? 'down' : 'normal')" />
+              <div class="favorite-trend-meta">
+                <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
+                  {{ formatPercent(item.return20) }}
+                </strong>
+                <span>近 20 日走勢</span>
+              </div>
+            </div>
             <div class="favorite-metrics">
               <span>產業 {{ item.industryName ?? '未分類' }}</span>
               <span :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
@@ -189,6 +199,9 @@ function getInstitutionalFlow(contract, identity) {
               </span>
               <span>20 日 {{ formatPercent(item.return20) }}</span>
               <span>法人五日 {{ formatAmount(item.total5Day) }}</span>
+              <span :class="['signal-pill', item.topSignalTone ? `is-${item.topSignalTone}` : '']">
+                {{ item.topSignalTitle ?? '技術面整理中' }}
+              </span>
             </div>
           </article>
         </div>

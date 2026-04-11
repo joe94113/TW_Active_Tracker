@@ -3,7 +3,20 @@
   "name": "主動摩根台灣鑫收",
   "kind": "etf",
   "priceDate": "2026-04-10",
-  "generatedAt": "2026-04-11T17:22:58.003Z",
+  "generatedAt": "2026-04-11T17:46:23.397Z",
+  "indicatorSettings": {
+    "maFastPeriod": 5,
+    "maShortPeriod": 10,
+    "maMediumPeriod": 20,
+    "maLongPeriod": 60,
+    "rsiPeriod": 14,
+    "stochasticPeriod": 9,
+    "stochasticKPeriod": 3,
+    "stochasticDPeriod": 3,
+    "macdFastPeriod": 12,
+    "macdSlowPeriod": 26,
+    "macdSignalPeriod": 9
+  },
   "歷史資料": [
     {
       "date": "2026-04-10",
@@ -16,17 +29,36 @@
       "transactions": null,
       "change": null,
       "changePercent": null,
+      "maFast": null,
+      "maShort": null,
+      "maMedium": null,
+      "maLong": null,
+      "rsi": null,
+      "stochasticK": null,
+      "stochasticD": null,
+      "macd": 0,
+      "macdSignal": 0,
+      "macdHist": 0,
       "ma5": null,
       "ma10": null,
       "ma20": null,
       "ma60": null,
       "rsi14": null,
       "k9": null,
-      "d9": null,
-      "macd": 0,
-      "macdSignal": 0,
-      "macdHist": 0
+      "d9": null
     }
+  ],
+  "technicalSignals": [
+    {
+      "key": "neutral",
+      "title": "技術面中性",
+      "tone": "normal",
+      "importance": 1,
+      "description": "主動摩根台灣鑫收 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+    }
+  ],
+  "訊號摘要": [
+    "技術面中性"
   ],
   "最新摘要": {
     "close": 10.609999656677246,
@@ -39,11 +71,18 @@
     "return60": null
   },
   "最新指標": {
+    "maFast": null,
+    "maShort": null,
+    "maMedium": null,
+    "maLong": null,
     "ma5": null,
     "ma10": null,
     "ma20": null,
     "ma60": null,
+    "rsi": null,
     "rsi14": null,
+    "stochasticK": null,
+    "stochasticD": null,
     "k9": null,
     "d9": null,
     "macd": 0,

@@ -299,6 +299,85 @@ input {
   align-items: flex-start;
 }
 
+.chart-parameter-panel,
+.chart-compare-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(11, 105, 155, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 255, 0.94)),
+    linear-gradient(135deg, rgba(11, 105, 155, 0.04), rgba(19, 136, 94, 0.04));
+}
+
+.chart-parameter-group,
+.chart-compare-picker,
+.chart-compare-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.chart-parameter-input {
+  display: grid;
+  gap: 6px;
+  min-width: 88px;
+}
+
+.chart-parameter-input span {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+
+.chart-parameter-input input {
+  min-height: 38px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(16, 32, 45, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.chart-compare-head,
+.chart-signal-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.chart-signal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.chart-signal-card {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(16, 32, 45, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.chart-signal-card.is-up {
+  border-color: rgba(209, 75, 50, 0.18);
+  background: linear-gradient(180deg, rgba(255, 248, 245, 0.98), rgba(255, 255, 255, 0.95));
+}
+
+.chart-signal-card.is-down {
+  border-color: rgba(19, 136, 94, 0.18);
+  background: linear-gradient(180deg, rgba(244, 255, 249, 0.98), rgba(255, 255, 255, 0.95));
+}
+
+.chart-signal-card p {
+  margin: 0;
+  color: var(--text-soft);
+}
+
 .toolbar-group {
   display: flex;
   flex-wrap: wrap;
@@ -645,6 +724,11 @@ input {
   align-self: stretch;
 }
 
+.compact-button {
+  min-height: 38px;
+  padding: 8px 14px;
+}
+
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -666,6 +750,25 @@ input {
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
+}
+
+.favorite-trend-block {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.favorite-trend-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  color: var(--text-soft);
+}
+
+.favorite-trend-meta strong {
+  font-size: 1.16rem;
+  letter-spacing: -0.03em;
 }
 
 .favorite-title {
@@ -693,6 +796,56 @@ input {
   padding: 8px 12px;
   border-radius: 999px;
   background: rgba(11, 105, 155, 0.08);
+  color: var(--text-soft);
+}
+
+.mini-trend-chart {
+  width: 100%;
+  min-height: 58px;
+  color: #5b7288;
+}
+
+.mini-trend-chart.is-up {
+  color: var(--up);
+}
+
+.mini-trend-chart.is-down {
+  color: var(--down);
+}
+
+.mini-trend-svg {
+  width: 100%;
+  height: 58px;
+  display: block;
+}
+
+.mini-trend-area {
+  fill: currentColor;
+  opacity: 0.14;
+}
+
+.mini-trend-empty {
+  min-height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(16, 32, 45, 0.04), rgba(11, 105, 155, 0.07), rgba(16, 32, 45, 0.04));
+}
+
+.signal-pill {
+  font-weight: 700;
+}
+
+.signal-pill.is-up {
+  background: rgba(209, 75, 50, 0.12);
+  color: var(--up);
+}
+
+.signal-pill.is-down {
+  background: rgba(19, 136, 94, 0.12);
+  color: var(--down);
+}
+
+.signal-pill.is-normal {
+  background: rgba(91, 114, 136, 0.12);
   color: var(--text-soft);
 }
 
@@ -778,6 +931,15 @@ input {
 .comparison-stat-note {
   color: var(--text-soft);
   font-size: 0.92rem;
+}
+
+.compare-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 999px;
+  vertical-align: middle;
 }
 
 .comparison-row-active td {
@@ -1248,8 +1410,19 @@ input {
     align-items: flex-start;
   }
 
-  .favorite-card-head {
-    flex-direction: column;
+.favorite-card-head {
+  flex-direction: column;
+}
+
+  .chart-parameter-group,
+  .chart-compare-picker,
+  .chart-compare-summary {
+    gap: 8px;
+  }
+
+  .chart-parameter-input {
+    min-width: 78px;
+    flex: 1 1 78px;
   }
 
   .search-row-actions {
@@ -1273,6 +1446,16 @@ input {
   .chart-toolbar {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .chart-parameter-panel,
+  .chart-compare-panel {
+    padding: 14px;
+  }
+
+  .chart-compare-head,
+  .chart-signal-head {
+    flex-direction: column;
   }
 
   .toolbar-group {
@@ -1320,7 +1503,8 @@ input {
   }
 
   .favorite-card,
-  .comparison-stat-card {
+  .comparison-stat-card,
+  .chart-signal-card {
     padding: 16px;
   }
 

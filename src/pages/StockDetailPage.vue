@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useStockDetail } from '../composables/useStockDetail';
+import { useStockComparisonSeries } from '../composables/useStockComparisonSeries';
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
@@ -38,6 +39,16 @@ const marginSnapshot = computed(() => detail.value?.融資融券 ?? null);
 const activeEtfExposure = computed(() => detail.value?.主動ETF曝光 ?? null);
 const industryComparison = computed(() => detail.value?.同產業比較 ?? null);
 const isTracked = computed(() => isFavorite(stockCode.value));
+const comparisonCandidateCodes = computed(() =>
+  (industryComparison.value?.leaders ?? [])
+    .map((item) => item.code)
+    .filter((code) => code && code !== stockCode.value)
+    .slice(0, 5),
+);
+const {
+  comparisonSeries,
+  isLoading: isComparisonSeriesLoading,
+} = useStockComparisonSeries(comparisonCandidateCodes);
 
 const laggardText = computed(() =>
   (industryComparison.value?.laggards ?? [])
@@ -274,7 +285,12 @@ const quickCards = computed(() => [
         title="個股盤中分時圖"
       />
 
-      <TechnicalChart :data="detail" title="個股技術分析圖表" />
+      <TechnicalChart
+        :data="detail"
+        :comparison-series="comparisonSeries"
+        :comparison-loading="isComparisonSeriesLoading"
+        title="個股技術分析圖表"
+      />
 
       <HolderStructureChart
         v-if="detail?.持股分散"

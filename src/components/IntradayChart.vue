@@ -59,6 +59,7 @@ const latestPoint = computed(() => points.value.at(-1) ?? null);
 const hoveredPoint = computed(() => pointMap.value.get(hoveredKey.value) ?? null);
 const displayPoint = computed(() => hoveredPoint.value ?? latestPoint.value);
 const previousClose = computed(() => normalizeNumber(props.data?.previousClose, true));
+const isInteractive = computed(() => points.value.length > 1);
 
 const sessionRangePercent = computed(() => {
   const high = normalizeNumber(props.data?.high, true);
@@ -139,12 +140,16 @@ function renderChart() {
 
   const chart = createChart(chartHost.value, {
     ...createBaseChartOptions({
-      rightOffset: 8,
+      rightOffset: 1,
       timeVisible: true,
+      interactive: isInteractive.value,
     }),
     timeScale: {
-      ...createBaseChartOptions({ timeVisible: true }).timeScale,
-      rightOffset: 8,
+      ...createBaseChartOptions({
+        timeVisible: true,
+        interactive: isInteractive.value,
+      }).timeScale,
+      rightOffset: 1,
       barSpacing: points.value.length <= 12 ? 24 : 11,
       minBarSpacing: 7,
       timeVisible: true,
@@ -297,7 +302,7 @@ onBeforeUnmount(() => {
       <div ref="chartHost" class="market-chart-host is-intraday" />
 
       <p class="chart-footnote">
-        交易日 {{ formatDate(data?.marketDate) }}，十字線會同步對應價格與量能柱。
+        交易日 {{ formatDate(data?.marketDate) }}，十字線會同步對應價格與量能柱，沒有資料的區段不開放額外縮放或捲動。
       </p>
     </div>
 

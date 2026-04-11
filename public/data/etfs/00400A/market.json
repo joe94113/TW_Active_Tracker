@@ -3,7 +3,20 @@
   "name": "主動國泰動能高息",
   "kind": "etf",
   "priceDate": "2026-04-10",
-  "generatedAt": "2026-04-11T17:22:57.918Z",
+  "generatedAt": "2026-04-11T17:46:23.315Z",
+  "indicatorSettings": {
+    "maFastPeriod": 5,
+    "maShortPeriod": 10,
+    "maMediumPeriod": 20,
+    "maLongPeriod": 60,
+    "rsiPeriod": 14,
+    "stochasticPeriod": 9,
+    "stochasticKPeriod": 3,
+    "stochasticDPeriod": 3,
+    "macdFastPeriod": 12,
+    "macdSlowPeriod": 26,
+    "macdSignalPeriod": 9
+  },
   "歷史資料": [
     {
       "date": "2026-04-09",
@@ -16,16 +29,23 @@
       "transactions": null,
       "change": null,
       "changePercent": null,
+      "maFast": null,
+      "maShort": null,
+      "maMedium": null,
+      "maLong": null,
+      "rsi": null,
+      "stochasticK": null,
+      "stochasticD": null,
+      "macd": 0,
+      "macdSignal": 0,
+      "macdHist": 0,
       "ma5": null,
       "ma10": null,
       "ma20": null,
       "ma60": null,
       "rsi14": null,
       "k9": null,
-      "d9": null,
-      "macd": 0,
-      "macdSignal": 0,
-      "macdHist": 0
+      "d9": null
     },
     {
       "date": "2026-04-10",
@@ -38,17 +58,36 @@
       "transactions": null,
       "change": 0.24000072479248047,
       "changePercent": 2.2018415889159595,
+      "maFast": null,
+      "maShort": null,
+      "maMedium": null,
+      "maLong": null,
+      "rsi": null,
+      "stochasticK": null,
+      "stochasticD": null,
+      "macd": 0.019145356963504057,
+      "macdSignal": 0.0038290713927008114,
+      "macdHist": 0.015316285570803246,
       "ma5": null,
       "ma10": null,
       "ma20": null,
       "ma60": null,
       "rsi14": null,
       "k9": null,
-      "d9": null,
-      "macd": 0.019145356963504057,
-      "macdSignal": 0.0038290713927008114,
-      "macdHist": 0.015316285570803246
+      "d9": null
     }
+  ],
+  "technicalSignals": [
+    {
+      "key": "macd-bullish-cross",
+      "title": "MACD 翻正",
+      "tone": "up",
+      "importance": 3,
+      "description": "主動國泰動能高息 MACD 線上穿訊號線，短線動能重新偏多。"
+    }
+  ],
+  "訊號摘要": [
+    "MACD 翻正"
   ],
   "最新摘要": {
     "close": 11.140000343322754,
@@ -61,11 +100,18 @@
     "return60": null
   },
   "最新指標": {
+    "maFast": null,
+    "maShort": null,
+    "maMedium": null,
+    "maLong": null,
     "ma5": null,
     "ma10": null,
     "ma20": null,
     "ma60": null,
+    "rsi": null,
     "rsi14": null,
+    "stochasticK": null,
+    "stochasticD": null,
     "k9": null,
     "d9": null,
     "macd": 0.019145356963504057,

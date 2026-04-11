@@ -139,7 +139,12 @@ export function formatCrosshairLabel(time) {
   return '-';
 }
 
-export function createBaseChartOptions({ rightOffset = 6, timeVisible = false } = {}) {
+export function createBaseChartOptions({
+  rightOffset = 2,
+  timeVisible = false,
+  interactive = true,
+  lockEdges = true,
+} = {}) {
   return {
     autoSize: true,
     layout: {
@@ -196,6 +201,9 @@ export function createBaseChartOptions({ rightOffset = 6, timeVisible = false } 
       minBarSpacing: 5,
       timeVisible,
       secondsVisible: false,
+      fixLeftEdge: lockEdges,
+      fixRightEdge: lockEdges,
+      lockVisibleTimeRangeOnResize: true,
       tickMarkFormatter: formatTickMark,
     },
     localization: {
@@ -203,18 +211,18 @@ export function createBaseChartOptions({ rightOffset = 6, timeVisible = false } 
       priceFormatter: formatChartPrice,
     },
     handleScroll: {
-      mouseWheel: true,
-      pressedMouseMove: true,
-      horzTouchDrag: true,
+      mouseWheel: interactive,
+      pressedMouseMove: interactive,
+      horzTouchDrag: interactive,
       vertTouchDrag: false,
     },
     handleScale: {
       axisPressedMouseMove: {
-        time: true,
-        price: true,
+        time: interactive,
+        price: interactive,
       },
-      mouseWheel: true,
-      pinch: true,
+      mouseWheel: interactive,
+      pinch: interactive,
     },
   };
 }

@@ -1,0 +1,34 @@
+name: Send Telegram Close Digest
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * 1-5'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: telegram-close-digest-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  send-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TZ: Asia/Taipei
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Send close digest
+        run: node scripts/send-telegram-brief.mjs
