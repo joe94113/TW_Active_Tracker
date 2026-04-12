@@ -1,5 +1,6 @@
 import { ref, watch } from 'vue';
-import { fetchJson } from '../lib/api';
+import { fetchOptionalJson } from '../lib/api';
+import { fetchLiveFallbackStockDetail } from '../lib/liveStockApi';
 
 export function useStockDetail(codeRef) {
   const detail = ref(null);
@@ -13,7 +14,8 @@ export function useStockDetail(codeRef) {
     errorMessage.value = '';
 
     try {
-      detail.value = await fetchJson(`data/stocks/${code}.json`);
+      const staticDetail = await fetchOptionalJson(`data/stocks/${code}.json`);
+      detail.value = staticDetail ?? (await fetchLiveFallbackStockDetail(code));
     } catch (error) {
       errorMessage.value = error instanceof Error ? error.message : '個股明細載入失敗';
       detail.value = null;

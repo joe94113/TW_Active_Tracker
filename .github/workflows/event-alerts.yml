@@ -1,0 +1,38 @@
+name: Send Event Alerts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 11 * * 1-5'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: event-alerts-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  send-event-alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      TZ: Asia/Taipei
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Send Telegram event alert
+        run: node scripts/send-telegram-event-alert.mjs
+
+      - name: Send Discord event alert
+        run: node scripts/send-discord-event-alert.mjs

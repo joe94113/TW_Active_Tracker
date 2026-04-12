@@ -5,6 +5,7 @@ import {
   CandlestickSeries,
   HistogramSeries,
   LineSeries,
+  createSeriesMarkers,
   createChart,
 } from 'lightweight-charts';
 import { formatAmount, formatDate, formatNumber, formatPercent, formatPriceDelta } from '../lib/formatters';
@@ -26,6 +27,7 @@ import {
   serializeChartTime,
   toBusinessDay,
 } from '../lib/charting';
+import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
 
 const props = defineProps({
   data: {
@@ -81,6 +83,8 @@ const overlayState = reactive({
   maLong: true,
   volume: true,
   zone: true,
+  levels: true,
+  events: true,
 });
 
 watch(
@@ -103,6 +107,8 @@ const overlayOptions = computed(() => [
   { key: 'maLong', label: `MA${indicatorSettings.value.maLongPeriod}` },
   { key: 'volume', label: '量能' },
   { key: 'zone', label: '漲跌區' },
+  { key: 'levels', label: '價位帶' },
+  { key: 'events', label: '事件點' },
 ]);
 
 const movingAverageInputs = computed(() => [
@@ -188,7 +194,7 @@ const latestRow = computed(() => chartRows.value.at(-1) ?? null);
 const hoveredRow = computed(() => rowMap.value.get(hoveredKey.value) ?? null);
 const displayRow = computed(() => hoveredRow.value ?? latestRow.value);
 const volumeVisible = computed(() => overlayState.volume && chartRows.value.some((row) => row.volume > 0));
-const chartModeSummary = computed(() => (hoveredRow.value ? '游標' : '最新'));
+const chartModeSummary = computed(() => (hoveredKey.value ? '游標' : '最新'));
 const hasFuturesContractMonth = computed(() => chartRows.value.some((row) => row.contractMonth));
 const isInteractive = computed(() => chartRows.value.length > 1);
 
@@ -213,6 +219,42 @@ const technicalSignals = computed(() =>
   }),
 );
 
+const priceZones = computed(() =>
+  buildKeyPriceZones(props.data)
+    .filter((item) => item.value !== null && item.label !== '目前價')
+    .filter((item) => !['MA20', 'MA60'].includes(item.label)),
+);
+
+const supportResistance = computed(() => buildSupportResistance(props.data));
+const stockEvents = computed(() => buildStockEventCalendar(props.data));
+const nearestResistance = computed(() => supportResistance.value.resistances[0] ?? null);
+const nearestSupport = computed(() => supportResistance.value.supports[0] ?? null);
+const nextUpcomingEvent = computed(() =>
+  stockEvents.value.find((item) => item.status === 'upcoming') ?? null,
+);
+const chartLevelStats = computed(() => [
+  {
+    label: '最近壓力',
+    value: nearestResistance.value
+      ? `${formatNumber(nearestResistance.value.low)} - ${formatNumber(nearestResistance.value.high)}`
+      : '-',
+    tone: 'down',
+  },
+  {
+    label: '最近支撐',
+    value: nearestSupport.value
+      ? `${formatNumber(nearestSupport.value.low)} - ${formatNumber(nearestSupport.value.high)}`
+      : '-',
+    tone: 'up',
+  },
+  {
+    label: '下一個事件',
+    value: nextUpcomingEvent.value
+      ? `${nextUpcomingEvent.value.label} ${formatDate(nextUpcomingEvent.value.date)}`
+      : '-',
+  },
+]);
+
 const primaryStats = computed(() => {
   const row = displayRow.value;
 
@@ -223,7 +265,7 @@ const primaryStats = computed(() => {
   return [
     {
       label: chartModeSummary.value,
-      value: hoveredRow.value ? formatCrosshairLabel(row.time) : formatDate(row.date),
+      value: hoveredKey.value ? formatCrosshairLabel(hoveredKey.value) : formatDate(row.date),
       emphasis: true,
     },
     {
@@ -422,6 +464,262 @@ function addSegmentedLineSeries(chart, paneIndex, rows, accessor, options, posit
   });
 }
 
+function addBandBoundarySeries(chart, rows, value, color) {
+  if (value === null) {
+    return;
+  }
+
+  const series = chart.addSeries(
+    LineSeries,
+    {
+      color,
+      lineWidth: 1,
+      lineStyle: chartEnums.LineStyle.LargeDashed,
+      priceLineVisible: false,
+      lastValueVisible: false,
+      crosshairMarkerVisible: false,
+    },
+    0,
+  );
+
+  series.setData(buildConstantLineData(rows, value));
+}
+
+function addChartPriceLine(series, {
+  value,
+  title,
+  color,
+  lineStyle = chartEnums.LineStyle.Dashed,
+  axisLabelVisible = true,
+}) {
+  if (value === null) {
+    return;
+  }
+
+  series.createPriceLine({
+    price: value,
+    title,
+    color,
+    lineWidth: 1,
+    lineStyle,
+    axisLabelVisible,
+    axisLabelColor: color,
+    axisLabelTextColor: '#ffffff',
+  });
+}
+
+function mapEventLabelToMarkerText(label) {
+  if (label.includes('月營收')) return '營收';
+  if (label.includes('季報')) return '季報';
+  if (label.includes('ETF')) return 'ETF';
+  return '事件';
+}
+
+function mapEventToMarkerTone(status) {
+  if (status === 'recent') {
+    return {
+      color: chartPalette.resistance,
+      shape: 'circle',
+      position: 'aboveBar',
+    };
+  }
+
+  if (status === 'upcoming') {
+    return {
+      color: chartPalette.brand,
+      shape: 'square',
+      position: 'belowBar',
+    };
+  }
+
+  return {
+    color: chartPalette.reference,
+    shape: 'circle',
+    position: 'inBar',
+  };
+}
+
+function describeEventStatus(status) {
+  if (status === 'recent') return '最近事件';
+  if (status === 'upcoming') return '即將到來';
+  return '參考揭露';
+}
+
+function describeEventDistance(dateText) {
+  const targetDate = new Date(`${dateText}T00:00:00`);
+
+  if (Number.isNaN(targetDate.getTime())) {
+    return '日期整理中';
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const diffDays = Math.round((targetDate.getTime() - today.getTime()) / 86400000);
+
+  if (diffDays === 0) {
+    return '就在今天';
+  }
+
+  if (diffDays > 0) {
+    return `${diffDays} 天後`;
+  }
+
+  return `${Math.abs(diffDays)} 天前`;
+}
+
+function toDayStamp(dateText) {
+  const stamp = Date.parse(`${dateText}T00:00:00Z`);
+  return Number.isFinite(stamp) ? stamp : null;
+}
+
+function resolveEventMarkerTime(rows, dateText) {
+  if (!dateText || !rows.length) {
+    return null;
+  }
+
+  const exactMatch = rows.find((row) => row.key === dateText);
+  if (exactMatch) {
+    return exactMatch.key;
+  }
+
+  const targetStamp = toDayStamp(dateText);
+  if (targetStamp === null) {
+    return null;
+  }
+
+  let bestMatch = null;
+  let bestDistance = Number.POSITIVE_INFINITY;
+
+  rows.forEach((row) => {
+    const rowStamp = toDayStamp(row.key);
+
+    if (rowStamp === null) {
+      return;
+    }
+
+    const distance = Math.abs(rowStamp - targetStamp);
+
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestMatch = row.key;
+    }
+  });
+
+  return bestDistance <= 4 * 86400000 ? bestMatch : null;
+}
+
+const chartEventEntries = computed(() => {
+  if (!chartRows.value.length) {
+    return [];
+  }
+
+  const firstKey = chartRows.value[0].key;
+  const lastKey = chartRows.value.at(-1)?.key ?? firstKey;
+  const lastStamp = toDayStamp(lastKey);
+
+  return stockEvents.value
+    .map((item) => {
+      let time = null;
+
+      if (item.date >= firstKey && item.date <= lastKey) {
+        time = resolveEventMarkerTime(chartRows.value, item.date);
+      } else if (item.status === 'upcoming' && lastStamp !== null) {
+        const eventStamp = toDayStamp(item.date);
+
+        if (eventStamp !== null && eventStamp > lastStamp && eventStamp - lastStamp <= 21 * 86400000) {
+          time = item.date;
+        }
+      }
+
+      if (!time) {
+        return null;
+      }
+
+      const markerTone = mapEventToMarkerTone(item.status);
+
+      return {
+        key: item.key,
+        time,
+        event: item,
+        marker: {
+          id: item.key,
+          time,
+          position: markerTone.position,
+          shape: markerTone.shape,
+          color: markerTone.color,
+          text: mapEventLabelToMarkerText(item.label),
+          size: item.status === 'upcoming' ? 1.3 : 1,
+        },
+      };
+    })
+    .filter(Boolean);
+});
+
+const chartEventMarkers = computed(() => chartEventEntries.value.map((item) => item.marker));
+const chartEventLookup = computed(() => {
+  const lookup = new Map();
+
+  chartEventEntries.value.forEach((item) => {
+    const existing = lookup.get(item.time) ?? [];
+    existing.push(item);
+    lookup.set(item.time, existing);
+  });
+
+  return lookup;
+});
+
+const chartTimelineRows = computed(() => {
+  const rows = chartRows.value.map((row) => ({
+    time: row.time,
+    open: row.open,
+    high: row.high,
+    low: row.low,
+    close: row.close,
+  }));
+
+  const existingTimes = new Set(rows.map((row) => row.time));
+
+  if (!overlayState.events) {
+    return rows;
+  }
+
+  chartEventEntries.value.forEach((entry) => {
+    const markerTime = String(entry.time ?? '').trim();
+
+    if (!markerTime || existingTimes.has(markerTime)) {
+      return;
+    }
+
+    rows.push({ time: markerTime });
+    existingTimes.add(markerTime);
+  });
+
+  rows.sort((left, right) => String(left.time).localeCompare(String(right.time)));
+
+  return rows;
+});
+
+const activeEventEntries = computed(() => {
+  if (!overlayState.events) {
+    return [];
+  }
+
+  if (hoveredKey.value && chartEventLookup.value.has(hoveredKey.value)) {
+    return chartEventLookup.value.get(hoveredKey.value) ?? [];
+  }
+
+  const nextUpcomingEntry = chartEventEntries.value.find((item) => item.event.status === 'upcoming');
+
+  if (nextUpcomingEntry) {
+    return [nextUpcomingEntry];
+  }
+
+  return chartEventEntries.value.length ? [chartEventEntries.value.at(-1)] : [];
+});
+
+const activeEventHeadline = computed(() => (hoveredKey.value && activeEventEntries.value.length ? '事件說明' : '下一個事件'));
+
 function handleCrosshairMove(event) {
   if (!event?.time) {
     hoveredKey.value = null;
@@ -429,7 +727,7 @@ function handleCrosshairMove(event) {
   }
 
   const key = serializeChartTime(event.time);
-  hoveredKey.value = rowMap.value.has(key) ? key : null;
+  hoveredKey.value = rowMap.value.has(key) || chartEventLookup.value.has(key) ? key : null;
 }
 
 function destroyChart() {
@@ -519,13 +817,7 @@ function renderChart() {
   );
 
   candleSeries.setData(
-    chartRows.value.map((row) => ({
-      time: row.time,
-      open: row.open,
-      high: row.high,
-      low: row.low,
-      close: row.close,
-    })),
+    chartTimelineRows.value,
   );
 
   candleSeries.priceScale().applyOptions({
@@ -534,6 +826,53 @@ function renderChart() {
       bottom: 0.08,
     },
   });
+
+  if (overlayState.levels) {
+    priceZones.value.forEach((item) => {
+      const toneColor =
+        item.role === 'support'
+          ? chartPalette.support
+          : item.role === 'resistance'
+            ? chartPalette.resistance
+            : chartPalette.reference;
+
+      addChartPriceLine(candleSeries, {
+        value: item.value,
+        title: item.label,
+        color: toneColor,
+        lineStyle: item.role === 'reference' ? chartEnums.LineStyle.Dotted : chartEnums.LineStyle.Dashed,
+        axisLabelVisible: false,
+      });
+    });
+
+    supportResistance.value.resistances.slice(0, 2).forEach((item, index) => {
+      addBandBoundarySeries(chart, chartRows.value, item.low, chartPalette.resistanceSoft);
+      addBandBoundarySeries(chart, chartRows.value, item.high, chartPalette.resistanceSoft);
+      addChartPriceLine(candleSeries, {
+        value: item.value,
+        title: index === 0 ? '最近壓力' : item.label,
+        color: chartPalette.resistance,
+        lineStyle: chartEnums.LineStyle.SparseDotted,
+      });
+    });
+
+    supportResistance.value.supports.slice(0, 2).forEach((item, index) => {
+      addBandBoundarySeries(chart, chartRows.value, item.low, chartPalette.supportSoft);
+      addBandBoundarySeries(chart, chartRows.value, item.high, chartPalette.supportSoft);
+      addChartPriceLine(candleSeries, {
+        value: item.value,
+        title: index === 0 ? '最近支撐' : item.label,
+        color: chartPalette.support,
+        lineStyle: chartEnums.LineStyle.SparseDotted,
+      });
+    });
+  }
+
+  if (overlayState.events && chartEventMarkers.value.length) {
+    createSeriesMarkers(candleSeries, chartEventMarkers.value, {
+      zOrder: 'aboveSeries',
+    });
+  }
 
   [
     { key: 'maFast', color: chartPalette.ma5, accessor: (row) => row.maFast },
@@ -748,7 +1087,7 @@ function renderChart() {
 }
 
 watch(
-  [chartRows, activeIndicator, overlaySignature, indicatorSettings, comparisonOverlays],
+  [chartRows, chartTimelineRows, chartEventMarkers, activeIndicator, overlaySignature, indicatorSettings, comparisonOverlays],
   () => {
     renderChart();
   },
@@ -821,6 +1160,45 @@ onBeforeUnmount(() => {
               {{ formatPercent(rangeReturn) }}
             </strong>
           </div>
+          <div
+            v-for="item in chartLevelStats"
+            :key="item.label"
+            class="chart-info-chip"
+            :class="item.tone ? `is-${item.tone}` : ''"
+          >
+            <span class="chart-info-label">{{ item.label }}</span>
+            <strong>{{ item.value }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="activeEventEntries.length" class="chart-event-callout">
+        <div class="chart-event-callout-head">
+          <div>
+            <span class="chart-info-label">{{ activeEventHeadline }}</span>
+            <strong>{{ activeEventEntries.length > 1 ? `同日 ${activeEventEntries.length} 個事件` : activeEventEntries[0].event.label }}</strong>
+          </div>
+          <span class="meta-chip">{{ hoveredKey ? formatCrosshairLabel(hoveredKey) : formatDate(activeEventEntries[0].event.date) }}</span>
+        </div>
+        <div class="chart-event-list">
+          <article
+            v-for="item in activeEventEntries"
+            :key="`chart-event-${item.key}`"
+            class="chart-event-item"
+            :class="`is-${item.event.status === 'reference' ? 'reference' : item.event.status}`"
+          >
+            <div class="chart-event-item-head">
+              <strong>{{ item.event.label }}</strong>
+              <span class="status-badge" :class="`is-${item.event.status === 'reference' ? 'event-reference' : item.event.status}`">
+                {{ describeEventStatus(item.event.status) }}
+              </span>
+            </div>
+            <p>{{ item.event.note }}</p>
+            <div class="chart-event-item-foot">
+              <span>{{ formatDate(item.event.date) }}</span>
+              <span>{{ describeEventDistance(item.event.date) }}</span>
+            </div>
+          </article>
         </div>
       </div>
 
@@ -953,7 +1331,7 @@ onBeforeUnmount(() => {
       </div>
 
       <p class="chart-footnote">
-        十字線會同步顯示價量與指標數值，沒有資料的區段不開放額外縮放或捲動。
+        十字線會同步顯示價量與指標數值，價位帶與事件點都可以獨立切換，沒有資料的區段不開放額外縮放或捲動。
         <template v-if="hasFuturesContractMonth">期貨資料遇到換倉時，均線會自動斷開避免錯誤連線。</template>
       </p>
     </div>

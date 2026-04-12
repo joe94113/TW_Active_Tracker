@@ -10,7 +10,7 @@ async function sendDiscordMessage(payload) {
 
   if (!webhookUrl) {
     console.log('Skip Discord push: missing DISCORD_WEBHOOK_URL.');
-    return;
+    return false;
   }
 
   const response = await fetch(webhookUrl, {
@@ -25,6 +25,8 @@ async function sendDiscordMessage(payload) {
     const errorText = await response.text();
     throw new Error(`Discord send failed: ${response.status} ${errorText}`);
   }
+
+  return true;
 }
 
 async function main() {
@@ -41,8 +43,11 @@ async function main() {
     return;
   }
 
-  await sendDiscordMessage(payload);
-  console.log(`Discord push sent for ${today}.`);
+  const sent = await sendDiscordMessage(payload);
+
+  if (sent) {
+    console.log(`Discord push sent for ${today}.`);
+  }
 }
 
 await main();

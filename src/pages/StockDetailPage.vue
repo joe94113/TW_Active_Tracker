@@ -4,13 +4,17 @@ import { RouterLink, useRoute } from 'vue-router';
 import { useStockDetail } from '../composables/useStockDetail';
 import { useStockComparisonSeries } from '../composables/useStockComparisonSeries';
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
+import { useLiveStockSnapshot } from '../composables/useLiveStockSnapshot';
+import { useRecentStocks } from '../composables/useRecentStocks';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
 import StockFinancialOverview from '../components/StockFinancialOverview.vue';
 import IntradayChart from '../components/IntradayChart.vue';
 import TechnicalChart from '../components/TechnicalChart.vue';
 import HolderStructureChart from '../components/HolderStructureChart.vue';
+import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
+import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
 import {
   formatDate,
   formatAmount,
@@ -31,6 +35,8 @@ watch(
 
 const { detail, isLoading, errorMessage } = useStockDetail(stockCode);
 const { isFavorite, toggleFavorite } = useFavoriteStocks();
+const { snapshot: liveSnapshot, isLoading: isLiveSnapshotLoading } = useLiveStockSnapshot(stockCode, { refreshIntervalMs: 45000 });
+const { recentItems, pushRecentStock } = useRecentStocks();
 
 const companyProfile = computed(() => detail.value?.公司概況 ?? null);
 const holderDistribution = computed(() => detail.value?.持股分散 ?? null);
@@ -39,6 +45,9 @@ const marginSnapshot = computed(() => detail.value?.融資融券 ?? null);
 const activeEtfExposure = computed(() => detail.value?.主動ETF曝光 ?? null);
 const industryComparison = computed(() => detail.value?.同產業比較 ?? null);
 const isTracked = computed(() => isFavorite(stockCode.value));
+const technicalSignals = computed(() => detail.value?.technicalSignals ?? []);
+const latestIndicators = computed(() => detail.value?.最新指標 ?? {});
+const indicatorSettings = computed(() => detail.value?.indicatorSettings ?? {});
 const comparisonCandidateCodes = computed(() =>
   (industryComparison.value?.leaders ?? [])
     .map((item) => item.code)
@@ -59,18 +68,66 @@ const laggardText = computed(() =>
 
 const heroPills = computed(() => [
   companyProfile.value?.產業名稱 ?? '上市股票',
-  `資料日 ${formatDate(detail.value?.priceDate)}`,
+  `資料日 ${formatDate(liveSnapshot.value?.marketDate ?? detail.value?.priceDate)}`,
   `法人五日 ${formatAmount(institutionalFlows.value?.summary?.total5Day)}`,
   `ETF 持有 ${formatNumber(activeEtfExposure.value?.count)}`,
 ]);
 
-const summaryCards = computed(() => {
+const displayQuote = computed(() => {
   const latestSummary = detail.value?.最新摘要 ?? {};
+
+  return {
+    close: liveSnapshot.value?.lastPrice ?? latestSummary.close ?? null,
+    change: liveSnapshot.value?.change ?? latestSummary.change ?? null,
+    changePercent: liveSnapshot.value?.changePercent ?? latestSummary.changePercent ?? null,
+    return20: latestSummary.return20 ?? null,
+    return60: latestSummary.return60 ?? null,
+    volume: liveSnapshot.value?.volume ?? latestSummary.volume ?? null,
+  };
+});
+
+const heroAlertSignals = computed(() => technicalSignals.value.slice(0, 3));
+const isLiveFallback = computed(() => detail.value?.kind === 'live');
+const liveSnapshotCards = computed(() => [
+  {
+    title: '即時成交',
+    value: formatNumber(liveSnapshot.value?.lastPrice),
+    description: `${formatPriceDelta(liveSnapshot.value?.change)} / ${formatPercent(liveSnapshot.value?.changePercent)}`,
+    status:
+      (liveSnapshot.value?.change ?? 0) > 0
+        ? 'up'
+        : (liveSnapshot.value?.change ?? 0) < 0
+          ? 'down'
+          : 'normal',
+  },
+  {
+    title: '今日區間',
+    value: `${formatNumber(liveSnapshot.value?.low)} - ${formatNumber(liveSnapshot.value?.high)}`,
+    description: `開盤 ${formatNumber(liveSnapshot.value?.open)}`,
+  },
+  {
+    title: '累計量',
+    value: formatAmount(liveSnapshot.value?.volume),
+    description: `更新 ${formatDate(liveSnapshot.value?.marketDate)}`,
+  },
+]);
+
+const keyPriceZones = computed(() => buildKeyPriceZones(detail.value));
+const supportResistance = computed(() => buildSupportResistance(detail.value));
+const stockEventCalendar = computed(() => buildStockEventCalendar(detail.value));
+const recentViewedStocks = computed(() =>
+  recentItems.value
+    .filter((item) => item.code && item.code !== stockCode.value)
+    .slice(0, 6),
+);
+
+const summaryCards = computed(() => {
+  const latestSummary = displayQuote.value;
   const holderSummary = holderDistribution.value ?? {};
 
   return [
     {
-      title: '收盤價',
+      title: liveSnapshot.value?.lastPrice ? '最新價' : '收盤價',
       value: formatNumber(latestSummary.close),
       description: `日變動 ${formatPriceDelta(latestSummary.change)} / ${formatPercent(latestSummary.changePercent)}`,
       status: (latestSummary.change ?? 0) > 0 ? 'up' : (latestSummary.change ?? 0) < 0 ? 'down' : 'normal',
@@ -136,6 +193,185 @@ const quickCards = computed(() => [
         : '目前不在已整理主動 ETF 核心持股',
   },
 ]);
+
+const technicalQuickCards = computed(() => {
+  const latestSummary = detail.value?.最新摘要 ?? {};
+  const maMedium = latestIndicators.value.maMedium ?? latestIndicators.value.ma20 ?? null;
+  const maLong = latestIndicators.value.maLong ?? latestIndicators.value.ma60 ?? null;
+  const rsi = latestIndicators.value.rsi ?? latestIndicators.value.rsi14 ?? null;
+  const kValue = latestIndicators.value.stochasticK ?? latestIndicators.value.k9 ?? null;
+  const dValue = latestIndicators.value.stochasticD ?? latestIndicators.value.d9 ?? null;
+  const macdHist = latestIndicators.value.macdHist ?? null;
+
+  const movingAverageDescription =
+    latestSummary.close !== null && maMedium !== null && maLong !== null
+      ? latestSummary.close > maMedium && maMedium > maLong
+        ? '收盤仍站在中長均之上'
+        : latestSummary.close < maMedium && maMedium < maLong
+          ? '收盤落在中長均之下'
+          : '股價與中長均線交錯整理'
+      : '均線資料整理中';
+
+  return [
+    {
+      title: '均線位置',
+      value:
+        maMedium !== null && maLong !== null
+          ? `MA${indicatorSettings.value.maMediumPeriod ?? 20} / MA${indicatorSettings.value.maLongPeriod ?? 60}`
+          : '-',
+      description: movingAverageDescription,
+      status:
+        latestSummary.close !== null && maMedium !== null && maLong !== null
+          ? latestSummary.close > maMedium && maMedium > maLong
+            ? 'up'
+            : latestSummary.close < maMedium && maMedium < maLong
+              ? 'down'
+              : 'normal'
+          : 'normal',
+    },
+    {
+      title: `RSI${indicatorSettings.value.rsiPeriod ?? 14}`,
+      value: formatNumber(rsi),
+      description: rsi !== null ? (rsi >= 70 ? '偏熱區' : rsi <= 30 ? '偏低區' : '中性區間') : 'RSI 資料整理中',
+      status: rsi !== null ? (rsi <= 30 ? 'up' : rsi >= 70 ? 'down' : 'normal') : 'normal',
+    },
+    {
+      title: 'KD 指標',
+      value: `K ${formatNumber(kValue)} / D ${formatNumber(dValue)}`,
+      description:
+        kValue !== null && dValue !== null
+          ? kValue > dValue
+            ? 'K 值在 D 值上方'
+            : kValue < dValue
+              ? 'K 值在 D 值下方'
+              : 'K、D 交會'
+          : 'KD 資料整理中',
+      status:
+        kValue !== null && dValue !== null
+          ? kValue > dValue
+            ? 'up'
+            : kValue < dValue
+              ? 'down'
+              : 'normal'
+          : 'normal',
+    },
+    {
+      title: 'MACD 柱體',
+      value: formatNumber(macdHist),
+      description:
+        macdHist !== null
+          ? macdHist > 0
+            ? '動能仍偏多'
+            : macdHist < 0
+              ? '動能偏弱'
+              : '多空分水嶺'
+          : 'MACD 資料整理中',
+      status: macdHist !== null ? (macdHist > 0 ? 'up' : macdHist < 0 ? 'down' : 'normal') : 'normal',
+    },
+  ];
+});
+
+const technicalNarrative = computed(() => {
+  const latestSummary = detail.value?.最新摘要 ?? {};
+  const maMedium = latestIndicators.value.maMedium ?? latestIndicators.value.ma20 ?? null;
+  const maLong = latestIndicators.value.maLong ?? latestIndicators.value.ma60 ?? null;
+  const macdHist = latestIndicators.value.macdHist ?? null;
+  const narratives = [];
+
+  if (latestSummary.close !== null && maMedium !== null && maLong !== null) {
+    if (latestSummary.close > maMedium && maMedium > maLong) {
+      narratives.push('價格結構目前維持在中長均線之上，波段節奏仍偏強。');
+    } else if (latestSummary.close < maMedium && maMedium < maLong) {
+      narratives.push('價格結構仍壓在中長均線下方，若沒有新量能配合，隔日容易先走整理。');
+    } else {
+      narratives.push('價格正在均線密集區整理，後續比較需要看量價與族群同步性。');
+    }
+  }
+
+  if (macdHist !== null) {
+    narratives.push(macdHist > 0 ? 'MACD 柱體仍在正值區，短線動能還沒完全退潮。': macdHist < 0 ? 'MACD 柱體仍在負值區，搶短時要留意反彈後再度轉弱。': 'MACD 柱體貼近零軸，代表方向感還不夠明確。');
+  }
+
+  if (technicalSignals.value.length) {
+    narratives.push(`目前最值得先看的是「${technicalSignals.value[0].title}」訊號。`);
+  }
+
+  return narratives.slice(0, 3);
+});
+
+function getPriceZoneTone(role) {
+  if (role === 'support') return 'support';
+  if (role === 'resistance') return 'resistance';
+  return 'reference';
+}
+
+function getPriceZoneLabel(role) {
+  if (role === 'support') return '支撐觀察';
+  if (role === 'resistance') return '壓力觀察';
+  return '目前參考';
+}
+
+function getEventStatusLabel(status) {
+  if (status === 'recent') return '最近事件';
+  if (status === 'upcoming') return '接下來';
+  return '參考點';
+}
+
+function getEventStatusTone(status) {
+  if (status === 'recent') return 'recent';
+  if (status === 'upcoming') return 'upcoming';
+  return 'event-reference';
+}
+
+function formatEventDistance(dateText) {
+  const targetDate = new Date(`${dateText}T00:00:00`);
+
+  if (Number.isNaN(targetDate.getTime())) {
+    return '日期整理中';
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const diffDays = Math.round((targetDate.getTime() - today.getTime()) / 86400000);
+
+  if (diffDays === 0) {
+    return '今天';
+  }
+
+  if (diffDays > 0) {
+    return `${diffDays} 天後`;
+  }
+
+  return `${Math.abs(diffDays)} 天前`;
+}
+
+function formatViewedAt(dateText) {
+  const viewedDate = new Date(dateText);
+
+  if (Number.isNaN(viewedDate.getTime())) {
+    return '剛剛';
+  }
+
+  return viewedDate.toLocaleString('zh-TW', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+watch(
+  () => detail.value?.code,
+  (code) => {
+    if (!code) return;
+    pushRecentStock({
+      code,
+      name: detail.value?.name ?? stockCode.value,
+    });
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -153,6 +389,13 @@ const quickCards = computed(() => [
       </div>
       <div class="hero-side-actions">
         <span class="meta-chip">代號 {{ stockCode }}</span>
+        <span
+          v-if="liveSnapshot?.lastPrice"
+          class="meta-chip"
+          :class="{ 'text-up': (liveSnapshot?.change ?? 0) > 0, 'text-down': (liveSnapshot?.change ?? 0) < 0 }"
+        >
+          即時 {{ formatNumber(liveSnapshot.lastPrice) }}
+        </span>
         <button
           type="button"
           class="favorite-toggle hero-favorite-toggle"
@@ -161,6 +404,17 @@ const quickCards = computed(() => [
         >
           {{ isTracked ? '已加入自選' : '加入自選' }}
         </button>
+        <div v-if="heroAlertSignals.length" class="hero-alert-stack">
+          <article
+            v-for="signal in heroAlertSignals"
+            :key="`hero-${signal.key}`"
+            class="hero-alert-card"
+            :class="signal.tone ? `is-${signal.tone}` : ''"
+          >
+            <strong>{{ signal.title }}</strong>
+            <p>{{ signal.description }}</p>
+          </article>
+        </div>
       </div>
     </div>
 
@@ -172,6 +426,29 @@ const quickCards = computed(() => [
     />
 
     <template v-if="detail">
+      <section v-if="isLiveFallback || liveSnapshot?.lastPrice" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">即時快照</h2>
+            <p class="panel-subtitle">
+              {{ isLiveFallback ? '這檔股票來自即時補資料，部分籌碼與財務欄位仍會逐步補齊。' : '盤中用即時行情校正靜態資料，避免只看收盤後快照。' }}
+            </p>
+          </div>
+          <span class="meta-chip">{{ isLiveSnapshotLoading ? '更新中' : (liveSnapshot?.updatedAt ? liveSnapshot.updatedAt.replace('T', ' ').slice(5, 16) : '即時資料') }}</span>
+        </div>
+
+        <section class="card-grid">
+          <InfoCard
+            v-for="item in liveSnapshotCards"
+            :key="`live-${item.title}`"
+            :title="item.title"
+            :value="item.value"
+            :description="item.description"
+            :status="item.status"
+          />
+        </section>
+      </section>
+
       <section class="card-grid">
         <InfoCard
           v-for="item in summaryCards"
@@ -192,6 +469,188 @@ const quickCards = computed(() => [
           :description="item.description"
           :status="item.status"
         />
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">技術分析快讀</h2>
+            <p class="panel-subtitle">先看結構、再看指標與訊號，不用先打開完整圖表也能快速判斷強弱。</p>
+          </div>
+        </div>
+
+        <section class="card-grid stock-technical-cards">
+          <InfoCard
+            v-for="item in technicalQuickCards"
+            :key="`technical-${item.title}`"
+            :title="item.title"
+            :value="item.value"
+            :description="item.description"
+            :status="item.status"
+          />
+        </section>
+
+        <div v-if="technicalSignals.length" class="stock-technical-signal-list">
+          <article
+            v-for="signal in technicalSignals"
+            :key="signal.key"
+            class="stock-technical-signal"
+            :class="signal.tone ? `is-${signal.tone}` : ''"
+          >
+            <div class="stock-technical-signal-head">
+              <strong>{{ signal.title }}</strong>
+              <span class="meta-chip">{{ signal.importance >= 3 ? '高優先' : signal.importance === 2 ? '留意' : '觀察' }}</span>
+            </div>
+            <p>{{ signal.description }}</p>
+          </article>
+        </div>
+
+        <ul v-if="technicalNarrative.length" class="bullet-list compact">
+          <li v-for="item in technicalNarrative" :key="item">{{ item }}</li>
+        </ul>
+      </section>
+
+      <section class="triple-grid">
+        <article class="panel insight-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">關鍵價位區</h2>
+              <p class="panel-subtitle">把近期高低點和中長均線拉在一起，先看隔日容易有反應的位置。</p>
+            </div>
+          </div>
+
+          <div v-if="keyPriceZones.length" class="price-zone-list">
+            <article
+              v-for="item in keyPriceZones"
+              :key="item.key"
+              class="price-zone-card"
+              :class="`is-${getPriceZoneTone(item.role)}`"
+            >
+              <div class="price-zone-head">
+                <strong>{{ item.label }}</strong>
+                <span class="status-badge" :class="`is-${getPriceZoneTone(item.role)}`">{{ getPriceZoneLabel(item.role) }}</span>
+              </div>
+              <p class="price-zone-value">{{ formatNumber(item.value) }}</p>
+            </article>
+          </div>
+          <div v-else class="empty-state compact">
+            <strong>關鍵價位還在整理</strong>
+            <p>目前沒有足夠的歷史價格資料可以建立價位區。</p>
+          </div>
+        </article>
+
+        <article class="panel insight-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">支撐壓力帶</h2>
+              <p class="panel-subtitle">用價位加上緩衝區間，幫你先看明天容易測試的支撐與壓力。</p>
+            </div>
+          </div>
+
+          <div class="support-resistance-grid">
+            <section class="support-resistance-column">
+              <div class="support-resistance-head">
+                <strong>上方壓力</strong>
+                <span class="muted">靠近上緣時留意追價風險</span>
+              </div>
+              <div v-if="supportResistance.resistances.length" class="support-resistance-list">
+                <article
+                  v-for="item in supportResistance.resistances"
+                  :key="`resistance-${item.key}`"
+                  class="support-resistance-item is-resistance"
+                >
+                  <div class="price-zone-head">
+                    <strong>{{ item.label }}</strong>
+                    <span class="meta-chip">{{ formatPercent(item.distancePercent) }}</span>
+                  </div>
+                  <p class="support-resistance-value">{{ formatNumber(item.low) }} - {{ formatNumber(item.high) }}</p>
+                </article>
+              </div>
+              <p v-else class="muted">目前沒有足夠的上方壓力資料。</p>
+            </section>
+
+            <section class="support-resistance-column">
+              <div class="support-resistance-head">
+                <strong>下方支撐</strong>
+                <span class="muted">回測區間時留意量能是否守住</span>
+              </div>
+              <div v-if="supportResistance.supports.length" class="support-resistance-list">
+                <article
+                  v-for="item in supportResistance.supports"
+                  :key="`support-${item.key}`"
+                  class="support-resistance-item is-support"
+                >
+                  <div class="price-zone-head">
+                    <strong>{{ item.label }}</strong>
+                    <span class="meta-chip">{{ formatPercent(item.distancePercent) }}</span>
+                  </div>
+                  <p class="support-resistance-value">{{ formatNumber(item.low) }} - {{ formatNumber(item.high) }}</p>
+                </article>
+              </div>
+              <p v-else class="muted">目前沒有足夠的下方支撐資料。</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="panel insight-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">事件日曆</h2>
+              <p class="panel-subtitle">把月營收、季報與 ETF 揭露時間拉出來，方便預先安排觀察。</p>
+            </div>
+          </div>
+
+          <div v-if="stockEventCalendar.length" class="event-list">
+            <article v-for="item in stockEventCalendar" :key="item.key" class="event-item">
+              <div class="event-main">
+                <div class="price-zone-head">
+                  <strong>{{ item.label }}</strong>
+                  <span class="status-badge" :class="`is-${getEventStatusTone(item.status)}`">{{ getEventStatusLabel(item.status) }}</span>
+                </div>
+                <p class="event-note">{{ item.note }}</p>
+              </div>
+              <div class="event-side">
+                <strong class="event-date">{{ formatDate(item.date) }}</strong>
+                <span class="muted">{{ formatEventDistance(item.date) }}</span>
+              </div>
+            </article>
+          </div>
+          <div v-else class="empty-state compact">
+            <strong>事件日曆還沒有足夠資料</strong>
+            <p>月營收、季報或 ETF 揭露資料補齊後會顯示在這裡。</p>
+          </div>
+        </article>
+      </section>
+
+      <StockNewsPanel :code-ref="stockCode" :stock-name="detail?.name ?? stockCode" />
+
+      <section v-if="recentViewedStocks.length" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">最近瀏覽</h2>
+            <p class="panel-subtitle">回看你最近研究過的股票，不用再重找一次。</p>
+          </div>
+        </div>
+
+        <div class="recent-stocks-grid compact">
+          <article
+            v-for="item in recentViewedStocks"
+            :key="`recent-${item.code}`"
+            class="favorite-card recent-stock-card"
+          >
+            <div class="recent-stock-head">
+              <div class="favorite-title-block">
+                <p class="ticker-code">{{ item.code }}</p>
+                <RouterLink class="favorite-title" :to="createStockRoute(item.code)">{{ item.name }}</RouterLink>
+              </div>
+              <span class="recent-stock-time">最後查看 {{ formatViewedAt(item.viewedAt) }}</span>
+            </div>
+            <div class="favorite-metrics">
+              <span>快速回到個股頁</span>
+              <span class="signal-pill">延續剛剛的研究脈絡</span>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section class="dual-grid">

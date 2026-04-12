@@ -11,7 +11,7 @@ async function sendTelegramMessage(message) {
 
   if (!token || !chatId) {
     console.log('Skip Telegram push: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID.');
-    return;
+    return false;
   }
 
   const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -31,6 +31,8 @@ async function sendTelegramMessage(message) {
     const errorText = await response.text();
     throw new Error(`Telegram send failed: ${response.status} ${errorText}`);
   }
+
+  return true;
 }
 
 async function main() {
@@ -47,8 +49,11 @@ async function main() {
     return;
   }
 
-  await sendTelegramMessage(message);
-  console.log(`Telegram push sent for ${today}.`);
+  const sent = await sendTelegramMessage(message);
+
+  if (sent) {
+    console.log(`Telegram push sent for ${today}.`);
+  }
 }
 
 await main();

@@ -5,6 +5,7 @@ const manifest = ref(null);
 const dashboard = ref(null);
 const overlap = ref(null);
 const stockList = ref([]);
+const stockSearchList = ref([]);
 const isLoading = ref(false);
 const errorMessage = ref('');
 
@@ -12,7 +13,7 @@ let loadPromise = null;
 
 async function loadGlobalData() {
   if (loadPromise) return loadPromise;
-  if (manifest.value && dashboard.value && overlap.value && stockList.value.length) return Promise.resolve();
+  if (manifest.value && dashboard.value && overlap.value && stockList.value.length && stockSearchList.value.length) return Promise.resolve();
 
   isLoading.value = true;
   errorMessage.value = '';
@@ -20,16 +21,18 @@ async function loadGlobalData() {
   loadPromise = (async () => {
     try {
       const manifestData = await fetchJson('data/manifest.json');
-      const [dashboardData, overlapData, stockIndexData] = await Promise.all([
+      const [dashboardData, overlapData, stockIndexData, stockSearchData] = await Promise.all([
         fetchJson(manifestData.dashboardPath ?? 'data/dashboard.json'),
         fetchJson(manifestData.overlapPath ?? 'data/etf-overlap.json'),
         fetchJson(manifestData.stockIndexPath ?? 'data/stocks/index.json'),
+        fetchJson(manifestData.stockSearchPath ?? 'data/stocks/search.json'),
       ]);
 
       manifest.value = manifestData;
       dashboard.value = dashboardData;
       overlap.value = overlapData;
       stockList.value = stockIndexData;
+      stockSearchList.value = stockSearchData;
     } catch (error) {
       errorMessage.value = error instanceof Error ? error.message : '全域資料載入失敗';
       throw error;
@@ -53,6 +56,7 @@ export function useGlobalData() {
     trackedEtfs: computed(() => manifest.value?.trackedEtfs ?? []),
     etfOverviewList: computed(() => manifest.value?.latestOverview ?? []),
     stockList: computed(() => stockList.value),
+    stockSearchList: computed(() => stockSearchList.value),
   };
 }
 

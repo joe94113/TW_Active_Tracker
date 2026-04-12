@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
+import { useRecentStocks } from '../composables/useRecentStocks';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
 import IntradayChart from '../components/IntradayChart.vue';
@@ -19,8 +20,9 @@ import {
 } from '../lib/formatters';
 
 const router = useRouter();
-const { dashboard, manifest, stockList, isLoading, errorMessage, loadGlobalData } = useGlobalData();
+const { dashboard, manifest, stockList, stockSearchList, etfOverviewList, isLoading, errorMessage, loadGlobalData } = useGlobalData();
 const { favoriteCodes, isFavorite, toggleFavorite, clearFavorites } = useFavoriteStocks();
+const { recentItems, clearRecentStocks } = useRecentStocks();
 const searchQuery = ref('');
 
 onMounted(() => {
@@ -36,6 +38,7 @@ const intradayPulse = computed(() => marketOverview.value?.盤中脈動 ?? {});
 const marketBreadth = computed(() => marketOverview.value?.市場廣度 ?? null);
 const foreignOwnershipLeaders = computed(() => marketOverview.value?.外資持股焦點 ?? []);
 const foreignIndustryLeaders = computed(() => marketOverview.value?.外資類股焦點 ?? null);
+const hotStocks = computed(() => marketOverview.value?.熱門股 ?? []);
 
 const summaryCards = computed(() => [
   {
@@ -99,20 +102,157 @@ const filteredStocks = computed(() => {
     return stockList.value.slice(0, 8);
   }
 
-  return stockList.value
+  const sourceList = stockSearchList.value.length ? stockSearchList.value : stockList.value;
+
+  return sourceList
     .filter((item) => [item.code, item.name].some((field) => String(field ?? '').toLowerCase().includes(keyword)))
     .slice(0, 8);
+});
+
+const canDirectLookup = computed(() => {
+  const normalizedCode = searchQuery.value.trim();
+
+  return isStockCode(normalizedCode) && !filteredStocks.value.some((item) => item.code === normalizedCode);
 });
 
 const favoriteStocks = computed(() =>
   favoriteCodes.value
     .map((code) => stockList.value.find((item) => item.code === code))
-    .filter(Boolean),
+    .filter(Boolean)
+    .map((item) => {
+      const momentumScore =
+        Math.abs(item.changePercent ?? 0) * 14 +
+        Math.abs(item.return20 ?? 0) * 1.8 +
+        (item.signalCount ?? 0) * 12 +
+        ((item.total5Day ?? 0) > 0 ? 8 : 0);
+
+      return {
+        ...item,
+        momentumScore,
+      };
+    })
+    .sort((left, right) => (right.momentumScore ?? 0) - (left.momentumScore ?? 0))
+    .map((item, index) => ({
+      ...item,
+      rank: index + 1,
+      heatWidth: `${Math.max(14, Math.min(100, item.momentumScore ?? 0))}%`,
+    })),
 );
+
+const recentViewedStocks = computed(() =>
+  recentItems.value
+    .map((item) => {
+      const stockMatch =
+        stockList.value.find((candidate) => candidate.code === item.code) ??
+        stockSearchList.value.find((candidate) => candidate.code === item.code);
+
+      return {
+        code: item.code,
+        name: stockMatch?.name ?? item.name,
+        industryName: stockMatch?.industryName ?? null,
+        changePercent: stockMatch?.changePercent ?? null,
+        return20: stockMatch?.return20 ?? null,
+        total5Day: stockMatch?.total5Day ?? null,
+        topSignalTitle: stockMatch?.topSignalTitle ?? null,
+        topSignalTone: stockMatch?.topSignalTone ?? null,
+        sparkline20: stockMatch?.sparkline20 ?? [],
+        viewedAt: item.viewedAt,
+      };
+    })
+    .filter((item) => item.code)
+    .slice(0, 6),
+);
+
+const closeFocusCards = computed(() => [
+  {
+    title: '熱門股',
+    subtitle: '先看成交量與價差集中的股票',
+    items: hotStocks.value.slice(0, 3).map((item) => ({
+      code: item.代號,
+      name: item.名稱,
+      value: `${formatPercent(item.漲跌幅)} / ${formatAmount(item.成交量)}`,
+      tone: (item.漲跌幅 ?? 0) > 0 ? 'up' : (item.漲跌幅 ?? 0) < 0 ? 'down' : 'normal',
+    })),
+  },
+  {
+    title: 'ETF 異動',
+    subtitle: '主動式 ETF 最新換股節奏',
+    items: etfOverviewList.value
+      .filter((item) => item.detailAvailability === 'full')
+      .sort(
+        (left, right) =>
+          ((right.changeSummary?.totalChangeCount ?? 0) ||
+            (right.changeSummary?.addedCount ?? 0) +
+              (right.changeSummary?.removedCount ?? 0) +
+              (right.changeSummary?.increasedCount ?? 0) +
+              (right.changeSummary?.decreasedCount ?? 0)) -
+          ((left.changeSummary?.totalChangeCount ?? 0) ||
+            (left.changeSummary?.addedCount ?? 0) +
+              (left.changeSummary?.removedCount ?? 0) +
+              (left.changeSummary?.increasedCount ?? 0) +
+              (left.changeSummary?.decreasedCount ?? 0)),
+      )
+      .slice(0, 3)
+      .map((item) => ({
+        code: item.code,
+        name: item.name,
+        value: item.changeSummary?.comparisonReady === false
+          ? '首日建檔'
+          : `變動 ${formatNumber(
+              (item.changeSummary?.totalChangeCount ?? 0) ||
+                (item.changeSummary?.addedCount ?? 0) +
+                  (item.changeSummary?.removedCount ?? 0) +
+                  (item.changeSummary?.increasedCount ?? 0) +
+                  (item.changeSummary?.decreasedCount ?? 0),
+            )} 檔`,
+        tone:
+          ((item.changeSummary?.totalChangeCount ?? 0) ||
+            (item.changeSummary?.addedCount ?? 0) +
+              (item.changeSummary?.removedCount ?? 0) +
+              (item.changeSummary?.increasedCount ?? 0) +
+              (item.changeSummary?.decreasedCount ?? 0)) > 0
+            ? 'up'
+            : 'normal',
+      })),
+  },
+  {
+    title: '法人連買',
+    subtitle: '盤後先看資金連續流向',
+    items: [
+      ...(institutionalHighlights.value?.外資連買 ?? []).slice(0, 2).map((item) => ({
+        code: item.代號,
+        name: item.名稱,
+        value: `外資連買 ${formatNumber(item.連買天數)} 天`,
+        tone: 'up',
+      })),
+      ...(institutionalHighlights.value?.投信連買 ?? []).slice(0, 1).map((item) => ({
+        code: item.代號,
+        name: item.名稱,
+        value: `投信連買 ${formatNumber(item.連買天數)} 天`,
+        tone: 'up',
+      })),
+    ],
+  },
+]);
 
 function openStockDetail(code) {
   if (!isStockCode(code)) return;
   router.push(createStockRoute(code));
+}
+
+function formatViewedAt(dateText) {
+  const viewedDate = new Date(dateText);
+
+  if (Number.isNaN(viewedDate.getTime())) {
+    return '剛剛';
+  }
+
+  return viewedDate.toLocaleString('zh-TW', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
 
 function getInstitutionalFlow(contract, identity) {
@@ -124,8 +264,6 @@ function getInstitutionalFlow(contract, identity) {
   <section class="page-shell">
     <div class="page-hero">
       <div>
-        <p class="page-kicker">首頁儀表板</p>
-        <h1 class="page-title">台股主動通</h1>
         <p class="page-text">
           先看大盤節奏，再看市場廣度、外資重倉與熱門股，最後一路點進個股頁，把技術面、籌碼面與財務面串成同一條研究路徑。
         </p>
@@ -157,6 +295,42 @@ function getInstitutionalFlow(contract, identity) {
       <section class="panel">
         <div class="panel-header">
           <div>
+            <h2 class="panel-title">盤後重點卡</h2>
+            <p class="panel-subtitle">把熱門股、ETF 異動與法人連買整合在一起，收盤後先看這一區。</p>
+          </div>
+        </div>
+
+        <section class="triple-grid">
+          <article
+            v-for="card in closeFocusCards"
+            :key="card.title"
+            class="focus-card"
+          >
+            <div class="focus-card-head">
+              <div>
+                <h3>{{ card.title }}</h3>
+                <p class="panel-subtitle">{{ card.subtitle }}</p>
+              </div>
+            </div>
+            <div class="focus-card-list">
+              <div
+                v-for="item in card.items"
+                :key="`${card.title}-${item.code}`"
+                class="focus-card-item"
+              >
+                <div>
+                  <strong>{{ item.code }} {{ item.name }}</strong>
+                </div>
+                <span :class="{ 'text-up': item.tone === 'up', 'text-down': item.tone === 'down' }">{{ item.value }}</span>
+              </div>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
             <h2 class="panel-title">自選股</h2>
             <p class="panel-subtitle">把常看的股票放在首頁，回來就能直接看重點。</p>
           </div>
@@ -177,11 +351,19 @@ function getInstitutionalFlow(contract, identity) {
             class="favorite-card"
           >
             <div class="favorite-card-head">
-              <div>
+              <div class="favorite-title-block">
+                <span class="favorite-rank-badge">#{{ item.rank }}</span>
                 <p class="ticker-code">{{ item.code }}</p>
                 <RouterLink class="favorite-title" :to="createStockRoute(item.code)">{{ item.name }}</RouterLink>
               </div>
               <button type="button" class="favorite-toggle is-active" @click="toggleFavorite(item.code)">已追蹤</button>
+            </div>
+            <div class="favorite-heat-strip">
+              <span
+                class="favorite-heat-fill"
+                :class="item.topSignalTone ? `is-${item.topSignalTone}` : ''"
+                :style="{ width: item.heatWidth }"
+              ></span>
             </div>
             <div class="favorite-trend-block">
               <MiniTrendChart :values="item.sparkline20" :tone="item.topSignalTone ?? ((item.changePercent ?? 0) > 0 ? 'up' : (item.changePercent ?? 0) < 0 ? 'down' : 'normal')" />
@@ -189,7 +371,7 @@ function getInstitutionalFlow(contract, identity) {
                 <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
                   {{ formatPercent(item.return20) }}
                 </strong>
-                <span>近 20 日走勢</span>
+                <span>自選熱度第 {{ item.rank }} 名</span>
               </div>
             </div>
             <div class="favorite-metrics">
@@ -214,6 +396,63 @@ function getInstitutionalFlow(contract, identity) {
       <section class="panel">
         <div class="panel-header">
           <div>
+            <h2 class="panel-title">最近瀏覽</h2>
+            <p class="panel-subtitle">剛剛看過的股票會先留在這裡，方便回頭接著研究。</p>
+          </div>
+          <button
+            v-if="recentViewedStocks.length"
+            type="button"
+            class="ghost-button"
+            @click="clearRecentStocks"
+          >
+            清空最近瀏覽
+          </button>
+        </div>
+
+        <div v-if="recentViewedStocks.length" class="recent-stocks-grid">
+          <article
+            v-for="item in recentViewedStocks"
+            :key="`home-recent-${item.code}`"
+            class="favorite-card recent-stock-card"
+          >
+            <div class="recent-stock-head">
+              <div class="favorite-title-block">
+                <p class="ticker-code">{{ item.code }}</p>
+                <RouterLink class="favorite-title" :to="createStockRoute(item.code)">{{ item.name }}</RouterLink>
+              </div>
+              <span class="recent-stock-time">最後查看 {{ formatViewedAt(item.viewedAt) }}</span>
+            </div>
+            <div class="favorite-trend-block">
+              <MiniTrendChart
+                :values="item.sparkline20"
+                :tone="item.topSignalTone ?? ((item.changePercent ?? 0) > 0 ? 'up' : (item.changePercent ?? 0) < 0 ? 'down' : 'normal')"
+              />
+              <div class="favorite-trend-meta">
+                <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
+                  {{ formatPercent(item.return20) }}
+                </strong>
+                <span>{{ item.topSignalTitle ?? '延續前次研究脈絡' }}</span>
+              </div>
+            </div>
+            <div class="favorite-metrics">
+              <span>產業 {{ item.industryName ?? '未分類' }}</span>
+              <span :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
+                日變動 {{ formatPercent(item.changePercent) }}
+              </span>
+              <span>20 日 {{ formatPercent(item.return20) }}</span>
+              <span>法人五日 {{ formatAmount(item.total5Day) }}</span>
+            </div>
+          </article>
+        </div>
+        <div v-else class="empty-state">
+          <strong>最近瀏覽會出現在這裡</strong>
+          <p>只要點進個股頁，我就會把最近研究過的股票整理成回訪入口。</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
             <h2 class="panel-title">個股快速搜尋</h2>
             <p class="panel-subtitle">輸入代號或名稱，快速打開個股頁。</p>
           </div>
@@ -228,21 +467,43 @@ function getInstitutionalFlow(contract, identity) {
         <ul v-if="filteredStocks.length" class="stack-list search-result-list">
           <li v-for="item in filteredStocks" :key="item.code">
             <RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.code }}</RouterLink>
-            <span>{{ item.name }}</span>
+            <span>
+              {{ item.name }}
+              <small v-if="item.topSignalTitle" class="inline-signal-text" :class="{ 'text-up': item.topSignalTone === 'up', 'text-down': item.topSignalTone === 'down' }">
+                {{ item.topSignalTitle }}
+              </small>
+            </span>
             <span class="search-row-actions">
-              <span class="muted">{{ item.activeEtfCount ? `${item.activeEtfCount} 檔 ETF 持有` : '查看個股頁' }}</span>
+              <span class="muted">
+                {{
+                  item.hasLocalDetail === false
+                    ? '即時補資料'
+                    : item.activeEtfCount
+                      ? `${item.activeEtfCount} 檔 ETF 持有`
+                      : '查看個股頁'
+                }}
+                <template v-if="item.return20 !== null && item.return20 !== undefined">・20 日 {{ formatPercent(item.return20) }}</template>
+              </span>
               <button
                 type="button"
                 class="favorite-toggle"
                 :class="{ 'is-active': isFavorite(item.code) }"
-                @click="toggleFavorite(item.code)"
+                @click="item.hasLocalDetail === false ? openStockDetail(item.code) : toggleFavorite(item.code)"
               >
-                {{ isFavorite(item.code) ? '已追蹤' : '加入自選' }}
+                {{ item.hasLocalDetail === false ? '前往查看' : (isFavorite(item.code) ? '已追蹤' : '加入自選') }}
               </button>
             </span>
           </li>
         </ul>
-        <p v-else class="muted">找不到符合的個股，試試代號前幾碼或完整公司名稱。</p>
+        <button
+          v-if="canDirectLookup"
+          type="button"
+          class="ghost-button"
+          @click="openStockDetail(searchQuery.trim())"
+        >
+          直接查詢 {{ searchQuery.trim() }} 即時資料
+        </button>
+        <p v-else class="muted">找不到符合的個股，試試代號前幾碼、完整公司名稱，或直接輸入 4 碼代號查詢。</p>
       </section>
 
       <IntradayChart
