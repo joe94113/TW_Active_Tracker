@@ -1133,7 +1133,7 @@ onBeforeUnmount(() => {
         <div class="chart-info-grid">
           <div
             v-for="item in primaryStats"
-            :key="`${item.label}-${item.value}`"
+            :key="item.label"
             class="chart-info-chip"
             :class="[
               item.emphasis ? 'is-emphasis' : '',
@@ -1169,36 +1169,6 @@ onBeforeUnmount(() => {
             <span class="chart-info-label">{{ item.label }}</span>
             <strong>{{ item.value }}</strong>
           </div>
-        </div>
-      </div>
-
-      <div v-if="activeEventEntries.length" class="chart-event-callout">
-        <div class="chart-event-callout-head">
-          <div>
-            <span class="chart-info-label">{{ activeEventHeadline }}</span>
-            <strong>{{ activeEventEntries.length > 1 ? `同日 ${activeEventEntries.length} 個事件` : activeEventEntries[0].event.label }}</strong>
-          </div>
-          <span class="meta-chip">{{ hoveredKey ? formatCrosshairLabel(hoveredKey) : formatDate(activeEventEntries[0].event.date) }}</span>
-        </div>
-        <div class="chart-event-list">
-          <article
-            v-for="item in activeEventEntries"
-            :key="`chart-event-${item.key}`"
-            class="chart-event-item"
-            :class="`is-${item.event.status === 'reference' ? 'reference' : item.event.status}`"
-          >
-            <div class="chart-event-item-head">
-              <strong>{{ item.event.label }}</strong>
-              <span class="status-badge" :class="`is-${item.event.status === 'reference' ? 'event-reference' : item.event.status}`">
-                {{ describeEventStatus(item.event.status) }}
-              </span>
-            </div>
-            <p>{{ item.event.note }}</p>
-            <div class="chart-event-item-foot">
-              <span>{{ formatDate(item.event.date) }}</span>
-              <span>{{ describeEventDistance(item.event.date) }}</span>
-            </div>
-          </article>
         </div>
       </div>
 
@@ -1314,6 +1284,36 @@ onBeforeUnmount(() => {
       </div>
 
       <div ref="chartHost" class="market-chart-host is-technical" />
+
+      <div v-if="activeEventEntries.length" class="chart-event-callout">
+        <div class="chart-event-callout-head">
+          <div>
+            <span class="chart-info-label">{{ activeEventHeadline }}</span>
+            <strong>{{ activeEventEntries.length > 1 ? `同日 ${activeEventEntries.length} 個事件` : activeEventEntries[0].event.label }}</strong>
+          </div>
+          <span class="meta-chip">{{ hoveredKey ? formatCrosshairLabel(hoveredKey) : formatDate(activeEventEntries[0].event.date) }}</span>
+        </div>
+        <div class="chart-event-list">
+          <article
+            v-for="item in activeEventEntries"
+            :key="`chart-event-${item.key}`"
+            class="chart-event-item"
+            :class="`is-${item.event.status === 'reference' ? 'reference' : item.event.status}`"
+          >
+            <div class="chart-event-item-head">
+              <strong>{{ item.event.label }}</strong>
+              <span class="status-badge" :class="`is-${item.event.status === 'reference' ? 'event-reference' : item.event.status}`">
+                {{ describeEventStatus(item.event.status) }}
+              </span>
+            </div>
+            <p>{{ item.event.note }}</p>
+            <div class="chart-event-item-foot">
+              <span>{{ formatDate(item.event.date) }}</span>
+              <span>{{ describeEventDistance(item.event.date) }}</span>
+            </div>
+          </article>
+        </div>
+      </div>
 
       <div v-if="technicalSignals.length" class="chart-signal-grid">
         <article

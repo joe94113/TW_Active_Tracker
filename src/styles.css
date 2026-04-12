@@ -601,6 +601,7 @@ input {
   border: 1px solid rgba(16, 32, 45, 0.08);
   background: rgba(255, 255, 255, 0.88);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  overflow: hidden;
 }
 
 .chart-info-chip.is-emphasis {
@@ -612,6 +613,8 @@ input {
   font-size: 1.02rem;
   color: var(--text-strong, #10202d);
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .chart-info-chip.is-up strong {

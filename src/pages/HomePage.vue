@@ -65,13 +65,6 @@ const summaryCards = computed(() => [
   },
 ]);
 
-const heroPills = computed(() => [
-  `市場情緒 ${marketBreadth.value?.市場情緒 ?? '整理中'}`,
-  `追蹤個股 ${formatNumber(manifest.value?.stockDetailCount)}`,
-  `熱門股 ${formatNumber(marketOverview.value?.熱門股?.length)}`,
-  `ETF 風向球 ${formatNumber(activeEtfOverview.value?.已串接檔數)}`,
-]);
-
 const marketBreadthCards = computed(() => [
   {
     label: '上漲家數',
@@ -262,17 +255,6 @@ function getInstitutionalFlow(contract, identity) {
 
 <template>
   <section class="page-shell">
-    <div class="page-hero">
-      <div>
-        <p class="page-text">
-          先看大盤節奏，再看市場廣度、外資重倉與熱門股，最後一路點進個股頁，把技術面、籌碼面與財務面串成同一條研究路徑。
-        </p>
-        <div class="hero-feature-row">
-          <span v-for="item in heroPills" :key="item" class="hero-feature-pill">{{ item }}</span>
-        </div>
-      </div>
-    </div>
-
     <StatusCard
       :is-loading="isLoading"
       :error-message="errorMessage"
