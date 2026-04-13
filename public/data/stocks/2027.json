@@ -3,7 +3,7 @@
   "name": "大成鋼",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:07.230Z",
+  "generatedAt": "2026-04-13T06:33:23.777Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 3.93%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 18,130,940 股。"
+    "最近 5 個交易日三大法人合計買超 29,021,134 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4195,13 +4195,6 @@
         "total": 5612567
       },
       {
-        "date": "2026-04-09",
-        "foreign": 8153000,
-        "investmentTrust": 2000,
-        "dealer": 103289,
-        "total": 8258289
-      },
-      {
         "date": "2026-04-08",
         "foreign": 7150000,
         "investmentTrust": 0,
@@ -4216,18 +4209,25 @@
         "total": -2954388
       },
       {
-        "date": "2026-04-04",
-        "foreign": 299000,
+        "date": "2026-04-02",
+        "foreign": 19006000,
         "investmentTrust": 0,
-        "dealer": -272000,
-        "total": 27000
+        "dealer": 2682291,
+        "total": 21688291
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -2437000,
+        "investmentTrust": 0,
+        "dealer": -75808,
+        "total": -2512808
       }
     ],
     "summary": {
-      "foreign5Day": 16499738,
-      "investmentTrust5Day": 1096000,
-      "dealer5Day": 535202,
-      "total5Day": 18130940
+      "foreign5Day": 24616738,
+      "investmentTrust5Day": 1094000,
+      "dealer5Day": 3310396,
+      "total5Day": 29021134
     }
   },
   "持股分散": {
@@ -4405,67 +4405,67 @@
   },
   "同產業比較": {
     "industryName": "鋼鐵工業",
-    "peerCount": 2,
+    "peerCount": 3,
     "rank20Day": 2,
     "rankDaily": 1,
-    "averageReturn20": 4.233728908963526,
-    "averageChangePercent": 0.45893813349586443,
+    "averageReturn20": -1.2570430415410503,
+    "averageChangePercent": 0.8289249261980531,
     "leaders": [
       {
-        "code": "2014",
-        "name": "中鴻",
+        "code": "2002",
+        "name": "中鋼",
         "industryName": "鋼鐵工業",
         "priceDate": "2026-04-13",
-        "close": 18.450000762939453,
-        "change": -0.09999847412109375,
-        "changePercent": -0.5390753543607132,
-        "return20": 4.53258448555024,
-        "return60": 17.891381550539194,
-        "volume": 3468840,
+        "close": 20.200000762939453,
+        "change": 0.15000152587890625,
+        "changePercent": 0.7481373146470872,
+        "return20": 4.39276674270104,
+        "return60": 8.602152412124298,
+        "volume": 28823737,
         "turnover": null,
-        "foreign5Day": 4805457,
-        "investmentTrust5Day": 0,
-        "total5Day": 5684708,
-        "largeHolderRatio": 48.39,
-        "retailRatio": 21.53,
-        "shortToMarginRatio": null,
+        "foreign5Day": 82906210,
+        "investmentTrust5Day": -162403,
+        "total5Day": 87986832,
+        "largeHolderRatio": 54.26,
+        "retailRatio": 16.22,
+        "shortToMarginRatio": 0.891838639427564,
         "activeEtfCount": 0,
         "sparkline20": [
-          17.350000381469727,
-          17.350000381469727,
-          17.799999237060547,
-          18.049999237060547,
-          17.850000381469727,
-          19.600000381469727,
-          18.149999618530273,
-          18.450000762939453,
-          18.75,
+          19.100000381469727,
+          19.149999618530273,
+          19.25,
+          19.299999237060547,
           18.799999237060547,
-          18.600000381469727,
-          18.399999618530273,
-          18,
-          18.299999237060547,
-          18.299999237060547,
-          18.399999618530273,
-          18.649999618530273,
+          19.450000762939453,
+          19.049999237060547,
+          19.200000762939453,
+          19.299999237060547,
+          19.75,
+          19.600000381469727,
+          19.149999618530273,
           18.899999618530273,
-          18.549999237060547,
-          18.450000762939453
+          19.5,
+          19.5,
+          19.5,
+          19.950000762939453,
+          20.200000762939453,
+          20.049999237060547,
+          20.200000762939453
         ],
         "technicalSignals": [
           {
-            "key": "macd-bearish-cross",
-            "title": "MACD 轉弱",
-            "tone": "down",
-            "importance": 3,
-            "description": "中鴻 MACD 線跌破訊號線，短線修正壓力升高。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "中鋼 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "MACD 轉弱"
+          "技術面中性"
         ],
-        "topSignalTitle": "MACD 轉弱",
-        "topSignalTone": "down",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       },
       {
@@ -4480,9 +4480,9 @@
         "return60": 9.42856924874442,
         "volume": 16480628,
         "turnover": null,
-        "foreign5Day": 16499738,
-        "investmentTrust5Day": 1096000,
-        "total5Day": 18130940,
+        "foreign5Day": 24616738,
+        "investmentTrust5Day": 1094000,
+        "total5Day": 29021134,
         "largeHolderRatio": 68.14,
         "retailRatio": 11.37,
         "shortToMarginRatio": null,
@@ -4516,6 +4516,63 @@
             "tone": "normal",
             "importance": 1,
             "description": "大成鋼 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1
+      },
+      {
+        "code": "2006",
+        "name": "東和鋼鐵",
+        "industryName": "鋼鐵工業",
+        "priceDate": "2026-04-13",
+        "close": 71.19999694824219,
+        "change": 0.1999969482421875,
+        "changePercent": 0.28168584259463025,
+        "return20": -12.098769199701003,
+        "return60": 10.21671614553531,
+        "volume": 2394350,
+        "turnover": null,
+        "foreign5Day": 3694343,
+        "investmentTrust5Day": -194783,
+        "total5Day": 2854271,
+        "largeHolderRatio": 80.63,
+        "retailRatio": 8.63,
+        "shortToMarginRatio": 0.129366106080207,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          77.69999694824219,
+          76.30000305175781,
+          76.5999984741211,
+          77,
+          75,
+          70.5,
+          71.19999694824219,
+          72.69999694824219,
+          72.30000305175781,
+          71.80000305175781,
+          70.5,
+          68.9000015258789,
+          67.80000305175781,
+          68.5999984741211,
+          69.30000305175781,
+          69.5999984741211,
+          70.5999984741211,
+          71.69999694824219,
+          71,
+          71.19999694824219
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "東和鋼鐵 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -4528,6 +4585,63 @@
     ],
     "laggards": [
       {
+        "code": "2006",
+        "name": "東和鋼鐵",
+        "industryName": "鋼鐵工業",
+        "priceDate": "2026-04-13",
+        "close": 71.19999694824219,
+        "change": 0.1999969482421875,
+        "changePercent": 0.28168584259463025,
+        "return20": -12.098769199701003,
+        "return60": 10.21671614553531,
+        "volume": 2394350,
+        "turnover": null,
+        "foreign5Day": 3694343,
+        "investmentTrust5Day": -194783,
+        "total5Day": 2854271,
+        "largeHolderRatio": 80.63,
+        "retailRatio": 8.63,
+        "shortToMarginRatio": 0.129366106080207,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          77.69999694824219,
+          76.30000305175781,
+          76.5999984741211,
+          77,
+          75,
+          70.5,
+          71.19999694824219,
+          72.69999694824219,
+          72.30000305175781,
+          71.80000305175781,
+          70.5,
+          68.9000015258789,
+          67.80000305175781,
+          68.5999984741211,
+          69.30000305175781,
+          69.5999984741211,
+          70.5999984741211,
+          71.69999694824219,
+          71,
+          71.19999694824219
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "東和鋼鐵 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1
+      },
+      {
         "code": "2027",
         "name": "大成鋼",
         "industryName": "鋼鐵工業",
@@ -4539,9 +4653,9 @@
         "return60": 9.42856924874442,
         "volume": 16480628,
         "turnover": null,
-        "foreign5Day": 16499738,
-        "investmentTrust5Day": 1096000,
-        "total5Day": 18130940,
+        "foreign5Day": 24616738,
+        "investmentTrust5Day": 1094000,
+        "total5Day": 29021134,
         "largeHolderRatio": 68.14,
         "retailRatio": 11.37,
         "shortToMarginRatio": null,
@@ -4585,66 +4699,66 @@
         "signalCount": 1
       },
       {
-        "code": "2014",
-        "name": "中鴻",
+        "code": "2002",
+        "name": "中鋼",
         "industryName": "鋼鐵工業",
         "priceDate": "2026-04-13",
-        "close": 18.450000762939453,
-        "change": -0.09999847412109375,
-        "changePercent": -0.5390753543607132,
-        "return20": 4.53258448555024,
-        "return60": 17.891381550539194,
-        "volume": 3468840,
+        "close": 20.200000762939453,
+        "change": 0.15000152587890625,
+        "changePercent": 0.7481373146470872,
+        "return20": 4.39276674270104,
+        "return60": 8.602152412124298,
+        "volume": 28823737,
         "turnover": null,
-        "foreign5Day": 4805457,
-        "investmentTrust5Day": 0,
-        "total5Day": 5684708,
-        "largeHolderRatio": 48.39,
-        "retailRatio": 21.53,
-        "shortToMarginRatio": null,
+        "foreign5Day": 82906210,
+        "investmentTrust5Day": -162403,
+        "total5Day": 87986832,
+        "largeHolderRatio": 54.26,
+        "retailRatio": 16.22,
+        "shortToMarginRatio": 0.891838639427564,
         "activeEtfCount": 0,
         "sparkline20": [
-          17.350000381469727,
-          17.350000381469727,
-          17.799999237060547,
-          18.049999237060547,
-          17.850000381469727,
-          19.600000381469727,
-          18.149999618530273,
-          18.450000762939453,
-          18.75,
+          19.100000381469727,
+          19.149999618530273,
+          19.25,
+          19.299999237060547,
           18.799999237060547,
-          18.600000381469727,
-          18.399999618530273,
-          18,
-          18.299999237060547,
-          18.299999237060547,
-          18.399999618530273,
-          18.649999618530273,
+          19.450000762939453,
+          19.049999237060547,
+          19.200000762939453,
+          19.299999237060547,
+          19.75,
+          19.600000381469727,
+          19.149999618530273,
           18.899999618530273,
-          18.549999237060547,
-          18.450000762939453
+          19.5,
+          19.5,
+          19.5,
+          19.950000762939453,
+          20.200000762939453,
+          20.049999237060547,
+          20.200000762939453
         ],
         "technicalSignals": [
           {
-            "key": "macd-bearish-cross",
-            "title": "MACD 轉弱",
-            "tone": "down",
-            "importance": 3,
-            "description": "中鴻 MACD 線跌破訊號線，短線修正壓力升高。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "中鋼 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "MACD 轉弱"
+          "技術面中性"
         ],
-        "topSignalTitle": "MACD 轉弱",
-        "topSignalTone": "down",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 4.23%，短線強度落後族群。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "近 20 日報酬優於同產業平均 -1.26%，在同族群相對偏強。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }

@@ -3,7 +3,7 @@
   "name": "玉山金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:13.368Z",
+  "generatedAt": "2026-04-13T06:33:31.221Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -3.03%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 3,688,430 股。"
+    "最近 5 個交易日三大法人合計買超 1,096,308 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4195,13 +4195,6 @@
         "total": -6096147
       },
       {
-        "date": "2026-04-09",
-        "foreign": 4369250,
-        "investmentTrust": -360783,
-        "dealer": -325322,
-        "total": 3683145
-      },
-      {
         "date": "2026-04-08",
         "foreign": -2084170,
         "investmentTrust": -165409,
@@ -4216,18 +4209,25 @@
         "total": 2416162
       },
       {
-        "date": "2026-04-04",
-        "foreign": -2174149,
-        "investmentTrust": 100000,
-        "dealer": -326000,
-        "total": -2400149
+        "date": "2026-04-02",
+        "foreign": -60179,
+        "investmentTrust": -206375,
+        "dealer": 2345421,
+        "total": 2078867
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 3184688,
+        "investmentTrust": 94452,
+        "dealer": 709727,
+        "total": 3988867
       }
     ],
     "summary": {
-      "foreign5Day": -5195392,
-      "investmentTrust5Day": 489419,
-      "dealer5Day": 1017543,
-      "total5Day": -3688430
+      "foreign5Day": -4265984,
+      "investmentTrust5Day": 638279,
+      "dealer5Day": 4724013,
+      "total5Day": 1096308
     }
   },
   "持股分散": {
@@ -4414,12 +4414,69 @@
   },
   "同產業比較": {
     "industryName": "金融保險業",
-    "peerCount": 2,
-    "rank20Day": 2,
-    "rankDaily": 2,
-    "averageReturn20": -0.25893903497081694,
-    "averageChangePercent": -0.3100787022317103,
+    "peerCount": 4,
+    "rank20Day": 4,
+    "rankDaily": 4,
+    "averageReturn20": 1.2006136917713681,
+    "averageChangePercent": 0.2387606595544588,
     "leaders": [
+      {
+        "code": "2897",
+        "name": "王道銀行",
+        "industryName": "金融保險業",
+        "priceDate": "2026-04-13",
+        "close": 10.350000381469727,
+        "change": 0.20000076293945312,
+        "changePercent": 1.9704509404544526,
+        "return20": 3.707423408864088,
+        "return60": 13.486847712117509,
+        "volume": 7422114,
+        "turnover": null,
+        "foreign5Day": 5788000,
+        "investmentTrust5Day": 124000,
+        "total5Day": 5839902,
+        "largeHolderRatio": 84.79,
+        "retailRatio": 2.7,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          9.930000305175781,
+          9.9399995803833,
+          9.920000076293945,
+          9.920000076293945,
+          9.899999618530273,
+          9.859999656677246,
+          9.84000015258789,
+          9.829999923706055,
+          9.930000305175781,
+          9.9399995803833,
+          10.100000381469727,
+          10,
+          10,
+          10.050000190734863,
+          10.050000190734863,
+          10.050000190734863,
+          10.100000381469727,
+          10.149999618530273,
+          10.149999618530273,
+          10.350000381469727
+        ],
+        "technicalSignals": [
+          {
+            "key": "rsi-overbought",
+            "title": "RSI 超買",
+            "tone": "down",
+            "importance": 2,
+            "description": "王道銀行 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "RSI 超買"
+        ],
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "signalCount": 1
+      },
       {
         "code": "2890",
         "name": "永豐金",
@@ -4432,9 +4489,9 @@
         "return60": 13.541672323589122,
         "volume": 15956698,
         "turnover": null,
-        "foreign5Day": 30883497,
-        "investmentTrust5Day": -3045822,
-        "total5Day": 28122708,
+        "foreign5Day": 30029185,
+        "investmentTrust5Day": -1506210,
+        "total5Day": 30627163,
         "largeHolderRatio": 80.59,
         "retailRatio": 4.65,
         "shortToMarginRatio": 0.9695290858725761,
@@ -4478,6 +4535,63 @@
         "signalCount": 1
       },
       {
+        "code": "2845",
+        "name": "遠東銀",
+        "industryName": "金融保險業",
+        "priceDate": "2026-04-13",
+        "close": 12.600000381469727,
+        "change": -0.049999237060546875,
+        "changePercent": -0.3952508977731968,
+        "return20": 1.6129094281630187,
+        "return60": -3.0769201425405646,
+        "volume": 3501498,
+        "turnover": null,
+        "foreign5Day": 7123332,
+        "investmentTrust5Day": -36000,
+        "total5Day": 7915332,
+        "largeHolderRatio": 73.41,
+        "retailRatio": 3.99,
+        "shortToMarginRatio": 0.6082108464267613,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          12.350000381469727,
+          12.399999618530273,
+          12.449999809265137,
+          12.449999809265137,
+          12.350000381469727,
+          12.300000190734863,
+          12.25,
+          12.300000190734863,
+          12.449999809265137,
+          12.5,
+          12.5,
+          12.5,
+          12.449999809265137,
+          12.550000190734863,
+          12.550000190734863,
+          12.600000381469727,
+          12.649999618530273,
+          12.649999618530273,
+          12.649999618530273,
+          12.600000381469727
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "遠東銀 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1
+      },
+      {
         "code": "2884",
         "name": "玉山金",
         "industryName": "金融保險業",
@@ -4489,9 +4603,9 @@
         "return60": -5.317575533826618,
         "volume": 28506628,
         "turnover": null,
-        "foreign5Day": -5195392,
-        "investmentTrust5Day": 489419,
-        "total5Day": -3688430,
+        "foreign5Day": -4265984,
+        "investmentTrust5Day": 638279,
+        "total5Day": 1096308,
         "largeHolderRatio": 71.05000000000001,
         "retailRatio": 7.32,
         "shortToMarginRatio": null,
@@ -4548,9 +4662,9 @@
         "return60": -5.317575533826618,
         "volume": 28506628,
         "turnover": null,
-        "foreign5Day": -5195392,
-        "investmentTrust5Day": 489419,
-        "total5Day": -3688430,
+        "foreign5Day": -4265984,
+        "investmentTrust5Day": 638279,
+        "total5Day": 1096308,
         "largeHolderRatio": 71.05000000000001,
         "retailRatio": 7.32,
         "shortToMarginRatio": null,
@@ -4594,6 +4708,63 @@
         "signalCount": 1
       },
       {
+        "code": "2845",
+        "name": "遠東銀",
+        "industryName": "金融保險業",
+        "priceDate": "2026-04-13",
+        "close": 12.600000381469727,
+        "change": -0.049999237060546875,
+        "changePercent": -0.3952508977731968,
+        "return20": 1.6129094281630187,
+        "return60": -3.0769201425405646,
+        "volume": 3501498,
+        "turnover": null,
+        "foreign5Day": 7123332,
+        "investmentTrust5Day": -36000,
+        "total5Day": 7915332,
+        "largeHolderRatio": 73.41,
+        "retailRatio": 3.99,
+        "shortToMarginRatio": 0.6082108464267613,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          12.350000381469727,
+          12.399999618530273,
+          12.449999809265137,
+          12.449999809265137,
+          12.350000381469727,
+          12.300000190734863,
+          12.25,
+          12.300000190734863,
+          12.449999809265137,
+          12.5,
+          12.5,
+          12.5,
+          12.449999809265137,
+          12.550000190734863,
+          12.550000190734863,
+          12.600000381469727,
+          12.649999618530273,
+          12.649999618530273,
+          12.649999618530273,
+          12.600000381469727
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "遠東銀 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1
+      },
+      {
         "code": "2890",
         "name": "永豐金",
         "industryName": "金融保險業",
@@ -4605,9 +4776,9 @@
         "return60": 13.541672323589122,
         "volume": 15956698,
         "turnover": null,
-        "foreign5Day": 30883497,
-        "investmentTrust5Day": -3045822,
-        "total5Day": 28122708,
+        "foreign5Day": 30029185,
+        "investmentTrust5Day": -1506210,
+        "total5Day": 30627163,
         "largeHolderRatio": 80.59,
         "retailRatio": 4.65,
         "shortToMarginRatio": 0.9695290858725761,
@@ -4652,7 +4823,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 -0.26%，短線強度落後族群。",
+      "近 20 日報酬低於同產業平均 1.20%，短線強度落後族群。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

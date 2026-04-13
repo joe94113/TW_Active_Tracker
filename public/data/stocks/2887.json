@@ -3,7 +3,7 @@
   "name": "台新新光金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:13.879Z",
+  "generatedAt": "2026-04-13T06:33:31.648Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -2.03%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 4,478,146 股。"
+    "最近 5 個交易日三大法人合計買超 68,903,982 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4181,13 +4181,6 @@
         "total": 311229
       },
       {
-        "date": "2026-04-09",
-        "foreign": 4273162,
-        "investmentTrust": -1203613,
-        "dealer": 500543,
-        "total": 3570092
-      },
-      {
         "date": "2026-04-08",
         "foreign": 3956830,
         "investmentTrust": -615875,
@@ -4202,18 +4195,25 @@
         "total": 4469
       },
       {
-        "date": "2026-04-04",
-        "foreign": -196223,
-        "investmentTrust": 0,
-        "dealer": -67000,
-        "total": -263223
+        "date": "2026-04-02",
+        "foreign": 27309254,
+        "investmentTrust": -673825,
+        "dealer": 649000,
+        "total": 27284429
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 42920268,
+        "investmentTrust": 733172,
+        "dealer": -3205164,
+        "total": 40448276
       }
     ],
     "summary": {
-      "foreign5Day": 1343027,
-      "investmentTrust5Day": 2594392,
-      "dealer5Day": 540727,
-      "total5Day": 4478146
+      "foreign5Day": 67495610,
+      "investmentTrust5Day": 3857352,
+      "dealer5Day": -2448980,
+      "total5Day": 68903982
     }
   },
   "持股分散": {

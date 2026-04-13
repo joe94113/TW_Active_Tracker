@@ -3,7 +3,7 @@
   "name": "中租-KY",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:23.558Z",
+  "generatedAt": "2026-04-13T06:33:43.175Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 8.37%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 2,064,824 股。"
+    "最近 5 個交易日三大法人合計賣超 4,015,634 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4195,13 +4195,6 @@
         "total": -1219194
       },
       {
-        "date": "2026-04-09",
-        "foreign": -411977,
-        "investmentTrust": -130529,
-        "dealer": -76916,
-        "total": -619422
-      },
-      {
         "date": "2026-04-08",
         "foreign": 522114,
         "investmentTrust": -95000,
@@ -4216,18 +4209,25 @@
         "total": -14347
       },
       {
-        "date": "2026-04-04",
-        "foreign": -255000,
-        "investmentTrust": -251000,
-        "dealer": -201000,
-        "total": -707000
+        "date": "2026-04-02",
+        "foreign": -1115768,
+        "investmentTrust": -21307,
+        "dealer": 56867,
+        "total": -1080208
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -2256321,
+        "investmentTrust": 0,
+        "dealer": 59297,
+        "total": -2197024
       }
     ],
     "summary": {
-      "foreign5Day": -1549592,
-      "investmentTrust5Day": -335911,
-      "dealer5Day": -179321,
-      "total5Day": -2064824
+      "foreign5Day": -4254704,
+      "investmentTrust5Day": 24311,
+      "dealer5Day": 214759,
+      "total5Day": -4015634
     }
   },
   "持股分散": {
@@ -4424,9 +4424,9 @@
         "return60": 6.796116504854369,
         "volume": 7943466,
         "turnover": null,
-        "foreign5Day": -1549592,
-        "investmentTrust5Day": -335911,
-        "total5Day": -2064824,
+        "foreign5Day": -4254704,
+        "investmentTrust5Day": 24311,
+        "total5Day": -4015634,
         "largeHolderRatio": 66.95,
         "retailRatio": 11.8,
         "shortToMarginRatio": 0.5057803468208093,
@@ -4483,9 +4483,9 @@
         "return60": 6.796116504854369,
         "volume": 7943466,
         "turnover": null,
-        "foreign5Day": -1549592,
-        "investmentTrust5Day": -335911,
-        "total5Day": -2064824,
+        "foreign5Day": -4254704,
+        "investmentTrust5Day": 24311,
+        "total5Day": -4015634,
         "largeHolderRatio": 66.95,
         "retailRatio": 11.8,
         "shortToMarginRatio": 0.5057803468208093,

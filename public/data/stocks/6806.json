@@ -3,7 +3,7 @@
   "name": "森崴能源",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T04:24:01.377Z",
+  "generatedAt": "2026-04-13T06:33:48.429Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3417,7 +3417,7 @@
       "high": 20.649999618530273,
       "low": 20.649999618530273,
       "close": 20.649999618530273,
-      "volume": 457209,
+      "volume": 565993,
       "turnover": null,
       "transactions": null,
       "change": -2.25,
@@ -3457,7 +3457,7 @@
     "close": 20.649999618530273,
     "change": -2.25,
     "changePercent": -9.825327674587994,
-    "volume": 457209,
+    "volume": 565993,
     "turnover": null,
     "return5": -40.57554066609993,
     "return20": -49.13793006250278,
@@ -3487,7 +3487,7 @@
     "RSI14 落在偏低區，若出現量縮止跌，反而可以留意技術性反彈。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -49.14%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 57.01%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 4,225,776 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3503,12 +3503,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-13T04:00:11.000Z",
+    "updatedAt": "2026-04-13T05:30:30.000Z",
     "previousClose": 22.9,
     "latestPrice": 20.65,
     "high": 20.65,
     "low": 20.65,
-    "volume": 457209,
+    "volume": 565993,
     "points": [
       {
         "timestamp": 1776042000,
@@ -3709,9 +3709,108 @@
         "changePercent": -9.82532917672369
       },
       {
-        "timestamp": 1776052811,
-        "dateTime": "2026-04-13T04:00:11.000Z",
+        "timestamp": 1776052800,
+        "dateTime": "2026-04-13T04:00:00.000Z",
         "time": "12:00",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 6142,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776053400,
+        "dateTime": "2026-04-13T04:10:00.000Z",
+        "time": "12:10",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 2000,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776054000,
+        "dateTime": "2026-04-13T04:20:00.000Z",
+        "time": "12:20",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 6550,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776054600,
+        "dateTime": "2026-04-13T04:30:00.000Z",
+        "time": "12:30",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 7262,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776055200,
+        "dateTime": "2026-04-13T04:40:00.000Z",
+        "time": "12:40",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 14819,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776055800,
+        "dateTime": "2026-04-13T04:50:00.000Z",
+        "time": "12:50",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 6617,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776056400,
+        "dateTime": "2026-04-13T05:00:00.000Z",
+        "time": "13:00",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 6250,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776057000,
+        "dateTime": "2026-04-13T05:10:00.000Z",
+        "time": "13:10",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 36439,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776057600,
+        "dateTime": "2026-04-13T05:20:00.000Z",
+        "time": "13:20",
+        "price": 20.649999618530273,
+        "high": 20.649999618530273,
+        "low": 20.649999618530273,
+        "volume": 23000,
+        "change": -2.250000381469725,
+        "changePercent": -9.82532917672369
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
         "price": 20.649999618530273,
         "high": 20.649999618530273,
         "low": 20.649999618530273,
@@ -3800,12 +3899,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": 46000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 46000
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": 2443388,
+        "investmentTrust": -56000,
+        "dealer": -9000,
+        "total": 2378388
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": 1513388,
+        "investmentTrust": 0,
+        "dealer": -408000,
+        "total": 1105388
+      },
+      {
+        "date": "2026-04-02",
+        "foreign": 88000,
+        "investmentTrust": 0,
+        "dealer": -1000,
+        "total": 87000
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 396000,
+        "investmentTrust": 0,
+        "dealer": 213000,
+        "total": 609000
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 4486776,
+      "investmentTrust5Day": -56000,
+      "dealer5Day": -205000,
+      "total5Day": 4225776
     }
   },
   "持股分散": {
@@ -3971,8 +4106,8 @@
     "peerCount": 4,
     "rank20Day": 4,
     "rankDaily": 4,
-    "averageReturn20": 15.031221574357417,
-    "averageChangePercent": -1.7816059596079667,
+    "averageReturn20": 15.175649796182492,
+    "averageChangePercent": -1.6332284106225416,
     "leaders": [
       {
         "code": "7610",
@@ -3984,11 +4119,11 @@
         "changePercent": 9.949748743718594,
         "return20": 64.7590361445783,
         "return60": 287.9432624113475,
-        "volume": 1637591,
+        "volume": 1678597,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 608414,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 619342,
         "largeHolderRatio": 46.120000000000005,
         "retailRatio": 19.03,
         "shortToMarginRatio": null,
@@ -4036,16 +4171,16 @@
         "name": "昶昕",
         "industryName": "綠能環保",
         "priceDate": "2026-04-13",
-        "close": 87.0999984741211,
-        "change": -2.2000045776367188,
-        "changePercent": -2.463610865009274,
-        "return20": 30.78078148600218,
-        "return60": 76.3157809387769,
-        "volume": 5271532,
+        "close": 86.30000305175781,
+        "change": -3,
+        "changePercent": -3.3594623711952347,
+        "return20": 29.579587130608708,
+        "return60": 74.69635705688856,
+        "volume": 6263943,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1800798,
+        "investmentTrust5Day": -2000,
+        "total5Day": 1894184,
         "largeHolderRatio": 78.06,
         "retailRatio": 7.529999999999999,
         "shortToMarginRatio": 1.9897669130187607,
@@ -4070,22 +4205,22 @@
           81.69999694824219,
           81.19999694824219,
           89.30000305175781,
-          87.0999984741211
+          86.30000305175781
         ],
         "technicalSignals": [
           {
-            "key": "rsi-overbought",
-            "title": "RSI 超買",
-            "tone": "down",
-            "importance": 2,
-            "description": "昶昕 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "昶昕 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "RSI 超買"
+          "技術面中性"
         ],
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       },
       {
@@ -4093,16 +4228,16 @@
         "name": "兆聯實業",
         "industryName": "綠能環保",
         "priceDate": "2026-04-13",
-        "close": 895,
-        "change": -45,
-        "changePercent": -4.787234042553192,
-        "return20": 13.722998729351971,
-        "return60": 27.311522048364157,
-        "volume": 1426707,
+        "close": 909,
+        "change": -31,
+        "changePercent": -3.2978723404255317,
+        "return20": 15.501905972045742,
+        "return60": 29.30298719772404,
+        "volume": 1847642,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 738461,
+        "investmentTrust5Day": 111136,
+        "total5Day": 911192,
         "largeHolderRatio": 52.27,
         "retailRatio": 10.77,
         "shortToMarginRatio": 0.45366169799092676,
@@ -4127,7 +4262,7 @@
           896,
           946,
           940,
-          895
+          909
         ],
         "technicalSignals": [
           {
@@ -4155,11 +4290,11 @@
         "changePercent": -9.825327674587994,
         "return20": -49.13793006250278,
         "return60": -45.871562797913846,
-        "volume": 457209,
+        "volume": 565993,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 4486776,
+        "investmentTrust5Day": -56000,
+        "total5Day": 4225776,
         "largeHolderRatio": 57.01,
         "retailRatio": 23.82,
         "shortToMarginRatio": 29.726443768996962,
@@ -4214,11 +4349,11 @@
         "changePercent": -9.825327674587994,
         "return20": -49.13793006250278,
         "return60": -45.871562797913846,
-        "volume": 457209,
+        "volume": 565993,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 4486776,
+        "investmentTrust5Day": -56000,
+        "total5Day": 4225776,
         "largeHolderRatio": 57.01,
         "retailRatio": 23.82,
         "shortToMarginRatio": 29.726443768996962,
@@ -4266,16 +4401,16 @@
         "name": "兆聯實業",
         "industryName": "綠能環保",
         "priceDate": "2026-04-13",
-        "close": 895,
-        "change": -45,
-        "changePercent": -4.787234042553192,
-        "return20": 13.722998729351971,
-        "return60": 27.311522048364157,
-        "volume": 1426707,
+        "close": 909,
+        "change": -31,
+        "changePercent": -3.2978723404255317,
+        "return20": 15.501905972045742,
+        "return60": 29.30298719772404,
+        "volume": 1847642,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 738461,
+        "investmentTrust5Day": 111136,
+        "total5Day": 911192,
         "largeHolderRatio": 52.27,
         "retailRatio": 10.77,
         "shortToMarginRatio": 0.45366169799092676,
@@ -4300,7 +4435,7 @@
           896,
           946,
           940,
-          895
+          909
         ],
         "technicalSignals": [
           {
@@ -4323,16 +4458,16 @@
         "name": "昶昕",
         "industryName": "綠能環保",
         "priceDate": "2026-04-13",
-        "close": 87.0999984741211,
-        "change": -2.2000045776367188,
-        "changePercent": -2.463610865009274,
-        "return20": 30.78078148600218,
-        "return60": 76.3157809387769,
-        "volume": 5271532,
+        "close": 86.30000305175781,
+        "change": -3,
+        "changePercent": -3.3594623711952347,
+        "return20": 29.579587130608708,
+        "return60": 74.69635705688856,
+        "volume": 6263943,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1800798,
+        "investmentTrust5Day": -2000,
+        "total5Day": 1894184,
         "largeHolderRatio": 78.06,
         "retailRatio": 7.529999999999999,
         "shortToMarginRatio": 1.9897669130187607,
@@ -4357,27 +4492,28 @@
           81.69999694824219,
           81.19999694824219,
           89.30000305175781,
-          87.0999984741211
+          86.30000305175781
         ],
         "technicalSignals": [
           {
-            "key": "rsi-overbought",
-            "title": "RSI 超買",
-            "tone": "down",
-            "importance": 2,
-            "description": "昶昕 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "昶昕 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "RSI 超買"
+          "技術面中性"
         ],
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 15.03%，短線強度落後族群。"
+      "近 20 日報酬低於同產業平均 15.18%，短線強度落後族群。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

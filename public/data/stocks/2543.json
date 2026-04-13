@@ -3,7 +3,7 @@
   "name": "皇昌",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:11.518Z",
+  "generatedAt": "2026-04-13T06:33:29.416Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -22.79%，可用來觀察波段資金是否持續留在主線。",
-    "最近 4 個交易日三大法人合計買超 147,234 股。"
+    "最近 5 個交易日三大法人合計買超 69,013 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4173,13 +4173,6 @@
         "total": 87144
       },
       {
-        "date": "2026-04-09",
-        "foreign": -139000,
-        "investmentTrust": 0,
-        "dealer": -23122,
-        "total": -162122
-      },
-      {
         "date": "2026-04-08",
         "foreign": 180000,
         "investmentTrust": 0,
@@ -4192,13 +4185,27 @@
         "investmentTrust": 0,
         "dealer": -9564,
         "total": -2564
+      },
+      {
+        "date": "2026-04-02",
+        "foreign": -152000,
+        "investmentTrust": 0,
+        "dealer": -33664,
+        "total": -185664
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -70000,
+        "investmentTrust": 0,
+        "dealer": 15321,
+        "total": -54679
       }
     ],
     "summary": {
-      "foreign5Day": 92000,
+      "foreign5Day": 9000,
       "investmentTrust5Day": 0,
-      "dealer5Day": 55234,
-      "total5Day": 147234
+      "dealer5Day": 60013,
+      "total5Day": 69013
     }
   },
   "持股分散": {
@@ -4376,11 +4383,11 @@
   },
   "同產業比較": {
     "industryName": "建材營造",
-    "peerCount": 4,
-    "rank20Day": 4,
-    "rankDaily": 3,
-    "averageReturn20": 0.5598894549384439,
-    "averageChangePercent": 1.103664004592652,
+    "peerCount": 3,
+    "rank20Day": 3,
+    "rankDaily": 2,
+    "averageReturn20": -1.004026074024334,
+    "averageChangePercent": 0.6914112443355265,
     "leaders": [
       {
         "code": "2923",
@@ -4394,9 +4401,9 @@
         "return60": 1.4741976974787665,
         "volume": 156207,
         "turnover": null,
-        "foreign5Day": 267950,
+        "foreign5Day": 191950,
         "investmentTrust5Day": 0,
-        "total5Day": 307950,
+        "total5Day": 301950,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4451,9 +4458,9 @@
         "return60": 10.526315789473683,
         "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 4078116,
+        "foreign5Day": 3601757,
         "investmentTrust5Day": 0,
-        "total5Day": 3985365,
+        "total5Day": 3738158,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4497,71 +4504,6 @@
         "signalCount": 1
       },
       {
-        "code": "2501",
-        "name": "國建",
-        "industryName": "建材營造",
-        "priceDate": "2026-04-13",
-        "close": 24.049999237060547,
-        "change": 0.5499992370605469,
-        "changePercent": 2.340422285364029,
-        "return20": 5.251636041826777,
-        "return60": 3.44085693359375,
-        "volume": 3566393,
-        "turnover": null,
-        "foreign5Day": 3213585,
-        "investmentTrust5Day": -229000,
-        "total5Day": 3296669,
-        "largeHolderRatio": 77.04,
-        "retailRatio": 7.83,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          22.850000381469727,
-          22.850000381469727,
-          23.450000762939453,
-          23.450000762939453,
-          23.25,
-          23.850000381469727,
-          23.299999237060547,
-          23.600000381469727,
-          24.049999237060547,
-          23.899999618530273,
-          24,
-          23.049999237060547,
-          22.600000381469727,
-          22.600000381469727,
-          22.299999237060547,
-          22.549999237060547,
-          23.25,
-          23.299999237060547,
-          23.5,
-          24.049999237060547
-        ],
-        "technicalSignals": [
-          {
-            "key": "golden-cross",
-            "title": "黃金交叉",
-            "tone": "up",
-            "importance": 3,
-            "description": "國建 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
-          },
-          {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "國建 MACD 線上穿訊號線，短線動能重新偏多。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "黃金交叉",
-          "MACD 翻正"
-        ],
-        "topSignalTitle": "黃金交叉",
-        "topSignalTone": "up",
-        "signalCount": 2
-      },
-      {
         "code": "2543",
         "name": "皇昌",
         "industryName": "建材營造",
@@ -4573,9 +4515,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": 92000,
+        "foreign5Day": 9000,
         "investmentTrust5Day": 0,
-        "total5Day": 147234,
+        "total5Day": 69013,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4632,9 +4574,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": 92000,
+        "foreign5Day": 9000,
         "investmentTrust5Day": 0,
-        "total5Day": 147234,
+        "total5Day": 69013,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4678,71 +4620,6 @@
         "signalCount": 1
       },
       {
-        "code": "2501",
-        "name": "國建",
-        "industryName": "建材營造",
-        "priceDate": "2026-04-13",
-        "close": 24.049999237060547,
-        "change": 0.5499992370605469,
-        "changePercent": 2.340422285364029,
-        "return20": 5.251636041826777,
-        "return60": 3.44085693359375,
-        "volume": 3566393,
-        "turnover": null,
-        "foreign5Day": 3213585,
-        "investmentTrust5Day": -229000,
-        "total5Day": 3296669,
-        "largeHolderRatio": 77.04,
-        "retailRatio": 7.83,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          22.850000381469727,
-          22.850000381469727,
-          23.450000762939453,
-          23.450000762939453,
-          23.25,
-          23.850000381469727,
-          23.299999237060547,
-          23.600000381469727,
-          24.049999237060547,
-          23.899999618530273,
-          24,
-          23.049999237060547,
-          22.600000381469727,
-          22.600000381469727,
-          22.299999237060547,
-          22.549999237060547,
-          23.25,
-          23.299999237060547,
-          23.5,
-          24.049999237060547
-        ],
-        "technicalSignals": [
-          {
-            "key": "golden-cross",
-            "title": "黃金交叉",
-            "tone": "up",
-            "importance": 3,
-            "description": "國建 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
-          },
-          {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "國建 MACD 線上穿訊號線，短線動能重新偏多。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "黃金交叉",
-          "MACD 翻正"
-        ],
-        "topSignalTitle": "黃金交叉",
-        "topSignalTone": "up",
-        "signalCount": 2
-      },
-      {
         "code": "2548",
         "name": "華固",
         "industryName": "建材營造",
@@ -4754,9 +4631,9 @@
         "return60": 10.526315789473683,
         "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 4078116,
+        "foreign5Day": 3601757,
         "investmentTrust5Day": 0,
-        "total5Day": 3985365,
+        "total5Day": 3738158,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4798,10 +4675,67 @@
         "topSignalTitle": "KD 高檔死亡交叉",
         "topSignalTone": "down",
         "signalCount": 1
+      },
+      {
+        "code": "2923",
+        "name": "鼎固-KY",
+        "industryName": "建材營造",
+        "priceDate": "2026-04-13",
+        "close": 20.649999618530273,
+        "change": 0.75,
+        "changePercent": 3.7688442933517594,
+        "return20": 11.6216195596231,
+        "return60": 1.4741976974787665,
+        "volume": 156207,
+        "turnover": null,
+        "foreign5Day": 191950,
+        "investmentTrust5Day": 0,
+        "total5Day": 301950,
+        "largeHolderRatio": 99.36,
+        "retailRatio": 0.23000000000000004,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          18.299999237060547,
+          17.75,
+          18.649999618530273,
+          18.799999237060547,
+          17.799999237060547,
+          18.399999618530273,
+          17.5,
+          17.700000762939453,
+          18.549999237060547,
+          18.399999618530273,
+          18.25,
+          17.75,
+          17.649999618530273,
+          17.649999618530273,
+          17.200000762939453,
+          17.950000762939453,
+          19.5,
+          19.049999237060547,
+          19.899999618530273,
+          20.649999618530273
+        ],
+        "technicalSignals": [
+          {
+            "key": "break-above-long-ma",
+            "title": "站回長均線",
+            "tone": "up",
+            "importance": 2,
+            "description": "鼎固-KY 收盤重新站上長均線，中期結構開始修復。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "站回長均線"
+        ],
+        "topSignalTitle": "站回長均線",
+        "topSignalTone": "up",
+        "signalCount": 1
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 0.56%，短線強度落後族群。",
+      "近 20 日報酬低於同產業平均 -1.00%，短線強度落後族群。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

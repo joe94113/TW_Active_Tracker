@@ -1,8 +1,8 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-13T06:15:30.088Z",
+  "generatedAt": "2026-04-13T06:33:51.444Z",
   "generatedAtLocalDate": "2026-04-13",
-  "generatedAtLocalTime": "14:14:36",
+  "generatedAtLocalTime": "14:32:42",
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -556,18 +556,18 @@
       "sourceUrl": "https://www.yuantaetfs.com/product/detail/00990A/ratio",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-13",
-      "nav": 13.89,
-      "aum": 24954895728,
-      "holdingsCount": 52,
+      "disclosureDate": "2026-04-14",
+      "nav": 14.15,
+      "aum": 25196137843,
+      "holdingsCount": 51,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "comparisonReady": false,
-        "addedCount": 52,
-        "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 52
+        "comparisonReady": true,
+        "addedCount": 0,
+        "removedCount": 1,
+        "increasedCount": 28,
+        "decreasedCount": 18,
+        "totalChangeCount": 47
       }
     },
     {
@@ -805,9 +805,9 @@
       }
     }
   ],
-  "latestDisclosureDate": "2026-04-13",
+  "latestDisclosureDate": "2026-04-14",
   "connectedCount": 15,
-  "stockDetailCount": 176,
+  "stockDetailCount": 175,
   "pendingEtfs": [
     {
       "code": "00981A",

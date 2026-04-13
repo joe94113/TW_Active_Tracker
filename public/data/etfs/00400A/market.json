@@ -2,8 +2,8 @@
   "code": "00400A",
   "name": "主動國泰動能高息",
   "kind": "etf",
-  "priceDate": "2026-04-10",
-  "generatedAt": "2026-04-13T06:15:04.365Z",
+  "priceDate": "2026-04-13",
+  "generatedAt": "2026-04-13T06:33:18.704Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -75,25 +75,54 @@
       "rsi14": null,
       "k9": null,
       "d9": null
+    },
+    {
+      "date": "2026-04-13",
+      "open": 11.149999618530273,
+      "high": 11.1899995803833,
+      "low": 11.079999923706055,
+      "close": 11.119999885559082,
+      "volume": 90288349,
+      "turnover": null,
+      "transactions": null,
+      "change": -0.020000457763671875,
+      "changePercent": -0.17953731730053332,
+      "maFast": null,
+      "maShort": null,
+      "maMedium": null,
+      "maLong": null,
+      "rsi": null,
+      "stochasticK": null,
+      "stochasticD": null,
+      "macd": 0.03233162169206949,
+      "macdSignal": 0.009529581452574548,
+      "macdHist": 0.02280204023949494,
+      "ma5": null,
+      "ma10": null,
+      "ma20": null,
+      "ma60": null,
+      "rsi14": null,
+      "k9": null,
+      "d9": null
     }
   ],
   "technicalSignals": [
     {
-      "key": "macd-bullish-cross",
-      "title": "MACD 翻正",
-      "tone": "up",
-      "importance": 3,
-      "description": "主動國泰動能高息 MACD 線上穿訊號線，短線動能重新偏多。"
+      "key": "neutral",
+      "title": "技術面中性",
+      "tone": "normal",
+      "importance": 1,
+      "description": "主動國泰動能高息 目前沒有明確的新訊號，偏向等待下一段量價表態。"
     }
   ],
   "訊號摘要": [
-    "MACD 翻正"
+    "技術面中性"
   ],
   "最新摘要": {
-    "close": 11.140000343322754,
-    "change": 0.24000072479248047,
-    "changePercent": 2.2018415889159595,
-    "volume": 148646300,
+    "close": 11.119999885559082,
+    "change": -0.020000457763671875,
+    "changePercent": -0.17953731730053332,
+    "volume": 90288349,
     "turnover": null,
     "return5": null,
     "return20": null,
@@ -114,9 +143,9 @@
     "stochasticD": null,
     "k9": null,
     "d9": null,
-    "macd": 0.019145356963504057,
-    "macdSignal": 0.0038290713927008114,
-    "macdHist": 0.015316285570803246
+    "macd": 0.03233162169206949,
+    "macdSignal": 0.009529581452574548,
+    "macdHist": 0.02280204023949494
   },
   "觀察摘要": [
     "主動國泰動能高息 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
@@ -129,7 +158,7 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-10T05:30:06.000Z",
+    "updatedAt": "2026-04-13T05:30:05.000Z",
     "previousClose": 11.14,
     "latestPrice": 11.12,
     "high": 11.19,
@@ -716,6 +745,17 @@
         "high": 11.119999885559082,
         "low": 11.109999656677246,
         "volume": 734188,
+        "change": -0.020000114440918537,
+        "changePercent": -0.17953424094181808
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
+        "price": 11.119999885559082,
+        "high": 11.119999885559082,
+        "low": 11.119999885559082,
+        "volume": 0,
         "change": -0.020000114440918537,
         "changePercent": -0.17953424094181808
       }

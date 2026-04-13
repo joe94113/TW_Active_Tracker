@@ -3,7 +3,7 @@
   "name": "智伸科",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:20.785Z",
+  "generatedAt": "2026-04-13T06:33:39.688Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 13.64%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 33,002 股。"
+    "最近 5 個交易日三大法人合計買超 47,168 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4118,13 +4118,6 @@
         "total": 112877
       },
       {
-        "date": "2026-04-09",
-        "foreign": -30000,
-        "investmentTrust": 0,
-        "dealer": -939,
-        "total": -30939
-      },
-      {
         "date": "2026-04-08",
         "foreign": -178000,
         "investmentTrust": 0,
@@ -4139,18 +4132,25 @@
         "total": 30157
       },
       {
-        "date": "2026-04-04",
-        "foreign": 47000,
-        "investmentTrust": -40000,
-        "dealer": 1000,
-        "total": 8000
+        "date": "2026-04-02",
+        "foreign": 45000,
+        "investmentTrust": 0,
+        "dealer": -4846,
+        "total": 40154
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 7000,
+        "investmentTrust": 0,
+        "dealer": 10077,
+        "total": 17077
       }
     ],
     "summary": {
-      "foreign5Day": -25000,
-      "investmentTrust5Day": -40000,
-      "dealer5Day": 31998,
-      "total5Day": -33002
+      "foreign5Day": 10000,
+      "investmentTrust5Day": 0,
+      "dealer5Day": 37168,
+      "total5Day": 47168
     }
   },
   "持股分散": {
@@ -4347,9 +4347,9 @@
         "return60": 17.02127659574468,
         "volume": 522921,
         "turnover": null,
-        "foreign5Day": -25000,
-        "investmentTrust5Day": -40000,
-        "total5Day": -33002,
+        "foreign5Day": 10000,
+        "investmentTrust5Day": 0,
+        "total5Day": 47168,
         "largeHolderRatio": 79.36,
         "retailRatio": 6.94,
         "shortToMarginRatio": 0.13157894736842105,
@@ -4406,9 +4406,9 @@
         "return60": 17.02127659574468,
         "volume": 522921,
         "turnover": null,
-        "foreign5Day": -25000,
-        "investmentTrust5Day": -40000,
-        "total5Day": -33002,
+        "foreign5Day": 10000,
+        "investmentTrust5Day": 0,
+        "total5Day": 47168,
         "largeHolderRatio": 79.36,
         "retailRatio": 6.94,
         "shortToMarginRatio": 0.13157894736842105,

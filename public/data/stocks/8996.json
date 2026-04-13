@@ -3,7 +3,7 @@
   "name": "高力",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:29.265Z",
+  "generatedAt": "2026-04-13T06:33:50.841Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 19.41%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 1,001,003 股。"
+    "最近 5 個交易日三大法人合計賣超 498,458 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4195,13 +4195,6 @@
         "total": 859225
       },
       {
-        "date": "2026-04-09",
-        "foreign": 1261836,
-        "investmentTrust": -40000,
-        "dealer": 91781,
-        "total": 1313617
-      },
-      {
         "date": "2026-04-08",
         "foreign": -1485956,
         "investmentTrust": -179001,
@@ -4216,18 +4209,25 @@
         "total": 405389
       },
       {
-        "date": "2026-04-04",
-        "foreign": 55000,
-        "investmentTrust": 0,
-        "dealer": 0,
-        "total": 55000
+        "date": "2026-04-02",
+        "foreign": -429850,
+        "investmentTrust": 16999,
+        "dealer": -16831,
+        "total": -429682
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 122683,
+        "investmentTrust": 115000,
+        "dealer": 61155,
+        "total": 298838
       }
     ],
     "summary": {
-      "foreign5Day": 980612,
-      "investmentTrust5Day": -95001,
-      "dealer5Day": 115392,
-      "total5Day": 1001003
+      "foreign5Day": -643391,
+      "investmentTrust5Day": 76998,
+      "dealer5Day": 67935,
+      "total5Day": -498458
     }
   },
   "持股分散": {
@@ -4425,11 +4425,11 @@
   },
   "同產業比較": {
     "industryName": "電機機械",
-    "peerCount": 7,
+    "peerCount": 6,
     "rank20Day": 2,
     "rankDaily": 1,
-    "averageReturn20": 13.442238286407065,
-    "averageChangePercent": 0.6850201964390202,
+    "averageReturn20": 15.272775268567806,
+    "averageChangePercent": 0.24822604185103314,
     "leaders": [
       {
         "code": "3167",
@@ -4443,9 +4443,9 @@
         "return60": 175.33632286995515,
         "volume": 1442389,
         "turnover": null,
-        "foreign5Day": 384730,
-        "investmentTrust5Day": 95000,
-        "total5Day": 569967,
+        "foreign5Day": 1004869,
+        "investmentTrust5Day": 2461000,
+        "total5Day": 3541677,
         "largeHolderRatio": 64.23,
         "retailRatio": 10.67,
         "shortToMarginRatio": 7.181403071814032,
@@ -4508,9 +4508,9 @@
         "return60": 89.44636678200692,
         "volume": 4043697,
         "turnover": null,
-        "foreign5Day": 980612,
-        "investmentTrust5Day": -95001,
-        "total5Day": 1001003,
+        "foreign5Day": -643391,
+        "investmentTrust5Day": 76998,
+        "total5Day": -498458,
         "largeHolderRatio": 54.22,
         "retailRatio": 10.27,
         "shortToMarginRatio": 4.452951843642958,
@@ -4565,9 +4565,9 @@
         "return60": 13.825363825363826,
         "volume": 542491,
         "turnover": null,
-        "foreign5Day": 421821,
-        "investmentTrust5Day": 47256,
-        "total5Day": 548723,
+        "foreign5Day": -112178,
+        "investmentTrust5Day": -71575,
+        "total5Day": 46048,
         "largeHolderRatio": 72.19,
         "retailRatio": 1.69,
         "shortToMarginRatio": null,
@@ -4622,9 +4622,9 @@
         "return60": 1.687116564417178,
         "volume": 174970,
         "turnover": null,
-        "foreign5Day": 14498,
-        "investmentTrust5Day": -19000,
-        "total5Day": -1718,
+        "foreign5Day": 652,
+        "investmentTrust5Day": -29000,
+        "total5Day": -19017,
         "largeHolderRatio": 86.22,
         "retailRatio": 4.6,
         "shortToMarginRatio": 0.7766990291262136,
@@ -4668,63 +4668,6 @@
         "signalCount": 1
       },
       {
-        "code": "2049",
-        "name": "上銀",
-        "industryName": "電機機械",
-        "priceDate": "2026-04-13",
-        "close": 250,
-        "change": 8,
-        "changePercent": 3.3057851239669422,
-        "return20": 2.459016393442623,
-        "return60": 28.205128205128204,
-        "volume": 5909952,
-        "turnover": null,
-        "foreign5Day": 5162149,
-        "investmentTrust5Day": -10162,
-        "total5Day": 5370400,
-        "largeHolderRatio": 65.4,
-        "retailRatio": 17.45,
-        "shortToMarginRatio": 0.537345513164965,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          238.5,
-          233,
-          235.5,
-          232.5,
-          229.5,
-          223.5,
-          221,
-          225.5,
-          234.5,
-          236.5,
-          235,
-          247,
-          228.5,
-          233.5,
-          228,
-          234,
-          241.5,
-          245,
-          242,
-          250
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "上銀 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1
-      },
-      {
         "code": "4560",
         "name": "強信-KY",
         "industryName": "電機機械",
@@ -4736,9 +4679,9 @@
         "return60": 2.6315860956525325,
         "volume": 70640,
         "turnover": null,
-        "foreign5Day": -43000,
+        "foreign5Day": -48000,
         "investmentTrust5Day": 0,
-        "total5Day": -40000,
+        "total5Day": -25000,
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4793,9 +4736,9 @@
         "return60": 10.854816824966079,
         "volume": 1442495,
         "turnover": null,
-        "foreign5Day": -559220,
-        "investmentTrust5Day": -100792,
-        "total5Day": -569817,
+        "foreign5Day": 1123894,
+        "investmentTrust5Day": -349192,
+        "total5Day": 926219,
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4852,9 +4795,9 @@
         "return60": 10.854816824966079,
         "volume": 1442495,
         "turnover": null,
-        "foreign5Day": -559220,
-        "investmentTrust5Day": -100792,
-        "total5Day": -569817,
+        "foreign5Day": 1123894,
+        "investmentTrust5Day": -349192,
+        "total5Day": 926219,
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4909,9 +4852,9 @@
         "return60": 2.6315860956525325,
         "volume": 70640,
         "turnover": null,
-        "foreign5Day": -43000,
+        "foreign5Day": -48000,
         "investmentTrust5Day": 0,
-        "total5Day": -40000,
+        "total5Day": -25000,
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4955,45 +4898,45 @@
         "signalCount": 1
       },
       {
-        "code": "2049",
-        "name": "上銀",
+        "code": "4583",
+        "name": "台灣精銳",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 250,
-        "change": 8,
-        "changePercent": 3.3057851239669422,
-        "return20": 2.459016393442623,
-        "return60": 28.205128205128204,
-        "volume": 5909952,
+        "close": 663,
+        "change": -5,
+        "changePercent": -0.7485029940119761,
+        "return20": 3.43213728549142,
+        "return60": 1.687116564417178,
+        "volume": 174970,
         "turnover": null,
-        "foreign5Day": 5162149,
-        "investmentTrust5Day": -10162,
-        "total5Day": 5370400,
-        "largeHolderRatio": 65.4,
-        "retailRatio": 17.45,
-        "shortToMarginRatio": 0.537345513164965,
-        "activeEtfCount": 0,
+        "foreign5Day": 652,
+        "investmentTrust5Day": -29000,
+        "total5Day": -19017,
+        "largeHolderRatio": 86.22,
+        "retailRatio": 4.6,
+        "shortToMarginRatio": 0.7766990291262136,
+        "activeEtfCount": 1,
         "sparkline20": [
-          238.5,
-          233,
-          235.5,
-          232.5,
-          229.5,
-          223.5,
-          221,
-          225.5,
-          234.5,
-          236.5,
-          235,
-          247,
-          228.5,
-          233.5,
-          228,
-          234,
-          241.5,
-          245,
-          242,
-          250
+          631,
+          629,
+          629,
+          639,
+          640,
+          642,
+          626,
+          638,
+          659,
+          679,
+          667,
+          648,
+          624,
+          642,
+          632,
+          649,
+          678,
+          664,
+          668,
+          663
         ],
         "technicalSignals": [
           {
@@ -5001,7 +4944,7 @@
             "title": "技術面中性",
             "tone": "normal",
             "importance": 1,
-            "description": "上銀 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "description": "台灣精銳 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -5013,8 +4956,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 13.44%，在同族群相對偏強。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "近 20 日報酬優於同產業平均 15.27%，在同族群相對偏強。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }
