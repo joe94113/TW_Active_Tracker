@@ -3,11 +3,7 @@
   "name": "兆豐金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-<<<<<<< HEAD
-  "generatedAt": "2026-04-13T06:38:54.405Z",
-=======
-  "generatedAt": "2026-04-13T06:33:31.508Z",
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
+  "generatedAt": "2026-04-13T06:53:50.909Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3491,11 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 1.29%，可用來觀察波段資金是否持續留在主線。",
-<<<<<<< HEAD
     "最近 5 個交易日三大法人合計買超 46,767,587 股。"
-=======
-    "最近 5 個交易日三大法人合計買超 34,815,595 股。"
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4189,7 +4181,6 @@
         "total": -1110619
       },
       {
-<<<<<<< HEAD
         "date": "2026-04-09",
         "foreign": 18563917,
         "investmentTrust": 2866462,
@@ -4197,8 +4188,6 @@
         "total": 21099379
       },
       {
-=======
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "date": "2026-04-08",
         "foreign": 1725700,
         "investmentTrust": 2360411,
@@ -4218,7 +4207,6 @@
         "investmentTrust": 798142,
         "dealer": 2513865,
         "total": 10512925
-<<<<<<< HEAD
       }
     ],
     "summary": {
@@ -4226,30 +4214,14 @@
       "investmentTrust5Day": 8207672,
       "dealer5Day": 3753632,
       "total5Day": 46767587
-=======
-      },
-      {
-        "date": "2026-04-01",
-        "foreign": 7451807,
-        "investmentTrust": 771657,
-        "dealer": 923923,
-        "total": 9147387
-      }
-    ],
-    "summary": {
-      "foreign5Day": 23694173,
-      "investmentTrust5Day": 6112867,
-      "dealer5Day": 5008555,
-      "total5Day": 34815595
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
     }
   },
   "持股分散": {
     "date": "2026-04-10",
     "retailRatio": 6.24,
     "largeHolderRatio": 81.44999999999999,
-    "retailRatioDelta": 0,
-    "largeHolderRatioDelta": 0,
+    "retailRatioDelta": null,
+    "largeHolderRatioDelta": null,
     "totalHolders": 496055,
     "totalRatio": 100,
     "bands": [

@@ -511,6 +511,13 @@ async function 讀取JSON存在則回傳(filePath) {
     if (error && error.code === 'ENOENT') {
       return null;
     }
+    if (error instanceof SyntaxError) {
+      const raw = await readFile(filePath, 'utf8').catch(() => '');
+      if (raw.includes('<<<<<<<') || raw.includes('=======') || raw.includes('>>>>>>>')) {
+        console.warn(`[警告] 偵測到 Git 衝突標記，忽略舊 JSON：${filePath}`);
+        return null;
+      }
+    }
     throw error;
   }
 }

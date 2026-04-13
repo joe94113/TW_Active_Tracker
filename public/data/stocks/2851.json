@@ -3,11 +3,7 @@
   "name": "中再保",
   "kind": "stock",
   "priceDate": "2026-04-13",
-<<<<<<< HEAD
-  "generatedAt": "2026-04-13T06:38:53.725Z",
-=======
-  "generatedAt": "2026-04-13T06:33:30.633Z",
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
+  "generatedAt": "2026-04-13T06:53:50.214Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3491,11 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 9.36%，可用來觀察波段資金是否持續留在主線。",
-<<<<<<< HEAD
     "最近 5 個交易日三大法人合計買超 2,867,352 股。"
-=======
-    "最近 5 個交易日三大法人合計買超 3,113,777 股。"
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4178,7 +4170,6 @@
         "total": 742000
       },
       {
-<<<<<<< HEAD
         "date": "2026-04-09",
         "foreign": 66000,
         "investmentTrust": 12000,
@@ -4186,8 +4177,6 @@
         "total": 67000
       },
       {
-=======
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "date": "2026-04-08",
         "foreign": 1058000,
         "investmentTrust": 9000,
@@ -4207,7 +4196,6 @@
         "investmentTrust": 0,
         "dealer": -2933,
         "total": 354067
-<<<<<<< HEAD
       }
     ],
     "summary": {
@@ -4215,30 +4203,14 @@
       "investmentTrust5Day": 37000,
       "dealer5Day": 268352,
       "total5Day": 2867352
-=======
-      },
-      {
-        "date": "2026-04-01",
-        "foreign": 285000,
-        "investmentTrust": -22000,
-        "dealer": 50425,
-        "total": 313425
-      }
-    ],
-    "summary": {
-      "foreign5Day": 2781000,
-      "investmentTrust5Day": 3000,
-      "dealer5Day": 329777,
-      "total5Day": 3113777
->>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
     }
   },
   "持股分散": {
     "date": "2026-04-10",
     "retailRatio": 7.749999999999999,
     "largeHolderRatio": 71.03,
-    "retailRatioDelta": 0,
-    "largeHolderRatioDelta": 0,
+    "retailRatioDelta": null,
+    "largeHolderRatioDelta": null,
     "totalHolders": 28979,
     "totalRatio": 100,
     "bands": [
