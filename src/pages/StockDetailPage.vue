@@ -451,7 +451,15 @@ watch(
     />
 
     <template v-if="detail">
-      <section v-if="isLiveFallback || liveSnapshot?.lastPrice" class="panel">
+      <nav class="mobile-section-nav stock-mobile-nav" aria-label="個股研究捷徑">
+        <a class="mobile-section-link" href="#quote">報價</a>
+        <a class="mobile-section-link" href="#signals">技術</a>
+        <a class="mobile-section-link" href="#chart">圖表</a>
+        <a class="mobile-section-link" href="#news">新聞</a>
+        <a class="mobile-section-link" href="#financials">財務</a>
+      </nav>
+
+      <section id="quote" v-if="isLiveFallback || liveSnapshot?.lastPrice" class="panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">即時快照</h2>
@@ -462,7 +470,7 @@ watch(
           <span class="meta-chip">{{ isLiveSnapshotLoading ? '更新中' : (liveSnapshot?.updatedAt ? liveSnapshot.updatedAt.replace('T', ' ').slice(5, 16) : '即時資料') }}</span>
         </div>
 
-        <section class="card-grid">
+        <section class="card-grid compact-summary-grid">
           <InfoCard
             v-for="item in liveSnapshotCards"
             :key="`live-${item.title}`"
@@ -474,7 +482,7 @@ watch(
         </section>
       </section>
 
-      <section class="card-grid">
+      <section class="card-grid compact-summary-grid">
         <InfoCard
           v-for="item in summaryCards"
           :key="item.title"
@@ -485,7 +493,7 @@ watch(
         />
       </section>
 
-      <section class="card-grid">
+      <section class="card-grid compact-summary-grid">
         <InfoCard
           v-for="item in quickCards"
           :key="`quick-${item.title}`"
@@ -496,7 +504,7 @@ watch(
         />
       </section>
 
-      <section class="panel">
+      <section id="signals" class="panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">技術分析快讀</h2>
@@ -647,7 +655,9 @@ watch(
         </article>
       </section>
 
-      <StockNewsPanel :code-ref="stockCode" :stock-name="detail?.name ?? stockCode" />
+      <section id="news" class="page-section-anchor">
+        <StockNewsPanel :code-ref="stockCode" :stock-name="detail?.name ?? stockCode" />
+      </section>
 
       <section v-if="recentViewedStocks.length" class="panel">
         <div class="panel-header">
@@ -763,6 +773,7 @@ watch(
         </article>
       </section>
 
+      <section id="chart" class="page-section-anchor chart-stack">
       <IntradayChart
         v-if="detail?.盤中走勢"
         :data="detail.盤中走勢"
@@ -775,6 +786,7 @@ watch(
         :comparison-loading="isComparisonSeriesLoading"
         title="個股技術分析圖表"
       />
+      </section>
 
       <HolderStructureChart
         v-if="detail?.持股分散"
@@ -782,7 +794,9 @@ watch(
         title="個股大戶 / 散戶拆解圖表"
       />
 
-      <StockFinancialOverview :data="detail" />
+      <section id="financials" class="page-section-anchor">
+        <StockFinancialOverview :data="detail" />
+      </section>
 
       <section class="dual-grid">
         <article class="panel">

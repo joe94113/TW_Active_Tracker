@@ -392,7 +392,7 @@ function getInstitutionalFlow(contract, identity) {
     />
 
     <template v-if="dashboard">
-      <section class="card-grid">
+      <section class="card-grid compact-summary-grid">
         <InfoCard
           v-for="item in summaryCards"
           :key="item.title"
@@ -403,7 +403,14 @@ function getInstitutionalFlow(contract, identity) {
         />
       </section>
 
-      <section class="panel">
+      <nav class="mobile-section-nav home-mobile-nav" aria-label="首頁快速導覽">
+        <a class="mobile-section-link" href="#close-focus">盤後重點</a>
+        <a class="mobile-section-link" href="#favorites">自選股</a>
+        <a class="mobile-section-link" href="#stock-search">搜尋</a>
+        <a class="mobile-section-link" href="#market-ranking">排行</a>
+      </nav>
+
+      <section id="close-focus" class="panel home-panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">盤後重點卡</h2>
@@ -439,7 +446,7 @@ function getInstitutionalFlow(contract, identity) {
         </section>
       </section>
 
-      <section class="panel">
+      <section id="favorites" class="panel home-panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">自選股</h2>
@@ -503,7 +510,7 @@ function getInstitutionalFlow(contract, identity) {
         </div>
       </section>
 
-      <section class="panel">
+      <section id="recent-viewed" class="panel home-panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">最近瀏覽</h2>
@@ -556,7 +563,7 @@ function getInstitutionalFlow(contract, identity) {
         </div>
       </section>
 
-      <section class="panel">
+      <section id="stock-search" class="panel home-panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">個股快速搜尋</h2>
@@ -791,7 +798,7 @@ function getInstitutionalFlow(contract, identity) {
         </article>
       </section>
 
-      <section class="panel">
+      <section id="market-ranking" class="panel home-panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">盤面排行</h2>
