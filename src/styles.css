@@ -28,10 +28,16 @@
   --chart-grid: rgba(16, 32, 45, 0.12);
   --chart-grid-strong: rgba(16, 32, 45, 0.2);
   --chart-text: #6a7f91;
+  --ease-standard: 180ms ease;
+  --surface-hover-shadow: 0 22px 44px rgba(20, 41, 61, 0.1);
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -339,6 +345,10 @@ input {
   background: rgba(11, 105, 155, 0.05);
   text-align: left;
   cursor: pointer;
+  transition:
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard),
+    color var(--ease-standard);
 }
 
 .global-search-result:hover {
@@ -517,6 +527,11 @@ input {
   border-radius: 16px;
   border: 1px solid rgba(122, 177, 211, 0.16);
   background: rgba(255, 255, 255, 0.06);
+  transition:
+    background-color var(--ease-standard),
+    border-color var(--ease-standard),
+    box-shadow var(--ease-standard),
+    color var(--ease-standard);
 }
 
 .footer-link {
@@ -551,6 +566,10 @@ input {
   background: var(--surface);
   border-radius: 24px;
   box-shadow: var(--shadow);
+  transition:
+    border-color var(--ease-standard),
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .panel,
@@ -643,12 +662,17 @@ input {
 .chart-event-callout {
   display: grid;
   gap: 12px;
+  min-height: 176px;
   padding: 16px;
   border-radius: 22px;
   border: 1px solid rgba(11, 105, 155, 0.12);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 255, 0.94)),
     linear-gradient(135deg, rgba(11, 105, 155, 0.04), rgba(19, 136, 94, 0.04));
+  transition:
+    border-color var(--ease-standard),
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .chart-event-callout-head,
@@ -670,6 +694,7 @@ input {
 .chart-event-list {
   display: grid;
   gap: 12px;
+  min-height: 104px;
 }
 
 .chart-event-item {
@@ -679,6 +704,10 @@ input {
   border-radius: 20px;
   border: 1px solid rgba(16, 32, 45, 0.08);
   background: rgba(255, 255, 255, 0.88);
+  transition:
+    border-color var(--ease-standard),
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .chart-event-item.is-recent {
@@ -810,16 +839,14 @@ input {
   color: var(--brand-deep);
   cursor: pointer;
   transition:
-    background-color 120ms ease,
-    border-color 120ms ease,
-    transform 120ms ease,
-    box-shadow 120ms ease,
-    color 120ms ease;
+    background-color var(--ease-standard),
+    border-color var(--ease-standard),
+    box-shadow var(--ease-standard),
+    color var(--ease-standard);
 }
 
 .chart-toggle:hover,
 .chart-toggle:focus-visible {
-  transform: translateY(-1px);
   background: rgba(11, 105, 155, 0.08);
   border-color: rgba(11, 105, 155, 0.18);
   box-shadow: 0 10px 18px rgba(20, 41, 61, 0.08);
@@ -1113,18 +1140,16 @@ input {
   color: var(--brand-deep);
   cursor: pointer;
   transition:
-    transform 140ms ease,
-    background-color 140ms ease,
-    border-color 140ms ease,
-    box-shadow 140ms ease,
-    color 140ms ease;
+    background-color var(--ease-standard),
+    border-color var(--ease-standard),
+    box-shadow var(--ease-standard),
+    color var(--ease-standard);
 }
 
 .ghost-button:hover,
 .favorite-toggle:hover {
-  transform: translateY(-1px);
   background: rgba(11, 105, 155, 0.08);
-  box-shadow: 0 12px 24px rgba(20, 41, 61, 0.08);
+  box-shadow: 0 12px 20px rgba(20, 41, 61, 0.08);
 }
 
 .favorite-toggle.is-active {
@@ -1158,6 +1183,10 @@ input {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 249, 255, 0.94)),
     linear-gradient(135deg, rgba(11, 105, 155, 0.06), rgba(19, 136, 94, 0.04));
+  transition:
+    border-color var(--ease-standard),
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .focus-card-head h3 {
@@ -1178,6 +1207,9 @@ input {
   padding: 12px 14px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.76);
+  transition:
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .focus-card-item strong {
@@ -1193,6 +1225,10 @@ input {
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 249, 255, 0.96)),
     linear-gradient(135deg, rgba(11, 105, 155, 0.06), rgba(19, 136, 94, 0.05));
   box-shadow: 0 16px 32px rgba(20, 41, 61, 0.06);
+  transition:
+    border-color var(--ease-standard),
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .favorite-card-head {
@@ -1502,6 +1538,19 @@ input {
   color: var(--text-soft);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 .keyword-pill {
   display: inline-flex;
   align-items: center;
@@ -1531,6 +1580,31 @@ input {
 
 .news-card-foot {
   align-items: center;
+}
+
+.panel:hover,
+.sub-panel:hover,
+.chart-card:hover,
+.futures-card:hover,
+.info-card:hover,
+.favorite-card:hover,
+.focus-card:hover,
+.comparison-stat-card:hover,
+.price-zone-card:hover,
+.support-resistance-item:hover,
+.event-item:hover,
+.news-card:hover,
+.stock-technical-signal:hover,
+.chart-event-callout:hover,
+.chart-event-item:hover {
+  border-color: rgba(11, 105, 155, 0.16);
+  box-shadow: var(--surface-hover-shadow);
+}
+
+.focus-card-item:hover,
+.global-search-result:hover,
+.footer-link:hover {
+  box-shadow: 0 10px 20px rgba(20, 41, 61, 0.08);
 }
 
 .etf-change-strip {
@@ -1593,6 +1667,10 @@ input {
   border-radius: 20px;
   border: 1px solid rgba(11, 105, 155, 0.12);
   background: linear-gradient(180deg, rgba(245, 250, 255, 0.98), rgba(255, 255, 255, 0.96));
+  transition:
+    border-color var(--ease-standard),
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .comparison-stat-label,
@@ -1647,6 +1725,10 @@ input {
   border-radius: 20px;
   border: 1px solid rgba(16, 32, 45, 0.08);
   background: rgba(255, 255, 255, 0.9);
+  transition:
+    border-color var(--ease-standard),
+    background-color var(--ease-standard),
+    box-shadow var(--ease-standard);
 }
 
 .stock-technical-signal.is-up {

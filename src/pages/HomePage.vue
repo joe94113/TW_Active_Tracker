@@ -1,8 +1,9 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
+import { useLiveMarketOverview } from '../composables/useLiveMarketOverview';
 import { useRecentStocks } from '../composables/useRecentStocks';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
@@ -24,12 +25,25 @@ const { dashboard, manifest, stockList, stockSearchList, etfOverviewList, isLoad
 const { favoriteCodes, isFavorite, toggleFavorite, clearFavorites } = useFavoriteStocks();
 const { recentItems, clearRecentStocks } = useRecentStocks();
 const searchQuery = ref('');
+const staticMarketOverview = computed(() => dashboard.value?.市場總覽 ?? null);
+const {
+  marketOverview,
+  liveStatus,
+  refreshLiveMarketData,
+  startAutoRefresh,
+  stopAutoRefresh,
+} = useLiveMarketOverview(staticMarketOverview);
 
 onMounted(() => {
   loadGlobalData();
+  refreshLiveMarketData();
+  startAutoRefresh();
 });
 
-const marketOverview = computed(() => dashboard.value?.市場總覽 ?? null);
+onBeforeUnmount(() => {
+  stopAutoRefresh();
+});
+
 const institutionalHighlights = computed(() => dashboard.value?.法人追蹤 ?? null);
 const futuresPositioning = computed(() => dashboard.value?.期貨籌碼 ?? null);
 const activeEtfOverview = computed(() => dashboard.value?.主動ETF總覽 ?? null);
@@ -56,7 +70,7 @@ const summaryCards = computed(() => [
   {
     title: '盤中更新',
     value: formatTime(intradayPulse.value.更新時間),
-    description: `累計成交值 ${formatAmount(intradayPulse.value.累計成交值)}`,
+    description: `${liveStatus.value?.updatedAt ? '即時覆蓋' : '最近同步'}・累計成交值 ${formatAmount(intradayPulse.value.累計成交值)}`,
   },
   {
     title: '主動式 ETF',

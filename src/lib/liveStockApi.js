@@ -10,6 +10,8 @@ import {
 const LISTED_DIRECTORY_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL';
 const COMPANY_PROFILE_URL = 'https://openapi.twse.com.tw/v1/opendata/t187ap03_L';
 const VALUATION_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL';
+const MARKET_PULSE_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/MI_5MINS';
+const MARKET_INDEX_SYMBOLS = ['^TWII'];
 
 let listedDirectoryCache = null;
 let listedDirectoryPromise = null;
@@ -31,6 +33,57 @@ function normalizeNumber(value) {
 
   const parsed = Number(text);
   return Number.isFinite(parsed) ? parsed : null;
+}
+
+function buildMisSnapshotUrl(exChanges) {
+  return `https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=${encodeURIComponent(exChanges)}&json=1&delay=0&_=${Date.now()}`;
+}
+
+function formatMarketDate(value) {
+  const text = String(value ?? '').trim();
+
+  if (/^\d{8}$/.test(text)) {
+    return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`;
+  }
+
+  return null;
+}
+
+function formatMarketTime(value) {
+  const text = String(value ?? '').trim().replaceAll(':', '');
+
+  if (/^\d{6}$/.test(text)) {
+    return text;
+  }
+
+  return null;
+}
+
+function formatUpdatedAt(marketDate, marketTime) {
+  if (!marketDate || !marketTime) {
+    return null;
+  }
+
+  return `${marketDate}T${marketTime.slice(0, 2)}:${marketTime.slice(2, 4)}:${marketTime.slice(4, 6)}+08:00`;
+}
+
+function formatTimeLabelFromTimestamp(timestamp) {
+  return new Date(timestamp * 1000).toLocaleTimeString('zh-TW', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Asia/Taipei',
+  });
+}
+
+function toUnixTimestamp(value) {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return null;
+  }
+
+  return Math.floor(date.getTime() / 1000);
 }
 
 function buildYahooChartUrl(symbol, interval, range) {
@@ -95,12 +148,7 @@ function mapYahooIntraday(result) {
       return {
         timestamp,
         dateTime: new Date(timestamp * 1000).toISOString(),
-        time: new Date(timestamp * 1000).toLocaleTimeString('zh-TW', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-          timeZone: 'Asia/Taipei',
-        }),
+        time: formatTimeLabelFromTimestamp(timestamp),
         price,
         high: normalizeNumber(quote.high?.[index]),
         low: normalizeNumber(quote.low?.[index]),
@@ -148,6 +196,124 @@ async function fetchYahooChart(symbols, interval, range) {
   }
 
   throw lastError ?? new Error(`查詢 ${symbols.join(', ')} 圖表資料失敗`);
+}
+
+function mapMarketPulseRows(rows, marketDate) {
+  if (!Array.isArray(rows) || !rows.length) {
+    return null;
+  }
+
+  const latest = rows
+    .map((row) => ({
+      更新時間: formatMarketTime(row.Time),
+      累計委買筆數: normalizeNumber(row.AccBidOrders),
+      累計委買張數: normalizeNumber(row.AccBidVolume),
+      累計委賣筆數: normalizeNumber(row.AccAskOrders),
+      累計委賣張數: normalizeNumber(row.AccAskVolume),
+      累計成交筆數: normalizeNumber(row.AccTransaction),
+      累計成交張數: normalizeNumber(row.AccTradeVolume),
+      累計成交值: normalizeNumber(row.AccTradeValue),
+    }))
+    .filter((row) => row.更新時間)
+    .at(-1);
+
+  if (!latest) {
+    return null;
+  }
+
+  return {
+    資料日期: marketDate ?? null,
+    更新時間: latest.更新時間,
+    累計委買筆數: latest.累計委買筆數,
+    累計委買張數: latest.累計委買張數,
+    累計委賣筆數: latest.累計委賣筆數,
+    累計委賣張數: latest.累計委賣張數,
+    累計成交筆數: latest.累計成交筆數,
+    累計成交張數: latest.累計成交張數,
+    累計成交量: latest.累計成交張數 !== null ? latest.累計成交張數 * 1000 : null,
+    累計成交值: latest.累計成交值 !== null ? latest.累計成交值 * 1000000 : null,
+    資料來源: ['TWSE OpenAPI MI_5MINS'],
+  };
+}
+
+function mapMarketIndexSnapshot(payload) {
+  const item =
+    payload?.msgArray?.find((entry) => String(entry?.c ?? '').trim() === 't00') ??
+    payload?.msgArray?.find((entry) => String(entry?.['@'] ?? '').trim() === 't00.tw') ??
+    payload?.msgArray?.[0];
+
+  if (!item) {
+    return null;
+  }
+
+  const marketDate = formatMarketDate(item.d ?? item['^']);
+  const marketTime = formatMarketTime(item.t ?? item['%']);
+  const previousClose = normalizeNumber(item.y);
+  const lastPrice = normalizeNumber(item.z) ?? normalizeNumber(item.o) ?? previousClose;
+  const change = lastPrice !== null && previousClose !== null ? lastPrice - previousClose : null;
+  const changePercent = previousClose ? (change / previousClose) * 100 : null;
+
+  return {
+    code: 't00',
+    name: item.n ?? '發行量加權股價指數',
+    previousClose,
+    lastPrice,
+    change,
+    changePercent,
+    open: normalizeNumber(item.o),
+    high: normalizeNumber(item.h),
+    low: normalizeNumber(item.l),
+    volume: normalizeNumber(item.v),
+    marketDate,
+    marketTime,
+    updatedAt: formatUpdatedAt(marketDate, marketTime),
+    sourceLabel: 'TWSE MIS 即時指數',
+  };
+}
+
+function createIntradayPointFromSnapshot(snapshot) {
+  const timestamp = toUnixTimestamp(snapshot?.updatedAt);
+
+  if (timestamp === null || snapshot?.lastPrice === null || snapshot?.lastPrice === undefined) {
+    return null;
+  }
+
+  return {
+    timestamp,
+    dateTime: new Date(timestamp * 1000).toISOString(),
+    time: formatTimeLabelFromTimestamp(timestamp),
+    price: snapshot.lastPrice,
+    high: snapshot.high ?? snapshot.lastPrice,
+    low: snapshot.low ?? snapshot.lastPrice,
+    volume: snapshot.volume ?? 0,
+    change: snapshot.change ?? null,
+    changePercent: snapshot.changePercent ?? null,
+  };
+}
+
+function mergeMarketIntraday(liveIntraday, fallbackIntraday, snapshot) {
+  if (liveIntraday?.points?.length) {
+    return liveIntraday;
+  }
+
+  const snapshotPoint = createIntradayPointFromSnapshot(snapshot);
+
+  if (snapshotPoint) {
+    return {
+      interval: '5m',
+      marketDate: snapshot.marketDate ?? fallbackIntraday?.marketDate ?? null,
+      updatedAt: snapshot.updatedAt ?? fallbackIntraday?.updatedAt ?? null,
+      previousClose: snapshot.previousClose ?? fallbackIntraday?.previousClose ?? null,
+      latestPrice: snapshot.lastPrice ?? fallbackIntraday?.latestPrice ?? null,
+      high: snapshot.high ?? fallbackIntraday?.high ?? snapshot.lastPrice ?? null,
+      low: snapshot.low ?? fallbackIntraday?.low ?? snapshot.lastPrice ?? null,
+      volume: snapshot.volume ?? fallbackIntraday?.volume ?? null,
+      points: [snapshotPoint],
+      資料來源: ['TWSE MIS 即時指數'],
+    };
+  }
+
+  return fallbackIntraday ?? null;
 }
 
 export async function fetchListedStockDirectory() {
@@ -315,8 +481,7 @@ export async function fetchLiveStockSnapshot(code) {
     throw new Error('缺少股票代號');
   }
 
-  const url =
-    `https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_${normalizedCode}.tw|otc_${normalizedCode}.tw&json=1&delay=0&_=${Date.now()}`;
+  const url = buildMisSnapshotUrl(`tse_${normalizedCode}.tw|otc_${normalizedCode}.tw`);
   const payload = await fetchRemoteJson(url);
   const item =
     payload?.msgArray?.find((entry) => String(entry?.c ?? '').trim() === normalizedCode) ??
@@ -354,6 +519,85 @@ export async function fetchLiveStockSnapshot(code) {
         : null,
     marketDate: marketDate.length === 8 ? `${marketDate.slice(0, 4)}-${marketDate.slice(4, 6)}-${marketDate.slice(6, 8)}` : null,
     sourceLabel: 'TWSE 即時行情',
+  };
+}
+
+export async function fetchLiveMarketOverview(baseMarketOverview = null) {
+  const [marketSnapshotResult, marketPulseResult, intradayResult] = await Promise.allSettled([
+    fetchRemoteJson(buildMisSnapshotUrl('tse_t00.tw')).then(mapMarketIndexSnapshot),
+    fetchRemoteJson(MARKET_PULSE_URL),
+    fetchYahooChart(MARKET_INDEX_SYMBOLS, '5m', '1d').then(mapYahooIntraday),
+  ]);
+
+  const marketSnapshot = marketSnapshotResult.status === 'fulfilled' ? marketSnapshotResult.value : null;
+  const marketDate = marketSnapshot?.marketDate ?? baseMarketOverview?.資料日期 ?? null;
+  const marketPulse =
+    marketPulseResult.status === 'fulfilled' ? mapMarketPulseRows(marketPulseResult.value, marketDate) : null;
+  const liveIntraday = intradayResult.status === 'fulfilled' ? intradayResult.value : null;
+  const mergedIntraday = mergeMarketIntraday(liveIntraday, baseMarketOverview?.盤中走勢 ?? null, marketSnapshot);
+
+  if (!marketSnapshot && !marketPulse && !mergedIntraday) {
+    const primaryError = marketSnapshotResult.status === 'rejected'
+      ? marketSnapshotResult.reason
+      : marketPulseResult.status === 'rejected'
+        ? marketPulseResult.reason
+        : intradayResult.status === 'rejected'
+          ? intradayResult.reason
+          : null;
+
+    throw primaryError instanceof Error ? primaryError : new Error('大盤即時資料載入失敗');
+  }
+
+  const latestPrice = marketSnapshot?.lastPrice ?? mergedIntraday?.latestPrice ?? baseMarketOverview?.大盤摘要?.加權指數 ?? null;
+  const previousClose = marketSnapshot?.previousClose ?? mergedIntraday?.previousClose ?? null;
+  const change =
+    marketSnapshot?.change ??
+    (latestPrice !== null && previousClose !== null ? latestPrice - previousClose : null);
+  const changePercent =
+    marketSnapshot?.changePercent ??
+    (latestPrice !== null && previousClose ? (change / previousClose) * 100 : null);
+  const updatedAt = marketSnapshot?.updatedAt ?? mergedIntraday?.updatedAt ?? null;
+  const updatedTime =
+    marketPulse?.更新時間 ??
+    formatMarketTime(updatedAt ? updatedAt.slice(11, 19) : null) ??
+    baseMarketOverview?.盤中脈動?.更新時間 ??
+    null;
+
+  return {
+    資料日期: marketDate,
+    大盤摘要: {
+      ...(baseMarketOverview?.大盤摘要 ?? {}),
+      資料日期: marketDate,
+      加權指數: latestPrice,
+      漲跌點數: change,
+      漲跌幅: changePercent,
+      成交量: marketPulse?.累計成交量 ?? baseMarketOverview?.大盤摘要?.成交量 ?? null,
+      成交值: marketPulse?.累計成交值 ?? baseMarketOverview?.大盤摘要?.成交值 ?? null,
+      成交筆數: marketPulse?.累計成交筆數 ?? baseMarketOverview?.大盤摘要?.成交筆數 ?? null,
+    },
+    盤中脈動: {
+      ...(baseMarketOverview?.盤中脈動 ?? {}),
+      資料日期: marketDate,
+      更新時間: updatedTime,
+      累計委買筆數: marketPulse?.累計委買筆數 ?? baseMarketOverview?.盤中脈動?.累計委買筆數 ?? null,
+      累計委買張數: marketPulse?.累計委買張數 ?? baseMarketOverview?.盤中脈動?.累計委買張數 ?? null,
+      累計委賣筆數: marketPulse?.累計委賣筆數 ?? baseMarketOverview?.盤中脈動?.累計委賣筆數 ?? null,
+      累計委賣張數: marketPulse?.累計委賣張數 ?? baseMarketOverview?.盤中脈動?.累計委賣張數 ?? null,
+      累計成交筆數: marketPulse?.累計成交筆數 ?? baseMarketOverview?.盤中脈動?.累計成交筆數 ?? null,
+      累計成交張數: marketPulse?.累計成交張數 ?? baseMarketOverview?.盤中脈動?.累計成交張數 ?? null,
+      累計成交值: marketPulse?.累計成交值 ?? baseMarketOverview?.盤中脈動?.累計成交值 ?? null,
+    },
+    盤中走勢: mergedIntraday,
+    即時狀態: {
+      marketDate,
+      updatedAt,
+      updatedTime,
+      sources: [
+        marketSnapshot?.sourceLabel,
+        ...(marketPulse?.資料來源 ?? []),
+        ...(mergedIntraday?.資料來源 ?? []),
+      ].filter(Boolean),
+    },
   };
 }
 
