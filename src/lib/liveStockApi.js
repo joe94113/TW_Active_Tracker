@@ -39,6 +39,10 @@ function buildMisSnapshotUrl(exChanges) {
   return `https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=${encodeURIComponent(exChanges)}&json=1&delay=0&_=${Date.now()}`;
 }
 
+function buildMisStockChannels(codes) {
+  return codes.flatMap((code) => [`tse_${code}.tw`, `otc_${code}.tw`]).join('|');
+}
+
 function formatMarketDate(value) {
   const text = String(value ?? '').trim();
 
@@ -65,6 +69,20 @@ function formatUpdatedAt(marketDate, marketTime) {
   }
 
   return `${marketDate}T${marketTime.slice(0, 2)}:${marketTime.slice(2, 4)}:${marketTime.slice(4, 6)}+08:00`;
+}
+
+function uniqueCodes(codes) {
+  return [...new Set((codes ?? []).map((code) => String(code ?? '').trim().toUpperCase()).filter(Boolean))];
+}
+
+function chunkItems(items, size) {
+  const chunks = [];
+
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+
+  return chunks;
 }
 
 function formatTimeLabelFromTimestamp(timestamp) {
@@ -268,6 +286,47 @@ function mapMarketIndexSnapshot(payload) {
     marketTime,
     updatedAt: formatUpdatedAt(marketDate, marketTime),
     sourceLabel: 'TWSE MIS 即時指數',
+  };
+}
+
+function mapStockSnapshotItem(item, codeOverride = null) {
+  const normalizedCode = String(codeOverride ?? item?.c ?? '').trim().toUpperCase();
+  const marketDate = formatMarketDate(item?.d ?? item?.['^']);
+  const marketTime = formatMarketTime(item?.t ?? item?.['%']);
+  const previousClose = normalizeNumber(item?.y);
+  const volumeLots = normalizeNumber(item?.v);
+  const latestTradeVolumeLots = normalizeNumber(item?.tv);
+  const lastPrice =
+    normalizeNumber(item?.z) ??
+    normalizeNumber(item?.pz) ??
+    normalizeNumber(item?.b?.split?.('_')?.[0]) ??
+    normalizeNumber(item?.a?.split?.('_')?.[0]) ??
+    normalizeNumber(item?.o) ??
+    previousClose;
+  const change = lastPrice !== null && previousClose !== null ? lastPrice - previousClose : null;
+  const changePercent = previousClose ? (change / previousClose) * 100 : null;
+
+  return {
+    code: normalizedCode,
+    name: item?.nf ?? item?.n ?? normalizedCode,
+    shortName: item?.n ?? item?.nf ?? normalizedCode,
+    market: String(item?.['@'] ?? '').includes('.otc') ? '上櫃' : '上市',
+    previousClose,
+    lastPrice,
+    change,
+    changePercent,
+    open: normalizeNumber(item?.o),
+    high: normalizeNumber(item?.h),
+    low: normalizeNumber(item?.l),
+    volume: volumeLots,
+    volumeShares: volumeLots !== null ? volumeLots * 1000 : null,
+    latestTradeVolume: latestTradeVolumeLots,
+    latestTradeVolumeShares: latestTradeVolumeLots !== null ? latestTradeVolumeLots * 1000 : null,
+    averagePrice: normalizeNumber(item?.a),
+    updatedAt: formatUpdatedAt(marketDate, marketTime),
+    marketDate,
+    marketTime,
+    sourceLabel: 'TWSE 即時行情',
   };
 }
 
@@ -491,35 +550,35 @@ export async function fetchLiveStockSnapshot(code) {
     throw new Error(`${normalizedCode} 即時報價查詢失敗`);
   }
 
-  const previousClose = normalizeNumber(item.y);
-  const lastPrice = normalizeNumber(item.z) ?? normalizeNumber(item.o) ?? previousClose;
-  const change = lastPrice !== null && previousClose !== null ? lastPrice - previousClose : null;
-  const changePercent = previousClose ? (change / previousClose) * 100 : null;
-  const marketDate = String(item.d ?? '').trim();
-  const marketTime = String(item.t ?? '').trim().padStart(6, '0');
+  return mapStockSnapshotItem(item, normalizedCode);
+}
 
-  return {
-    code: normalizedCode,
-    name: item.nf ?? item.n ?? normalizedCode,
-    shortName: item.n ?? item.nf ?? normalizedCode,
-    market: String(item['@'] ?? '').includes('.otc') ? '上櫃' : '上市',
-    previousClose,
-    lastPrice,
-    change,
-    changePercent,
-    open: normalizeNumber(item.o),
-    high: normalizeNumber(item.h),
-    low: normalizeNumber(item.l),
-    volume: normalizeNumber(item.v),
-    latestTradeVolume: normalizeNumber(item.tv),
-    averagePrice: normalizeNumber(item.a),
-    updatedAt:
-      marketDate.length === 8 && marketTime.length === 6
-        ? `${marketDate.slice(0, 4)}-${marketDate.slice(4, 6)}-${marketDate.slice(6, 8)}T${marketTime.slice(0, 2)}:${marketTime.slice(2, 4)}:${marketTime.slice(4, 6)}+08:00`
-        : null,
-    marketDate: marketDate.length === 8 ? `${marketDate.slice(0, 4)}-${marketDate.slice(4, 6)}-${marketDate.slice(6, 8)}` : null,
-    sourceLabel: 'TWSE 即時行情',
-  };
+export async function fetchLiveStockSnapshots(codes, options = {}) {
+  const normalizedCodes = uniqueCodes(codes);
+
+  if (!normalizedCodes.length) {
+    return new Map();
+  }
+
+  const batchSize = options.batchSize ?? 12;
+  const snapshotMap = new Map();
+  const batches = chunkItems(normalizedCodes, batchSize);
+
+  for (const batch of batches) {
+    const payload = await fetchRemoteJson(buildMisSnapshotUrl(buildMisStockChannels(batch)));
+
+    for (const item of payload?.msgArray ?? []) {
+      const code = String(item?.c ?? '').trim().toUpperCase();
+
+      if (!code || snapshotMap.has(code)) {
+        continue;
+      }
+
+      snapshotMap.set(code, mapStockSnapshotItem(item, code));
+    }
+  }
+
+  return snapshotMap;
 }
 
 export async function fetchLiveMarketOverview(baseMarketOverview = null) {

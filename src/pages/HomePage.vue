@@ -4,6 +4,7 @@ import { RouterLink, useRouter } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
 import { useLiveMarketOverview } from '../composables/useLiveMarketOverview';
+import { useLiveStockSnapshots } from '../composables/useLiveStockSnapshots';
 import { useRecentStocks } from '../composables/useRecentStocks';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
@@ -25,6 +26,7 @@ const { dashboard, manifest, stockList, stockSearchList, etfOverviewList, isLoad
 const { favoriteCodes, isFavorite, toggleFavorite, clearFavorites } = useFavoriteStocks();
 const { recentItems, clearRecentStocks } = useRecentStocks();
 const searchQuery = ref('');
+const rankingView = ref('live');
 const staticMarketOverview = computed(() => dashboard.value?.市場總覽 ?? null);
 const {
   marketOverview,
@@ -33,15 +35,31 @@ const {
   startAutoRefresh,
   stopAutoRefresh,
 } = useLiveMarketOverview(staticMarketOverview);
+const watchedLiveCodes = computed(() => [
+  ...favoriteCodes.value,
+  ...recentItems.value.map((item) => item.code),
+  ...(marketOverview.value?.熱門股 ?? []).map((item) => item.代號),
+  ...(marketOverview.value?.強勢股 ?? []).map((item) => item.代號),
+  ...(marketOverview.value?.成交排行 ?? []).map((item) => item.代號),
+]);
+const {
+  snapshotMap: liveSnapshotMap,
+  refreshSnapshots,
+  startAutoRefresh: startLiveSnapshotAutoRefresh,
+  stopAutoRefresh: stopLiveSnapshotAutoRefresh,
+} = useLiveStockSnapshots(watchedLiveCodes);
 
 onMounted(() => {
   loadGlobalData();
   refreshLiveMarketData();
   startAutoRefresh();
+  refreshSnapshots();
+  startLiveSnapshotAutoRefresh();
 });
 
 onBeforeUnmount(() => {
   stopAutoRefresh();
+  stopLiveSnapshotAutoRefresh();
 });
 
 const institutionalHighlights = computed(() => dashboard.value?.法人追蹤 ?? null);
@@ -53,6 +71,85 @@ const marketBreadth = computed(() => marketOverview.value?.市場廣度 ?? null)
 const foreignOwnershipLeaders = computed(() => marketOverview.value?.外資持股焦點 ?? []);
 const foreignIndustryLeaders = computed(() => marketOverview.value?.外資類股焦點 ?? null);
 const hotStocks = computed(() => marketOverview.value?.熱門股 ?? []);
+const strongStocks = computed(() => marketOverview.value?.強勢股 ?? []);
+const turnoverRanks = computed(() => marketOverview.value?.成交排行 ?? []);
+const liveMarketDate = computed(() => liveStatus.value?.marketDate ?? marketOverview.value?.資料日期 ?? null);
+const marketBreadthDate = computed(() => marketBreadth.value?.資料日期 ?? null);
+const marketBreadthIsLiveDay = computed(() => Boolean(liveMarketDate.value) && marketBreadthDate.value === liveMarketDate.value);
+const marketBreadthBadge = computed(() => {
+  if (marketBreadthIsLiveDay.value) {
+    return marketBreadth.value?.市場情緒 ?? '最近同步';
+  }
+
+  if (marketBreadthDate.value) {
+    return `盤後統計 ${formatDate(marketBreadthDate.value)}`;
+  }
+
+  return '尚無資料';
+});
+
+const marketBreadthHint = computed(() =>
+  marketBreadthIsLiveDay.value
+    ? '當上漲家數明顯多於下跌家數時，代表盤勢不是只靠少數權值股撐住。'
+    : '市場廣度目前仍採最近一次盤後統計，盤中請搭配指數與成交節奏一起看。',
+);
+
+function getLiveSnapshot(code) {
+  return liveSnapshotMap.value.get(String(code ?? '').trim().toUpperCase()) ?? null;
+}
+
+function mergeSnapshotIntoStock(item, fieldName = '代號') {
+  const snapshot = getLiveSnapshot(item?.[fieldName]);
+
+  if (!snapshot) {
+    return item;
+  }
+
+  return {
+    ...item,
+    名稱: snapshot.shortName ?? item.名稱 ?? item.name,
+    收盤價: snapshot.lastPrice ?? item.收盤價,
+    漲跌值: snapshot.change ?? item.漲跌值,
+    漲跌幅: snapshot.changePercent ?? item.漲跌幅,
+    成交量: snapshot.volumeShares ?? item.成交量,
+    即時更新時間: snapshot.updatedAt ?? null,
+    即時來源: snapshot.sourceLabel ?? null,
+  };
+}
+
+const liveHotStocks = computed(() => hotStocks.value.map((item) => mergeSnapshotIntoStock(item)));
+const liveStrongStocks = computed(() => strongStocks.value.map((item) => mergeSnapshotIntoStock(item)));
+const liveTurnoverRanks = computed(() => turnoverRanks.value.map((item) => mergeSnapshotIntoStock(item)));
+const rankingGroups = computed(() => {
+  const isLive = rankingView.value === 'live';
+
+  return [
+    {
+      key: 'hot',
+      title: '熱門股',
+      subtitle: isLive ? '榜單基底採最近同步，價格與量能即時更新' : '盤後成交人氣前段班',
+      metricLabel: '成交量',
+      items: isLive ? liveHotStocks.value : hotStocks.value,
+      metricValue: (item) => formatAmount(item.成交量),
+    },
+    {
+      key: 'strong',
+      title: '強勢股',
+      subtitle: isLive ? '強勢股清單沿用最近篩選，盤中行情即時覆蓋' : '量價一起轉強的上市股',
+      metricLabel: '成交值',
+      items: isLive ? liveStrongStocks.value : strongStocks.value,
+      metricValue: (item) => formatAmount(item.成交值),
+    },
+    {
+      key: 'turnover',
+      title: '成交排行',
+      subtitle: isLive ? '成交值大戶用即時快照補價格與量能' : '盤後成交值前段班',
+      metricLabel: '成交值',
+      items: isLive ? liveTurnoverRanks.value : turnoverRanks.value,
+      metricValue: (item) => formatAmount(item.成交值),
+    },
+  ];
+});
 
 const summaryCards = computed(() => [
   {
@@ -127,14 +224,21 @@ const favoriteStocks = computed(() =>
     .map((code) => stockList.value.find((item) => item.code === code))
     .filter(Boolean)
     .map((item) => {
+      const snapshot = getLiveSnapshot(item.code);
+      const changePercent = snapshot?.changePercent ?? item.changePercent ?? 0;
       const momentumScore =
-        Math.abs(item.changePercent ?? 0) * 14 +
+        Math.abs(changePercent) * 14 +
         Math.abs(item.return20 ?? 0) * 1.8 +
         (item.signalCount ?? 0) * 12 +
         ((item.total5Day ?? 0) > 0 ? 8 : 0);
 
       return {
         ...item,
+        livePrice: snapshot?.lastPrice ?? item.close ?? null,
+        changePercent: snapshot?.changePercent ?? item.changePercent ?? null,
+        changeValue: snapshot?.change ?? item.change ?? null,
+        volume: snapshot?.volumeShares ?? item.volume ?? null,
+        liveUpdatedAt: snapshot?.updatedAt ?? null,
         momentumScore,
       };
     })
@@ -157,12 +261,15 @@ const recentViewedStocks = computed(() =>
         code: item.code,
         name: stockMatch?.name ?? item.name,
         industryName: stockMatch?.industryName ?? null,
-        changePercent: stockMatch?.changePercent ?? null,
+        changePercent: getLiveSnapshot(item.code)?.changePercent ?? stockMatch?.changePercent ?? null,
+        changeValue: getLiveSnapshot(item.code)?.change ?? stockMatch?.change ?? null,
+        livePrice: getLiveSnapshot(item.code)?.lastPrice ?? stockMatch?.close ?? null,
         return20: stockMatch?.return20 ?? null,
         total5Day: stockMatch?.total5Day ?? null,
         topSignalTitle: stockMatch?.topSignalTitle ?? null,
         topSignalTone: stockMatch?.topSignalTone ?? null,
         sparkline20: stockMatch?.sparkline20 ?? [],
+        liveUpdatedAt: getLiveSnapshot(item.code)?.updatedAt ?? null,
         viewedAt: item.viewedAt,
       };
     })
@@ -173,8 +280,8 @@ const recentViewedStocks = computed(() =>
 const closeFocusCards = computed(() => [
   {
     title: '熱門股',
-    subtitle: '先看成交量與價差集中的股票',
-    items: hotStocks.value.slice(0, 3).map((item) => ({
+    subtitle: liveStatus.value?.updatedAt ? '榜單採最近一次整理，盤中價格與量能即時更新' : '先看成交量與價差集中的股票',
+    items: liveHotStocks.value.slice(0, 3).map((item) => ({
       code: item.代號,
       name: item.名稱,
       value: `${formatPercent(item.漲跌幅)} / ${formatAmount(item.成交量)}`,
@@ -367,7 +474,7 @@ function getInstitutionalFlow(contract, identity) {
                 <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
                   {{ formatPercent(item.return20) }}
                 </strong>
-                <span>自選熱度第 {{ item.rank }} 名</span>
+                <span>{{ item.liveUpdatedAt ? `即時價 ${formatNumber(item.livePrice)}` : `自選熱度第 ${item.rank} 名` }}</span>
               </div>
             </div>
             <div class="favorite-metrics">
@@ -427,7 +534,7 @@ function getInstitutionalFlow(contract, identity) {
                 <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
                   {{ formatPercent(item.return20) }}
                 </strong>
-                <span>{{ item.topSignalTitle ?? '延續前次研究脈絡' }}</span>
+                <span>{{ item.liveUpdatedAt ? `即時價 ${formatNumber(item.livePrice)}` : (item.topSignalTitle ?? '延續前次研究脈絡') }}</span>
               </div>
             </div>
             <div class="favorite-metrics">
@@ -531,9 +638,11 @@ function getInstitutionalFlow(contract, identity) {
           <div class="panel-header">
             <div>
               <h2 class="panel-title">市場廣度</h2>
-              <p class="panel-subtitle">集中市場漲跌家數與漲跌停統計</p>
+              <p class="panel-subtitle">
+                {{ marketBreadthIsLiveDay ? '集中市場漲跌家數與漲跌停統計' : '集中市場盤後統計，盤中先看指數與量價節奏' }}
+              </p>
             </div>
-            <span class="meta-chip">{{ marketBreadth?.市場情緒 ?? '尚無資料' }}</span>
+            <span class="meta-chip">{{ marketBreadthBadge }}</span>
           </div>
           <div class="breadth-grid">
             <article
@@ -545,7 +654,7 @@ function getInstitutionalFlow(contract, identity) {
               <p class="comparison-stat-value" :class="item.statusClass">{{ item.value }}</p>
             </article>
           </div>
-          <p class="muted">當上漲家數明顯多於下跌家數時，代表盤勢不是只靠少數權值股撐住。</p>
+          <p class="muted">{{ marketBreadthHint }}</p>
         </article>
       </section>
 
@@ -679,86 +788,81 @@ function getInstitutionalFlow(contract, identity) {
         </article>
       </section>
 
-      <section class="dual-grid">
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">熱門股</h2>
-              <p class="panel-subtitle">當日成交人氣前段班</p>
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">盤面排行</h2>
+            <p class="panel-subtitle">
+              {{ rankingView === 'live' ? '盤中即時看價格與量能變化，榜單基底仍沿用最近一次整理。' : '盤後用完整榜單回頭整理資金流向與強勢結構。' }}
+            </p>
+          </div>
+          <div class="range-tabs">
+            <button
+              type="button"
+              class="range-tab"
+              :class="{ 'is-active': rankingView === 'live' }"
+              @click="rankingView = 'live'"
+            >
+              盤中即時榜
+            </button>
+            <button
+              type="button"
+              class="range-tab"
+              :class="{ 'is-active': rankingView === 'close' }"
+              @click="rankingView = 'close'"
+            >
+              盤後整理榜
+            </button>
+          </div>
+        </div>
+        <section class="triple-grid">
+          <article
+            v-for="group in rankingGroups"
+            :key="`${rankingView}-${group.key}`"
+            class="sub-panel"
+          >
+            <div class="panel-header">
+              <div>
+                <h3 class="sub-panel-title">{{ group.title }}</h3>
+                <p class="panel-subtitle">{{ group.subtitle }}</p>
+              </div>
+              <span class="meta-chip">
+                {{ rankingView === 'live' && liveStatus?.updatedAt ? `即時 ${formatTime(intradayPulse.更新時間)}` : `盤後 ${formatDate(marketOverview?.資料日期)}` }}
+              </span>
             </div>
-          </div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>代號</th>
-                  <th>名稱</th>
-                  <th>收盤價</th>
-                  <th>漲跌幅</th>
-                  <th>成交量</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="item in marketOverview?.熱門股 ?? []"
-                  :key="item.代號"
-                  class="clickable-row"
-                  tabindex="0"
-                  @click="openStockDetail(item.代號)"
-                  @keydown.enter="openStockDetail(item.代號)"
-                >
-                  <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.代號 }}</RouterLink></td>
-                  <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.名稱 }}</RouterLink></td>
-                  <td>{{ formatNumber(item.收盤價) }}</td>
-                  <td :class="{ 'text-up': (item.漲跌幅 ?? 0) > 0, 'text-down': (item.漲跌幅 ?? 0) < 0 }">
-                    {{ formatPercent(item.漲跌幅) }}
-                  </td>
-                  <td>{{ formatAmount(item.成交量) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">強勢股</h2>
-              <p class="panel-subtitle">量價一起轉強的上市股</p>
+            <div class="table-wrap">
+              <table class="data-table compact-table ranking-table">
+                <thead>
+                  <tr>
+                    <th>代號</th>
+                    <th>名稱</th>
+                    <th>價格</th>
+                    <th>漲跌幅</th>
+                    <th>{{ group.metricLabel }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="item in group.items"
+                    :key="`${group.key}-${item.代號}`"
+                    class="clickable-row"
+                    tabindex="0"
+                    @click="openStockDetail(item.代號)"
+                    @keydown.enter="openStockDetail(item.代號)"
+                  >
+                    <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.代號 }}</RouterLink></td>
+                    <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.名稱 }}</RouterLink></td>
+                    <td>{{ formatNumber(item.收盤價) }}</td>
+                    <td :class="{ 'text-up': (item.漲跌幅 ?? 0) > 0, 'text-down': (item.漲跌幅 ?? 0) < 0 }">
+                      {{ formatPercent(item.漲跌幅) }}
+                    </td>
+                    <td>{{ group.metricValue(item) }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>代號</th>
-                  <th>名稱</th>
-                  <th>收盤價</th>
-                  <th>漲跌幅</th>
-                  <th>成交值</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="item in marketOverview?.強勢股 ?? []"
-                  :key="item.代號"
-                  class="clickable-row"
-                  tabindex="0"
-                  @click="openStockDetail(item.代號)"
-                  @keydown.enter="openStockDetail(item.代號)"
-                >
-                  <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.代號 }}</RouterLink></td>
-                  <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.名稱 }}</RouterLink></td>
-                  <td>{{ formatNumber(item.收盤價) }}</td>
-                  <td :class="{ 'text-up': (item.漲跌幅 ?? 0) > 0, 'text-down': (item.漲跌幅 ?? 0) < 0 }">
-                    {{ formatPercent(item.漲跌幅) }}
-                  </td>
-                  <td>{{ formatAmount(item.成交值) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
+          </article>
+        </section>
       </section>
 
       <section class="dual-grid">
