@@ -1,8 +1,14 @@
 {
   "appName": "台股主動通",
+<<<<<<< HEAD
   "generatedAt": "2026-04-13T08:56:50.791Z",
   "generatedAtLocalDate": "2026-04-13",
   "generatedAtLocalTime": "16:56:50",
+=======
+  "generatedAt": "2026-04-13T08:58:42.545Z",
+  "generatedAtLocalDate": "2026-04-13",
+  "generatedAtLocalTime": "16:58:42",
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -584,7 +590,7 @@
       "nav": 13.94,
       "aum": 1890392378,
       "holdingsCount": 26,
-      "trackingMessage": "官方來源每日同步",
+      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：台新 ETF 持股解析失敗",
       "changeSummary": {
         "comparisonReady": false,
         "addedCount": 26,
@@ -604,18 +610,18 @@
       "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/500/portfolio",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-13",
-      "nav": 14.86,
-      "aum": 24305990758,
+      "disclosureDate": "2026-04-14",
+      "nav": 14.9,
+      "aum": 26056864008,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "comparisonReady": false,
-        "addedCount": 10,
-        "removedCount": 0,
-        "increasedCount": 0,
+        "comparisonReady": true,
+        "addedCount": 1,
+        "removedCount": 1,
+        "increasedCount": 9,
         "decreasedCount": 0,
-        "totalChangeCount": 10
+        "totalChangeCount": 11
       }
     },
     {
@@ -807,7 +813,11 @@
   ],
   "latestDisclosureDate": "2026-04-14",
   "connectedCount": 15,
+<<<<<<< HEAD
   "stockDetailCount": 171,
+=======
+  "stockDetailCount": 175,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
   "pendingEtfs": [
     {
       "code": "00981A",

@@ -3,7 +3,11 @@
   "name": "昶昕",
   "kind": "stock",
   "priceDate": "2026-04-13",
+<<<<<<< HEAD
   "generatedAt": "2026-04-13T08:57:32.186Z",
+=======
+  "generatedAt": "2026-04-13T08:59:37.067Z",
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3491,11 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 29.58%，可用來觀察波段資金是否持續留在主線。",
+<<<<<<< HEAD
     "最近 5 個交易日三大法人合計買超 219,951 股。"
+=======
+    "最近 5 個交易日三大法人合計買超 1,894,184 股。"
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4200,13 +4208,6 @@
         "total": 386644
       },
       {
-        "date": "2026-04-09",
-        "foreign": 278728,
-        "investmentTrust": -4000,
-        "dealer": 17593,
-        "total": 292321
-      },
-      {
         "date": "2026-04-08",
         "foreign": -447000,
         "investmentTrust": 0,
@@ -4224,15 +4225,32 @@
         "date": "2026-04-02",
         "foreign": -491000,
         "investmentTrust": -1000,
+<<<<<<< HEAD
+=======
+        "dealer": 7554,
+        "total": 1966554
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -491000,
+        "investmentTrust": -1000,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "dealer": 39791,
         "total": -452209
       }
     ],
     "summary": {
+<<<<<<< HEAD
       "foreign5Day": 119526,
       "investmentTrust5Day": -5000,
       "dealer5Day": 105425,
       "total5Day": 219951
+=======
+      "foreign5Day": 1800798,
+      "investmentTrust5Day": -2000,
+      "dealer5Day": 95386,
+      "total5Day": 1894184
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
     }
   },
   "持股分散": {
@@ -4445,9 +4463,15 @@
         "return60": 287.9432624113475,
         "volume": 1678597,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 638414,
         "investmentTrust5Day": 0,
         "total5Day": 646592,
+=======
+        "foreign5Day": 608414,
+        "investmentTrust5Day": 0,
+        "total5Day": 619342,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 46.120000000000005,
         "retailRatio": 19.03,
         "shortToMarginRatio": null,
@@ -4509,9 +4533,15 @@
         "return60": 74.69635705688856,
         "volume": 6263943,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 119526,
         "investmentTrust5Day": -5000,
         "total5Day": 219951,
+=======
+        "foreign5Day": 1800798,
+        "investmentTrust5Day": -2000,
+        "total5Day": 1894184,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 78.06,
         "retailRatio": 7.529999999999999,
         "shortToMarginRatio": 1.9897669130187607,
@@ -4573,9 +4603,15 @@
         "return60": 29.30298719772404,
         "volume": 1847642,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 933874,
         "investmentTrust5Day": 121136,
         "total5Day": 1158426,
+=======
+        "foreign5Day": 738461,
+        "investmentTrust5Day": 111136,
+        "total5Day": 911192,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 52.27,
         "retailRatio": 10.77,
         "shortToMarginRatio": 0.45366169799092676,
@@ -4624,10 +4660,144 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
+<<<<<<< HEAD
+=======
+      },
+      {
+        "code": "6806",
+        "name": "森崴能源",
+        "industryName": "綠能環保",
+        "priceDate": "2026-04-13",
+        "close": 20.649999618530273,
+        "change": -2.25,
+        "changePercent": -9.825327674587994,
+        "return20": -49.13793006250278,
+        "return60": -45.871562797913846,
+        "volume": 565993,
+        "turnover": null,
+        "foreign5Day": 4486776,
+        "investmentTrust5Day": -56000,
+        "total5Day": 4225776,
+        "largeHolderRatio": 57.01,
+        "retailRatio": 23.82,
+        "shortToMarginRatio": 29.726443768996962,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          39.95000076293945,
+          41.900001525878906,
+          42.20000076293945,
+          41.400001525878906,
+          41.04999923706055,
+          40.650001525878906,
+          39.400001525878906,
+          38.099998474121094,
+          39.099998474121094,
+          38.95000076293945,
+          39.54999923706055,
+          38.400001525878906,
+          37.349998474121094,
+          38.599998474121094,
+          34.75,
+          31.299999237060547,
+          28.200000762939453,
+          25.399999618530273,
+          22.899999618530273,
+          20.649999618530273
+        ],
+        "technicalSignals": [
+          {
+            "key": "rsi-oversold",
+            "title": "RSI 超賣",
+            "tone": "up",
+            "importance": 2,
+            "description": "森崴能源 RSI14 落到 30 以下偏低區，若量縮止穩可留意反彈。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "RSI 超賣"
+        ],
+        "topSignalTitle": "RSI 超賣",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "人工管制撮合",
+        "selectionSignalTone": "risk",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": true,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
       }
     ],
     "laggards": [
       {
+<<<<<<< HEAD
+=======
+        "code": "6806",
+        "name": "森崴能源",
+        "industryName": "綠能環保",
+        "priceDate": "2026-04-13",
+        "close": 20.649999618530273,
+        "change": -2.25,
+        "changePercent": -9.825327674587994,
+        "return20": -49.13793006250278,
+        "return60": -45.871562797913846,
+        "volume": 565993,
+        "turnover": null,
+        "foreign5Day": 4486776,
+        "investmentTrust5Day": -56000,
+        "total5Day": 4225776,
+        "largeHolderRatio": 57.01,
+        "retailRatio": 23.82,
+        "shortToMarginRatio": 29.726443768996962,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          39.95000076293945,
+          41.900001525878906,
+          42.20000076293945,
+          41.400001525878906,
+          41.04999923706055,
+          40.650001525878906,
+          39.400001525878906,
+          38.099998474121094,
+          39.099998474121094,
+          38.95000076293945,
+          39.54999923706055,
+          38.400001525878906,
+          37.349998474121094,
+          38.599998474121094,
+          34.75,
+          31.299999237060547,
+          28.200000762939453,
+          25.399999618530273,
+          22.899999618530273,
+          20.649999618530273
+        ],
+        "technicalSignals": [
+          {
+            "key": "rsi-oversold",
+            "title": "RSI 超賣",
+            "tone": "up",
+            "importance": 2,
+            "description": "森崴能源 RSI14 落到 30 以下偏低區，若量縮止穩可留意反彈。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "RSI 超賣"
+        ],
+        "topSignalTitle": "RSI 超賣",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "人工管制撮合",
+        "selectionSignalTone": "risk",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": true,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "code": "6944",
         "name": "兆聯實業",
         "industryName": "綠能環保",
@@ -4639,9 +4809,15 @@
         "return60": 29.30298719772404,
         "volume": 1847642,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 933874,
         "investmentTrust5Day": 121136,
         "total5Day": 1158426,
+=======
+        "foreign5Day": 738461,
+        "investmentTrust5Day": 111136,
+        "total5Day": 911192,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 52.27,
         "retailRatio": 10.77,
         "shortToMarginRatio": 0.45366169799092676,
@@ -4703,9 +4879,15 @@
         "return60": 74.69635705688856,
         "volume": 6263943,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 119526,
         "investmentTrust5Day": -5000,
         "total5Day": 219951,
+=======
+        "foreign5Day": 1800798,
+        "investmentTrust5Day": -2000,
+        "total5Day": 1894184,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 78.06,
         "retailRatio": 7.529999999999999,
         "shortToMarginRatio": 1.9897669130187607,
@@ -4821,7 +5003,11 @@
       }
     ],
     "觀察摘要": [
+<<<<<<< HEAD
       "近 20 日報酬低於同產業平均 36.61%，短線強度落後族群。",
+=======
+      "近 20 日報酬優於同產業平均 15.18%，在同族群相對偏強。",
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

@@ -3,7 +3,11 @@
   "name": "卜蜂",
   "kind": "stock",
   "priceDate": "2026-04-13",
+<<<<<<< HEAD
   "generatedAt": "2026-04-13T08:57:07.822Z",
+=======
+  "generatedAt": "2026-04-13T08:59:18.450Z",
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3491,11 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -6.45%，可用來觀察波段資金是否持續留在主線。",
+<<<<<<< HEAD
     "最近 5 個交易日三大法人合計賣超 1,384,309 股。"
+=======
+    "最近 5 個交易日三大法人合計賣超 1,445,634 股。"
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4200,13 +4208,6 @@
         "total": -73018
       },
       {
-        "date": "2026-04-09",
-        "foreign": -203000,
-        "investmentTrust": -2000,
-        "dealer": 52493,
-        "total": -152507
-      },
-      {
         "date": "2026-04-08",
         "foreign": -621000,
         "investmentTrust": 0,
@@ -4224,15 +4225,32 @@
         "date": "2026-04-02",
         "foreign": -333000,
         "investmentTrust": 0,
+<<<<<<< HEAD
+=======
+        "dealer": -3832,
+        "total": -213832
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -333000,
+        "investmentTrust": 0,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "dealer": -117348,
         "total": -450348
       }
     ],
     "summary": {
+<<<<<<< HEAD
       "foreign5Day": -1620819,
       "investmentTrust5Day": 54000,
       "dealer5Day": 182510,
       "total5Day": -1384309
+=======
+      "foreign5Day": -1627819,
+      "investmentTrust5Day": 56000,
+      "dealer5Day": 126185,
+      "total5Day": -1445634
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
     }
   },
   "持股分散": {
@@ -4459,9 +4477,15 @@
         "return60": -6.493506493506493,
         "volume": 8442642,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -4562482,
         "investmentTrust5Day": -1890099,
         "total5Day": -5610158,
+=======
+        "foreign5Day": -1531003,
+        "investmentTrust5Day": -1879099,
+        "total5Day": -1168730,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 88.45,
         "retailRatio": 4.470000000000001,
         "shortToMarginRatio": 2.1940928270042197,
@@ -4523,9 +4547,15 @@
         "return60": 9.022556390977442,
         "volume": 1149265,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -1620819,
         "investmentTrust5Day": 54000,
         "total5Day": -1384309,
+=======
+        "foreign5Day": -1627819,
+        "investmentTrust5Day": 56000,
+        "total5Day": -1445634,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 65.18,
         "retailRatio": 18.67,
         "shortToMarginRatio": null,
@@ -4589,9 +4619,15 @@
         "return60": 9.022556390977442,
         "volume": 1149265,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -1620819,
         "investmentTrust5Day": 54000,
         "total5Day": -1384309,
+=======
+        "foreign5Day": -1627819,
+        "investmentTrust5Day": 56000,
+        "total5Day": -1445634,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 65.18,
         "retailRatio": 18.67,
         "shortToMarginRatio": null,
@@ -4653,9 +4689,15 @@
         "return60": -6.493506493506493,
         "volume": 8442642,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -4562482,
         "investmentTrust5Day": -1890099,
         "total5Day": -5610158,
+=======
+        "foreign5Day": -1531003,
+        "investmentTrust5Day": -1879099,
+        "total5Day": -1168730,
+>>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "largeHolderRatio": 88.45,
         "retailRatio": 4.470000000000001,
         "shortToMarginRatio": 2.1940928270042197,
@@ -4708,7 +4750,7 @@
     ],
     "觀察摘要": [
       "近 20 日報酬低於同產業平均 -1.87%，短線強度落後族群。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }
