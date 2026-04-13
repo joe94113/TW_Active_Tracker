@@ -1,6 +1,6 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-13T08:01:20.583Z",
+  "generatedAt": "2026-04-13T08:40:45.622Z",
   "市場總覽": {
     "資料日期": "2026-04-10",
     "指數卡片": [
@@ -51,7 +51,7 @@
       "name": "加權指數",
       "kind": "index",
       "priceDate": "2026-04-13",
-      "generatedAt": "2026-04-13T08:01:21.436Z",
+      "generatedAt": "2026-04-13T08:40:52.964Z",
       "indicatorSettings": {
         "maFastPeriod": 5,
         "maShortPeriod": 10,
@@ -5500,7 +5500,8 @@
     ],
     "資料說明": [
       "以最近 5 個有資料的交易日計算連買名單。",
-      "資料來源：TWSE 三大法人買賣超日報（T86），僅納入上市一般股票。"
+      "資料來源：TWSE 三大法人買賣超日報（T86），僅納入上市一般股票。",
+      "本次更新未能重新抓取 T86：Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
     ]
   },
   "期貨籌碼": {
@@ -5562,7 +5563,7 @@
           "name": "小型臺指期貨",
           "kind": "futures",
           "priceDate": "2026-04-10",
-          "generatedAt": "2026-04-13T08:01:36.313Z",
+          "generatedAt": "2026-04-13T08:41:03.274Z",
           "indicatorSettings": {
             "maFastPeriod": 5,
             "maShortPeriod": 10,
@@ -9202,7 +9203,7 @@
           "name": "微型臺指期貨",
           "kind": "futures",
           "priceDate": "2026-04-10",
-          "generatedAt": "2026-04-13T08:01:36.265Z",
+          "generatedAt": "2026-04-13T08:41:03.195Z",
           "indicatorSettings": {
             "maFastPeriod": 5,
             "maShortPeriod": 10,
@@ -12855,7 +12856,7 @@
       {
         "code": "00994A",
         "name": "主動第一金台股優",
-        "disclosureDate": "2026-04-10"
+        "disclosureDate": "2026-04-13"
       },
       {
         "code": "00995A",

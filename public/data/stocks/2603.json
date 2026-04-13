@@ -3,7 +3,7 @@
   "name": "長榮",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:47.632Z",
+  "generatedAt": "2026-04-13T08:41:17.651Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -5.44%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 3,222,549 股。"
+    "大戶持股比 67.70%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4191,48 +4191,12 @@
     ]
   },
   "法人買賣": {
-    "days": [
-      {
-        "date": "2026-04-10",
-        "foreign": 574099,
-        "investmentTrust": -171725,
-        "dealer": 96524,
-        "total": 498898
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": 1823917,
-        "investmentTrust": -574450,
-        "dealer": 96723,
-        "total": 1346190
-      },
-      {
-        "date": "2026-04-08",
-        "foreign": -5291162,
-        "investmentTrust": -258611,
-        "dealer": 196670,
-        "total": -5353103
-      },
-      {
-        "date": "2026-04-07",
-        "foreign": 401043,
-        "investmentTrust": -57415,
-        "dealer": 236074,
-        "total": 579702
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -627476,
-        "investmentTrust": -14000,
-        "dealer": 347240,
-        "total": -294236
-      }
-    ],
+    "days": [],
     "summary": {
-      "foreign5Day": -3119579,
-      "investmentTrust5Day": -1076201,
-      "dealer5Day": 973231,
-      "total5Day": -3222549
+      "foreign5Day": 0,
+      "investmentTrust5Day": 0,
+      "dealer5Day": 0,
+      "total5Day": 0
     }
   },
   "持股分散": {
@@ -4461,9 +4425,9 @@
         "return60": -2.423471286861823,
         "volume": 9061661,
         "turnover": null,
-        "foreign5Day": 3169498,
-        "investmentTrust5Day": -1136,
-        "total5Day": 3434983,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 83.92,
         "retailRatio": 8.36,
         "shortToMarginRatio": 1.1314632167712735,
@@ -4525,9 +4489,9 @@
         "return60": 5.263157894736842,
         "volume": 8333857,
         "turnover": null,
-        "foreign5Day": -3119579,
-        "investmentTrust5Day": -1076201,
-        "total5Day": -3222549,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 67.7,
         "retailRatio": 16.27,
         "shortToMarginRatio": 0.09362621534029529,
@@ -4589,9 +4553,9 @@
         "return60": 4.513888888888888,
         "volume": 720011,
         "turnover": null,
-        "foreign5Day": -8418,
-        "investmentTrust5Day": -325000,
-        "total5Day": -216301,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 82.91000000000001,
         "retailRatio": 9.11,
         "shortToMarginRatio": null,
@@ -4653,9 +4617,9 @@
         "return60": -7.832427927585514,
         "volume": 17417555,
         "turnover": null,
-        "foreign5Day": -21315485,
-        "investmentTrust5Day": -669312,
-        "total5Day": -21794924,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 57.76,
         "retailRatio": 23.029999999999998,
         "shortToMarginRatio": 0.3791844704151221,
@@ -4719,9 +4683,9 @@
         "return60": -7.832427927585514,
         "volume": 17417555,
         "turnover": null,
-        "foreign5Day": -21315485,
-        "investmentTrust5Day": -669312,
-        "total5Day": -21794924,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 57.76,
         "retailRatio": 23.029999999999998,
         "shortToMarginRatio": 0.3791844704151221,
@@ -4783,9 +4747,9 @@
         "return60": 4.513888888888888,
         "volume": 720011,
         "turnover": null,
-        "foreign5Day": -8418,
-        "investmentTrust5Day": -325000,
-        "total5Day": -216301,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 82.91000000000001,
         "retailRatio": 9.11,
         "shortToMarginRatio": null,
@@ -4847,9 +4811,9 @@
         "return60": 5.263157894736842,
         "volume": 8333857,
         "turnover": null,
-        "foreign5Day": -3119579,
-        "investmentTrust5Day": -1076201,
-        "total5Day": -3222549,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 67.7,
         "retailRatio": 16.27,
         "shortToMarginRatio": 0.09362621534029529,
@@ -4901,8 +4865,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 -8.49%，在同族群相對偏強。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "近 20 日報酬優於同產業平均 -8.49%，在同族群相對偏強。"
     ]
   }
 }

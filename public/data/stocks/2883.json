@@ -3,7 +3,7 @@
   "name": "凱基金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:48.646Z",
+  "generatedAt": "2026-04-13T08:41:18.854Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 5.25%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 82,220,231 股。"
+    "大戶持股比 65.84%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4177,48 +4177,12 @@
     ]
   },
   "法人買賣": {
-    "days": [
-      {
-        "date": "2026-04-10",
-        "foreign": -3423781,
-        "investmentTrust": 1087007,
-        "dealer": -62353,
-        "total": -2399127
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": 4678654,
-        "investmentTrust": -609389,
-        "dealer": -690513,
-        "total": 3378752
-      },
-      {
-        "date": "2026-04-08",
-        "foreign": 43513455,
-        "investmentTrust": 997893,
-        "dealer": 1983488,
-        "total": 46494836
-      },
-      {
-        "date": "2026-04-07",
-        "foreign": 22559296,
-        "investmentTrust": 2019986,
-        "dealer": 1628099,
-        "total": 26207381
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": 4519515,
-        "investmentTrust": -231927,
-        "dealer": 4250801,
-        "total": 8538389
-      }
-    ],
+    "days": [],
     "summary": {
-      "foreign5Day": 71847139,
-      "investmentTrust5Day": 3263570,
-      "dealer5Day": 7109522,
-      "total5Day": 82220231
+      "foreign5Day": 0,
+      "investmentTrust5Day": 0,
+      "dealer5Day": 0,
+      "total5Day": 0
     }
   },
   "持股分散": {

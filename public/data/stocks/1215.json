@@ -3,7 +3,7 @@
   "name": "卜蜂",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:41.421Z",
+  "generatedAt": "2026-04-13T08:41:10.273Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -6.45%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 1,147,793 股。"
+    "大戶持股比 65.18%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4191,48 +4191,12 @@
     ]
   },
   "法人買賣": {
-    "days": [
-      {
-        "date": "2026-04-10",
-        "foreign": -250859,
-        "investmentTrust": 0,
-        "dealer": 177841,
-        "total": -73018
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -203000,
-        "investmentTrust": -2000,
-        "dealer": 52493,
-        "total": -152507
-      },
-      {
-        "date": "2026-04-08",
-        "foreign": -621000,
-        "investmentTrust": 0,
-        "dealer": 16499,
-        "total": -604501
-      },
-      {
-        "date": "2026-04-07",
-        "foreign": -212960,
-        "investmentTrust": 56000,
-        "dealer": 53025,
-        "total": -103935
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -210000,
-        "investmentTrust": 0,
-        "dealer": -3832,
-        "total": -213832
-      }
-    ],
+    "days": [],
     "summary": {
-      "foreign5Day": -1497819,
-      "investmentTrust5Day": 54000,
-      "dealer5Day": 296026,
-      "total5Day": -1147793
+      "foreign5Day": 0,
+      "investmentTrust5Day": 0,
+      "dealer5Day": 0,
+      "total5Day": 0
     }
   },
   "持股分散": {
@@ -4459,9 +4423,9 @@
         "return60": -6.493506493506493,
         "volume": 8442642,
         "turnover": null,
-        "foreign5Day": -1157735,
-        "investmentTrust5Day": -1980207,
-        "total5Day": -1313776,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 88.45,
         "retailRatio": 4.470000000000001,
         "shortToMarginRatio": 2.1940928270042197,
@@ -4523,9 +4487,9 @@
         "return60": 9.022556390977442,
         "volume": 1149265,
         "turnover": null,
-        "foreign5Day": -1497819,
-        "investmentTrust5Day": 54000,
-        "total5Day": -1147793,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 65.18,
         "retailRatio": 18.67,
         "shortToMarginRatio": null,
@@ -4589,9 +4553,9 @@
         "return60": 9.022556390977442,
         "volume": 1149265,
         "turnover": null,
-        "foreign5Day": -1497819,
-        "investmentTrust5Day": 54000,
-        "total5Day": -1147793,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 65.18,
         "retailRatio": 18.67,
         "shortToMarginRatio": null,
@@ -4653,9 +4617,9 @@
         "return60": -6.493506493506493,
         "volume": 8442642,
         "turnover": null,
-        "foreign5Day": -1157735,
-        "investmentTrust5Day": -1980207,
-        "total5Day": -1313776,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 88.45,
         "retailRatio": 4.470000000000001,
         "shortToMarginRatio": 2.1940928270042197,
@@ -4707,8 +4671,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 -1.87%，短線強度落後族群。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "近 20 日報酬低於同產業平均 -1.87%，短線強度落後族群。"
     ]
   }
 }

@@ -3,7 +3,7 @@
   "name": "皇昌",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:47.406Z",
+  "generatedAt": "2026-04-13T08:41:17.352Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -22.79%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 38,430 股。"
+    "大戶持股比 73.63%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4169,48 +4169,12 @@
     ]
   },
   "法人買賣": {
-    "days": [
-      {
-        "date": "2026-04-10",
-        "foreign": 44000,
-        "investmentTrust": 0,
-        "dealer": 43144,
-        "total": 87144
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -139000,
-        "investmentTrust": 0,
-        "dealer": -23122,
-        "total": -162122
-      },
-      {
-        "date": "2026-04-08",
-        "foreign": 180000,
-        "investmentTrust": 0,
-        "dealer": 44776,
-        "total": 224776
-      },
-      {
-        "date": "2026-04-07",
-        "foreign": 7000,
-        "investmentTrust": 0,
-        "dealer": -9564,
-        "total": -2564
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -152000,
-        "investmentTrust": 0,
-        "dealer": -33664,
-        "total": -185664
-      }
-    ],
+    "days": [],
     "summary": {
-      "foreign5Day": -60000,
+      "foreign5Day": 0,
       "investmentTrust5Day": 0,
-      "dealer5Day": 21570,
-      "total5Day": -38430
+      "dealer5Day": 0,
+      "total5Day": 0
     }
   },
   "持股分散": {
@@ -4437,9 +4401,9 @@
         "return60": 1.4741976974787665,
         "volume": 156207,
         "turnover": null,
-        "foreign5Day": 245950,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 292950,
+        "total5Day": 0,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4501,9 +4465,9 @@
         "return60": 10.526315789473683,
         "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 4269116,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 4235826,
+        "total5Day": 0,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4565,9 +4529,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": -60000,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": -38430,
+        "total5Day": 0,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4631,9 +4595,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": -60000,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": -38430,
+        "total5Day": 0,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4695,9 +4659,9 @@
         "return60": 10.526315789473683,
         "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 4269116,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 4235826,
+        "total5Day": 0,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4759,9 +4723,9 @@
         "return60": 1.4741976974787665,
         "volume": 156207,
         "turnover": null,
-        "foreign5Day": 245950,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 292950,
+        "total5Day": 0,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4813,8 +4777,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 -1.00%，短線強度落後族群。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "近 20 日報酬低於同產業平均 -1.00%，短線強度落後族群。"
     ]
   }
 }

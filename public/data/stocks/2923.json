@@ -3,7 +3,7 @@
   "name": "鼎固-KY",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:49.795Z",
+  "generatedAt": "2026-04-13T08:41:19.990Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 11.62%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 292,950 股。"
+    "大戶持股比 99.36%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3838,48 +3838,12 @@
     ]
   },
   "法人買賣": {
-    "days": [
-      {
-        "date": "2026-04-10",
-        "foreign": 81950,
-        "investmentTrust": 0,
-        "dealer": 7000,
-        "total": 88950
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": 4000,
-        "investmentTrust": 0,
-        "dealer": -1000,
-        "total": 3000
-      },
-      {
-        "date": "2026-04-08",
-        "foreign": 192000,
-        "investmentTrust": 0,
-        "dealer": 35000,
-        "total": 227000
-      },
-      {
-        "date": "2026-04-07",
-        "foreign": 1000,
-        "investmentTrust": 0,
-        "dealer": -1000,
-        "total": 0
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -33000,
-        "investmentTrust": 0,
-        "dealer": 7000,
-        "total": -26000
-      }
-    ],
+    "days": [],
     "summary": {
-      "foreign5Day": 245950,
+      "foreign5Day": 0,
       "investmentTrust5Day": 0,
-      "dealer5Day": 47000,
-      "total5Day": 292950
+      "dealer5Day": 0,
+      "total5Day": 0
     }
   },
   "持股分散": {
@@ -4052,9 +4016,9 @@
         "return60": 1.4741976974787665,
         "volume": 156207,
         "turnover": null,
-        "foreign5Day": 245950,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 292950,
+        "total5Day": 0,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4116,9 +4080,9 @@
         "return60": 10.526315789473683,
         "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 4269116,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 4235826,
+        "total5Day": 0,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4180,9 +4144,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": -60000,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": -38430,
+        "total5Day": 0,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4246,9 +4210,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": -60000,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": -38430,
+        "total5Day": 0,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4310,9 +4274,9 @@
         "return60": 10.526315789473683,
         "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 4269116,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 4235826,
+        "total5Day": 0,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4374,9 +4338,9 @@
         "return60": 1.4741976974787665,
         "volume": 156207,
         "turnover": null,
-        "foreign5Day": 245950,
+        "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "total5Day": 292950,
+        "total5Day": 0,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4428,8 +4392,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 -1.00%，在同族群相對偏強。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "近 20 日報酬優於同產業平均 -1.00%，在同族群相對偏強。"
     ]
   }
 }
