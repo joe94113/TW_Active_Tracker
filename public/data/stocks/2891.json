@@ -3,11 +3,7 @@
   "name": "中信金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-<<<<<<< HEAD
-  "generatedAt": "2026-04-13T08:57:16.033Z",
-=======
-  "generatedAt": "2026-04-13T08:59:24.905Z",
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+  "generatedAt": "2026-04-13T08:01:49.495Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3491,11 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 3.90%，可用來觀察波段資金是否持續留在主線。",
-<<<<<<< HEAD
-    "最近 5 個交易日三大法人合計賣超 3,483,691 股。"
-=======
-    "最近 5 個交易日三大法人合計買超 29,405,621 股。"
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+    "最近 5 個交易日三大法人合計賣超 7,068,752 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4194,6 +4186,13 @@
         "total": -20646762
       },
       {
+        "date": "2026-04-09",
+        "foreign": -19146548,
+        "investmentTrust": -510742,
+        "dealer": -1181011,
+        "total": -20838301
+      },
+      {
         "date": "2026-04-08",
         "foreign": 14406339,
         "investmentTrust": 2540067,
@@ -4209,34 +4208,17 @@
       },
       {
         "date": "2026-04-02",
-<<<<<<< HEAD
-=======
         "foreign": 8044540,
         "investmentTrust": 1957893,
         "dealer": 2048578,
         "total": 12051011
-      },
-      {
-        "date": "2026-04-01",
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
-        "foreign": 10894932,
-        "investmentTrust": 4600972,
-        "dealer": 140168,
-        "total": 15636072
       }
     ],
     "summary": {
-<<<<<<< HEAD
-      "foreign5Day": -22737887,
-      "investmentTrust5Day": 19457830,
-      "dealer5Day": -203634,
-      "total5Day": -3483691
-=======
-      "foreign5Day": 4453201,
-      "investmentTrust5Day": 21926465,
-      "dealer5Day": 3025955,
-      "total5Day": 29405621
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+      "foreign5Day": -25588279,
+      "investmentTrust5Day": 16814751,
+      "dealer5Day": 1704776,
+      "total5Day": -7068752
     }
   },
   "持股分散": {

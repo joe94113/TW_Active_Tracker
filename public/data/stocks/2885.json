@@ -3,11 +3,7 @@
   "name": "元大金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-<<<<<<< HEAD
-  "generatedAt": "2026-04-13T08:57:15.547Z",
-=======
-  "generatedAt": "2026-04-13T08:59:24.507Z",
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+  "generatedAt": "2026-04-13T08:01:48.923Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3491,11 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 7.23%，可用來觀察波段資金是否持續留在主線。",
-<<<<<<< HEAD
-    "最近 5 個交易日三大法人合計買超 26,267,780 股。"
-=======
-    "最近 5 個交易日三大法人合計買超 14,250,783 股。"
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+    "最近 5 個交易日三大法人合計買超 10,350,650 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4194,6 +4186,13 @@
         "total": 686303
       },
       {
+        "date": "2026-04-09",
+        "foreign": 2949340,
+        "investmentTrust": 3262173,
+        "dealer": -81791,
+        "total": 6129722
+      },
+      {
         "date": "2026-04-08",
         "foreign": 1819095,
         "investmentTrust": 3016403,
@@ -4209,34 +4208,17 @@
       },
       {
         "date": "2026-04-02",
-<<<<<<< HEAD
-=======
         "foreign": -9930139,
         "investmentTrust": 1720366,
         "dealer": 2322498,
         "total": -5887275
-      },
-      {
-        "date": "2026-04-01",
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
-        "foreign": 5907656,
-        "investmentTrust": 3740451,
-        "dealer": 381748,
-        "total": 10029855
       }
     ],
     "summary": {
-<<<<<<< HEAD
-      "foreign5Day": 12118424,
-      "investmentTrust5Day": 12244868,
-      "dealer5Day": 1904488,
-      "total5Day": 26267780
-=======
-      "foreign5Day": -761055,
-      "investmentTrust5Day": 10703061,
-      "dealer5Day": 4308777,
-      "total5Day": 14250783
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+      "foreign5Day": -3719371,
+      "investmentTrust5Day": 10224783,
+      "dealer5Day": 3845238,
+      "total5Day": 10350650
     }
   },
   "持股分散": {

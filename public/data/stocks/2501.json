@@ -3,7 +3,7 @@
   "name": "國建",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:21.166Z",
+  "generatedAt": "2026-04-13T06:15:11.349Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3495,18 +3495,13 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 5.25%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 2,799,771 股。"
+    "最近 5 個交易日三大法人合計買超 3,296,669 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
-    "TWSE OpenAPI punish",
-    "TWSE OpenAPI notetrans",
-    "TWSE OpenAPI TWT48U_ALL",
-    "TWSE OpenAPI TWT85U",
-    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4202,10 +4197,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": 190000,
-        "investmentTrust": 0,
-        "dealer": -27000,
-        "total": 163000
+        "foreign": 502898,
+        "investmentTrust": 16000,
+        "dealer": 141000,
+        "total": 659898
       },
       {
         "date": "2026-04-09",
@@ -4229,7 +4224,7 @@
         "total": 654664
       },
       {
-        "date": "2026-04-05",
+        "date": "2026-04-04",
         "foreign": 99000,
         "investmentTrust": -294000,
         "dealer": 20000,
@@ -4237,18 +4232,18 @@
       }
     ],
     "summary": {
-      "foreign5Day": 2900687,
-      "investmentTrust5Day": -245000,
-      "dealer5Day": 144084,
-      "total5Day": 2799771
+      "foreign5Day": 3213585,
+      "investmentTrust5Day": -229000,
+      "dealer5Day": 312084,
+      "total5Day": 3296669
     }
   },
   "持股分散": {
     "date": "2026-04-10",
     "retailRatio": 7.83,
     "largeHolderRatio": 77.04,
-    "retailRatioDelta": 0,
-    "largeHolderRatioDelta": 0,
+    "retailRatioDelta": null,
+    "largeHolderRatioDelta": null,
     "totalHolders": 46370,
     "totalRatio": 100,
     "bands": [
@@ -4399,45 +4394,14 @@
       "融資餘額單日減少 112 張，浮額略有清洗。"
     ]
   },
-  "交易提醒": {
-    "asOfDate": "2026-04-10",
-    "alerts": [
-      {
-        "key": "short-sale-2501",
-        "type": "short-sale",
-        "tone": "info",
-        "title": "可借券賣出餘量",
-        "badgeLabel": "借券",
-        "date": "2026-04-10",
-        "note": "今日可借券賣出股數約 716,894 股，可作為券源與流動性參考。",
-        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
-        "footnote": "今日可借券賣出股數約 716,894 股，可作為券源與流動性參考。"
-      }
-    ],
-    "eventCalendar": [],
-    "highlights": [
-      "今日可借券賣出股數約 716,894 股，可作為券源與流動性參考。"
-    ],
-    "summary": {
-      "riskTone": "info",
-      "activeDispositionCount": 0,
-      "attentionWarningCount": 0,
-      "changedTradingCount": 0,
-      "nextExDividendDate": null,
-      "shortSaleAvailableVolume": 716894,
-      "alertCount": 1,
-      "topTitle": "可借券賣出餘量",
-      "topTone": "info"
-    }
-  },
   "主動ETF曝光": null,
   "同產業比較": {
     "industryName": "建材營造",
-    "peerCount": 5,
+    "peerCount": 4,
     "rank20Day": 3,
     "rankDaily": 2,
-    "averageReturn20": 0.6122947075455751,
-    "averageChangePercent": 0.9374262838061498,
+    "averageReturn20": 0.5598894549384439,
+    "averageChangePercent": 1.103664004592652,
     "leaders": [
       {
         "code": "2923",
@@ -4451,9 +4415,9 @@
         "return60": 1.4741976974787665,
         "volume": 156207,
         "turnover": null,
-        "foreign5Day": 216000,
+        "foreign5Day": 267950,
         "investmentTrust5Day": 0,
-        "total5Day": 249000,
+        "total5Day": 307950,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4494,14 +4458,7 @@
         ],
         "topSignalTitle": "站回長均線",
         "topSignalTone": "up",
-        "signalCount": 1,
-        "topSelectionSignalTitle": null,
-        "selectionSignalTone": "normal",
-        "selectionSignalCount": 0,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
+        "signalCount": 1
       },
       {
         "code": "2548",
@@ -4515,9 +4472,9 @@
         "return60": 10.526315789473683,
         "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 4005116,
+        "foreign5Day": 4078116,
         "investmentTrust5Day": 0,
-        "total5Day": 3897101,
+        "total5Day": 3985365,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4558,14 +4515,7 @@
         ],
         "topSignalTitle": "KD 高檔死亡交叉",
         "topSignalTone": "down",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
+        "signalCount": 1
       },
       {
         "code": "2501",
@@ -4579,9 +4529,9 @@
         "return60": 3.44085693359375,
         "volume": 3566393,
         "turnover": null,
-        "foreign5Day": 2900687,
-        "investmentTrust5Day": -245000,
-        "total5Day": 2799771,
+        "foreign5Day": 3213585,
+        "investmentTrust5Day": -229000,
+        "total5Day": 3296669,
         "largeHolderRatio": 77.04,
         "retailRatio": 7.83,
         "shortToMarginRatio": null,
@@ -4630,78 +4580,7 @@
         ],
         "topSignalTitle": "黃金交叉",
         "topSignalTone": "up",
-        "signalCount": 2,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
-      {
-        "code": "2542",
-        "name": "興富發",
-        "industryName": "建材營造",
-        "priceDate": "2026-04-13",
-        "close": 36.79999923706055,
-        "change": 0.09999847412109375,
-        "changePercent": 0.2724754006601401,
-        "return20": 0.821915717974101,
-        "return60": -5.519901113646734,
-        "volume": 4123787,
-        "turnover": null,
-        "foreign5Day": 1623872,
-        "investmentTrust5Day": 128000,
-        "total5Day": 2051427,
-        "largeHolderRatio": 60.33,
-        "retailRatio": 10.99,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          36.54999923706055,
-          36.79999923706055,
-          36.75,
-          36.5,
-          35.849998474121094,
-          36.5,
-          35.650001525878906,
-          35.54999923706055,
-          36.099998474121094,
-          35.900001525878906,
-          35.79999923706055,
-          35.400001525878906,
-          34.79999923706055,
-          35.400001525878906,
-          35,
-          35.650001525878906,
-          36.25,
-          36.150001525878906,
-          36.70000076293945,
-          36.79999923706055
-        ],
-        "technicalSignals": [
-          {
-            "key": "golden-cross",
-            "title": "黃金交叉",
-            "tone": "up",
-            "importance": 3,
-            "description": "興富發 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "黃金交叉"
-        ],
-        "topSignalTitle": "黃金交叉",
-        "topSignalTone": "up",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
+        "signalCount": 2
       },
       {
         "code": "2543",
@@ -4715,9 +4594,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": 48000,
+        "foreign5Day": 92000,
         "investmentTrust5Day": 0,
-        "total5Day": 60090,
+        "total5Day": 147234,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4758,14 +4637,7 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
+        "signalCount": 1
       }
     ],
     "laggards": [
@@ -4781,9 +4653,9 @@
         "return60": -13.383460941171288,
         "volume": 1219733,
         "turnover": null,
-        "foreign5Day": 48000,
+        "foreign5Day": 92000,
         "investmentTrust5Day": 0,
-        "total5Day": 60090,
+        "total5Day": 147234,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4824,78 +4696,7 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
-      {
-        "code": "2542",
-        "name": "興富發",
-        "industryName": "建材營造",
-        "priceDate": "2026-04-13",
-        "close": 36.79999923706055,
-        "change": 0.09999847412109375,
-        "changePercent": 0.2724754006601401,
-        "return20": 0.821915717974101,
-        "return60": -5.519901113646734,
-        "volume": 4123787,
-        "turnover": null,
-        "foreign5Day": 1623872,
-        "investmentTrust5Day": 128000,
-        "total5Day": 2051427,
-        "largeHolderRatio": 60.33,
-        "retailRatio": 10.99,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          36.54999923706055,
-          36.79999923706055,
-          36.75,
-          36.5,
-          35.849998474121094,
-          36.5,
-          35.650001525878906,
-          35.54999923706055,
-          36.099998474121094,
-          35.900001525878906,
-          35.79999923706055,
-          35.400001525878906,
-          34.79999923706055,
-          35.400001525878906,
-          35,
-          35.650001525878906,
-          36.25,
-          36.150001525878906,
-          36.70000076293945,
-          36.79999923706055
-        ],
-        "technicalSignals": [
-          {
-            "key": "golden-cross",
-            "title": "黃金交叉",
-            "tone": "up",
-            "importance": 3,
-            "description": "興富發 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "黃金交叉"
-        ],
-        "topSignalTitle": "黃金交叉",
-        "topSignalTone": "up",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
+        "signalCount": 1
       },
       {
         "code": "2501",
@@ -4909,9 +4710,9 @@
         "return60": 3.44085693359375,
         "volume": 3566393,
         "turnover": null,
-        "foreign5Day": 2900687,
-        "investmentTrust5Day": -245000,
-        "total5Day": 2799771,
+        "foreign5Day": 3213585,
+        "investmentTrust5Day": -229000,
+        "total5Day": 3296669,
         "largeHolderRatio": 77.04,
         "retailRatio": 7.83,
         "shortToMarginRatio": null,
@@ -4960,18 +4761,68 @@
         ],
         "topSignalTitle": "黃金交叉",
         "topSignalTone": "up",
-        "signalCount": 2,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
+        "signalCount": 2
+      },
+      {
+        "code": "2548",
+        "name": "華固",
+        "industryName": "建材營造",
+        "priceDate": "2026-04-13",
+        "close": 126,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942,
+        "return20": 8.15450643776824,
+        "return60": 10.526315789473683,
+        "volume": 1758922,
+        "turnover": null,
+        "foreign5Day": 4078116,
+        "investmentTrust5Day": 0,
+        "total5Day": 3985365,
+        "largeHolderRatio": 58.16,
+        "retailRatio": 15.309999999999999,
+        "shortToMarginRatio": 0.350140056022409,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          116.5,
+          118,
+          118,
+          115.5,
+          116.5,
+          120.5,
+          117.5,
+          119.5,
+          123.5,
+          122.5,
+          122.5,
+          122.5,
+          120,
+          123,
+          122,
+          122,
+          127,
+          129,
+          127.5,
+          126
+        ],
+        "technicalSignals": [
+          {
+            "key": "kd-bearish",
+            "title": "KD 高檔死亡交叉",
+            "tone": "down",
+            "importance": 2,
+            "description": "華固 KD 在高檔轉成死亡交叉，隔日震盪回檔風險升高。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "KD 高檔死亡交叉"
+        ],
+        "topSignalTitle": "KD 高檔死亡交叉",
+        "topSignalTone": "down",
+        "signalCount": 1
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 0.61%，在同族群相對偏強。",
+      "近 20 日報酬優於同產業平均 0.56%，在同族群相對偏強。",
       "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }

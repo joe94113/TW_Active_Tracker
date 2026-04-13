@@ -3,11 +3,7 @@
   "name": "大成鋼",
   "kind": "stock",
   "priceDate": "2026-04-13",
-<<<<<<< HEAD
-  "generatedAt": "2026-04-13T08:57:09.581Z",
-=======
-  "generatedAt": "2026-04-13T08:59:19.694Z",
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+  "generatedAt": "2026-04-13T08:01:43.025Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3491,11 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 3.93%，可用來觀察波段資金是否持續留在主線。",
-<<<<<<< HEAD
-    "最近 5 個交易日三大法人合計買超 15,591,132 股。"
-=======
-    "最近 5 個交易日三大法人合計買超 29,021,134 股。"
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+    "最近 5 個交易日三大法人合計買超 39,792,231 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4208,6 +4200,13 @@
         "total": 5612567
       },
       {
+        "date": "2026-04-09",
+        "foreign": 8153000,
+        "investmentTrust": 2000,
+        "dealer": 103289,
+        "total": 8258289
+      },
+      {
         "date": "2026-04-08",
         "foreign": 7150000,
         "investmentTrust": 0,
@@ -4223,34 +4222,17 @@
       },
       {
         "date": "2026-04-02",
-        "foreign": -2437000,
+        "foreign": 19006000,
         "investmentTrust": 0,
-<<<<<<< HEAD
-=======
         "dealer": 2682291,
         "total": 21688291
-      },
-      {
-        "date": "2026-04-01",
-        "foreign": -2437000,
-        "investmentTrust": 0,
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
-        "dealer": -75808,
-        "total": -2512808
       }
     ],
     "summary": {
-<<<<<<< HEAD
-      "foreign5Day": 13763738,
+      "foreign5Day": 35206738,
       "investmentTrust5Day": 1096000,
-      "dealer5Day": 731394,
-      "total5Day": 15591132
-=======
-      "foreign5Day": 24616738,
-      "investmentTrust5Day": 1094000,
-      "dealer5Day": 3310396,
-      "total5Day": 29021134
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+      "dealer5Day": 3489493,
+      "total5Day": 39792231
     }
   },
   "持股分散": {
@@ -4459,11 +4441,11 @@
   },
   "同產業比較": {
     "industryName": "鋼鐵工業",
-    "peerCount": 2,
+    "peerCount": 3,
     "rank20Day": 2,
     "rankDaily": 1,
-    "averageReturn20": 4.163820037538926,
-    "averageChangePercent": 1.1025444679997647,
+    "averageReturn20": -1.2570430415410503,
+    "averageChangePercent": 0.8289249261980531,
     "leaders": [
       {
         "code": "2002",
@@ -4477,15 +4459,9 @@
         "return60": 8.602152412124298,
         "volume": 28823737,
         "turnover": null,
-<<<<<<< HEAD
-        "foreign5Day": 103880017,
-        "investmentTrust5Day": -240403,
-        "total5Day": 110285205,
-=======
-        "foreign5Day": 82906210,
-        "investmentTrust5Day": -162403,
-        "total5Day": 87986832,
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+        "foreign5Day": 102229668,
+        "investmentTrust5Day": -269917,
+        "total5Day": 105956443,
         "largeHolderRatio": 54.26,
         "retailRatio": 16.22,
         "shortToMarginRatio": 0.891838639427564,
@@ -4547,15 +4523,9 @@
         "return60": 9.42856924874442,
         "volume": 16480628,
         "turnover": null,
-<<<<<<< HEAD
-        "foreign5Day": 13763738,
+        "foreign5Day": 35206738,
         "investmentTrust5Day": 1096000,
-        "total5Day": 15591132,
-=======
-        "foreign5Day": 24616738,
-        "investmentTrust5Day": 1094000,
-        "total5Day": 29021134,
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+        "total5Day": 39792231,
         "largeHolderRatio": 68.14,
         "retailRatio": 11.37,
         "shortToMarginRatio": null,
@@ -4604,8 +4574,6 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
-<<<<<<< HEAD
-=======
       },
       {
         "code": "2006",
@@ -4619,9 +4587,9 @@
         "return60": 10.21671614553531,
         "volume": 2394350,
         "turnover": null,
-        "foreign5Day": 3694343,
-        "investmentTrust5Day": -194783,
-        "total5Day": 2854271,
+        "foreign5Day": 3650343,
+        "investmentTrust5Day": -222783,
+        "total5Day": 3303710,
         "largeHolderRatio": 80.63,
         "retailRatio": 8.63,
         "shortToMarginRatio": 0.129366106080207,
@@ -4670,13 +4638,10 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
       }
     ],
     "laggards": [
       {
-<<<<<<< HEAD
-=======
         "code": "2006",
         "name": "東和鋼鐵",
         "industryName": "鋼鐵工業",
@@ -4688,9 +4653,9 @@
         "return60": 10.21671614553531,
         "volume": 2394350,
         "turnover": null,
-        "foreign5Day": 3694343,
-        "investmentTrust5Day": -194783,
-        "total5Day": 2854271,
+        "foreign5Day": 3650343,
+        "investmentTrust5Day": -222783,
+        "total5Day": 3303710,
         "largeHolderRatio": 80.63,
         "retailRatio": 8.63,
         "shortToMarginRatio": 0.129366106080207,
@@ -4741,7 +4706,6 @@
         "nextExDividendDate": null
       },
       {
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
         "code": "2027",
         "name": "大成鋼",
         "industryName": "鋼鐵工業",
@@ -4753,15 +4717,9 @@
         "return60": 9.42856924874442,
         "volume": 16480628,
         "turnover": null,
-<<<<<<< HEAD
-        "foreign5Day": 13763738,
+        "foreign5Day": 35206738,
         "investmentTrust5Day": 1096000,
-        "total5Day": 15591132,
-=======
-        "foreign5Day": 24616738,
-        "investmentTrust5Day": 1094000,
-        "total5Day": 29021134,
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+        "total5Day": 39792231,
         "largeHolderRatio": 68.14,
         "retailRatio": 11.37,
         "shortToMarginRatio": null,
@@ -4823,15 +4781,9 @@
         "return60": 8.602152412124298,
         "volume": 28823737,
         "turnover": null,
-<<<<<<< HEAD
-        "foreign5Day": 103880017,
-        "investmentTrust5Day": -240403,
-        "total5Day": 110285205,
-=======
-        "foreign5Day": 82906210,
-        "investmentTrust5Day": -162403,
-        "total5Day": 87986832,
->>>>>>> 83380223c65189719cf0a5574c07b4e8a0f99c63
+        "foreign5Day": 102229668,
+        "investmentTrust5Day": -269917,
+        "total5Day": 105956443,
         "largeHolderRatio": 54.26,
         "retailRatio": 16.22,
         "shortToMarginRatio": 0.891838639427564,
@@ -4883,7 +4835,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 4.16%，短線強度落後族群。",
+      "近 20 日報酬優於同產業平均 -1.26%，在同族群相對偏強。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
