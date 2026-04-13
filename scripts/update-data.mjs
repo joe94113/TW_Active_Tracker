@@ -332,8 +332,8 @@ const 上市公司資產負債端點 = [
   },
 ];
 
-function 取得現在ISO() {
-  return new Date().toISOString();
+function 取得現在ISO(date = new Date()) {
+  return date.toISOString();
 }
 
 function 正規化日期(value) {
@@ -3507,7 +3507,7 @@ async function main() {
   const ETF重疊分析 = 建立ETF重疊分析(successes);
   const dashboard = {
     appName: '台股主動通',
-    generatedAt: 取得現在ISO(),
+    generatedAt: 取得現在ISO(現在),
     市場總覽,
     法人追蹤,
     期貨籌碼,
@@ -3519,7 +3519,7 @@ async function main() {
   };
   const manifest = {
     appName: '台股主動通',
-    generatedAt: 取得現在ISO(),
+    generatedAt: 取得現在ISO(現在),
     generatedAtLocalDate: 轉台北日期(現在),
     generatedAtLocalTime: 轉台北時間(現在),
     dashboardPath: 'data/dashboard.json',

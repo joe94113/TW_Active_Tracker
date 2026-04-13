@@ -3,7 +3,7 @@
   "name": "華固",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T04:23:47.242Z",
+  "generatedAt": "2026-04-13T06:38:52.746Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3417,7 +3417,7 @@
       "high": 127.5,
       "low": 125,
       "close": 126,
-      "volume": 1350776,
+      "volume": 1758922,
       "turnover": null,
       "transactions": null,
       "change": -1.5,
@@ -3457,7 +3457,7 @@
     "close": 126,
     "change": -1.5,
     "changePercent": -1.1764705882352942,
-    "volume": 1350776,
+    "volume": 1758922,
     "turnover": null,
     "return5": 3.278688524590164,
     "return20": 8.15450643776824,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 8.15%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 58.16%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 4,235,826 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3503,12 +3503,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-13T04:03:12.000Z",
+    "updatedAt": "2026-04-13T05:30:04.000Z",
     "previousClose": 127.5,
     "latestPrice": 126,
     "high": 127.5,
     "low": 125,
-    "volume": 1350776,
+    "volume": 1758922,
     "points": [
       {
         "timestamp": 1776042000,
@@ -3913,14 +3913,190 @@
         "price": 126,
         "high": 126,
         "low": 126,
-        "volume": 20130,
+        "volume": 33412,
         "change": -1.5,
         "changePercent": -1.1764705882352942
       },
       {
-        "timestamp": 1776052992,
-        "dateTime": "2026-04-13T04:03:12.000Z",
-        "time": "12:03",
+        "timestamp": 1776053100,
+        "dateTime": "2026-04-13T04:05:00.000Z",
+        "time": "12:05",
+        "price": 126,
+        "high": 126.5,
+        "low": 126,
+        "volume": 13053,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942
+      },
+      {
+        "timestamp": 1776053400,
+        "dateTime": "2026-04-13T04:10:00.000Z",
+        "time": "12:10",
+        "price": 126,
+        "high": 126.5,
+        "low": 126,
+        "volume": 20410,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942
+      },
+      {
+        "timestamp": 1776053700,
+        "dateTime": "2026-04-13T04:15:00.000Z",
+        "time": "12:15",
+        "price": 126.5,
+        "high": 126.5,
+        "low": 126,
+        "volume": 6013,
+        "change": -1,
+        "changePercent": -0.7843137254901961
+      },
+      {
+        "timestamp": 1776054000,
+        "dateTime": "2026-04-13T04:20:00.000Z",
+        "time": "12:20",
+        "price": 126.5,
+        "high": 126.5,
+        "low": 126.5,
+        "volume": 11488,
+        "change": -1,
+        "changePercent": -0.7843137254901961
+      },
+      {
+        "timestamp": 1776054300,
+        "dateTime": "2026-04-13T04:25:00.000Z",
+        "time": "12:25",
+        "price": 126,
+        "high": 126.5,
+        "low": 126,
+        "volume": 40016,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942
+      },
+      {
+        "timestamp": 1776054600,
+        "dateTime": "2026-04-13T04:30:00.000Z",
+        "time": "12:30",
+        "price": 126.5,
+        "high": 126.5,
+        "low": 126,
+        "volume": 45263,
+        "change": -1,
+        "changePercent": -0.7843137254901961
+      },
+      {
+        "timestamp": 1776054900,
+        "dateTime": "2026-04-13T04:35:00.000Z",
+        "time": "12:35",
+        "price": 126,
+        "high": 126.5,
+        "low": 126,
+        "volume": 30052,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942
+      },
+      {
+        "timestamp": 1776055200,
+        "dateTime": "2026-04-13T04:40:00.000Z",
+        "time": "12:40",
+        "price": 126.5,
+        "high": 126.5,
+        "low": 126,
+        "volume": 15298,
+        "change": -1,
+        "changePercent": -0.7843137254901961
+      },
+      {
+        "timestamp": 1776055500,
+        "dateTime": "2026-04-13T04:45:00.000Z",
+        "time": "12:45",
+        "price": 126,
+        "high": 126.5,
+        "low": 126,
+        "volume": 13001,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942
+      },
+      {
+        "timestamp": 1776055800,
+        "dateTime": "2026-04-13T04:50:00.000Z",
+        "time": "12:50",
+        "price": 126.5,
+        "high": 126.5,
+        "low": 126,
+        "volume": 19488,
+        "change": -1,
+        "changePercent": -0.7843137254901961
+      },
+      {
+        "timestamp": 1776056100,
+        "dateTime": "2026-04-13T04:55:00.000Z",
+        "time": "12:55",
+        "price": 126,
+        "high": 126.5,
+        "low": 126,
+        "volume": 4311,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942
+      },
+      {
+        "timestamp": 1776056400,
+        "dateTime": "2026-04-13T05:00:00.000Z",
+        "time": "13:00",
+        "price": 126.5,
+        "high": 126.5,
+        "low": 126,
+        "volume": 16534,
+        "change": -1,
+        "changePercent": -0.7843137254901961
+      },
+      {
+        "timestamp": 1776056700,
+        "dateTime": "2026-04-13T05:05:00.000Z",
+        "time": "13:05",
+        "price": 125.5,
+        "high": 126.5,
+        "low": 125.5,
+        "volume": 23215,
+        "change": -2,
+        "changePercent": -1.5686274509803921
+      },
+      {
+        "timestamp": 1776057000,
+        "dateTime": "2026-04-13T05:10:00.000Z",
+        "time": "13:10",
+        "price": 126,
+        "high": 126.5,
+        "low": 126,
+        "volume": 17086,
+        "change": -1.5,
+        "changePercent": -1.1764705882352942
+      },
+      {
+        "timestamp": 1776057300,
+        "dateTime": "2026-04-13T05:15:00.000Z",
+        "time": "13:15",
+        "price": 126.5,
+        "high": 126.5,
+        "low": 126,
+        "volume": 15169,
+        "change": -1,
+        "changePercent": -0.7843137254901961
+      },
+      {
+        "timestamp": 1776057600,
+        "dateTime": "2026-04-13T05:20:00.000Z",
+        "time": "13:20",
+        "price": 125.5,
+        "high": 126.5,
+        "low": 125.5,
+        "volume": 32469,
+        "change": -2,
+        "changePercent": -1.5686274509803921
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
         "price": 126,
         "high": 126,
         "low": 126,
@@ -4010,12 +4186,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": 147000,
+        "investmentTrust": 0,
+        "dealer": 14264,
+        "total": 161264
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": 1042784,
+        "investmentTrust": 0,
+        "dealer": -89368,
+        "total": 953416
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": 2146000,
+        "investmentTrust": 0,
+        "dealer": -28867,
+        "total": 2117133
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": 827332,
+        "investmentTrust": 0,
+        "dealer": 13220,
+        "total": 840552
+      },
+      {
+        "date": "2026-04-02",
+        "foreign": 106000,
+        "investmentTrust": 0,
+        "dealer": 57461,
+        "total": 163461
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
+      "foreign5Day": 4269116,
       "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "dealer5Day": -33290,
+      "total5Day": 4235826
     }
   },
   "持股分散": {
@@ -4197,24 +4409,24 @@
     "peerCount": 3,
     "rank20Day": 2,
     "rankDaily": 3,
-    "averageReturn20": -1.5006077682638927,
-    "averageChangePercent": 0.2778592615396582,
+    "averageReturn20": -1.004026074024334,
+    "averageChangePercent": 0.6914112443355265,
     "leaders": [
       {
         "code": "2923",
         "name": "鼎固-KY",
         "industryName": "建材營造",
         "priceDate": "2026-04-13",
-        "close": 20.299999237060547,
-        "change": 0.39999961853027344,
-        "changePercent": 2.0100483728542686,
-        "return20": 9.729725605732686,
-        "return60": -0.24570586472671352,
-        "volume": 49175,
+        "close": 20.649999618530273,
+        "change": 0.75,
+        "changePercent": 3.7688442933517594,
+        "return20": 11.6216195596231,
+        "return60": 1.4741976974787665,
+        "volume": 156207,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 245950,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 292950,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4239,7 +4451,7 @@
           19.5,
           19.049999237060547,
           19.899999618530273,
-          20.299999237060547
+          20.649999618530273
         ],
         "technicalSignals": [
           {
@@ -4267,11 +4479,11 @@
         "changePercent": -1.1764705882352942,
         "return20": 8.15450643776824,
         "return60": 10.526315789473683,
-        "volume": 1350776,
+        "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 4269116,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 4235826,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4319,16 +4531,16 @@
         "name": "皇昌",
         "industryName": "建材營造",
         "priceDate": "2026-04-13",
-        "close": 57.900001525878906,
-        "change": 0,
-        "changePercent": 0,
-        "return20": -22.386055348292604,
-        "return60": -12.932328532512924,
-        "volume": 870500,
+        "close": 57.599998474121094,
+        "change": -0.3000030517578125,
+        "changePercent": -0.5181399721098859,
+        "return20": -22.788204219464344,
+        "return60": -13.383460941171288,
+        "volume": 1219733,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": -60000,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -38430,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4353,7 +4565,7 @@
           58.5,
           57.5,
           57.900001525878906,
-          57.900001525878906
+          57.599998474121094
         ],
         "technicalSignals": [
           {
@@ -4378,16 +4590,16 @@
         "name": "皇昌",
         "industryName": "建材營造",
         "priceDate": "2026-04-13",
-        "close": 57.900001525878906,
-        "change": 0,
-        "changePercent": 0,
-        "return20": -22.386055348292604,
-        "return60": -12.932328532512924,
-        "volume": 870500,
+        "close": 57.599998474121094,
+        "change": -0.3000030517578125,
+        "changePercent": -0.5181399721098859,
+        "return20": -22.788204219464344,
+        "return60": -13.383460941171288,
+        "volume": 1219733,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": -60000,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -38430,
         "largeHolderRatio": 73.63,
         "retailRatio": 8.82,
         "shortToMarginRatio": null,
@@ -4412,7 +4624,7 @@
           58.5,
           57.5,
           57.900001525878906,
-          57.900001525878906
+          57.599998474121094
         ],
         "technicalSignals": [
           {
@@ -4440,11 +4652,11 @@
         "changePercent": -1.1764705882352942,
         "return20": 8.15450643776824,
         "return60": 10.526315789473683,
-        "volume": 1350776,
+        "volume": 1758922,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 4269116,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 4235826,
         "largeHolderRatio": 58.16,
         "retailRatio": 15.309999999999999,
         "shortToMarginRatio": 0.350140056022409,
@@ -4492,16 +4704,16 @@
         "name": "鼎固-KY",
         "industryName": "建材營造",
         "priceDate": "2026-04-13",
-        "close": 20.299999237060547,
-        "change": 0.39999961853027344,
-        "changePercent": 2.0100483728542686,
-        "return20": 9.729725605732686,
-        "return60": -0.24570586472671352,
-        "volume": 49175,
+        "close": 20.649999618530273,
+        "change": 0.75,
+        "changePercent": 3.7688442933517594,
+        "return20": 11.6216195596231,
+        "return60": 1.4741976974787665,
+        "volume": 156207,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 245950,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 292950,
         "largeHolderRatio": 99.36,
         "retailRatio": 0.23000000000000004,
         "shortToMarginRatio": null,
@@ -4526,7 +4738,7 @@
           19.5,
           19.049999237060547,
           19.899999618530273,
-          20.299999237060547
+          20.649999618530273
         ],
         "technicalSignals": [
           {
@@ -4546,7 +4758,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 -1.50%，在同族群相對偏強。"
+      "近 20 日報酬優於同產業平均 -1.00%，在同族群相對偏強。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

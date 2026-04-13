@@ -3,7 +3,7 @@
   "name": "高力",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T04:24:02.750Z",
+  "generatedAt": "2026-04-13T06:39:10.729Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3417,7 +3417,7 @@
       "high": 1115,
       "low": 1025,
       "close": 1095,
-      "volume": 3136569,
+      "volume": 4043697,
       "turnover": null,
       "transactions": null,
       "change": 55,
@@ -3457,7 +3457,7 @@
     "close": 1095,
     "change": 55,
     "changePercent": 5.288461538461538,
-    "volume": 3136569,
+    "volume": 4043697,
     "turnover": null,
     "return5": 26.443418013856814,
     "return20": 19.41112322791712,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 19.41%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 54.22%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 516,321 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3503,12 +3503,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-13T04:03:39.000Z",
+    "updatedAt": "2026-04-13T05:30:30.000Z",
     "previousClose": 1040,
     "latestPrice": 1095,
     "high": 1115,
     "low": 1025,
-    "volume": 3136569,
+    "volume": 4043697,
     "points": [
       {
         "timestamp": 1776042000,
@@ -3911,16 +3911,192 @@
         "dateTime": "2026-04-13T04:00:00.000Z",
         "time": "12:00",
         "price": 1095,
-        "high": 1095,
+        "high": 1100,
         "low": 1090,
-        "volume": 15052,
+        "volume": 24433,
         "change": 55,
         "changePercent": 5.288461538461538
       },
       {
-        "timestamp": 1776053019,
-        "dateTime": "2026-04-13T04:03:39.000Z",
-        "time": "12:03",
+        "timestamp": 1776053100,
+        "dateTime": "2026-04-13T04:05:00.000Z",
+        "time": "12:05",
+        "price": 1100,
+        "high": 1100,
+        "low": 1095,
+        "volume": 12292,
+        "change": 60,
+        "changePercent": 5.769230769230769
+      },
+      {
+        "timestamp": 1776053400,
+        "dateTime": "2026-04-13T04:10:00.000Z",
+        "time": "12:10",
+        "price": 1105,
+        "high": 1105,
+        "low": 1095,
+        "volume": 52674,
+        "change": 65,
+        "changePercent": 6.25
+      },
+      {
+        "timestamp": 1776053700,
+        "dateTime": "2026-04-13T04:15:00.000Z",
+        "time": "12:15",
+        "price": 1100,
+        "high": 1110,
+        "low": 1100,
+        "volume": 78953,
+        "change": 60,
+        "changePercent": 5.769230769230769
+      },
+      {
+        "timestamp": 1776054000,
+        "dateTime": "2026-04-13T04:20:00.000Z",
+        "time": "12:20",
+        "price": 1090,
+        "high": 1100,
+        "low": 1090,
+        "volume": 43469,
+        "change": 50,
+        "changePercent": 4.807692307692308
+      },
+      {
+        "timestamp": 1776054300,
+        "dateTime": "2026-04-13T04:25:00.000Z",
+        "time": "12:25",
+        "price": 1090,
+        "high": 1090,
+        "low": 1090,
+        "volume": 12805,
+        "change": 50,
+        "changePercent": 4.807692307692308
+      },
+      {
+        "timestamp": 1776054600,
+        "dateTime": "2026-04-13T04:30:00.000Z",
+        "time": "12:30",
+        "price": 1095,
+        "high": 1095,
+        "low": 1085,
+        "volume": 22768,
+        "change": 55,
+        "changePercent": 5.288461538461538
+      },
+      {
+        "timestamp": 1776054900,
+        "dateTime": "2026-04-13T04:35:00.000Z",
+        "time": "12:35",
+        "price": 1095,
+        "high": 1100,
+        "low": 1090,
+        "volume": 43394,
+        "change": 55,
+        "changePercent": 5.288461538461538
+      },
+      {
+        "timestamp": 1776055200,
+        "dateTime": "2026-04-13T04:40:00.000Z",
+        "time": "12:40",
+        "price": 1090,
+        "high": 1095,
+        "low": 1090,
+        "volume": 18702,
+        "change": 50,
+        "changePercent": 4.807692307692308
+      },
+      {
+        "timestamp": 1776055500,
+        "dateTime": "2026-04-13T04:45:00.000Z",
+        "time": "12:45",
+        "price": 1090,
+        "high": 1090,
+        "low": 1085,
+        "volume": 55357,
+        "change": 50,
+        "changePercent": 4.807692307692308
+      },
+      {
+        "timestamp": 1776055800,
+        "dateTime": "2026-04-13T04:50:00.000Z",
+        "time": "12:50",
+        "price": 1085,
+        "high": 1090,
+        "low": 1085,
+        "volume": 21819,
+        "change": 45,
+        "changePercent": 4.326923076923077
+      },
+      {
+        "timestamp": 1776056100,
+        "dateTime": "2026-04-13T04:55:00.000Z",
+        "time": "12:55",
+        "price": 1090,
+        "high": 1090,
+        "low": 1085,
+        "volume": 17337,
+        "change": 50,
+        "changePercent": 4.807692307692308
+      },
+      {
+        "timestamp": 1776056400,
+        "dateTime": "2026-04-13T05:00:00.000Z",
+        "time": "13:00",
+        "price": 1095,
+        "high": 1095,
+        "low": 1085,
+        "volume": 51132,
+        "change": 55,
+        "changePercent": 5.288461538461538
+      },
+      {
+        "timestamp": 1776056700,
+        "dateTime": "2026-04-13T05:05:00.000Z",
+        "time": "13:05",
+        "price": 1095,
+        "high": 1095,
+        "low": 1090,
+        "volume": 46340,
+        "change": 55,
+        "changePercent": 5.288461538461538
+      },
+      {
+        "timestamp": 1776057000,
+        "dateTime": "2026-04-13T05:10:00.000Z",
+        "time": "13:10",
+        "price": 1090,
+        "high": 1095,
+        "low": 1085,
+        "volume": 76218,
+        "change": 50,
+        "changePercent": 4.807692307692308
+      },
+      {
+        "timestamp": 1776057300,
+        "dateTime": "2026-04-13T05:15:00.000Z",
+        "time": "13:15",
+        "price": 1085,
+        "high": 1090,
+        "low": 1085,
+        "volume": 35959,
+        "change": 45,
+        "changePercent": 4.326923076923077
+      },
+      {
+        "timestamp": 1776057600,
+        "dateTime": "2026-04-13T05:20:00.000Z",
+        "time": "13:20",
+        "price": 1085,
+        "high": 1095,
+        "low": 1085,
+        "volume": 115609,
+        "change": 45,
+        "changePercent": 4.326923076923077
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
         "price": 1095,
         "high": 1095,
         "low": 1095,
@@ -4010,12 +4186,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": 815971,
+        "investmentTrust": 57000,
+        "dealer": -13746,
+        "total": 859225
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": 1261836,
+        "investmentTrust": -40000,
+        "dealer": 91781,
+        "total": 1313617
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": -1485956,
+        "investmentTrust": -179001,
+        "dealer": 32729,
+        "total": -1632228
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": 333761,
+        "investmentTrust": 67000,
+        "dealer": 4628,
+        "total": 405389
+      },
+      {
+        "date": "2026-04-02",
+        "foreign": -429850,
+        "investmentTrust": 16999,
+        "dealer": -16831,
+        "total": -429682
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 495762,
+      "investmentTrust5Day": -78002,
+      "dealer5Day": 98561,
+      "total5Day": 516321
     }
   },
   "持股分散": {
@@ -4216,24 +4428,24 @@
     "peerCount": 6,
     "rank20Day": 2,
     "rankDaily": 1,
-    "averageReturn20": 17.768064682799736,
-    "averageChangePercent": 1.6735453731345433,
+    "averageReturn20": 15.272775268567806,
+    "averageChangePercent": 0.24822604185103314,
     "leaders": [
       {
         "code": "3167",
         "name": "大量",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 665,
-        "change": 32,
-        "changePercent": 5.055292259083728,
-        "return20": 87.32394366197182,
-        "return60": 198.20627802690584,
-        "volume": 991755,
+        "close": 614,
+        "change": -19,
+        "changePercent": -3.0015797788309637,
+        "return20": 72.95774647887325,
+        "return60": 175.33632286995515,
+        "volume": 1442389,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1035204,
+        "investmentTrust5Day": 1673000,
+        "total5Day": 2729490,
         "largeHolderRatio": 64.23,
         "retailRatio": 10.67,
         "shortToMarginRatio": 7.181403071814032,
@@ -4258,7 +4470,7 @@
           539,
           576,
           633,
-          665
+          614
         ],
         "technicalSignals": [
           {
@@ -4267,14 +4479,22 @@
             "tone": "down",
             "importance": 2,
             "description": "大量 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
+          },
+          {
+            "key": "kd-bearish",
+            "title": "KD 高檔死亡交叉",
+            "tone": "down",
+            "importance": 2,
+            "description": "大量 KD 在高檔轉成死亡交叉，隔日震盪回檔風險升高。"
           }
         ],
         "technicalSignalTitles": [
-          "RSI 超買"
+          "RSI 超買",
+          "KD 高檔死亡交叉"
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 2
       },
       {
         "code": "8996",
@@ -4286,11 +4506,11 @@
         "changePercent": 5.288461538461538,
         "return20": 19.41112322791712,
         "return60": 89.44636678200692,
-        "volume": 3136569,
+        "volume": 4043697,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 495762,
+        "investmentTrust5Day": -78002,
+        "total5Day": 516321,
         "largeHolderRatio": 54.22,
         "retailRatio": 10.27,
         "shortToMarginRatio": 4.452951843642958,
@@ -4338,16 +4558,16 @@
         "name": "亞德客-KY",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 1105,
-        "change": -10,
-        "changePercent": -0.8968609865470852,
-        "return20": 7.281553398058252,
-        "return60": 14.864864864864865,
-        "volume": 317617,
+        "close": 1095,
+        "change": -20,
+        "changePercent": -1.7937219730941705,
+        "return20": 6.310679611650485,
+        "return60": 13.825363825363826,
+        "volume": 542491,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 109811,
+        "investmentTrust5Day": -33744,
+        "total5Day": 189921,
         "largeHolderRatio": 72.19,
         "retailRatio": 1.69,
         "shortToMarginRatio": null,
@@ -4372,7 +4592,7 @@
           1075,
           1075,
           1115,
-          1105
+          1095
         ],
         "technicalSignals": [
           {
@@ -4395,16 +4615,16 @@
         "name": "台灣精銳",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 664,
-        "change": -4,
-        "changePercent": -0.5988023952095809,
-        "return20": 3.58814352574103,
-        "return60": 1.8404907975460123,
-        "volume": 103469,
+        "close": 663,
+        "change": -5,
+        "changePercent": -0.7485029940119761,
+        "return20": 3.43213728549142,
+        "return60": 1.687116564417178,
+        "volume": 174970,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -6540,
+        "investmentTrust5Day": -33000,
+        "total5Day": -33768,
         "largeHolderRatio": 86.22,
         "retailRatio": 4.6,
         "shortToMarginRatio": 0.7766990291262136,
@@ -4429,7 +4649,7 @@
           678,
           664,
           668,
-          664
+          663
         ],
         "technicalSignals": [
           {
@@ -4452,16 +4672,16 @@
         "name": "強信-KY",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 33.04999923706055,
-        "change": 0.34999847412109375,
-        "changePercent": 1.070331700168535,
-        "return20": 0.6088303568629135,
-        "return60": 2.3219814789947764,
-        "volume": 60640,
+        "close": 33.150001525878906,
+        "change": 0.4500007629394531,
+        "changePercent": 1.3761490900314028,
+        "return20": 0.9132513415309653,
+        "return60": 2.6315860956525325,
+        "volume": 70640,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": -33000,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -34000,
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4486,7 +4706,7 @@
           32.75,
           32.75,
           32.70000076293945,
-          33.04999923706055
+          33.150001525878906
         ],
         "technicalSignals": [
           {
@@ -4509,16 +4729,16 @@
         "name": "華城",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 815,
-        "change": 1,
-        "changePercent": 0.12285012285012285,
-        "return20": -11.605206073752711,
-        "return60": 10.583446404341927,
-        "volume": 1088603,
+        "close": 817,
+        "change": 3,
+        "changePercent": 0.36855036855036855,
+        "return20": -11.3882863340564,
+        "return60": 10.854816824966079,
+        "volume": 1442495,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -666653,
+        "investmentTrust5Day": -182392,
+        "total5Day": -765760,
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4543,7 +4763,7 @@
           830,
           806,
           814,
-          815
+          817
         ],
         "technicalSignals": [
           {
@@ -4568,16 +4788,16 @@
         "name": "華城",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 815,
-        "change": 1,
-        "changePercent": 0.12285012285012285,
-        "return20": -11.605206073752711,
-        "return60": 10.583446404341927,
-        "volume": 1088603,
+        "close": 817,
+        "change": 3,
+        "changePercent": 0.36855036855036855,
+        "return20": -11.3882863340564,
+        "return60": 10.854816824966079,
+        "volume": 1442495,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -666653,
+        "investmentTrust5Day": -182392,
+        "total5Day": -765760,
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4602,7 +4822,7 @@
           830,
           806,
           814,
-          815
+          817
         ],
         "technicalSignals": [
           {
@@ -4625,16 +4845,16 @@
         "name": "強信-KY",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 33.04999923706055,
-        "change": 0.34999847412109375,
-        "changePercent": 1.070331700168535,
-        "return20": 0.6088303568629135,
-        "return60": 2.3219814789947764,
-        "volume": 60640,
+        "close": 33.150001525878906,
+        "change": 0.4500007629394531,
+        "changePercent": 1.3761490900314028,
+        "return20": 0.9132513415309653,
+        "return60": 2.6315860956525325,
+        "volume": 70640,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": -33000,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -34000,
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4659,7 +4879,7 @@
           32.75,
           32.75,
           32.70000076293945,
-          33.04999923706055
+          33.150001525878906
         ],
         "technicalSignals": [
           {
@@ -4682,16 +4902,16 @@
         "name": "台灣精銳",
         "industryName": "電機機械",
         "priceDate": "2026-04-13",
-        "close": 664,
-        "change": -4,
-        "changePercent": -0.5988023952095809,
-        "return20": 3.58814352574103,
-        "return60": 1.8404907975460123,
-        "volume": 103469,
+        "close": 663,
+        "change": -5,
+        "changePercent": -0.7485029940119761,
+        "return20": 3.43213728549142,
+        "return60": 1.687116564417178,
+        "volume": 174970,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -6540,
+        "investmentTrust5Day": -33000,
+        "total5Day": -33768,
         "largeHolderRatio": 86.22,
         "retailRatio": 4.6,
         "shortToMarginRatio": 0.7766990291262136,
@@ -4716,7 +4936,7 @@
           678,
           664,
           668,
-          664
+          663
         ],
         "technicalSignals": [
           {
@@ -4736,7 +4956,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 17.77%，在同族群相對偏強。"
+      "近 20 日報酬優於同產業平均 15.27%，在同族群相對偏強。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

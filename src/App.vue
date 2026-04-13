@@ -21,9 +21,31 @@ const currentSectionLabel = computed(() => {
   return '首頁';
 });
 
+function formatGeneratedAt(value) {
+  if (!value) {
+    return '資料載入中';
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toLocaleString('zh-TW', {
+    timeZone: 'Asia/Taipei',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+}
+
 const generatedAtText = computed(() => {
-  if (!manifest.value) return '資料載入中';
-  return `${manifest.value.generatedAtLocalDate} ${manifest.value.generatedAtLocalTime}`;
+  return formatGeneratedAt(manifest.value?.generatedAt);
 });
 
 const footerStats = computed(() => [
@@ -36,7 +58,7 @@ const footerStats = computed(() => [
     value: manifest.value?.trackedEtfs?.length ? `${manifest.value.trackedEtfs.length} 檔` : '整理中',
   },
   {
-    label: '最新整理',
+    label: '資料包整理',
     value: generatedAtText.value,
   },
 ]);
@@ -89,7 +111,7 @@ function isActiveRoute(path) {
 
         <div class="app-header-side compact">
           <span class="meta-chip">目前頁面：{{ currentSectionLabel }}</span>
-          <span class="meta-text">最新整理：{{ generatedAtText }}</span>
+          <span class="meta-text">資料包整理：{{ generatedAtText }}</span>
         </div>
       </div>
     </header>

@@ -3,7 +3,7 @@
   "name": "群創",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T04:23:53.053Z",
+  "generatedAt": "2026-04-13T06:38:59.689Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3414,80 +3414,80 @@
     {
       "date": "2026-04-13",
       "open": 26,
-      "high": 26.450000762939453,
+      "high": 26.5,
       "low": 25.5,
-      "close": 26.450000762939453,
-      "volume": 142323824,
+      "close": 26.299999237060547,
+      "volume": 196602453,
       "turnover": null,
       "transactions": null,
-      "change": 0.4500007629394531,
-      "changePercent": 1.730772165151743,
-      "maFast": 25.93000030517578,
-      "maShort": 25.260000038146973,
-      "maMedium": 25.947500038146973,
-      "maLong": 24.89249989191691,
-      "rsi": 53.27799583004803,
-      "stochasticK": 57.46474927847449,
-      "stochasticD": 47.33406822060298,
-      "macd": 0.10600615242373834,
-      "macdSignal": 0.1033742707000074,
-      "macdHist": 0.002631881723730939,
-      "ma5": 25.93000030517578,
-      "ma10": 25.260000038146973,
-      "ma20": 25.947500038146973,
-      "ma60": 24.89249989191691,
-      "rsi14": 53.27799583004803,
-      "k9": 57.46474927847449,
-      "d9": 47.33406822060298
+      "change": 0.2999992370605469,
+      "changePercent": 1.1538432194636417,
+      "maFast": 25.9,
+      "maShort": 25.244999885559082,
+      "maMedium": 25.939999961853026,
+      "maLong": 24.889999866485596,
+      "rsi": 52.7583549960639,
+      "stochasticK": 56.31531239935844,
+      "stochasticD": 46.95092259423097,
+      "macd": 0.09404021873539037,
+      "macdSignal": 0.1009810839623378,
+      "macdHist": -0.0069408652269474375,
+      "ma5": 25.9,
+      "ma10": 25.244999885559082,
+      "ma20": 25.939999961853026,
+      "ma60": 24.889999866485596,
+      "rsi14": 52.7583549960639,
+      "k9": 56.31531239935844,
+      "d9": 46.95092259423097
     }
   ],
   "technicalSignals": [
     {
-      "key": "macd-bullish-cross",
-      "title": "MACD 翻正",
-      "tone": "up",
-      "importance": 3,
-      "description": "群創 MACD 線上穿訊號線，短線動能重新偏多。"
+      "key": "neutral",
+      "title": "技術面中性",
+      "tone": "normal",
+      "importance": 1,
+      "description": "群創 目前沒有明確的新訊號，偏向等待下一段量價表態。"
     }
   ],
   "訊號摘要": [
-    "MACD 翻正"
+    "技術面中性"
   ],
   "最新摘要": {
-    "close": 26.450000762939453,
-    "change": 0.4500007629394531,
-    "changePercent": 1.730772165151743,
-    "volume": 142323824,
+    "close": 26.299999237060547,
+    "change": 0.2999992370605469,
+    "changePercent": 1.1538432194636417,
+    "volume": 196602453,
     "turnover": null,
-    "return5": 7.3022359929614575,
-    "return20": -19.726858420321744,
-    "return60": 32.91457924607204
+    "return5": 6.693710523589261,
+    "return20": -20.182098245528728,
+    "return60": 32.16080271966834
   },
   "最新指標": {
-    "maFast": 25.93000030517578,
-    "maShort": 25.260000038146973,
-    "maMedium": 25.947500038146973,
-    "maLong": 24.89249989191691,
-    "ma5": 25.93000030517578,
-    "ma10": 25.260000038146973,
-    "ma20": 25.947500038146973,
-    "ma60": 24.89249989191691,
-    "rsi": 53.27799583004803,
-    "rsi14": 53.27799583004803,
-    "stochasticK": 57.46474927847449,
-    "stochasticD": 47.33406822060298,
-    "k9": 57.46474927847449,
-    "d9": 47.33406822060298,
-    "macd": 0.10600615242373834,
-    "macdSignal": 0.1033742707000074,
-    "macdHist": 0.002631881723730939
+    "maFast": 25.9,
+    "maShort": 25.244999885559082,
+    "maMedium": 25.939999961853026,
+    "maLong": 24.889999866485596,
+    "ma5": 25.9,
+    "ma10": 25.244999885559082,
+    "ma20": 25.939999961853026,
+    "ma60": 24.889999866485596,
+    "rsi": 52.7583549960639,
+    "rsi14": 52.7583549960639,
+    "stochasticK": 56.31531239935844,
+    "stochasticD": 46.95092259423097,
+    "k9": 56.31531239935844,
+    "d9": 46.95092259423097,
+    "macd": 0.09404021873539037,
+    "macdSignal": 0.1009810839623378,
+    "macdHist": -0.0069408652269474375
   },
   "觀察摘要": [
     "群創 目前站在 MA20 與 MA60 之上，短中期均線仍偏向多方排列。",
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
-    "MACD 柱體維持正值，短線動能仍偏向多方。",
-    "近 20 個交易日報酬 -19.73%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 42.71%，相較前次 增加 0.00 個百分點。"
+    "MACD 柱體位於負值區，代表短線修正力道仍在。",
+    "近 20 個交易日報酬 -20.18%，可用來觀察波段資金是否持續留在主線。",
+    "最近 5 個交易日三大法人合計賣超 18,946,566 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3503,12 +3503,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-13T04:03:51.000Z",
+    "updatedAt": "2026-04-13T05:30:01.000Z",
     "previousClose": 26,
-    "latestPrice": 26.45,
-    "high": 26.45,
+    "latestPrice": 26.3,
+    "high": 26.5,
     "low": 25.5,
-    "volume": 142323824,
+    "volume": 196602453,
     "points": [
       {
         "timestamp": 1776042000,
@@ -3913,20 +3913,196 @@
         "price": 26.450000762939453,
         "high": 26.450000762939453,
         "low": 26.350000381469727,
-        "volume": 4385995,
+        "volume": 5005222,
         "change": 0.4500007629394531,
         "changePercent": 1.730772165151743
       },
       {
-        "timestamp": 1776053031,
-        "dateTime": "2026-04-13T04:03:51.000Z",
-        "time": "12:03",
+        "timestamp": 1776053100,
+        "dateTime": "2026-04-13T04:05:00.000Z",
+        "time": "12:05",
         "price": 26.450000762939453,
-        "high": 26.450000762939453,
-        "low": 26.450000762939453,
-        "volume": 0,
+        "high": 26.5,
+        "low": 26.350000381469727,
+        "volume": 4593398,
         "change": 0.4500007629394531,
         "changePercent": 1.730772165151743
+      },
+      {
+        "timestamp": 1776053400,
+        "dateTime": "2026-04-13T04:10:00.000Z",
+        "time": "12:10",
+        "price": 26.399999618530273,
+        "high": 26.450000762939453,
+        "low": 26.350000381469727,
+        "volume": 2055305,
+        "change": 0.39999961853027344,
+        "changePercent": 1.5384600712702823
+      },
+      {
+        "timestamp": 1776053700,
+        "dateTime": "2026-04-13T04:15:00.000Z",
+        "time": "12:15",
+        "price": 26.350000381469727,
+        "high": 26.399999618530273,
+        "low": 26.299999237060547,
+        "volume": 1876645,
+        "change": 0.35000038146972656,
+        "changePercent": 1.3461553133451023
+      },
+      {
+        "timestamp": 1776054000,
+        "dateTime": "2026-04-13T04:20:00.000Z",
+        "time": "12:20",
+        "price": 26.350000381469727,
+        "high": 26.399999618530273,
+        "low": 26.299999237060547,
+        "volume": 1026546,
+        "change": 0.35000038146972656,
+        "changePercent": 1.3461553133451023
+      },
+      {
+        "timestamp": 1776054300,
+        "dateTime": "2026-04-13T04:25:00.000Z",
+        "time": "12:25",
+        "price": 26.399999618530273,
+        "high": 26.450000762939453,
+        "low": 26.299999237060547,
+        "volume": 2674721,
+        "change": 0.39999961853027344,
+        "changePercent": 1.5384600712702823
+      },
+      {
+        "timestamp": 1776054600,
+        "dateTime": "2026-04-13T04:30:00.000Z",
+        "time": "12:30",
+        "price": 26.350000381469727,
+        "high": 26.399999618530273,
+        "low": 26.299999237060547,
+        "volume": 1382578,
+        "change": 0.35000038146972656,
+        "changePercent": 1.3461553133451023
+      },
+      {
+        "timestamp": 1776054900,
+        "dateTime": "2026-04-13T04:35:00.000Z",
+        "time": "12:35",
+        "price": 26.299999237060547,
+        "high": 26.399999618530273,
+        "low": 26.25,
+        "volume": 2339067,
+        "change": 0.2999992370605469,
+        "changePercent": 1.1538432194636417
+      },
+      {
+        "timestamp": 1776055200,
+        "dateTime": "2026-04-13T04:40:00.000Z",
+        "time": "12:40",
+        "price": 26.350000381469727,
+        "high": 26.399999618530273,
+        "low": 26.25,
+        "volume": 2817190,
+        "change": 0.35000038146972656,
+        "changePercent": 1.3461553133451023
+      },
+      {
+        "timestamp": 1776055500,
+        "dateTime": "2026-04-13T04:45:00.000Z",
+        "time": "12:45",
+        "price": 26.299999237060547,
+        "high": 26.399999618530273,
+        "low": 26.25,
+        "volume": 1710789,
+        "change": 0.2999992370605469,
+        "changePercent": 1.1538432194636417
+      },
+      {
+        "timestamp": 1776055800,
+        "dateTime": "2026-04-13T04:50:00.000Z",
+        "time": "12:50",
+        "price": 26.25,
+        "high": 26.350000381469727,
+        "low": 26.25,
+        "volume": 1948936,
+        "change": 0.25,
+        "changePercent": 0.9615384615384616
+      },
+      {
+        "timestamp": 1776056100,
+        "dateTime": "2026-04-13T04:55:00.000Z",
+        "time": "12:55",
+        "price": 26.25,
+        "high": 26.350000381469727,
+        "low": 26.25,
+        "volume": 1787590,
+        "change": 0.25,
+        "changePercent": 0.9615384615384616
+      },
+      {
+        "timestamp": 1776056400,
+        "dateTime": "2026-04-13T05:00:00.000Z",
+        "time": "13:00",
+        "price": 26.350000381469727,
+        "high": 26.399999618530273,
+        "low": 26.25,
+        "volume": 3658581,
+        "change": 0.35000038146972656,
+        "changePercent": 1.3461553133451023
+      },
+      {
+        "timestamp": 1776056700,
+        "dateTime": "2026-04-13T05:05:00.000Z",
+        "time": "13:05",
+        "price": 26.25,
+        "high": 26.399999618530273,
+        "low": 26.25,
+        "volume": 1708807,
+        "change": 0.25,
+        "changePercent": 0.9615384615384616
+      },
+      {
+        "timestamp": 1776057000,
+        "dateTime": "2026-04-13T05:10:00.000Z",
+        "time": "13:10",
+        "price": 26.149999618530273,
+        "high": 26.299999237060547,
+        "low": 26.149999618530273,
+        "volume": 3108455,
+        "change": 0.14999961853027344,
+        "changePercent": 0.5769216097318208
+      },
+      {
+        "timestamp": 1776057300,
+        "dateTime": "2026-04-13T05:15:00.000Z",
+        "time": "13:15",
+        "price": 26.149999618530273,
+        "high": 26.25,
+        "low": 26.149999618530273,
+        "volume": 2713673,
+        "change": 0.14999961853027344,
+        "changePercent": 0.5769216097318208
+      },
+      {
+        "timestamp": 1776057600,
+        "dateTime": "2026-04-13T05:20:00.000Z",
+        "time": "13:20",
+        "price": 26.25,
+        "high": 26.25,
+        "low": 26.149999618530273,
+        "volume": 3991436,
+        "change": 0.25,
+        "changePercent": 0.9615384615384616
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
+        "price": 26.299999237060547,
+        "high": 26.299999237060547,
+        "low": 26.299999237060547,
+        "volume": 0,
+        "change": 0.2999992370605469,
+        "changePercent": 1.1538432194636417
       }
     ],
     "資料來源": [
@@ -4010,12 +4186,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": -92927159,
+        "investmentTrust": -103868,
+        "dealer": -7128643,
+        "total": -100159670
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": -14444977,
+        "investmentTrust": -1466789,
+        "dealer": 5286914,
+        "total": -10624852
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": 131973743,
+        "investmentTrust": -112738,
+        "dealer": 7335858,
+        "total": 139196863
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": -51624913,
+        "investmentTrust": -31017,
+        "dealer": -1005212,
+        "total": -52661142
+      },
+      {
+        "date": "2026-04-02",
+        "foreign": 4772545,
+        "investmentTrust": 109353,
+        "dealer": 420337,
+        "total": 5302235
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -22250761,
+      "investmentTrust5Day": -1605059,
+      "dealer5Day": 4909254,
+      "total5Day": -18946566
     }
   },
   "持股分散": {
@@ -4182,8 +4394,8 @@
     "peerCount": 9,
     "rank20Day": 9,
     "rankDaily": 6,
-    "averageReturn20": 17.820669519130735,
-    "averageChangePercent": 4.329475655241154,
+    "averageReturn20": 18.334481367722294,
+    "averageChangePercent": 4.7009728848967764,
     "leaders": [
       {
         "code": "2426",
@@ -4195,11 +4407,11 @@
         "changePercent": 9.936576826108917,
         "return20": 68.28479172153895,
         "return60": 205.88235294117646,
-        "volume": 9597020,
+        "volume": 10035117,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": -6916201,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -6553412,
         "largeHolderRatio": 49.43,
         "retailRatio": 21.67,
         "shortToMarginRatio": 4.679597621297171,
@@ -4252,11 +4464,11 @@
         "changePercent": 9.917357530735112,
         "return20": 49.678452302516284,
         "return60": 150.6056383584994,
-        "volume": 9929842,
+        "volume": 10106846,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 945064,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 1008841,
         "largeHolderRatio": 60.52,
         "retailRatio": 12.799999999999999,
         "shortToMarginRatio": 7.417873542917697,
@@ -4300,77 +4512,20 @@
         "signalCount": 1
       },
       {
-        "code": "2489",
-        "name": "瑞軒",
-        "industryName": "光電業",
-        "priceDate": "2026-04-13",
-        "close": 47.29999923706055,
-        "change": 2,
-        "changePercent": 4.415011111884904,
-        "return20": 25.79787541644626,
-        "return60": 200.31745547340032,
-        "volume": 125948469,
-        "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
-        "largeHolderRatio": 49.12,
-        "retailRatio": 24.06,
-        "shortToMarginRatio": 1.725325601140605,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          41.349998474121094,
-          41.900001525878906,
-          39.900001525878906,
-          39,
-          42.900001525878906,
-          38.650001525878906,
-          34.79999923706055,
-          31.5,
-          32.599998474121094,
-          31.899999618530273,
-          35.04999923706055,
-          32.70000076293945,
-          31.25,
-          33.400001525878906,
-          32.20000076293945,
-          35.400001525878906,
-          38.900001525878906,
-          42.75,
-          45.29999923706055,
-          47.29999923706055
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "瑞軒 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1
-      },
-      {
         "code": "3714",
         "name": "富采",
         "industryName": "光電業",
         "priceDate": "2026-04-13",
-        "close": 54.599998474121094,
-        "change": 2.5999984741210938,
-        "changePercent": 4.999997065617488,
-        "return20": 25.085902784562858,
-        "return60": 52.089125775557676,
-        "volume": 39721637,
+        "close": 57.20000076293945,
+        "change": 5.200000762939453,
+        "changePercent": 10.000001467191257,
+        "return20": 31.042379755764998,
+        "return60": 59.33147167613966,
+        "volume": 62910566,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -7371138,
+        "investmentTrust5Day": 185000,
+        "total5Day": -5896365,
         "largeHolderRatio": 47.54,
         "retailRatio": 20.88,
         "shortToMarginRatio": 1.5145296338860614,
@@ -4395,7 +4550,7 @@
           52.099998474121094,
           57.29999923706055,
           52,
-          54.599998474121094
+          57.20000076293945
         ],
         "technicalSignals": [
           {
@@ -4404,6 +4559,63 @@
             "tone": "normal",
             "importance": 1,
             "description": "富采 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1
+      },
+      {
+        "code": "2489",
+        "name": "瑞軒",
+        "industryName": "光電業",
+        "priceDate": "2026-04-13",
+        "close": 47.70000076293945,
+        "change": 2.4000015258789062,
+        "changePercent": 5.298016702648049,
+        "return20": 26.861709305041266,
+        "return60": 202.85714770120288,
+        "volume": 167601527,
+        "turnover": null,
+        "foreign5Day": 7595078,
+        "investmentTrust5Day": 7166000,
+        "total5Day": 17288832,
+        "largeHolderRatio": 49.12,
+        "retailRatio": 24.06,
+        "shortToMarginRatio": 1.725325601140605,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          41.349998474121094,
+          41.900001525878906,
+          39.900001525878906,
+          39,
+          42.900001525878906,
+          38.650001525878906,
+          34.79999923706055,
+          31.5,
+          32.599998474121094,
+          31.899999618530273,
+          35.04999923706055,
+          32.70000076293945,
+          31.25,
+          33.400001525878906,
+          32.20000076293945,
+          35.400001525878906,
+          38.900001525878906,
+          42.75,
+          45.29999923706055,
+          47.70000076293945
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "瑞軒 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -4423,11 +4635,11 @@
         "changePercent": -0.8264441966000433,
         "return20": 4.3478260869565215,
         "return60": 29.963895337379665,
-        "volume": 192368083,
+        "volume": 246630433,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 223973557,
+        "investmentTrust5Day": 29904,
+        "total5Day": 241297171,
         "largeHolderRatio": 54.09,
         "retailRatio": 14.129999999999999,
         "shortToMarginRatio": 2.0504808079506467,
@@ -4475,16 +4687,16 @@
         "name": "大立光",
         "industryName": "光電業",
         "priceDate": "2026-04-13",
-        "close": 2455,
-        "change": 145,
-        "changePercent": 6.277056277056277,
-        "return20": 4.246284501061571,
-        "return60": -3.155818540433925,
-        "volume": 1035637,
+        "close": 2430,
+        "change": 120,
+        "changePercent": 5.194805194805195,
+        "return20": 3.1847133757961785,
+        "return60": -4.142011834319527,
+        "volume": 1372776,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1017383,
+        "investmentTrust5Day": -9581,
+        "total5Day": 1093067,
         "largeHolderRatio": 60.83,
         "retailRatio": 14.129999999999999,
         "shortToMarginRatio": 0.13333333333333333,
@@ -4509,7 +4721,7 @@
           2280,
           2280,
           2310,
-          2455
+          2430
         ],
         "technicalSignals": [
           {
@@ -4540,16 +4752,16 @@
         "name": "錸德",
         "industryName": "光電業",
         "priceDate": "2026-04-13",
-        "close": 13.449999809265137,
-        "change": 0.14999961853027344,
-        "changePercent": 1.1278166645047658,
-        "return20": 2.671751279415938,
-        "return60": 0.3731357623750989,
-        "volume": 2047948,
+        "close": 13.399999618530273,
+        "change": 0.09999942779541016,
+        "changePercent": 0.7518753861753509,
+        "return20": 2.290070445226118,
+        "return60": 0,
+        "volume": 3285435,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 1993294,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 2011294,
         "largeHolderRatio": 25.35,
         "retailRatio": 29.57,
         "shortToMarginRatio": null,
@@ -4574,7 +4786,7 @@
           13.25,
           13.149999618530273,
           13.300000190734863,
-          13.449999809265137
+          13.399999618530273
         ],
         "technicalSignals": [
           {
@@ -4597,16 +4809,16 @@
         "name": "達興材料",
         "industryName": "光電業",
         "priceDate": "2026-04-13",
-        "close": 402,
-        "change": 5.5,
-        "changePercent": 1.3871374527112232,
-        "return20": 0,
-        "return60": 4.280155642023346,
-        "volume": 614492,
+        "close": 400,
+        "change": 3.5,
+        "changePercent": 0.8827238335435058,
+        "return20": -0.4975124378109453,
+        "return60": 3.761348897535668,
+        "volume": 800140,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 72625,
+        "investmentTrust5Day": -117331,
+        "total5Day": 17517,
         "largeHolderRatio": 65.63,
         "retailRatio": 9.55,
         "shortToMarginRatio": 1.2413793103448276,
@@ -4631,7 +4843,7 @@
           392,
           401,
           396.5,
-          402
+          400
         ],
         "technicalSignals": [
           {
@@ -4656,16 +4868,16 @@
         "name": "群創",
         "industryName": "光電業",
         "priceDate": "2026-04-13",
-        "close": 26.450000762939453,
-        "change": 0.4500007629394531,
-        "changePercent": 1.730772165151743,
-        "return20": -19.726858420321744,
-        "return60": 32.91457924607204,
-        "volume": 142323824,
+        "close": 26.299999237060547,
+        "change": 0.2999992370605469,
+        "changePercent": 1.1538432194636417,
+        "return20": -20.182098245528728,
+        "return60": 32.16080271966834,
+        "volume": 196602453,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -22250761,
+        "investmentTrust5Day": -1605059,
+        "total5Day": -18946566,
         "largeHolderRatio": 42.71,
         "retailRatio": 20.590000000000003,
         "shortToMarginRatio": 0.5625255479042858,
@@ -4690,22 +4902,22 @@
           26.200000762939453,
           26.950000762939453,
           26,
-          26.450000762939453
+          26.299999237060547
         ],
         "technicalSignals": [
           {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "群創 MACD 線上穿訊號線，短線動能重新偏多。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "群創 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "MACD 翻正"
+          "技術面中性"
         ],
-        "topSignalTitle": "MACD 翻正",
-        "topSignalTone": "up",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       },
       {
@@ -4713,16 +4925,16 @@
         "name": "達興材料",
         "industryName": "光電業",
         "priceDate": "2026-04-13",
-        "close": 402,
-        "change": 5.5,
-        "changePercent": 1.3871374527112232,
-        "return20": 0,
-        "return60": 4.280155642023346,
-        "volume": 614492,
+        "close": 400,
+        "change": 3.5,
+        "changePercent": 0.8827238335435058,
+        "return20": -0.4975124378109453,
+        "return60": 3.761348897535668,
+        "volume": 800140,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 72625,
+        "investmentTrust5Day": -117331,
+        "total5Day": 17517,
         "largeHolderRatio": 65.63,
         "retailRatio": 9.55,
         "shortToMarginRatio": 1.2413793103448276,
@@ -4747,7 +4959,7 @@
           392,
           401,
           396.5,
-          402
+          400
         ],
         "technicalSignals": [
           {
@@ -4770,16 +4982,16 @@
         "name": "錸德",
         "industryName": "光電業",
         "priceDate": "2026-04-13",
-        "close": 13.449999809265137,
-        "change": 0.14999961853027344,
-        "changePercent": 1.1278166645047658,
-        "return20": 2.671751279415938,
-        "return60": 0.3731357623750989,
-        "volume": 2047948,
+        "close": 13.399999618530273,
+        "change": 0.09999942779541016,
+        "changePercent": 0.7518753861753509,
+        "return20": 2.290070445226118,
+        "return60": 0,
+        "volume": 3285435,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 1993294,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 2011294,
         "largeHolderRatio": 25.35,
         "retailRatio": 29.57,
         "shortToMarginRatio": null,
@@ -4804,7 +5016,7 @@
           13.25,
           13.149999618530273,
           13.300000190734863,
-          13.449999809265137
+          13.399999618530273
         ],
         "technicalSignals": [
           {
@@ -4824,7 +5036,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 17.82%，短線強度落後族群。"
+      "近 20 日報酬低於同產業平均 18.33%，短線強度落後族群。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }
