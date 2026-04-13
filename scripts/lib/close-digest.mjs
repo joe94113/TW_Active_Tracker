@@ -70,6 +70,107 @@ function pickSignalStocks(items, tone) {
     .slice(0, 3);
 }
 
+function normalizeDateKey(value) {
+  const text = String(value ?? '').trim().replaceAll('/', '-');
+
+  if (!text) {
+    return null;
+  }
+
+  if (/^\d{8}$/.test(text)) {
+    return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`;
+  }
+
+  if (/^\d{7}$/.test(text)) {
+    return `${Number(text.slice(0, 3)) + 1911}-${text.slice(3, 5)}-${text.slice(5, 7)}`;
+  }
+
+  return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : null;
+}
+
+function toDayStamp(dateText) {
+  const stamp = Date.parse(`${dateText}T00:00:00+08:00`);
+  return Number.isFinite(stamp) ? stamp : null;
+}
+
+function diffDays(fromDate, targetDate) {
+  const fromStamp = toDayStamp(fromDate);
+  const targetStamp = toDayStamp(targetDate);
+
+  if (fromStamp === null || targetStamp === null) {
+    return null;
+  }
+
+  return Math.round((targetStamp - fromStamp) / 86400000);
+}
+
+function getAlertPriority(item) {
+  if (item.isUnderDisposition) return 3;
+  if (item.hasChangedTrading) return 2;
+  if (item.hasAttentionWarning) return 1;
+  return 0;
+}
+
+function getAlertLabel(item) {
+  if (item.isUnderDisposition) return '處置中';
+  if (item.hasChangedTrading) return '變更交易';
+  if (item.hasAttentionWarning) return '注意累計';
+  return '觀察';
+}
+
+function getAlertTone(item) {
+  if (item.isUnderDisposition) return 'risk';
+  if (item.hasChangedTrading || item.hasAttentionWarning) return 'warning';
+  return item.selectionSignalTone ?? 'info';
+}
+
+function pickOfficialRiskRadar(items) {
+  return [...items]
+    .filter((item) => item.isUnderDisposition || item.hasChangedTrading || item.hasAttentionWarning)
+    .map((item) => ({
+      ...item,
+      alertLabel: getAlertLabel(item),
+      alertTone: getAlertTone(item),
+      priority: getAlertPriority(item),
+    }))
+    .sort((left, right) =>
+      (right.priority ?? 0) - (left.priority ?? 0) ||
+      (right.selectionSignalCount ?? 0) - (left.selectionSignalCount ?? 0) ||
+      Math.abs(right.changePercent ?? 0) - Math.abs(left.changePercent ?? 0) ||
+      String(left.code).localeCompare(String(right.code)),
+    )
+    .slice(0, 6);
+}
+
+function pickUpcomingDividendWatch(items, marketDate) {
+  return [...items]
+    .map((item) => {
+      const nextEventDate = normalizeDateKey(item.nextExDividendDate);
+      const dayOffset = nextEventDate ? diffDays(marketDate, nextEventDate) : null;
+
+      return {
+        ...item,
+        nextEventDate,
+        dayOffset,
+      };
+    })
+    .filter((item) => item.nextEventDate && item.dayOffset !== null && item.dayOffset >= 0 && item.dayOffset <= 21)
+    .sort((left, right) =>
+      (left.dayOffset ?? Infinity) - (right.dayOffset ?? Infinity) ||
+      String(left.nextEventDate).localeCompare(String(right.nextEventDate)) ||
+      String(left.code).localeCompare(String(right.code)),
+    )
+    .slice(0, 6);
+}
+
+function buildOfficialRadarSummary(items) {
+  return {
+    dispositions: items.filter((item) => item.isUnderDisposition).length,
+    changedTrading: items.filter((item) => item.hasChangedTrading).length,
+    attentionWarnings: items.filter((item) => item.hasAttentionWarning).length,
+  };
+}
+
 function pickEtfHighlights(overlap) {
   const combined = [
     ...(overlap?.共同新增 ?? []).map((item) => ({ ...item, bucket: '共同新增' })),
@@ -88,25 +189,31 @@ function pickEtfHighlights(overlap) {
 }
 
 export async function loadCloseDigestData() {
-  const [dashboard, overlap, trackedStocks] = await Promise.all([
+  const [dashboard, overlap, trackedStocks, stockSearchList] = await Promise.all([
     readJson(path.join('public', 'data', 'dashboard.json')),
     readJson(path.join('public', 'data', 'etf-overlap.json')),
     readJson(path.join('public', 'data', 'stocks', 'index.json')),
+    readJson(path.join('public', 'data', 'stocks', 'search.json')),
   ]);
 
   return {
     dashboard,
     overlap,
     trackedStocks,
+    stockSearchList,
   };
 }
 
-export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, today = formatTaipeiDate() }) {
+export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, stockSearchList, today = formatTaipeiDate() }) {
   const marketDate = dashboard?.市場總覽?.資料日期 ?? null;
 
   if (marketDate !== today) {
     return null;
   }
+
+  const selectionUniverse = Array.isArray(stockSearchList) && stockSearchList.length ? stockSearchList : trackedStocks;
+  const officialRiskRadar = pickOfficialRiskRadar(selectionUniverse);
+  const upcomingDividendWatch = pickUpcomingDividendWatch(selectionUniverse, marketDate);
 
   return {
     appName: dashboard?.appName ?? '台股主動通',
@@ -116,6 +223,9 @@ export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, tod
     observations: (dashboard?.市場總覽?.觀察摘要 ?? []).slice(0, 2),
     bullishSignals: pickSignalStocks(trackedStocks, 'up'),
     bearishSignals: pickSignalStocks(trackedStocks, 'down'),
+    officialRadarSummary: buildOfficialRadarSummary(selectionUniverse),
+    officialRiskRadar,
+    upcomingDividendWatch,
     etfHighlights: pickEtfHighlights(overlap),
     staleEtfs: (overlap?.已串接ETF ?? [])
       .filter((item) => item.disclosureDate && item.disclosureDate !== marketDate)
@@ -139,6 +249,30 @@ export function buildTelegramMessage(summary) {
     lines.push('<b>大盤觀察</b>');
     summary.observations.forEach((item) => {
       lines.push(`• ${escapeHtml(item)}`);
+    });
+  }
+
+  lines.push('');
+  lines.push('<b>官方交易雷達</b>');
+  lines.push(
+    `• 處置 ${escapeHtml(formatNumber(summary.officialRadarSummary?.dispositions, 0))}｜變更交易 ${escapeHtml(formatNumber(summary.officialRadarSummary?.changedTrading, 0))}｜注意累計 ${escapeHtml(formatNumber(summary.officialRadarSummary?.attentionWarnings, 0))}`,
+  );
+
+  if (summary.officialRiskRadar.length) {
+    summary.officialRiskRadar.forEach((item) => {
+      lines.push(
+        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.alertLabel)}｜${escapeHtml(item.topSelectionSignalTitle ?? '官方公告提醒')}｜日變動 ${escapeHtml(formatPercent(item.changePercent))}`,
+      );
+    });
+  }
+
+  if (summary.upcomingDividendWatch.length) {
+    lines.push('');
+    lines.push('<b>即將除息 / 事件接近</b>');
+    summary.upcomingDividendWatch.forEach((item) => {
+      lines.push(
+        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSelectionSignalTitle ?? '股利事件接近')}｜${escapeHtml(item.nextEventDate)}｜${escapeHtml(item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`)}`,
+      );
     });
   }
 
@@ -210,6 +344,25 @@ export function buildDiscordPayload(summary) {
         {
           name: '大盤觀察',
           value: toEmbedLines(summary.observations, (item) => `• ${item}`),
+          inline: false,
+        },
+        {
+          name: '官方交易雷達',
+          value: [
+            `處置 ${formatNumber(summary.officialRadarSummary?.dispositions, 0)}｜變更交易 ${formatNumber(summary.officialRadarSummary?.changedTrading, 0)}｜注意累計 ${formatNumber(summary.officialRadarSummary?.attentionWarnings, 0)}`,
+            toEmbedLines(
+              summary.officialRiskRadar,
+              (item) => `• **${item.code} ${item.name}**\n${item.alertLabel}｜${item.topSelectionSignalTitle ?? '官方公告提醒'}｜日變動 ${formatPercent(item.changePercent)}`,
+            ),
+          ].join('\n'),
+          inline: false,
+        },
+        {
+          name: '即將除息 / 事件接近',
+          value: toEmbedLines(
+            summary.upcomingDividendWatch,
+            (item) => `• **${item.code} ${item.name}**\n${item.topSelectionSignalTitle ?? '股利事件接近'}｜${item.nextEventDate}｜${item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`}`,
+          ),
           inline: false,
         },
         {

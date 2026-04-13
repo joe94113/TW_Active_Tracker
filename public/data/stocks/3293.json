@@ -3,7 +3,7 @@
   "name": "鈊象電子",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:53:54.277Z",
+  "generatedAt": "2026-04-13T08:01:52.590Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,13 +3487,18 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 5.36%，可用來觀察波段資金是否持續留在主線。",
-    "目前有 3 檔已串接主動式 ETF 持有這檔個股，最高權重來自 主動野村台灣50 權重 1.98%。"
+    "大戶持股比 50.90%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4081,8 +4086,8 @@
     "date": "2026-04-10",
     "retailRatio": 24.71,
     "largeHolderRatio": 50.9,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 123314,
     "totalRatio": 100,
     "bands": [
@@ -4209,11 +4214,28 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": null,
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [],
+    "eventCalendar": [],
+    "highlights": [],
+    "summary": {
+      "riskTone": "normal",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": null,
+      "alertCount": 0,
+      "topTitle": null,
+      "topTone": "normal"
+    }
+  },
   "主動ETF曝光": {
     "count": 3,
-    "averageWeight": 1.2266666666666668,
-    "totalWeight": 3.68,
-    "latestDisclosureDate": "2026-04-10",
+    "averageWeight": 1.2,
+    "totalWeight": 3.6,
+    "latestDisclosureDate": "2026-04-13",
     "items": [
       {
         "etfCode": "00985A",
@@ -4228,10 +4250,10 @@
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
         "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 0.93,
+        "disclosureDate": "2026-04-13",
+        "weight": 0.85,
         "shares": null,
-        "rank": 34
+        "rank": 38
       },
       {
         "etfCode": "00980A",

@@ -3,7 +3,7 @@
   "name": "森崴能源",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:54:03.872Z",
+  "generatedAt": "2026-04-13T08:02:02.671Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3494,6 +3494,11 @@
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -3947,8 +3952,8 @@
     "date": "2026-04-10",
     "retailRatio": 23.82,
     "largeHolderRatio": 57.01,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 40800,
     "totalRatio": 100,
     "bands": [
@@ -4100,6 +4105,57 @@
       "融券餘額減少 11 張，空方回補力道偏強。"
     ]
   },
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [
+      {
+        "key": "disposition-6806-2026-04-24",
+        "type": "disposition",
+        "tone": "risk",
+        "title": "人工管制撮合",
+        "badgeLabel": "處置",
+        "date": "2026-04-10",
+        "note": "目前列入人工管制撮合，原因為連續三次，處置期到 2026-04-24。",
+        "detail": "１處置原因：該有價證券之交易，連續三個營業日達本公司「公布注意交易資訊」標準。 ２處置期間：自民國一百十五年四月十三日起至一百十五年四月二十四日﹝十個營業日，如遇：ａ有價證券最後交易日在處置期間，僅處置至最後交易日，ｂ有…",
+        "footnote": "處置期間至 2026-04-24"
+      },
+      {
+        "key": "short-sale-6806",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-10",
+        "note": "今日可借券賣出股數約 541,368 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 541,368 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [
+      {
+        "key": "disposition-end-6806-2026-04-24",
+        "label": "處置交易結束觀察",
+        "date": "2026-04-24",
+        "status": "upcoming",
+        "note": "目前列入人工管制撮合，原因為連續三次，處置期到 2026-04-24。"
+      }
+    ],
+    "highlights": [
+      "目前列入人工管制撮合，原因為連續三次，處置期到 2026-04-24。",
+      "今日可借券賣出股數約 541,368 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "risk",
+      "activeDispositionCount": 1,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": 541368,
+      "alertCount": 2,
+      "topTitle": "人工管制撮合",
+      "topTone": "risk"
+    }
+  },
   "主動ETF曝光": null,
   "同產業比較": {
     "industryName": "綠能環保",
@@ -4164,7 +4220,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "8438",
@@ -4221,7 +4284,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "6944",
@@ -4278,7 +4348,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "6806",
@@ -4335,7 +4412,14 @@
         ],
         "topSignalTitle": "RSI 超賣",
         "topSignalTone": "up",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "人工管制撮合",
+        "selectionSignalTone": "risk",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": true,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "laggards": [
@@ -4394,7 +4478,14 @@
         ],
         "topSignalTitle": "RSI 超賣",
         "topSignalTone": "up",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "人工管制撮合",
+        "selectionSignalTone": "risk",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": true,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "6944",
@@ -4451,7 +4542,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "8438",
@@ -4508,7 +4606,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [

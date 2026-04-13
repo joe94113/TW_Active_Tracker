@@ -3,7 +3,7 @@
   "name": "旺矽科技",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:54:00.899Z",
+  "generatedAt": "2026-04-13T08:01:59.286Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,13 +3487,18 @@
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 25.90%，可用來觀察波段資金是否持續留在主線。",
-    "目前有 11 檔已串接主動式 ETF 持有這檔個股，最高權重來自 主動台新優勢成長 權重 6.60%。"
+    "大戶持股比 53.81%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4103,8 +4108,8 @@
     "date": "2026-04-10",
     "retailRatio": 8.940000000000001,
     "largeHolderRatio": 53.81,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 36827,
     "totalRatio": 100,
     "bands": [
@@ -4231,11 +4236,28 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": null,
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [],
+    "eventCalendar": [],
+    "highlights": [],
+    "summary": {
+      "riskTone": "normal",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": null,
+      "alertCount": 0,
+      "topTitle": null,
+      "topTone": "normal"
+    }
+  },
   "主動ETF曝光": {
     "count": 11,
-    "averageWeight": 3.8550181818181826,
-    "totalWeight": 42.40520000000001,
-    "latestDisclosureDate": "2026-04-13",
+    "averageWeight": 3.8186545454545455,
+    "totalWeight": 42.0052,
+    "latestDisclosureDate": "2026-04-14",
     "items": [
       {
         "etfCode": "00987A",
@@ -4259,10 +4281,10 @@
         "etfCode": "00995A",
         "etfName": "主動中信台灣卓越",
         "providerLabel": "中信投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 5.43,
+        "disclosureDate": "2026-04-13",
+        "weight": 5.35,
         "shares": 49000,
-        "rank": 4
+        "rank": 5
       },
       {
         "etfCode": "00991A",
@@ -4274,15 +4296,6 @@
         "rank": 8
       },
       {
-        "etfCode": "00982A",
-        "etfName": "主動群益台灣強棒",
-        "providerLabel": "群益投信",
-        "disclosureDate": "2026-04-13",
-        "weight": 3.76,
-        "shares": 276000,
-        "rank": 10
-      },
-      {
         "etfCode": "00992A",
         "etfName": "主動群益科技創新",
         "providerLabel": "群益投信",
@@ -4292,22 +4305,31 @@
         "rank": 4
       },
       {
-        "etfCode": "00400A",
-        "etfName": "主動國泰動能高息",
-        "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 2.86,
-        "shares": null,
-        "rank": 11
+        "etfCode": "00982A",
+        "etfName": "主動群益台灣強棒",
+        "providerLabel": "群益投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 3.71,
+        "shares": 276000,
+        "rank": 10
       },
       {
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 2.77,
+        "disclosureDate": "2026-04-13",
+        "weight": 2.76,
         "shares": 18000,
         "rank": 12
+      },
+      {
+        "etfCode": "00400A",
+        "etfName": "主動國泰動能高息",
+        "providerLabel": "國泰投信",
+        "disclosureDate": "2026-04-13",
+        "weight": 2.6,
+        "shares": null,
+        "rank": 13
       },
       {
         "etfCode": "00980A",

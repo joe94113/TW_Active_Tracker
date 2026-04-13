@@ -3,7 +3,7 @@
   "name": "國泰金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:53:50.501Z",
+  "generatedAt": "2026-04-13T08:01:48.545Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3494,6 +3494,11 @@
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4220,8 +4225,8 @@
     "date": "2026-04-10",
     "retailRatio": 4.98,
     "largeHolderRatio": 85.06,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 414867,
     "totalRatio": 100,
     "bands": [
@@ -4373,6 +4378,37 @@
       "券資比約 1.34%，市場籌碼仍以多方槓桿為主。"
     ]
   },
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [
+      {
+        "key": "short-sale-2882",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-10",
+        "note": "今日可借券賣出股數約 7,943,376 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 7,943,376 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [],
+    "highlights": [
+      "今日可借券賣出股數約 7,943,376 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "info",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": 7943376,
+      "alertCount": 1,
+      "topTitle": "可借券賣出餘量",
+      "topTone": "info"
+    }
+  },
   "主動ETF曝光": {
     "count": 2,
     "averageWeight": 1.23405,
@@ -4392,10 +4428,10 @@
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
-        "disclosureDate": "2026-04-10",
+        "disclosureDate": "2026-04-13",
         "weight": 0.06,
         "shares": 25000,
-        "rank": 48
+        "rank": 49
       }
     ]
   },

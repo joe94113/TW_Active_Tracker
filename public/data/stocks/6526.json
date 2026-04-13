@@ -3,7 +3,7 @@
   "name": "達發",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:54:02.529Z",
+  "generatedAt": "2026-04-13T08:02:01.193Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3494,6 +3494,11 @@
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4201,8 +4206,8 @@
     "date": "2026-04-10",
     "retailRatio": 9.54,
     "largeHolderRatio": 79.25999999999999,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 18259,
     "totalRatio": 100,
     "bands": [
@@ -4355,18 +4360,49 @@
       "券資比約 0.16%，市場籌碼仍以多方槓桿為主。"
     ]
   },
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [
+      {
+        "key": "short-sale-6526",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-10",
+        "note": "今日可借券賣出股數約 273,558 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 273,558 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [],
+    "highlights": [
+      "今日可借券賣出股數約 273,558 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "info",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": 273558,
+      "alertCount": 1,
+      "topTitle": "可借券賣出餘量",
+      "topTone": "info"
+    }
+  },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 1.36,
-    "totalWeight": 1.36,
-    "latestDisclosureDate": "2026-04-10",
+    "averageWeight": 1.38,
+    "totalWeight": 1.38,
+    "latestDisclosureDate": "2026-04-13",
     "items": [
       {
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.36,
+        "disclosureDate": "2026-04-13",
+        "weight": 1.38,
         "shares": 86000,
         "rank": 27
       }
@@ -4435,7 +4471,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "注意股累計次數偏高",
+        "selectionSignalTone": "warning",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": true,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "2337",
@@ -4492,7 +4535,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "3532",
@@ -4549,7 +4599,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "6257",
@@ -4606,7 +4663,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "6515",
@@ -4663,7 +4727,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "3189",
@@ -4720,7 +4791,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "3711",
@@ -4777,7 +4855,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "3443",
@@ -4834,7 +4919,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "laggards": [
@@ -4893,7 +4985,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "2344",
@@ -4950,7 +5049,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "6526",
@@ -5007,7 +5113,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [

@@ -3,7 +3,7 @@
   "name": "智伸科",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:53:56.979Z",
+  "generatedAt": "2026-04-13T08:01:55.375Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3494,6 +3494,11 @@
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4157,8 +4162,8 @@
     "date": "2026-04-10",
     "retailRatio": 6.94,
     "largeHolderRatio": 79.36,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 5531,
     "totalRatio": 100,
     "bands": [
@@ -4310,20 +4315,51 @@
       "券資比約 0.13%，市場籌碼仍以多方槓桿為主。"
     ]
   },
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [
+      {
+        "key": "short-sale-4551",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-10",
+        "note": "今日可借券賣出股數約 149,577 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 149,577 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [],
+    "highlights": [
+      "今日可借券賣出股數約 149,577 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "info",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": 149577,
+      "alertCount": 1,
+      "topTitle": "可借券賣出餘量",
+      "topTone": "info"
+    }
+  },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 1.45,
-    "totalWeight": 1.45,
-    "latestDisclosureDate": "2026-04-10",
+    "averageWeight": 1.48,
+    "totalWeight": 1.48,
+    "latestDisclosureDate": "2026-04-13",
     "items": [
       {
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.45,
+        "disclosureDate": "2026-04-13",
+        "weight": 1.48,
         "shares": 320000,
-        "rank": 25
+        "rank": 26
       }
     ]
   },
@@ -4390,7 +4426,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "laggards": [
@@ -4449,7 +4492,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [

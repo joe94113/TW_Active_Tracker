@@ -511,6 +511,8 @@ function addChartPriceLine(series, {
 function mapEventLabelToMarkerText(label) {
   if (label.includes('月營收')) return '營收';
   if (label.includes('季報')) return '季報';
+  if (label.includes('除權') || label.includes('除息') || label.includes('股利')) return '股利';
+  if (label.includes('處置')) return '處置';
   if (label.includes('ETF')) return 'ETF';
   return '事件';
 }

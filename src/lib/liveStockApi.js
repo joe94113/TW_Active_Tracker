@@ -6,11 +6,20 @@ import {
   defaultIndicatorSettings,
   summarizeSignalTitles,
 } from './technicalAnalysis';
+import {
+  buildStockSelectionSignals,
+  createStockSelectionSignalDataset,
+} from './stockSelectionSignals';
 
 const LISTED_DIRECTORY_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL';
 const COMPANY_PROFILE_URL = 'https://openapi.twse.com.tw/v1/opendata/t187ap03_L';
 const VALUATION_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL';
 const MARKET_PULSE_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/MI_5MINS';
+const DISPOSITION_URL = 'https://openapi.twse.com.tw/v1/announcement/punish';
+const ATTENTION_COUNT_URL = 'https://openapi.twse.com.tw/v1/announcement/notetrans';
+const CHANGED_TRADING_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/TWT85U';
+const EX_DIVIDEND_URL = 'https://openapi.twse.com.tw/v1/exchangeReport/TWT48U_ALL';
+const SHORT_SALE_URL = 'https://openapi.twse.com.tw/v1/SBL/TWT96U';
 const MARKET_INDEX_SYMBOLS = ['^TWII'];
 
 let listedDirectoryCache = null;
@@ -21,6 +30,8 @@ let valuationCache = null;
 let valuationPromise = null;
 let staticSearchIndexCache = null;
 let staticSearchIndexPromise = null;
+let selectionSignalDatasetCache = null;
+let selectionSignalDatasetPromise = null;
 
 function normalizeNumber(value) {
   if (value === null || value === undefined) return null;
@@ -533,6 +544,63 @@ async function fetchStaticSearchIndex() {
   return staticSearchIndexPromise;
 }
 
+async function fetchSelectionSignalDataset() {
+  if (selectionSignalDatasetCache) {
+    return selectionSignalDatasetCache;
+  }
+
+  if (!selectionSignalDatasetPromise) {
+    selectionSignalDatasetPromise = Promise.allSettled([
+      fetchRemoteJson(DISPOSITION_URL),
+      fetchRemoteJson(ATTENTION_COUNT_URL),
+      fetchRemoteJson(CHANGED_TRADING_URL),
+      fetchRemoteJson(EX_DIVIDEND_URL),
+      fetchRemoteJson(SHORT_SALE_URL),
+    ])
+      .then(([dispositionResult, attentionResult, changedTradingResult, exDividendResult, shortSaleResult]) => {
+        selectionSignalDatasetCache = createStockSelectionSignalDataset({
+          dispositionRows:
+            dispositionResult.status === 'fulfilled'
+              ? Array.isArray(dispositionResult.value)
+                ? dispositionResult.value
+                : []
+              : [],
+          attentionRows:
+            attentionResult.status === 'fulfilled'
+              ? Array.isArray(attentionResult.value)
+                ? attentionResult.value
+                : []
+              : [],
+          changedTradingRows:
+            changedTradingResult.status === 'fulfilled'
+              ? Array.isArray(changedTradingResult.value)
+                ? changedTradingResult.value
+                : []
+              : [],
+          exDividendRows:
+            exDividendResult.status === 'fulfilled'
+              ? Array.isArray(exDividendResult.value)
+                ? exDividendResult.value
+                : []
+              : [],
+          shortSaleRows:
+            shortSaleResult.status === 'fulfilled'
+              ? Array.isArray(shortSaleResult.value)
+                ? shortSaleResult.value
+                : []
+              : [],
+        });
+
+        return selectionSignalDatasetCache;
+      })
+      .finally(() => {
+        selectionSignalDatasetPromise = null;
+      });
+  }
+
+  return selectionSignalDatasetPromise;
+}
+
 export async function fetchLiveStockSnapshot(code) {
   const normalizedCode = String(code ?? '').trim();
 
@@ -664,7 +732,7 @@ export async function fetchLiveFallbackStockDetail(code) {
   const normalizedCode = String(code ?? '').trim();
   const symbols = [`${normalizedCode}.TW`, `${normalizedCode}.TWO`];
 
-  const [directoryResult, profileResult, valuationResult, snapshotResult, historyResult, intradayResult, staticSearchResult] = await Promise.allSettled([
+  const [directoryResult, profileResult, valuationResult, snapshotResult, historyResult, intradayResult, staticSearchResult, selectionSignalsResult] = await Promise.allSettled([
     fetchListedStockDirectory(),
     fetchCompanyProfileMap(),
     fetchValuationMap(),
@@ -672,6 +740,7 @@ export async function fetchLiveFallbackStockDetail(code) {
     fetchYahooChart(symbols, '1d', '6mo').then(mapYahooDailyRows),
     fetchYahooChart(symbols, '5m', '1d').then(mapYahooIntraday),
     fetchStaticSearchIndex(),
+    fetchSelectionSignalDataset(),
   ]);
 
   const directoryMatch =
@@ -693,6 +762,17 @@ export async function fetchLiveFallbackStockDetail(code) {
     staticSearchResult.status === 'fulfilled'
       ? staticSearchResult.value.find((item) => item.code === normalizedCode) ?? null
       : null;
+  const selectionSignalsRaw =
+    selectionSignalsResult.status === 'fulfilled'
+      ? buildStockSelectionSignals(selectionSignalsResult.value, normalizedCode)
+      : null;
+  const selectionSignals =
+    selectionSignalsRaw && !selectionSignalsRaw.asOfDate && liveSnapshot?.marketDate
+      ? {
+          ...selectionSignalsRaw,
+          asOfDate: liveSnapshot.marketDate,
+        }
+      : selectionSignalsRaw;
 
   if (!directoryMatch && !companyProfile && !liveSnapshot && !historyRows.length && !staticSearchItem) {
     const reason = snapshotResult.status === 'rejected' ? snapshotResult.reason : null;
@@ -737,6 +817,7 @@ export async function fetchLiveFallbackStockDetail(code) {
     liveSnapshot?.updatedAt ? `即時行情更新時間：${liveSnapshot.updatedAt.replace('T', ' ').slice(0, 16)}` : null,
     liveSnapshot?.market ? `市場別：${liveSnapshot.market}` : null,
     technicalSignals[0] ? `技術重點：${technicalSignals[0].title}` : null,
+    ...(selectionSignals?.highlights ?? []).slice(0, 2),
     !technicalSignals.length && historyRows.length < 20 ? '歷史資料較少，技術指標仍需累積更多交易日。' : null,
     !liveSnapshot && staticSearchItem ? '目前先顯示最近一次同步快照，盤中即時欄位可能稍晚更新。' : null,
   ].filter(Boolean);
@@ -774,12 +855,22 @@ export async function fetchLiveFallbackStockDetail(code) {
     法人買賣: null,
     持股分散: null,
     融資融券: null,
+    交易提醒: selectionSignals,
     主動ETF曝光: {
       count: null,
       items: [],
     },
     同產業比較: null,
     即時報價: liveSnapshot,
-    資料來源: ['TWSE OpenAPI', 'TWSE 即時行情', 'Yahoo Finance Chart API'],
+    資料來源: [
+      'TWSE OpenAPI',
+      'TWSE 即時行情',
+      'TWSE OpenAPI punish',
+      'TWSE OpenAPI notetrans',
+      'TWSE OpenAPI TWT48U_ALL',
+      'TWSE OpenAPI TWT85U',
+      'TWSE OpenAPI TWT96U',
+      'Yahoo Finance Chart API',
+    ],
   };
 }

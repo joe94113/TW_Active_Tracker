@@ -103,6 +103,7 @@ export function buildStockEventCalendar(detail) {
   const monthlyRevenue = detail?.財務資料?.月營收 ?? null;
   const incomeStatement = detail?.財務資料?.綜合損益表 ?? null;
   const etfExposure = detail?.主動ETF曝光 ?? null;
+  const selectionSignals = detail?.交易提醒 ?? null;
   const events = [];
 
   if (monthlyRevenue?.出表日期) {
@@ -147,7 +148,12 @@ export function buildStockEventCalendar(detail) {
     });
   }
 
+  if (selectionSignals?.eventCalendar?.length) {
+    events.push(...selectionSignals.eventCalendar);
+  }
+
   return events
     .filter((item) => item.date)
+    .filter((item, index, list) => list.findIndex((candidate) => candidate.key === item.key) === index)
     .sort((left, right) => String(left.date).localeCompare(String(right.date)));
 }

@@ -3,7 +3,7 @@
   "name": "環球晶圓",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:54:02.210Z",
+  "generatedAt": "2026-04-13T08:02:00.852Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,13 +3487,18 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 16.43%，可用來觀察波段資金是否持續留在主線。",
-    "目前有 2 檔已串接主動式 ETF 持有這檔個股，最高權重來自 主動野村台灣50 權重 1.47%。"
+    "大戶持股比 77.19%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4125,8 +4130,8 @@
     "date": "2026-04-10",
     "retailRatio": 9.87,
     "largeHolderRatio": 77.19,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 54152,
     "totalRatio": 100,
     "bands": [
@@ -4253,11 +4258,28 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": null,
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [],
+    "eventCalendar": [],
+    "highlights": [],
+    "summary": {
+      "riskTone": "normal",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": null,
+      "alertCount": 0,
+      "topTitle": null,
+      "topTone": "normal"
+    }
+  },
   "主動ETF曝光": {
     "count": 2,
-    "averageWeight": 1.26,
-    "totalWeight": 2.52,
-    "latestDisclosureDate": "2026-04-10",
+    "averageWeight": 1.455,
+    "totalWeight": 2.91,
+    "latestDisclosureDate": "2026-04-13",
     "items": [
       {
         "etfCode": "00985A",
@@ -4272,10 +4294,10 @@
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
         "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.05,
+        "disclosureDate": "2026-04-13",
+        "weight": 1.44,
         "shares": null,
-        "rank": 28
+        "rank": 19
       }
     ]
   },

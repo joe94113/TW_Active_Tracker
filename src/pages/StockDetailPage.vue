@@ -46,8 +46,10 @@ const institutionalFlows = computed(() => detail.value?.法人買賣 ?? null);
 const marginSnapshot = computed(() => detail.value?.融資融券 ?? null);
 const activeEtfExposure = computed(() => detail.value?.主動ETF曝光 ?? null);
 const industryComparison = computed(() => detail.value?.同產業比較 ?? null);
+const selectionSignals = computed(() => detail.value?.交易提醒 ?? null);
 const isTracked = computed(() => isFavorite(stockCode.value));
 const technicalSignals = computed(() => detail.value?.technicalSignals ?? []);
+const selectionAlertItems = computed(() => selectionSignals.value?.alerts ?? []);
 const latestIndicators = computed(() => detail.value?.最新指標 ?? {});
 const indicatorSettings = computed(() => detail.value?.indicatorSettings ?? {});
 const comparisonCandidateCodes = computed(() =>
@@ -348,6 +350,12 @@ function getEventStatusTone(status) {
   return 'event-reference';
 }
 
+function getSelectionAlertTone(tone) {
+  if (tone === 'risk') return 'risk';
+  if (tone === 'warning') return 'warning';
+  return 'info';
+}
+
 function formatEventDistance(dateText) {
   const targetDate = new Date(`${dateText}T00:00:00`);
 
@@ -544,7 +552,72 @@ watch(
         </ul>
       </section>
 
-      <section class="triple-grid">
+      <section class="dual-grid">
+        <article class="panel insight-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">交易提醒</h2>
+              <p class="panel-subtitle">把官方公告裡對隔日交易最有影響的風險與事件先拉出來。</p>
+            </div>
+            <span v-if="selectionSignals?.asOfDate" class="meta-chip">資料日 {{ formatDate(selectionSignals.asOfDate) }}</span>
+          </div>
+
+          <div v-if="selectionAlertItems.length" class="selection-alert-list">
+            <article
+              v-for="item in selectionAlertItems"
+              :key="item.key"
+              class="selection-alert-card"
+              :class="`is-${getSelectionAlertTone(item.tone)}`"
+            >
+              <div class="selection-alert-head">
+                <strong>{{ item.title }}</strong>
+                <span class="status-badge" :class="`is-${getSelectionAlertTone(item.tone)}`">{{ item.badgeLabel }}</span>
+              </div>
+              <p>{{ item.note }}</p>
+              <p v-if="item.detail" class="muted">{{ item.detail }}</p>
+              <div class="selection-alert-foot">
+                <span>{{ item.date ? formatDate(item.date) : '官方公告整理' }}</span>
+                <span v-if="item.footnote">{{ item.footnote }}</span>
+              </div>
+            </article>
+          </div>
+          <div v-else class="empty-state compact">
+            <strong>目前沒有額外交易提醒</strong>
+            <p>若官方公告出現處置、注意累計、變更交易或除權息事件，這裡會自動補上。</p>
+          </div>
+        </article>
+
+        <article class="panel insight-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">事件日曆</h2>
+              <p class="panel-subtitle">把月營收、季報、股利事件與 ETF 揭露時間拉出來，方便預先安排觀察。</p>
+            </div>
+          </div>
+
+          <div v-if="stockEventCalendar.length" class="event-list">
+            <article v-for="item in stockEventCalendar" :key="item.key" class="event-item">
+              <div class="event-main">
+                <div class="price-zone-head">
+                  <strong>{{ item.label }}</strong>
+                  <span class="status-badge" :class="`is-${getEventStatusTone(item.status)}`">{{ getEventStatusLabel(item.status) }}</span>
+                </div>
+                <p class="event-note">{{ item.note }}</p>
+              </div>
+              <div class="event-side">
+                <strong class="event-date">{{ formatDate(item.date) }}</strong>
+                <span class="muted">{{ formatEventDistance(item.date) }}</span>
+              </div>
+            </article>
+          </div>
+          <div v-else class="empty-state compact">
+            <strong>事件日曆還沒有足夠資料</strong>
+            <p>月營收、季報、股利事件或 ETF 揭露資料補齊後會顯示在這裡。</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="dual-grid">
         <article class="panel insight-panel">
           <div class="panel-header">
             <div>
@@ -628,35 +701,6 @@ watch(
                 {{ isEnhancing ? '正在補抓遠端日線資料，完成後會自動回填下方支撐。' : '目前沒有足夠的下方支撐資料，通常代表這次載入的是即時快照或日線樣本不足。' }}
               </p>
             </section>
-          </div>
-        </article>
-
-        <article class="panel insight-panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">事件日曆</h2>
-              <p class="panel-subtitle">把月營收、季報與 ETF 揭露時間拉出來，方便預先安排觀察。</p>
-            </div>
-          </div>
-
-          <div v-if="stockEventCalendar.length" class="event-list">
-            <article v-for="item in stockEventCalendar" :key="item.key" class="event-item">
-              <div class="event-main">
-                <div class="price-zone-head">
-                  <strong>{{ item.label }}</strong>
-                  <span class="status-badge" :class="`is-${getEventStatusTone(item.status)}`">{{ getEventStatusLabel(item.status) }}</span>
-                </div>
-                <p class="event-note">{{ item.note }}</p>
-              </div>
-              <div class="event-side">
-                <strong class="event-date">{{ formatDate(item.date) }}</strong>
-                <span class="muted">{{ formatEventDistance(item.date) }}</span>
-              </div>
-            </article>
-          </div>
-          <div v-else class="empty-state compact">
-            <strong>事件日曆還沒有足夠資料</strong>
-            <p>月營收、季報或 ETF 揭露資料補齊後會顯示在這裡。</p>
           </div>
         </article>
       </section>

@@ -401,10 +401,47 @@ input {
   font-size: 0.96rem;
 }
 
+.global-search-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
 .global-search-source,
 .global-search-status {
   color: var(--text-soft);
   font-size: 0.84rem;
+}
+
+.global-search-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(91, 114, 136, 0.12);
+  color: var(--text-soft);
+}
+
+.global-search-chip.is-risk,
+.signal-pill.is-risk {
+  background: rgba(209, 75, 50, 0.12);
+  color: var(--up);
+}
+
+.global-search-chip.is-warning,
+.signal-pill.is-warning {
+  background: rgba(181, 126, 34, 0.12);
+  color: #8a5b00;
+}
+
+.global-search-chip.is-info,
+.signal-pill.is-info {
+  background: rgba(11, 105, 155, 0.12);
+  color: var(--brand-deep);
 }
 
 .global-search-status {
@@ -982,11 +1019,16 @@ input {
   font-size: 0.94rem;
 }
 
-.inline-signal-text {
+.inline-signal-text,
+.inline-signal-chip {
   display: block;
   margin-top: 4px;
   font-size: 0.86rem;
   font-weight: 700;
+}
+
+.inline-signal-chip {
+  width: fit-content;
 }
 
 .card-grid,
@@ -1291,6 +1333,30 @@ input {
   overflow-wrap: anywhere;
 }
 
+.official-radar-card {
+  align-content: start;
+}
+
+.official-radar-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.official-radar-row {
+  width: 100%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  text-align: left;
+}
+
+.official-radar-side {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
 .favorite-card {
   padding: 18px;
   border: 1px solid rgba(11, 105, 155, 0.14);
@@ -1352,6 +1418,18 @@ input {
 
 .favorite-heat-fill.is-down {
   background: linear-gradient(135deg, #13885e, #16a34a);
+}
+
+.favorite-heat-fill.is-risk {
+  background: linear-gradient(135deg, #d14b32, #9a3412);
+}
+
+.favorite-heat-fill.is-warning {
+  background: linear-gradient(135deg, #c2852c, #f59e0b);
+}
+
+.favorite-heat-fill.is-info {
+  background: linear-gradient(135deg, #0b699b, #2563eb);
 }
 
 .favorite-trend-block {
@@ -1484,6 +1562,7 @@ input {
 .price-zone-list,
 .support-resistance-list,
 .event-list,
+.selection-alert-list,
 .news-list {
   display: grid;
   gap: 12px;
@@ -1491,6 +1570,7 @@ input {
 
 .price-zone-card,
 .support-resistance-item,
+.selection-alert-card,
 .event-item,
 .news-card {
   display: grid;
@@ -1518,6 +1598,21 @@ input {
   background: linear-gradient(180deg, rgba(245, 250, 255, 0.98), rgba(255, 255, 255, 0.95));
 }
 
+.selection-alert-card.is-risk {
+  border-color: rgba(209, 75, 50, 0.18);
+  background: linear-gradient(180deg, rgba(255, 246, 242, 0.98), rgba(255, 255, 255, 0.95));
+}
+
+.selection-alert-card.is-warning {
+  border-color: rgba(181, 126, 34, 0.18);
+  background: linear-gradient(180deg, rgba(255, 251, 241, 0.98), rgba(255, 255, 255, 0.95));
+}
+
+.selection-alert-card.is-info {
+  border-color: rgba(11, 105, 155, 0.16);
+  background: linear-gradient(180deg, rgba(245, 250, 255, 0.98), rgba(255, 255, 255, 0.95));
+}
+
 .price-zone-head,
 .news-card-head,
 .news-card-foot,
@@ -1527,6 +1622,19 @@ input {
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
+}
+
+.selection-alert-head,
+.selection-alert-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.selection-alert-foot {
+  color: var(--text-soft);
+  font-size: 0.88rem;
 }
 
 .price-zone-value,
@@ -1611,6 +1719,24 @@ input {
   background: rgba(91, 114, 136, 0.12);
   border-color: rgba(91, 114, 136, 0.18);
   color: var(--text-soft);
+}
+
+.status-badge.is-risk {
+  background: rgba(209, 75, 50, 0.12);
+  border-color: rgba(209, 75, 50, 0.18);
+  color: var(--up);
+}
+
+.status-badge.is-warning {
+  background: rgba(181, 126, 34, 0.12);
+  border-color: rgba(181, 126, 34, 0.18);
+  color: #8a5b00;
+}
+
+.status-badge.is-info {
+  background: rgba(11, 105, 155, 0.12);
+  border-color: rgba(11, 105, 155, 0.18);
+  color: var(--brand-deep);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2563,6 +2689,10 @@ input {
     align-items: flex-start;
   }
 
+  .official-radar-side {
+    justify-items: start;
+  }
+
   .favorite-card,
   .recent-stock-card,
   .comparison-stat-card,
@@ -2750,6 +2880,8 @@ input {
 
   .price-zone-head,
   .support-resistance-head,
+  .selection-alert-head,
+  .selection-alert-foot,
   .news-card-head,
   .news-card-foot {
     flex-direction: column;

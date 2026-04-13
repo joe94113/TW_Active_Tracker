@@ -193,7 +193,23 @@ function submitSearch() {
       >
         <div class="global-search-main">
           <strong>{{ item.code }} {{ item.name }}</strong>
-          <span class="global-search-source">{{ item.searchSource }}</span>
+          <div class="global-search-meta">
+            <span class="global-search-source">{{ item.searchSource }}</span>
+            <span
+              v-if="item.topSelectionSignalTitle"
+              class="global-search-chip"
+              :class="item.selectionSignalTone ? `is-${item.selectionSignalTone}` : 'is-info'"
+            >
+              {{ item.topSelectionSignalTitle }}
+            </span>
+            <span
+              v-else-if="item.topSignalTitle"
+              class="global-search-chip"
+              :class="item.topSignalTone ? `is-${item.topSignalTone}` : 'is-normal'"
+            >
+              {{ item.topSignalTitle }}
+            </span>
+          </div>
         </div>
         <div class="global-search-side">
           <span v-if="item.return20 !== null && item.return20 !== undefined" :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">

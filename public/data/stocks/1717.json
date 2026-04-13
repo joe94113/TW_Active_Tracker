@@ -3,7 +3,7 @@
   "name": "長興",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:53:44.324Z",
+  "generatedAt": "2026-04-13T08:01:42.502Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3494,6 +3494,11 @@
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4234,8 +4239,8 @@
     "date": "2026-04-10",
     "retailRatio": 11.81,
     "largeHolderRatio": 71,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 75229,
     "totalRatio": 100,
     "bands": [
@@ -4388,20 +4393,71 @@
       "券資比約 3.43%，市場籌碼仍以多方槓桿為主。"
     ]
   },
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [
+      {
+        "key": "dividend-1717-2026-04-24",
+        "type": "ex-dividend",
+        "tone": "info",
+        "title": "除息事件接近",
+        "badgeLabel": "股利",
+        "date": "2026-04-24",
+        "note": "現金股利 1.00 元",
+        "detail": "除息日為 2026-04-24",
+        "footnote": "隔日價位與殖利率判讀要把股利事件一起看。"
+      },
+      {
+        "key": "short-sale-1717",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-10",
+        "note": "今日可借券賣出股數約 12,969,550 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 12,969,550 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [
+      {
+        "key": "dividend-event-1717-2026-04-24",
+        "label": "除息觀察",
+        "date": "2026-04-24",
+        "status": "upcoming",
+        "note": "現金股利 1.00 元"
+      }
+    ],
+    "highlights": [
+      "除息日期在 2026-04-24，隔日評估時記得先把股利事件納入。",
+      "今日可借券賣出股數約 12,969,550 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "info",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": "2026-04-24",
+      "shortSaleAvailableVolume": 12969550,
+      "alertCount": 2,
+      "topTitle": "除息事件接近",
+      "topTone": "info"
+    }
+  },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 0.33,
-    "totalWeight": 0.33,
-    "latestDisclosureDate": "2026-04-10",
+    "averageWeight": 0.3,
+    "totalWeight": 0.3,
+    "latestDisclosureDate": "2026-04-13",
     "items": [
       {
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
         "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 0.33,
+        "disclosureDate": "2026-04-13",
+        "weight": 0.3,
         "shares": null,
-        "rank": 49
+        "rank": 51
       }
     ]
   },
@@ -4468,7 +4524,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "除息事件接近",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": "2026-04-24"
       }
     ],
     "laggards": [
@@ -4527,7 +4590,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "除息事件接近",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": "2026-04-24"
       }
     ],
     "觀察摘要": [

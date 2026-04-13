@@ -3,7 +3,7 @@
   "name": "弘塑科技",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:53:53.237Z",
+  "generatedAt": "2026-04-13T08:01:51.472Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,13 +3487,18 @@
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 79.64%，可用來觀察波段資金是否持續留在主線。",
-    "目前有 2 檔已串接主動式 ETF 持有這檔個股，最高權重來自 主動摩根台灣鑫收 權重 1.78%。"
+    "大戶持股比 46.53%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4092,8 +4097,8 @@
     "date": "2026-04-10",
     "retailRatio": 11.360000000000001,
     "largeHolderRatio": 46.53,
-    "retailRatioDelta": null,
-    "largeHolderRatioDelta": null,
+    "retailRatioDelta": 0,
+    "largeHolderRatioDelta": 0,
     "totalHolders": 20435,
     "totalRatio": 100,
     "bands": [
@@ -4220,10 +4225,27 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": null,
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [],
+    "eventCalendar": [],
+    "highlights": [],
+    "summary": {
+      "riskTone": "normal",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": null,
+      "alertCount": 0,
+      "topTitle": null,
+      "topTone": "normal"
+    }
+  },
   "主動ETF曝光": {
     "count": 2,
-    "averageWeight": 1.5783999999999998,
-    "totalWeight": 3.1567999999999996,
+    "averageWeight": 1.6534,
+    "totalWeight": 3.3068,
     "latestDisclosureDate": "2026-04-13",
     "items": [
       {
@@ -4239,10 +4261,10 @@
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.38,
+        "disclosureDate": "2026-04-13",
+        "weight": 1.53,
         "shares": 13000,
-        "rank": 26
+        "rank": 25
       }
     ]
   },

@@ -330,6 +330,8 @@ const favoriteStocks = computed(() =>
         changeValue: snapshot?.change ?? item.change ?? null,
         volume: snapshot?.volumeShares ?? item.volume ?? null,
         liveUpdatedAt: snapshot?.updatedAt ?? null,
+        displaySignalTitle: item.topSelectionSignalTitle ?? item.topSignalTitle ?? null,
+        displaySignalTone: item.selectionSignalTone ?? item.topSignalTone ?? null,
         momentumScore,
       };
     })
@@ -359,6 +361,8 @@ const recentViewedStocks = computed(() =>
         total5Day: stockMatch?.total5Day ?? null,
         topSignalTitle: stockMatch?.topSignalTitle ?? null,
         topSignalTone: stockMatch?.topSignalTone ?? null,
+        displaySignalTitle: stockMatch?.topSelectionSignalTitle ?? stockMatch?.topSignalTitle ?? null,
+        displaySignalTone: stockMatch?.selectionSignalTone ?? stockMatch?.topSignalTone ?? null,
         liveUpdatedAt: getLiveSnapshot(item.code)?.updatedAt ?? null,
         viewedAt: item.viewedAt,
       };
@@ -366,6 +370,108 @@ const recentViewedStocks = computed(() =>
     .filter((item) => item.code)
     .slice(0, 6),
 );
+
+const stockSelectionUniverse = computed(() => (stockSearchList.value.length ? stockSearchList.value : stockList.value));
+
+function normalizeDateKey(value) {
+  const text = String(value ?? '').trim().replaceAll('/', '-');
+
+  if (!text) {
+    return null;
+  }
+
+  if (/^\d{8}$/.test(text)) {
+    return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`;
+  }
+
+  if (/^\d{7}$/.test(text)) {
+    return `${Number(text.slice(0, 3)) + 1911}-${text.slice(3, 5)}-${text.slice(5, 7)}`;
+  }
+
+  return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : null;
+}
+
+function getReferenceDateKey() {
+  return normalizeDateKey(liveMarketDate.value) ?? normalizeDateKey(manifest.value?.generatedAt?.slice(0, 10)) ?? new Date().toISOString().slice(0, 10);
+}
+
+function getDateOffset(referenceDateText, targetDateText) {
+  const referenceDate = new Date(`${referenceDateText}T00:00:00+08:00`);
+  const targetDate = new Date(`${targetDateText}T00:00:00+08:00`);
+
+  if (Number.isNaN(referenceDate.getTime()) || Number.isNaN(targetDate.getTime())) {
+    return null;
+  }
+
+  return Math.round((targetDate.getTime() - referenceDate.getTime()) / 86400000);
+}
+
+function getAlertPriority(item) {
+  if (item.isUnderDisposition) return 3;
+  if (item.hasChangedTrading) return 2;
+  if (item.hasAttentionWarning) return 1;
+  return 0;
+}
+
+function getAlertLabel(item) {
+  if (item.isUnderDisposition) return '處置中';
+  if (item.hasChangedTrading) return '變更交易';
+  if (item.hasAttentionWarning) return '注意累計';
+  return '觀察';
+}
+
+function getAlertTone(item) {
+  if (item.isUnderDisposition) return 'risk';
+  if (item.hasChangedTrading || item.hasAttentionWarning) return 'warning';
+  return item.selectionSignalTone ?? 'info';
+}
+
+const officialRiskRadar = computed(() =>
+  stockSelectionUniverse.value
+    .filter((item) => item.isUnderDisposition || item.hasChangedTrading || item.hasAttentionWarning)
+    .map((item) => ({
+      ...item,
+      alertLabel: getAlertLabel(item),
+      alertTone: getAlertTone(item),
+      priority: getAlertPriority(item),
+    }))
+    .sort((left, right) =>
+      (right.priority ?? 0) - (left.priority ?? 0) ||
+      (right.selectionSignalCount ?? 0) - (left.selectionSignalCount ?? 0) ||
+      Math.abs(right.changePercent ?? 0) - Math.abs(left.changePercent ?? 0) ||
+      String(left.code).localeCompare(String(right.code)),
+    )
+    .slice(0, 8),
+);
+
+const upcomingDividendWatch = computed(() => {
+  const referenceDate = getReferenceDateKey();
+
+  return stockSelectionUniverse.value
+    .map((item) => {
+      const eventDate = normalizeDateKey(item.nextExDividendDate);
+      const dayOffset = eventDate ? getDateOffset(referenceDate, eventDate) : null;
+
+      return {
+        ...item,
+        nextEventDate: eventDate,
+        dayOffset,
+      };
+    })
+    .filter((item) => item.nextEventDate && item.dayOffset !== null && item.dayOffset >= 0 && item.dayOffset <= 21)
+    .sort((left, right) =>
+      (left.dayOffset ?? Infinity) - (right.dayOffset ?? Infinity) ||
+      String(left.nextEventDate).localeCompare(String(right.nextEventDate)) ||
+      String(left.code).localeCompare(String(right.code)),
+    )
+    .slice(0, 8);
+});
+
+const officialRadarSummary = computed(() => ({
+  dispositions: stockSelectionUniverse.value.filter((item) => item.isUnderDisposition).length,
+  changedTrading: stockSelectionUniverse.value.filter((item) => item.hasChangedTrading).length,
+  attentionWarnings: stockSelectionUniverse.value.filter((item) => item.hasAttentionWarning).length,
+}));
 
 const closeFocusCards = computed(() => [
   {
@@ -487,6 +593,7 @@ function getInstitutionalFlow(contract, identity) {
 
       <nav class="mobile-section-nav home-mobile-nav" aria-label="首頁快速導覽">
         <a class="mobile-section-link" href="#close-focus">盤後重點</a>
+        <a class="mobile-section-link" href="#official-radar">官方提醒</a>
         <a class="mobile-section-link" href="#favorites">自選股</a>
         <a class="mobile-section-link" href="#stock-search">搜尋</a>
         <a class="mobile-section-link" href="#market-ranking">排行</a>
@@ -528,6 +635,104 @@ function getInstitutionalFlow(contract, identity) {
         </section>
       </section>
 
+      <section id="official-radar" class="panel home-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">官方交易雷達</h2>
+            <p class="panel-subtitle">把處置、注意累計、變更交易與即將除息的股票先整理好，隔日選股時更快避開風險或提前排事件。</p>
+          </div>
+          <span class="meta-chip">資料日 {{ formatDate(liveMarketDate ?? manifest?.generatedAt?.slice(0, 10)) }}</span>
+        </div>
+
+        <section class="triple-grid">
+          <article class="focus-card official-radar-card">
+            <div class="focus-card-head">
+              <div>
+                <h3>盤後風險雷達</h3>
+                <p class="panel-subtitle">先看真正會影響隔日下單節奏的官方提醒。</p>
+              </div>
+            </div>
+            <div class="official-radar-summary">
+              <span class="status-badge is-risk">處置 {{ formatNumber(officialRadarSummary.dispositions) }}</span>
+              <span class="status-badge is-warning">變更交易 {{ formatNumber(officialRadarSummary.changedTrading) }}</span>
+              <span class="status-badge is-info">注意累計 {{ formatNumber(officialRadarSummary.attentionWarnings) }}</span>
+            </div>
+            <div v-if="officialRiskRadar.length" class="focus-card-list">
+              <div
+                v-for="item in officialRiskRadar.slice(0, 4)"
+                :key="`risk-${item.code}`"
+                class="focus-card-item"
+              >
+                <div>
+                  <strong>{{ item.code }} {{ item.name }}</strong>
+                  <p class="muted">{{ item.topSelectionSignalTitle ?? '官方公告提醒' }}</p>
+                </div>
+                <span class="status-badge" :class="`is-${item.alertTone}`">{{ item.alertLabel }}</span>
+              </div>
+            </div>
+            <p v-else class="muted">目前沒有新的處置、變更交易或注意累計提醒。</p>
+          </article>
+
+          <article class="focus-card official-radar-card">
+            <div class="focus-card-head">
+              <div>
+                <h3>注意 / 處置排行</h3>
+                <p class="panel-subtitle">先看風險優先級，再決定隔日要不要碰。</p>
+              </div>
+            </div>
+            <div v-if="officialRiskRadar.length" class="focus-card-list">
+              <button
+                v-for="item in officialRiskRadar.slice(0, 5)"
+                :key="`risk-rank-${item.code}`"
+                type="button"
+                class="focus-card-item official-radar-row"
+                @click="openStockDetail(item.code)"
+              >
+                <div>
+                  <strong>{{ item.code }} {{ item.name }}</strong>
+                  <p class="muted">{{ item.topSelectionSignalTitle ?? '官方公告提醒' }}</p>
+                </div>
+                <div class="official-radar-side">
+                  <span class="status-badge" :class="`is-${item.alertTone}`">{{ item.alertLabel }}</span>
+                  <span :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
+                    {{ formatPercent(item.changePercent) }}
+                  </span>
+                </div>
+              </button>
+            </div>
+            <p v-else class="muted">今天目前沒有需要優先避開的官方風險標的。</p>
+          </article>
+
+          <article class="focus-card official-radar-card">
+            <div class="focus-card-head">
+              <div>
+                <h3>即將除息 / 事件接近</h3>
+                <p class="panel-subtitle">先把股利事件排進研究節奏，避免隔日價位誤判。</p>
+              </div>
+            </div>
+            <div v-if="upcomingDividendWatch.length" class="focus-card-list">
+              <button
+                v-for="item in upcomingDividendWatch.slice(0, 5)"
+                :key="`dividend-${item.code}`"
+                type="button"
+                class="focus-card-item official-radar-row"
+                @click="openStockDetail(item.code)"
+              >
+                <div>
+                  <strong>{{ item.code }} {{ item.name }}</strong>
+                  <p class="muted">{{ item.topSelectionSignalTitle ?? '股利事件接近' }}</p>
+                </div>
+                <div class="official-radar-side">
+                  <span class="meta-chip">{{ formatDate(item.nextEventDate) }}</span>
+                  <span class="status-badge is-info">{{ item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後` }}</span>
+                </div>
+              </button>
+            </div>
+            <p v-else class="muted">未來 21 天內沒有抓到新的除權息事件。</p>
+          </article>
+        </section>
+      </section>
+
       <section id="favorites" class="panel home-panel">
         <div class="panel-header">
           <div>
@@ -561,7 +766,7 @@ function getInstitutionalFlow(contract, identity) {
             <div class="favorite-heat-strip">
               <span
                 class="favorite-heat-fill"
-                :class="item.topSignalTone ? `is-${item.topSignalTone}` : ''"
+                :class="item.displaySignalTone ? `is-${item.displaySignalTone}` : ''"
                 :style="{ width: item.heatWidth }"
               ></span>
             </div>
@@ -580,8 +785,8 @@ function getInstitutionalFlow(contract, identity) {
               </span>
               <span>20 日 {{ formatPercent(item.return20) }}</span>
               <span>法人五日 {{ formatAmount(item.total5Day) }}</span>
-              <span :class="['signal-pill', item.topSignalTone ? `is-${item.topSignalTone}` : '']">
-                {{ item.topSignalTitle ?? '技術面整理中' }}
+              <span :class="['signal-pill', item.displaySignalTone ? `is-${item.displaySignalTone}` : '']">
+                {{ item.displaySignalTitle ?? '技術面整理中' }}
               </span>
             </div>
           </article>
@@ -626,7 +831,7 @@ function getInstitutionalFlow(contract, identity) {
                 <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
                   {{ formatPercent(item.return20) }}
                 </strong>
-                <span>{{ item.liveUpdatedAt ? `即時價 ${formatNumber(item.livePrice)}` : (item.topSignalTitle ?? '延續前次研究脈絡') }}</span>
+                <span>{{ item.liveUpdatedAt ? `即時價 ${formatNumber(item.livePrice)}` : (item.displaySignalTitle ?? '延續前次研究脈絡') }}</span>
               </div>
             </div>
             <div class="favorite-metrics">
@@ -636,6 +841,9 @@ function getInstitutionalFlow(contract, identity) {
               </span>
               <span>20 日 {{ formatPercent(item.return20) }}</span>
               <span>法人五日 {{ formatAmount(item.total5Day) }}</span>
+              <span :class="['signal-pill', item.displaySignalTone ? `is-${item.displaySignalTone}` : '']">
+                {{ item.displaySignalTitle ?? '延續前次研究脈絡' }}
+              </span>
             </div>
           </article>
         </div>
@@ -664,15 +872,25 @@ function getInstitutionalFlow(contract, identity) {
             <RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.code }}</RouterLink>
             <span>
               {{ item.name }}
-              <small v-if="item.topSignalTitle" class="inline-signal-text" :class="{ 'text-up': item.topSignalTone === 'up', 'text-down': item.topSignalTone === 'down' }">
-                {{ item.topSignalTitle }}
-              </small>
+              <span
+                v-if="item.topSelectionSignalTitle || item.topSignalTitle"
+                class="signal-pill inline-signal-chip"
+                :class="(item.selectionSignalTone ?? item.topSignalTone) ? `is-${item.selectionSignalTone ?? item.topSignalTone}` : ''"
+              >
+                {{ item.topSelectionSignalTitle ?? item.topSignalTitle }}
+              </span>
             </span>
             <span class="search-row-actions">
               <span class="muted">
                 {{
                   item.hasLocalDetail === false
                     ? '即時補資料'
+                    : item.isUnderDisposition
+                      ? '處置中'
+                      : item.hasChangedTrading
+                        ? '變更交易'
+                        : item.hasAttentionWarning
+                          ? '注意累計'
                     : item.activeEtfCount
                       ? `${item.activeEtfCount} 檔 ETF 持有`
                       : '查看個股頁'
