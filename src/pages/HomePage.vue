@@ -91,6 +91,7 @@ const foreignIndustryLeaders = computed(() => marketOverview.value?.外資類股
 const hotStocks = computed(() => marketOverview.value?.熱門股 ?? []);
 const strongStocks = computed(() => marketOverview.value?.強勢股 ?? []);
 const turnoverRanks = computed(() => marketOverview.value?.成交排行 ?? []);
+const closeMarketDate = computed(() => marketOverview.value?.盤後資料日期 ?? marketOverview.value?.資料日期 ?? null);
 const liveMarketDate = computed(() => liveStatus.value?.marketDate ?? marketOverview.value?.資料日期 ?? null);
 const marketBreadthDate = computed(() => marketBreadth.value?.資料日期 ?? null);
 const marketBreadthIsLiveDay = computed(() => Boolean(liveMarketDate.value) && marketBreadthDate.value === liveMarketDate.value);
@@ -111,6 +112,53 @@ const marketBreadthHint = computed(() =>
     ? '當上漲家數明顯多於下跌家數時，代表盤勢不是只靠少數權值股撐住。'
     : '市場廣度目前仍採最近一次盤後統計，盤中請搭配指數與成交節奏一起看。',
 );
+const marketLiveTimeLabel = computed(() => {
+  const timeText = intradayPulse.value?.更新時間 ?? liveStatus.value?.updatedTime ?? null;
+  return timeText ? formatTime(timeText) : null;
+});
+const marketObservationSubtitle = computed(() => {
+  if (liveMarketDate.value && closeMarketDate.value && liveMarketDate.value !== closeMarketDate.value) {
+    const liveLabel = marketLiveTimeLabel.value ? `${formatDate(liveMarketDate.value)} ${marketLiveTimeLabel.value}` : formatDate(liveMarketDate.value);
+    return `盤中即時 ${liveLabel}，盤後摘要基底 ${formatDate(closeMarketDate.value)}`;
+  }
+
+  if (liveMarketDate.value && marketLiveTimeLabel.value) {
+    return `盤中即時 ${formatDate(liveMarketDate.value)} ${marketLiveTimeLabel.value}`;
+  }
+
+  return closeMarketDate.value ? `盤後資料日期 ${formatDate(closeMarketDate.value)}` : '資料整理中';
+});
+const rankingLiveBadge = computed(() => {
+  if (rankingView.value !== 'live') {
+    return closeMarketDate.value ? `盤後 ${formatDate(closeMarketDate.value)}` : '盤後整理';
+  }
+
+  const parts = [];
+
+  if (marketLiveTimeLabel.value) {
+    parts.push(`即時 ${marketLiveTimeLabel.value}`);
+  }
+
+  const baselineDate = marketOverview.value?.排行基準日期 ?? closeMarketDate.value;
+
+  if (baselineDate) {
+    parts.push(`榜單基底 ${formatDate(baselineDate)}`);
+  }
+
+  return parts.join(' / ') || '盤中即時';
+});
+const futuresDailyDate = computed(() => futuresPositioning.value?.資料日期 ?? null);
+const futuresStatusSummary = computed(() => {
+  if (liveMarketDate.value && futuresDailyDate.value && liveMarketDate.value !== futuresDailyDate.value) {
+    return `期交所今日日資料尚未公告，暫以 ${formatDate(futuresDailyDate.value)} 的日線與法人籌碼呈現。`;
+  }
+
+  if (futuresDailyDate.value) {
+    return `目前顯示期交所最新日資料 ${formatDate(futuresDailyDate.value)}。`;
+  }
+
+  return '期貨日資料整理中。';
+});
 
 function toTaipeiShiftedDate(dateLike) {
   const baseDate = dateLike instanceof Date ? dateLike : new Date(dateLike);
@@ -936,7 +984,7 @@ function getInstitutionalFlow(contract, identity) {
           <div class="panel-header">
             <div>
               <h2 class="panel-title">大盤觀察</h2>
-              <p class="panel-subtitle">資料日期 {{ formatDate(marketOverview?.資料日期) }}</p>
+              <p class="panel-subtitle">{{ marketObservationSubtitle }}</p>
             </div>
           </div>
           <ul class="bullet-list">
@@ -1137,7 +1185,7 @@ function getInstitutionalFlow(contract, identity) {
                 <p class="panel-subtitle">{{ group.subtitle }}</p>
               </div>
               <span class="meta-chip">
-                {{ rankingView === 'live' && liveStatus?.updatedAt ? `即時 ${formatTime(intradayPulse.更新時間)}` : `盤後 ${formatDate(marketOverview?.資料日期)}` }}
+                {{ rankingLiveBadge }}
               </span>
             </div>
             <div class="table-wrap">
@@ -1299,9 +1347,9 @@ function getInstitutionalFlow(contract, identity) {
         <div class="panel-header">
           <div>
             <h2 class="panel-title">小台與微台籌碼面</h2>
-            <p class="panel-subtitle">整理小型臺指與微型臺指的三大法人籌碼與技術走勢，盤中與盤後都能快速確認資料節奏。</p>
+            <p class="panel-subtitle">{{ futuresStatusSummary }}</p>
             <div class="tag-row">
-              <span class="meta-chip">資料日期 {{ formatDate(futuresPositioning?.資料日期) }}</span>
+              <span class="meta-chip">日線資料 {{ formatDate(futuresPositioning?.資料日期) }}</span>
               <span class="meta-chip">最近整理 {{ futuresLastUpdatedLabel }}</span>
               <span class="meta-chip">下次預計更新 {{ futuresNextRefreshLabel }}</span>
             </div>

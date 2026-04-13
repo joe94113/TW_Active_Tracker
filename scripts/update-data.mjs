@@ -1319,6 +1319,171 @@ async function POST抓取JSON資料(url, body, referer) {
   return response.json();
 }
 
+function 建立MIS快照網址(exChanges) {
+  return `https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=${encodeURIComponent(exChanges)}&json=1&delay=0&_=${Date.now()}`;
+}
+
+function 格式化MIS日期(value) {
+  const text = String(value ?? '').trim();
+
+  if (/^\d{8}$/.test(text)) {
+    return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`;
+  }
+
+  return null;
+}
+
+function 格式化MIS時間(value) {
+  const text = String(value ?? '').trim().replaceAll(':', '');
+
+  if (/^\d{6}$/.test(text)) {
+    return text;
+  }
+
+  return null;
+}
+
+function 格式化MIS時間顯示(value) {
+  const text = 格式化MIS時間(value);
+
+  if (!text) {
+    return null;
+  }
+
+  return `${text.slice(0, 2)}:${text.slice(2, 4)}`;
+}
+
+function 建立MIS更新時間(marketDate, marketTime) {
+  const normalizedTime = 格式化MIS時間(marketTime);
+
+  if (!marketDate || !normalizedTime) {
+    return null;
+  }
+
+  return `${marketDate}T${normalizedTime.slice(0, 2)}:${normalizedTime.slice(2, 4)}:${normalizedTime.slice(4, 6)}+08:00`;
+}
+
+function 解析MIS大盤快照(payload) {
+  const item =
+    payload?.msgArray?.find((entry) => String(entry?.c ?? '').trim() === 't00') ??
+    payload?.msgArray?.find((entry) => String(entry?.['@'] ?? '').trim() === 't00.tw') ??
+    payload?.msgArray?.[0];
+
+  if (!item) {
+    return null;
+  }
+
+  const marketDate = 格式化MIS日期(item.d ?? item['^']);
+  const marketTime = 格式化MIS時間(item.t ?? item['%']);
+  const previousClose = 取數字(item.y);
+  const lastPrice = 取數字(item.z) ?? 取數字(item.o) ?? previousClose;
+  const change = lastPrice !== null && previousClose !== null ? lastPrice - previousClose : null;
+  const changePercent = previousClose ? (change / previousClose) * 100 : null;
+
+  return {
+    marketDate,
+    marketTime,
+    updatedAt: 建立MIS更新時間(marketDate, marketTime),
+    previousClose,
+    lastPrice,
+    change,
+    changePercent,
+    open: 取數字(item.o),
+    high: 取數字(item.h),
+    low: 取數字(item.l),
+    volumeLots: 取數字(item.v),
+    sourceLabel: 'TWSE MIS 即時指數',
+  };
+}
+
+function 解析MIS個股快照(item, codeOverride = null) {
+  const code = 壓縮文字(codeOverride ?? item?.c ?? '').toUpperCase();
+
+  if (!code) {
+    return null;
+  }
+
+  const marketDate = 格式化MIS日期(item?.d ?? item?.['^']);
+  const marketTime = 格式化MIS時間(item?.t ?? item?.['%']);
+  const previousClose = 取數字(item?.y);
+  const volumeLots = 取數字(item?.v);
+  const latestTradeVolumeLots = 取數字(item?.tv);
+  const lastPrice =
+    取數字(item?.z) ??
+    取數字(item?.pz) ??
+    取數字(String(item?.b ?? '').split('_')[0]) ??
+    取數字(String(item?.a ?? '').split('_')[0]) ??
+    取數字(item?.o) ??
+    previousClose;
+  const change = lastPrice !== null && previousClose !== null ? lastPrice - previousClose : null;
+  const changePercent = previousClose ? (change / previousClose) * 100 : null;
+
+  return {
+    code,
+    name: 壓縮文字(item?.n ?? item?.nf ?? code),
+    shortName: 壓縮文字(item?.n ?? item?.nf ?? code),
+    previousClose,
+    lastPrice,
+    change,
+    changePercent,
+    open: 取數字(item?.o),
+    high: 取數字(item?.h),
+    low: 取數字(item?.l),
+    volumeLots,
+    volumeShares: volumeLots !== null ? volumeLots * 1000 : null,
+    latestTradeVolumeLots,
+    latestTradeVolumeShares: latestTradeVolumeLots !== null ? latestTradeVolumeLots * 1000 : null,
+    updatedAt: 建立MIS更新時間(marketDate, marketTime),
+    marketDate,
+    marketTime,
+    sourceLabel: 'TWSE 即時行情',
+  };
+}
+
+async function 抓取MIS大盤快照() {
+  return 解析MIS大盤快照(await 抓取JSON資料(建立MIS快照網址('tse_t00.tw')));
+}
+
+async function 批次抓取MIS個股快照(codes, batchSize = 12) {
+  const normalizedCodes = [...new Set((codes ?? []).map((code) => 壓縮文字(code).toUpperCase()).filter(Boolean))];
+  const snapshotMap = new Map();
+
+  for (let index = 0; index < normalizedCodes.length; index += batchSize) {
+    const batch = normalizedCodes.slice(index, index + batchSize);
+    const channels = batch.flatMap((code) => [`tse_${code}.tw`, `otc_${code}.tw`]).join('|');
+    const payload = await 抓取JSON資料(建立MIS快照網址(channels));
+
+    for (const item of payload?.msgArray ?? []) {
+      const snapshot = 解析MIS個股快照(item);
+
+      if (snapshot?.code && !snapshotMap.has(snapshot.code)) {
+        snapshotMap.set(snapshot.code, snapshot);
+      }
+    }
+  }
+
+  return snapshotMap;
+}
+
+function 套用MIS快照到排行項目(item, snapshotMap) {
+  const snapshot = snapshotMap.get(壓縮文字(item?.代號).toUpperCase());
+
+  if (!snapshot) {
+    return item;
+  }
+
+  return {
+    ...item,
+    名稱: snapshot.shortName ?? item.名稱,
+    收盤價: snapshot.lastPrice ?? item.收盤價,
+    漲跌值: snapshot.change ?? item.漲跌值,
+    漲跌幅: snapshot.changePercent ?? item.漲跌幅,
+    成交量: snapshot.volumeShares ?? item.成交量,
+    即時更新時間: snapshot.updatedAt ?? null,
+    即時來源: snapshot.sourceLabel ?? null,
+  };
+}
+
 function 建立ETF快照(etf, { disclosureDate, aum = null, nav = null, units = null, holdings = [] }) {
   const 排序後持股 = 排序持股(holdings);
 
@@ -2099,9 +2264,10 @@ async function 抓取市場總覽() {
   const 市場廣度 = 建立市場廣度資料(breadthRows);
   const 外資類股焦點 = 建立外資類股焦點(foreignIndustryRows);
   const 外資持股焦點 = 建立外資持股焦點(foreignTopRows);
+  const 盤後資料日期 = 最新大盤.日期 ?? 指數卡片[0]?.日期 ?? null;
 
   const 大盤摘要 = {
-    資料日期: 最新大盤.日期 ?? 指數卡片[0]?.日期 ?? null,
+    資料日期: 盤後資料日期,
     加權指數: 最新大盤.指數 ?? null,
     漲跌點數: 最新大盤.漲跌點數 ?? null,
     漲跌幅: 最新大盤.指數 && 最新大盤.漲跌點數
@@ -2113,6 +2279,7 @@ async function 抓取市場總覽() {
   };
   let 技術面資料 = null;
   let 盤中走勢 = null;
+  let 即時狀態 = null;
 
   try {
     技術面資料 = 建立技術分析資料({
@@ -2154,14 +2321,71 @@ async function 抓取市場總覽() {
     };
   }
 
+  {
+    const 排行代號 = [...new Set([...熱門股, ...成交排行, ...強勢股].map((item) => item.代號).filter(Boolean))];
+    const [即時大盤結果, 即時個股結果] = await Promise.allSettled([
+      抓取MIS大盤快照(),
+      排行代號.length ? 批次抓取MIS個股快照(排行代號) : Promise.resolve(new Map()),
+    ]);
+
+    const 即時大盤快照 = 即時大盤結果.status === 'fulfilled' ? 即時大盤結果.value : null;
+    const 即時個股快照 = 即時個股結果.status === 'fulfilled' ? 即時個股結果.value : new Map();
+
+    if (即時大盤快照) {
+      大盤摘要.資料日期 = 即時大盤快照.marketDate ?? 大盤摘要.資料日期;
+      大盤摘要.加權指數 = 即時大盤快照.lastPrice ?? 大盤摘要.加權指數;
+      大盤摘要.漲跌點數 = 即時大盤快照.change ?? 大盤摘要.漲跌點數;
+      大盤摘要.漲跌幅 = 即時大盤快照.changePercent ?? 大盤摘要.漲跌幅;
+
+      const 加權指數卡 = 指數卡片.find((item) => item.簡稱 === '加權指數');
+
+      if (加權指數卡) {
+        加權指數卡.指數值 = 即時大盤快照.lastPrice ?? 加權指數卡.指數值;
+        加權指數卡.漲跌點數 = 即時大盤快照.change ?? 加權指數卡.漲跌點數;
+        加權指數卡.漲跌百分比 = 即時大盤快照.changePercent ?? 加權指數卡.漲跌百分比;
+        加權指數卡.走勢 = (即時大盤快照.change ?? 0) > 0 ? '偏多' : (即時大盤快照.change ?? 0) < 0 ? '回檔' : '整理';
+      }
+
+      即時狀態 = {
+        marketDate: 即時大盤快照.marketDate ?? null,
+        updatedAt: 即時大盤快照.updatedAt ?? null,
+        updatedTime: 格式化MIS時間顯示(即時大盤快照.marketTime) ?? 盤中原始資料.Time ?? null,
+        sources: ['TWSE MIS 即時指數', 'TWSE OpenAPI MI_5MINS'],
+      };
+    }
+
+    for (const key of ['熱門股', '成交排行', '強勢股']) {
+      const 原始列表 = key === '熱門股' ? 熱門股 : key === '成交排行' ? 成交排行 : 強勢股;
+      const 覆蓋後列表 = 原始列表.map((item) => 套用MIS快照到排行項目(item, 即時個股快照));
+
+      if (key === '熱門股') {
+        熱門股.splice(0, 熱門股.length, ...覆蓋後列表);
+      } else if (key === '成交排行') {
+        成交排行.splice(0, 成交排行.length, ...覆蓋後列表);
+      } else {
+        強勢股.splice(0, 強勢股.length, ...覆蓋後列表);
+      }
+    }
+  }
+
+  const 觀察摘要 = 建立市場觀察摘要({ 大盤摘要, 近五日節奏, 熱門股, 指數卡片, 市場廣度, 外資類股焦點 });
+
+  if (即時狀態?.marketDate && 盤後資料日期 && 即時狀態.marketDate !== 盤後資料日期) {
+    const 即時時間 = 即時狀態.updatedTime ? ` ${即時狀態.updatedTime}` : '';
+    觀察摘要.unshift(`盤中即時資料已更新到 ${即時狀態.marketDate}${即時時間}，以下排行與摘要基底仍沿用 ${盤後資料日期} 的盤後資料。`);
+  }
+
   return {
     市場總覽: {
-      資料日期: 最新大盤.日期 ?? null,
+      資料日期: 盤後資料日期,
+      盤後資料日期,
+      排行基準日期: 盤後資料日期,
       指數卡片,
       大盤摘要,
       技術面資料,
       盤中走勢,
       盤中脈動: {
+        資料日期: 即時狀態?.marketDate ?? 盤後資料日期,
         更新時間: 盤中原始資料.Time ?? null,
         累計委買筆數: 取數字(盤中原始資料.AccBidOrders),
         累計委買張數: 取數字(盤中原始資料.AccBidVolume),
@@ -2171,6 +2395,7 @@ async function 抓取市場總覽() {
         累計成交張數: 取數字(盤中原始資料.AccTradeVolume),
         累計成交值: 取數字(盤中原始資料.AccTradeValue),
       },
+      即時狀態,
       市場廣度,
       外資類股焦點,
       外資持股焦點,
@@ -2178,9 +2403,10 @@ async function 抓取市場總覽() {
       成交排行,
       強勢股,
       近五日節奏,
-      觀察摘要: 建立市場觀察摘要({ 大盤摘要, 近五日節奏, 熱門股, 指數卡片, 市場廣度, 外資類股焦點 }),
+      觀察摘要,
       資料說明: [
         'TWSE OpenAPI：MI_INDEX、MI_5MINS、FMTQIK、MI_INDEX20、STOCK_DAY_ALL、twtazu_od、MI_QFIIS_cat、MI_QFIIS_sort_20',
+        '盤中大盤與個股即時覆蓋：TWSE MIS 即時指數與即時行情。',
         '熱門股以成交量與成交值為主，並排除 ETF 與受益證券，聚焦上市一般股票。',
       ],
     },

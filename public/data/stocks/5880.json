@@ -3,7 +3,7 @@
   "name": "合庫金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:23.649Z",
+  "generatedAt": "2026-04-13T08:57:25.753Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,13 +3487,18 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 3.46%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 18,110,742 股。"
+    "最近 5 個交易日三大法人合計買超 27,000,279 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4202,18 +4207,18 @@
         "total": 1904541
       },
       {
-        "date": "2026-04-04",
-        "foreign": 363815,
-        "investmentTrust": 0,
-        "dealer": 0,
-        "total": 363815
+        "date": "2026-04-02",
+        "foreign": 7968449,
+        "investmentTrust": 66354,
+        "dealer": 1218549,
+        "total": 9253352
       }
     ],
     "summary": {
-      "foreign5Day": 17248697,
-      "investmentTrust5Day": -54854,
-      "dealer5Day": 916899,
-      "total5Day": 18110742
+      "foreign5Day": 24853331,
+      "investmentTrust5Day": 11500,
+      "dealer5Day": 2135448,
+      "total5Day": 27000279
     }
   },
   "持股分散": {
@@ -4371,6 +4376,37 @@
     "觀察摘要": [
       "融資餘額單日增加 14 張，短線追價意願升溫。"
     ]
+  },
+  "交易提醒": {
+    "asOfDate": "2026-04-10",
+    "alerts": [
+      {
+        "key": "short-sale-5880",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-10",
+        "note": "今日可借券賣出股數約 5,248,888 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 5,248,888 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [],
+    "highlights": [
+      "今日可借券賣出股數約 5,248,888 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "info",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": 5248888,
+      "alertCount": 1,
+      "topTitle": "可借券賣出餘量",
+      "topTone": "info"
+    }
   },
   "主動ETF曝光": null,
   "同產業比較": null

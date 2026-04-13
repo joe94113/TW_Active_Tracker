@@ -213,6 +213,8 @@ const rangeReturn = computed(() => {
   return ((lastClose - firstClose) / firstClose) * 100;
 });
 
+const dataAsOfDate = computed(() => props.data?.priceDate ?? latestRow.value?.date ?? null);
+
 const technicalSignals = computed(() =>
   buildTechnicalSignalSummary(enrichedRows.value, indicatorSettings.value, {
     name: props.data?.name ?? props.data?.code ?? '',
@@ -1115,6 +1117,7 @@ onBeforeUnmount(() => {
         </p>
       </div>
       <div class="chart-header-actions">
+        <span class="meta-chip">日線最新 {{ formatDate(dataAsOfDate) }}</span>
         <div class="range-tabs" role="tablist" aria-label="圖表區間">
           <button
             v-for="item in rangeOptions"
