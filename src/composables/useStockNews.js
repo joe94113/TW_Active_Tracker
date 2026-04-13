@@ -1,14 +1,14 @@
-import { ref, watch } from 'vue';
+import { ref, toValue, watch } from 'vue';
 import { fetchOptionalJson } from '../lib/api';
 
-export function useStockNews(codeRef) {
+export function useStockNews(codeSource) {
   const news = ref(null);
   const isLoading = ref(false);
   const errorMessage = ref('');
   const hasLoaded = ref(false);
 
   watch(
-    () => codeRef.value,
+    () => String(toValue(codeSource) ?? '').trim(),
     () => {
       news.value = null;
       isLoading.value = false;
@@ -18,7 +18,7 @@ export function useStockNews(codeRef) {
   );
 
   async function load() {
-    const code = String(codeRef.value ?? '').trim();
+    const code = String(toValue(codeSource) ?? '').trim();
 
     if (!code || isLoading.value) {
       return;

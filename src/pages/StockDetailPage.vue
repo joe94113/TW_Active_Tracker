@@ -35,7 +35,7 @@ watch(
   },
 );
 
-const { detail, isLoading, errorMessage } = useStockDetail(stockCode);
+const { detail, isLoading, isEnhancing, errorMessage } = useStockDetail(stockCode);
 const { isFavorite, toggleFavorite } = useFavoriteStocks();
 const { snapshot: liveSnapshot, isLoading: isLiveSnapshotLoading } = useLiveStockSnapshot(stockCode, { refreshIntervalMs: 45000 });
 const { recentItems, pushRecentStock } = useRecentStocks();
@@ -421,6 +421,7 @@ watch(
         >
           即時 {{ formatNumber(liveSnapshot.lastPrice) }}
         </span>
+        <span v-if="isEnhancing" class="meta-chip">補抓遠端日線中</span>
         <button
           type="button"
           class="favorite-toggle hero-favorite-toggle"
@@ -568,7 +569,8 @@ watch(
           </div>
           <div v-else class="empty-state compact">
             <strong>關鍵價位還在整理</strong>
-            <p>目前沒有足夠的歷史價格資料可以建立價位區。</p>
+            <p v-if="isEnhancing">正在補抓遠端日線資料，抓到完整 K 線後會自動補上價位區。</p>
+            <p v-else>通常是目前只有即時報價，還沒有抓到足夠的日線歷史，所以暫時無法建立價位區。</p>
           </div>
         </article>
 
@@ -599,7 +601,9 @@ watch(
                   <p class="support-resistance-value">{{ formatNumber(item.low) }} - {{ formatNumber(item.high) }}</p>
                 </article>
               </div>
-              <p v-else class="muted">目前沒有足夠的上方壓力資料。</p>
+              <p v-else class="muted">
+                {{ isEnhancing ? '正在補抓遠端日線資料，完成後會自動回填上方壓力。' : '目前沒有足夠的上方壓力資料，通常代表這次載入的是即時快照或日線樣本不足。' }}
+              </p>
             </section>
 
             <section class="support-resistance-column">
@@ -620,7 +624,9 @@ watch(
                   <p class="support-resistance-value">{{ formatNumber(item.low) }} - {{ formatNumber(item.high) }}</p>
                 </article>
               </div>
-              <p v-else class="muted">目前沒有足夠的下方支撐資料。</p>
+              <p v-else class="muted">
+                {{ isEnhancing ? '正在補抓遠端日線資料，完成後會自動回填下方支撐。' : '目前沒有足夠的下方支撐資料，通常代表這次載入的是即時快照或日線樣本不足。' }}
+              </p>
             </section>
           </div>
         </article>
@@ -656,7 +662,7 @@ watch(
       </section>
 
       <section id="news" class="page-section-anchor">
-        <StockNewsPanel :code-ref="stockCode" :stock-name="detail?.name ?? stockCode" />
+        <StockNewsPanel :code="stockCode" :stock-name="detail?.name ?? stockCode" />
       </section>
 
       <section v-if="recentViewedStocks.length" class="panel">

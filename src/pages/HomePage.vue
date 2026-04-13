@@ -21,12 +21,21 @@ import {
   formatTime,
 } from '../lib/formatters';
 
+const TAIPEI_OFFSET_MS = 8 * 60 * 60 * 1000;
+const REFRESH_MINUTES = [
+  ...Array.from({ length: 24 }, (_, index) => (9 * 60) + (index * 15)),
+  14 * 60 + 50,
+  15 * 60 + 20,
+  18 * 60 + 35,
+];
+
 const router = useRouter();
 const { dashboard, manifest, stockList, stockSearchList, etfOverviewList, isLoading, errorMessage, loadGlobalData } = useGlobalData();
 const { favoriteCodes, isFavorite, toggleFavorite, clearFavorites } = useFavoriteStocks();
 const { recentItems, clearRecentStocks } = useRecentStocks();
 const searchQuery = ref('');
 const rankingView = ref('live');
+const nowTimestamp = ref(Date.now());
 const staticMarketOverview = computed(() => dashboard.value?.市場總覽 ?? null);
 const {
   marketOverview,
@@ -48,6 +57,7 @@ const {
   startAutoRefresh: startLiveSnapshotAutoRefresh,
   stopAutoRefresh: stopLiveSnapshotAutoRefresh,
 } = useLiveStockSnapshots(watchedLiveCodes);
+let clockHandle = null;
 
 onMounted(() => {
   loadGlobalData();
@@ -55,11 +65,19 @@ onMounted(() => {
   startAutoRefresh();
   refreshSnapshots();
   startLiveSnapshotAutoRefresh();
+  clockHandle = window.setInterval(() => {
+    nowTimestamp.value = Date.now();
+  }, 60000);
 });
 
 onBeforeUnmount(() => {
   stopAutoRefresh();
   stopLiveSnapshotAutoRefresh();
+
+  if (clockHandle) {
+    window.clearInterval(clockHandle);
+    clockHandle = null;
+  }
 });
 
 const institutionalHighlights = computed(() => dashboard.value?.法人追蹤 ?? null);
@@ -93,6 +111,70 @@ const marketBreadthHint = computed(() =>
     ? '當上漲家數明顯多於下跌家數時，代表盤勢不是只靠少數權值股撐住。'
     : '市場廣度目前仍採最近一次盤後統計，盤中請搭配指數與成交節奏一起看。',
 );
+
+function toTaipeiShiftedDate(dateLike) {
+  const baseDate = dateLike instanceof Date ? dateLike : new Date(dateLike);
+  return new Date(baseDate.getTime() + TAIPEI_OFFSET_MS);
+}
+
+function createTaipeiDate(year, month, day, minutesOfDay) {
+  const hour = Math.floor(minutesOfDay / 60);
+  const minute = minutesOfDay % 60;
+  return new Date(Date.UTC(year, month - 1, day, hour - 8, minute, 0));
+}
+
+function formatTaipeiDateTime(value) {
+  if (!value) {
+    return '-';
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return '-';
+  }
+
+  return date.toLocaleString('zh-TW', {
+    timeZone: 'Asia/Taipei',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+}
+
+function getNextRefreshDate(now = new Date()) {
+  const shiftedNow = toTaipeiShiftedDate(now);
+
+  for (let offset = 0; offset < 10; offset += 1) {
+    const shiftedDay = new Date(shiftedNow.getTime());
+    shiftedDay.setUTCDate(shiftedNow.getUTCDate() + offset);
+    const weekday = shiftedDay.getUTCDay();
+
+    if (weekday === 0 || weekday === 6) {
+      continue;
+    }
+
+    const year = shiftedDay.getUTCFullYear();
+    const month = shiftedDay.getUTCMonth() + 1;
+    const day = shiftedDay.getUTCDate();
+    const currentMinutes = (shiftedNow.getUTCHours() * 60) + shiftedNow.getUTCMinutes();
+
+    for (const minutesOfDay of REFRESH_MINUTES) {
+      if (offset === 0 && minutesOfDay <= currentMinutes) {
+        continue;
+      }
+
+      return createTaipeiDate(year, month, day, minutesOfDay);
+    }
+  }
+
+  return null;
+}
+
+const futuresLastUpdatedLabel = computed(() => formatTaipeiDateTime(manifest.value?.generatedAt));
+const futuresNextRefreshLabel = computed(() => formatTaipeiDateTime(getNextRefreshDate(new Date(nowTimestamp.value))));
 
 const homeSeo = computed(() => ({
   title: '台股大盤、熱門股與主動式 ETF 風向球',
@@ -999,7 +1081,12 @@ function getInstitutionalFlow(contract, identity) {
         <div class="panel-header">
           <div>
             <h2 class="panel-title">小台與微台籌碼面</h2>
-            <p class="panel-subtitle">資料日期 {{ formatDate(futuresPositioning?.資料日期) }}</p>
+            <p class="panel-subtitle">整理小型臺指與微型臺指的三大法人籌碼與技術走勢，盤中與盤後都能快速確認資料節奏。</p>
+            <div class="tag-row">
+              <span class="meta-chip">資料日期 {{ formatDate(futuresPositioning?.資料日期) }}</span>
+              <span class="meta-chip">最近整理 {{ futuresLastUpdatedLabel }}</span>
+              <span class="meta-chip">下次預計更新 {{ futuresNextRefreshLabel }}</span>
+            </div>
           </div>
         </div>
         <div class="futures-grid">

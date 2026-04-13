@@ -1203,41 +1203,44 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="chart-parameter-panel">
-        <div class="chart-parameter-group">
-          <span class="toolbar-label">均線參數</span>
-          <label
-            v-for="item in movingAverageInputs"
-            :key="item.key"
-            class="chart-parameter-input"
-          >
-            <span>{{ item.label }}</span>
-            <input
-              v-model.number="rawIndicatorSettings[item.key]"
-              type="number"
-              :min="item.min"
-              :max="item.max"
-              inputmode="numeric"
+        <div class="chart-parameter-row">
+          <div class="chart-parameter-group is-inline">
+            <span class="toolbar-label chart-parameter-group-label">均線參數</span>
+            <label
+              v-for="item in movingAverageInputs"
+              :key="item.key"
+              class="chart-parameter-input"
             >
-          </label>
-        </div>
+              <span>{{ item.label }}</span>
+              <input
+                v-model.number="rawIndicatorSettings[item.key]"
+                type="number"
+                :min="item.min"
+                :max="item.max"
+                inputmode="numeric"
+              >
+            </label>
+          </div>
 
-        <div class="chart-parameter-group">
-          <span class="toolbar-label">目前指標參數</span>
-          <label
-            v-for="item in activeIndicatorInputs"
-            :key="item.key"
-            class="chart-parameter-input"
-          >
-            <span>{{ item.label }}</span>
-            <input
-              v-model.number="rawIndicatorSettings[item.key]"
-              type="number"
-              :min="item.min"
-              :max="item.max"
-              inputmode="numeric"
+          <div class="chart-parameter-group is-inline">
+            <span class="toolbar-label chart-parameter-group-label">目前指標參數</span>
+            <label
+              v-for="item in activeIndicatorInputs"
+              :key="item.key"
+              class="chart-parameter-input"
             >
-          </label>
-          <button type="button" class="ghost-button compact-button" @click="resetIndicatorSettings">
+              <span>{{ item.label }}</span>
+              <input
+                v-model.number="rawIndicatorSettings[item.key]"
+                type="number"
+                :min="item.min"
+                :max="item.max"
+                inputmode="numeric"
+              >
+            </label>
+          </div>
+
+          <button type="button" class="ghost-button compact-button chart-parameter-reset" @click="resetIndicatorSettings">
             回復預設
           </button>
         </div>

@@ -4,8 +4,8 @@ import { useStockNews } from '../composables/useStockNews';
 import { formatDate } from '../lib/formatters';
 
 const props = defineProps({
-  codeRef: {
-    type: Object,
+  code: {
+    type: String,
     required: true,
   },
   stockName: {
@@ -14,10 +14,10 @@ const props = defineProps({
   },
 });
 
-const { news, isLoading, errorMessage, hasLoaded, load } = useStockNews(props.codeRef);
+const { news, isLoading, errorMessage, hasLoaded, load } = useStockNews(() => props.code);
 
 const newsSearchUrl = computed(() => {
-  const code = String(props.codeRef?.value ?? '').trim();
+  const code = String(props.code ?? '').trim();
   const query = `${props.stockName || code} ${code}`.trim();
   return `https://news.google.com/search?q=${encodeURIComponent(query)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant`;
 });
