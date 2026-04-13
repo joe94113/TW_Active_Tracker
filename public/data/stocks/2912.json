@@ -3,7 +3,7 @@
   "name": "統一超",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T04:23:49.793Z",
+  "generatedAt": "2026-04-13T06:15:14.170Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3417,7 +3417,7 @@
       "high": 227.5,
       "low": 223,
       "close": 225,
-      "volume": 1548410,
+      "volume": 2303808,
       "turnover": null,
       "transactions": null,
       "change": -2.5,
@@ -3457,7 +3457,7 @@
     "close": 225,
     "change": -2.5,
     "changePercent": -1.098901098901099,
-    "volume": 1548410,
+    "volume": 2303808,
     "turnover": null,
     "return5": -0.881057268722467,
     "return20": 4.651162790697675,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 4.65%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 84.30%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 1,194,104 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3503,12 +3503,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-13T04:03:01.000Z",
+    "updatedAt": "2026-04-13T05:30:17.000Z",
     "previousClose": 227.5,
     "latestPrice": 225,
     "high": 227.5,
     "low": 223,
-    "volume": 1548410,
+    "volume": 2303808,
     "points": [
       {
         "timestamp": 1776042000,
@@ -3901,15 +3901,180 @@
         "time": "12:00",
         "price": 225,
         "high": 225,
-        "low": 225,
-        "volume": 3065,
+        "low": 224.5,
+        "volume": 7225,
         "change": -2.5,
         "changePercent": -1.098901098901099
       },
       {
-        "timestamp": 1776052981,
-        "dateTime": "2026-04-13T04:03:01.000Z",
-        "time": "12:03",
+        "timestamp": 1776053100,
+        "dateTime": "2026-04-13T04:05:00.000Z",
+        "time": "12:05",
+        "price": 225,
+        "high": 225.5,
+        "low": 225,
+        "volume": 20138,
+        "change": -2.5,
+        "changePercent": -1.098901098901099
+      },
+      {
+        "timestamp": 1776053400,
+        "dateTime": "2026-04-13T04:10:00.000Z",
+        "time": "12:10",
+        "price": 225,
+        "high": 225.5,
+        "low": 225,
+        "volume": 13154,
+        "change": -2.5,
+        "changePercent": -1.098901098901099
+      },
+      {
+        "timestamp": 1776053700,
+        "dateTime": "2026-04-13T04:15:00.000Z",
+        "time": "12:15",
+        "price": 225.5,
+        "high": 225.5,
+        "low": 225.5,
+        "volume": 20190,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776054000,
+        "dateTime": "2026-04-13T04:20:00.000Z",
+        "time": "12:20",
+        "price": 225.5,
+        "high": 225.5,
+        "low": 225.5,
+        "volume": 3123,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776054300,
+        "dateTime": "2026-04-13T04:25:00.000Z",
+        "time": "12:25",
+        "price": 225,
+        "high": 225.5,
+        "low": 225,
+        "volume": 5768,
+        "change": -2.5,
+        "changePercent": -1.098901098901099
+      },
+      {
+        "timestamp": 1776054900,
+        "dateTime": "2026-04-13T04:35:00.000Z",
+        "time": "12:35",
+        "price": 224.5,
+        "high": 225,
+        "low": 224.5,
+        "volume": 53104,
+        "change": -3,
+        "changePercent": -1.3186813186813187
+      },
+      {
+        "timestamp": 1776055200,
+        "dateTime": "2026-04-13T04:40:00.000Z",
+        "time": "12:40",
+        "price": 225.5,
+        "high": 225.5,
+        "low": 224.5,
+        "volume": 70602,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776055500,
+        "dateTime": "2026-04-13T04:45:00.000Z",
+        "time": "12:45",
+        "price": 225.5,
+        "high": 225.5,
+        "low": 225.5,
+        "volume": 50000,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776055800,
+        "dateTime": "2026-04-13T04:50:00.000Z",
+        "time": "12:50",
+        "price": 225.5,
+        "high": 225.5,
+        "low": 225.5,
+        "volume": 10169,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776056100,
+        "dateTime": "2026-04-13T04:55:00.000Z",
+        "time": "12:55",
+        "price": 225.5,
+        "high": 225.5,
+        "low": 225,
+        "volume": 28041,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776056400,
+        "dateTime": "2026-04-13T05:00:00.000Z",
+        "time": "13:00",
+        "price": 225.5,
+        "high": 225.5,
+        "low": 225,
+        "volume": 13574,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776056700,
+        "dateTime": "2026-04-13T05:05:00.000Z",
+        "time": "13:05",
+        "price": 226,
+        "high": 226,
+        "low": 225.5,
+        "volume": 8139,
+        "change": -1.5,
+        "changePercent": -0.6593406593406593
+      },
+      {
+        "timestamp": 1776057000,
+        "dateTime": "2026-04-13T05:10:00.000Z",
+        "time": "13:10",
+        "price": 225.5,
+        "high": 226,
+        "low": 225.5,
+        "volume": 27358,
+        "change": -2,
+        "changePercent": -0.8791208791208791
+      },
+      {
+        "timestamp": 1776057300,
+        "dateTime": "2026-04-13T05:15:00.000Z",
+        "time": "13:15",
+        "price": 226,
+        "high": 226,
+        "low": 225.5,
+        "volume": 41390,
+        "change": -1.5,
+        "changePercent": -0.6593406593406593
+      },
+      {
+        "timestamp": 1776057600,
+        "dateTime": "2026-04-13T05:20:00.000Z",
+        "time": "13:20",
+        "price": 224.5,
+        "high": 225.5,
+        "low": 224.5,
+        "volume": 76464,
+        "change": -3,
+        "changePercent": -1.3186813186813187
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
         "price": 225,
         "high": 225,
         "low": 225,
@@ -3999,12 +4164,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": -346534,
+        "investmentTrust": -3383,
+        "dealer": 234,
+        "total": -349683
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": 541079,
+        "investmentTrust": 0,
+        "dealer": -12705,
+        "total": 528374
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": -339406,
+        "investmentTrust": 0,
+        "dealer": 95123,
+        "total": -244283
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": 956153,
+        "investmentTrust": 58186,
+        "dealer": 6968,
+        "total": 1021307
+      },
+      {
+        "date": "2026-04-04",
+        "foreign": 239389,
+        "investmentTrust": 0,
+        "dealer": -1000,
+        "total": 238389
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 1050681,
+      "investmentTrust5Day": 54803,
+      "dealer5Day": 88620,
+      "total5Day": 1194104
     }
   },
   "持股分散": {
@@ -4199,11 +4400,11 @@
         "changePercent": -1.098901098901099,
         "return20": 4.651162790697675,
         "return60": 2.0408163265306123,
-        "volume": 1548410,
+        "volume": 2303808,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1050681,
+        "investmentTrust5Day": 54803,
+        "total5Day": 1194104,
         "largeHolderRatio": 84.3,
         "retailRatio": 7.659999999999999,
         "shortToMarginRatio": 0.3091190108191654,
@@ -4258,11 +4459,11 @@
         "changePercent": -1.098901098901099,
         "return20": 4.651162790697675,
         "return60": 2.0408163265306123,
-        "volume": 1548410,
+        "volume": 2303808,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1050681,
+        "investmentTrust5Day": 54803,
+        "total5Day": 1194104,
         "largeHolderRatio": 84.3,
         "retailRatio": 7.659999999999999,
         "shortToMarginRatio": 0.3091190108191654,

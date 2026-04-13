@@ -3,7 +3,7 @@
   "name": "卜蜂",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T04:23:41.983Z",
+  "generatedAt": "2026-04-13T06:15:05.716Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3416,29 +3416,29 @@
       "open": 143.5,
       "high": 145.5,
       "low": 141.5,
-      "close": 145.5,
-      "volume": 911392,
+      "close": 145,
+      "volume": 1149265,
       "turnover": null,
       "transactions": null,
-      "change": 2,
-      "changePercent": 1.3937282229965158,
-      "maFast": 142.5,
-      "maShort": 140.75,
-      "maMedium": 145.05,
-      "maLong": 148.49166666666667,
-      "rsi": 49.79040801669657,
-      "stochasticK": 72.93502927387783,
-      "stochasticD": 51.64679284442186,
-      "macd": -2.4090188184790122,
-      "macdSignal": -2.5642022095598724,
-      "macdHist": 0.1551833910808602,
-      "ma5": 142.5,
-      "ma10": 140.75,
-      "ma20": 145.05,
-      "ma60": 148.49166666666667,
-      "rsi14": 49.79040801669657,
-      "k9": 72.93502927387783,
-      "d9": 51.64679284442186
+      "change": 1.5,
+      "changePercent": 1.0452961672473868,
+      "maFast": 142.4,
+      "maShort": 140.7,
+      "maMedium": 145.025,
+      "maLong": 148.48333333333332,
+      "rsi": 48.77921276536381,
+      "stochasticK": 71.54614038498895,
+      "stochasticD": 51.183829881458905,
+      "macd": -2.44890485836504,
+      "macdSignal": -2.572179417537078,
+      "macdHist": 0.12327455917203789,
+      "ma5": 142.4,
+      "ma10": 140.7,
+      "ma20": 145.025,
+      "ma60": 148.48333333333332,
+      "rsi14": 48.77921276536381,
+      "k9": 71.54614038498895,
+      "d9": 51.183829881458905
     }
   ],
   "technicalSignals": [
@@ -3454,40 +3454,40 @@
     "MACD 翻正"
   ],
   "最新摘要": {
-    "close": 145.5,
-    "change": 2,
-    "changePercent": 1.3937282229965158,
-    "volume": 911392,
+    "close": 145,
+    "change": 1.5,
+    "changePercent": 1.0452961672473868,
+    "volume": 1149265,
     "turnover": null,
-    "return5": 4.676258992805756,
-    "return20": -6.129032258064516,
-    "return60": 9.398496240601503
+    "return5": 4.316546762589928,
+    "return20": -6.451612903225806,
+    "return60": 9.022556390977442
   },
   "最新指標": {
-    "maFast": 142.5,
-    "maShort": 140.75,
-    "maMedium": 145.05,
-    "maLong": 148.49166666666667,
-    "ma5": 142.5,
-    "ma10": 140.75,
-    "ma20": 145.05,
-    "ma60": 148.49166666666667,
-    "rsi": 49.79040801669657,
-    "rsi14": 49.79040801669657,
-    "stochasticK": 72.93502927387783,
-    "stochasticD": 51.64679284442186,
-    "k9": 72.93502927387783,
-    "d9": 51.64679284442186,
-    "macd": -2.4090188184790122,
-    "macdSignal": -2.5642022095598724,
-    "macdHist": 0.1551833910808602
+    "maFast": 142.4,
+    "maShort": 140.7,
+    "maMedium": 145.025,
+    "maLong": 148.48333333333332,
+    "ma5": 142.4,
+    "ma10": 140.7,
+    "ma20": 145.025,
+    "ma60": 148.48333333333332,
+    "rsi": 48.77921276536381,
+    "rsi14": 48.77921276536381,
+    "stochasticK": 71.54614038498895,
+    "stochasticD": 51.183829881458905,
+    "k9": 71.54614038498895,
+    "d9": 51.183829881458905,
+    "macd": -2.44890485836504,
+    "macdSignal": -2.572179417537078,
+    "macdHist": 0.12327455917203789
   },
   "觀察摘要": [
-    "卜蜂 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
+    "卜蜂 收盤落在 MA20 與 MA60 下方，現階段仍屬偏弱整理格局。",
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
-    "近 20 個交易日報酬 -6.13%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 65.18%，相較前次 增加 0.00 個百分點。"
+    "近 20 個交易日報酬 -6.45%，可用來觀察波段資金是否持續留在主線。",
+    "最近 5 個交易日三大法人合計賣超 1,045,961 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3503,12 +3503,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-13T04:03:38.000Z",
+    "updatedAt": "2026-04-13T05:30:20.000Z",
     "previousClose": 143.5,
-    "latestPrice": 145.5,
+    "latestPrice": 145,
     "high": 145.5,
     "low": 141.5,
-    "volume": 911392,
+    "volume": 1149265,
     "points": [
       {
         "timestamp": 1776042000,
@@ -3910,23 +3910,199 @@
         "timestamp": 1776052800,
         "dateTime": "2026-04-13T04:00:00.000Z",
         "time": "12:00",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 6005,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776053100,
+        "dateTime": "2026-04-13T04:05:00.000Z",
+        "time": "12:05",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 10268,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776053400,
+        "dateTime": "2026-04-13T04:10:00.000Z",
+        "time": "12:10",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 9520,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776053700,
+        "dateTime": "2026-04-13T04:15:00.000Z",
+        "time": "12:15",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 11405,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776054000,
+        "dateTime": "2026-04-13T04:20:00.000Z",
+        "time": "12:20",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 9004,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776054300,
+        "dateTime": "2026-04-13T04:25:00.000Z",
+        "time": "12:25",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 8048,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776054600,
+        "dateTime": "2026-04-13T04:30:00.000Z",
+        "time": "12:30",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 16016,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776054900,
+        "dateTime": "2026-04-13T04:35:00.000Z",
+        "time": "12:35",
         "price": 145,
         "high": 145.5,
         "low": 145,
-        "volume": 4004,
+        "volume": 6230,
         "change": 1.5,
         "changePercent": 1.0452961672473868
       },
       {
-        "timestamp": 1776053018,
-        "dateTime": "2026-04-13T04:03:38.000Z",
-        "time": "12:03",
+        "timestamp": 1776055200,
+        "dateTime": "2026-04-13T04:40:00.000Z",
+        "time": "12:40",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 9339,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776055500,
+        "dateTime": "2026-04-13T04:45:00.000Z",
+        "time": "12:45",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 11053,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776055800,
+        "dateTime": "2026-04-13T04:50:00.000Z",
+        "time": "12:50",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 6002,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776056100,
+        "dateTime": "2026-04-13T04:55:00.000Z",
+        "time": "12:55",
         "price": 145.5,
         "high": 145.5,
         "low": 145.5,
-        "volume": 0,
+        "volume": 5023,
         "change": 2,
         "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776056400,
+        "dateTime": "2026-04-13T05:00:00.000Z",
+        "time": "13:00",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 8202,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776056700,
+        "dateTime": "2026-04-13T05:05:00.000Z",
+        "time": "13:05",
+        "price": 145,
+        "high": 145.5,
+        "low": 145,
+        "volume": 50607,
+        "change": 1.5,
+        "changePercent": 1.0452961672473868
+      },
+      {
+        "timestamp": 1776057000,
+        "dateTime": "2026-04-13T05:10:00.000Z",
+        "time": "13:10",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 18161,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776057300,
+        "dateTime": "2026-04-13T05:15:00.000Z",
+        "time": "13:15",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145.5,
+        "volume": 3232,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776057600,
+        "dateTime": "2026-04-13T05:20:00.000Z",
+        "time": "13:20",
+        "price": 145.5,
+        "high": 145.5,
+        "low": 145,
+        "volume": 14762,
+        "change": 2,
+        "changePercent": 1.3937282229965158
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
+        "price": 145,
+        "high": 145,
+        "low": 145,
+        "volume": 0,
+        "change": 1.5,
+        "changePercent": 1.0452961672473868
       }
     ],
     "資料來源": [
@@ -4010,12 +4186,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": -250859,
+        "investmentTrust": 0,
+        "dealer": 177841,
+        "total": -73018
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": -203000,
+        "investmentTrust": -2000,
+        "dealer": 52493,
+        "total": -152507
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": -621000,
+        "investmentTrust": 0,
+        "dealer": 16499,
+        "total": -604501
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": -212960,
+        "investmentTrust": 56000,
+        "dealer": 53025,
+        "total": -103935
+      },
+      {
+        "date": "2026-04-04",
+        "foreign": -203000,
+        "investmentTrust": 93000,
+        "dealer": -2000,
+        "total": -112000
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -1490819,
+      "investmentTrust5Day": 147000,
+      "dealer5Day": 297858,
+      "total5Day": -1045961
     }
   },
   "持股分散": {
@@ -4196,24 +4408,24 @@
     "peerCount": 2,
     "rank20Day": 2,
     "rankDaily": 1,
-    "averageReturn20": -1.8519593425550716,
-    "averageChangePercent": 0.6968641114982579,
+    "averageReturn20": -1.870598486394236,
+    "averageChangePercent": 0.6619217185412418,
     "leaders": [
       {
         "code": "1216",
         "name": "統一",
         "industryName": "食品工業",
         "priceDate": "2026-04-13",
-        "close": 71.80000305175781,
-        "change": 0,
-        "changePercent": 0,
-        "return20": 2.425113572954373,
-        "return60": -6.753242789924919,
-        "volume": 3461836,
+        "close": 72,
+        "change": 0.1999969482421875,
+        "changePercent": 0.2785472698350967,
+        "return20": 2.710415930437334,
+        "return60": -6.493506493506493,
+        "volume": 8442642,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -4102899,
+        "investmentTrust5Day": -1341207,
+        "total5Day": -4868498,
         "largeHolderRatio": 88.45,
         "retailRatio": 4.470000000000001,
         "shortToMarginRatio": 2.1940928270042197,
@@ -4238,7 +4450,7 @@
           72.69999694824219,
           72,
           71.80000305175781,
-          71.80000305175781
+          72
         ],
         "technicalSignals": [
           {
@@ -4261,16 +4473,16 @@
         "name": "卜蜂",
         "industryName": "食品工業",
         "priceDate": "2026-04-13",
-        "close": 145.5,
-        "change": 2,
-        "changePercent": 1.3937282229965158,
-        "return20": -6.129032258064516,
-        "return60": 9.398496240601503,
-        "volume": 911392,
+        "close": 145,
+        "change": 1.5,
+        "changePercent": 1.0452961672473868,
+        "return20": -6.451612903225806,
+        "return60": 9.022556390977442,
+        "volume": 1149265,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -1490819,
+        "investmentTrust5Day": 147000,
+        "total5Day": -1045961,
         "largeHolderRatio": 65.18,
         "retailRatio": 18.67,
         "shortToMarginRatio": null,
@@ -4295,7 +4507,7 @@
           141,
           141,
           143.5,
-          145.5
+          145
         ],
         "technicalSignals": [
           {
@@ -4320,16 +4532,16 @@
         "name": "卜蜂",
         "industryName": "食品工業",
         "priceDate": "2026-04-13",
-        "close": 145.5,
-        "change": 2,
-        "changePercent": 1.3937282229965158,
-        "return20": -6.129032258064516,
-        "return60": 9.398496240601503,
-        "volume": 911392,
+        "close": 145,
+        "change": 1.5,
+        "changePercent": 1.0452961672473868,
+        "return20": -6.451612903225806,
+        "return60": 9.022556390977442,
+        "volume": 1149265,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -1490819,
+        "investmentTrust5Day": 147000,
+        "total5Day": -1045961,
         "largeHolderRatio": 65.18,
         "retailRatio": 18.67,
         "shortToMarginRatio": null,
@@ -4354,7 +4566,7 @@
           141,
           141,
           143.5,
-          145.5
+          145
         ],
         "technicalSignals": [
           {
@@ -4377,16 +4589,16 @@
         "name": "統一",
         "industryName": "食品工業",
         "priceDate": "2026-04-13",
-        "close": 71.80000305175781,
-        "change": 0,
-        "changePercent": 0,
-        "return20": 2.425113572954373,
-        "return60": -6.753242789924919,
-        "volume": 3461836,
+        "close": 72,
+        "change": 0.1999969482421875,
+        "changePercent": 0.2785472698350967,
+        "return20": 2.710415930437334,
+        "return60": -6.493506493506493,
+        "volume": 8442642,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -4102899,
+        "investmentTrust5Day": -1341207,
+        "total5Day": -4868498,
         "largeHolderRatio": 88.45,
         "retailRatio": 4.470000000000001,
         "shortToMarginRatio": 2.1940928270042197,
@@ -4411,7 +4623,7 @@
           72.69999694824219,
           72,
           71.80000305175781,
-          71.80000305175781
+          72
         ],
         "technicalSignals": [
           {
@@ -4431,7 +4643,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 -1.85%，短線強度落後族群。"
+      "近 20 日報酬低於同產業平均 -1.87%，短線強度落後族群。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

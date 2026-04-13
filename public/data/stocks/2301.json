@@ -3,7 +3,7 @@
   "name": "光寶科",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T04:23:43.587Z",
+  "generatedAt": "2026-04-13T06:15:07.517Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3417,7 +3417,7 @@
       "high": 159.5,
       "low": 153,
       "close": 153.5,
-      "volume": 20178096,
+      "volume": 30914312,
       "turnover": null,
       "transactions": null,
       "change": -8,
@@ -3457,7 +3457,7 @@
     "close": 153.5,
     "change": -8,
     "changePercent": -4.953560371517028,
-    "volume": 20178096,
+    "volume": 30914312,
     "turnover": null,
     "return5": 5.862068965517241,
     "return20": -3.761755485893417,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -3.76%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 78.10%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 17,939,579 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3503,12 +3503,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-04-13",
-    "updatedAt": "2026-04-13T04:03:42.000Z",
+    "updatedAt": "2026-04-13T05:30:06.000Z",
     "previousClose": 161.5,
     "latestPrice": 153.5,
     "high": 159.5,
     "low": 153,
-    "volume": 20178096,
+    "volume": 30914312,
     "points": [
       {
         "timestamp": 1776042000,
@@ -3913,14 +3913,190 @@
         "price": 153.5,
         "high": 154,
         "low": 153.5,
-        "volume": 134685,
+        "volume": 234489,
         "change": -8,
         "changePercent": -4.953560371517028
       },
       {
-        "timestamp": 1776053022,
-        "dateTime": "2026-04-13T04:03:42.000Z",
-        "time": "12:03",
+        "timestamp": 1776053100,
+        "dateTime": "2026-04-13T04:05:00.000Z",
+        "time": "12:05",
+        "price": 153.5,
+        "high": 154,
+        "low": 153.5,
+        "volume": 185438,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776053400,
+        "dateTime": "2026-04-13T04:10:00.000Z",
+        "time": "12:10",
+        "price": 153.5,
+        "high": 154,
+        "low": 153,
+        "volume": 1351462,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776053700,
+        "dateTime": "2026-04-13T04:15:00.000Z",
+        "time": "12:15",
+        "price": 153,
+        "high": 153.5,
+        "low": 153,
+        "volume": 200170,
+        "change": -8.5,
+        "changePercent": -5.263157894736842
+      },
+      {
+        "timestamp": 1776054000,
+        "dateTime": "2026-04-13T04:20:00.000Z",
+        "time": "12:20",
+        "price": 153.5,
+        "high": 153.5,
+        "low": 153,
+        "volume": 356547,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776054300,
+        "dateTime": "2026-04-13T04:25:00.000Z",
+        "time": "12:25",
+        "price": 153.5,
+        "high": 153.5,
+        "low": 153,
+        "volume": 445323,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776054600,
+        "dateTime": "2026-04-13T04:30:00.000Z",
+        "time": "12:30",
+        "price": 153,
+        "high": 153.5,
+        "low": 153,
+        "volume": 235781,
+        "change": -8.5,
+        "changePercent": -5.263157894736842
+      },
+      {
+        "timestamp": 1776054900,
+        "dateTime": "2026-04-13T04:35:00.000Z",
+        "time": "12:35",
+        "price": 153,
+        "high": 153.5,
+        "low": 153,
+        "volume": 1174146,
+        "change": -8.5,
+        "changePercent": -5.263157894736842
+      },
+      {
+        "timestamp": 1776055200,
+        "dateTime": "2026-04-13T04:40:00.000Z",
+        "time": "12:40",
+        "price": 153.5,
+        "high": 154,
+        "low": 153,
+        "volume": 552333,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776055500,
+        "dateTime": "2026-04-13T04:45:00.000Z",
+        "time": "12:45",
+        "price": 153.5,
+        "high": 154,
+        "low": 153.5,
+        "volume": 254476,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776055800,
+        "dateTime": "2026-04-13T04:50:00.000Z",
+        "time": "12:50",
+        "price": 153,
+        "high": 153.5,
+        "low": 153,
+        "volume": 452722,
+        "change": -8.5,
+        "changePercent": -5.263157894736842
+      },
+      {
+        "timestamp": 1776056100,
+        "dateTime": "2026-04-13T04:55:00.000Z",
+        "time": "12:55",
+        "price": 153.5,
+        "high": 154,
+        "low": 153,
+        "volume": 363083,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776056400,
+        "dateTime": "2026-04-13T05:00:00.000Z",
+        "time": "13:00",
+        "price": 153.5,
+        "high": 154,
+        "low": 153.5,
+        "volume": 350275,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776056700,
+        "dateTime": "2026-04-13T05:05:00.000Z",
+        "time": "13:05",
+        "price": 154,
+        "high": 154,
+        "low": 153,
+        "volume": 803138,
+        "change": -7.5,
+        "changePercent": -4.643962848297214
+      },
+      {
+        "timestamp": 1776057000,
+        "dateTime": "2026-04-13T05:10:00.000Z",
+        "time": "13:10",
+        "price": 153.5,
+        "high": 154,
+        "low": 153.5,
+        "volume": 301141,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776057300,
+        "dateTime": "2026-04-13T05:15:00.000Z",
+        "time": "13:15",
+        "price": 154,
+        "high": 154,
+        "low": 153.5,
+        "volume": 339470,
+        "change": -7.5,
+        "changePercent": -4.643962848297214
+      },
+      {
+        "timestamp": 1776057600,
+        "dateTime": "2026-04-13T05:20:00.000Z",
+        "time": "13:20",
+        "price": 153.5,
+        "high": 154,
+        "low": 153.5,
+        "volume": 778285,
+        "change": -8,
+        "changePercent": -4.953560371517028
+      },
+      {
+        "timestamp": 1776058200,
+        "dateTime": "2026-04-13T05:30:00.000Z",
+        "time": "13:30",
         "price": 153.5,
         "high": 153.5,
         "low": 153.5,
@@ -4010,12 +4186,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": 189231,
+        "investmentTrust": 57176,
+        "dealer": 1116277,
+        "total": 1362684
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": 3782693,
+        "investmentTrust": -19775,
+        "dealer": -72644,
+        "total": 3690274
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": 6563862,
+        "investmentTrust": 1426,
+        "dealer": 672480,
+        "total": 7237768
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": 1431902,
+        "investmentTrust": 509138,
+        "dealer": 469813,
+        "total": 2410853
+      },
+      {
+        "date": "2026-04-04",
+        "foreign": 2968000,
+        "investmentTrust": 155000,
+        "dealer": 115000,
+        "total": 3238000
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 14935688,
+      "investmentTrust5Day": 702965,
+      "dealer5Day": 2300926,
+      "total5Day": 17939579
     }
   },
   "持股分散": {
@@ -4207,24 +4419,24 @@
     "peerCount": 14,
     "rank20Day": 11,
     "rankDaily": 14,
-    "averageReturn20": 2.7139498240015265,
-    "averageChangePercent": -0.8088274458116119,
+    "averageReturn20": 3.042136573845762,
+    "averageChangePercent": -0.488014932891494,
     "leaders": [
       {
         "code": "6831",
         "name": "邁科",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 444.5,
-        "change": 14.5,
-        "changePercent": 3.372093023255814,
-        "return20": 48.66220735785953,
-        "return60": 45.26143790849673,
-        "volume": 985752,
+        "close": 449.5,
+        "change": 19.5,
+        "changePercent": 4.534883720930233,
+        "return20": 50.33444816053512,
+        "return60": 46.89542483660131,
+        "volume": 1220767,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 464650,
+        "investmentTrust5Day": -308,
+        "total5Day": 472826,
         "largeHolderRatio": 60,
         "retailRatio": 12.8,
         "shortToMarginRatio": null,
@@ -4249,7 +4461,7 @@
           418.5,
           417.5,
           430,
-          444.5
+          449.5
         ],
         "technicalSignals": [
           {
@@ -4268,77 +4480,20 @@
         "signalCount": 1
       },
       {
-        "code": "2376",
-        "name": "技嘉",
-        "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-13",
-        "close": 266,
-        "change": 3.5,
-        "changePercent": 1.3333333333333335,
-        "return20": 16.666666666666664,
-        "return60": 7.258064516129033,
-        "volume": 7165141,
-        "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
-        "largeHolderRatio": 63.85,
-        "retailRatio": 19.97,
-        "shortToMarginRatio": 1.1509371917132523,
-        "activeEtfCount": 1,
-        "sparkline20": [
-          233,
-          236.5,
-          248,
-          249.5,
-          247.5,
-          248.5,
-          232.5,
-          235,
-          234,
-          233.5,
-          235,
-          228,
-          222.5,
-          232,
-          228,
-          222.5,
-          244.5,
-          251,
-          262.5,
-          266
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "技嘉 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1
-      },
-      {
         "code": "3017",
         "name": "奇鋐",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 2185,
-        "change": -80,
-        "changePercent": -3.532008830022075,
-        "return20": 16.53333333333333,
-        "return60": 50.689655172413794,
-        "volume": 2245298,
+        "close": 2200,
+        "change": -65,
+        "changePercent": -2.869757174392936,
+        "return20": 17.333333333333336,
+        "return60": 51.724137931034484,
+        "volume": 3113174,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 694256,
+        "investmentTrust5Day": 137645,
+        "total5Day": 872703,
         "largeHolderRatio": 68.13,
         "retailRatio": 7.62,
         "shortToMarginRatio": 0.8849557522123894,
@@ -4363,7 +4518,7 @@
           2230,
           2235,
           2265,
-          2185
+          2200
         ],
         "technicalSignals": [
           {
@@ -4372,6 +4527,63 @@
             "tone": "normal",
             "importance": 1,
             "description": "奇鋐 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1
+      },
+      {
+        "code": "2376",
+        "name": "技嘉",
+        "industryName": "電腦及週邊設備業",
+        "priceDate": "2026-04-13",
+        "close": 264,
+        "change": 1.5,
+        "changePercent": 0.5714285714285714,
+        "return20": 15.789473684210526,
+        "return60": 6.451612903225806,
+        "volume": 8998451,
+        "turnover": null,
+        "foreign5Day": 6498862,
+        "investmentTrust5Day": 1370120,
+        "total5Day": 9125421,
+        "largeHolderRatio": 63.85,
+        "retailRatio": 19.97,
+        "shortToMarginRatio": 1.1509371917132523,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          233,
+          236.5,
+          248,
+          249.5,
+          247.5,
+          248.5,
+          232.5,
+          235,
+          234,
+          233.5,
+          235,
+          228,
+          222.5,
+          232,
+          228,
+          222.5,
+          244.5,
+          251,
+          262.5,
+          264
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "技嘉 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -4391,11 +4603,11 @@
         "changePercent": -0.7776049766718507,
         "return20": 10.571923743500866,
         "return60": 14.748201438848922,
-        "volume": 11928874,
+        "volume": 16814838,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 59433201,
+        "investmentTrust5Day": 2479403,
+        "total5Day": 64654508,
         "largeHolderRatio": 85.28,
         "retailRatio": 7.459999999999999,
         "shortToMarginRatio": 7.819580566972284,
@@ -4443,16 +4655,16 @@
         "name": "勤誠",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 905,
-        "change": 15,
-        "changePercent": 1.6853932584269662,
-        "return20": 2.724177071509648,
-        "return60": -5.433646812957157,
-        "volume": 1722127,
+        "close": 900,
+        "change": 10,
+        "changePercent": 1.1235955056179776,
+        "return20": 2.1566401816118046,
+        "return60": -5.956112852664576,
+        "volume": 2194242,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 870263,
+        "investmentTrust5Day": -1582603,
+        "total5Day": -676071,
         "largeHolderRatio": 65.85,
         "retailRatio": 16.93,
         "shortToMarginRatio": 1.3058239749281797,
@@ -4477,7 +4689,7 @@
           898,
           880,
           890,
-          905
+          900
         ],
         "technicalSignals": [
           {
@@ -4505,11 +4717,11 @@
         "changePercent": -0.3703703703703704,
         "return20": 1.509433962264151,
         "return60": -13.225806451612904,
-        "volume": 19415101,
+        "volume": 26926793,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 39801271,
+        "investmentTrust5Day": 1818662,
+        "total5Day": 41653917,
         "largeHolderRatio": 57.620000000000005,
         "retailRatio": 22.26,
         "shortToMarginRatio": 0.5452997336908277,
@@ -4557,16 +4769,16 @@
         "name": "和碩",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 77.5999984741211,
-        "change": -3.0999984741210938,
-        "changePercent": -3.8413861107198195,
-        "return20": 0.648508443444168,
-        "return60": 12.954879070204425,
-        "volume": 11881397,
+        "close": 78,
+        "change": -2.6999969482421875,
+        "changePercent": -3.345721251977072,
+        "return20": 1.1673171772902111,
+        "return60": 13.537122947420698,
+        "volume": 16370244,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 3008797,
+        "investmentTrust5Day": 595480,
+        "total5Day": 4679935,
         "largeHolderRatio": 77.83,
         "retailRatio": 10.26,
         "shortToMarginRatio": 0.4549050632911392,
@@ -4591,7 +4803,7 @@
           79.5999984741211,
           80,
           80.69999694824219,
-          77.5999984741211
+          78
         ],
         "technicalSignals": [
           {
@@ -4614,16 +4826,16 @@
         "name": "華碩",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 577,
-        "change": -1,
-        "changePercent": -0.17301038062283738,
-        "return20": -0.6884681583476765,
-        "return60": 5.677655677655678,
-        "volume": 1787847,
+        "close": 578,
+        "change": 0,
+        "changePercent": 0,
+        "return20": -0.5163511187607573,
+        "return60": 5.86080586080586,
+        "volume": 2906957,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -1175898,
+        "investmentTrust5Day": 350093,
+        "total5Day": -745552,
         "largeHolderRatio": 71.04,
         "retailRatio": 13.180000000000001,
         "shortToMarginRatio": 0.8781977854142803,
@@ -4648,7 +4860,7 @@
           562,
           568,
           578,
-          577
+          578
         ],
         "technicalSignals": [
           {
@@ -4673,16 +4885,16 @@
         "name": "神基",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 97.9000015258789,
-        "change": -2.0999984741210938,
-        "changePercent": -2.0999984741210938,
-        "return20": -28.014704760383157,
-        "return60": -13.744492047683782,
-        "volume": 4303561,
+        "close": 98.5,
+        "change": -1.5,
+        "changePercent": -1.5,
+        "return20": -27.573529411764707,
+        "return60": -13.215859030837004,
+        "volume": 5461086,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -2371324,
+        "investmentTrust5Day": -240000,
+        "total5Day": -2226540,
         "largeHolderRatio": 76.57,
         "retailRatio": 9.93,
         "shortToMarginRatio": 1.0691003911342896,
@@ -4707,7 +4919,7 @@
           101,
           100.5,
           100,
-          97.9000015258789
+          98.5
         ],
         "technicalSignals": [
           {
@@ -4730,16 +4942,16 @@
         "name": "尼得科超眾",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 145,
-        "change": 0.5,
-        "changePercent": 0.34602076124567477,
-        "return20": -13.690476190476192,
-        "return60": 26.637554585152838,
-        "volume": 108405,
+        "close": 147.5,
+        "change": 3,
+        "changePercent": 2.0761245674740483,
+        "return20": -12.202380952380953,
+        "return60": 28.82096069868996,
+        "volume": 178131,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 100015,
+        "investmentTrust5Day": -404,
+        "total5Day": 113633,
         "largeHolderRatio": 87.67,
         "retailRatio": 7.21,
         "shortToMarginRatio": null,
@@ -4764,7 +4976,7 @@
           146,
           144.5,
           144.5,
-          145
+          147.5
         ],
         "technicalSignals": [
           {
@@ -4787,16 +4999,16 @@
         "name": "緯穎",
         "industryName": "電腦及週邊設備業",
         "priceDate": "2026-04-13",
-        "close": 3630,
-        "change": 0,
-        "changePercent": 0,
-        "return20": -11.138310893512852,
-        "return60": -20.044052863436125,
-        "volume": 892853,
+        "close": 3645,
+        "change": 15,
+        "changePercent": 0.4132231404958678,
+        "return20": -10.771113831089352,
+        "return60": -19.7136563876652,
+        "volume": 1348392,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 86844,
+        "investmentTrust5Day": -25104,
+        "total5Day": 82980,
         "largeHolderRatio": 65.43,
         "retailRatio": 9.86,
         "shortToMarginRatio": 0.10861694424330195,
@@ -4821,7 +5033,7 @@
           3570,
           3580,
           3630,
-          3630
+          3645
         ],
         "technicalSignals": [
           {
@@ -4841,7 +5053,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 2.71%，短線強度落後族群。"
+      "近 20 日報酬低於同產業平均 3.04%，短線強度落後族群。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }
