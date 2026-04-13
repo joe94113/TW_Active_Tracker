@@ -1,6 +1,6 @@
 {
   "appName": "台股主動通",
-  "產生時間": "2026-04-12T09:51:36.186Z",
+  "產生時間": "2026-04-13T04:24:08.963Z",
   "最新揭露日期": "2026-04-13",
   "已串接ETF數": 15,
   "已串接ETF": [
@@ -17,7 +17,7 @@
     {
       "code": "00983A",
       "name": "主動中信ARK創新",
-      "disclosureDate": "2026-04-09"
+      "disclosureDate": "2026-04-10"
     },
     {
       "code": "00985A",
@@ -32,7 +32,7 @@
     {
       "code": "00989A",
       "name": "主動摩根美國科技",
-      "disclosureDate": "2026-04-10"
+      "disclosureDate": "2026-04-13"
     },
     {
       "code": "00991A",
@@ -3321,12 +3321,20 @@
   "不重複異動": {
     "新增": [
       {
-        "code": "TSLA US",
-        "name": "特斯拉公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 21823,
-        "weightDelta": 7.89
+        "code": "GOOGL US",
+        "name": "Alphabet 公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 4500,
+        "weightDelta": 7.3159
+      },
+      {
+        "code": "AVGO US",
+        "name": "博通公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 3900,
+        "weightDelta": 7.0655
       },
       {
         "code": "SNDK US",
@@ -3337,92 +3345,12 @@
         "weightDelta": 7
       },
       {
-        "code": "PLTR US",
-        "name": "帕蘭提爾科技公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 45310,
-        "weightDelta": 6.17
-      },
-      {
-        "code": "ROKU US",
-        "name": "Roku Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 56302,
-        "weightDelta": 5.88
-      },
-      {
-        "code": "TEM US",
-        "name": "Tempus AI Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 115068,
-        "weightDelta": 5.3
-      },
-      {
-        "code": "SHOP US",
-        "name": "Shopify公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 43449,
-        "weightDelta": 5.09
-      },
-      {
-        "code": "GOOG",
-        "name": "ALPHABET INC COM USD 0.001",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 8427,
-        "weightDelta": 4.934
-      },
-      {
-        "code": "LRCX",
-        "name": "LAM RESEARCH CORP COM USD.001000000",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 8925,
-        "weightDelta": 4.2741
-      },
-      {
         "code": "TSEM US",
         "name": "TOWER SEMICONDUCTOR LTD",
         "etfCode": "00990A",
         "etfName": "主動元大AI新經濟",
         "sharesDelta": 156582,
         "weightDelta": 4.07
-      },
-      {
-        "code": "TTWO",
-        "name": "TAKE-TWO INTERACTIVE SOFTWARE COM USD0.01",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 10365,
-        "weightDelta": 3.7991
-      },
-      {
-        "code": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 10985,
-        "weightDelta": 3.7389
-      },
-      {
-        "code": "AVGO",
-        "name": "BROADCOM INC COM NPV",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 5671,
-        "weightDelta": 3.7249
-      },
-      {
-        "code": "META",
-        "name": "META PLATFORMS INC COM USD.000006",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 3155,
-        "weightDelta": 3.6691
       },
       {
         "code": "5801 JP",
@@ -3433,20 +3361,12 @@
         "weightDelta": 3.63
       },
       {
-        "code": "CIEN",
-        "name": "CIENA CORP COM USD0.01",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 3974,
-        "weightDelta": 3.5845
-      },
-      {
-        "code": "CRCL US",
-        "name": "Circle Internet Group Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 40349,
-        "weightDelta": 3.58
+        "code": "AMZN US",
+        "name": "AMAZON. COM INC",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 3000,
+        "weightDelta": 3.5781
       },
       {
         "code": "CIEN US",
@@ -3455,14 +3375,6 @@
         "etfName": "主動元大AI新經濟",
         "sharesDelta": 55742,
         "weightDelta": 3.46
-      },
-      {
-        "code": "TSLA",
-        "name": "TESLA INC COM USD0.001",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 5392,
-        "weightDelta": 3.4489
       },
       {
         "code": "2395",
@@ -3481,30 +3393,6 @@
         "weightDelta": 3.16
       },
       {
-        "code": "TXG US",
-        "name": "10X Genomics Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 126095,
-        "weightDelta": 3.03
-      },
-      {
-        "code": "COIN US",
-        "name": "比特幣基地全球公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 17000,
-        "weightDelta": 3
-      },
-      {
-        "code": "CRSP US",
-        "name": "CRISPR治療公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 54223,
-        "weightDelta": 2.93
-      },
-      {
         "code": "8306 JT",
         "name": "三菱UFJ金融集團公司",
         "etfCode": "00986A",
@@ -3513,36 +3401,12 @@
         "weightDelta": 2.7413
       },
       {
-        "code": "BEAM US",
-        "name": "光束治療公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 99465,
-        "weightDelta": 2.73
-      },
-      {
         "code": "AIXA GR",
         "name": "AIXTRON SE",
         "etfCode": "00990A",
         "etfName": "主動元大AI新經濟",
         "sharesDelta": 503734,
         "weightDelta": 2.73
-      },
-      {
-        "code": "SNOW",
-        "name": "SNOWFLAKE INC-CLASS A COM 1.000000000",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 11055,
-        "weightDelta": 2.7056
-      },
-      {
-        "code": "TSM US",
-        "name": "台積電",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 6994,
-        "weightDelta": 2.67
       },
       {
         "code": "LRCX US",
@@ -3559,11 +3423,629 @@
         "etfName": "主動台新優勢成長",
         "sharesDelta": 340000,
         "weightDelta": 2.6259
+      },
+      {
+        "code": "5706 JP",
+        "name": "MITSUI KINZOKU CO LTD",
+        "etfCode": "00990A",
+        "etfName": "主動元大AI新經濟",
+        "sharesDelta": 92300,
+        "weightDelta": 2.57
+      },
+      {
+        "code": "005930 KP",
+        "name": "SAMSUNG ELECTRONICS CO LTD",
+        "etfCode": "00990A",
+        "etfName": "主動元大AI新經濟",
+        "sharesDelta": 143231,
+        "weightDelta": 2.52
+      },
+      {
+        "code": "3167",
+        "name": "大量",
+        "etfCode": "00401A",
+        "etfName": "主動摩根台灣鑫收",
+        "sharesDelta": 96000,
+        "weightDelta": 2.2707
+      },
+      {
+        "code": "WMT UN",
+        "name": "沃爾瑪公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 3400,
+        "weightDelta": 2.2411
+      },
+      {
+        "code": "HWM US",
+        "name": "Howmet航太公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 1700,
+        "weightDelta": 2.2047
+      },
+      {
+        "code": "ENR GY",
+        "name": "Siemens Energy AG",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 2200,
+        "weightDelta": 2.1556
+      },
+      {
+        "code": "7011 JT",
+        "name": "三菱重工業",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 14000,
+        "weightDelta": 2.1517
+      },
+      {
+        "code": "SU FP",
+        "name": "施奈德電機公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 1400,
+        "weightDelta": 2.1348
+      },
+      {
+        "code": "ETN US",
+        "name": "伊頓公開有限公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 1000,
+        "weightDelta": 2.0441
+      },
+      {
+        "code": "IFX GY",
+        "name": "英飛凌科技股份有限公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 8000,
+        "weightDelta": 2.0192
+      },
+      {
+        "code": "BE US",
+        "name": "BLOOM ENERGY CORP- A",
+        "etfCode": "00990A",
+        "etfName": "主動元大AI新經濟",
+        "sharesDelta": 97600,
+        "weightDelta": 1.99
+      },
+      {
+        "code": "6213",
+        "name": "聯茂",
+        "etfCode": "00996A",
+        "etfName": "主動兆豐台灣豐收",
+        "sharesDelta": 277000,
+        "weightDelta": 1.98
+      },
+      {
+        "code": "MSFT US",
+        "name": "Microsoft Corp",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 1000,
+        "weightDelta": 1.9044
+      },
+      {
+        "code": "CRWD US",
+        "name": "Crowdstrike控股公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 938,
+        "weightDelta": 1.8898
+      },
+      {
+        "code": "6501 JT",
+        "name": "日立製作所有限公司",
+        "etfCode": "00986A",
+        "etfName": "主動台新龍頭成長",
+        "sharesDelta": 12000,
+        "weightDelta": 1.8682
+      },
+      {
+        "code": "6787 JP",
+        "name": "MEIKO ELECTRONICS CO LTD",
+        "etfCode": "00990A",
+        "etfName": "主動元大AI新經濟",
+        "sharesDelta": 85300,
+        "weightDelta": 1.85
+      },
+      {
+        "code": "WDC US",
+        "name": "WESTERN DIGITAL CORP",
+        "etfCode": "00990A",
+        "etfName": "主動元大AI新經濟",
+        "sharesDelta": 41462,
+        "weightDelta": 1.79
       }
     ],
     "剔除": [],
-    "加碼": [],
-    "減碼": []
+    "加碼": [
+      {
+        "code": "INTC",
+        "name": "INTEL CORP",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 8173,
+        "weightDelta": 1.1037
+      },
+      {
+        "code": "ASML",
+        "name": "ASML HOLDING NV - NY REG SHS EUR0.09 (1 ADR REPS 1 ORD SHR)",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 152,
+        "weightDelta": 0.5885000000000002
+      },
+      {
+        "code": "FN",
+        "name": "FABRINET ORD USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 178,
+        "weightDelta": 0.2864
+      },
+      {
+        "code": "ENTG",
+        "name": "ENTEGRIS INC COM USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 621,
+        "weightDelta": 0.24460000000000015
+      },
+      {
+        "code": "ON",
+        "name": "ON SEMICONDUCTOR CORP COM USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 1163,
+        "weightDelta": 0.21089999999999987
+      },
+      {
+        "code": "PANW",
+        "name": "PALO ALTO NETWORKS INC COM USD0.0001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 795,
+        "weightDelta": 0.20100000000000007
+      },
+      {
+        "code": "CRWV US",
+        "name": "CoreWeave Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.16999999999999993
+      },
+      {
+        "code": "AMD US",
+        "name": "超微半導體公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.13999999999999968
+      },
+      {
+        "code": "ROKU US",
+        "name": "Roku Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.1299999999999999
+      },
+      {
+        "code": "CRCL US",
+        "name": "Circle Internet Group Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.1200000000000001
+      },
+      {
+        "code": "SATS",
+        "name": "ECHOSTAR CORP-A COM USD.001000000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.11680000000000001
+      },
+      {
+        "code": "BEAM US",
+        "name": "光束治療公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.10999999999999988
+      },
+      {
+        "code": "DOCN",
+        "name": "DIGITALOCEAN HOLDINGS INC COM USD.000025000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 945,
+        "weightDelta": 0.08820000000000006
+      },
+      {
+        "code": "TTMI",
+        "name": "TTM TECHNOLOGIES INC COM USD0.001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.07400000000000001
+      },
+      {
+        "code": "NVDA US",
+        "name": "輝達",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.06000000000000005
+      },
+      {
+        "code": "KTOS US",
+        "name": "克瑞拓斯安全防衛公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.05999999999999961
+      },
+      {
+        "code": "AMZN US",
+        "name": "亞馬遜公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.050000000000000266
+      },
+      {
+        "code": "AVGO US",
+        "name": "博通公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.050000000000000044
+      },
+      {
+        "code": "TER US",
+        "name": "泰瑞達公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.04999999999999982
+      },
+      {
+        "code": "TXG US",
+        "name": "10X Genomics Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.03000000000000025
+      },
+      {
+        "code": "TSM US",
+        "name": "台積電",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.03000000000000025
+      },
+      {
+        "code": "OLED",
+        "name": "UNIVERSAL DISPLAY CORP COM",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.0257
+      },
+      {
+        "code": "ROK",
+        "name": "ROCKWELL AUTOMATION INC",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.02399999999999991
+      },
+      {
+        "code": "FIGR",
+        "name": "FIGURE TECHNOLOGY SOLUTIONS INC COM NPV",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.021499999999999964
+      },
+      {
+        "code": "WRBY",
+        "name": "WARBY PARKER INC-CLASS A COM USD.000100000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.01820000000000005
+      },
+      {
+        "code": "LUMN",
+        "name": "LUMEN TECHNOLOGIES INC COM USD1.000000000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.01589999999999997
+      },
+      {
+        "code": "CRCL",
+        "name": "CIRCLE INTERNET GROUP INC COM NPV",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.015200000000000019
+      },
+      {
+        "code": "XYZ",
+        "name": "BLOCK INC COM USD.000000100",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.014600000000000002
+      },
+      {
+        "code": "PLTR",
+        "name": "PALANTIR TECHNOLOGIES INC COM USD0.001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": 0,
+        "weightDelta": 0.012199999999999989
+      },
+      {
+        "code": "TSLA US",
+        "name": "特斯拉公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.010000000000000675
+      }
+    ],
+    "減碼": [
+      {
+        "code": "NOW",
+        "name": "SERVICENOW INC COM USD0.001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -5024,
+        "weightDelta": -0.8472
+      },
+      {
+        "code": "INTU",
+        "name": "INTUIT INC",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -1091,
+        "weightDelta": -0.7271000000000001
+      },
+      {
+        "code": "SNOW",
+        "name": "SNOWFLAKE INC-CLASS A COM 1.000000000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -2471,
+        "weightDelta": -0.6999
+      },
+      {
+        "code": "HUBS",
+        "name": "HUBSPOT INC COM USD0.001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -1295,
+        "weightDelta": -0.4961
+      },
+      {
+        "code": "NET",
+        "name": "CLOUDFLARE INC - CLASS A COM USD.001000000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -218,
+        "weightDelta": -0.2530999999999999
+      },
+      {
+        "code": "AVGO",
+        "name": "BROADCOM INC COM NPV",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -238,
+        "weightDelta": 0.16970000000000018
+      },
+      {
+        "code": "TEM US",
+        "name": "Tempus AI Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.14999999999999947
+      },
+      {
+        "code": "PLTR US",
+        "name": "帕蘭提爾科技公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.1299999999999999
+      },
+      {
+        "code": "ZM",
+        "name": "ZOOM COMMUNICATIONS INC",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -480,
+        "weightDelta": -0.10350000000000015
+      },
+      {
+        "code": "NVDA",
+        "name": "NVIDIA CORPORATION",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -460,
+        "weightDelta": 0.0913999999999997
+      },
+      {
+        "code": "TWLO",
+        "name": "TWILIO INC - A SHRS COM NPV",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -276,
+        "weightDelta": -0.08919999999999995
+      },
+      {
+        "code": "LRCX",
+        "name": "LAM RESEARCH CORP COM USD.001000000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -682,
+        "weightDelta": -0.08099999999999952
+      },
+      {
+        "code": "SHOP US",
+        "name": "Shopify公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.08000000000000007
+      },
+      {
+        "code": "NTRA US",
+        "name": "那提拉公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.07999999999999985
+      },
+      {
+        "code": "SYM",
+        "name": "SYMBOTIC INC COM USD.000100000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -991,
+        "weightDelta": -0.07850000000000001
+      },
+      {
+        "code": "CIEN",
+        "name": "CIENA CORP COM USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -167,
+        "weightDelta": 0.05870000000000042
+      },
+      {
+        "code": "AMKR",
+        "name": "AMKOR TECHNOLOGY INC COM USD0.001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -465,
+        "weightDelta": 0.056499999999999995
+      },
+      {
+        "code": "AMD",
+        "name": "ADVANCED MICRO DEVICES INC",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -156,
+        "weightDelta": 0.055600000000000094
+      },
+      {
+        "code": "CDNS",
+        "name": "CADENCE DESIGN SYSTEMS INC COM USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -78,
+        "weightDelta": -0.05389999999999995
+      },
+      {
+        "code": "MTSI",
+        "name": "M/A-COM TECHNOLOGY SOLUTIONS H COM USD0.001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -104,
+        "weightDelta": 0.04610000000000003
+      },
+      {
+        "code": "CRSP US",
+        "name": "CRISPR治療公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.040000000000000036
+      },
+      {
+        "code": "ILMN US",
+        "name": "伊魯米納公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.040000000000000036
+      },
+      {
+        "code": "TWST US",
+        "name": "Twist Bioscience Corp",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.040000000000000036
+      },
+      {
+        "code": "SNDK",
+        "name": "SANDISK CORP/DE COM USD 0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -62,
+        "weightDelta": -0.03980000000000006
+      },
+      {
+        "code": "SHOP",
+        "name": "SHOPIFY INC - CLASS A",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -421,
+        "weightDelta": -0.03200000000000003
+      },
+      {
+        "code": "APP",
+        "name": "APPLOVIN CORP-CLASS A COM USD.000030000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -61,
+        "weightDelta": 0.03179999999999983
+      },
+      {
+        "code": "SNPS",
+        "name": "SYNOPSYS INC COM USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -53,
+        "weightDelta": -0.03079999999999994
+      },
+      {
+        "code": "COIN US",
+        "name": "比特幣基地全球公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.029999999999999805
+      },
+      {
+        "code": "TSLA",
+        "name": "TESLA INC COM USD0.001",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -226,
+        "weightDelta": 0.028999999999999915
+      },
+      {
+        "code": "HOOD",
+        "name": "ROBINHOOD MARKETS INC - A COM USD.000100000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -633,
+        "weightDelta": -0.028200000000000003
+      }
+    ]
   },
   "各ETF異動摘要": [
     {
@@ -3593,14 +4075,14 @@
     {
       "code": "00983A",
       "name": "主動中信ARK創新",
-      "disclosureDate": "2026-04-09",
+      "disclosureDate": "2026-04-10",
       "summary": {
-        "comparisonReady": false,
-        "addedCount": 38,
+        "comparisonReady": true,
+        "addedCount": 1,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 38
+        "increasedCount": 15,
+        "decreasedCount": 13,
+        "totalChangeCount": 29
       }
     },
     {
@@ -3630,13 +4112,13 @@
     {
       "code": "00989A",
       "name": "主動摩根美國科技",
-      "disclosureDate": "2026-04-10",
+      "disclosureDate": "2026-04-13",
       "summary": {
-        "comparisonReady": false,
-        "addedCount": 70,
+        "comparisonReady": true,
+        "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
+        "increasedCount": 20,
+        "decreasedCount": 50,
         "totalChangeCount": 70
       }
     },
