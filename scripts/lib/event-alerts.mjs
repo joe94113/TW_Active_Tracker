@@ -6,8 +6,6 @@ import { formatNumber, formatPercent, formatTaipeiDate } from './close-digest.mj
 export { formatTaipeiDate } from './close-digest.mjs';
 
 const rootDir = process.cwd();
-const sparklineChars = ['_', '.', ':', '-', '=', '+', '*', '#'];
-
 function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -156,31 +154,6 @@ function pickStaleEtfs(overlap, marketDate) {
     .slice(0, 5);
 }
 
-function buildSparkline(values) {
-  const cleanValues = values
-    .map((value) => Number(value))
-    .filter((value) => Number.isFinite(value));
-
-  if (cleanValues.length < 2) {
-    return null;
-  }
-
-  const minValue = Math.min(...cleanValues);
-  const maxValue = Math.max(...cleanValues);
-
-  if (minValue === maxValue) {
-    return '='.repeat(cleanValues.length);
-  }
-
-  return cleanValues
-    .map((value) => {
-      const ratio = (value - minValue) / (maxValue - minValue);
-      const index = Math.max(0, Math.min(sparklineChars.length - 1, Math.round(ratio * (sparklineChars.length - 1))));
-      return sparklineChars[index];
-    })
-    .join('');
-}
-
 function pickIdentityRow(contract, identity) {
   return (contract?.法人資料 ?? []).find((item) => item.身份別 === identity) ?? null;
 }
@@ -207,8 +180,6 @@ function pickFuturesCards(dashboard) {
         macdHist: latestIndicators.macdHist ?? null,
         direction: contract?.方向 ?? '區間整理',
         highlight: contract?.觀察建議?.at(-1) ?? '先看價格與法人方向是否同步。',
-        priceSparkline: buildSparkline(history.slice(-16).map((item) => item.close)),
-        moveSparkline: buildSparkline(history.slice(-16).map((item) => item.changePercent)),
         foreignNetOi: foreign?.未平倉淨口數 ?? null,
         dealerNetOi: dealer?.未平倉淨口數 ?? null,
       };
@@ -231,14 +202,6 @@ function buildFuturesDiscordDescription(item) {
     `收 ${formatNumber(item.latestClose, 0)} ｜ 單日 ${formatPercent(item.changePercent)} ｜ 20日 ${formatPercent(item.return20)}`,
     `RSI ${formatNumber(item.rsi, 1)} ｜ MACD柱 ${formatNumber(item.macdHist, 1)} ｜ 日線 ${item.latestDate ?? '-'}`,
   ];
-
-  if (item.priceSparkline) {
-    lines.push(`收盤節奏 ${item.priceSparkline}`);
-  }
-
-  if (item.moveSparkline) {
-    lines.push(`單日強弱 ${item.moveSparkline}`);
-  }
 
   lines.push(`外資 OI ${formatNumber(item.foreignNetOi, 0)} ｜ 自營 OI ${formatNumber(item.dealerNetOi, 0)}`);
   lines.push(item.highlight ?? '先看價格與法人方向是否同步。');
@@ -398,9 +361,6 @@ export function buildTelegramEventAlertMessage(summary) {
     lines.push('<b>期貨風向球</b>');
     summary.futuresCards.forEach((item) => {
       lines.push(formatFuturesSummaryLine(item));
-      if (item.priceSparkline) {
-        lines.push(`  收盤節奏 ${escapeHtml(item.priceSparkline)}`);
-      }
       lines.push(
         `  外資 OI ${escapeHtml(formatNumber(item.foreignNetOi, 0))}｜自營 OI ${escapeHtml(formatNumber(item.dealerNetOi, 0))}｜日線 ${escapeHtml(item.latestDate ?? '-')}`,
       );

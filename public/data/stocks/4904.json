@@ -3,7 +3,7 @@
   "name": "遠傳",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T09:44:32.141Z",
+  "generatedAt": "2026-04-13T10:14:06.982Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 2.28%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 4,911,475 股。"
+    "最近 5 個交易日三大法人合計買超 4,363,733 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4132,9 +4132,9 @@
     "更新日期": "2026-04-12"
   },
   "評價面": {
-    "本益比": 24.83,
-    "殖利率": 4.03,
-    "股價淨值比": 3.7
+    "本益比": 24.75,
+    "殖利率": 4.04,
+    "股價淨值比": 3.69
   },
   "財務資料": {
     "月營收": {
@@ -4183,7 +4183,7 @@
       "最新月營收年增 3.65%，營收仍維持溫和成長。",
       "最新季報 EPS 3.81 元，仍具獲利能力。",
       "負債比約 48.56%，資本結構仍在可觀察區間。",
-      "官方估值顯示本益比 24.83 倍、股價淨值比 3.70 倍。"
+      "官方估值顯示本益比 24.75 倍、股價淨值比 3.69 倍。"
     ],
     "資料說明": [
       "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
@@ -4192,6 +4192,13 @@
   },
   "法人買賣": {
     "days": [
+      {
+        "date": "2026-04-13",
+        "foreign": 314456,
+        "investmentTrust": -770996,
+        "dealer": 110000,
+        "total": -346540
+      },
       {
         "date": "2026-04-10",
         "foreign": 432404,
@@ -4219,20 +4226,13 @@
         "investmentTrust": 161695,
         "dealer": -19199,
         "total": 650724
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -239745,
-        "investmentTrust": 517244,
-        "dealer": -76297,
-        "total": 201202
       }
     ],
     "summary": {
-      "foreign5Day": 4095013,
-      "investmentTrust5Day": 903034,
-      "dealer5Day": -86572,
-      "total5Day": 4911475
+      "foreign5Day": 4649214,
+      "investmentTrust5Day": -385206,
+      "dealer5Day": 99725,
+      "total5Day": 4363733
     }
   },
   "持股分散": {
@@ -4367,7 +4367,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-04-10",
+    "date": "2026-04-13",
     "marginBuy": 2,
     "marginSell": 5,
     "marginRepay": null,
@@ -4392,7 +4392,7 @@
     ]
   },
   "交易提醒": {
-    "asOfDate": "2026-04-10",
+    "asOfDate": "2026-04-13",
     "alerts": [
       {
         "key": "short-sale-4904",
@@ -4400,7 +4400,7 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-04-10",
+        "date": "2026-04-13",
         "note": "今日可借券賣出股數約 2,003,271 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
         "footnote": "今日可借券賣出股數約 2,003,271 股，可作為券源與流動性參考。"
@@ -4459,11 +4459,11 @@
   },
   "同產業比較": {
     "industryName": "通信網路業",
-    "peerCount": 7,
-    "rank20Day": 6,
-    "rankDaily": 3,
-    "averageReturn20": 19.611576998996235,
-    "averageChangePercent": 0.2875072297619751,
+    "peerCount": 8,
+    "rank20Day": 7,
+    "rankDaily": 4,
+    "averageReturn20": 21.271972815253335,
+    "averageChangePercent": 1.4930659436876148,
     "leaders": [
       {
         "code": "6285",
@@ -4477,9 +4477,9 @@
         "return60": 125.45454545454547,
         "volume": 30372184,
         "turnover": null,
-        "foreign5Day": 3292676,
-        "investmentTrust5Day": 9185709,
-        "total5Day": 15148079,
+        "foreign5Day": 5144495,
+        "investmentTrust5Day": 8401709,
+        "total5Day": 16452400,
         "largeHolderRatio": 68.71000000000001,
         "retailRatio": 16.29,
         "shortToMarginRatio": 2.1603212524780155,
@@ -4530,6 +4530,70 @@
         "nextExDividendDate": null
       },
       {
+        "code": "2485",
+        "name": "兆赫",
+        "industryName": "通信網路業",
+        "priceDate": "2026-04-13",
+        "close": 80.80000305175781,
+        "change": 7.3000030517578125,
+        "changePercent": 9.931976941167092,
+        "return20": 32.89474352905303,
+        "return60": 226.46465879498106,
+        "volume": 58709240,
+        "turnover": null,
+        "foreign5Day": -6877298,
+        "investmentTrust5Day": 258000,
+        "total5Day": -6443877,
+        "largeHolderRatio": 21.79,
+        "retailRatio": 49.09,
+        "shortToMarginRatio": 13.830698099206575,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          62,
+          68.19999694824219,
+          75,
+          80,
+          80.0999984741211,
+          73.9000015258789,
+          78,
+          75.19999694824219,
+          80,
+          78.69999694824219,
+          80.4000015258789,
+          79.5999984741211,
+          79.5999984741211,
+          81.5,
+          78.5,
+          73.0999984741211,
+          73,
+          69.9000015258789,
+          73.5,
+          80.80000305175781
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "兆赫 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
         "code": "6442",
         "name": "光聖",
         "industryName": "通信網路業",
@@ -4541,9 +4605,9 @@
         "return60": 68.30188679245282,
         "volume": 4692280,
         "turnover": null,
-        "foreign5Day": 470531,
-        "investmentTrust5Day": -26739,
-        "total5Day": 518138,
+        "foreign5Day": -27002,
+        "investmentTrust5Day": -218739,
+        "total5Day": -200446,
         "largeHolderRatio": 57.959999999999994,
         "retailRatio": 13.98,
         "shortToMarginRatio": 3.4509803921568625,
@@ -4605,9 +4669,9 @@
         "return60": 97.3063973063973,
         "volume": 3150570,
         "turnover": null,
-        "foreign5Day": -2440000,
-        "investmentTrust5Day": 1478734,
-        "total5Day": 42394,
+        "foreign5Day": -1859912,
+        "investmentTrust5Day": 1596734,
+        "total5Day": 853298,
         "largeHolderRatio": 50.8,
         "retailRatio": 27.52,
         "shortToMarginRatio": 8.260497000856898,
@@ -4669,9 +4733,9 @@
         "return60": 53.58649789029536,
         "volume": 2930469,
         "turnover": null,
-        "foreign5Day": -1565558,
-        "investmentTrust5Day": 998113,
-        "total5Day": -88602,
+        "foreign5Day": -1258425,
+        "investmentTrust5Day": 672926,
+        "total5Day": -5007,
         "largeHolderRatio": 71.06,
         "retailRatio": 4.3500000000000005,
         "shortToMarginRatio": 1.3309134906231095,
@@ -4733,9 +4797,9 @@
         "return60": 2.803738317757009,
         "volume": 6919215,
         "turnover": null,
-        "foreign5Day": 9755871,
-        "investmentTrust5Day": 2964900,
-        "total5Day": 13628530,
+        "foreign5Day": 12807538,
+        "investmentTrust5Day": 1891044,
+        "total5Day": 14663081,
         "largeHolderRatio": 91.68,
         "retailRatio": 3.17,
         "shortToMarginRatio": 10.323574730354391,
@@ -4797,9 +4861,9 @@
         "return60": 5.71749582735398,
         "volume": 3374526,
         "turnover": null,
-        "foreign5Day": 4095013,
-        "investmentTrust5Day": 903034,
-        "total5Day": 4911475,
+        "foreign5Day": 4649214,
+        "investmentTrust5Day": -385206,
+        "total5Day": 4363733,
         "largeHolderRatio": 93.26,
         "retailRatio": 2.75,
         "shortToMarginRatio": null,
@@ -4861,9 +4925,9 @@
         "return60": 1.1278195488721803,
         "volume": 6551901,
         "turnover": null,
-        "foreign5Day": -1909135,
-        "investmentTrust5Day": 2283998,
-        "total5Day": 337698,
+        "foreign5Day": -1392201,
+        "investmentTrust5Day": 1213961,
+        "total5Day": -182268,
         "largeHolderRatio": 79.02000000000001,
         "retailRatio": 6.86,
         "shortToMarginRatio": 1.9434628975265018,
@@ -4927,9 +4991,9 @@
         "return60": 1.1278195488721803,
         "volume": 6551901,
         "turnover": null,
-        "foreign5Day": -1909135,
-        "investmentTrust5Day": 2283998,
-        "total5Day": 337698,
+        "foreign5Day": -1392201,
+        "investmentTrust5Day": 1213961,
+        "total5Day": -182268,
         "largeHolderRatio": 79.02000000000001,
         "retailRatio": 6.86,
         "shortToMarginRatio": 1.9434628975265018,
@@ -4991,9 +5055,9 @@
         "return60": 5.71749582735398,
         "volume": 3374526,
         "turnover": null,
-        "foreign5Day": 4095013,
-        "investmentTrust5Day": 903034,
-        "total5Day": 4911475,
+        "foreign5Day": 4649214,
+        "investmentTrust5Day": -385206,
+        "total5Day": 4363733,
         "largeHolderRatio": 93.26,
         "retailRatio": 2.75,
         "shortToMarginRatio": null,
@@ -5055,9 +5119,9 @@
         "return60": 2.803738317757009,
         "volume": 6919215,
         "turnover": null,
-        "foreign5Day": 9755871,
-        "investmentTrust5Day": 2964900,
-        "total5Day": 13628530,
+        "foreign5Day": 12807538,
+        "investmentTrust5Day": 1891044,
+        "total5Day": 14663081,
         "largeHolderRatio": 91.68,
         "retailRatio": 3.17,
         "shortToMarginRatio": 10.323574730354391,
@@ -5109,8 +5173,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 19.61%，短線強度落後族群。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "近 20 日報酬低於同產業平均 21.27%，短線強度落後族群。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

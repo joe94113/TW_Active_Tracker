@@ -3,7 +3,7 @@
   "name": "富林-KY",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T09:44:18.754Z",
+  "generatedAt": "2026-04-13T10:13:53.579Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 1.70%，可用來觀察波段資金是否持續留在主線。",
-    "最近 3 個交易日三大法人合計買超 10,000 股。"
+    "最近 4 個交易日三大法人合計買超 11,002 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3654,6 +3654,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-13",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 2,
+        "total": 1002
+      },
+      {
         "date": "2026-04-10",
         "foreign": 4000,
         "investmentTrust": 0,
@@ -3676,10 +3683,10 @@
       }
     ],
     "summary": {
-      "foreign5Day": 9000,
+      "foreign5Day": 10000,
       "investmentTrust5Day": 0,
-      "dealer5Day": 1000,
-      "total5Day": 10000
+      "dealer5Day": 1002,
+      "total5Day": 11002
     }
   },
   "持股分散": {
@@ -3815,7 +3822,7 @@
   },
   "融資融券": null,
   "交易提醒": {
-    "asOfDate": "2026-04-10",
+    "asOfDate": "2026-04-13",
     "alerts": [],
     "eventCalendar": [],
     "highlights": [],
@@ -3852,9 +3859,9 @@
         "return60": 35.26316191020765,
         "volume": 89856903,
         "turnover": null,
-        "foreign5Day": 16328104,
-        "investmentTrust5Day": -136339,
-        "total5Day": 16537245,
+        "foreign5Day": 74186500,
+        "investmentTrust5Day": -779452,
+        "total5Day": 75293754,
         "largeHolderRatio": 72.03999999999999,
         "retailRatio": 10.5,
         "shortToMarginRatio": 0.3926459719142646,
@@ -3916,9 +3923,9 @@
         "return60": 54.1366893888155,
         "volume": 99290125,
         "turnover": null,
-        "foreign5Day": -1244340,
-        "investmentTrust5Day": 5828059,
-        "total5Day": 12070914,
+        "foreign5Day": 33687227,
+        "investmentTrust5Day": 5276978,
+        "total5Day": 48664542,
         "largeHolderRatio": 83.86,
         "retailRatio": 6.01,
         "shortToMarginRatio": 2.5336637609829644,
@@ -3980,9 +3987,9 @@
         "return60": 3.639512038741457,
         "volume": 10027,
         "turnover": null,
-        "foreign5Day": 9000,
+        "foreign5Day": 10000,
         "investmentTrust5Day": 0,
-        "total5Day": 10000,
+        "total5Day": 11002,
         "largeHolderRatio": 84.99,
         "retailRatio": 2.65,
         "shortToMarginRatio": null,
@@ -4046,9 +4053,9 @@
         "return60": 3.639512038741457,
         "volume": 10027,
         "turnover": null,
-        "foreign5Day": 9000,
+        "foreign5Day": 10000,
         "investmentTrust5Day": 0,
-        "total5Day": 10000,
+        "total5Day": 11002,
         "largeHolderRatio": 84.99,
         "retailRatio": 2.65,
         "shortToMarginRatio": null,
@@ -4110,9 +4117,9 @@
         "return60": 54.1366893888155,
         "volume": 99290125,
         "turnover": null,
-        "foreign5Day": -1244340,
-        "investmentTrust5Day": 5828059,
-        "total5Day": 12070914,
+        "foreign5Day": 33687227,
+        "investmentTrust5Day": 5276978,
+        "total5Day": 48664542,
         "largeHolderRatio": 83.86,
         "retailRatio": 6.01,
         "shortToMarginRatio": 2.5336637609829644,
@@ -4174,9 +4181,9 @@
         "return60": 35.26316191020765,
         "volume": 89856903,
         "turnover": null,
-        "foreign5Day": 16328104,
-        "investmentTrust5Day": -136339,
-        "total5Day": 16537245,
+        "foreign5Day": 74186500,
+        "investmentTrust5Day": -779452,
+        "total5Day": 75293754,
         "largeHolderRatio": 72.03999999999999,
         "retailRatio": 10.5,
         "shortToMarginRatio": 0.3926459719142646,

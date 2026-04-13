@@ -3,7 +3,7 @@
   "name": "聯詠",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T09:44:27.029Z",
+  "generatedAt": "2026-04-13T10:14:01.882Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 1.28%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 598,124 股。"
+    "最近 5 個交易日三大法人合計買超 865,836 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4132,8 +4132,8 @@
     "更新日期": "2026-04-12"
   },
   "評價面": {
-    "本益比": 14.66,
-    "殖利率": 5.84,
+    "本益比": 14.68,
+    "殖利率": 5.83,
     "股價淨值比": 3.54
   },
   "財務資料": {
@@ -4183,7 +4183,7 @@
       "最新月營收年減 9.64%，短線要留意營運動能是否放緩。",
       "最新季報 EPS 26.87 元，仍具獲利能力。",
       "負債比約 30.43%，資本結構仍在可觀察區間。",
-      "官方估值顯示本益比 14.66 倍、股價淨值比 3.54 倍。"
+      "官方估值顯示本益比 14.68 倍、股價淨值比 3.54 倍。"
     ],
     "資料說明": [
       "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
@@ -4192,6 +4192,13 @@
   },
   "法人買賣": {
     "days": [
+      {
+        "date": "2026-04-13",
+        "foreign": -209414,
+        "investmentTrust": -26353,
+        "dealer": 113522,
+        "total": -122245
+      },
       {
         "date": "2026-04-10",
         "foreign": -478288,
@@ -4219,20 +4226,13 @@
         "investmentTrust": 84086,
         "dealer": 88427,
         "total": 355426
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -489728,
-        "investmentTrust": 15080,
-        "dealer": 84691,
-        "total": -389957
       }
     ],
     "summary": {
-      "foreign5Day": 597025,
-      "investmentTrust5Day": -109412,
-      "dealer5Day": 110511,
-      "total5Day": 598124
+      "foreign5Day": 877339,
+      "investmentTrust5Day": -150845,
+      "dealer5Day": 139342,
+      "total5Day": 865836
     }
   },
   "持股分散": {
@@ -4367,7 +4367,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-04-10",
+    "date": "2026-04-13",
     "marginBuy": 165,
     "marginSell": 70,
     "marginRepay": 30,
@@ -4393,7 +4393,7 @@
     ]
   },
   "交易提醒": {
-    "asOfDate": "2026-04-10",
+    "asOfDate": "2026-04-13",
     "alerts": [
       {
         "key": "short-sale-3034",
@@ -4401,7 +4401,7 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-04-10",
+        "date": "2026-04-13",
         "note": "今日可借券賣出股數約 1,294,595 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
         "footnote": "今日可借券賣出股數約 1,294,595 股，可作為券源與流動性參考。"
@@ -4444,9 +4444,9 @@
     "industryName": "半導體業",
     "peerCount": 26,
     "rank20Day": 16,
-    "rankDaily": 19,
-    "averageReturn20": 12.00169355762326,
-    "averageChangePercent": 2.513279897083922,
+    "rankDaily": 18,
+    "averageReturn20": 10.802156623216009,
+    "averageChangePercent": 2.081507976827282,
     "leaders": [
       {
         "code": "3583",
@@ -4460,9 +4460,9 @@
         "return60": 100.28530670470757,
         "volume": 6897056,
         "turnover": null,
-        "foreign5Day": 4306914,
-        "investmentTrust5Day": 666560,
-        "total5Day": 4957672,
+        "foreign5Day": 4109388,
+        "investmentTrust5Day": 707560,
+        "total5Day": 4756656,
         "largeHolderRatio": 60.66,
         "retailRatio": 21.43,
         "shortToMarginRatio": 26.733921815889026,
@@ -4524,9 +4524,9 @@
         "return60": 209.5487833717952,
         "volume": 105632955,
         "turnover": null,
-        "foreign5Day": -33211024,
-        "investmentTrust5Day": 2028000,
-        "total5Day": -28317117,
+        "foreign5Day": -45884155,
+        "investmentTrust5Day": 1488000,
+        "total5Day": -40526567,
         "largeHolderRatio": 55.27,
         "retailRatio": 23.549999999999997,
         "shortToMarginRatio": 0.3013051831581037,
@@ -4577,70 +4577,6 @@
         "nextExDividendDate": null
       },
       {
-        "code": "3532",
-        "name": "台勝科",
-        "industryName": "半導體業",
-        "priceDate": "2026-04-13",
-        "close": 182,
-        "change": 16.5,
-        "changePercent": 9.969788519637463,
-        "return20": 44.44444444444444,
-        "return60": 83.83838383838383,
-        "volume": 5660652,
-        "turnover": null,
-        "foreign5Day": -452320,
-        "investmentTrust5Day": 1043000,
-        "total5Day": 985494,
-        "largeHolderRatio": 88.5,
-        "retailRatio": 5.67,
-        "shortToMarginRatio": 1.4769765421372718,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          126,
-          133,
-          137,
-          150.5,
-          153,
-          143.5,
-          135,
-          132,
-          133,
-          146,
-          141.5,
-          140.5,
-          130.5,
-          135,
-          130.5,
-          130.5,
-          141,
-          150.5,
-          165.5,
-          182
-        ],
-        "technicalSignals": [
-          {
-            "key": "rsi-overbought",
-            "title": "RSI 超買",
-            "tone": "down",
-            "importance": 2,
-            "description": "台勝科 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "RSI 超買"
-        ],
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
-      {
         "code": "6257",
         "name": "矽格",
         "industryName": "半導體業",
@@ -4652,9 +4588,9 @@
         "return60": 58.849557522123895,
         "volume": 17280334,
         "turnover": null,
-        "foreign5Day": -268010,
-        "investmentTrust5Day": -2132460,
-        "total5Day": -1653005,
+        "foreign5Day": 41508,
+        "investmentTrust5Day": -2352583,
+        "total5Day": -1182958,
         "largeHolderRatio": 56.769999999999996,
         "retailRatio": 19.72,
         "shortToMarginRatio": 1.1097780443911218,
@@ -4716,9 +4652,9 @@
         "return60": 179.73856209150327,
         "volume": 525335,
         "turnover": null,
-        "foreign5Day": 171264,
-        "investmentTrust5Day": -210069,
-        "total5Day": -44818,
+        "foreign5Day": 92015,
+        "investmentTrust5Day": 68816,
+        "total5Day": 143420,
         "largeHolderRatio": 54.17,
         "retailRatio": 8.02,
         "shortToMarginRatio": null,
@@ -4780,9 +4716,9 @@
         "return60": 118.15476190476191,
         "volume": 24038931,
         "turnover": null,
-        "foreign5Day": 470815,
-        "investmentTrust5Day": -2291795,
-        "total5Day": -812206,
+        "foreign5Day": -539981,
+        "investmentTrust5Day": -1879879,
+        "total5Day": -590543,
         "largeHolderRatio": 68.92999999999999,
         "retailRatio": 18.03,
         "shortToMarginRatio": 0.43576782290395677,
@@ -4844,9 +4780,9 @@
         "return60": 58.44402277039848,
         "volume": 25855208,
         "turnover": null,
-        "foreign5Day": 5208150,
-        "investmentTrust5Day": 1600188,
-        "total5Day": 7852009,
+        "foreign5Day": 5112381,
+        "investmentTrust5Day": -1790407,
+        "total5Day": 4352189,
         "largeHolderRatio": 88.85,
         "retailRatio": 4.1899999999999995,
         "shortToMarginRatio": 7.527124773960217,
@@ -4908,9 +4844,9 @@
         "return60": 19.612068965517242,
         "volume": 3017757,
         "turnover": null,
-        "foreign5Day": 322361,
-        "investmentTrust5Day": 231724,
-        "total5Day": 1097272,
+        "foreign5Day": 287566,
+        "investmentTrust5Day": 62560,
+        "total5Day": 959969,
         "largeHolderRatio": 66.4,
         "retailRatio": 9.83,
         "shortToMarginRatio": 2.780711017247448,
@@ -4959,6 +4895,70 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
+      },
+      {
+        "code": "6531",
+        "name": "愛普*",
+        "industryName": "半導體業",
+        "priceDate": "2026-04-13",
+        "close": 567,
+        "change": 51,
+        "changePercent": 9.883720930232558,
+        "return20": 16.786817713697218,
+        "return60": 18.37160751565762,
+        "volume": 7279271,
+        "turnover": null,
+        "foreign5Day": -2222428,
+        "investmentTrust5Day": -34011,
+        "total5Day": -1753400,
+        "largeHolderRatio": 64.78,
+        "retailRatio": 14.12,
+        "shortToMarginRatio": 1.2935186459336727,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          531,
+          528,
+          580,
+          572,
+          551,
+          553,
+          523,
+          501,
+          511,
+          509,
+          507,
+          485,
+          442,
+          460,
+          440,
+          471.5,
+          478,
+          480.5,
+          516,
+          567
+        ],
+        "technicalSignals": [
+          {
+            "key": "macd-bullish-cross",
+            "title": "MACD 翻正",
+            "tone": "up",
+            "importance": 3,
+            "description": "愛普* MACD 線上穿訊號線，短線動能重新偏多。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "MACD 翻正"
+        ],
+        "topSignalTitle": "MACD 翻正",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "laggards": [
@@ -4974,9 +4974,9 @@
         "return60": 25.431528292366824,
         "volume": 101735395,
         "turnover": null,
-        "foreign5Day": -26355101,
-        "investmentTrust5Day": -3526000,
-        "total5Day": -28457619,
+        "foreign5Day": -44195710,
+        "investmentTrust5Day": -3686000,
+        "total5Day": -46286041,
         "largeHolderRatio": 44.74,
         "retailRatio": 25.29,
         "shortToMarginRatio": 2.1629594195965876,
@@ -5038,9 +5038,9 @@
         "return60": -1.151830862954025,
         "volume": 95571662,
         "turnover": null,
-        "foreign5Day": 7259974,
-        "investmentTrust5Day": -3726612,
-        "total5Day": 5271449,
+        "foreign5Day": 4918328,
+        "investmentTrust5Day": -12423508,
+        "total5Day": -5393715,
         "largeHolderRatio": 64.85,
         "retailRatio": 18.52,
         "shortToMarginRatio": 1.6437208002855948,
@@ -5102,9 +5102,9 @@
         "return60": 7.5706214689265545,
         "volume": 311877,
         "turnover": null,
-        "foreign5Day": -3649,
-        "investmentTrust5Day": -104722,
-        "total5Day": -101954,
+        "foreign5Day": 11382,
+        "investmentTrust5Day": -125722,
+        "total5Day": -105217,
         "largeHolderRatio": 79.25999999999999,
         "retailRatio": 9.54,
         "shortToMarginRatio": 0.16339869281045752,
@@ -5156,8 +5156,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 12.00%，短線強度落後族群。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "近 20 日報酬低於同產業平均 10.80%，短線強度落後族群。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

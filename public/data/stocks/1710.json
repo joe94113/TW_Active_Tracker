@@ -3,7 +3,7 @@
   "name": "東聯",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:06.800Z",
+  "generatedAt": "2026-04-13T10:13:54.120Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,13 +3487,18 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 5.00%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 5,903,719 股。"
+    "最近 5 個交易日三大法人合計買超 6,147,962 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4128,8 +4133,8 @@
   },
   "評價面": {
     "本益比": null,
-    "殖利率": null,
-    "股價淨值比": 1.29
+    "殖利率": 0,
+    "股價淨值比": 1.4
   },
   "財務資料": {
     "月營收": {
@@ -4187,6 +4192,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-13",
+        "foreign": 2591000,
+        "investmentTrust": 0,
+        "dealer": 23243,
+        "total": 2614243
+      },
+      {
         "date": "2026-04-10",
         "foreign": 156020,
         "investmentTrust": 0,
@@ -4213,20 +4225,13 @@
         "investmentTrust": 0,
         "dealer": 2490,
         "total": 412423
-      },
-      {
-        "date": "2026-04-04",
-        "foreign": 2714000,
-        "investmentTrust": -591000,
-        "dealer": 247000,
-        "total": 2370000
       }
     ],
     "summary": {
-      "foreign5Day": 6071953,
-      "investmentTrust5Day": -591000,
-      "dealer5Day": 422766,
-      "total5Day": 5903719
+      "foreign5Day": 5948953,
+      "investmentTrust5Day": 0,
+      "dealer5Day": 199009,
+      "total5Day": 6147962
     }
   },
   "持股分散": {
@@ -4361,7 +4366,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-04-10",
+    "date": "2026-04-13",
     "marginBuy": 402,
     "marginSell": 965,
     "marginRepay": 100,
@@ -4387,14 +4392,45 @@
       "券資比約 0.21%，市場籌碼仍以多方槓桿為主。"
     ]
   },
+  "交易提醒": {
+    "asOfDate": "2026-04-13",
+    "alerts": [
+      {
+        "key": "short-sale-1710",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-13",
+        "note": "今日可借券賣出股數約 3,569,961 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 3,569,961 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [],
+    "highlights": [
+      "今日可借券賣出股數約 3,569,961 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "info",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": 3569961,
+      "alertCount": 1,
+      "topTitle": "可借券賣出餘量",
+      "topTone": "info"
+    }
+  },
   "主動ETF曝光": null,
   "同產業比較": {
     "industryName": "化學工業",
-    "peerCount": 2,
+    "peerCount": 3,
     "rank20Day": 2,
-    "rankDaily": 1,
-    "averageReturn20": 16.143528503343347,
-    "averageChangePercent": 4.681039060704686,
+    "rankDaily": 2,
+    "averageReturn20": 12.189467524145309,
+    "averageChangePercent": 6.454026040469791,
     "leaders": [
       {
         "code": "1717",
@@ -4408,9 +4444,9 @@
         "return60": 75.05422910923589,
         "volume": 150397859,
         "turnover": null,
-        "foreign5Day": 21038399,
-        "investmentTrust5Day": -7790488,
-        "total5Day": 18178232,
+        "foreign5Day": 17185358,
+        "investmentTrust5Day": -7536976,
+        "total5Day": 16220237,
         "largeHolderRatio": 71,
         "retailRatio": 11.81,
         "shortToMarginRatio": 3.4329132464679133,
@@ -4451,7 +4487,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "除息事件接近",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": "2026-04-24"
       },
       {
         "code": "1710",
@@ -4465,9 +4508,9 @@
         "return60": 21.991697730991195,
         "volume": 8926637,
         "turnover": null,
-        "foreign5Day": 6071953,
-        "investmentTrust5Day": -591000,
-        "total5Day": 5903719,
+        "foreign5Day": 5948953,
+        "investmentTrust5Day": 0,
+        "total5Day": 6147962,
         "largeHolderRatio": 61.42,
         "retailRatio": 12.52,
         "shortToMarginRatio": 0.2098391233387736,
@@ -4508,10 +4551,145 @@
         ],
         "topSignalTitle": "KD 低檔黃金交叉",
         "topSignalTone": "up",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
+        "code": "4764",
+        "name": "雙鍵",
+        "industryName": "化學工業",
+        "priceDate": "2026-04-13",
+        "close": 170.5,
+        "change": 15.5,
+        "changePercent": 10,
+        "return20": 4.281345565749235,
+        "return60": 34.25196850393701,
+        "volume": 4759692,
+        "turnover": null,
+        "foreign5Day": 1184088,
+        "investmentTrust5Day": -7000,
+        "total5Day": 1626428,
+        "largeHolderRatio": 76.42,
+        "retailRatio": 8.82,
+        "shortToMarginRatio": 2.075098814229249,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          162,
+          159,
+          153,
+          155,
+          157.5,
+          143.5,
+          135.5,
+          129,
+          130.5,
+          129,
+          133,
+          127,
+          117,
+          125.5,
+          121,
+          124,
+          136,
+          149.5,
+          155,
+          170.5
+        ],
+        "technicalSignals": [
+          {
+            "key": "golden-cross",
+            "title": "黃金交叉",
+            "tone": "up",
+            "importance": 3,
+            "description": "雙鍵 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "黃金交叉"
+        ],
+        "topSignalTitle": "黃金交叉",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "除息事件接近",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": "2026-04-23"
       }
     ],
     "laggards": [
+      {
+        "code": "4764",
+        "name": "雙鍵",
+        "industryName": "化學工業",
+        "priceDate": "2026-04-13",
+        "close": 170.5,
+        "change": 15.5,
+        "changePercent": 10,
+        "return20": 4.281345565749235,
+        "return60": 34.25196850393701,
+        "volume": 4759692,
+        "turnover": null,
+        "foreign5Day": 1184088,
+        "investmentTrust5Day": -7000,
+        "total5Day": 1626428,
+        "largeHolderRatio": 76.42,
+        "retailRatio": 8.82,
+        "shortToMarginRatio": 2.075098814229249,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          162,
+          159,
+          153,
+          155,
+          157.5,
+          143.5,
+          135.5,
+          129,
+          130.5,
+          129,
+          133,
+          127,
+          117,
+          125.5,
+          121,
+          124,
+          136,
+          149.5,
+          155,
+          170.5
+        ],
+        "technicalSignals": [
+          {
+            "key": "golden-cross",
+            "title": "黃金交叉",
+            "tone": "up",
+            "importance": 3,
+            "description": "雙鍵 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "黃金交叉"
+        ],
+        "topSignalTitle": "黃金交叉",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "除息事件接近",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": "2026-04-23"
+      },
       {
         "code": "1710",
         "name": "東聯",
@@ -4524,9 +4702,9 @@
         "return60": 21.991697730991195,
         "volume": 8926637,
         "turnover": null,
-        "foreign5Day": 6071953,
-        "investmentTrust5Day": -591000,
-        "total5Day": 5903719,
+        "foreign5Day": 5948953,
+        "investmentTrust5Day": 0,
+        "total5Day": 6147962,
         "largeHolderRatio": 61.42,
         "retailRatio": 12.52,
         "shortToMarginRatio": 0.2098391233387736,
@@ -4567,7 +4745,14 @@
         ],
         "topSignalTitle": "KD 低檔黃金交叉",
         "topSignalTone": "up",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "1717",
@@ -4581,9 +4766,9 @@
         "return60": 75.05422910923589,
         "volume": 150397859,
         "turnover": null,
-        "foreign5Day": 21038399,
-        "investmentTrust5Day": -7790488,
-        "total5Day": 18178232,
+        "foreign5Day": 17185358,
+        "investmentTrust5Day": -7536976,
+        "total5Day": 16220237,
         "largeHolderRatio": 71,
         "retailRatio": 11.81,
         "shortToMarginRatio": 3.4329132464679133,
@@ -4624,11 +4809,18 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "除息事件接近",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": "2026-04-24"
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 16.14%，短線強度落後族群。",
+      "近 20 日報酬低於同產業平均 12.19%，短線強度落後族群。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

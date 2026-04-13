@@ -3,7 +3,7 @@
   "name": "奇鋐",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T09:44:26.625Z",
+  "generatedAt": "2026-04-13T10:14:01.666Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 17.33%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 937,063 股。"
+    "最近 5 個交易日三大法人合計買超 99,895 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4132,9 +4132,9 @@
     "更新日期": "2026-04-12"
   },
   "評價面": {
-    "本益比": 46.3,
-    "殖利率": 0.93,
-    "股價淨值比": 19.92
+    "本益比": 44.97,
+    "殖利率": 0.95,
+    "股價淨值比": 19.34
   },
   "財務資料": {
     "月營收": {
@@ -4183,7 +4183,7 @@
       "最新月營收年增 111.72%，營收動能明顯轉強。",
       "最新季報 EPS 49.17 元，仍具獲利能力。",
       "負債比約 68.42%，財務槓桿相對偏高。",
-      "官方估值顯示本益比 46.30 倍、股價淨值比 19.92 倍。"
+      "官方估值顯示本益比 44.97 倍、股價淨值比 19.34 倍。"
     ],
     "資料說明": [
       "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
@@ -4192,6 +4192,13 @@
   },
   "法人買賣": {
     "days": [
+      {
+        "date": "2026-04-13",
+        "foreign": -918145,
+        "investmentTrust": 9587,
+        "dealer": -7250,
+        "total": -915808
+      },
       {
         "date": "2026-04-10",
         "foreign": 60337,
@@ -4219,20 +4226,13 @@
         "investmentTrust": 160261,
         "dealer": 1698,
         "total": -171075
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -52280,
-        "investmentTrust": 105000,
-        "dealer": -131360,
-        "total": -78640
       }
     ],
     "summary": {
-      "foreign5Day": 751976,
-      "investmentTrust5Day": 242645,
-      "dealer5Day": -57558,
-      "total5Day": 937063
+      "foreign5Day": -113889,
+      "investmentTrust5Day": 147232,
+      "dealer5Day": 66552,
+      "total5Day": 99895
     }
   },
   "持股分散": {
@@ -4367,7 +4367,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-04-10",
+    "date": "2026-04-13",
     "marginBuy": 244,
     "marginSell": 185,
     "marginRepay": null,
@@ -4394,7 +4394,7 @@
     ]
   },
   "交易提醒": {
-    "asOfDate": "2026-04-10",
+    "asOfDate": "2026-04-13",
     "alerts": [
       {
         "key": "short-sale-3017",
@@ -4402,7 +4402,7 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-04-10",
+        "date": "2026-04-13",
         "note": "今日可借券賣出股數約 1,756,763 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
         "footnote": "今日可借券賣出股數約 1,756,763 股，可作為券源與流動性參考。"
@@ -4428,13 +4428,13 @@
     "count": 10,
     "averageWeight": 3.453220000000001,
     "totalWeight": 34.53220000000001,
-    "latestDisclosureDate": "2026-04-14",
+    "latestDisclosureDate": "2026-04-13",
     "items": [
       {
         "etfCode": "00987A",
         "etfName": "主動台新優勢成長",
         "providerLabel": "台新投信",
-        "disclosureDate": "2026-04-14",
+        "disclosureDate": "2026-04-13",
         "weight": 6.0512,
         "shares": 53000,
         "rank": 4
@@ -4488,7 +4488,7 @@
         "etfCode": "00992A",
         "etfName": "主動群益科技創新",
         "providerLabel": "群益投信",
-        "disclosureDate": "2026-04-14",
+        "disclosureDate": "2026-04-13",
         "weight": 3.21,
         "shares": 380000,
         "rank": 8
@@ -4506,7 +4506,7 @@
         "etfCode": "00990A",
         "etfName": "主動元大AI新經濟",
         "providerLabel": "元大投信",
-        "disclosureDate": "2026-04-14",
+        "disclosureDate": "2026-04-13",
         "weight": 1.17,
         "shares": 130000,
         "rank": 29
@@ -4525,10 +4525,10 @@
   "同產業比較": {
     "industryName": "電腦及週邊設備業",
     "peerCount": 14,
-    "rank20Day": 2,
+    "rank20Day": 3,
     "rankDaily": 12,
-    "averageReturn20": 3.042136573845762,
-    "averageChangePercent": -0.488014932891494,
+    "averageReturn20": 6.6740622314718285,
+    "averageChangePercent": 0.2779057619554159,
     "leaders": [
       {
         "code": "6831",
@@ -4542,9 +4542,9 @@
         "return60": 46.89542483660131,
         "volume": 1220767,
         "turnover": null,
-        "foreign5Day": 148650,
+        "foreign5Day": 610710,
         "investmentTrust5Day": -308,
-        "total5Day": 157327,
+        "total5Day": 624537,
         "largeHolderRatio": 60,
         "retailRatio": 12.8,
         "shortToMarginRatio": null,
@@ -4595,6 +4595,70 @@
         "nextExDividendDate": null
       },
       {
+        "code": "7711",
+        "name": "永擎",
+        "industryName": "電腦及週邊設備業",
+        "priceDate": "2026-04-13",
+        "close": 302.5,
+        "change": 27.5,
+        "changePercent": 10,
+        "return20": 50.12406947890818,
+        "return60": 14.800759013282732,
+        "volume": 1527072,
+        "turnover": null,
+        "foreign5Day": 85225,
+        "investmentTrust5Day": 0,
+        "total5Day": 108860,
+        "largeHolderRatio": 61.79,
+        "retailRatio": 13.99,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          197.5,
+          203,
+          223,
+          245,
+          269.5,
+          262.5,
+          288.5,
+          271.5,
+          276,
+          280,
+          278,
+          270.5,
+          254,
+          265.5,
+          264.5,
+          276,
+          294,
+          282.5,
+          275,
+          302.5
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "永擎 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
         "code": "3017",
         "name": "奇鋐",
         "industryName": "電腦及週邊設備業",
@@ -4606,9 +4670,9 @@
         "return60": 51.724137931034484,
         "volume": 3113174,
         "turnover": null,
-        "foreign5Day": 751976,
-        "investmentTrust5Day": 242645,
-        "total5Day": 937063,
+        "foreign5Day": -113889,
+        "investmentTrust5Day": 147232,
+        "total5Day": 99895,
         "largeHolderRatio": 68.13,
         "retailRatio": 7.62,
         "shortToMarginRatio": 0.8849557522123894,
@@ -4670,9 +4734,9 @@
         "return60": 6.451612903225806,
         "volume": 8998451,
         "turnover": null,
-        "foreign5Day": 6410362,
-        "investmentTrust5Day": 1270211,
-        "total5Day": 9067899,
+        "foreign5Day": 7010632,
+        "investmentTrust5Day": 1633942,
+        "total5Day": 9814703,
         "largeHolderRatio": 63.85,
         "retailRatio": 19.97,
         "shortToMarginRatio": 1.1509371917132523,
@@ -4734,9 +4798,9 @@
         "return60": 14.748201438848922,
         "volume": 16814838,
         "turnover": null,
-        "foreign5Day": 55350377,
-        "investmentTrust5Day": 3442245,
-        "total5Day": 61840895,
+        "foreign5Day": 59759932,
+        "investmentTrust5Day": 2657093,
+        "total5Day": 65094939,
         "largeHolderRatio": 85.28,
         "retailRatio": 7.459999999999999,
         "shortToMarginRatio": 7.819580566972284,
@@ -4798,9 +4862,9 @@
         "return60": -5.956112852664576,
         "volume": 2194242,
         "turnover": null,
-        "foreign5Day": -1435250,
-        "investmentTrust5Day": -2556603,
-        "total5Day": -4029943,
+        "foreign5Day": 1195462,
+        "investmentTrust5Day": -1633603,
+        "total5Day": -374442,
         "largeHolderRatio": 65.85,
         "retailRatio": 16.93,
         "shortToMarginRatio": 1.3058239749281797,
@@ -4862,9 +4926,9 @@
         "return60": -13.225806451612904,
         "volume": 26926793,
         "turnover": null,
-        "foreign5Day": 38444431,
-        "investmentTrust5Day": 2846421,
-        "total5Day": 41654413,
+        "foreign5Day": 46403835,
+        "investmentTrust5Day": 353003,
+        "total5Day": 46676104,
         "largeHolderRatio": 57.620000000000005,
         "retailRatio": 22.26,
         "shortToMarginRatio": 0.5452997336908277,
@@ -4926,9 +4990,9 @@
         "return60": 13.537122947420698,
         "volume": 16370244,
         "turnover": null,
-        "foreign5Day": 2583344,
-        "investmentTrust5Day": 376560,
-        "total5Day": 4343354,
+        "foreign5Day": -5160999,
+        "investmentTrust5Day": 281713,
+        "total5Day": -4585380,
         "largeHolderRatio": 77.83,
         "retailRatio": 10.26,
         "shortToMarginRatio": 0.4549050632911392,
@@ -4977,70 +5041,6 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
-      },
-      {
-        "code": "2357",
-        "name": "華碩",
-        "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-13",
-        "close": 578,
-        "change": 0,
-        "changePercent": 0,
-        "return20": -0.5163511187607573,
-        "return60": 5.86080586080586,
-        "volume": 2906957,
-        "turnover": null,
-        "foreign5Day": -2304464,
-        "investmentTrust5Day": 571595,
-        "total5Day": -1442598,
-        "largeHolderRatio": 71.04,
-        "retailRatio": 13.180000000000001,
-        "shortToMarginRatio": 0.8781977854142803,
-        "activeEtfCount": 2,
-        "sparkline20": [
-          589,
-          589,
-          593,
-          594,
-          578,
-          582,
-          563,
-          565,
-          565,
-          574,
-          577,
-          562,
-          549,
-          567,
-          555,
-          550,
-          562,
-          568,
-          578,
-          578
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "華碩 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
       }
     ],
     "laggards": [
@@ -5056,9 +5056,9 @@
         "return60": -13.215859030837004,
         "volume": 5461086,
         "turnover": null,
-        "foreign5Day": -3511858,
-        "investmentTrust5Day": -415000,
-        "total5Day": -3565663,
+        "foreign5Day": -4938145,
+        "investmentTrust5Day": -461000,
+        "total5Day": -5534061,
         "largeHolderRatio": 76.57,
         "retailRatio": 9.93,
         "shortToMarginRatio": 1.0691003911342896,
@@ -5120,9 +5120,9 @@
         "return60": 28.82096069868996,
         "volume": 178131,
         "turnover": null,
-        "foreign5Day": 16015,
+        "foreign5Day": 46015,
         "investmentTrust5Day": -404,
-        "total5Day": 17633,
+        "total5Day": 48124,
         "largeHolderRatio": 87.67,
         "retailRatio": 7.21,
         "shortToMarginRatio": null,
@@ -5184,9 +5184,9 @@
         "return60": -19.7136563876652,
         "volume": 1348392,
         "turnover": null,
-        "foreign5Day": 24755,
-        "investmentTrust5Day": -56775,
-        "total5Day": -16708,
+        "foreign5Day": 33554,
+        "investmentTrust5Day": -37991,
+        "total5Day": 32872,
         "largeHolderRatio": 65.43,
         "retailRatio": 9.86,
         "shortToMarginRatio": 0.10861694424330195,
@@ -5238,7 +5238,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 3.04%，在同族群相對偏強。",
+      "近 20 日報酬優於同產業平均 6.67%，在同族群相對偏強。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

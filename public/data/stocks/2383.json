@@ -3,7 +3,7 @@
   "name": "台光電",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T09:44:22.130Z",
+  "generatedAt": "2026-04-13T10:13:56.838Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 27.88%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 981,052 股。"
+    "最近 5 個交易日三大法人合計買超 619,231 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4132,9 +4132,9 @@
     "更新日期": "2026-04-12"
   },
   "評價面": {
-    "本益比": 83.66,
-    "殖利率": 0.73,
-    "股價淨值比": 24.29
+    "本益比": 81.34,
+    "殖利率": 0.75,
+    "股價淨值比": 23.61
   },
   "財務資料": {
     "月營收": {
@@ -4183,7 +4183,7 @@
       "最新月營收年增 56.63%，營收動能明顯轉強。",
       "最新季報 EPS 41.67 元，仍具獲利能力。",
       "負債比約 53.26%，資本結構仍在可觀察區間。",
-      "官方估值顯示本益比 83.66 倍、股價淨值比 24.29 倍。"
+      "官方估值顯示本益比 81.34 倍、股價淨值比 23.61 倍。"
     ],
     "資料說明": [
       "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
@@ -4192,6 +4192,13 @@
   },
   "法人買賣": {
     "days": [
+      {
+        "date": "2026-04-13",
+        "foreign": -331446,
+        "investmentTrust": -97399,
+        "dealer": 189099,
+        "total": -239746
+      },
       {
         "date": "2026-04-10",
         "foreign": -194742,
@@ -4219,20 +4226,13 @@
         "investmentTrust": 71421,
         "dealer": 62308,
         "total": 95151
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": -19797,
-        "investmentTrust": 177129,
-        "dealer": -35257,
-        "total": 122075
       }
     ],
     "summary": {
-      "foreign5Day": 484675,
-      "investmentTrust5Day": 482227,
-      "dealer5Day": 14150,
-      "total5Day": 981052
+      "foreign5Day": 173026,
+      "investmentTrust5Day": 207699,
+      "dealer5Day": 238506,
+      "total5Day": 619231
     }
   },
   "持股分散": {
@@ -4367,7 +4367,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-04-10",
+    "date": "2026-04-13",
     "marginBuy": 151,
     "marginSell": 204,
     "marginRepay": null,
@@ -4394,7 +4394,7 @@
     ]
   },
   "交易提醒": {
-    "asOfDate": "2026-04-10",
+    "asOfDate": "2026-04-13",
     "alerts": [
       {
         "key": "short-sale-2383",
@@ -4402,7 +4402,7 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-04-10",
+        "date": "2026-04-13",
         "note": "今日可借券賣出股數約 1,127,646 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
         "footnote": "今日可借券賣出股數約 1,127,646 股，可作為券源與流動性參考。"
@@ -4428,7 +4428,7 @@
     "count": 12,
     "averageWeight": 4.613708333333334,
     "totalWeight": 55.36450000000001,
-    "latestDisclosureDate": "2026-04-14",
+    "latestDisclosureDate": "2026-04-13",
     "items": [
       {
         "etfCode": "00991A",
@@ -4479,7 +4479,7 @@
         "etfCode": "00982A",
         "etfName": "主動群益台灣強棒",
         "providerLabel": "群益投信",
-        "disclosureDate": "2026-04-14",
+        "disclosureDate": "2026-04-13",
         "weight": 4.5,
         "shares": 457000,
         "rank": 6
@@ -4488,7 +4488,7 @@
         "etfCode": "00987A",
         "etfName": "主動台新優勢成長",
         "providerLabel": "台新投信",
-        "disclosureDate": "2026-04-14",
+        "disclosureDate": "2026-04-13",
         "weight": 4.3139,
         "shares": 25000,
         "rank": 8
@@ -4497,7 +4497,7 @@
         "etfCode": "00992A",
         "etfName": "主動群益科技創新",
         "providerLabel": "群益投信",
-        "disclosureDate": "2026-04-14",
+        "disclosureDate": "2026-04-13",
         "weight": 4.24,
         "shares": 332000,
         "rank": 3
@@ -4524,7 +4524,7 @@
         "etfCode": "00990A",
         "etfName": "主動元大AI新經濟",
         "providerLabel": "元大投信",
-        "disclosureDate": "2026-04-14",
+        "disclosureDate": "2026-04-13",
         "weight": 1.95,
         "shares": 144000,
         "rank": 16
@@ -4542,11 +4542,11 @@
   },
   "同產業比較": {
     "industryName": "電子零組件業",
-    "peerCount": 26,
-    "rank20Day": 9,
-    "rankDaily": 21,
-    "averageReturn20": 20.948214582064647,
-    "averageChangePercent": -0.7961182045994905,
+    "peerCount": 25,
+    "rank20Day": 10,
+    "rankDaily": 20,
+    "averageReturn20": 22.474854140131047,
+    "averageChangePercent": -0.0833120627618606,
     "leaders": [
       {
         "code": "6213",
@@ -4560,9 +4560,9 @@
         "return60": 71.42857142857143,
         "volume": 26360826,
         "turnover": null,
-        "foreign5Day": -2441953,
-        "investmentTrust5Day": 2129518,
-        "total5Day": 1287202,
+        "foreign5Day": -9955946,
+        "investmentTrust5Day": 1587518,
+        "total5Day": -7892872,
         "largeHolderRatio": 66.25,
         "retailRatio": 16.85,
         "shortToMarginRatio": 5.338522543692172,
@@ -4632,9 +4632,9 @@
         "return60": 47.72727272727273,
         "volume": 2828655,
         "turnover": null,
-        "foreign5Day": 2085652,
+        "foreign5Day": 2659907,
         "investmentTrust5Day": -13612,
-        "total5Day": 2250549,
+        "total5Day": 3092199,
         "largeHolderRatio": 59.29,
         "retailRatio": 21.509999999999998,
         "shortToMarginRatio": 0.5119240854039206,
@@ -4696,9 +4696,9 @@
         "return60": 96.42218246869409,
         "volume": 7225860,
         "turnover": null,
-        "foreign5Day": 524583,
-        "investmentTrust5Day": 841001,
-        "total5Day": 922885,
+        "foreign5Day": -54509,
+        "investmentTrust5Day": 830001,
+        "total5Day": 174484,
         "largeHolderRatio": 69.43,
         "retailRatio": 11.23,
         "shortToMarginRatio": 32.39208049334631,
@@ -4760,9 +4760,9 @@
         "return60": 83.27402135231317,
         "volume": 26201838,
         "turnover": null,
-        "foreign5Day": -6614858,
-        "investmentTrust5Day": 1755147,
-        "total5Day": -3567740,
+        "foreign5Day": -10379170,
+        "investmentTrust5Day": 1786599,
+        "total5Day": -7501062,
         "largeHolderRatio": 80.43,
         "retailRatio": 7.709999999999999,
         "shortToMarginRatio": 0.9824978293652608,
@@ -4824,9 +4824,9 @@
         "return60": 171.22153209109732,
         "volume": 9062786,
         "turnover": null,
-        "foreign5Day": 3180216,
-        "investmentTrust5Day": 5715000,
-        "total5Day": 9870817,
+        "foreign5Day": 731803,
+        "investmentTrust5Day": 4770000,
+        "total5Day": 6126139,
         "largeHolderRatio": 86.26,
         "retailRatio": 6.48,
         "shortToMarginRatio": 7.218657453109575,
@@ -4888,9 +4888,9 @@
         "return60": 195.8642534156305,
         "volume": 66434040,
         "turnover": null,
-        "foreign5Day": -9094696,
-        "investmentTrust5Day": 410911,
-        "total5Day": -7397502,
+        "foreign5Day": -16619713,
+        "investmentTrust5Day": -2457089,
+        "total5Day": -17790367,
         "largeHolderRatio": 72.09,
         "retailRatio": 15.33,
         "shortToMarginRatio": 3.2095567069660333,
@@ -4952,9 +4952,9 @@
         "return60": 316,
         "volume": 2999457,
         "turnover": null,
-        "foreign5Day": -506172,
-        "investmentTrust5Day": 1030862,
-        "total5Day": 453381,
+        "foreign5Day": -983431,
+        "investmentTrust5Day": 1553862,
+        "total5Day": 539248,
         "largeHolderRatio": 76.15,
         "retailRatio": 5.64,
         "shortToMarginRatio": 2.0947802197802194,
@@ -5005,66 +5005,66 @@
         "nextExDividendDate": null
       },
       {
-        "code": "3037",
-        "name": "欣興",
+        "code": "2402",
+        "name": "毅嘉",
         "industryName": "電子零組件業",
         "priceDate": "2026-04-13",
-        "close": 626,
-        "change": -12,
-        "changePercent": -1.8808777429467085,
-        "return20": 30.416666666666664,
-        "return60": 172.17391304347828,
-        "volume": 58203144,
+        "close": 67.4000015258789,
+        "change": 6.100002288818359,
+        "changePercent": 9.951064216539892,
+        "return20": 33.99602892283792,
+        "return60": 11.221127430657804,
+        "volume": 39542166,
         "turnover": null,
-        "foreign5Day": 5168157,
-        "investmentTrust5Day": 6090422,
-        "total5Day": 9791034,
-        "largeHolderRatio": 77.45,
-        "retailRatio": 9.64,
-        "shortToMarginRatio": 0.9865339578454332,
-        "activeEtfCount": 10,
+        "foreign5Day": 19039708,
+        "investmentTrust5Day": -58996,
+        "total5Day": 20114491,
+        "largeHolderRatio": 48.59,
+        "retailRatio": 24.03,
+        "shortToMarginRatio": 0.03617363344051447,
+        "activeEtfCount": 0,
         "sparkline20": [
-          508,
-          549,
-          543,
-          580,
-          581,
-          554,
-          499,
-          460,
-          506,
-          502,
-          505,
-          493.5,
-          444.5,
-          488.5,
-          519,
-          564,
-          620,
-          625,
-          638,
-          626
+          51.29999923706055,
+          50.79999923706055,
+          50.599998474121094,
+          50.5,
+          51.599998474121094,
+          51,
+          49.599998474121094,
+          51.099998474121094,
+          51.29999923706055,
+          51.29999923706055,
+          53,
+          51.900001525878906,
+          49.150001525878906,
+          51.599998474121094,
+          52.79999923706055,
+          51.79999923706055,
+          56.900001525878906,
+          55.79999923706055,
+          61.29999923706055,
+          67.4000015258789
         ],
         "technicalSignals": [
           {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "欣興 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "key": "rsi-overbought",
+            "title": "RSI 超買",
+            "tone": "down",
+            "importance": 2,
+            "description": "毅嘉 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
           }
         ],
         "technicalSignalTitles": [
-          "技術面中性"
+          "RSI 超買"
         ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
         "signalCount": 1,
-        "topSelectionSignalTitle": "注意股累計次數偏高",
-        "selectionSignalTone": "warning",
-        "selectionSignalCount": 2,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
         "isUnderDisposition": false,
-        "hasAttentionWarning": true,
+        "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
       }
@@ -5082,9 +5082,9 @@
         "return60": 18.456375838926174,
         "volume": 3236436,
         "turnover": null,
-        "foreign5Day": -958556,
-        "investmentTrust5Day": -299893,
-        "total5Day": -1300598,
+        "foreign5Day": -683258,
+        "investmentTrust5Day": -824194,
+        "total5Day": -1518852,
         "largeHolderRatio": 63.17,
         "retailRatio": 8.73,
         "shortToMarginRatio": 0.273972602739726,
@@ -5146,9 +5146,9 @@
         "return60": -23.488372093023255,
         "volume": 614392,
         "turnover": null,
-        "foreign5Day": 417282,
-        "investmentTrust5Day": -230265,
-        "total5Day": 278907,
+        "foreign5Day": 514280,
+        "investmentTrust5Day": -206265,
+        "total5Day": 439786,
         "largeHolderRatio": 72.2,
         "retailRatio": 14.94,
         "shortToMarginRatio": 0.17774617845716317,
@@ -5210,9 +5210,9 @@
         "return60": -10.828025477707007,
         "volume": 3482960,
         "turnover": null,
-        "foreign5Day": 1694074,
-        "investmentTrust5Day": -3308612,
-        "total5Day": -1183888,
+        "foreign5Day": 1835277,
+        "investmentTrust5Day": -3313612,
+        "total5Day": -1003801,
         "largeHolderRatio": 55.43,
         "retailRatio": 24.200000000000003,
         "shortToMarginRatio": 0.2877106452938759,
@@ -5264,7 +5264,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 20.95%，在同族群相對偏強。",
+      "近 20 日報酬優於同產業平均 22.47%，在同族群相對偏強。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

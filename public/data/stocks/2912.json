@@ -3,7 +3,7 @@
   "name": "統一超",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T09:44:26.227Z",
+  "generatedAt": "2026-04-13T10:14:01.181Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 4.65%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 2,314,791 股。"
+    "最近 5 個交易日三大法人合計買超 319,095 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4110,9 +4110,9 @@
     "更新日期": "2026-04-12"
   },
   "評價面": {
-    "本益比": 21.1,
-    "殖利率": 3.96,
-    "股價淨值比": 5.56
+    "本益比": 20.87,
+    "殖利率": 4,
+    "股價淨值比": 5.5
   },
   "財務資料": {
     "月營收": {
@@ -4161,7 +4161,7 @@
       "最新月營收年增 4.93%，營收仍維持溫和成長。",
       "最新季報 EPS 10.78 元，仍具獲利能力。",
       "負債比約 81.91%，財務槓桿相對偏高。",
-      "官方估值顯示本益比 21.10 倍、股價淨值比 5.56 倍。"
+      "官方估值顯示本益比 20.87 倍、股價淨值比 5.50 倍。"
     ],
     "資料說明": [
       "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
@@ -4170,6 +4170,13 @@
   },
   "法人買賣": {
     "days": [
+      {
+        "date": "2026-04-13",
+        "foreign": -622470,
+        "investmentTrust": 4848,
+        "dealer": -18998,
+        "total": -636620
+      },
       {
         "date": "2026-04-10",
         "foreign": -346534,
@@ -4197,20 +4204,13 @@
         "investmentTrust": 58186,
         "dealer": 6968,
         "total": 1021307
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": 1410045,
-        "investmentTrust": -52000,
-        "dealer": 1031,
-        "total": 1359076
       }
     ],
     "summary": {
-      "foreign5Day": 2221337,
-      "investmentTrust5Day": 2803,
-      "dealer5Day": 90651,
-      "total5Day": 2314791
+      "foreign5Day": 188822,
+      "investmentTrust5Day": 59651,
+      "dealer5Day": 70622,
+      "total5Day": 319095
     }
   },
   "持股分散": {
@@ -4345,7 +4345,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-04-10",
+    "date": "2026-04-13",
     "marginBuy": 17,
     "marginSell": 8,
     "marginRepay": null,
@@ -4371,7 +4371,7 @@
     ]
   },
   "交易提醒": {
-    "asOfDate": "2026-04-10",
+    "asOfDate": "2026-04-13",
     "alerts": [
       {
         "key": "short-sale-2912",
@@ -4379,7 +4379,7 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-04-10",
+        "date": "2026-04-13",
         "note": "今日可借券賣出股數約 963,408 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
         "footnote": "今日可借券賣出股數約 963,408 股，可作為券源與流動性參考。"
@@ -4438,9 +4438,9 @@
         "return60": 2.0408163265306123,
         "volume": 2303808,
         "turnover": null,
-        "foreign5Day": 2221337,
-        "investmentTrust5Day": 2803,
-        "total5Day": 2314791,
+        "foreign5Day": 188822,
+        "investmentTrust5Day": 59651,
+        "total5Day": 319095,
         "largeHolderRatio": 84.3,
         "retailRatio": 7.659999999999999,
         "shortToMarginRatio": 0.3091190108191654,
@@ -4504,9 +4504,9 @@
         "return60": 2.0408163265306123,
         "volume": 2303808,
         "turnover": null,
-        "foreign5Day": 2221337,
-        "investmentTrust5Day": 2803,
-        "total5Day": 2314791,
+        "foreign5Day": 188822,
+        "investmentTrust5Day": 59651,
+        "total5Day": 319095,
         "largeHolderRatio": 84.3,
         "retailRatio": 7.659999999999999,
         "shortToMarginRatio": 0.3091190108191654,

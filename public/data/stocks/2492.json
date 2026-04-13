@@ -3,7 +3,7 @@
   "name": "華新科",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T06:15:11.215Z",
+  "generatedAt": "2026-04-13T10:13:58.856Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,13 +3487,18 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 8.80%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 4,121,804 股。"
+    "最近 5 個交易日三大法人合計買超 2,128,956 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
+    "TWSE OpenAPI punish",
+    "TWSE OpenAPI notetrans",
+    "TWSE OpenAPI TWT48U_ALL",
+    "TWSE OpenAPI TWT85U",
+    "TWSE OpenAPI TWT96U",
     "TWSE OpenAPI t187ap03_L",
     "TWSE OpenAPI t187ap05_L",
     "TWSE OpenAPI t187ap06_L_*",
@@ -4127,9 +4132,9 @@
     "更新日期": "2026-04-12"
   },
   "評價面": {
-    "本益比": 27.11,
-    "殖利率": 1.87,
-    "股價淨值比": 1.2
+    "本益比": 28.69,
+    "殖利率": 1.76,
+    "股價淨值比": 1.27
   },
   "財務資料": {
     "月營收": {
@@ -4178,7 +4183,7 @@
       "最新月營收年增 11.13%，營收仍維持溫和成長。",
       "最新季報 EPS 4.74 元，仍具獲利能力。",
       "負債比約 39.87%，資本結構仍在可觀察區間。",
-      "官方估值顯示本益比 27.11 倍、股價淨值比 1.20 倍。"
+      "官方估值顯示本益比 28.69 倍、股價淨值比 1.27 倍。"
     ],
     "資料說明": [
       "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
@@ -4187,6 +4192,13 @@
   },
   "法人買賣": {
     "days": [
+      {
+        "date": "2026-04-13",
+        "foreign": -241150,
+        "investmentTrust": 101000,
+        "dealer": 905302,
+        "total": 765152
+      },
       {
         "date": "2026-04-10",
         "foreign": 1553056,
@@ -4214,20 +4226,13 @@
         "investmentTrust": 6000,
         "dealer": 167225,
         "total": -950775
-      },
-      {
-        "date": "2026-04-04",
-        "foreign": 586000,
-        "investmentTrust": 2155000,
-        "dealer": 17000,
-        "total": 2758000
       }
     ],
     "summary": {
-      "foreign5Day": 1457597,
-      "investmentTrust5Day": 2173000,
-      "dealer5Day": 491207,
-      "total5Day": 4121804
+      "foreign5Day": 630447,
+      "investmentTrust5Day": 119000,
+      "dealer5Day": 1379509,
+      "total5Day": 2128956
     }
   },
   "持股分散": {
@@ -4362,7 +4367,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-04-10",
+    "date": "2026-04-13",
     "marginBuy": 1001,
     "marginSell": 1019,
     "marginRepay": 11,
@@ -4387,14 +4392,45 @@
       "券資比約 0.15%，市場籌碼仍以多方槓桿為主。"
     ]
   },
+  "交易提醒": {
+    "asOfDate": "2026-04-13",
+    "alerts": [
+      {
+        "key": "short-sale-2492",
+        "type": "short-sale",
+        "tone": "info",
+        "title": "可借券賣出餘量",
+        "badgeLabel": "借券",
+        "date": "2026-04-13",
+        "note": "今日可借券賣出股數約 2,884,185 股，可作為券源與流動性參考。",
+        "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
+        "footnote": "今日可借券賣出股數約 2,884,185 股，可作為券源與流動性參考。"
+      }
+    ],
+    "eventCalendar": [],
+    "highlights": [
+      "今日可借券賣出股數約 2,884,185 股，可作為券源與流動性參考。"
+    ],
+    "summary": {
+      "riskTone": "info",
+      "activeDispositionCount": 0,
+      "attentionWarningCount": 0,
+      "changedTradingCount": 0,
+      "nextExDividendDate": null,
+      "shortSaleAvailableVolume": 2884185,
+      "alertCount": 1,
+      "topTitle": "可借券賣出餘量",
+      "topTone": "info"
+    }
+  },
   "主動ETF曝光": null,
   "同產業比較": {
     "industryName": "電子零組件業",
-    "peerCount": 28,
-    "rank20Day": 19,
-    "rankDaily": 3,
-    "averageReturn20": 19.79483601323334,
-    "averageChangePercent": -0.6140442645798251,
+    "peerCount": 25,
+    "rank20Day": 18,
+    "rankDaily": 4,
+    "averageReturn20": 22.474854140131047,
+    "averageChangePercent": -0.0833120627618606,
     "leaders": [
       {
         "code": "6213",
@@ -4408,9 +4444,9 @@
         "return60": 71.42857142857143,
         "volume": 26360826,
         "turnover": null,
-        "foreign5Day": -9037521,
-        "investmentTrust5Day": 1621518,
-        "total5Day": -6928427,
+        "foreign5Day": -9955946,
+        "investmentTrust5Day": 1587518,
+        "total5Day": -7892872,
         "largeHolderRatio": 66.25,
         "retailRatio": 16.85,
         "shortToMarginRatio": 5.338522543692172,
@@ -4459,7 +4495,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 2
+        "signalCount": 2,
+        "topSelectionSignalTitle": "注意股累計次數偏高",
+        "selectionSignalTone": "warning",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": true,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "2472",
@@ -4473,9 +4516,9 @@
         "return60": 47.72727272727273,
         "volume": 2828655,
         "turnover": null,
-        "foreign5Day": 2482907,
-        "investmentTrust5Day": 156388,
-        "total5Day": 2928544,
+        "foreign5Day": 2659907,
+        "investmentTrust5Day": -13612,
+        "total5Day": 3092199,
         "largeHolderRatio": 59.29,
         "retailRatio": 21.509999999999998,
         "shortToMarginRatio": 0.5119240854039206,
@@ -4516,7 +4559,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "2467",
@@ -4530,9 +4580,9 @@
         "return60": 96.42218246869409,
         "volume": 7225860,
         "turnover": null,
-        "foreign5Day": -264315,
-        "investmentTrust5Day": 832001,
-        "total5Day": 204632,
+        "foreign5Day": -54509,
+        "investmentTrust5Day": 830001,
+        "total5Day": 174484,
         "largeHolderRatio": 69.43,
         "retailRatio": 11.23,
         "shortToMarginRatio": 32.39208049334631,
@@ -4573,7 +4623,14 @@
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "4958",
@@ -4587,9 +4644,9 @@
         "return60": 83.27402135231317,
         "volume": 26201838,
         "turnover": null,
-        "foreign5Day": -2921057,
-        "investmentTrust5Day": 1531665,
-        "total5Day": -427781,
+        "foreign5Day": -10379170,
+        "investmentTrust5Day": 1786599,
+        "total5Day": -7501062,
         "largeHolderRatio": 80.43,
         "retailRatio": 7.709999999999999,
         "shortToMarginRatio": 0.9824978293652608,
@@ -4630,7 +4687,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "8046",
@@ -4644,9 +4708,9 @@
         "return60": 171.22153209109732,
         "volume": 9062786,
         "turnover": null,
-        "foreign5Day": 1060016,
-        "investmentTrust5Day": 4571000,
-        "total5Day": 6365461,
+        "foreign5Day": 731803,
+        "investmentTrust5Day": 4770000,
+        "total5Day": 6126139,
         "largeHolderRatio": 86.26,
         "retailRatio": 6.48,
         "shortToMarginRatio": 7.218657453109575,
@@ -4687,7 +4751,14 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "2313",
@@ -4701,9 +4772,9 @@
         "return60": 195.8642534156305,
         "volume": 66434040,
         "turnover": null,
-        "foreign5Day": -5602207,
-        "investmentTrust5Day": 200911,
-        "total5Day": -2870426,
+        "foreign5Day": -16619713,
+        "investmentTrust5Day": -2457089,
+        "total5Day": -17790367,
         "largeHolderRatio": 72.09,
         "retailRatio": 15.33,
         "shortToMarginRatio": 3.2095567069660333,
@@ -4744,7 +4815,14 @@
         ],
         "topSignalTitle": "KD 高檔死亡交叉",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "除息事件接近",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 2,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": "2026-06-02"
       },
       {
         "code": "6715",
@@ -4758,9 +4836,9 @@
         "return60": 316,
         "volume": 2999457,
         "turnover": null,
-        "foreign5Day": -392172,
-        "investmentTrust5Day": 890862,
-        "total5Day": 473507,
+        "foreign5Day": -983431,
+        "investmentTrust5Day": 1553862,
+        "total5Day": 539248,
         "largeHolderRatio": 76.15,
         "retailRatio": 5.64,
         "shortToMarginRatio": 2.0947802197802194,
@@ -4801,64 +4879,78 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
-        "code": "3037",
-        "name": "欣興",
+        "code": "2402",
+        "name": "毅嘉",
         "industryName": "電子零組件業",
         "priceDate": "2026-04-13",
-        "close": 626,
-        "change": -12,
-        "changePercent": -1.8808777429467085,
-        "return20": 30.416666666666664,
-        "return60": 172.17391304347828,
-        "volume": 58203144,
+        "close": 67.4000015258789,
+        "change": 6.100002288818359,
+        "changePercent": 9.951064216539892,
+        "return20": 33.99602892283792,
+        "return60": 11.221127430657804,
+        "volume": 39542166,
         "turnover": null,
-        "foreign5Day": 3144187,
-        "investmentTrust5Day": 3074444,
-        "total5Day": 6763944,
-        "largeHolderRatio": 77.45,
-        "retailRatio": 9.64,
-        "shortToMarginRatio": 0.9865339578454332,
-        "activeEtfCount": 10,
+        "foreign5Day": 19039708,
+        "investmentTrust5Day": -58996,
+        "total5Day": 20114491,
+        "largeHolderRatio": 48.59,
+        "retailRatio": 24.03,
+        "shortToMarginRatio": 0.03617363344051447,
+        "activeEtfCount": 0,
         "sparkline20": [
-          508,
-          549,
-          543,
-          580,
-          581,
-          554,
-          499,
-          460,
-          506,
-          502,
-          505,
-          493.5,
-          444.5,
-          488.5,
-          519,
-          564,
-          620,
-          625,
-          638,
-          626
+          51.29999923706055,
+          50.79999923706055,
+          50.599998474121094,
+          50.5,
+          51.599998474121094,
+          51,
+          49.599998474121094,
+          51.099998474121094,
+          51.29999923706055,
+          51.29999923706055,
+          53,
+          51.900001525878906,
+          49.150001525878906,
+          51.599998474121094,
+          52.79999923706055,
+          51.79999923706055,
+          56.900001525878906,
+          55.79999923706055,
+          61.29999923706055,
+          67.4000015258789
         ],
         "technicalSignals": [
           {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "欣興 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "key": "rsi-overbought",
+            "title": "RSI 超買",
+            "tone": "down",
+            "importance": 2,
+            "description": "毅嘉 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
           }
         ],
         "technicalSignalTitles": [
-          "技術面中性"
+          "RSI 超買"
         ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "laggards": [
@@ -4874,9 +4966,9 @@
         "return60": 18.456375838926174,
         "volume": 3236436,
         "turnover": null,
-        "foreign5Day": -895137,
-        "investmentTrust5Day": -479893,
-        "total5Day": -1365906,
+        "foreign5Day": -683258,
+        "investmentTrust5Day": -824194,
+        "total5Day": -1518852,
         "largeHolderRatio": 63.17,
         "retailRatio": 8.73,
         "shortToMarginRatio": 0.273972602739726,
@@ -4917,7 +5009,14 @@
         ],
         "topSignalTitle": "死亡交叉",
         "topSignalTone": "down",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "6781",
@@ -4931,9 +5030,9 @@
         "return60": -23.488372093023255,
         "volume": 614392,
         "turnover": null,
-        "foreign5Day": 413573,
-        "investmentTrust5Day": -192265,
-        "total5Day": 332005,
+        "foreign5Day": 514280,
+        "investmentTrust5Day": -206265,
+        "total5Day": 439786,
         "largeHolderRatio": 72.2,
         "retailRatio": 14.94,
         "shortToMarginRatio": 0.17774617845716317,
@@ -4974,7 +5073,14 @@
         ],
         "topSignalTitle": "KD 低檔黃金交叉",
         "topSignalTone": "up",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       },
       {
         "code": "2421",
@@ -4988,9 +5094,9 @@
         "return60": -10.828025477707007,
         "volume": 3482960,
         "turnover": null,
-        "foreign5Day": 2480675,
-        "investmentTrust5Day": -3511612,
-        "total5Day": -392299,
+        "foreign5Day": 1835277,
+        "investmentTrust5Day": -3313612,
+        "total5Day": -1003801,
         "largeHolderRatio": 55.43,
         "retailRatio": 24.200000000000003,
         "shortToMarginRatio": 0.2877106452938759,
@@ -5031,12 +5137,19 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
-        "signalCount": 1
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 19.79%，短線強度落後族群。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "近 20 日報酬低於同產業平均 22.47%，短線強度落後族群。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }
