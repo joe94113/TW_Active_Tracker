@@ -88,6 +88,16 @@ function normalizeDateKey(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : null;
 }
 
+function resolveDigestMarketDate(dashboard) {
+  return (
+    normalizeDateKey(dashboard?.市場總覽?.即時狀態?.marketDate) ??
+    normalizeDateKey(dashboard?.市場總覽?.大盤摘要?.資料日期) ??
+    normalizeDateKey(dashboard?.市場總覽?.盤中脈動?.資料日期) ??
+    normalizeDateKey(dashboard?.市場總覽?.資料日期) ??
+    null
+  );
+}
+
 function toDayStamp(dateText) {
   const stamp = Date.parse(`${dateText}T00:00:00+08:00`);
   return Number.isFinite(stamp) ? stamp : null;
@@ -205,7 +215,7 @@ export async function loadCloseDigestData() {
 }
 
 export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, stockSearchList, today = formatTaipeiDate() }) {
-  const marketDate = dashboard?.市場總覽?.資料日期 ?? null;
+  const marketDate = resolveDigestMarketDate(dashboard);
 
   if (marketDate !== today) {
     return null;

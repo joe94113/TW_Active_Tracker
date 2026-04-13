@@ -2,8 +2,6 @@ name: Send Event Alerts
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '20 11 * * 1-5'
 
 permissions:
   contents: read
@@ -31,6 +29,12 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh event data snapshot
+        run: npm run data:update || echo "data:update completed with partial upstream failures"
 
       - name: Send Telegram event alert
         run: node scripts/send-telegram-event-alert.mjs

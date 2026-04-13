@@ -3,7 +3,7 @@
   "name": "崇越",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:57.534Z",
+  "generatedAt": "2026-04-13T09:16:51.935Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 20.15%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 2,417,243 股。"
+    "最近 5 個交易日三大法人合計買超 1,882,498 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4214,25 +4214,25 @@
         "total": -186158
       },
       {
-        "date": "2026-04-07",
-        "foreign": 659252,
-        "investmentTrust": -34000,
-        "dealer": 84737,
-        "total": 709989
-      },
-      {
         "date": "2026-04-02",
         "foreign": 404015,
         "investmentTrust": 153000,
         "dealer": 17863,
         "total": 574878
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 155878,
+        "investmentTrust": 0,
+        "dealer": 19366,
+        "total": 175244
       }
     ],
     "summary": {
-      "foreign5Day": 2049004,
-      "investmentTrust5Day": 129807,
-      "dealer5Day": 238432,
-      "total5Day": 2417243
+      "foreign5Day": 1545630,
+      "investmentTrust5Day": 163807,
+      "dealer5Day": 173061,
+      "total5Day": 1882498
     }
   },
   "持股分散": {
@@ -4452,76 +4452,12 @@
   },
   "同產業比較": {
     "industryName": "電子通路業",
-    "peerCount": 3,
-    "rank20Day": 2,
-    "rankDaily": 3,
-    "averageReturn20": 16.689022080906437,
-    "averageChangePercent": 2.1027838121272286,
+    "peerCount": 2,
+    "rank20Day": 1,
+    "rankDaily": 2,
+    "averageReturn20": 9.3192484450868,
+    "averageChangePercent": 0.3672913061028139,
     "leaders": [
-      {
-        "code": "3702",
-        "name": "大聯大",
-        "industryName": "電子通路業",
-        "priceDate": "2026-04-13",
-        "close": 96.5999984741211,
-        "change": 5.099998474121094,
-        "changePercent": 5.573768824176058,
-        "return20": 31.428569352545704,
-        "return60": 62.35293861196822,
-        "volume": 26046452,
-        "turnover": null,
-        "foreign5Day": 25235085,
-        "investmentTrust5Day": -767000,
-        "total5Day": 25393292,
-        "largeHolderRatio": 84.57000000000001,
-        "retailRatio": 5.97,
-        "shortToMarginRatio": 17.640807651434645,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          74.5,
-          81.9000015258789,
-          90,
-          93.0999984741211,
-          93,
-          91.4000015258789,
-          90.69999694824219,
-          90.69999694824219,
-          95.80000305175781,
-          95.0999984741211,
-          92.0999984741211,
-          90.4000015258789,
-          88,
-          89.9000015258789,
-          88,
-          89.0999984741211,
-          91.9000015258789,
-          91.30000305175781,
-          91.5,
-          96.5999984741211
-        ],
-        "technicalSignals": [
-          {
-            "key": "rsi-overbought",
-            "title": "RSI 超買",
-            "tone": "down",
-            "importance": 2,
-            "description": "大聯大 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "RSI 超買"
-        ],
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
       {
         "code": "5434",
         "name": "崇越",
@@ -4534,9 +4470,9 @@
         "return60": 33.61204013377927,
         "volume": 1779058,
         "turnover": null,
-        "foreign5Day": 2049004,
-        "investmentTrust5Day": 129807,
-        "total5Day": 2417243,
+        "foreign5Day": 1545630,
+        "investmentTrust5Day": 163807,
+        "total5Day": 1882498,
         "largeHolderRatio": 54.559999999999995,
         "retailRatio": 14.66,
         "shortToMarginRatio": 2.5899280575539567,
@@ -4598,9 +4534,9 @@
         "return60": 63.44086021505376,
         "volume": 4815142,
         "turnover": null,
-        "foreign5Day": -8800,
-        "investmentTrust5Day": 753777,
-        "total5Day": 1194916,
+        "foreign5Day": 2268526,
+        "investmentTrust5Day": -1143656,
+        "total5Day": 1353598,
         "largeHolderRatio": 90.1,
         "retailRatio": 2.87,
         "shortToMarginRatio": 31.848958333333332,
@@ -4664,9 +4600,9 @@
         "return60": 63.44086021505376,
         "volume": 4815142,
         "turnover": null,
-        "foreign5Day": -8800,
-        "investmentTrust5Day": 753777,
-        "total5Day": 1194916,
+        "foreign5Day": 2268526,
+        "investmentTrust5Day": -1143656,
+        "total5Day": 1353598,
         "largeHolderRatio": 90.1,
         "retailRatio": 2.87,
         "shortToMarginRatio": 31.848958333333332,
@@ -4728,9 +4664,9 @@
         "return60": 33.61204013377927,
         "volume": 1779058,
         "turnover": null,
-        "foreign5Day": 2049004,
-        "investmentTrust5Day": 129807,
-        "total5Day": 2417243,
+        "foreign5Day": 1545630,
+        "investmentTrust5Day": 163807,
+        "total5Day": 1882498,
         "largeHolderRatio": 54.559999999999995,
         "retailRatio": 14.66,
         "shortToMarginRatio": 2.5899280575539567,
@@ -4779,75 +4715,11 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
-      },
-      {
-        "code": "3702",
-        "name": "大聯大",
-        "industryName": "電子通路業",
-        "priceDate": "2026-04-13",
-        "close": 96.5999984741211,
-        "change": 5.099998474121094,
-        "changePercent": 5.573768824176058,
-        "return20": 31.428569352545704,
-        "return60": 62.35293861196822,
-        "volume": 26046452,
-        "turnover": null,
-        "foreign5Day": 25235085,
-        "investmentTrust5Day": -767000,
-        "total5Day": 25393292,
-        "largeHolderRatio": 84.57000000000001,
-        "retailRatio": 5.97,
-        "shortToMarginRatio": 17.640807651434645,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          74.5,
-          81.9000015258789,
-          90,
-          93.0999984741211,
-          93,
-          91.4000015258789,
-          90.69999694824219,
-          90.69999694824219,
-          95.80000305175781,
-          95.0999984741211,
-          92.0999984741211,
-          90.4000015258789,
-          88,
-          89.9000015258789,
-          88,
-          89.0999984741211,
-          91.9000015258789,
-          91.30000305175781,
-          91.5,
-          96.5999984741211
-        ],
-        "technicalSignals": [
-          {
-            "key": "rsi-overbought",
-            "title": "RSI 超買",
-            "tone": "down",
-            "importance": 2,
-            "description": "大聯大 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "RSI 超買"
-        ],
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 16.69%，在同族群相對偏強。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "近 20 日報酬優於同產業平均 9.32%，在同族群相對偏強。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

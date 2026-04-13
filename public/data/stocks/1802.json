@@ -3,7 +3,7 @@
   "name": "台玻",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:42.609Z",
+  "generatedAt": "2026-04-13T09:16:37.367Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 15.27%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 3,187,967 股。"
+    "最近 5 個交易日三大法人合計賣超 473,270 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4213,25 +4213,25 @@
         "total": 8244301
       },
       {
-        "date": "2026-04-07",
-        "foreign": 7223130,
-        "investmentTrust": 0,
-        "dealer": 742950,
-        "total": 7966080
-      },
-      {
         "date": "2026-04-02",
         "foreign": -3261820,
         "investmentTrust": 0,
         "dealer": -401156,
         "total": -3662976
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 4449500,
+        "investmentTrust": 0,
+        "dealer": -144657,
+        "total": 4304843
       }
     ],
     "summary": {
-      "foreign5Day": -1958468,
+      "foreign5Day": -4732098,
       "investmentTrust5Day": 2000,
-      "dealer5Day": 5144435,
-      "total5Day": 3187967
+      "dealer5Day": 4256828,
+      "total5Day": -473270
     }
   },
   "持股分散": {
@@ -4459,9 +4459,9 @@
         "return60": 87.57397324542826,
         "volume": 122541218,
         "turnover": null,
-        "foreign5Day": -1958468,
+        "foreign5Day": -4732098,
         "investmentTrust5Day": 2000,
-        "total5Day": 3187967,
+        "total5Day": -473270,
         "largeHolderRatio": 78.53,
         "retailRatio": 11.51,
         "shortToMarginRatio": 0.22740562666493405,
@@ -4525,9 +4525,9 @@
         "return60": 87.57397324542826,
         "volume": 122541218,
         "turnover": null,
-        "foreign5Day": -1958468,
+        "foreign5Day": -4732098,
         "investmentTrust5Day": 2000,
-        "total5Day": 3187967,
+        "total5Day": -473270,
         "largeHolderRatio": 78.53,
         "retailRatio": 11.51,
         "shortToMarginRatio": 0.22740562666493405,

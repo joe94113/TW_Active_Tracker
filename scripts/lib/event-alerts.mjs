@@ -143,6 +143,34 @@ function buildEventEntry({ detail, stockMeta, event, marketDate }) {
   };
 }
 
+function normalizeDateKey(value) {
+  const text = String(value ?? '').trim().replaceAll('/', '-');
+
+  if (!text) {
+    return null;
+  }
+
+  if (/^\d{8}$/.test(text)) {
+    return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`;
+  }
+
+  if (/^\d{7}$/.test(text)) {
+    return `${Number(text.slice(0, 3)) + 1911}-${text.slice(3, 5)}-${text.slice(5, 7)}`;
+  }
+
+  return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : null;
+}
+
+function resolveAlertMarketDate(dashboard) {
+  return (
+    normalizeDateKey(dashboard?.市場總覽?.即時狀態?.marketDate) ??
+    normalizeDateKey(dashboard?.市場總覽?.大盤摘要?.資料日期) ??
+    normalizeDateKey(dashboard?.市場總覽?.盤中脈動?.資料日期) ??
+    normalizeDateKey(dashboard?.市場總覽?.資料日期) ??
+    null
+  );
+}
+
 export async function loadEventAlertData() {
   const [dashboard, overlap, stockIndex] = await Promise.all([
     readJson(path.join('public', 'data', 'dashboard.json')),
@@ -172,7 +200,7 @@ export async function loadEventAlertData() {
 }
 
 export function buildEventAlertSummary({ dashboard, overlap, stockIndex, stockDetailList, today = formatTaipeiDate() }) {
-  const marketDate = dashboard?.市場總覽?.資料日期 ?? null;
+  const marketDate = resolveAlertMarketDate(dashboard);
 
   if (marketDate !== today) {
     return null;

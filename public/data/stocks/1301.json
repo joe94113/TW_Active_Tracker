@@ -3,7 +3,7 @@
   "name": "台塑",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:01:41.644Z",
+  "generatedAt": "2026-04-13T09:16:36.434Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 11.14%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 16,537,245 股。"
+    "最近 5 個交易日三大法人合計買超 12,717,022 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4213,25 +4213,25 @@
         "total": 2125388
       },
       {
-        "date": "2026-04-07",
-        "foreign": 12787482,
-        "investmentTrust": 3774,
-        "dealer": 767363,
-        "total": 13558619
-      },
-      {
         "date": "2026-04-02",
         "foreign": 138228,
         "investmentTrust": 0,
         "dealer": -254682,
         "total": -116454
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 8452785,
+        "investmentTrust": 688944,
+        "dealer": 596667,
+        "total": 9738396
       }
     ],
     "summary": {
-      "foreign5Day": 16328104,
-      "investmentTrust5Day": -136339,
-      "dealer5Day": 345480,
-      "total5Day": 16537245
+      "foreign5Day": 11993407,
+      "investmentTrust5Day": 548831,
+      "dealer5Day": 174784,
+      "total5Day": 12717022
     }
   },
   "持股分散": {
@@ -4460,9 +4460,9 @@
         "return60": 35.26316191020765,
         "volume": 89856903,
         "turnover": null,
-        "foreign5Day": 16328104,
-        "investmentTrust5Day": -136339,
-        "total5Day": 16537245,
+        "foreign5Day": 11993407,
+        "investmentTrust5Day": 548831,
+        "total5Day": 12717022,
         "largeHolderRatio": 72.03999999999999,
         "retailRatio": 10.5,
         "shortToMarginRatio": 0.3926459719142646,
@@ -4524,9 +4524,9 @@
         "return60": 54.1366893888155,
         "volume": 99290125,
         "turnover": null,
-        "foreign5Day": -1244340,
-        "investmentTrust5Day": 5828059,
-        "total5Day": 12070914,
+        "foreign5Day": 10169008,
+        "investmentTrust5Day": 5755324,
+        "total5Day": 27625424,
         "largeHolderRatio": 83.86,
         "retailRatio": 6.01,
         "shortToMarginRatio": 2.5336637609829644,
@@ -4588,9 +4588,9 @@
         "return60": 3.639512038741457,
         "volume": 10027,
         "turnover": null,
-        "foreign5Day": 9000,
+        "foreign5Day": 6000,
         "investmentTrust5Day": 0,
-        "total5Day": 10000,
+        "total5Day": 9000,
         "largeHolderRatio": 84.99,
         "retailRatio": 2.65,
         "shortToMarginRatio": null,
@@ -4654,9 +4654,9 @@
         "return60": 3.639512038741457,
         "volume": 10027,
         "turnover": null,
-        "foreign5Day": 9000,
+        "foreign5Day": 6000,
         "investmentTrust5Day": 0,
-        "total5Day": 10000,
+        "total5Day": 9000,
         "largeHolderRatio": 84.99,
         "retailRatio": 2.65,
         "shortToMarginRatio": null,
@@ -4718,9 +4718,9 @@
         "return60": 54.1366893888155,
         "volume": 99290125,
         "turnover": null,
-        "foreign5Day": -1244340,
-        "investmentTrust5Day": 5828059,
-        "total5Day": 12070914,
+        "foreign5Day": 10169008,
+        "investmentTrust5Day": 5755324,
+        "total5Day": 27625424,
         "largeHolderRatio": 83.86,
         "retailRatio": 6.01,
         "shortToMarginRatio": 2.5336637609829644,
@@ -4782,9 +4782,9 @@
         "return60": 35.26316191020765,
         "volume": 89856903,
         "turnover": null,
-        "foreign5Day": 16328104,
-        "investmentTrust5Day": -136339,
-        "total5Day": 16537245,
+        "foreign5Day": 11993407,
+        "investmentTrust5Day": 548831,
+        "total5Day": 12717022,
         "largeHolderRatio": 72.03999999999999,
         "retailRatio": 10.5,
         "shortToMarginRatio": 0.3926459719142646,
@@ -4837,7 +4837,7 @@
     ],
     "觀察摘要": [
       "近 20 日報酬優於同產業平均 7.81%，在同族群相對偏強。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }
