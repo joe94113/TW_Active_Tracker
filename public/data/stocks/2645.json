@@ -2,8 +2,8 @@
   "code": "2645",
   "name": "長榮航太",
   "kind": "stock",
-  "priceDate": "2026-04-10",
-  "generatedAt": "2026-04-12T09:51:13.761Z",
+  "priceDate": "2026-04-13",
+  "generatedAt": "2026-04-13T04:23:47.760Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3410,55 +3410,84 @@
       "rsi14": 44.58837447784161,
       "k9": 39.28907121673404,
       "d9": 28.898268911786264
+    },
+    {
+      "date": "2026-04-13",
+      "open": 150,
+      "high": 152,
+      "low": 149.5,
+      "close": 151,
+      "volume": 443315,
+      "turnover": null,
+      "transactions": null,
+      "change": 1,
+      "changePercent": 0.6666666666666667,
+      "maFast": 149.6,
+      "maShort": 149.2,
+      "maMedium": 152.625,
+      "maLong": 158.83333333333334,
+      "rsi": 46.03008135175844,
+      "stochasticK": 49.722125909195235,
+      "stochasticD": 35.839554577589254,
+      "macd": -3.010334859367191,
+      "macdSignal": -3.249152860231928,
+      "macdHist": 0.23881800086473692,
+      "ma5": 149.6,
+      "ma10": 149.2,
+      "ma20": 152.625,
+      "ma60": 158.83333333333334,
+      "rsi14": 46.03008135175844,
+      "k9": 49.722125909195235,
+      "d9": 35.839554577589254
     }
   ],
   "technicalSignals": [
     {
-      "key": "macd-bullish-cross",
-      "title": "MACD 翻正",
-      "tone": "up",
-      "importance": 3,
-      "description": "長榮航太 MACD 線上穿訊號線，短線動能重新偏多。"
+      "key": "neutral",
+      "title": "技術面中性",
+      "tone": "normal",
+      "importance": 1,
+      "description": "長榮航太 目前沒有明確的新訊號，偏向等待下一段量價表態。"
     }
   ],
   "訊號摘要": [
-    "MACD 翻正"
+    "技術面中性"
   ],
   "最新摘要": {
-    "close": 150,
-    "change": -1,
-    "changePercent": -0.6622516556291391,
-    "volume": 588313,
+    "close": 151,
+    "change": 1,
+    "changePercent": 0.6666666666666667,
+    "volume": 443315,
     "turnover": null,
-    "return5": 1.0101010101010102,
-    "return20": -6.25,
-    "return60": 4.529616724738676
+    "return5": 3.0716723549488054,
+    "return20": -5.329153605015674,
+    "return60": 4.861111111111112
   },
   "最新指標": {
-    "maFast": 148.7,
-    "maShort": 149.55,
-    "maMedium": 153.05,
-    "maLong": 158.71666666666667,
-    "ma5": 148.7,
-    "ma10": 149.55,
-    "ma20": 153.05,
-    "ma60": 158.71666666666667,
-    "rsi": 44.58837447784161,
-    "rsi14": 44.58837447784161,
-    "stochasticK": 39.28907121673404,
-    "stochasticD": 28.898268911786264,
-    "k9": 39.28907121673404,
-    "d9": 28.898268911786264,
-    "macd": -3.285510963977714,
-    "macdSignal": -3.308857360448112,
-    "macdHist": 0.023346396470397934
+    "maFast": 149.6,
+    "maShort": 149.2,
+    "maMedium": 152.625,
+    "maLong": 158.83333333333334,
+    "ma5": 149.6,
+    "ma10": 149.2,
+    "ma20": 152.625,
+    "ma60": 158.83333333333334,
+    "rsi": 46.03008135175844,
+    "rsi14": 46.03008135175844,
+    "stochasticK": 49.722125909195235,
+    "stochasticD": 35.839554577589254,
+    "k9": 49.722125909195235,
+    "d9": 35.839554577589254,
+    "macd": -3.010334859367191,
+    "macdSignal": -3.249152860231928,
+    "macdHist": 0.23881800086473692
   },
   "觀察摘要": [
     "長榮航太 收盤落在 MA20 與 MA60 下方，現階段仍屬偏弱整理格局。",
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
-    "近 20 個交易日報酬 -6.25%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 216,301 股。"
+    "近 20 個交易日報酬 -5.33%，可用來觀察波段資金是否持續留在主線。",
+    "大戶持股比 82.91%，相較前次 增加 0.00 個百分點。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3473,585 +3502,409 @@
   ],
   "盤中走勢": {
     "interval": "5m",
-    "marketDate": "2026-04-10",
-    "updatedAt": "2026-04-10T05:30:21.000Z",
-    "previousClose": 151,
-    "latestPrice": 150,
-    "high": 151,
-    "low": 148.5,
-    "volume": 605317,
+    "marketDate": "2026-04-13",
+    "updatedAt": "2026-04-13T04:03:00.000Z",
+    "previousClose": 150,
+    "latestPrice": 151,
+    "high": 152,
+    "low": 149.5,
+    "volume": 443315,
     "points": [
       {
-        "timestamp": 1775782800,
-        "dateTime": "2026-04-10T01:00:00.000Z",
+        "timestamp": 1776042000,
+        "dateTime": "2026-04-13T01:00:00.000Z",
         "time": "09:00",
-        "price": 149.5,
-        "high": 151,
-        "low": 149,
-        "volume": 0,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "price": 150,
+        "high": 150,
+        "low": 149.5,
+        "volume": 7000,
+        "change": 0,
+        "changePercent": 0
       },
       {
-        "timestamp": 1775783100,
-        "dateTime": "2026-04-10T01:05:00.000Z",
+        "timestamp": 1776042300,
+        "dateTime": "2026-04-13T01:05:00.000Z",
         "time": "09:05",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149,
-        "volume": 7270,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "price": 150,
+        "high": 150.5,
+        "low": 150,
+        "volume": 15238,
+        "change": 0,
+        "changePercent": 0
       },
       {
-        "timestamp": 1775783400,
-        "dateTime": "2026-04-10T01:10:00.000Z",
+        "timestamp": 1776042600,
+        "dateTime": "2026-04-13T01:10:00.000Z",
         "time": "09:10",
         "price": 150,
         "high": 150,
-        "low": 149,
-        "volume": 26832,
-        "change": -1,
-        "changePercent": -0.6622516556291391
+        "low": 149.5,
+        "volume": 7001,
+        "change": 0,
+        "changePercent": 0
       },
       {
-        "timestamp": 1775783700,
-        "dateTime": "2026-04-10T01:15:00.000Z",
+        "timestamp": 1776042900,
+        "dateTime": "2026-04-13T01:15:00.000Z",
         "time": "09:15",
-        "price": 149.5,
-        "high": 150.5,
-        "low": 149.5,
-        "volume": 17554,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "price": 150,
+        "high": 150,
+        "low": 150,
+        "volume": 4860,
+        "change": 0,
+        "changePercent": 0
       },
       {
-        "timestamp": 1775784000,
-        "dateTime": "2026-04-10T01:20:00.000Z",
+        "timestamp": 1776043200,
+        "dateTime": "2026-04-13T01:20:00.000Z",
         "time": "09:20",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149,
-        "volume": 14508,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "price": 150,
+        "high": 150,
+        "low": 149.5,
+        "volume": 4641,
+        "change": 0,
+        "changePercent": 0
       },
       {
-        "timestamp": 1775784300,
-        "dateTime": "2026-04-10T01:25:00.000Z",
+        "timestamp": 1776043500,
+        "dateTime": "2026-04-13T01:25:00.000Z",
         "time": "09:25",
-        "price": 149.5,
+        "price": 150,
         "high": 150,
-        "low": 149.5,
-        "volume": 11300,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "low": 150,
+        "volume": 13470,
+        "change": 0,
+        "changePercent": 0
       },
       {
-        "timestamp": 1775784600,
-        "dateTime": "2026-04-10T01:30:00.000Z",
+        "timestamp": 1776043800,
+        "dateTime": "2026-04-13T01:30:00.000Z",
         "time": "09:30",
-        "price": 149.5,
-        "high": 150,
-        "low": 149.5,
-        "volume": 20150,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 16200,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775784900,
-        "dateTime": "2026-04-10T01:35:00.000Z",
+        "timestamp": 1776044100,
+        "dateTime": "2026-04-13T01:35:00.000Z",
         "time": "09:35",
-        "price": 150,
-        "high": 150,
-        "low": 150,
-        "volume": 8405,
-        "change": -1,
-        "changePercent": -0.6622516556291391
+        "price": 150.5,
+        "high": 151,
+        "low": 150.5,
+        "volume": 30225,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775785200,
-        "dateTime": "2026-04-10T01:40:00.000Z",
+        "timestamp": 1776044400,
+        "dateTime": "2026-04-13T01:40:00.000Z",
         "time": "09:40",
-        "price": 150,
-        "high": 150,
-        "low": 150,
-        "volume": 5214,
-        "change": -1,
-        "changePercent": -0.6622516556291391
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 19081,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775785500,
-        "dateTime": "2026-04-10T01:45:00.000Z",
+        "timestamp": 1776044700,
+        "dateTime": "2026-04-13T01:45:00.000Z",
         "time": "09:45",
         "price": 150.5,
         "high": 150.5,
-        "low": 150.5,
-        "volume": 5170,
-        "change": -0.5,
-        "changePercent": -0.33112582781456956
+        "low": 150,
+        "volume": 11752,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775785800,
-        "dateTime": "2026-04-10T01:50:00.000Z",
+        "timestamp": 1776045000,
+        "dateTime": "2026-04-13T01:50:00.000Z",
         "time": "09:50",
-        "price": 150.5,
-        "high": 150.5,
-        "low": 150.5,
-        "volume": 11141,
-        "change": -0.5,
-        "changePercent": -0.33112582781456956
+        "price": 151,
+        "high": 151.5,
+        "low": 151,
+        "volume": 45210,
+        "change": 1,
+        "changePercent": 0.6666666666666667
       },
       {
-        "timestamp": 1775786100,
-        "dateTime": "2026-04-10T01:55:00.000Z",
+        "timestamp": 1776045300,
+        "dateTime": "2026-04-13T01:55:00.000Z",
         "time": "09:55",
+        "price": 151,
+        "high": 151,
+        "low": 150.5,
+        "volume": 9464,
+        "change": 1,
+        "changePercent": 0.6666666666666667
+      },
+      {
+        "timestamp": 1776045600,
+        "dateTime": "2026-04-13T02:00:00.000Z",
+        "time": "10:00",
+        "price": 151,
+        "high": 151,
+        "low": 151,
+        "volume": 9253,
+        "change": 1,
+        "changePercent": 0.6666666666666667
+      },
+      {
+        "timestamp": 1776045900,
+        "dateTime": "2026-04-13T02:05:00.000Z",
+        "time": "10:05",
         "price": 150.5,
         "high": 150.5,
         "low": 150.5,
-        "volume": 8219,
-        "change": -0.5,
-        "changePercent": -0.33112582781456956
-      },
-      {
-        "timestamp": 1775786400,
-        "dateTime": "2026-04-10T02:00:00.000Z",
-        "time": "10:00",
-        "price": 150,
-        "high": 150,
-        "low": 149.5,
-        "volume": 43405,
-        "change": -1,
-        "changePercent": -0.6622516556291391
-      },
-      {
-        "timestamp": 1775786700,
-        "dateTime": "2026-04-10T02:05:00.000Z",
-        "time": "10:05",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 10539,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775787000,
-        "dateTime": "2026-04-10T02:10:00.000Z",
-        "time": "10:10",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 5110,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775787300,
-        "dateTime": "2026-04-10T02:15:00.000Z",
-        "time": "10:15",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 2865,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775787600,
-        "dateTime": "2026-04-10T02:20:00.000Z",
-        "time": "10:20",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 11064,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775787900,
-        "dateTime": "2026-04-10T02:25:00.000Z",
-        "time": "10:25",
-        "price": 148.5,
-        "high": 149,
-        "low": 148.5,
-        "volume": 40172,
-        "change": -2.5,
-        "changePercent": -1.6556291390728477
-      },
-      {
-        "timestamp": 1775788200,
-        "dateTime": "2026-04-10T02:30:00.000Z",
-        "time": "10:30",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 4802,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775788500,
-        "dateTime": "2026-04-10T02:35:00.000Z",
-        "time": "10:35",
-        "price": 149,
-        "high": 149,
-        "low": 148.5,
-        "volume": 8064,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775788800,
-        "dateTime": "2026-04-10T02:40:00.000Z",
-        "time": "10:40",
-        "price": 149,
-        "high": 149,
-        "low": 148.5,
-        "volume": 7600,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775789100,
-        "dateTime": "2026-04-10T02:45:00.000Z",
-        "time": "10:45",
-        "price": 149,
-        "high": 149,
-        "low": 148.5,
-        "volume": 10125,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775789400,
-        "dateTime": "2026-04-10T02:50:00.000Z",
-        "time": "10:50",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 13020,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775789700,
-        "dateTime": "2026-04-10T02:55:00.000Z",
-        "time": "10:55",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 12117,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775790000,
-        "dateTime": "2026-04-10T03:00:00.000Z",
-        "time": "11:00",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 3687,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775790900,
-        "dateTime": "2026-04-10T03:15:00.000Z",
-        "time": "11:15",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
         "volume": 1000,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775791200,
-        "dateTime": "2026-04-10T03:20:00.000Z",
-        "time": "11:20",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 6000,
-        "change": -2,
-        "changePercent": -1.3245033112582782
+        "timestamp": 1776046200,
+        "dateTime": "2026-04-13T02:10:00.000Z",
+        "time": "10:10",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 4040,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775791500,
-        "dateTime": "2026-04-10T03:25:00.000Z",
-        "time": "11:25",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 7036,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "timestamp": 1776046500,
+        "dateTime": "2026-04-13T02:15:00.000Z",
+        "time": "10:15",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 4016,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775791800,
-        "dateTime": "2026-04-10T03:30:00.000Z",
-        "time": "11:30",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149,
-        "volume": 3522,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775792100,
-        "dateTime": "2026-04-10T03:35:00.000Z",
-        "time": "11:35",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 2010,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775792400,
-        "dateTime": "2026-04-10T03:40:00.000Z",
-        "time": "11:40",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 4000,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775792700,
-        "dateTime": "2026-04-10T03:45:00.000Z",
-        "time": "11:45",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 2200,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775793000,
-        "dateTime": "2026-04-10T03:50:00.000Z",
-        "time": "11:50",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 12003,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775793300,
-        "dateTime": "2026-04-10T03:55:00.000Z",
-        "time": "11:55",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 3020,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775793600,
-        "dateTime": "2026-04-10T04:00:00.000Z",
-        "time": "12:00",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 2007,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775793900,
-        "dateTime": "2026-04-10T04:05:00.000Z",
-        "time": "12:05",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 2044,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775794200,
-        "dateTime": "2026-04-10T04:10:00.000Z",
-        "time": "12:10",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 4361,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775794500,
-        "dateTime": "2026-04-10T04:15:00.000Z",
-        "time": "12:15",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 16244,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775794800,
-        "dateTime": "2026-04-10T04:20:00.000Z",
-        "time": "12:20",
-        "price": 149,
-        "high": 149,
-        "low": 149,
-        "volume": 7489,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775795100,
-        "dateTime": "2026-04-10T04:25:00.000Z",
-        "time": "12:25",
-        "price": 149,
-        "high": 149.5,
-        "low": 149,
-        "volume": 6322,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775795400,
-        "dateTime": "2026-04-10T04:30:00.000Z",
-        "time": "12:30",
-        "price": 149,
-        "high": 149.5,
-        "low": 149,
-        "volume": 10193,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775795700,
-        "dateTime": "2026-04-10T04:35:00.000Z",
-        "time": "12:35",
-        "price": 149,
-        "high": 149.5,
-        "low": 149,
-        "volume": 7086,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775796000,
-        "dateTime": "2026-04-10T04:40:00.000Z",
-        "time": "12:40",
-        "price": 149,
-        "high": 149.5,
-        "low": 149,
-        "volume": 7095,
-        "change": -2,
-        "changePercent": -1.3245033112582782
-      },
-      {
-        "timestamp": 1775796300,
-        "dateTime": "2026-04-10T04:45:00.000Z",
-        "time": "12:45",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149,
-        "volume": 31277,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775796600,
-        "dateTime": "2026-04-10T04:50:00.000Z",
-        "time": "12:50",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 3081,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775796900,
-        "dateTime": "2026-04-10T04:55:00.000Z",
-        "time": "12:55",
+        "timestamp": 1776046800,
+        "dateTime": "2026-04-13T02:20:00.000Z",
+        "time": "10:20",
         "price": 150,
-        "high": 150,
-        "low": 149.5,
-        "volume": 4675,
-        "change": -1,
-        "changePercent": -0.6622516556291391
+        "high": 150.5,
+        "low": 150,
+        "volume": 4209,
+        "change": 0,
+        "changePercent": 0
       },
       {
-        "timestamp": 1775797200,
-        "dateTime": "2026-04-10T05:00:00.000Z",
-        "time": "13:00",
-        "price": 149.5,
-        "high": 150,
-        "low": 149.5,
-        "volume": 7200,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
+        "timestamp": 1776047100,
+        "dateTime": "2026-04-13T02:25:00.000Z",
+        "time": "10:25",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 5239,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
       },
       {
-        "timestamp": 1775797500,
-        "dateTime": "2026-04-10T05:05:00.000Z",
-        "time": "13:05",
-        "price": 149.5,
-        "high": 150,
-        "low": 149,
-        "volume": 17064,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775797800,
-        "dateTime": "2026-04-10T05:10:00.000Z",
-        "time": "13:10",
-        "price": 149.5,
-        "high": 149.5,
-        "low": 149.5,
-        "volume": 7210,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775798100,
-        "dateTime": "2026-04-10T05:15:00.000Z",
-        "time": "13:15",
-        "price": 149.5,
-        "high": 150,
-        "low": 149.5,
-        "volume": 34291,
-        "change": -1.5,
-        "changePercent": -0.9933774834437087
-      },
-      {
-        "timestamp": 1775798400,
-        "dateTime": "2026-04-10T05:20:00.000Z",
-        "time": "13:20",
-        "price": 150,
-        "high": 150,
-        "low": 149.5,
-        "volume": 21554,
-        "change": -1,
-        "changePercent": -0.6622516556291391
-      },
-      {
-        "timestamp": 1775799000,
-        "dateTime": "2026-04-10T05:30:00.000Z",
-        "time": "13:30",
+        "timestamp": 1776047400,
+        "dateTime": "2026-04-13T02:30:00.000Z",
+        "time": "10:30",
         "price": 150,
         "high": 150,
         "low": 150,
+        "volume": 5177,
+        "change": 0,
+        "changePercent": 0
+      },
+      {
+        "timestamp": 1776047700,
+        "dateTime": "2026-04-13T02:35:00.000Z",
+        "time": "10:35",
+        "price": 150,
+        "high": 150.5,
+        "low": 150,
+        "volume": 10410,
+        "change": 0,
+        "changePercent": 0
+      },
+      {
+        "timestamp": 1776048000,
+        "dateTime": "2026-04-13T02:40:00.000Z",
+        "time": "10:40",
+        "price": 150,
+        "high": 150,
+        "low": 150,
+        "volume": 6020,
+        "change": 0,
+        "changePercent": 0
+      },
+      {
+        "timestamp": 1776048300,
+        "dateTime": "2026-04-13T02:45:00.000Z",
+        "time": "10:45",
+        "price": 150,
+        "high": 150.5,
+        "low": 150,
+        "volume": 3161,
+        "change": 0,
+        "changePercent": 0
+      },
+      {
+        "timestamp": 1776048600,
+        "dateTime": "2026-04-13T02:50:00.000Z",
+        "time": "10:50",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 10019,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
+      },
+      {
+        "timestamp": 1776048900,
+        "dateTime": "2026-04-13T02:55:00.000Z",
+        "time": "10:55",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 13011,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
+      },
+      {
+        "timestamp": 1776049200,
+        "dateTime": "2026-04-13T03:00:00.000Z",
+        "time": "11:00",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 5004,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
+      },
+      {
+        "timestamp": 1776049500,
+        "dateTime": "2026-04-13T03:05:00.000Z",
+        "time": "11:05",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 14284,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
+      },
+      {
+        "timestamp": 1776049800,
+        "dateTime": "2026-04-13T03:10:00.000Z",
+        "time": "11:10",
+        "price": 150.5,
+        "high": 150.5,
+        "low": 150.5,
+        "volume": 1320,
+        "change": 0.5,
+        "changePercent": 0.33333333333333337
+      },
+      {
+        "timestamp": 1776050100,
+        "dateTime": "2026-04-13T03:15:00.000Z",
+        "time": "11:15",
+        "price": 151.5,
+        "high": 151.5,
+        "low": 151,
+        "volume": 73072,
+        "change": 1.5,
+        "changePercent": 1
+      },
+      {
+        "timestamp": 1776050400,
+        "dateTime": "2026-04-13T03:20:00.000Z",
+        "time": "11:20",
+        "price": 151.5,
+        "high": 152,
+        "low": 151,
+        "volume": 21000,
+        "change": 1.5,
+        "changePercent": 1
+      },
+      {
+        "timestamp": 1776050700,
+        "dateTime": "2026-04-13T03:25:00.000Z",
+        "time": "11:25",
+        "price": 151.5,
+        "high": 151.5,
+        "low": 151.5,
+        "volume": 16056,
+        "change": 1.5,
+        "changePercent": 1
+      },
+      {
+        "timestamp": 1776051000,
+        "dateTime": "2026-04-13T03:30:00.000Z",
+        "time": "11:30",
+        "price": 151.5,
+        "high": 151.5,
+        "low": 151,
+        "volume": 21283,
+        "change": 1.5,
+        "changePercent": 1
+      },
+      {
+        "timestamp": 1776051300,
+        "dateTime": "2026-04-13T03:35:00.000Z",
+        "time": "11:35",
+        "price": 151.5,
+        "high": 152,
+        "low": 151.5,
+        "volume": 5861,
+        "change": 1.5,
+        "changePercent": 1
+      },
+      {
+        "timestamp": 1776051600,
+        "dateTime": "2026-04-13T03:40:00.000Z",
+        "time": "11:40",
+        "price": 151.5,
+        "high": 151.5,
+        "low": 151,
+        "volume": 11100,
+        "change": 1.5,
+        "changePercent": 1
+      },
+      {
+        "timestamp": 1776051900,
+        "dateTime": "2026-04-13T03:45:00.000Z",
+        "time": "11:45",
+        "price": 151,
+        "high": 151.5,
+        "low": 151,
+        "volume": 3026,
+        "change": 1,
+        "changePercent": 0.6666666666666667
+      },
+      {
+        "timestamp": 1776052200,
+        "dateTime": "2026-04-13T03:50:00.000Z",
+        "time": "11:50",
+        "price": 151,
+        "high": 151,
+        "low": 151,
+        "volume": 3612,
+        "change": 1,
+        "changePercent": 0.6666666666666667
+      },
+      {
+        "timestamp": 1776052980,
+        "dateTime": "2026-04-13T04:03:00.000Z",
+        "time": "12:03",
+        "price": 151,
+        "high": 151,
+        "low": 151,
         "volume": 0,
-        "change": -1,
-        "changePercent": -0.6622516556291391
+        "change": 1,
+        "changePercent": 0.6666666666666667
       }
     ],
     "資料來源": [
@@ -4073,7 +3926,7 @@
     "面額": "新台幣 10.0000元",
     "住址": "桃園市大園區航站南路6號",
     "網址": "https://www.egat.com.tw/",
-    "更新日期": "2026-04-11"
+    "更新日期": "2026-04-12"
   },
   "評價面": {
     "本益比": 27.47,
@@ -4082,7 +3935,7 @@
   },
   "財務資料": {
     "月營收": {
-      "出表日期": "2026-04-11",
+      "出表日期": "2026-04-12",
       "資料年月": "2026-03",
       "產業名稱": "航運業",
       "當月營收": 1697939,
@@ -4096,7 +3949,7 @@
       "備註": "-"
     },
     "綜合損益表": {
-      "出表日期": "2026-04-12",
+      "出表日期": "2026-04-13",
       "年度": 2025,
       "季別": 4,
       "報表類別": "一般業",
@@ -4110,7 +3963,7 @@
       "每股盈餘": 5.46
     },
     "資產負債表": {
-      "出表日期": "2026-04-12",
+      "出表日期": "2026-04-13",
       "年度": 2025,
       "季別": 4,
       "報表類別": "一般業",
@@ -4135,48 +3988,12 @@
     ]
   },
   "法人買賣": {
-    "days": [
-      {
-        "date": "2026-04-10",
-        "foreign": -149149,
-        "investmentTrust": -6000,
-        "dealer": -15781,
-        "total": -170930
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -44300,
-        "investmentTrust": -77000,
-        "dealer": -5646,
-        "total": -126946
-      },
-      {
-        "date": "2026-04-08",
-        "foreign": 247000,
-        "investmentTrust": -79000,
-        "dealer": 25290,
-        "total": 193290
-      },
-      {
-        "date": "2026-04-07",
-        "foreign": -67993,
-        "investmentTrust": -83000,
-        "dealer": 34461,
-        "total": -116532
-      },
-      {
-        "date": "2026-04-02",
-        "foreign": 6024,
-        "investmentTrust": -80000,
-        "dealer": 78793,
-        "total": 4817
-      }
-    ],
+    "days": [],
     "summary": {
-      "foreign5Day": -8418,
-      "investmentTrust5Day": -325000,
-      "dealer5Day": 117117,
-      "total5Day": -216301
+      "foreign5Day": 0,
+      "investmentTrust5Day": 0,
+      "dealer5Day": 0,
+      "total5Day": 0
     }
   },
   "持股分散": {
@@ -4356,31 +4173,30 @@
     "industryName": "航運業",
     "peerCount": 4,
     "rank20Day": 3,
-    "rankDaily": 3,
-    "averageReturn20": -7.242110746607052,
-    "averageChangePercent": -0.610282477675947,
+    "rankDaily": 1,
+    "averageReturn20": -8.43163894423258,
+    "averageChangePercent": -0.6805907836745995,
     "leaders": [
       {
         "code": "2615",
         "name": "萬海",
         "industryName": "航運業",
-        "priceDate": "2026-04-10",
-        "close": 77.0999984741211,
-        "change": -1.2000045776367188,
-        "changePercent": -1.5325728363554374,
-        "return20": -3.3834642536110078,
-        "return60": -3.1407035777931323,
-        "volume": 8298786,
+        "priceDate": "2026-04-13",
+        "close": 76,
+        "change": -1.0999984741210938,
+        "changePercent": -1.4267165964864608,
+        "return20": -5,
+        "return60": -3.061226376490177,
+        "volume": 5984896,
         "turnover": null,
-        "foreign5Day": 3169498,
-        "investmentTrust5Day": -1136,
-        "total5Day": 3434983,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 83.92,
         "retailRatio": 8.36,
         "shortToMarginRatio": 1.1314632167712735,
         "activeEtfCount": 1,
         "sparkline20": [
-          80,
           78.69999694824219,
           78.9000015258789,
           79.30000305175781,
@@ -4399,21 +4215,22 @@
           79.4000015258789,
           78.80000305175781,
           78.30000305175781,
-          77.0999984741211
+          77.0999984741211,
+          76
         ],
         "technicalSignals": [
           {
-            "key": "break-below-long-ma",
-            "title": "跌破長均線",
+            "key": "macd-bearish-cross",
+            "title": "MACD 轉弱",
             "tone": "down",
-            "importance": 2,
-            "description": "萬海 收盤跌破長均線，中期結構轉弱。"
+            "importance": 3,
+            "description": "萬海 MACD 線跌破訊號線，短線修正壓力升高。"
           }
         ],
         "technicalSignalTitles": [
-          "跌破長均線"
+          "MACD 轉弱"
         ],
-        "topSignalTitle": "跌破長均線",
+        "topSignalTitle": "MACD 轉弱",
         "topSignalTone": "down",
         "signalCount": 1
       },
@@ -4421,23 +4238,22 @@
         "code": "2603",
         "name": "長榮",
         "industryName": "航運業",
-        "priceDate": "2026-04-10",
-        "close": 202.5,
-        "change": -0.5,
-        "changePercent": -0.24630541871921183,
-        "return20": -3.571428571428571,
-        "return60": 4.922279792746114,
-        "volume": 8191542,
+        "priceDate": "2026-04-13",
+        "close": 200.5,
+        "change": -2,
+        "changePercent": -0.9876543209876543,
+        "return20": -5.200945626477541,
+        "return60": 5.526315789473684,
+        "volume": 6065123,
         "turnover": null,
-        "foreign5Day": -3119579,
-        "investmentTrust5Day": -1076201,
-        "total5Day": -3222549,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 67.7,
         "retailRatio": 16.27,
         "shortToMarginRatio": 0.09362621534029529,
         "activeEtfCount": 1,
         "sparkline20": [
-          211.5,
           207.5,
           218.5,
           218,
@@ -4456,7 +4272,8 @@
           203,
           202,
           203,
-          202.5
+          202.5,
+          200.5
         ],
         "technicalSignals": [
           {
@@ -4478,23 +4295,22 @@
         "code": "2645",
         "name": "長榮航太",
         "industryName": "航運業",
-        "priceDate": "2026-04-10",
-        "close": 150,
-        "change": -1,
-        "changePercent": -0.6622516556291391,
-        "return20": -6.25,
-        "return60": 4.529616724738676,
-        "volume": 588313,
+        "priceDate": "2026-04-13",
+        "close": 151,
+        "change": 1,
+        "changePercent": 0.6666666666666667,
+        "return20": -5.329153605015674,
+        "return60": 4.861111111111112,
+        "volume": 443315,
         "turnover": null,
-        "foreign5Day": -8418,
-        "investmentTrust5Day": -325000,
-        "total5Day": -216301,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 82.91000000000001,
         "retailRatio": 9.11,
         "shortToMarginRatio": null,
         "activeEtfCount": 1,
         "sparkline20": [
-          159.5,
           160.5,
           162,
           164,
@@ -4513,45 +4329,45 @@
           146,
           150,
           151,
-          150
+          150,
+          151
         ],
         "technicalSignals": [
           {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "長榮航太 MACD 線上穿訊號線，短線動能重新偏多。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "長榮航太 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "MACD 翻正"
+          "技術面中性"
         ],
-        "topSignalTitle": "MACD 翻正",
-        "topSignalTone": "up",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       },
       {
         "code": "2609",
         "name": "陽明",
         "industryName": "航運業",
-        "priceDate": "2026-04-10",
-        "close": 51.29999923706055,
-        "change": 0,
-        "changePercent": 0,
-        "return20": -15.763550161388626,
-        "return60": -8.392858505249023,
-        "volume": 17492817,
+        "priceDate": "2026-04-13",
+        "close": 50.79999923706055,
+        "change": -0.5,
+        "changePercent": -0.9746588838909496,
+        "return20": -18.1964565454371,
+        "return60": -7.468127823066981,
+        "volume": 11822869,
         "turnover": null,
-        "foreign5Day": -21315485,
-        "investmentTrust5Day": -669312,
-        "total5Day": -21794924,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 57.76,
         "retailRatio": 23.029999999999998,
         "shortToMarginRatio": 0.3791844704151221,
         "activeEtfCount": 1,
         "sparkline20": [
-          62.099998474121094,
           59.20000076293945,
           59.29999923706055,
           58.5,
@@ -4570,22 +4386,23 @@
           51.70000076293945,
           51.70000076293945,
           51.29999923706055,
-          51.29999923706055
+          51.29999923706055,
+          50.79999923706055
         ],
         "technicalSignals": [
           {
-            "key": "kd-bullish",
-            "title": "KD 低檔黃金交叉",
-            "tone": "up",
-            "importance": 2,
-            "description": "陽明 KD 在相對低檔出現黃金交叉，短線有技術反彈條件。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "陽明 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "KD 低檔黃金交叉"
+          "技術面中性"
         ],
-        "topSignalTitle": "KD 低檔黃金交叉",
-        "topSignalTone": "up",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       }
     ],
@@ -4594,23 +4411,22 @@
         "code": "2609",
         "name": "陽明",
         "industryName": "航運業",
-        "priceDate": "2026-04-10",
-        "close": 51.29999923706055,
-        "change": 0,
-        "changePercent": 0,
-        "return20": -15.763550161388626,
-        "return60": -8.392858505249023,
-        "volume": 17492817,
+        "priceDate": "2026-04-13",
+        "close": 50.79999923706055,
+        "change": -0.5,
+        "changePercent": -0.9746588838909496,
+        "return20": -18.1964565454371,
+        "return60": -7.468127823066981,
+        "volume": 11822869,
         "turnover": null,
-        "foreign5Day": -21315485,
-        "investmentTrust5Day": -669312,
-        "total5Day": -21794924,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 57.76,
         "retailRatio": 23.029999999999998,
         "shortToMarginRatio": 0.3791844704151221,
         "activeEtfCount": 1,
         "sparkline20": [
-          62.099998474121094,
           59.20000076293945,
           59.29999923706055,
           58.5,
@@ -4629,45 +4445,45 @@
           51.70000076293945,
           51.70000076293945,
           51.29999923706055,
-          51.29999923706055
+          51.29999923706055,
+          50.79999923706055
         ],
         "technicalSignals": [
           {
-            "key": "kd-bullish",
-            "title": "KD 低檔黃金交叉",
-            "tone": "up",
-            "importance": 2,
-            "description": "陽明 KD 在相對低檔出現黃金交叉，短線有技術反彈條件。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "陽明 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "KD 低檔黃金交叉"
+          "技術面中性"
         ],
-        "topSignalTitle": "KD 低檔黃金交叉",
-        "topSignalTone": "up",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       },
       {
         "code": "2645",
         "name": "長榮航太",
         "industryName": "航運業",
-        "priceDate": "2026-04-10",
-        "close": 150,
-        "change": -1,
-        "changePercent": -0.6622516556291391,
-        "return20": -6.25,
-        "return60": 4.529616724738676,
-        "volume": 588313,
+        "priceDate": "2026-04-13",
+        "close": 151,
+        "change": 1,
+        "changePercent": 0.6666666666666667,
+        "return20": -5.329153605015674,
+        "return60": 4.861111111111112,
+        "volume": 443315,
         "turnover": null,
-        "foreign5Day": -8418,
-        "investmentTrust5Day": -325000,
-        "total5Day": -216301,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 82.91000000000001,
         "retailRatio": 9.11,
         "shortToMarginRatio": null,
         "activeEtfCount": 1,
         "sparkline20": [
-          159.5,
           160.5,
           162,
           164,
@@ -4686,45 +4502,45 @@
           146,
           150,
           151,
-          150
+          150,
+          151
         ],
         "technicalSignals": [
           {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "長榮航太 MACD 線上穿訊號線，短線動能重新偏多。"
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "長榮航太 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
-          "MACD 翻正"
+          "技術面中性"
         ],
-        "topSignalTitle": "MACD 翻正",
-        "topSignalTone": "up",
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
         "signalCount": 1
       },
       {
         "code": "2603",
         "name": "長榮",
         "industryName": "航運業",
-        "priceDate": "2026-04-10",
-        "close": 202.5,
-        "change": -0.5,
-        "changePercent": -0.24630541871921183,
-        "return20": -3.571428571428571,
-        "return60": 4.922279792746114,
-        "volume": 8191542,
+        "priceDate": "2026-04-13",
+        "close": 200.5,
+        "change": -2,
+        "changePercent": -0.9876543209876543,
+        "return20": -5.200945626477541,
+        "return60": 5.526315789473684,
+        "volume": 6065123,
         "turnover": null,
-        "foreign5Day": -3119579,
-        "investmentTrust5Day": -1076201,
-        "total5Day": -3222549,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
         "largeHolderRatio": 67.7,
         "retailRatio": 16.27,
         "shortToMarginRatio": 0.09362621534029529,
         "activeEtfCount": 1,
         "sparkline20": [
-          211.5,
           207.5,
           218.5,
           218,
@@ -4743,7 +4559,8 @@
           203,
           202,
           203,
-          202.5
+          202.5,
+          200.5
         ],
         "technicalSignals": [
           {
@@ -4763,8 +4580,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 -7.24%，在同族群相對偏強。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "近 20 日報酬優於同產業平均 -8.43%，在同族群相對偏強。"
     ]
   }
 }
