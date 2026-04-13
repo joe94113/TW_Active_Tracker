@@ -198,6 +198,18 @@ function pickEtfHighlights(overlap) {
     .slice(0, 5);
 }
 
+function pickStaleEtfs(overlap, marketDate) {
+  return (overlap?.已串接ETF ?? [])
+    .map((item) => ({
+      ...item,
+      normalizedDisclosureDate: normalizeDateKey(item.disclosureDate),
+    }))
+    .filter((item) => item.normalizedDisclosureDate && item.normalizedDisclosureDate < marketDate)
+    .sort((left, right) => String(left.normalizedDisclosureDate).localeCompare(String(right.normalizedDisclosureDate)))
+    .slice(0, 5)
+    .map(({ normalizedDisclosureDate, ...item }) => item);
+}
+
 export async function loadCloseDigestData() {
   const [dashboard, overlap, trackedStocks, stockSearchList] = await Promise.all([
     readJson(path.join('public', 'data', 'dashboard.json')),
@@ -237,10 +249,20 @@ export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, sto
     officialRiskRadar,
     upcomingDividendWatch,
     etfHighlights: pickEtfHighlights(overlap),
-    staleEtfs: (overlap?.已串接ETF ?? [])
-      .filter((item) => item.disclosureDate && item.disclosureDate !== marketDate)
-      .slice(0, 5),
+    staleEtfs: pickStaleEtfs(overlap, marketDate),
   };
+}
+
+function appendTelegramSection(lines, title, items, formatter, limit = 3) {
+  const selected = (items ?? []).slice(0, limit).map(formatter).filter(Boolean);
+
+  if (!selected.length) {
+    return;
+  }
+
+  lines.push('');
+  lines.push(`<b>${title}</b>`);
+  lines.push(...selected);
 }
 
 export function buildTelegramMessage(summary) {
@@ -249,73 +271,54 @@ export function buildTelegramMessage(summary) {
   }
 
   const lines = [
-    `<b>${escapeHtml(summary.appName)}｜盤後重點 ${escapeHtml(summary.marketDate)}</b>`,
+    `<b>${escapeHtml(summary.appName)}｜盤後快訊 ${escapeHtml(summary.marketDate)}</b>`,
     `加權指數 ${escapeHtml(formatNumber(summary.marketSummary.加權指數))}（${escapeHtml(formatSigned(summary.marketSummary.漲跌點數))} / ${escapeHtml(formatPercent(summary.marketSummary.漲跌幅))}）`,
     `市場情緒 ${escapeHtml(summary.marketBreadth.市場情緒 ?? '整理中')}｜上漲 ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.上漲, 0))} / 下跌 ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.下跌, 0))} / 強弱比 ${escapeHtml(formatNumber(summary.marketBreadth?.強弱比))}`,
   ];
 
-  if (summary.observations.length) {
-    lines.push('');
-    lines.push('<b>大盤觀察</b>');
-    summary.observations.forEach((item) => {
-      lines.push(`• ${escapeHtml(item)}`);
-    });
-  }
-
-  lines.push('');
-  lines.push('<b>官方交易雷達</b>');
-  lines.push(
-    `• 處置 ${escapeHtml(formatNumber(summary.officialRadarSummary?.dispositions, 0))}｜變更交易 ${escapeHtml(formatNumber(summary.officialRadarSummary?.changedTrading, 0))}｜注意累計 ${escapeHtml(formatNumber(summary.officialRadarSummary?.attentionWarnings, 0))}`,
+  appendTelegramSection(lines, '今晚先看', summary.observations, (item) => `• ${escapeHtml(item)}`, 2);
+  appendTelegramSection(
+    lines,
+    '官方交易雷達',
+    summary.officialRiskRadar,
+    (item) =>
+      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.alertLabel)}｜${escapeHtml(item.topSelectionSignalTitle ?? '官方公告提醒')}｜日變動 ${escapeHtml(formatPercent(item.changePercent))}`,
+    3,
   );
-
-  if (summary.officialRiskRadar.length) {
-    summary.officialRiskRadar.forEach((item) => {
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.alertLabel)}｜${escapeHtml(item.topSelectionSignalTitle ?? '官方公告提醒')}｜日變動 ${escapeHtml(formatPercent(item.changePercent))}`,
-      );
-    });
-  }
-
-  if (summary.upcomingDividendWatch.length) {
-    lines.push('');
-    lines.push('<b>即將除息 / 事件接近</b>');
-    summary.upcomingDividendWatch.forEach((item) => {
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSelectionSignalTitle ?? '股利事件接近')}｜${escapeHtml(item.nextEventDate)}｜${escapeHtml(item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`)}`,
-      );
-    });
-  }
-
-  if (summary.bullishSignals.length) {
-    lines.push('');
-    lines.push('<b>偏多技術訊號</b>');
-    summary.bullishSignals.forEach((item) => {
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSignalTitle)}｜20日 ${escapeHtml(formatPercent(item.return20))}｜法人五日 ${escapeHtml(formatNumber(item.total5Day, 0))}`,
-      );
-    });
-  }
-
-  if (summary.bearishSignals.length) {
-    lines.push('');
-    lines.push('<b>偏弱技術訊號</b>');
-    summary.bearishSignals.forEach((item) => {
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSignalTitle)}｜20日 ${escapeHtml(formatPercent(item.return20))}｜法人五日 ${escapeHtml(formatNumber(item.total5Day, 0))}`,
-      );
-    });
-  }
-
-  if (summary.etfHighlights.length) {
-    lines.push('');
-    lines.push('<b>主動 ETF 風向球</b>');
-    summary.etfHighlights.forEach((item) => {
+  appendTelegramSection(
+    lines,
+    '偏多技術訊號',
+    summary.bullishSignals,
+    (item) =>
+      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSignalTitle)}｜20日 ${escapeHtml(formatPercent(item.return20))}｜法人五日 ${escapeHtml(formatNumber(item.total5Day, 0))}`,
+    2,
+  );
+  appendTelegramSection(
+    lines,
+    '偏弱技術訊號',
+    summary.bearishSignals,
+    (item) =>
+      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSignalTitle)}｜20日 ${escapeHtml(formatPercent(item.return20))}｜法人五日 ${escapeHtml(formatNumber(item.total5Day, 0))}`,
+    2,
+  );
+  appendTelegramSection(
+    lines,
+    '即將除息 / 事件接近',
+    summary.upcomingDividendWatch,
+    (item) =>
+      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSelectionSignalTitle ?? '股利事件接近')}｜${escapeHtml(item.nextEventDate)}｜${escapeHtml(item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`)}`,
+    2,
+  );
+  appendTelegramSection(
+    lines,
+    '主動 ETF 風向球',
+    summary.etfHighlights,
+    (item) => {
       const exposureText = item.出現ETF數 ? `${item.出現ETF數} 檔同步` : `${item.etfCode} ${item.etfName}`;
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.bucket)}｜${escapeHtml(exposureText)}｜權重變化 ${escapeHtml(formatPercent(item.weightDelta))}`,
-      );
-    });
-  }
+      return `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.bucket)}｜${escapeHtml(exposureText)}｜權重變化 ${escapeHtml(formatPercent(item.weightDelta))}`;
+    },
+    2,
+  );
 
   if (summary.staleEtfs.length) {
     lines.push('');
@@ -344,41 +347,43 @@ export function buildDiscordPayload(summary) {
     {
       title: `${summary.appName}｜${titlePrefix} ${summary.marketDate}`,
       description: [
-        `**加權指數** ${formatNumber(summary.marketSummary.加權指數)}  (${formatSigned(summary.marketSummary.漲跌點數)} / ${formatPercent(summary.marketSummary.漲跌幅)})`,
-        `**市場情緒** ${summary.marketBreadth.市場情緒 ?? '整理中'}`,
-        `**上漲 / 下跌** ${formatNumber(summary.marketBreadth?.股票市場?.上漲, 0)} / ${formatNumber(summary.marketBreadth?.股票市場?.下跌, 0)}`,
-        `**強弱比** ${formatNumber(summary.marketBreadth?.強弱比)}`,
+        `**加權指數** ${formatNumber(summary.marketSummary.加權指數)}（${formatSigned(summary.marketSummary.漲跌點數)} / ${formatPercent(summary.marketSummary.漲跌幅)}）`,
+        `**市場情緒** ${summary.marketBreadth.市場情緒 ?? '整理中'} ｜ **上漲 / 下跌** ${formatNumber(summary.marketBreadth?.股票市場?.上漲, 0)} / ${formatNumber(summary.marketBreadth?.股票市場?.下跌, 0)} ｜ **強弱比** ${formatNumber(summary.marketBreadth?.強弱比)}`,
       ].join('\n'),
       color,
+      fields: summary.observations.length
+        ? [
+            {
+              name: '今晚先看',
+              value: toEmbedLines(summary.observations.slice(0, 3), (item) => `• ${item}`),
+              inline: false,
+            },
+          ]
+        : [],
+      footer: {
+        text: '僅供研究參考，不構成投資建議。',
+      },
+      timestamp: new Date(`${summary.marketDate}T11:00:00+08:00`).toISOString(),
+    },
+    {
+      title: '選股線索',
+      color: 0x22466d,
       fields: [
-        {
-          name: '大盤觀察',
-          value: toEmbedLines(summary.observations, (item) => `• ${item}`),
-          inline: false,
-        },
         {
           name: '官方交易雷達',
           value: [
             `處置 ${formatNumber(summary.officialRadarSummary?.dispositions, 0)}｜變更交易 ${formatNumber(summary.officialRadarSummary?.changedTrading, 0)}｜注意累計 ${formatNumber(summary.officialRadarSummary?.attentionWarnings, 0)}`,
             toEmbedLines(
-              summary.officialRiskRadar,
+              summary.officialRiskRadar.slice(0, 4),
               (item) => `• **${item.code} ${item.name}**\n${item.alertLabel}｜${item.topSelectionSignalTitle ?? '官方公告提醒'}｜日變動 ${formatPercent(item.changePercent)}`,
             ),
           ].join('\n'),
           inline: false,
         },
         {
-          name: '即將除息 / 事件接近',
-          value: toEmbedLines(
-            summary.upcomingDividendWatch,
-            (item) => `• **${item.code} ${item.name}**\n${item.topSelectionSignalTitle ?? '股利事件接近'}｜${item.nextEventDate}｜${item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`}`,
-          ),
-          inline: false,
-        },
-        {
           name: '偏多技術訊號',
           value: toEmbedLines(
-            summary.bullishSignals,
+            summary.bullishSignals.slice(0, 3),
             (item) => `• **${item.code} ${item.name}**\n${item.topSignalTitle}｜20日 ${formatPercent(item.return20)}｜法人五日 ${formatNumber(item.total5Day, 0)}`,
           ),
           inline: false,
@@ -386,15 +391,29 @@ export function buildDiscordPayload(summary) {
         {
           name: '偏弱技術訊號',
           value: toEmbedLines(
-            summary.bearishSignals,
+            summary.bearishSignals.slice(0, 3),
             (item) => `• **${item.code} ${item.name}**\n${item.topSignalTitle}｜20日 ${formatPercent(item.return20)}｜法人五日 ${formatNumber(item.total5Day, 0)}`,
+          ),
+          inline: false,
+        },
+      ],
+    },
+    {
+      title: '事件與主動 ETF',
+      color: 0x13885e,
+      fields: [
+        {
+          name: '即將除息 / 事件接近',
+          value: toEmbedLines(
+            summary.upcomingDividendWatch.slice(0, 4),
+            (item) => `• **${item.code} ${item.name}**\n${item.topSelectionSignalTitle ?? '股利事件接近'}｜${item.nextEventDate}｜${item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`}`,
           ),
           inline: false,
         },
         {
           name: '主動 ETF 風向球',
           value: toEmbedLines(
-            summary.etfHighlights,
+            summary.etfHighlights.slice(0, 4),
             (item) => {
               const exposureText = item.出現ETF數 ? `${item.出現ETF數} 檔同步` : `${item.etfCode} ${item.etfName}`;
               return `• **${item.code} ${item.name}**\n${item.bucket}｜${exposureText}｜權重變化 ${formatPercent(item.weightDelta)}`;
@@ -412,10 +431,6 @@ export function buildDiscordPayload(summary) {
             ]
           : []),
       ],
-      footer: {
-        text: '僅供研究參考，不構成投資建議。',
-      },
-      timestamp: new Date(`${summary.marketDate}T11:00:00+08:00`).toISOString(),
     },
   ];
 
