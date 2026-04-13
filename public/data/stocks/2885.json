@@ -3,7 +3,7 @@
   "name": "元大金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:41:19.146Z",
+  "generatedAt": "2026-04-13T08:57:22.203Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 7.23%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 83.02%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 12,209,622 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4177,12 +4177,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": 830000,
+        "investmentTrust": -994000,
+        "dealer": 186000,
+        "total": 22000
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": 2949340,
+        "investmentTrust": 3262173,
+        "dealer": -81791,
+        "total": 6129722
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": 1819095,
+        "investmentTrust": 3016403,
+        "dealer": 22229,
+        "total": 4857727
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": 62265,
+        "investmentTrust": 3054552,
+        "dealer": 1447356,
+        "total": 4564173
+      },
+      {
+        "date": "2026-04-05",
+        "foreign": -3427000,
+        "investmentTrust": 0,
+        "dealer": 63000,
+        "total": -3364000
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 2233700,
+      "investmentTrust5Day": 8339128,
+      "dealer5Day": 1636794,
+      "total5Day": 12209622
     }
   },
   "持股分散": {

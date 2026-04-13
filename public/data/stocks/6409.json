@@ -3,7 +3,7 @@
   "name": "旭隼",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:41:31.903Z",
+  "generatedAt": "2026-04-13T08:57:28.147Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -11.48%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 59.44%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 337,799 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4169,12 +4169,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": 25500,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 25500
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": -254767,
+        "investmentTrust": -1928,
+        "dealer": -874,
+        "total": -257569
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": 35067,
+        "investmentTrust": 1080,
+        "dealer": 8522,
+        "total": 44669
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": -147609,
+        "investmentTrust": 3035,
+        "dealer": -2825,
+        "total": -147399
+      },
+      {
+        "date": "2026-04-05",
+        "foreign": -4000,
+        "investmentTrust": 1000,
+        "dealer": 0,
+        "total": -3000
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -345809,
+      "investmentTrust5Day": 3187,
+      "dealer5Day": 4823,
+      "total5Day": -337799
     }
   },
   "持股分散": {
@@ -4387,8 +4423,8 @@
     "peerCount": 10,
     "rank20Day": 9,
     "rankDaily": 7,
-    "averageReturn20": 14.321338634226588,
-    "averageChangePercent": 1.4885245499289692,
+    "averageReturn20": 13.31034164283744,
+    "averageChangePercent": 1.6681760476248217,
     "leaders": [
       {
         "code": "8021",
@@ -4402,9 +4438,9 @@
         "return60": 94.08098768549735,
         "volume": 19878692,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 5525463,
+        "investmentTrust5Day": 102446,
+        "total5Day": 5893019,
         "largeHolderRatio": 52.050000000000004,
         "retailRatio": 26.78,
         "shortToMarginRatio": 5.173479297254348,
@@ -4466,9 +4502,9 @@
         "return60": 41.269841269841265,
         "volume": 1989785,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -360794,
+        "investmentTrust5Day": 616679,
+        "total5Day": 424263,
         "largeHolderRatio": 63.92,
         "retailRatio": 6.16,
         "shortToMarginRatio": 2.3783783783783785,
@@ -4530,9 +4566,9 @@
         "return60": 131.8125770653514,
         "volume": 4601037,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 248686,
+        "investmentTrust5Day": 463184,
+        "total5Day": 619862,
         "largeHolderRatio": 72.53,
         "retailRatio": 2.66,
         "shortToMarginRatio": 0.38272279934390374,
@@ -4594,9 +4630,9 @@
         "return60": 27.017543859649123,
         "volume": 3615495,
         "turnover": null,
-        "foreign5Day": 0,
+        "foreign5Day": 97099,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 425196,
         "largeHolderRatio": 33.59,
         "retailRatio": 36.26,
         "shortToMarginRatio": 0.297358754591569,
@@ -4658,9 +4694,9 @@
         "return60": 2.5210084033613445,
         "volume": 8880565,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 190771,
+        "investmentTrust5Day": -293529,
+        "total5Day": 345415,
         "largeHolderRatio": 69.88,
         "retailRatio": 13.88,
         "shortToMarginRatio": 1.8301460004112688,
@@ -4711,70 +4747,6 @@
         "nextExDividendDate": null
       },
       {
-        "code": "6196",
-        "name": "帆宣",
-        "industryName": "其他電子業",
-        "priceDate": "2026-04-13",
-        "close": 320.5,
-        "change": -5,
-        "changePercent": -1.5360983102918586,
-        "return20": 13.051146384479717,
-        "return60": 14.669051878354203,
-        "volume": 2963899,
-        "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
-        "largeHolderRatio": 72.14,
-        "retailRatio": 11.170000000000002,
-        "shortToMarginRatio": 2.1719038817005547,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          276,
-          280,
-          281.5,
-          285.5,
-          280.5,
-          288,
-          273.5,
-          280.5,
-          300,
-          290,
-          293,
-          281.5,
-          273,
-          280,
-          282,
-          292,
-          302,
-          318.5,
-          325.5,
-          320.5
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "帆宣 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
-      {
         "code": "3030",
         "name": "德律",
         "industryName": "其他電子業",
@@ -4786,9 +4758,9 @@
         "return60": 69.20980926430518,
         "volume": 15078392,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -2365512,
+        "investmentTrust5Day": 770202,
+        "total5Day": -1237068,
         "largeHolderRatio": 62.459999999999994,
         "retailRatio": 14.13,
         "shortToMarginRatio": 2.114575466609127,
@@ -4839,6 +4811,70 @@
         "nextExDividendDate": null
       },
       {
+        "code": "2474",
+        "name": "可成",
+        "industryName": "其他電子業",
+        "priceDate": "2026-04-13",
+        "close": 192.5,
+        "change": 0.5,
+        "changePercent": 0.26041666666666663,
+        "return20": 2.941176470588235,
+        "return60": -6.779661016949152,
+        "volume": 1634034,
+        "turnover": null,
+        "foreign5Day": 1218384,
+        "investmentTrust5Day": -263524,
+        "total5Day": 870843,
+        "largeHolderRatio": 77.25,
+        "retailRatio": 8.86,
+        "shortToMarginRatio": 0.9572431397574984,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          185.5,
+          187.5,
+          188.5,
+          187.5,
+          188,
+          186,
+          182.5,
+          188.5,
+          187.5,
+          189.5,
+          192.5,
+          189.5,
+          188,
+          189.5,
+          190.5,
+          192,
+          192.5,
+          192,
+          192,
+          192.5
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "可成 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
         "code": "2317",
         "name": "鴻海",
         "industryName": "其他電子業",
@@ -4850,9 +4886,9 @@
         "return60": -14.712153518123666,
         "volume": 37247707,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1610986,
+        "investmentTrust5Day": -974887,
+        "total5Day": 7679940,
         "largeHolderRatio": 66.44,
         "retailRatio": 14.82,
         "shortToMarginRatio": 0.41704383809646967,
@@ -4916,9 +4952,9 @@
         "return60": -6.048387096774194,
         "volume": 5685815,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -1719063,
+        "investmentTrust5Day": 46000,
+        "total5Day": -1355180,
         "largeHolderRatio": 50.519999999999996,
         "retailRatio": 22.549999999999997,
         "shortToMarginRatio": 0.3991484832357637,
@@ -4980,9 +5016,9 @@
         "return60": -30.388349514563107,
         "volume": 653359,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -345809,
+        "investmentTrust5Day": 3187,
+        "total5Day": -337799,
         "largeHolderRatio": 59.44,
         "retailRatio": 11.540000000000001,
         "shortToMarginRatio": 0.43668122270742354,
@@ -5044,9 +5080,9 @@
         "return60": -14.712153518123666,
         "volume": 37247707,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 1610986,
+        "investmentTrust5Day": -974887,
+        "total5Day": 7679940,
         "largeHolderRatio": 66.44,
         "retailRatio": 14.82,
         "shortToMarginRatio": 0.41704383809646967,
@@ -5098,7 +5134,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 14.32%，短線強度落後族群。"
+      "近 20 日報酬低於同產業平均 13.31%，短線強度落後族群。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }

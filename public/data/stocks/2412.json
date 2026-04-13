@@ -3,7 +3,7 @@
   "name": "中華電",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:41:15.892Z",
+  "generatedAt": "2026-04-13T08:57:20.302Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -1.10%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 79.02%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 709,528 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4191,12 +4191,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-04-10",
+        "foreign": -507000,
+        "investmentTrust": 0,
+        "dealer": 10000,
+        "total": -497000
+      },
+      {
+        "date": "2026-04-09",
+        "foreign": -392175,
+        "investmentTrust": 682736,
+        "dealer": -250000,
+        "total": 40561
+      },
+      {
+        "date": "2026-04-08",
+        "foreign": -479132,
+        "investmentTrust": 612718,
+        "dealer": 356030,
+        "total": 489616
+      },
+      {
+        "date": "2026-04-07",
+        "foreign": -1020266,
+        "investmentTrust": 746881,
+        "dealer": 32805,
+        "total": -240580
+      },
+      {
+        "date": "2026-04-05",
+        "foreign": 2342931,
+        "investmentTrust": -30000,
+        "dealer": -1396000,
+        "total": 916931
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -55642,
+      "investmentTrust5Day": 2012335,
+      "dealer5Day": -1247165,
+      "total5Day": 709528
     }
   },
   "持股分散": {
@@ -4424,11 +4460,11 @@
   },
   "同產業比較": {
     "industryName": "通信網路業",
-    "peerCount": 7,
+    "peerCount": 8,
     "rank20Day": 7,
-    "rankDaily": 4,
-    "averageReturn20": 19.611576998996235,
-    "averageChangePercent": 0.2875072297619751,
+    "rankDaily": 5,
+    "averageReturn20": 15.244071479961121,
+    "averageChangePercent": 0.32382316130184385,
     "leaders": [
       {
         "code": "6285",
@@ -4442,9 +4478,9 @@
         "return60": 125.45454545454547,
         "volume": 30372184,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 5578360,
+        "investmentTrust5Day": 4500606,
+        "total5Day": 6049353,
         "largeHolderRatio": 68.71000000000001,
         "retailRatio": 16.29,
         "shortToMarginRatio": 2.1603212524780155,
@@ -4506,9 +4542,9 @@
         "return60": 68.30188679245282,
         "volume": 4692280,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 18276,
+        "investmentTrust5Day": -168739,
+        "total5Day": -130749,
         "largeHolderRatio": 57.959999999999994,
         "retailRatio": 13.98,
         "shortToMarginRatio": 3.4509803921568625,
@@ -4570,9 +4606,9 @@
         "return60": 97.3063973063973,
         "volume": 3150570,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -1794746,
+        "investmentTrust5Day": 898000,
+        "total5Day": -276972,
         "largeHolderRatio": 50.8,
         "retailRatio": 27.52,
         "shortToMarginRatio": 8.260497000856898,
@@ -4634,9 +4670,9 @@
         "return60": 53.58649789029536,
         "volume": 2930469,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -2325847,
+        "investmentTrust5Day": 410074,
+        "total5Day": -1896371,
         "largeHolderRatio": 71.06,
         "retailRatio": 4.3500000000000005,
         "shortToMarginRatio": 1.3309134906231095,
@@ -4698,9 +4734,9 @@
         "return60": 2.803738317757009,
         "volume": 6919215,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 2960232,
+        "investmentTrust5Day": 2643085,
+        "total5Day": 5863076,
         "largeHolderRatio": 91.68,
         "retailRatio": 3.17,
         "shortToMarginRatio": 10.323574730354391,
@@ -4762,9 +4798,9 @@
         "return60": 5.71749582735398,
         "volume": 3374526,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 4730318,
+        "investmentTrust5Day": 1224666,
+        "total5Day": 5876709,
         "largeHolderRatio": 93.26,
         "retailRatio": 2.75,
         "shortToMarginRatio": null,
@@ -4826,9 +4862,9 @@
         "return60": 1.1278195488721803,
         "volume": 6551901,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -55642,
+        "investmentTrust5Day": 2012335,
+        "total5Day": 709528,
         "largeHolderRatio": 79.02000000000001,
         "retailRatio": 6.86,
         "shortToMarginRatio": 1.9434628975265018,
@@ -4869,6 +4905,70 @@
         ],
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
+        "code": "3596",
+        "name": "智易",
+        "industryName": "通信網路業",
+        "priceDate": "2026-04-13",
+        "close": 174,
+        "change": 1,
+        "changePercent": 0.5780346820809248,
+        "return20": -15.328467153284672,
+        "return60": -3.867403314917127,
+        "volume": 1113827,
+        "turnover": null,
+        "foreign5Day": 2709412,
+        "investmentTrust5Day": -81000,
+        "total5Day": 2966150,
+        "largeHolderRatio": 72.80000000000001,
+        "retailRatio": 9.45,
+        "shortToMarginRatio": 2.341463414634146,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          210,
+          208.5,
+          207.5,
+          201.5,
+          197,
+          192,
+          185.5,
+          179,
+          177.5,
+          165.5,
+          168,
+          157.5,
+          152,
+          167,
+          165,
+          167,
+          172.5,
+          172.5,
+          173,
+          174
+        ],
+        "technicalSignals": [
+          {
+            "key": "macd-bullish-cross",
+            "title": "MACD 翻正",
+            "tone": "up",
+            "importance": 3,
+            "description": "智易 MACD 線上穿訊號線，短線動能重新偏多。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "MACD 翻正"
+        ],
+        "topSignalTitle": "MACD 翻正",
+        "topSignalTone": "up",
         "signalCount": 1,
         "topSelectionSignalTitle": "可借券賣出餘量",
         "selectionSignalTone": "info",
@@ -4881,6 +4981,70 @@
     ],
     "laggards": [
       {
+        "code": "3596",
+        "name": "智易",
+        "industryName": "通信網路業",
+        "priceDate": "2026-04-13",
+        "close": 174,
+        "change": 1,
+        "changePercent": 0.5780346820809248,
+        "return20": -15.328467153284672,
+        "return60": -3.867403314917127,
+        "volume": 1113827,
+        "turnover": null,
+        "foreign5Day": 2709412,
+        "investmentTrust5Day": -81000,
+        "total5Day": 2966150,
+        "largeHolderRatio": 72.80000000000001,
+        "retailRatio": 9.45,
+        "shortToMarginRatio": 2.341463414634146,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          210,
+          208.5,
+          207.5,
+          201.5,
+          197,
+          192,
+          185.5,
+          179,
+          177.5,
+          165.5,
+          168,
+          157.5,
+          152,
+          167,
+          165,
+          167,
+          172.5,
+          172.5,
+          173,
+          174
+        ],
+        "technicalSignals": [
+          {
+            "key": "macd-bullish-cross",
+            "title": "MACD 翻正",
+            "tone": "up",
+            "importance": 3,
+            "description": "智易 MACD 線上穿訊號線，短線動能重新偏多。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "MACD 翻正"
+        ],
+        "topSignalTitle": "MACD 翻正",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
         "code": "2412",
         "name": "中華電",
         "industryName": "通信網路業",
@@ -4892,9 +5056,9 @@
         "return60": 1.1278195488721803,
         "volume": 6551901,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -55642,
+        "investmentTrust5Day": 2012335,
+        "total5Day": 709528,
         "largeHolderRatio": 79.02000000000001,
         "retailRatio": 6.86,
         "shortToMarginRatio": 1.9434628975265018,
@@ -4956,9 +5120,9 @@
         "return60": 5.71749582735398,
         "volume": 3374526,
         "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 4730318,
+        "investmentTrust5Day": 1224666,
+        "total5Day": 5876709,
         "largeHolderRatio": 93.26,
         "retailRatio": 2.75,
         "shortToMarginRatio": null,
@@ -4992,70 +5156,6 @@
             "tone": "normal",
             "importance": 1,
             "description": "遠傳 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
-      {
-        "code": "3045",
-        "name": "台灣大",
-        "industryName": "通信網路業",
-        "priceDate": "2026-04-13",
-        "close": 110,
-        "change": 0,
-        "changePercent": 0,
-        "return20": 3.7735849056603774,
-        "return60": 2.803738317757009,
-        "volume": 6919215,
-        "turnover": null,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
-        "largeHolderRatio": 91.68,
-        "retailRatio": 3.17,
-        "shortToMarginRatio": 10.323574730354391,
-        "activeEtfCount": 1,
-        "sparkline20": [
-          106.5,
-          108,
-          109.5,
-          110,
-          109.5,
-          109,
-          109,
-          109.5,
-          109,
-          109,
-          109.5,
-          109,
-          109,
-          109.5,
-          109.5,
-          109.5,
-          109.5,
-          110,
-          110,
-          110
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "台灣大 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -5074,7 +5174,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 19.61%，短線強度落後族群。"
+      "近 20 日報酬低於同產業平均 15.24%，短線強度落後族群。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }
