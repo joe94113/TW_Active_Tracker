@@ -1,8 +1,14 @@
 {
   "appName": "台股主動通",
+<<<<<<< HEAD
   "generatedAt": "2026-04-13T06:38:16.650Z",
   "generatedAtLocalDate": "2026-04-13",
   "generatedAtLocalTime": "14:38:16",
+=======
+  "generatedAt": "2026-04-13T06:33:51.444Z",
+  "generatedAtLocalDate": "2026-04-13",
+  "generatedAtLocalTime": "14:32:42",
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -584,7 +590,7 @@
       "nav": 13.94,
       "aum": 1890392378,
       "holdingsCount": 26,
-      "trackingMessage": "官方來源每日同步",
+      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：台新 ETF 持股解析失敗",
       "changeSummary": {
         "comparisonReady": false,
         "addedCount": 26,
@@ -807,7 +813,7 @@
   ],
   "latestDisclosureDate": "2026-04-14",
   "connectedCount": 15,
-  "stockDetailCount": 176,
+  "stockDetailCount": 175,
   "pendingEtfs": [
     {
       "code": "00981A",

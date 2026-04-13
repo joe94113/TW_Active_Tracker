@@ -3,7 +3,11 @@
   "name": "文曄",
   "kind": "stock",
   "priceDate": "2026-04-13",
+<<<<<<< HEAD
   "generatedAt": "2026-04-13T06:38:56.108Z",
+=======
+  "generatedAt": "2026-04-13T06:33:33.292Z",
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3491,11 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -1.51%，可用來觀察波段資金是否持續留在主線。",
+<<<<<<< HEAD
     "最近 5 個交易日三大法人合計買超 1,194,916 股。"
+=======
+    "最近 5 個交易日三大法人合計買超 1,599,783 股。"
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4195,6 +4203,7 @@
         "total": 255232
       },
       {
+<<<<<<< HEAD
         "date": "2026-04-09",
         "foreign": 34404,
         "investmentTrust": -282865,
@@ -4202,6 +4211,8 @@
         "total": -289680
       },
       {
+=======
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "date": "2026-04-08",
         "foreign": 547154,
         "investmentTrust": -74337,
@@ -4221,6 +4232,7 @@
         "investmentTrust": 2906847,
         "dealer": 294330,
         "total": 875385
+<<<<<<< HEAD
       }
     ],
     "summary": {
@@ -4228,6 +4240,22 @@
       "investmentTrust5Day": 753777,
       "dealer5Day": 449939,
       "total5Day": 1194916
+=======
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 917385,
+        "investmentTrust": -813796,
+        "dealer": 11598,
+        "total": 115187
+      }
+    ],
+    "summary": {
+      "foreign5Day": 874181,
+      "investmentTrust5Day": 222846,
+      "dealer5Day": 502756,
+      "total5Day": 1599783
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
     }
   },
   "持股分散": {
@@ -4425,6 +4453,7 @@
   },
   "同產業比較": {
     "industryName": "電子通路業",
+<<<<<<< HEAD
     "peerCount": 3,
     "rank20Day": 3,
     "rankDaily": 2,
@@ -4489,6 +4518,15 @@
         "signalCount": 1
       },
       {
+=======
+    "peerCount": 2,
+    "rank20Day": 2,
+    "rankDaily": 1,
+    "averageReturn20": 9.3192484450868,
+    "averageChangePercent": 0.3672913061028139,
+    "leaders": [
+      {
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "code": "5434",
         "name": "崇越",
         "industryName": "電子通路業",
@@ -4500,9 +4538,15 @@
         "return60": 33.61204013377927,
         "volume": 1779058,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 2049004,
         "investmentTrust5Day": 129807,
         "total5Day": 2417243,
+=======
+        "foreign5Day": 1753242,
+        "investmentTrust5Day": 134807,
+        "total5Day": 2121123,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 54.559999999999995,
         "retailRatio": 14.66,
         "shortToMarginRatio": 2.5899280575539567,
@@ -4557,9 +4601,15 @@
         "return60": 63.44086021505376,
         "volume": 4815142,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -8800,
         "investmentTrust5Day": 753777,
         "total5Day": 1194916,
+=======
+        "foreign5Day": 874181,
+        "investmentTrust5Day": 222846,
+        "total5Day": 1599783,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 90.1,
         "retailRatio": 2.87,
         "shortToMarginRatio": 31.848958333333332,
@@ -4616,9 +4666,15 @@
         "return60": 63.44086021505376,
         "volume": 4815142,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -8800,
         "investmentTrust5Day": 753777,
         "total5Day": 1194916,
+=======
+        "foreign5Day": 874181,
+        "investmentTrust5Day": 222846,
+        "total5Day": 1599783,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 90.1,
         "retailRatio": 2.87,
         "shortToMarginRatio": 31.848958333333332,
@@ -4673,9 +4729,15 @@
         "return60": 33.61204013377927,
         "volume": 1779058,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 2049004,
         "investmentTrust5Day": 129807,
         "total5Day": 2417243,
+=======
+        "foreign5Day": 1753242,
+        "investmentTrust5Day": 134807,
+        "total5Day": 2121123,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 54.559999999999995,
         "retailRatio": 14.66,
         "shortToMarginRatio": 2.5899280575539567,
@@ -4717,6 +4779,7 @@
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
         "signalCount": 1
+<<<<<<< HEAD
       },
       {
         "code": "3702",
@@ -4778,6 +4841,12 @@
     ],
     "觀察摘要": [
       "近 20 日報酬低於同產業平均 16.69%，短線強度落後族群。",
+=======
+      }
+    ],
+    "觀察摘要": [
+      "近 20 日報酬低於同產業平均 9.32%，短線強度落後族群。",
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

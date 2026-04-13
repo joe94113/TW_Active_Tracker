@@ -3,7 +3,11 @@
   "name": "強信-KY",
   "kind": "stock",
   "priceDate": "2026-04-13",
+<<<<<<< HEAD
   "generatedAt": "2026-04-13T06:39:01.726Z",
+=======
+  "generatedAt": "2026-04-13T06:33:39.807Z",
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3491,11 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 0.91%，可用來觀察波段資金是否持續留在主線。",
+<<<<<<< HEAD
     "最近 5 個交易日三大法人合計賣超 34,000 股。"
+=======
+    "最近 5 個交易日三大法人合計賣超 25,000 股。"
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3777,6 +3785,7 @@
         "total": -27000
       },
       {
+<<<<<<< HEAD
         "date": "2026-04-09",
         "foreign": -4000,
         "investmentTrust": 0,
@@ -3784,6 +3793,8 @@
         "total": -3000
       },
       {
+=======
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "date": "2026-04-08",
         "foreign": 4000,
         "investmentTrust": 0,
@@ -3803,6 +3814,7 @@
         "investmentTrust": 0,
         "dealer": -4000,
         "total": -1000
+<<<<<<< HEAD
       }
     ],
     "summary": {
@@ -3810,6 +3822,22 @@
       "investmentTrust5Day": 0,
       "dealer5Day": -1000,
       "total5Day": -34000
+=======
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -19000,
+        "investmentTrust": 0,
+        "dealer": 25000,
+        "total": 6000
+      }
+    ],
+    "summary": {
+      "foreign5Day": -48000,
+      "investmentTrust5Day": 0,
+      "dealer5Day": 23000,
+      "total5Day": -25000
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
     }
   },
   "持股分散": {
@@ -3987,9 +4015,15 @@
         "return60": 175.33632286995515,
         "volume": 1442389,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 1035204,
         "investmentTrust5Day": 1673000,
         "total5Day": 2729490,
+=======
+        "foreign5Day": 1004869,
+        "investmentTrust5Day": 2461000,
+        "total5Day": 3541677,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 64.23,
         "retailRatio": 10.67,
         "shortToMarginRatio": 7.181403071814032,
@@ -4052,9 +4086,15 @@
         "return60": 89.44636678200692,
         "volume": 4043697,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 495762,
         "investmentTrust5Day": -78002,
         "total5Day": 516321,
+=======
+        "foreign5Day": -643391,
+        "investmentTrust5Day": 76998,
+        "total5Day": -498458,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 54.22,
         "retailRatio": 10.27,
         "shortToMarginRatio": 4.452951843642958,
@@ -4109,9 +4149,15 @@
         "return60": 13.825363825363826,
         "volume": 542491,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": 109811,
         "investmentTrust5Day": -33744,
         "total5Day": 189921,
+=======
+        "foreign5Day": -112178,
+        "investmentTrust5Day": -71575,
+        "total5Day": 46048,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 72.19,
         "retailRatio": 1.69,
         "shortToMarginRatio": null,
@@ -4166,9 +4212,15 @@
         "return60": 1.687116564417178,
         "volume": 174970,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -6540,
         "investmentTrust5Day": -33000,
         "total5Day": -33768,
+=======
+        "foreign5Day": 652,
+        "investmentTrust5Day": -29000,
+        "total5Day": -19017,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 86.22,
         "retailRatio": 4.6,
         "shortToMarginRatio": 0.7766990291262136,
@@ -4223,9 +4275,15 @@
         "return60": 2.6315860956525325,
         "volume": 70640,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -33000,
         "investmentTrust5Day": 0,
         "total5Day": -34000,
+=======
+        "foreign5Day": -48000,
+        "investmentTrust5Day": 0,
+        "total5Day": -25000,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4280,9 +4338,15 @@
         "return60": 10.854816824966079,
         "volume": 1442495,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -666653,
         "investmentTrust5Day": -182392,
         "total5Day": -765760,
+=======
+        "foreign5Day": 1123894,
+        "investmentTrust5Day": -349192,
+        "total5Day": 926219,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4339,9 +4403,15 @@
         "return60": 10.854816824966079,
         "volume": 1442495,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -666653,
         "investmentTrust5Day": -182392,
         "total5Day": -765760,
+=======
+        "foreign5Day": 1123894,
+        "investmentTrust5Day": -349192,
+        "total5Day": 926219,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4396,9 +4466,15 @@
         "return60": 2.6315860956525325,
         "volume": 70640,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -33000,
         "investmentTrust5Day": 0,
         "total5Day": -34000,
+=======
+        "foreign5Day": -48000,
+        "investmentTrust5Day": 0,
+        "total5Day": -25000,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4453,9 +4529,15 @@
         "return60": 1.687116564417178,
         "volume": 174970,
         "turnover": null,
+<<<<<<< HEAD
         "foreign5Day": -6540,
         "investmentTrust5Day": -33000,
         "total5Day": -33768,
+=======
+        "foreign5Day": 652,
+        "investmentTrust5Day": -29000,
+        "total5Day": -19017,
+>>>>>>> 01dbc4389f03f8a41e63b942d7cbd62ffd22bd58
         "largeHolderRatio": 86.22,
         "retailRatio": 4.6,
         "shortToMarginRatio": 0.7766990291262136,
