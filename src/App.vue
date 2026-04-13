@@ -48,6 +48,8 @@ const generatedAtText = computed(() => {
   return formatGeneratedAt(manifest.value?.generatedAt);
 });
 
+const siteIconHref = `${import.meta.env.BASE_URL}favicon.svg`;
+
 const footerStats = computed(() => [
   {
     label: '個股資料',
@@ -83,13 +85,7 @@ function isActiveRoute(path) {
         <div class="brand-chip">
           <RouterLink class="brand-lockup" to="/">
             <span class="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 16.5V7.5"></path>
-                <path d="M9.5 16.5V4.5"></path>
-                <path d="M15 16.5v-6"></path>
-                <path d="M20 16.5v-10"></path>
-                <path d="M3 19h18"></path>
-              </svg>
+              <img class="brand-mark-image" :src="siteIconHref" alt="" />
             </span>
             <span class="brand-title">台股主動通</span>
           </RouterLink>

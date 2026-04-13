@@ -3,6 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useEtfDetail } from '../composables/useEtfDetail';
+import { useSeoMeta } from '../composables/useSeoMeta';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
 import IntradayChart from '../components/IntradayChart.vue';
@@ -10,6 +11,7 @@ import TechnicalChart from '../components/TechnicalChart.vue';
 import HolderStructureChart from '../components/HolderStructureChart.vue';
 import { createStockRoute, isStockCode } from '../lib/stockRouting';
 import { getEtfAvailabilityLabel, getEtfAvailabilityNote } from '../lib/etfDisplay';
+import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
 import {
   formatDate,
   formatNumber,
@@ -42,6 +44,32 @@ const heroPills = computed(() => [
   getEtfAvailabilityLabel(overviewItem.value),
   `資料日 ${formatDate(marketData.value?.priceDate ?? latestSnapshot.value?.disclosureDate)}`,
 ]);
+
+const etfSeo = computed(() => {
+  const etfName = overviewItem.value?.name ?? latestSnapshot.value?.name ?? etfCode.value;
+  const providerLabel = overviewItem.value?.providerLabel ?? '主動式 ETF';
+  const disclosureDate = latestSnapshot.value?.disclosureDate ?? overviewItem.value?.disclosureDate ?? null;
+  const summary = diffData.value?.summary ?? {};
+  const diffText = diffData.value?.comparisonReady
+    ? `前一版相比新增 ${summary.addedCount ?? 0} 檔、刪除 ${summary.removedCount ?? 0} 檔。`
+    : '目前尚未有可比較的前一版持股。';
+
+  return {
+    title: `${etfName} ${etfCode.value} 持股異動與技術面`,
+    description: `${providerLabel} ${etfName}（${etfCode.value}）研究頁，整理最新成分股、前一日異動、技術面與持股分散。${disclosureDate ? ` 最新揭露日 ${formatDate(disclosureDate)}。` : ''} ${diffText}`,
+    routePath: `/etfs/${etfCode.value}`,
+    keywords: [etfCode.value, etfName, '主動式ETF', 'ETF持股異動', 'ETF成分股', providerLabel],
+    jsonLd: [
+      createBreadcrumbJsonLd([
+        { name: '台股主動通', url: buildPageUrl('/') },
+        { name: '主動式 ETF', url: buildPageUrl('/etfs') },
+        { name: etfName, url: buildPageUrl(`/etfs/${etfCode.value}`) },
+      ]),
+    ],
+  };
+});
+
+useSeoMeta(etfSeo);
 
 const summaryCards = computed(() => [
   {

@@ -38,12 +38,15 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  overflow-x: clip;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 a {
@@ -58,15 +61,37 @@ input {
 
 #app {
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .app-shell {
-  width: min(1420px, calc(100vw - 32px));
+  width: 100%;
+  max-width: 1420px;
   margin: 0 auto;
-  padding: 16px 0 56px;
+  padding: 16px 16px 56px;
+  overflow-x: clip;
 }
 
 .app-main {
+  min-width: 0;
+}
+
+.page-shell,
+.panel,
+.sub-panel,
+.focus-card,
+.focus-card-item,
+.focus-card-item > div,
+.favorite-card,
+.recent-stock-card,
+.favorite-card-head,
+.favorite-title-block,
+.favorite-trend-block,
+.favorite-trend-meta,
+.favorite-metrics,
+.panel-header,
+.panel-header > div {
   min-width: 0;
 }
 
@@ -131,9 +156,15 @@ input {
   background: linear-gradient(135deg, #0b699b, #07486d);
 }
 
-.brand-mark svg {
+.brand-mark svg,
+.brand-mark img {
   width: 18px;
   height: 18px;
+}
+
+.brand-mark-image {
+  display: block;
+  object-fit: contain;
 }
 
 .brand-kicker,
@@ -1215,6 +1246,7 @@ input {
 .focus-card-item strong {
   display: block;
   font-size: 0.96rem;
+  overflow-wrap: anywhere;
 }
 
 .favorite-card {
@@ -1281,8 +1313,7 @@ input {
 }
 
 .favorite-trend-block {
-  display: grid;
-  gap: 10px;
+  display: block;
   margin-top: 16px;
 }
 
@@ -1290,7 +1321,8 @@ input {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  align-items: baseline;
+  align-items: center;
+  flex-wrap: wrap;
   color: var(--text-soft);
 }
 
@@ -1304,6 +1336,7 @@ input {
   font-size: 1.12rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
 }
 
 .favorite-title:hover {
@@ -2184,8 +2217,8 @@ input {
 
 @media (max-width: 900px) {
   .app-shell {
-    width: min(100vw - 24px, 1420px);
     padding-top: 16px;
+    padding-inline: 12px;
   }
 
   .app-header {
@@ -2327,7 +2360,9 @@ input {
 
 @media (max-width: 640px) {
   .app-shell {
-    width: min(100vw - 16px, 1420px);
+    width: 100%;
+    max-width: none;
+    padding-inline: 8px;
     padding-bottom: 112px;
   }
 

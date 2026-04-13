@@ -6,10 +6,10 @@ import { useFavoriteStocks } from '../composables/useFavoriteStocks';
 import { useLiveMarketOverview } from '../composables/useLiveMarketOverview';
 import { useLiveStockSnapshots } from '../composables/useLiveStockSnapshots';
 import { useRecentStocks } from '../composables/useRecentStocks';
+import { useSeoMeta } from '../composables/useSeoMeta';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
 import IntradayChart from '../components/IntradayChart.vue';
-import MiniTrendChart from '../components/MiniTrendChart.vue';
 import TechnicalChart from '../components/TechnicalChart.vue';
 import { createStockRoute, isStockCode } from '../lib/stockRouting';
 import {
@@ -93,6 +93,15 @@ const marketBreadthHint = computed(() =>
     ? '當上漲家數明顯多於下跌家數時，代表盤勢不是只靠少數權值股撐住。'
     : '市場廣度目前仍採最近一次盤後統計，盤中請搭配指數與成交節奏一起看。',
 );
+
+const homeSeo = computed(() => ({
+  title: '台股大盤、熱門股與主動式 ETF 風向球',
+  description: `整合台股大盤即時走勢、熱門股排行、主動式 ETF 風向球與法人觀察。追蹤 ${stockList.value.length || 0} 檔個股與 ${etfOverviewList.value.length || 0} 檔主動式 ETF。`,
+  routePath: '/',
+  keywords: ['台股大盤', '熱門股', '主動式ETF', 'ETF持股異動', '法人觀察', '台股即時'],
+}));
+
+useSeoMeta(homeSeo);
 
 function getLiveSnapshot(code) {
   return liveSnapshotMap.value.get(String(code ?? '').trim().toUpperCase()) ?? null;
@@ -268,7 +277,6 @@ const recentViewedStocks = computed(() =>
         total5Day: stockMatch?.total5Day ?? null,
         topSignalTitle: stockMatch?.topSignalTitle ?? null,
         topSignalTone: stockMatch?.topSignalTone ?? null,
-        sparkline20: stockMatch?.sparkline20 ?? [],
         liveUpdatedAt: getLiveSnapshot(item.code)?.updatedAt ?? null,
         viewedAt: item.viewedAt,
       };
@@ -469,7 +477,6 @@ function getInstitutionalFlow(contract, identity) {
               ></span>
             </div>
             <div class="favorite-trend-block">
-              <MiniTrendChart :values="item.sparkline20" :tone="item.topSignalTone ?? ((item.changePercent ?? 0) > 0 ? 'up' : (item.changePercent ?? 0) < 0 ? 'down' : 'normal')" />
               <div class="favorite-trend-meta">
                 <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
                   {{ formatPercent(item.return20) }}
@@ -526,10 +533,6 @@ function getInstitutionalFlow(contract, identity) {
               <span class="recent-stock-time">最後查看 {{ formatViewedAt(item.viewedAt) }}</span>
             </div>
             <div class="favorite-trend-block">
-              <MiniTrendChart
-                :values="item.sparkline20"
-                :tone="item.topSignalTone ?? ((item.changePercent ?? 0) > 0 ? 'up' : (item.changePercent ?? 0) < 0 ? 'down' : 'normal')"
-              />
               <div class="favorite-trend-meta">
                 <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
                   {{ formatPercent(item.return20) }}

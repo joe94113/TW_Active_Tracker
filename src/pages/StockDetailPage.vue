@@ -6,6 +6,7 @@ import { useStockComparisonSeries } from '../composables/useStockComparisonSerie
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
 import { useLiveStockSnapshot } from '../composables/useLiveStockSnapshot';
 import { useRecentStocks } from '../composables/useRecentStocks';
+import { useSeoMeta } from '../composables/useSeoMeta';
 import StatusCard from '../components/StatusCard.vue';
 import InfoCard from '../components/InfoCard.vue';
 import StockFinancialOverview from '../components/StockFinancialOverview.vue';
@@ -15,6 +16,7 @@ import HolderStructureChart from '../components/HolderStructureChart.vue';
 import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
 import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
+import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
 import {
   formatDate,
   formatAmount,
@@ -120,6 +122,29 @@ const recentViewedStocks = computed(() =>
     .filter((item) => item.code && item.code !== stockCode.value)
     .slice(0, 6),
 );
+
+const stockSeo = computed(() => {
+  const stockName = detail.value?.name ?? companyProfile.value?.公司名稱 ?? stockCode.value;
+  const industryName = companyProfile.value?.產業名稱 ? `${companyProfile.value.產業名稱}個股` : '台股個股';
+  const signalText = technicalSignals.value.slice(0, 3).join('、');
+  const priceDateText = detail.value?.priceDate ? `資料截至 ${formatDate(detail.value.priceDate)}。` : '';
+  const description = `${stockName}（${stockCode.value}）${industryName}研究頁，整合技術分析、法人籌碼、持股分級、財務面、關鍵價位與最近新聞。${signalText ? ` 目前重點訊號：${signalText}。` : ''}${priceDateText}`;
+
+  return {
+    title: `${stockName} ${stockCode.value} 技術分析與籌碼面`,
+    description,
+    routePath: `/stocks/${stockCode.value}`,
+    keywords: [stockCode.value, stockName, '台股', '技術分析', '法人籌碼', '財務分析', '支撐壓力'],
+    jsonLd: [
+      createBreadcrumbJsonLd([
+        { name: '台股主動通', url: buildPageUrl('/') },
+        { name: stockName, url: buildPageUrl(`/stocks/${stockCode.value}`) },
+      ]),
+    ],
+  };
+});
+
+useSeoMeta(stockSeo);
 
 const summaryCards = computed(() => {
   const latestSummary = displayQuote.value;
