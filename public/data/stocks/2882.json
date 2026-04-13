@@ -3,7 +3,7 @@
   "name": "國泰金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:21.976Z",
+  "generatedAt": "2026-04-13T08:59:24.258Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -0.69%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 1,778,851 股。"
+    "最近 5 個交易日三大法人合計買超 6,535,821 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4180,17 +4180,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": -4795700,
-        "investmentTrust": -571000,
-        "dealer": 125000,
-        "total": -5241700
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -1652310,
-        "investmentTrust": 2320399,
-        "dealer": 61871,
-        "total": 729960
+        "foreign": -6756557,
+        "investmentTrust": 1214691,
+        "dealer": 126627,
+        "total": -5415239
       },
       {
         "date": "2026-04-08",
@@ -4207,18 +4200,25 @@
         "total": 112995
       },
       {
-        "date": "2026-04-05",
-        "foreign": -1882000,
-        "investmentTrust": 146000,
-        "dealer": -268000,
-        "total": -2004000
+        "date": "2026-04-02",
+        "foreign": -1193596,
+        "investmentTrust": 1643586,
+        "dealer": -566949,
+        "total": -116959
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -864958,
+        "investmentTrust": 3977106,
+        "dealer": 661280,
+        "total": 3773428
       }
     ],
     "summary": {
-      "foreign5Day": -7867697,
-      "investmentTrust5Day": 9249937,
-      "dealer5Day": 396611,
-      "total5Day": 1778851
+      "foreign5Day": -8352798,
+      "investmentTrust5Day": 14189921,
+      "dealer5Day": 698698,
+      "total5Day": 6535821
     }
   },
   "持股分散": {

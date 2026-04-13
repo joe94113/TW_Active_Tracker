@@ -3,7 +3,7 @@
   "name": "聚陽",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:17.879Z",
+  "generatedAt": "2026-04-13T08:59:18.821Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 落在偏低區，若出現量縮止跌，反而可以留意技術性反彈。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -25.43%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 483,352 股。"
+    "最近 5 個交易日三大法人合計買超 1,369,878 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4194,17 +4194,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": -156000,
-        "investmentTrust": 0,
-        "dealer": 96000,
-        "total": -60000
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -70000,
-        "investmentTrust": 162609,
-        "dealer": 4973,
-        "total": 97582
+        "foreign": -447000,
+        "investmentTrust": -38552,
+        "dealer": -9632,
+        "total": -495184
       },
       {
         "date": "2026-04-08",
@@ -4221,18 +4214,25 @@
         "total": -34760
       },
       {
-        "date": "2026-04-05",
-        "foreign": 19000,
-        "investmentTrust": 118000,
-        "dealer": -70660,
-        "total": 66340
+        "date": "2026-04-02",
+        "foreign": 204625,
+        "investmentTrust": -2495,
+        "dealer": 72742,
+        "total": 274872
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 1193469,
+        "investmentTrust": 0,
+        "dealer": 17291,
+        "total": 1210760
       }
     ],
     "summary": {
-      "foreign5Day": 187376,
-      "investmentTrust5Day": 261731,
-      "dealer5Day": 34245,
-      "total5Day": 483352
+      "foreign5Day": 1345470,
+      "investmentTrust5Day": -59925,
+      "dealer5Day": 84333,
+      "total5Day": 1369878
     }
   },
   "持股分散": {
@@ -4478,9 +4478,9 @@
         "return60": -24.912891986062718,
         "volume": 2307745,
         "turnover": null,
-        "foreign5Day": 187376,
-        "investmentTrust5Day": 261731,
-        "total5Day": 483352,
+        "foreign5Day": 1345470,
+        "investmentTrust5Day": -59925,
+        "total5Day": 1369878,
         "largeHolderRatio": 70.73,
         "retailRatio": 9.51,
         "shortToMarginRatio": 1.4492753623188406,
@@ -4544,9 +4544,9 @@
         "return60": -24.912891986062718,
         "volume": 2307745,
         "turnover": null,
-        "foreign5Day": 187376,
-        "investmentTrust5Day": 261731,
-        "total5Day": 483352,
+        "foreign5Day": 1345470,
+        "investmentTrust5Day": -59925,
+        "total5Day": 1369878,
         "largeHolderRatio": 70.73,
         "retailRatio": 9.51,
         "shortToMarginRatio": 1.4492753623188406,

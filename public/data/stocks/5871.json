@@ -3,7 +3,7 @@
   "name": "中租-KY",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:27.092Z",
+  "generatedAt": "2026-04-13T08:59:32.624Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 8.37%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 959,630 股。"
+    "最近 5 個交易日三大法人合計賣超 4,015,634 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4194,17 +4194,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": -44000,
-        "investmentTrust": 0,
-        "dealer": -70000,
-        "total": -114000
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -411977,
-        "investmentTrust": -130529,
-        "dealer": -76916,
-        "total": -619422
+        "foreign": -1105266,
+        "investmentTrust": -117920,
+        "dealer": 3992,
+        "total": -1219194
       },
       {
         "date": "2026-04-08",
@@ -4221,18 +4214,25 @@
         "total": -14347
       },
       {
-        "date": "2026-04-05",
-        "foreign": -255000,
-        "investmentTrust": -251000,
-        "dealer": -201000,
-        "total": -707000
+        "date": "2026-04-02",
+        "foreign": -1115768,
+        "investmentTrust": -21307,
+        "dealer": 56867,
+        "total": -1080208
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -2256321,
+        "investmentTrust": 0,
+        "dealer": 59297,
+        "total": -2197024
       }
     ],
     "summary": {
-      "foreign5Day": -488326,
-      "investmentTrust5Day": -217991,
-      "dealer5Day": -253313,
-      "total5Day": -959630
+      "foreign5Day": -4254704,
+      "investmentTrust5Day": 24311,
+      "dealer5Day": 214759,
+      "total5Day": -4015634
     }
   },
   "持股分散": {
@@ -4442,11 +4442,11 @@
   },
   "同產業比較": {
     "industryName": "其他",
-    "peerCount": 2,
+    "peerCount": 1,
     "rank20Day": 1,
     "rankDaily": 1,
-    "averageReturn20": 2.99387473924946,
-    "averageChangePercent": 2.020681016694545,
+    "averageReturn20": 8.374384236453201,
+    "averageChangePercent": 2.803738317757009,
     "leaders": [
       {
         "code": "5871",
@@ -4460,9 +4460,9 @@
         "return60": 6.796116504854369,
         "volume": 7943466,
         "turnover": null,
-        "foreign5Day": -488326,
-        "investmentTrust5Day": -217991,
-        "total5Day": -959630,
+        "foreign5Day": -4254704,
+        "investmentTrust5Day": 24311,
+        "total5Day": -4015634,
         "largeHolderRatio": 66.95,
         "retailRatio": 11.8,
         "shortToMarginRatio": 0.5057803468208093,
@@ -4511,137 +4511,9 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
-      },
-      {
-        "code": "2614",
-        "name": "東森",
-        "industryName": "其他",
-        "priceDate": "2026-04-13",
-        "close": 20.450000762939453,
-        "change": 0.25,
-        "changePercent": 1.2376237156320813,
-        "return20": -2.386634757954281,
-        "return60": -5.9770079864852725,
-        "volume": 618637,
-        "turnover": null,
-        "foreign5Day": 1127000,
-        "investmentTrust5Day": 0,
-        "total5Day": 1135305,
-        "largeHolderRatio": 47.18,
-        "retailRatio": 23.74,
-        "shortToMarginRatio": 0.015605493133583021,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          21,
-          20.799999237060547,
-          20.950000762939453,
-          20.899999618530273,
-          20.350000381469727,
-          20.25,
-          20.049999237060547,
-          20.5,
-          20.75,
-          20.5,
-          21.049999237060547,
-          20.950000762939453,
-          20.649999618530273,
-          20.850000381469727,
-          20.450000762939453,
-          20.5,
-          20.899999618530273,
-          20.850000381469727,
-          20.200000762939453,
-          20.450000762939453
-        ],
-        "technicalSignals": [
-          {
-            "key": "macd-bearish-cross",
-            "title": "MACD 轉弱",
-            "tone": "down",
-            "importance": 3,
-            "description": "東森 MACD 線跌破訊號線，短線修正壓力升高。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "MACD 轉弱"
-        ],
-        "topSignalTitle": "MACD 轉弱",
-        "topSignalTone": "down",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
       }
     ],
     "laggards": [
-      {
-        "code": "2614",
-        "name": "東森",
-        "industryName": "其他",
-        "priceDate": "2026-04-13",
-        "close": 20.450000762939453,
-        "change": 0.25,
-        "changePercent": 1.2376237156320813,
-        "return20": -2.386634757954281,
-        "return60": -5.9770079864852725,
-        "volume": 618637,
-        "turnover": null,
-        "foreign5Day": 1127000,
-        "investmentTrust5Day": 0,
-        "total5Day": 1135305,
-        "largeHolderRatio": 47.18,
-        "retailRatio": 23.74,
-        "shortToMarginRatio": 0.015605493133583021,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          21,
-          20.799999237060547,
-          20.950000762939453,
-          20.899999618530273,
-          20.350000381469727,
-          20.25,
-          20.049999237060547,
-          20.5,
-          20.75,
-          20.5,
-          21.049999237060547,
-          20.950000762939453,
-          20.649999618530273,
-          20.850000381469727,
-          20.450000762939453,
-          20.5,
-          20.899999618530273,
-          20.850000381469727,
-          20.200000762939453,
-          20.450000762939453
-        ],
-        "technicalSignals": [
-          {
-            "key": "macd-bearish-cross",
-            "title": "MACD 轉弱",
-            "tone": "down",
-            "importance": 3,
-            "description": "東森 MACD 線跌破訊號線，短線修正壓力升高。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "MACD 轉弱"
-        ],
-        "topSignalTitle": "MACD 轉弱",
-        "topSignalTone": "down",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
       {
         "code": "5871",
         "name": "中租-KY",
@@ -4654,9 +4526,9 @@
         "return60": 6.796116504854369,
         "volume": 7943466,
         "turnover": null,
-        "foreign5Day": -488326,
-        "investmentTrust5Day": -217991,
-        "total5Day": -959630,
+        "foreign5Day": -4254704,
+        "investmentTrust5Day": 24311,
+        "total5Day": -4015634,
         "largeHolderRatio": 66.95,
         "retailRatio": 11.8,
         "shortToMarginRatio": 0.5057803468208093,
@@ -4708,8 +4580,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 2.99%，在同族群相對偏強。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "目前追蹤池中同產業可比較標的有限，先以本身技術面與籌碼面為主。"
     ]
   }
 }

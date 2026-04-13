@@ -3,7 +3,7 @@
   "name": "崇越",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:26.838Z",
+  "generatedAt": "2026-04-13T08:59:32.261Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 20.15%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 1,039,186 股。"
+    "最近 5 個交易日三大法人合計買超 2,121,123 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4194,17 +4194,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": -29999,
-        "investmentTrust": 0,
-        "dealer": 138000,
-        "total": 108001
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": 451640,
-        "investmentTrust": -5000,
-        "dealer": 24724,
-        "total": 471364
+        "foreign": 735428,
+        "investmentTrust": -2349,
+        "dealer": 114091,
+        "total": 847170
       },
       {
         "date": "2026-04-08",
@@ -4221,18 +4214,25 @@
         "total": 709989
       },
       {
-        "date": "2026-04-05",
-        "foreign": -112010,
-        "investmentTrust": 51000,
-        "dealer": -3000,
-        "total": -64010
+        "date": "2026-04-02",
+        "foreign": 404015,
+        "investmentTrust": 153000,
+        "dealer": 17863,
+        "total": 574878
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 155878,
+        "investmentTrust": 0,
+        "dealer": 19366,
+        "total": 175244
       }
     ],
     "summary": {
-      "foreign5Day": 767552,
-      "investmentTrust5Day": 30156,
-      "dealer5Day": 241478,
-      "total5Day": 1039186
+      "foreign5Day": 1753242,
+      "investmentTrust5Day": 134807,
+      "dealer5Day": 233074,
+      "total5Day": 2121123
     }
   },
   "持股分散": {
@@ -4452,76 +4452,12 @@
   },
   "同產業比較": {
     "industryName": "電子通路業",
-    "peerCount": 3,
-    "rank20Day": 2,
-    "rankDaily": 3,
-    "averageReturn20": 12.986808365857387,
-    "averageChangePercent": 0.46932647169279673,
+    "peerCount": 2,
+    "rank20Day": 1,
+    "rankDaily": 2,
+    "averageReturn20": 9.3192484450868,
+    "averageChangePercent": 0.3672913061028139,
     "leaders": [
-      {
-        "code": "3028",
-        "name": "增你強",
-        "industryName": "電子通路業",
-        "priceDate": "2026-04-13",
-        "close": 59.79999923706055,
-        "change": 0.3999977111816406,
-        "changePercent": 0.6733968028727624,
-        "return20": 20.321928207398564,
-        "return60": 51.776641931809095,
-        "volume": 4689347,
-        "turnover": null,
-        "foreign5Day": 2558965,
-        "investmentTrust5Day": 0,
-        "total5Day": 2721300,
-        "largeHolderRatio": 46.88,
-        "retailRatio": 24.71,
-        "shortToMarginRatio": 0.06828269033799932,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          50.599998474121094,
-          51.5,
-          56.599998474121094,
-          58.900001525878906,
-          56.5,
-          54.20000076293945,
-          53.79999923706055,
-          53.20000076293945,
-          54.400001525878906,
-          53.79999923706055,
-          53.29999923706055,
-          50.900001525878906,
-          48.599998474121094,
-          50.400001525878906,
-          50.20000076293945,
-          52.79999923706055,
-          54.79999923706055,
-          60.20000076293945,
-          59.400001525878906,
-          59.79999923706055
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "增你強 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
       {
         "code": "5434",
         "name": "崇越",
@@ -4534,9 +4470,9 @@
         "return60": 33.61204013377927,
         "volume": 1779058,
         "turnover": null,
-        "foreign5Day": 767552,
-        "investmentTrust5Day": 30156,
-        "total5Day": 1039186,
+        "foreign5Day": 1753242,
+        "investmentTrust5Day": 134807,
+        "total5Day": 2121123,
         "largeHolderRatio": 54.559999999999995,
         "retailRatio": 14.66,
         "shortToMarginRatio": 2.5899280575539567,
@@ -4598,9 +4534,9 @@
         "return60": 63.44086021505376,
         "volume": 4815142,
         "turnover": null,
-        "foreign5Day": -456383,
-        "investmentTrust5Day": 1156772,
-        "total5Day": -7175,
+        "foreign5Day": 874181,
+        "investmentTrust5Day": 222846,
+        "total5Day": 1599783,
         "largeHolderRatio": 90.1,
         "retailRatio": 2.87,
         "shortToMarginRatio": 31.848958333333332,
@@ -4664,9 +4600,9 @@
         "return60": 63.44086021505376,
         "volume": 4815142,
         "turnover": null,
-        "foreign5Day": -456383,
-        "investmentTrust5Day": 1156772,
-        "total5Day": -7175,
+        "foreign5Day": 874181,
+        "investmentTrust5Day": 222846,
+        "total5Day": 1599783,
         "largeHolderRatio": 90.1,
         "retailRatio": 2.87,
         "shortToMarginRatio": 31.848958333333332,
@@ -4728,9 +4664,9 @@
         "return60": 33.61204013377927,
         "volume": 1779058,
         "turnover": null,
-        "foreign5Day": 767552,
-        "investmentTrust5Day": 30156,
-        "total5Day": 1039186,
+        "foreign5Day": 1753242,
+        "investmentTrust5Day": 134807,
+        "total5Day": 2121123,
         "largeHolderRatio": 54.559999999999995,
         "retailRatio": 14.66,
         "shortToMarginRatio": 2.5899280575539567,
@@ -4779,75 +4715,11 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
-      },
-      {
-        "code": "3028",
-        "name": "增你強",
-        "industryName": "電子通路業",
-        "priceDate": "2026-04-13",
-        "close": 59.79999923706055,
-        "change": 0.3999977111816406,
-        "changePercent": 0.6733968028727624,
-        "return20": 20.321928207398564,
-        "return60": 51.776641931809095,
-        "volume": 4689347,
-        "turnover": null,
-        "foreign5Day": 2558965,
-        "investmentTrust5Day": 0,
-        "total5Day": 2721300,
-        "largeHolderRatio": 46.88,
-        "retailRatio": 24.71,
-        "shortToMarginRatio": 0.06828269033799932,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          50.599998474121094,
-          51.5,
-          56.599998474121094,
-          58.900001525878906,
-          56.5,
-          54.20000076293945,
-          53.79999923706055,
-          53.20000076293945,
-          54.400001525878906,
-          53.79999923706055,
-          53.29999923706055,
-          50.900001525878906,
-          48.599998474121094,
-          50.400001525878906,
-          50.20000076293945,
-          52.79999923706055,
-          54.79999923706055,
-          60.20000076293945,
-          59.400001525878906,
-          59.79999923706055
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "增你強 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 12.99%，在同族群相對偏強。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "近 20 日報酬優於同產業平均 9.32%，在同族群相對偏強。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

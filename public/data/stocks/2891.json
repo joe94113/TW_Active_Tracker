@@ -3,7 +3,7 @@
   "name": "中信金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:22.452Z",
+  "generatedAt": "2026-04-13T08:59:24.905Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 3.90%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 1,155,999 股。"
+    "最近 5 個交易日三大法人合計買超 29,405,621 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4180,17 +4180,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": -9926000,
-        "investmentTrust": 9000,
-        "dealer": 264000,
-        "total": -9653000
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -19146548,
-        "investmentTrust": -510742,
-        "dealer": -1181011,
-        "total": -20838301
+        "foreign": -21138307,
+        "investmentTrust": 720997,
+        "dealer": -229452,
+        "total": -20646762
       },
       {
         "date": "2026-04-08",
@@ -4207,18 +4200,25 @@
         "total": 5354867
       },
       {
-        "date": "2026-04-05",
-        "foreign": 4849000,
-        "investmentTrust": 4422000,
-        "dealer": 11000,
-        "total": 9282000
+        "date": "2026-04-02",
+        "foreign": 8044540,
+        "investmentTrust": 1957893,
+        "dealer": 2048578,
+        "total": 12051011
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 10894932,
+        "investmentTrust": 4600972,
+        "dealer": 140168,
+        "total": 15636072
       }
     ],
     "summary": {
-      "foreign5Day": -17571512,
-      "investmentTrust5Day": 18566861,
-      "dealer5Day": 160650,
-      "total5Day": 1155999
+      "foreign5Day": 4453201,
+      "investmentTrust5Day": 21926465,
+      "dealer5Day": 3025955,
+      "total5Day": 29405621
     }
   },
   "持股分散": {

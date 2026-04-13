@@ -3,7 +3,7 @@
   "name": "富邦金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:21.893Z",
+  "generatedAt": "2026-04-13T08:59:24.174Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -3.02%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 14,750,207 股。"
+    "最近 5 個交易日三大法人合計賣超 11,386,674 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4180,17 +4180,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": -5656000,
-        "investmentTrust": -226000,
-        "dealer": -494000,
-        "total": -6376000
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": -7629164,
-        "investmentTrust": 1352614,
-        "dealer": -112588,
-        "total": -6389138
+        "foreign": -10071328,
+        "investmentTrust": 95570,
+        "dealer": 204557,
+        "total": -9771201
       },
       {
         "date": "2026-04-08",
@@ -4207,18 +4200,25 @@
         "total": -4214736
       },
       {
-        "date": "2026-04-05",
-        "foreign": 1879000,
-        "investmentTrust": 0,
-        "dealer": 33000,
-        "total": 1912000
+        "date": "2026-04-02",
+        "foreign": -945499,
+        "investmentTrust": 1689663,
+        "dealer": -163341,
+        "total": 580823
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -1005403,
+        "investmentTrust": 1948877,
+        "dealer": 757299,
+        "total": 1700773
       }
     ],
     "summary": {
-      "foreign5Day": -19083702,
-      "investmentTrust5Day": 4811147,
-      "dealer5Day": -477652,
-      "total5Day": -14750207
+      "foreign5Day": -19699768,
+      "investmentTrust5Day": 7418643,
+      "dealer5Day": 894451,
+      "total5Day": -11386674
     }
   },
   "持股分散": {

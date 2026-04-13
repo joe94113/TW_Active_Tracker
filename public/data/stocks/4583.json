@@ -3,7 +3,7 @@
   "name": "台灣精銳",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:25.794Z",
+  "generatedAt": "2026-04-13T08:59:30.284Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 3.43%，可用來觀察波段資金是否持續留在主線。",
-    "最近 3 個交易日三大法人合計賣超 1,718 股。"
+    "最近 5 個交易日三大法人合計賣超 19,017 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -3852,11 +3852,11 @@
   "法人買賣": {
     "days": [
       {
-        "date": "2026-04-09",
-        "foreign": -13684,
-        "investmentTrust": -19000,
-        "dealer": -378,
-        "total": -33062
+        "date": "2026-04-10",
+        "foreign": 3877,
+        "investmentTrust": -14000,
+        "dealer": -525,
+        "total": -10648
       },
       {
         "date": "2026-04-08",
@@ -3871,13 +3871,27 @@
         "investmentTrust": 0,
         "dealer": 465,
         "total": 2809
+      },
+      {
+        "date": "2026-04-02",
+        "foreign": -21038,
+        "investmentTrust": 0,
+        "dealer": -364,
+        "total": -21402
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": -6492,
+        "investmentTrust": -15000,
+        "dealer": 3181,
+        "total": -18311
       }
     ],
     "summary": {
-      "foreign5Day": 10621,
-      "investmentTrust5Day": -19000,
-      "dealer5Day": 6661,
-      "total5Day": -1718
+      "foreign5Day": 652,
+      "investmentTrust5Day": -29000,
+      "dealer5Day": 9331,
+      "total5Day": -19017
     }
   },
   "持股分散": {
@@ -4087,11 +4101,11 @@
   },
   "同產業比較": {
     "industryName": "電機機械",
-    "peerCount": 7,
+    "peerCount": 6,
     "rank20Day": 4,
-    "rankDaily": 5,
-    "averageReturn20": 10.975294422418672,
-    "averageChangePercent": 0.380269546758592,
+    "rankDaily": 4,
+    "averageReturn20": 15.272775268567806,
+    "averageChangePercent": 0.24822604185103314,
     "leaders": [
       {
         "code": "3167",
@@ -4105,9 +4119,9 @@
         "return60": 175.33632286995515,
         "volume": 1442389,
         "turnover": null,
-        "foreign5Day": 184413,
-        "investmentTrust5Day": 96000,
-        "total5Day": 331832,
+        "foreign5Day": 1004869,
+        "investmentTrust5Day": 2461000,
+        "total5Day": 3541677,
         "largeHolderRatio": 64.23,
         "retailRatio": 10.67,
         "shortToMarginRatio": 7.181403071814032,
@@ -4177,9 +4191,9 @@
         "return60": 89.44636678200692,
         "volume": 4043697,
         "turnover": null,
-        "foreign5Day": 157642,
-        "investmentTrust5Day": -152001,
-        "total5Day": 134779,
+        "foreign5Day": -643391,
+        "investmentTrust5Day": 76998,
+        "total5Day": -498458,
         "largeHolderRatio": 54.22,
         "retailRatio": 10.27,
         "shortToMarginRatio": 4.452951843642958,
@@ -4241,9 +4255,9 @@
         "return60": 13.825363825363826,
         "volume": 542491,
         "turnover": null,
-        "foreign5Day": 693592,
-        "investmentTrust5Day": 183256,
-        "total5Day": 930968,
+        "foreign5Day": -112178,
+        "investmentTrust5Day": -71575,
+        "total5Day": 46048,
         "largeHolderRatio": 72.19,
         "retailRatio": 1.69,
         "shortToMarginRatio": null,
@@ -4305,9 +4319,9 @@
         "return60": 1.687116564417178,
         "volume": 174970,
         "turnover": null,
-        "foreign5Day": 10621,
-        "investmentTrust5Day": -19000,
-        "total5Day": -1718,
+        "foreign5Day": 652,
+        "investmentTrust5Day": -29000,
+        "total5Day": -19017,
         "largeHolderRatio": 86.22,
         "retailRatio": 4.6,
         "shortToMarginRatio": 0.7766990291262136,
@@ -4369,9 +4383,9 @@
         "return60": 2.6315860956525325,
         "volume": 70640,
         "turnover": null,
-        "foreign5Day": -16000,
+        "foreign5Day": -48000,
         "investmentTrust5Day": 0,
-        "total5Day": -13000,
+        "total5Day": -25000,
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4433,9 +4447,9 @@
         "return60": 10.854816824966079,
         "volume": 1442495,
         "turnover": null,
-        "foreign5Day": -485880,
-        "investmentTrust5Day": -47792,
-        "total5Day": -458146,
+        "foreign5Day": 1123894,
+        "investmentTrust5Day": -349192,
+        "total5Day": 926219,
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4484,137 +4498,9 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
-      },
-      {
-        "code": "1504",
-        "name": "東元",
-        "industryName": "電機機械",
-        "priceDate": "2026-04-13",
-        "close": 60.400001525878906,
-        "change": 0.7000007629394531,
-        "changePercent": 1.1725305762039444,
-        "return20": -14.809590654476136,
-        "return60": -27.837510480163303,
-        "volume": 7385275,
-        "turnover": null,
-        "foreign5Day": -1055585,
-        "investmentTrust5Day": -725354,
-        "total5Day": -1742601,
-        "largeHolderRatio": 74.16,
-        "retailRatio": 12.21,
-        "shortToMarginRatio": 0.20330368487928843,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          69.9000015258789,
-          69.30000305175781,
-          70.30000305175781,
-          71.0999984741211,
-          68.30000305175781,
-          67.19999694824219,
-          64.80000305175781,
-          64.5999984741211,
-          66.30000305175781,
-          65.30000305175781,
-          63.79999923706055,
-          62.70000076293945,
-          60,
-          62.29999923706055,
-          60.70000076293945,
-          58.70000076293945,
-          60.400001525878906,
-          59.5,
-          59.70000076293945,
-          60.400001525878906
-        ],
-        "technicalSignals": [
-          {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "東元 MACD 線上穿訊號線，短線動能重新偏多。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "MACD 翻正"
-        ],
-        "topSignalTitle": "MACD 翻正",
-        "topSignalTone": "up",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
       }
     ],
     "laggards": [
-      {
-        "code": "1504",
-        "name": "東元",
-        "industryName": "電機機械",
-        "priceDate": "2026-04-13",
-        "close": 60.400001525878906,
-        "change": 0.7000007629394531,
-        "changePercent": 1.1725305762039444,
-        "return20": -14.809590654476136,
-        "return60": -27.837510480163303,
-        "volume": 7385275,
-        "turnover": null,
-        "foreign5Day": -1055585,
-        "investmentTrust5Day": -725354,
-        "total5Day": -1742601,
-        "largeHolderRatio": 74.16,
-        "retailRatio": 12.21,
-        "shortToMarginRatio": 0.20330368487928843,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          69.9000015258789,
-          69.30000305175781,
-          70.30000305175781,
-          71.0999984741211,
-          68.30000305175781,
-          67.19999694824219,
-          64.80000305175781,
-          64.5999984741211,
-          66.30000305175781,
-          65.30000305175781,
-          63.79999923706055,
-          62.70000076293945,
-          60,
-          62.29999923706055,
-          60.70000076293945,
-          58.70000076293945,
-          60.400001525878906,
-          59.5,
-          59.70000076293945,
-          60.400001525878906
-        ],
-        "technicalSignals": [
-          {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "東元 MACD 線上穿訊號線，短線動能重新偏多。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "MACD 翻正"
-        ],
-        "topSignalTitle": "MACD 翻正",
-        "topSignalTone": "up",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
-      },
       {
         "code": "1519",
         "name": "華城",
@@ -4627,9 +4513,9 @@
         "return60": 10.854816824966079,
         "volume": 1442495,
         "turnover": null,
-        "foreign5Day": -485880,
-        "investmentTrust5Day": -47792,
-        "total5Day": -458146,
+        "foreign5Day": 1123894,
+        "investmentTrust5Day": -349192,
+        "total5Day": 926219,
         "largeHolderRatio": 76.78,
         "retailRatio": 9.629999999999999,
         "shortToMarginRatio": null,
@@ -4691,9 +4577,9 @@
         "return60": 2.6315860956525325,
         "volume": 70640,
         "turnover": null,
-        "foreign5Day": -16000,
+        "foreign5Day": -48000,
         "investmentTrust5Day": 0,
-        "total5Day": -13000,
+        "total5Day": -25000,
         "largeHolderRatio": 86.39999999999999,
         "retailRatio": 3.4699999999999998,
         "shortToMarginRatio": null,
@@ -4742,11 +4628,75 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
+      },
+      {
+        "code": "4583",
+        "name": "台灣精銳",
+        "industryName": "電機機械",
+        "priceDate": "2026-04-13",
+        "close": 663,
+        "change": -5,
+        "changePercent": -0.7485029940119761,
+        "return20": 3.43213728549142,
+        "return60": 1.687116564417178,
+        "volume": 174970,
+        "turnover": null,
+        "foreign5Day": 652,
+        "investmentTrust5Day": -29000,
+        "total5Day": -19017,
+        "largeHolderRatio": 86.22,
+        "retailRatio": 4.6,
+        "shortToMarginRatio": 0.7766990291262136,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          631,
+          629,
+          629,
+          639,
+          640,
+          642,
+          626,
+          638,
+          659,
+          679,
+          667,
+          648,
+          624,
+          642,
+          632,
+          649,
+          678,
+          664,
+          668,
+          663
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "台灣精銳 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 10.98%，短線強度落後族群。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "近 20 日報酬低於同產業平均 15.27%，短線強度落後族群。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }

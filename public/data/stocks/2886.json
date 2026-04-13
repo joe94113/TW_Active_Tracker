@@ -3,7 +3,7 @@
   "name": "兆豐金",
   "kind": "stock",
   "priceDate": "2026-04-13",
-  "generatedAt": "2026-04-13T08:57:22.269Z",
+  "generatedAt": "2026-04-13T08:59:24.626Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 1.29%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 40,164,192 股。"
+    "最近 5 個交易日三大法人合計買超 34,815,595 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4180,17 +4180,10 @@
     "days": [
       {
         "date": "2026-04-10",
-        "foreign": 3239000,
-        "investmentTrust": 5000,
-        "dealer": -87000,
-        "total": 3157000
-      },
-      {
-        "date": "2026-04-09",
-        "foreign": 18563917,
-        "investmentTrust": 2866462,
-        "dealer": -331000,
-        "total": 21099379
+        "foreign": -914972,
+        "investmentTrust": -138647,
+        "dealer": -57000,
+        "total": -1110619
       },
       {
         "date": "2026-04-08",
@@ -4207,18 +4200,25 @@
         "total": 11753452
       },
       {
-        "date": "2026-04-05",
-        "foreign": -625089,
-        "investmentTrust": 231000,
-        "dealer": 36000,
-        "total": -358089
+        "date": "2026-04-02",
+        "foreign": 7200918,
+        "investmentTrust": 798142,
+        "dealer": 2513865,
+        "total": 10512925
+      },
+      {
+        "date": "2026-04-01",
+        "foreign": 7451807,
+        "investmentTrust": 771657,
+        "dealer": 923923,
+        "total": 9147387
       }
     ],
     "summary": {
-      "foreign5Day": 31134248,
-      "investmentTrust5Day": 7784177,
-      "dealer5Day": 1245767,
-      "total5Day": 40164192
+      "foreign5Day": 23694173,
+      "investmentTrust5Day": 6112867,
+      "dealer5Day": 5008555,
+      "total5Day": 34815595
     }
   },
   "持股分散": {
