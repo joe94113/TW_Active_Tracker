@@ -3,7 +3,7 @@
   "name": "頎邦",
   "kind": "stock",
   "priceDate": "2026-04-14",
-  "generatedAt": "2026-04-14T10:29:56.007Z",
+  "generatedAt": "2026-04-14T15:23:30.852Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4276,11 +4276,20 @@
     }
   },
   "主動ETF曝光": {
-    "count": 1,
+    "count": 2,
     "averageWeight": 0.69,
-    "totalWeight": 0.69,
+    "totalWeight": 1.38,
     "latestDisclosureDate": "2026-04-14",
     "items": [
+      {
+        "etfCode": "00981A",
+        "etfName": "主動統一台股增長",
+        "providerLabel": "統一投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 0.69,
+        "shares": 7884000,
+        "rank": 25
+      },
       {
         "etfCode": "00984A",
         "etfName": "主動安聯台灣高息",

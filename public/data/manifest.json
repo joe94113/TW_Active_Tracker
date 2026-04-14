@@ -1,8 +1,8 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-14T10:29:21.728Z",
+  "generatedAt": "2026-04-14T15:22:55.746Z",
   "generatedAtLocalDate": "2026-04-14",
-  "generatedAtLocalTime": "18:29:21",
+  "generatedAtLocalTime": "23:22:55",
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -35,12 +35,14 @@
       "code": "00981A",
       "name": "主動統一台股增長",
       "fullName": "主動統一台股增長主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "unity",
       "providerLabel": "統一投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A",
-      "trackingStatus": "待串接",
-      "providerConfig": {}
+      "sourceName": "統一投信 ETF 官方資料頁",
+      "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=49YTW",
+      "trackingStatus": "已串接",
+      "providerConfig": {
+        "fundCode": "49YTW"
+      }
     },
     {
       "code": "00983A",
@@ -92,22 +94,22 @@
       "code": "00982D",
       "name": "主動富邦動態入息",
       "fullName": "主動富邦動態入息主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "fubon",
       "providerLabel": "富邦投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D",
-      "trackingStatus": "待串接",
+      "sourceName": "富邦投信 ETF 官方資產頁",
+      "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00982D",
+      "trackingStatus": "已串接",
       "providerConfig": {}
     },
     {
       "code": "00983D",
       "name": "主動富邦複合收益",
       "fullName": "主動富邦複合收益主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "fubon",
       "providerLabel": "富邦投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D",
-      "trackingStatus": "待串接",
+      "sourceName": "富邦投信 ETF 官方資產頁",
+      "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00983D",
+      "trackingStatus": "已串接",
       "providerConfig": {}
     },
     {
@@ -127,12 +129,14 @@
       "code": "00988A",
       "name": "主動統一全球創新",
       "fullName": "主動統一全球創新主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "unity",
       "providerLabel": "統一投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A",
-      "trackingStatus": "待串接",
-      "providerConfig": {}
+      "sourceName": "統一投信 ETF 官方資料頁",
+      "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=61YTW",
+      "trackingStatus": "已串接",
+      "providerConfig": {
+        "fundCode": "61YTW"
+      }
     },
     {
       "code": "00991A",
@@ -328,22 +332,24 @@
       "code": "00981A",
       "name": "主動統一台股增長",
       "fullName": "主動統一台股增長主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "unity",
       "providerLabel": "統一投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market",
-      "disclosureDate": null,
-      "nav": null,
-      "aum": null,
-      "holdingsCount": 0,
-      "trackingMessage": "官方持股來源待串接",
+      "sourceName": "統一投信 ETF 官方資料頁",
+      "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=49YTW",
+      "trackingStatus": "已串接",
+      "detailAvailability": "full",
+      "disclosureDate": "2026-04-14",
+      "nav": 23.54,
+      "aum": 129604959884,
+      "holdingsCount": 52,
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "addedCount": 0,
+        "comparisonReady": false,
+        "addedCount": 52,
         "removedCount": 0,
         "increasedCount": 0,
-        "decreasedCount": 0
+        "decreasedCount": 0,
+        "totalChangeCount": 52
       }
     },
     {
@@ -444,44 +450,48 @@
       "code": "00982D",
       "name": "主動富邦動態入息",
       "fullName": "主動富邦動態入息主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "fubon",
       "providerLabel": "富邦投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market",
-      "disclosureDate": null,
-      "nav": null,
-      "aum": null,
-      "holdingsCount": 0,
-      "trackingMessage": "官方持股來源待串接",
+      "sourceName": "富邦投信 ETF 官方資產頁",
+      "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00982D",
+      "trackingStatus": "已串接",
+      "detailAvailability": "full",
+      "disclosureDate": "2026-04-13",
+      "nav": 10.1131,
+      "aum": 917553105,
+      "holdingsCount": 65,
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "addedCount": 0,
+        "comparisonReady": false,
+        "addedCount": 65,
         "removedCount": 0,
         "increasedCount": 0,
-        "decreasedCount": 0
+        "decreasedCount": 0,
+        "totalChangeCount": 65
       }
     },
     {
       "code": "00983D",
       "name": "主動富邦複合收益",
       "fullName": "主動富邦複合收益主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "fubon",
       "providerLabel": "富邦投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market",
-      "disclosureDate": null,
-      "nav": null,
-      "aum": null,
-      "holdingsCount": 0,
-      "trackingMessage": "官方持股來源待串接",
+      "sourceName": "富邦投信 ETF 官方資產頁",
+      "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00983D",
+      "trackingStatus": "已串接",
+      "detailAvailability": "full",
+      "disclosureDate": "2026-04-13",
+      "nav": 10.283,
+      "aum": 1040605569,
+      "holdingsCount": 81,
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "addedCount": 0,
+        "comparisonReady": false,
+        "addedCount": 81,
         "removedCount": 0,
         "increasedCount": 0,
-        "decreasedCount": 0
+        "decreasedCount": 0,
+        "totalChangeCount": 81
       }
     },
     {
@@ -512,22 +522,24 @@
       "code": "00988A",
       "name": "主動統一全球創新",
       "fullName": "主動統一全球創新主動式交易所交易基金",
-      "provider": "pending",
+      "provider": "unity",
       "providerLabel": "統一投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market",
-      "disclosureDate": null,
-      "nav": null,
-      "aum": null,
-      "holdingsCount": 0,
-      "trackingMessage": "官方持股來源待串接",
+      "sourceName": "統一投信 ETF 官方資料頁",
+      "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=61YTW",
+      "trackingStatus": "已串接",
+      "detailAvailability": "full",
+      "disclosureDate": "2026-04-14",
+      "nav": 14.99,
+      "aum": 17333892578,
+      "holdingsCount": 46,
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "addedCount": 0,
+        "comparisonReady": false,
+        "addedCount": 46,
         "removedCount": 0,
         "increasedCount": 0,
-        "decreasedCount": 0
+        "decreasedCount": 0,
+        "totalChangeCount": 46
       }
     },
     {
@@ -540,18 +552,18 @@
       "sourceUrl": "https://www.fhtrust.com.tw/ETF/etf_detail/ETF23",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-10",
+      "disclosureDate": "2026-04-14",
       "nav": null,
       "aum": null,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "comparisonReady": false,
-        "addedCount": 10,
-        "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 10
+        "comparisonReady": true,
+        "addedCount": 1,
+        "removedCount": 1,
+        "increasedCount": 6,
+        "decreasedCount": 3,
+        "totalChangeCount": 11
       }
     },
     {
@@ -820,50 +832,9 @@
     }
   ],
   "latestDisclosureDate": "2026-04-14",
-  "connectedCount": 19,
-  "stockDetailCount": 228,
-  "pendingEtfs": [
-    {
-      "code": "00981A",
-      "name": "主動統一台股增長",
-      "fullName": "主動統一台股增長主動式交易所交易基金",
-      "providerLabel": "統一投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market"
-    },
-    {
-      "code": "00982D",
-      "name": "主動富邦動態入息",
-      "fullName": "主動富邦動態入息主動式交易所交易基金",
-      "providerLabel": "富邦投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market"
-    },
-    {
-      "code": "00983D",
-      "name": "主動富邦複合收益",
-      "fullName": "主動富邦複合收益主動式交易所交易基金",
-      "providerLabel": "富邦投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market"
-    },
-    {
-      "code": "00988A",
-      "name": "主動統一全球創新",
-      "fullName": "主動統一全球創新主動式交易所交易基金",
-      "providerLabel": "統一投信",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A",
-      "trackingStatus": "待串接",
-      "detailAvailability": "market"
-    }
-  ],
+  "connectedCount": 23,
+  "stockDetailCount": 236,
+  "pendingEtfs": [],
   "failedEtfs": [],
   "sources": [
     {
@@ -878,8 +849,8 @@
     },
     {
       "code": "00981A",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A"
+      "sourceName": "統一投信 ETF 官方資料頁",
+      "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=49YTW"
     },
     {
       "code": "00983A",
@@ -903,13 +874,13 @@
     },
     {
       "code": "00982D",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D"
+      "sourceName": "富邦投信 ETF 官方資產頁",
+      "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00982D"
     },
     {
       "code": "00983D",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D"
+      "sourceName": "富邦投信 ETF 官方資產頁",
+      "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00983D"
     },
     {
       "code": "00989A",
@@ -918,8 +889,8 @@
     },
     {
       "code": "00988A",
-      "sourceName": "TWSE ETF 商品頁（官方持股來源待串接）",
-      "sourceUrl": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A"
+      "sourceName": "統一投信 ETF 官方資料頁",
+      "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=61YTW"
     },
     {
       "code": "00991A",

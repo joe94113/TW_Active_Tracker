@@ -3,7 +3,7 @@
   "name": "中華",
   "kind": "stock",
   "priceDate": "2026-04-14",
-  "generatedAt": "2026-04-14T10:29:37.753Z",
+  "generatedAt": "2026-04-14T15:23:12.610Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -3.87%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 1,407,318 股。"
+    "最近 5 個交易日三大法人合計賣超 2,028,010 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4222,17 +4222,17 @@
       },
       {
         "date": "2026-04-08",
-        "foreign": 243010,
-        "investmentTrust": -42651,
-        "dealer": -149667,
-        "total": 50692
+        "foreign": -116000,
+        "investmentTrust": -451000,
+        "dealer": -3000,
+        "total": -570000
       }
     ],
     "summary": {
-      "foreign5Day": -1104797,
-      "investmentTrust5Day": -158110,
-      "dealer5Day": -144411,
-      "total5Day": -1407318
+      "foreign5Day": -1463807,
+      "investmentTrust5Day": -566459,
+      "dealer5Day": 2256,
+      "total5Day": -2028010
     }
   },
   "持股分散": {
@@ -4441,11 +4441,11 @@
   },
   "同產業比較": {
     "industryName": "汽車工業",
-    "peerCount": 2,
+    "peerCount": 3,
     "rank20Day": 2,
     "rankDaily": 2,
-    "averageReturn20": 4.853503040865885,
-    "averageChangePercent": -0.09140863368235719,
+    "averageReturn20": -0.1442863442372714,
+    "averageChangePercent": -0.6136614643155297,
     "leaders": [
       {
         "code": "4551",
@@ -4459,9 +4459,9 @@
         "return60": 17.94871794871795,
         "volume": 573317,
         "turnover": null,
-        "foreign5Day": -27962,
-        "investmentTrust5Day": -1000,
-        "total5Day": 44180,
+        "foreign5Day": 197038,
+        "investmentTrust5Day": -41000,
+        "total5Day": 205277,
         "largeHolderRatio": 79.36,
         "retailRatio": 6.94,
         "shortToMarginRatio": 0.13020833333333331,
@@ -4523,9 +4523,9 @@
         "return60": -6.185570861900685,
         "volume": 836472,
         "turnover": null,
-        "foreign5Day": -1104797,
-        "investmentTrust5Day": -158110,
-        "total5Day": -1407318,
+        "foreign5Day": -1463807,
+        "investmentTrust5Day": -566459,
+        "total5Day": -2028010,
         "largeHolderRatio": 73.79,
         "retailRatio": 12.209999999999999,
         "shortToMarginRatio": null,
@@ -4574,9 +4574,137 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null
+      },
+      {
+        "code": "1319",
+        "name": "東陽",
+        "industryName": "汽車工業",
+        "priceDate": "2026-04-14",
+        "close": 77.0999984741211,
+        "change": -1.3000030517578125,
+        "changePercent": -1.658167125581875,
+        "return20": -10.139865114443582,
+        "return60": -18.92744509864342,
+        "volume": 4920701,
+        "turnover": null,
+        "foreign5Day": -3267907,
+        "investmentTrust5Day": -1963931,
+        "total5Day": -5411808,
+        "largeHolderRatio": 84.27000000000001,
+        "retailRatio": 6.960000000000001,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          85,
+          85.0999984741211,
+          83.9000015258789,
+          82,
+          83.0999984741211,
+          82,
+          82.19999694824219,
+          85.0999984741211,
+          84,
+          83.4000015258789,
+          82,
+          80.5999984741211,
+          82,
+          80.0999984741211,
+          80.0999984741211,
+          81.5,
+          80.0999984741211,
+          80.5,
+          78.4000015258789,
+          77.0999984741211
+        ],
+        "technicalSignals": [
+          {
+            "key": "rsi-oversold",
+            "title": "RSI 超賣",
+            "tone": "up",
+            "importance": 2,
+            "description": "東陽 RSI14 落到 30 以下偏低區，若量縮止穩可留意反彈。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "RSI 超賣"
+        ],
+        "topSignalTitle": "RSI 超賣",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
       }
     ],
     "laggards": [
+      {
+        "code": "1319",
+        "name": "東陽",
+        "industryName": "汽車工業",
+        "priceDate": "2026-04-14",
+        "close": 77.0999984741211,
+        "change": -1.3000030517578125,
+        "changePercent": -1.658167125581875,
+        "return20": -10.139865114443582,
+        "return60": -18.92744509864342,
+        "volume": 4920701,
+        "turnover": null,
+        "foreign5Day": -3267907,
+        "investmentTrust5Day": -1963931,
+        "total5Day": -5411808,
+        "largeHolderRatio": 84.27000000000001,
+        "retailRatio": 6.960000000000001,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          85,
+          85.0999984741211,
+          83.9000015258789,
+          82,
+          83.0999984741211,
+          82,
+          82.19999694824219,
+          85.0999984741211,
+          84,
+          83.4000015258789,
+          82,
+          80.5999984741211,
+          82,
+          80.0999984741211,
+          80.0999984741211,
+          81.5,
+          80.0999984741211,
+          80.5,
+          78.4000015258789,
+          77.0999984741211
+        ],
+        "technicalSignals": [
+          {
+            "key": "rsi-oversold",
+            "title": "RSI 超賣",
+            "tone": "up",
+            "importance": 2,
+            "description": "東陽 RSI14 落到 30 以下偏低區，若量縮止穩可留意反彈。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "RSI 超賣"
+        ],
+        "topSignalTitle": "RSI 超賣",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
       {
         "code": "2204",
         "name": "中華",
@@ -4589,9 +4717,9 @@
         "return60": -6.185570861900685,
         "volume": 836472,
         "turnover": null,
-        "foreign5Day": -1104797,
-        "investmentTrust5Day": -158110,
-        "total5Day": -1407318,
+        "foreign5Day": -1463807,
+        "investmentTrust5Day": -566459,
+        "total5Day": -2028010,
         "largeHolderRatio": 73.79,
         "retailRatio": 12.209999999999999,
         "shortToMarginRatio": null,
@@ -4653,9 +4781,9 @@
         "return60": 17.94871794871795,
         "volume": 573317,
         "turnover": null,
-        "foreign5Day": -27962,
-        "investmentTrust5Day": -1000,
-        "total5Day": 44180,
+        "foreign5Day": 197038,
+        "investmentTrust5Day": -41000,
+        "total5Day": 205277,
         "largeHolderRatio": 79.36,
         "retailRatio": 6.94,
         "shortToMarginRatio": 0.13020833333333331,
@@ -4707,8 +4835,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 4.85%，短線強度落後族群。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "近 20 日報酬低於同產業平均 -0.14%，短線強度落後族群。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

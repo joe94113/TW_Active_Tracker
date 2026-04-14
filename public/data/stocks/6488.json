@@ -1,9 +1,9 @@
 {
   "code": "6488",
-  "name": "環球晶圓",
+  "name": "環球晶",
   "kind": "stock",
   "priceDate": "2026-04-14",
-  "generatedAt": "2026-04-14T10:29:58.102Z",
+  "generatedAt": "2026-04-14T15:23:33.256Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3447,7 +3447,7 @@
       "title": "技術面中性",
       "tone": "normal",
       "importance": 1,
-      "description": "環球晶圓 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+      "description": "環球晶 目前沒有明確的新訊號，偏向等待下一段量價表態。"
     }
   ],
   "訊號摘要": [
@@ -3483,7 +3483,7 @@
     "macdHist": 8.334370711920515
   },
   "觀察摘要": [
-    "環球晶圓 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
+    "環球晶 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 15.84%，可用來觀察波段資金是否持續留在主線。",
@@ -4276,9 +4276,9 @@
     }
   },
   "主動ETF曝光": {
-    "count": 2,
-    "averageWeight": 1.435,
-    "totalWeight": 2.87,
+    "count": 3,
+    "averageWeight": 1.14,
+    "totalWeight": 3.42,
     "latestDisclosureDate": "2026-04-14",
     "items": [
       {
@@ -4298,6 +4298,15 @@
         "weight": 1.4,
         "shares": null,
         "rank": 19
+      },
+      {
+        "etfCode": "00981A",
+        "etfName": "主動統一台股增長",
+        "providerLabel": "統一投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 0.55,
+        "shares": 1414000,
+        "rank": 30
       }
     ]
   },

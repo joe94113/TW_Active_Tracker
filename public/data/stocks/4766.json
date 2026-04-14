@@ -3,7 +3,7 @@
   "name": "南寶",
   "kind": "stock",
   "priceDate": "2026-04-14",
-  "generatedAt": "2026-04-14T10:29:52.433Z",
+  "generatedAt": "2026-04-14T15:23:27.208Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 14.06%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 394,577 股。"
+    "最近 4 個交易日三大法人合計賣超 374,066 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4219,20 +4219,13 @@
         "investmentTrust": 0,
         "dealer": 9311,
         "total": 98311
-      },
-      {
-        "date": "2026-04-08",
-        "foreign": -29000,
-        "investmentTrust": 0,
-        "dealer": 8489,
-        "total": -20511
       }
     ],
     "summary": {
-      "foreign5Day": -192584,
+      "foreign5Day": -163584,
       "investmentTrust5Day": -48000,
-      "dealer5Day": -153993,
-      "total5Day": -394577
+      "dealer5Day": -162482,
+      "total5Day": -374066
     }
   },
   "持股分散": {
@@ -4443,11 +4436,11 @@
   },
   "同產業比較": {
     "industryName": "化學工業",
-    "peerCount": 3,
+    "peerCount": 4,
     "rank20Day": 3,
     "rankDaily": 1,
-    "averageReturn20": 23.145490833668273,
-    "averageChangePercent": 0.06225395492785468,
+    "averageReturn20": 18.156990105908257,
+    "averageChangePercent": -0.20841092917237886,
     "leaders": [
       {
         "code": "1711",
@@ -4461,9 +4454,9 @@
         "return60": 94.67591895569839,
         "volume": 76404546,
         "turnover": null,
-        "foreign5Day": -14733408,
-        "investmentTrust5Day": 68000,
-        "total5Day": -14797240,
+        "foreign5Day": -8813047,
+        "investmentTrust5Day": 56000,
+        "total5Day": -9020047,
         "largeHolderRatio": 50.949999999999996,
         "retailRatio": 21.59,
         "shortToMarginRatio": 1.5204511385537867,
@@ -4525,9 +4518,9 @@
         "return60": 59.7633112053307,
         "volume": 113809114,
         "turnover": null,
-        "foreign5Day": 26438208,
+        "foreign5Day": 12127238,
         "investmentTrust5Day": -7189976,
-        "total5Day": 24262435,
+        "total5Day": 8899966,
         "largeHolderRatio": 71,
         "retailRatio": 11.81,
         "shortToMarginRatio": 3.9109545163356825,
@@ -4589,9 +4582,9 @@
         "return60": 12.440944881889763,
         "volume": 1508231,
         "turnover": null,
-        "foreign5Day": -192584,
+        "foreign5Day": -163584,
         "investmentTrust5Day": -48000,
-        "total5Day": -394577,
+        "total5Day": -374066,
         "largeHolderRatio": 70.39999999999999,
         "retailRatio": 8.790000000000001,
         "shortToMarginRatio": 0.8350730688935281,
@@ -4625,6 +4618,70 @@
             "tone": "normal",
             "importance": 1,
             "description": "南寶 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
+        "code": "1710",
+        "name": "東聯",
+        "industryName": "化學工業",
+        "priceDate": "2026-04-14",
+        "close": 14.550000190734863,
+        "change": -0.14999961853027344,
+        "changePercent": -1.0204055814730792,
+        "return20": 3.1914879226282022,
+        "return60": 19.75309174943749,
+        "volume": 4885727,
+        "turnover": null,
+        "foreign5Day": 8220020,
+        "investmentTrust5Day": -591000,
+        "total5Day": 7948282,
+        "largeHolderRatio": 61.42,
+        "retailRatio": 12.52,
+        "shortToMarginRatio": 0.4449789536981359,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          13.600000381469727,
+          13.399999618530273,
+          13.5,
+          14.850000381469727,
+          15.350000381469727,
+          15.699999809265137,
+          15,
+          14.300000190734863,
+          14.5,
+          14.949999809265137,
+          15.550000190734863,
+          14.5,
+          14.550000190734863,
+          14.199999809265137,
+          14.149999618530273,
+          13.649999618530273,
+          13.800000190734863,
+          13.550000190734863,
+          14.699999809265137,
+          14.550000190734863
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "東聯 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -4644,6 +4701,70 @@
     ],
     "laggards": [
       {
+        "code": "1710",
+        "name": "東聯",
+        "industryName": "化學工業",
+        "priceDate": "2026-04-14",
+        "close": 14.550000190734863,
+        "change": -0.14999961853027344,
+        "changePercent": -1.0204055814730792,
+        "return20": 3.1914879226282022,
+        "return60": 19.75309174943749,
+        "volume": 4885727,
+        "turnover": null,
+        "foreign5Day": 8220020,
+        "investmentTrust5Day": -591000,
+        "total5Day": 7948282,
+        "largeHolderRatio": 61.42,
+        "retailRatio": 12.52,
+        "shortToMarginRatio": 0.4449789536981359,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          13.600000381469727,
+          13.399999618530273,
+          13.5,
+          14.850000381469727,
+          15.350000381469727,
+          15.699999809265137,
+          15,
+          14.300000190734863,
+          14.5,
+          14.949999809265137,
+          15.550000190734863,
+          14.5,
+          14.550000190734863,
+          14.199999809265137,
+          14.149999618530273,
+          13.649999618530273,
+          13.800000190734863,
+          13.550000190734863,
+          14.699999809265137,
+          14.550000190734863
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "東聯 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null
+      },
+      {
         "code": "4766",
         "name": "南寶",
         "industryName": "化學工業",
@@ -4655,9 +4776,9 @@
         "return60": 12.440944881889763,
         "volume": 1508231,
         "turnover": null,
-        "foreign5Day": -192584,
+        "foreign5Day": -163584,
         "investmentTrust5Day": -48000,
-        "total5Day": -394577,
+        "total5Day": -374066,
         "largeHolderRatio": 70.39999999999999,
         "retailRatio": 8.790000000000001,
         "shortToMarginRatio": 0.8350730688935281,
@@ -4719,9 +4840,9 @@
         "return60": 59.7633112053307,
         "volume": 113809114,
         "turnover": null,
-        "foreign5Day": 26438208,
+        "foreign5Day": 12127238,
         "investmentTrust5Day": -7189976,
-        "total5Day": 24262435,
+        "total5Day": 8899966,
         "largeHolderRatio": 71,
         "retailRatio": 11.81,
         "shortToMarginRatio": 3.9109545163356825,
@@ -4770,74 +4891,10 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": "2026-04-24"
-      },
-      {
-        "code": "1711",
-        "name": "永光",
-        "industryName": "化學工業",
-        "priceDate": "2026-04-14",
-        "close": 42.04999923706055,
-        "change": -0.5,
-        "changePercent": -1.1750881526796972,
-        "return20": 30.185759226932095,
-        "return60": 94.67591895569839,
-        "volume": 76404546,
-        "turnover": null,
-        "foreign5Day": -14733408,
-        "investmentTrust5Day": 68000,
-        "total5Day": -14797240,
-        "largeHolderRatio": 50.949999999999996,
-        "retailRatio": 21.59,
-        "shortToMarginRatio": 1.5204511385537867,
-        "activeEtfCount": 1,
-        "sparkline20": [
-          35.5,
-          39.04999923706055,
-          39.349998474121094,
-          43.25,
-          41.79999923706055,
-          38.45000076293945,
-          38.599998474121094,
-          40.599998474121094,
-          38.54999923706055,
-          39,
-          38.099998474121094,
-          36.349998474121094,
-          38.95000076293945,
-          37.5,
-          33.75,
-          33.349998474121094,
-          36.650001525878906,
-          38.70000076293945,
-          42.54999923706055,
-          42.04999923706055
-        ],
-        "technicalSignals": [
-          {
-            "key": "golden-cross",
-            "title": "黃金交叉",
-            "tone": "up",
-            "importance": 3,
-            "description": "永光 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "黃金交叉"
-        ],
-        "topSignalTitle": "黃金交叉",
-        "topSignalTone": "up",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 23.15%，短線強度落後族群。",
+      "近 20 日報酬低於同產業平均 18.16%，短線強度落後族群。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

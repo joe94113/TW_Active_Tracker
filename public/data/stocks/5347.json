@@ -1,9 +1,9 @@
 {
   "code": "5347",
-  "name": "VANGUARD INTERNATIONAL SEMICONDUCTOR CORPORATION ORD TWD10",
+  "name": "世界",
   "kind": "stock",
   "priceDate": "2026-04-14",
-  "generatedAt": "2026-04-14T10:29:54.353Z",
+  "generatedAt": "2026-04-14T15:23:29.011Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3447,7 +3447,7 @@
       "title": "跌破長均線",
       "tone": "down",
       "importance": 2,
-      "description": "VANGUARD INTERNATIONAL SEMICONDUCTOR CORPORATION ORD TWD10 收盤跌破長均線，中期結構轉弱。"
+      "description": "世界 收盤跌破長均線，中期結構轉弱。"
     }
   ],
   "訊號摘要": [
@@ -3483,7 +3483,7 @@
     "macdHist": 1.3452601339003647
   },
   "觀察摘要": [
-    "VANGUARD INTERNATIONAL SEMICONDUCTOR CORPORATION ORD TWD10 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
+    "世界 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 9.21%，可用來觀察波段資金是否持續留在主線。",
@@ -4276,8 +4276,8 @@
     }
   },
   "主動ETF曝光": {
-    "count": 1,
-    "averageWeight": 1.1892,
+    "count": 2,
+    "averageWeight": 0.5946,
     "totalWeight": 1.1892,
     "latestDisclosureDate": "2026-04-14",
     "items": [
@@ -4289,6 +4289,15 @@
         "weight": 1.1892,
         "shares": 246000,
         "rank": 36
+      },
+      {
+        "etfCode": "00981A",
+        "etfName": "主動統一台股增長",
+        "providerLabel": "統一投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 0,
+        "shares": 9000,
+        "rank": 51
       }
     ]
   },

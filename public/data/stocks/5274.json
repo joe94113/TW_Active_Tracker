@@ -3,7 +3,7 @@
   "name": "信驊科技",
   "kind": "stock",
   "priceDate": "2026-04-14",
-  "generatedAt": "2026-04-14T10:29:54.032Z",
+  "generatedAt": "2026-04-14T15:23:28.676Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4232,11 +4232,20 @@
     }
   },
   "主動ETF曝光": {
-    "count": 8,
-    "averageWeight": 2.03125,
-    "totalWeight": 16.25,
+    "count": 11,
+    "averageWeight": 2.319636363636364,
+    "totalWeight": 25.516000000000005,
     "latestDisclosureDate": "2026-04-14",
     "items": [
+      {
+        "etfCode": "00991A",
+        "etfName": "主動復華未來50",
+        "providerLabel": "復華投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 4.256,
+        "shares": 100000,
+        "rank": 9
+      },
       {
         "etfCode": "00995A",
         "etfName": "主動中信台灣卓越",
@@ -4256,6 +4265,15 @@
         "rank": 10
       },
       {
+        "etfCode": "00981A",
+        "etfName": "主動統一台股增長",
+        "providerLabel": "統一投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 3.32,
+        "shares": 331000,
+        "rank": 12
+      },
+      {
         "etfCode": "00994A",
         "etfName": "主動第一金台股優",
         "providerLabel": "第一金投信",
@@ -4272,6 +4290,15 @@
         "weight": 1.96,
         "shares": 20000,
         "rank": 20
+      },
+      {
+        "etfCode": "00988A",
+        "etfName": "主動統一全球創新",
+        "providerLabel": "統一投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 1.69,
+        "shares": 24000,
+        "rank": 24
       },
       {
         "etfCode": "00993A",

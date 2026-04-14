@@ -80,11 +80,14 @@ const 追蹤ETF清單 = [
   建立ETF項目({
     code: '00981A',
     fullName: '主動統一台股增長主動式交易所交易基金',
-    provider: 'pending',
+    provider: 'unity',
     providerLabel: '統一投信',
-    sourceName: 'TWSE ETF 商品頁（官方持股來源待串接）',
-    sourceUrl: 'https://www.twse.com.tw/zh/ETFortune/etfInfo/00981A',
-    trackingStatus: '待串接',
+    sourceName: '統一投信 ETF 官方資料頁',
+    sourceUrl: 'https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=49YTW',
+    trackingStatus: '已串接',
+    providerConfig: {
+      fundCode: '49YTW',
+    },
   }),
   建立ETF項目({
     code: '00983A',
@@ -128,20 +131,20 @@ const 追蹤ETF清單 = [
   建立ETF項目({
     code: '00982D',
     fullName: '主動富邦動態入息主動式交易所交易基金',
-    provider: 'pending',
+    provider: 'fubon',
     providerLabel: '富邦投信',
-    sourceName: 'TWSE ETF 商品頁（官方持股來源待串接）',
-    sourceUrl: 'https://www.twse.com.tw/zh/ETFortune/etfInfo/00982D',
-    trackingStatus: '待串接',
+    sourceName: '富邦投信 ETF 官方資產頁',
+    sourceUrl: 'https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00982D',
+    trackingStatus: '已串接',
   }),
   建立ETF項目({
     code: '00983D',
     fullName: '主動富邦複合收益主動式交易所交易基金',
-    provider: 'pending',
+    provider: 'fubon',
     providerLabel: '富邦投信',
-    sourceName: 'TWSE ETF 商品頁（官方持股來源待串接）',
-    sourceUrl: 'https://www.twse.com.tw/zh/ETFortune/etfInfo/00983D',
-    trackingStatus: '待串接',
+    sourceName: '富邦投信 ETF 官方資產頁',
+    sourceUrl: 'https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00983D',
+    trackingStatus: '已串接',
   }),
   建立ETF項目({
     code: '00989A',
@@ -159,11 +162,14 @@ const 追蹤ETF清單 = [
   建立ETF項目({
     code: '00988A',
     fullName: '主動統一全球創新主動式交易所交易基金',
-    provider: 'pending',
+    provider: 'unity',
     providerLabel: '統一投信',
-    sourceName: 'TWSE ETF 商品頁（官方持股來源待串接）',
-    sourceUrl: 'https://www.twse.com.tw/zh/ETFortune/etfInfo/00988A',
-    trackingStatus: '待串接',
+    sourceName: '統一投信 ETF 官方資料頁',
+    sourceUrl: 'https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=61YTW',
+    trackingStatus: '已串接',
+    providerConfig: {
+      fundCode: '61YTW',
+    },
   }),
   建立ETF項目({
     code: '00991A',
@@ -929,6 +935,22 @@ function 選擇不超前揭露日期(candidates, now = new Date()) {
   return availableDates.at(-1) ?? normalizedDates[0] ?? null;
 }
 
+function 解碼HTML實體多次(value, times = 4) {
+  let decoded = String(value ?? '');
+
+  for (let index = 0; index < times; index += 1) {
+    const next = decodeHtmlEntities(decoded);
+
+    if (next === decoded) {
+      break;
+    }
+
+    decoded = next;
+  }
+
+  return decoded;
+}
+
 async function 取得安聯API會話(referer) {
   const response = await fetch('https://etf.allianzgi.com.tw/webapi/api/AntiForgery/GetAntiForgeryToken', {
     headers: {
@@ -1094,6 +1116,171 @@ async function 抓取聯博快照(etf) {
       ...(holdingsPayload?.domesticHoldings ?? []).map((section) => section?.asOfDate),
     ]),
     nav: 取數字(latestNav?.price),
+    holdings,
+  });
+}
+
+async function 抓取統一ETF頁面(url) {
+  const firstResponse = await fetch(url, {
+    redirect: 'manual',
+    headers: {
+      'user-agent': 使用者代理,
+      'accept-language': 'zh-TW,zh;q=0.9',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    },
+  });
+
+  const cookieHeader = 合併SetCookie標頭(firstResponse.headers.getSetCookie?.() ?? []);
+
+  const secondResponse = await fetch(url, {
+    headers: {
+      'user-agent': 使用者代理,
+      'accept-language': 'zh-TW,zh;q=0.9',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      ...(cookieHeader ? { cookie: cookieHeader } : {}),
+    },
+  });
+
+  if (!secondResponse.ok) {
+    throw new Error(`HTTP ${secondResponse.status} ${secondResponse.statusText}`);
+  }
+
+  return secondResponse.text();
+}
+
+function 解析統一隱藏資料(html, id) {
+  const match = html.match(new RegExp(`<div[^>]*id="${id}"[^>]*data-content="([\\s\\S]*?)"`, 'i'));
+  const encodedPayload = match?.[1];
+
+  if (!encodedPayload) {
+    throw new Error(`統一 ETF 缺少 ${id} 資料節點`);
+  }
+
+  return JSON.parse(解碼HTML實體多次(encodedPayload));
+}
+
+async function 抓取統一快照(etf) {
+  const fundCode = etf.providerConfig?.fundCode;
+
+  if (!fundCode) {
+    throw new Error('統一 ETF 缺少 fundCode 設定');
+  }
+
+  const html = await 抓取統一ETF頁面(etf.sourceUrl);
+  const assetPayload = 解析統一隱藏資料(html, 'DataAsset');
+  const assetRows = Array.isArray(assetPayload) ? assetPayload : [];
+  const summaryRows = assetRows.filter((item) => 壓縮文字(item?.Group) === '1');
+  const detailRows = assetRows.filter((item) => 壓縮文字(item?.Group) === '2');
+  const summaryMap = new Map(summaryRows.map((item) => [壓縮文字(item?.AssetCode).toUpperCase(), item]));
+  const holdings = 排序持股(
+    detailRows
+      .flatMap((item) => item?.Details ?? [])
+      .map((detail) => ({
+        code: 壓縮文字(detail?.DetailCode).toUpperCase(),
+        name: 壓縮文字(detail?.DetailName),
+        shares: 取數字(detail?.Share),
+        weight: 取數字(detail?.NavRate),
+      }))
+      .filter((item) => item.code && item.name && item.weight !== null && 是否ETF成分代號(item.code)),
+  );
+
+  if (!holdings.length) {
+    throw new Error('統一 ETF 持股解析失敗');
+  }
+
+  const navRow = summaryMap.get('P_UNIT');
+  const unitsRow = summaryMap.get('OUT_UNIT');
+  const aumRow = summaryMap.get('NAV');
+  const disclosureDate = 選擇不超前揭露日期([
+    ...summaryRows.flatMap((item) => [item?.EditDate, item?.EndDate, item?.TranDate]),
+    ...detailRows.flatMap((item) => [
+      item?.EditDate,
+      item?.EndDate,
+      item?.TranDate,
+      ...(item?.Details ?? []).flatMap((detail) => [detail?.TranDate, detail?.EditTime]),
+    ]),
+  ]);
+
+  return 建立ETF快照(etf, {
+    disclosureDate,
+    aum: 取數字(aumRow?.Value),
+    nav: 取數字(navRow?.Value),
+    units: 取數字(unitsRow?.Value),
+    holdings,
+  });
+}
+
+function 解析富邦摘要欄位(html) {
+  const disclosureDate = 正規化日期(html.match(/資料日期[：:]\s*(\d{4}[/-]\d{2}[/-]\d{2})/)?.[1]);
+  const summarySection =
+    html.match(/<div class="fund_big_box mb40">[\s\S]*?<ul>([\s\S]*?)<\/ul>[\s\S]*?<\/div>\s*<\/div>/i)?.[1] ?? '';
+  const summaryValues = Array.from(summarySection.matchAll(/<li>[\s\S]*?<p>\s*([\d,.-]+)\s*<\/p>[\s\S]*?<\/li>/g), (match) =>
+    取數字(match[1]),
+  ).filter((value) => value !== null);
+  const [aumByOrder, unitsByOrder, navByOrder] = summaryValues;
+  const extractSummaryValue = (label) => {
+    const strongValue = html.match(new RegExp(`${label}[\\s\\S]*?<strong[^>]*>([\\d,.-]+)<\\/strong>`, 'i'))?.[1];
+    const spanValue = html.match(new RegExp(`${label}[\\s\\S]*?<span[^>]*>([\\d,.-]+)<\\/span>`, 'i'))?.[1];
+    return 取數字(strongValue ?? spanValue);
+  };
+
+  return {
+    disclosureDate,
+    aum: extractSummaryValue('基金淨資產\\(新台幣\\)') ?? aumByOrder ?? null,
+    units: extractSummaryValue('基金在外流通單位數\\(單位\\)') ?? unitsByOrder ?? null,
+    nav: extractSummaryValue('基金每單位淨值\\(新台幣\\)') ?? navByOrder ?? null,
+  };
+}
+
+function 解析富邦持股表格(html) {
+  const holdings = [];
+
+  for (const match of html.matchAll(/<h6 class="mb20">([\s\S]*?)<\/h6>\s*<div[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/g)) {
+    const tbody = match[2];
+
+    for (const rowMatch of tbody.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)) {
+      const cells = Array.from(rowMatch[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/g), (cell) =>
+        壓縮文字(stripHtml(decodeHtmlEntities(cell[1]))),
+      ).filter(Boolean);
+
+      if (cells.length < 5) {
+        continue;
+      }
+
+      const [rawCode, rawName, rawShares, , rawWeight] = cells;
+      const code = 壓縮文字(rawCode).toUpperCase();
+      const name = 壓縮文字(rawName);
+
+      if (!code || !name || code.includes('合計') || name.includes('合計')) {
+        continue;
+      }
+
+      holdings.push({
+        code,
+        name,
+        shares: 取數字(rawShares),
+        weight: 取數字(rawWeight),
+      });
+    }
+  }
+
+  return 排序持股(holdings.filter((item) => item.code && item.name && item.weight !== null));
+}
+
+async function 抓取富邦快照(etf) {
+  const html = await 抓取HTML(etf.sourceUrl);
+  const summary = 解析富邦摘要欄位(html);
+  const holdings = 解析富邦持股表格(html);
+
+  if (!summary.disclosureDate || !holdings.length) {
+    throw new Error('富邦 ETF 持股解析失敗');
+  }
+
+  return 建立ETF快照(etf, {
+    disclosureDate: summary.disclosureDate,
+    aum: summary.aum,
+    nav: summary.nav,
+    units: summary.units,
     holdings,
   });
 }
@@ -1476,6 +1663,8 @@ async function 抓取ETF快照(etf) {
   if (etf.provider === 'capital') return 抓取Capital快照(etf);
   if (etf.provider === 'allianz') return 抓取Allianz快照(etf);
   if (etf.provider === 'ab') return 抓取聯博快照(etf);
+  if (etf.provider === 'unity') return 抓取統一快照(etf);
+  if (etf.provider === 'fubon') return 抓取富邦快照(etf);
   if (etf.provider === 'ctbc') return 抓取CTBC快照(etf);
   if (etf.provider === 'taishin') return 抓取Taishin快照(etf);
   if (etf.provider === 'yuanta') return 抓取Yuanta快照(etf);

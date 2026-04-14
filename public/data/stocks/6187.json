@@ -1,9 +1,9 @@
 {
   "code": "6187",
-  "name": "萬潤科技",
+  "name": "萬潤",
   "kind": "stock",
   "priceDate": "2026-04-14",
-  "generatedAt": "2026-04-14T10:29:56.338Z",
+  "generatedAt": "2026-04-14T15:23:31.115Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3447,7 +3447,7 @@
       "title": "技術面中性",
       "tone": "normal",
       "importance": 1,
-      "description": "萬潤科技 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+      "description": "萬潤 目前沒有明確的新訊號，偏向等待下一段量價表態。"
     }
   ],
   "訊號摘要": [
@@ -3483,7 +3483,7 @@
     "macdHist": 2.0915714312402685
   },
   "觀察摘要": [
-    "萬潤科技 目前站在 MA20 與 MA60 之上，短中期均線仍偏向多方排列。",
+    "萬潤 目前站在 MA20 與 MA60 之上，短中期均線仍偏向多方排列。",
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 51.32%，可用來觀察波段資金是否持續留在主線。",
@@ -3847,9 +3847,9 @@
     }
   },
   "主動ETF曝光": {
-    "count": 2,
-    "averageWeight": 0.7424499999999999,
-    "totalWeight": 1.4848999999999999,
+    "count": 3,
+    "averageWeight": 0.5982999999999999,
+    "totalWeight": 1.7949,
     "latestDisclosureDate": "2026-04-14",
     "items": [
       {
@@ -3869,6 +3869,15 @@
         "weight": 0.44,
         "shares": 18000,
         "rank": 51
+      },
+      {
+        "etfCode": "00981A",
+        "etfName": "主動統一台股增長",
+        "providerLabel": "統一投信",
+        "disclosureDate": "2026-04-14",
+        "weight": 0.31,
+        "shares": 388000,
+        "rank": 37
       }
     ]
   },
