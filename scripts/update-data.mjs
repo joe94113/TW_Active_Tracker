@@ -98,11 +98,14 @@ const 追蹤ETF清單 = [
   建立ETF項目({
     code: '00984A',
     fullName: '主動安聯台灣高息主動式交易所交易基金',
-    provider: 'pending',
+    provider: 'allianz',
     providerLabel: '安聯投信',
-    sourceName: 'TWSE ETF 商品頁（官方持股來源待串接）',
-    sourceUrl: 'https://www.twse.com.tw/zh/ETFortune/etfInfo/00984A',
-    trackingStatus: '待串接',
+    sourceName: '安聯 ETF 官方 API',
+    sourceUrl: 'https://etf.allianzgi.com.tw/tw/00984A',
+    trackingStatus: '已串接',
+    providerConfig: {
+      fundNo: 'E0001',
+    },
   }),
   建立ETF項目({
     code: '00985A',
@@ -222,20 +225,26 @@ const 追蹤ETF清單 = [
   建立ETF項目({
     code: '00993A',
     fullName: '主動安聯台灣主動式交易所交易基金',
-    provider: 'pending',
+    provider: 'allianz',
     providerLabel: '安聯投信',
-    sourceName: 'TWSE ETF 商品頁（官方持股來源待串接）',
-    sourceUrl: 'https://www.twse.com.tw/zh/ETFortune/etfInfo/00993A',
-    trackingStatus: '待串接',
+    sourceName: '安聯 ETF 官方 API',
+    sourceUrl: 'https://etf.allianzgi.com.tw/tw/00993A',
+    trackingStatus: '已串接',
+    providerConfig: {
+      fundNo: 'E0002',
+    },
   }),
   建立ETF項目({
     code: '00984D',
     fullName: '主動聯博全球非投主動式交易所交易基金',
-    provider: 'pending',
+    provider: 'ab',
     providerLabel: '聯博投信',
-    sourceName: 'TWSE ETF 商品頁（官方持股來源待串接）',
-    sourceUrl: 'https://www.twse.com.tw/zh/ETFortune/etfInfo/00984D',
-    trackingStatus: '待串接',
+    sourceName: '聯博 ETF 官方 API',
+    sourceUrl: 'https://www.abfunds.com.tw/zh-tw/funds/etf/active/fixed-income/abitl-select-global-high-yield-active-etf.-.TW00000984D0.html',
+    trackingStatus: '已串接',
+    providerConfig: {
+      shareClassId: 'TW00000984D0',
+    },
   }),
   建立ETF項目({
     code: '00996A',
@@ -278,7 +287,7 @@ const 追蹤ETF清單 = [
     providerLabel: '群益投信',
     sourceName: '群益投信 ETF 官方持股資料',
     sourceUrl: 'https://www.capitalfund.com.tw/etf/product/detail/502/portfolio',
-    trackingStatus: '待串接',
+    trackingStatus: '已串接',
   }),
 ];
 
@@ -345,7 +354,10 @@ function 正規化日期(value) {
   if (/^\d{8}$/.test(text)) {
     return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`;
   }
-  return text.replace(/\s.+$/, '');
+  if (/^\d{2}-\d{2}-\d{4}$/.test(text)) {
+    return `${text.slice(6, 10)}-${text.slice(0, 2)}-${text.slice(3, 5)}`;
+  }
+  return text.replace(/[T\s].+$/, '');
 }
 
 function 正規化年月(value) {
@@ -405,6 +417,15 @@ function 取第一個數字(row, 欄位清單) {
 
 function 是否台股證券代號(code) {
   return /^[1-9]\d{3}$/.test(String(code ?? '').trim());
+}
+
+function 是否ETF成分代號(code) {
+  const text = 壓縮文字(code);
+
+  if (!text) return false;
+  if (是否台股證券代號(text)) return true;
+
+  return /^[A-Z0-9][A-Z0-9./-]{0,15}(?:\s+[A-Z]{2,3})?$/.test(text);
 }
 
 function 排序持股(items) {
@@ -863,7 +884,7 @@ async function 抓取Capital快照(etf) {
         weight: 取數字(match[3]),
         shares: 取數字(match[4]),
       }),
-    ).filter((item) => /^\d{4,6}[A-Z*]?$/.test(item.code)),
+    ).filter((item) => item.name && item.weight !== null && item.shares !== null && 是否ETF成分代號(item.code)),
   );
 
   if (!holdings.length) {
@@ -887,6 +908,194 @@ async function 抓取Capital快照(etf) {
     holdings,
     fetchedAt: 取得現在ISO(),
   };
+}
+
+function 合併SetCookie標頭(setCookieValues = []) {
+  return setCookieValues
+    .map((item) => String(item ?? '').split(';')[0]?.trim())
+    .filter(Boolean)
+    .join('; ');
+}
+
+function 選擇不超前揭露日期(candidates, now = new Date()) {
+  const today = 轉台北日期(now);
+  const normalizedDates = [...new Set((candidates ?? []).map((item) => 正規化日期(item)).filter(Boolean))].sort();
+
+  if (!normalizedDates.length) {
+    return null;
+  }
+
+  const availableDates = normalizedDates.filter((item) => item <= today);
+  return availableDates.at(-1) ?? normalizedDates[0] ?? null;
+}
+
+async function 取得安聯API會話(referer) {
+  const response = await fetch('https://etf.allianzgi.com.tw/webapi/api/AntiForgery/GetAntiForgeryToken', {
+    headers: {
+      'user-agent': 使用者代理,
+      'accept-language': 'zh-TW,zh;q=0.9',
+      accept: 'application/json, text/plain, */*',
+      origin: 'https://etf.allianzgi.com.tw',
+      referer,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  }
+
+  const payload = await response.json();
+  const token = 壓縮文字(payload?.token);
+  const cookieHeader = 合併SetCookie標頭(response.headers.getSetCookie?.() ?? []);
+
+  if (!token || !cookieHeader) {
+    throw new Error('安聯 ETF 防偽權杖取得失敗');
+  }
+
+  return { token, cookieHeader };
+}
+
+async function POST抓取安聯JSON資料(apiPath, body, referer, session = null) {
+  const auth = session ?? (await 取得安聯API會話(referer));
+  const response = await fetch(`https://etf.allianzgi.com.tw/webapi/api${apiPath}`, {
+    method: 'POST',
+    headers: {
+      'user-agent': 使用者代理,
+      'accept-language': 'zh-TW,zh;q=0.9',
+      accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json;charset=UTF-8',
+      origin: 'https://etf.allianzgi.com.tw',
+      referer,
+      cookie: auth.cookieHeader,
+      requestverificationtoken: auth.token,
+      'x-xsrf-token': auth.token,
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+function 解析安聯持股資料表(tables) {
+  const holdings = [];
+
+  for (const table of tables ?? []) {
+    const rows = table?.Rows ?? [];
+    const columns = table?.Columns ?? [];
+
+    if (!rows.length || columns.length < 5) {
+      continue;
+    }
+
+    for (const row of rows) {
+      const name = 壓縮文字(row?.[2]);
+      const shares = 取數字(row?.[3]);
+      const weight = 取數字(row?.[4]);
+      const rawCode = 壓縮文字(row?.[1]).toUpperCase();
+      const code = rawCode || (name ? `ALT:${name.toUpperCase().replace(/[^A-Z0-9]+/g, '_')}` : '');
+
+      if (!code || !name || shares === null || weight === null) {
+        continue;
+      }
+
+      holdings.push({
+        code,
+        name,
+        shares,
+        weight,
+      });
+    }
+  }
+
+  return 排序持股(holdings);
+}
+
+async function 抓取Allianz快照(etf) {
+  const fundNo = etf.providerConfig?.fundNo;
+
+  if (!fundNo) {
+    throw new Error('安聯 ETF 缺少 fundNo 設定');
+  }
+
+  const session = await 取得安聯API會話(etf.sourceUrl);
+  const [assetsPayload, latestNavPayload] = await Promise.all([
+    POST抓取安聯JSON資料('/Fund/GetFundAssets', { FundID: fundNo }, etf.sourceUrl, session),
+    POST抓取安聯JSON資料('/Fund/GetFundLatestNav', { FundNo: fundNo, IsPreview: false }, etf.sourceUrl, session),
+  ]);
+
+  const assetsEntry = assetsPayload?.Entries ?? assetsPayload ?? null;
+  const latestNav = latestNavPayload?.Entries ?? latestNavPayload ?? null;
+  const fundAsset = assetsEntry?.Data?.FundAsset ?? null;
+  const tables = assetsEntry?.Data?.Table ?? [];
+  const holdings = 解析安聯持股資料表(tables);
+
+  if (!fundAsset || !holdings.length) {
+    throw new Error('安聯 ETF 官方 API 回傳格式已變更');
+  }
+
+  return 建立ETF快照(etf, {
+    disclosureDate: 選擇不超前揭露日期([fundAsset.PCFDate, latestNav?.CLatestNAVDateStr, fundAsset.NavDate]),
+    aum: 取數字(fundAsset.Aum),
+    nav: 取數字(latestNav?.CLatestNAV ?? latestNav?.CLatestNAVStr ?? fundAsset.Nav),
+    units: 取數字(fundAsset.Units),
+    holdings,
+  });
+}
+
+function 正規化聯博成分代號(code, name) {
+  const normalizedCode = 壓縮文字(code).toUpperCase();
+
+  if (normalizedCode) {
+    return normalizedCode;
+  }
+
+  const normalizedName = 壓縮文字(name).toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  return normalizedName ? `AB:${normalizedName}` : '';
+}
+
+async function 抓取聯博快照(etf) {
+  const shareClassId = etf.providerConfig?.shareClassId;
+
+  if (!shareClassId) {
+    throw new Error('聯博 ETF 缺少 shareClassId 設定');
+  }
+
+  const apiBase = `https://webapi.alliancebernstein.com/v2/funds/tw/zh-tw/investor/${shareClassId}`;
+  const [holdingsPayload, historicalNavPayload] = await Promise.all([
+    抓取JSON資料(`${apiBase}/holdings`),
+    抓取JSON資料(`${apiBase}/historical-navs?period=overall`),
+  ]);
+
+  const holdings = 排序持股(
+    (holdingsPayload?.domesticHoldings ?? []).flatMap((section) =>
+      (section?.holdings ?? []).map((item) => ({
+        code: 正規化聯博成分代號(item?.holdingCode, item?.holding),
+        name: 壓縮文字(item?.holding),
+        shares: 取數字(item?.holdingShares),
+        weight: 取數字(item?.holdingPerc),
+      })),
+    ),
+  ).filter((item) => item.code && item.name && item.weight !== null);
+
+  const navRows = historicalNavPayload?.navs ?? [];
+  const latestNav = navRows.at(-1) ?? null;
+
+  if (!holdings.length) {
+    throw new Error('聯博 ETF 官方 API 回傳格式已變更');
+  }
+
+  return 建立ETF快照(etf, {
+    disclosureDate: 選擇不超前揭露日期([
+      historicalNavPayload?.asOfDate,
+      ...(holdingsPayload?.domesticHoldings ?? []).map((section) => section?.asOfDate),
+    ]),
+    nav: 取數字(latestNav?.price),
+    holdings,
+  });
 }
 
 async function 抓取CTBC快照(etf) {
@@ -1265,6 +1474,8 @@ async function 抓取摩根快照(etf) {
 async function 抓取ETF快照(etf) {
   if (etf.provider === 'nomura') return 抓取Nomura快照(etf);
   if (etf.provider === 'capital') return 抓取Capital快照(etf);
+  if (etf.provider === 'allianz') return 抓取Allianz快照(etf);
+  if (etf.provider === 'ab') return 抓取聯博快照(etf);
   if (etf.provider === 'ctbc') return 抓取CTBC快照(etf);
   if (etf.provider === 'taishin') return 抓取Taishin快照(etf);
   if (etf.provider === 'yuanta') return 抓取Yuanta快照(etf);

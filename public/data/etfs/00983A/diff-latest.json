@@ -1,250 +1,331 @@
 {
   "code": "00983A",
   "name": "主動中信ARK創新",
-  "fromDisclosureDate": "2026-04-09",
-  "toDisclosureDate": "2026-04-10",
+  "fromDisclosureDate": "2026-04-10",
+  "toDisclosureDate": "2026-04-13",
   "comparisonReady": true,
-  "added": [
-    {
-      "code": "BLSH US",
-      "name": "Bullish",
-      "currentShares": 6870,
-      "currentWeight": 0.26,
-      "sharesDelta": 6870,
-      "weightDelta": 0.26
-    }
-  ],
+  "added": [],
   "removed": [],
   "increased": [
-    {
-      "code": "CRWV US",
-      "name": "CoreWeave Inc",
-      "previousShares": 15887,
-      "currentShares": 15887,
-      "previousWeight": 1.52,
-      "currentWeight": 1.69,
-      "sharesDelta": 0,
-      "weightDelta": 0.16999999999999993
-    },
-    {
-      "code": "AMD US",
-      "name": "超微半導體公司",
-      "previousShares": 17202,
-      "currentShares": 17202,
-      "previousWeight": 4.25,
-      "currentWeight": 4.39,
-      "sharesDelta": 0,
-      "weightDelta": 0.13999999999999968
-    },
-    {
-      "code": "ROKU US",
-      "name": "Roku Inc",
-      "previousShares": 56302,
-      "currentShares": 56302,
-      "previousWeight": 5.88,
-      "currentWeight": 6.01,
-      "sharesDelta": 0,
-      "weightDelta": 0.1299999999999999
-    },
     {
       "code": "CRCL US",
       "name": "Circle Internet Group Inc",
       "previousShares": 40349,
       "currentShares": 40349,
-      "previousWeight": 3.58,
-      "currentWeight": 3.7,
+      "previousWeight": 3.7,
+      "currentWeight": 4.05,
       "sharesDelta": 0,
-      "weightDelta": 0.1200000000000001
+      "weightDelta": 0.34999999999999964
+    },
+    {
+      "code": "TEM US",
+      "name": "Tempus AI Inc",
+      "previousShares": 115068,
+      "currentShares": 115068,
+      "previousWeight": 5.15,
+      "currentWeight": 5.38,
+      "sharesDelta": 0,
+      "weightDelta": 0.22999999999999954
     },
     {
       "code": "BEAM US",
       "name": "光束治療公司",
       "previousShares": 99465,
       "currentShares": 99465,
-      "previousWeight": 2.73,
-      "currentWeight": 2.84,
+      "previousWeight": 2.84,
+      "currentWeight": 3.05,
       "sharesDelta": 0,
-      "weightDelta": 0.10999999999999988
-    },
-    {
-      "code": "NVDA US",
-      "name": "輝達",
-      "previousShares": 11846,
-      "currentShares": 11846,
-      "previousWeight": 2.27,
-      "currentWeight": 2.33,
-      "sharesDelta": 0,
-      "weightDelta": 0.06000000000000005
-    },
-    {
-      "code": "KTOS US",
-      "name": "克瑞拓斯安全防衛公司",
-      "previousShares": 34329,
-      "currentShares": 34329,
-      "previousWeight": 2.45,
-      "currentWeight": 2.51,
-      "sharesDelta": 0,
-      "weightDelta": 0.05999999999999961
-    },
-    {
-      "code": "AMZN US",
-      "name": "亞馬遜公司",
-      "previousShares": 9936,
-      "currentShares": 9936,
-      "previousWeight": 2.42,
-      "currentWeight": 2.47,
-      "sharesDelta": 0,
-      "weightDelta": 0.050000000000000266
-    },
-    {
-      "code": "AVGO US",
-      "name": "博通公司",
-      "previousShares": 3039,
-      "currentShares": 3039,
-      "previousWeight": 1.13,
-      "currentWeight": 1.18,
-      "sharesDelta": 0,
-      "weightDelta": 0.050000000000000044
-    },
-    {
-      "code": "TER US",
-      "name": "泰瑞達公司",
-      "previousShares": 17000,
-      "currentShares": 17000,
-      "previousWeight": 6.46,
-      "currentWeight": 6.51,
-      "sharesDelta": 0,
-      "weightDelta": 0.04999999999999982
-    },
-    {
-      "code": "TXG US",
-      "name": "10X Genomics Inc",
-      "previousShares": 126095,
-      "currentShares": 126095,
-      "previousWeight": 3.03,
-      "currentWeight": 3.06,
-      "sharesDelta": 0,
-      "weightDelta": 0.03000000000000025
-    },
-    {
-      "code": "TSM US",
-      "name": "台積電",
-      "previousShares": 6994,
-      "currentShares": 6994,
-      "previousWeight": 2.67,
-      "currentWeight": 2.7,
-      "sharesDelta": 0,
-      "weightDelta": 0.03000000000000025
-    },
-    {
-      "code": "TSLA US",
-      "name": "特斯拉公司",
-      "previousShares": 21823,
-      "currentShares": 21823,
-      "previousWeight": 7.89,
-      "currentWeight": 7.9,
-      "sharesDelta": 0,
-      "weightDelta": 0.010000000000000675
-    },
-    {
-      "code": "BMNR US",
-      "name": "BitMine Immersion Technologi",
-      "previousShares": 53552,
-      "currentShares": 53552,
-      "previousWeight": 1.18,
-      "currentWeight": 1.19,
-      "sharesDelta": 0,
-      "weightDelta": 0.010000000000000009
-    },
-    {
-      "code": "PSTG US",
-      "name": "PureStorage公司",
-      "previousShares": 17065,
-      "currentShares": 17065,
-      "previousWeight": 1.07,
-      "currentWeight": 1.08,
-      "sharesDelta": 0,
-      "weightDelta": 0.010000000000000009
-    }
-  ],
-  "decreased": [
-    {
-      "code": "TEM US",
-      "name": "Tempus AI Inc",
-      "previousShares": 115068,
-      "currentShares": 115068,
-      "previousWeight": 5.3,
-      "currentWeight": 5.15,
-      "sharesDelta": 0,
-      "weightDelta": -0.14999999999999947
-    },
-    {
-      "code": "PLTR US",
-      "name": "帕蘭提爾科技公司",
-      "previousShares": 45310,
-      "currentShares": 45310,
-      "previousWeight": 6.17,
-      "currentWeight": 6.04,
-      "sharesDelta": 0,
-      "weightDelta": -0.1299999999999999
-    },
-    {
-      "code": "SHOP US",
-      "name": "Shopify公司",
-      "previousShares": 43449,
-      "currentShares": 43449,
-      "previousWeight": 5.09,
-      "currentWeight": 5.01,
-      "sharesDelta": 0,
-      "weightDelta": -0.08000000000000007
-    },
-    {
-      "code": "NTRA US",
-      "name": "那提拉公司",
-      "previousShares": 8000,
-      "currentShares": 8000,
-      "previousWeight": 1.69,
-      "currentWeight": 1.61,
-      "sharesDelta": 0,
-      "weightDelta": -0.07999999999999985
+      "weightDelta": 0.20999999999999996
     },
     {
       "code": "CRSP US",
       "name": "CRISPR治療公司",
       "previousShares": 54223,
       "currentShares": 54223,
-      "previousWeight": 2.93,
-      "currentWeight": 2.89,
+      "previousWeight": 2.89,
+      "currentWeight": 3.02,
       "sharesDelta": 0,
-      "weightDelta": -0.040000000000000036
+      "weightDelta": 0.1299999999999999
     },
     {
-      "code": "ILMN US",
-      "name": "伊魯米納公司",
-      "previousShares": 15453,
-      "currentShares": 15453,
-      "previousWeight": 1.99,
-      "currentWeight": 1.95,
+      "code": "CRWV US",
+      "name": "CoreWeave Inc",
+      "previousShares": 15887,
+      "currentShares": 15887,
+      "previousWeight": 1.69,
+      "currentWeight": 1.78,
       "sharesDelta": 0,
-      "weightDelta": -0.040000000000000036
+      "weightDelta": 0.09000000000000008
+    },
+    {
+      "code": "SHOP US",
+      "name": "Shopify公司",
+      "previousShares": 43449,
+      "currentShares": 43449,
+      "previousWeight": 5.01,
+      "currentWeight": 5.08,
+      "sharesDelta": 0,
+      "weightDelta": 0.07000000000000028
+    },
+    {
+      "code": "KTOS US",
+      "name": "克瑞拓斯安全防衛公司",
+      "previousShares": 34329,
+      "currentShares": 34329,
+      "previousWeight": 2.51,
+      "currentWeight": 2.57,
+      "sharesDelta": 0,
+      "weightDelta": 0.06000000000000005
     },
     {
       "code": "TWST US",
       "name": "Twist Bioscience Corp",
       "previousShares": 36271,
       "currentShares": 36271,
-      "previousWeight": 1.85,
-      "currentWeight": 1.81,
+      "previousWeight": 1.81,
+      "currentWeight": 1.86,
       "sharesDelta": 0,
-      "weightDelta": -0.040000000000000036
+      "weightDelta": 0.050000000000000044
+    },
+    {
+      "code": "PLTR US",
+      "name": "帕蘭提爾科技公司",
+      "previousShares": 45310,
+      "currentShares": 45310,
+      "previousWeight": 6.04,
+      "currentWeight": 6.09,
+      "sharesDelta": 0,
+      "weightDelta": 0.04999999999999982
+    },
+    {
+      "code": "ILMN US",
+      "name": "伊魯米納公司",
+      "previousShares": 15453,
+      "currentShares": 15453,
+      "previousWeight": 1.95,
+      "currentWeight": 1.99,
+      "sharesDelta": 0,
+      "weightDelta": 0.040000000000000036
     },
     {
       "code": "COIN US",
       "name": "比特幣基地全球公司",
       "previousShares": 17000,
       "currentShares": 17000,
-      "previousWeight": 3,
-      "currentWeight": 2.97,
+      "previousWeight": 2.97,
+      "currentWeight": 3.01,
+      "sharesDelta": 0,
+      "weightDelta": 0.03999999999999959
+    },
+    {
+      "code": "SOFI US",
+      "name": "SoFi Technologies Inc",
+      "previousShares": 82155,
+      "currentShares": 82155,
+      "previousWeight": 1.39,
+      "currentWeight": 1.42,
+      "sharesDelta": 0,
+      "weightDelta": 0.030000000000000027
+    },
+    {
+      "code": "NTRA US",
+      "name": "那提拉公司",
+      "previousShares": 8000,
+      "currentShares": 8000,
+      "previousWeight": 1.61,
+      "currentWeight": 1.64,
+      "sharesDelta": 0,
+      "weightDelta": 0.029999999999999805
+    },
+    {
+      "code": "PSTG US",
+      "name": "PureStorage公司",
+      "previousShares": 17065,
+      "currentShares": 17065,
+      "previousWeight": 1.08,
+      "currentWeight": 1.1,
+      "sharesDelta": 0,
+      "weightDelta": 0.020000000000000018
+    },
+    {
+      "code": "NTLA US",
+      "name": "英特利亞治療公司",
+      "previousShares": 39350,
+      "currentShares": 39350,
+      "previousWeight": 0.55,
+      "currentWeight": 0.57,
+      "sharesDelta": 0,
+      "weightDelta": 0.019999999999999907
+    },
+    {
+      "code": "XYZ US",
+      "name": "布洛克公司",
+      "previousShares": 30344,
+      "currentShares": 30344,
+      "previousWeight": 1.97,
+      "currentWeight": 1.98,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "BIDU US",
+      "name": "百度股份有限公司",
+      "previousShares": 7791,
+      "currentShares": 7791,
+      "previousWeight": 0.88,
+      "currentWeight": 0.89,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "VCYT US",
+      "name": "Veracyte公司",
+      "previousShares": 24281,
+      "currentShares": 24281,
+      "previousWeight": 0.79,
+      "currentWeight": 0.8,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "BLSH US",
+      "name": "Bullish",
+      "previousShares": 6870,
+      "currentShares": 6870,
+      "previousWeight": 0.26,
+      "currentWeight": 0.27,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "PACB US",
+      "name": "加州太平洋生技科技公司",
+      "previousShares": 59677,
+      "currentShares": 59677,
+      "previousWeight": 0.08,
+      "currentWeight": 0.09,
+      "sharesDelta": 0,
+      "weightDelta": 0.009999999999999995
+    },
+    {
+      "code": "MELI US",
+      "name": "MercadoLibre Inc",
+      "previousShares": 439,
+      "currentShares": 439,
+      "previousWeight": 0.81,
+      "currentWeight": 0.82,
+      "sharesDelta": 0,
+      "weightDelta": 0.009999999999999898
+    }
+  ],
+  "decreased": [
+    {
+      "code": "TER US",
+      "name": "泰瑞達公司",
+      "previousShares": 17000,
+      "currentShares": 17000,
+      "previousWeight": 6.51,
+      "currentWeight": 6.39,
+      "sharesDelta": 0,
+      "weightDelta": -0.1200000000000001
+    },
+    {
+      "code": "ROKU US",
+      "name": "Roku Inc",
+      "previousShares": 56302,
+      "currentShares": 56302,
+      "previousWeight": 6.01,
+      "currentWeight": 5.91,
+      "sharesDelta": 0,
+      "weightDelta": -0.09999999999999964
+    },
+    {
+      "code": "TSLA US",
+      "name": "特斯拉公司",
+      "previousShares": 21823,
+      "currentShares": 21823,
+      "previousWeight": 7.9,
+      "currentWeight": 7.82,
+      "sharesDelta": 0,
+      "weightDelta": -0.08000000000000007
+    },
+    {
+      "code": "AMD US",
+      "name": "超微半導體公司",
+      "previousShares": 17202,
+      "currentShares": 17202,
+      "previousWeight": 4.39,
+      "currentWeight": 4.31,
+      "sharesDelta": 0,
+      "weightDelta": -0.08000000000000007
+    },
+    {
+      "code": "TSM US",
+      "name": "台積電",
+      "previousShares": 6994,
+      "currentShares": 6994,
+      "previousWeight": 2.7,
+      "currentWeight": 2.63,
+      "sharesDelta": 0,
+      "weightDelta": -0.07000000000000028
+    },
+    {
+      "code": "AMZN US",
+      "name": "亞馬遜公司",
+      "previousShares": 9936,
+      "currentShares": 9936,
+      "previousWeight": 2.47,
+      "currentWeight": 2.42,
+      "sharesDelta": 0,
+      "weightDelta": -0.050000000000000266
+    },
+    {
+      "code": "NVDA US",
+      "name": "輝達",
+      "previousShares": 11846,
+      "currentShares": 11846,
+      "previousWeight": 2.33,
+      "currentWeight": 2.28,
+      "sharesDelta": 0,
+      "weightDelta": -0.050000000000000266
+    },
+    {
+      "code": "TXG US",
+      "name": "10X Genomics Inc",
+      "previousShares": 126095,
+      "currentShares": 126095,
+      "previousWeight": 3.06,
+      "currentWeight": 3.02,
+      "sharesDelta": 0,
+      "weightDelta": -0.040000000000000036
+    },
+    {
+      "code": "META US",
+      "name": "Meta平台公司",
+      "previousShares": 2592,
+      "currentShares": 2592,
+      "previousWeight": 1.7,
+      "currentWeight": 1.67,
+      "sharesDelta": 0,
+      "weightDelta": -0.030000000000000027
+    },
+    {
+      "code": "ABNB US",
+      "name": "愛彼迎公司",
+      "previousShares": 12486,
+      "currentShares": 12486,
+      "previousWeight": 1.68,
+      "currentWeight": 1.65,
+      "sharesDelta": 0,
+      "weightDelta": -0.030000000000000027
+    },
+    {
+      "code": "BWXT US",
+      "name": "BWX科技股份有限公司",
+      "previousShares": 10526,
+      "currentShares": 10526,
+      "previousWeight": 2.52,
+      "currentWeight": 2.49,
       "sharesDelta": 0,
       "weightDelta": -0.029999999999999805
     },
@@ -253,58 +334,68 @@
       "name": "迪爾",
       "previousShares": 1791,
       "currentShares": 1791,
-      "previousWeight": 1.15,
-      "currentWeight": 1.13,
+      "previousWeight": 1.13,
+      "currentWeight": 1.1,
+      "sharesDelta": 0,
+      "weightDelta": -0.029999999999999805
+    },
+    {
+      "code": "BMNR US",
+      "name": "BitMine Immersion Technologi",
+      "previousShares": 53552,
+      "currentShares": 53552,
+      "previousWeight": 1.19,
+      "currentWeight": 1.17,
       "sharesDelta": 0,
       "weightDelta": -0.020000000000000018
     },
     {
-      "code": "NTLA US",
-      "name": "英特利亞治療公司",
-      "previousShares": 39350,
-      "currentShares": 39350,
-      "previousWeight": 0.57,
-      "currentWeight": 0.55,
-      "sharesDelta": 0,
-      "weightDelta": -0.019999999999999907
-    },
-    {
-      "code": "XYZ US",
-      "name": "布洛克公司",
-      "previousShares": 30344,
-      "currentShares": 30344,
-      "previousWeight": 1.98,
-      "currentWeight": 1.97,
+      "code": "AVGO US",
+      "name": "博通公司",
+      "previousShares": 3039,
+      "currentShares": 3039,
+      "previousWeight": 1.18,
+      "currentWeight": 1.17,
       "sharesDelta": 0,
       "weightDelta": -0.010000000000000009
     },
     {
-      "code": "MELI US",
-      "name": "MercadoLibre Inc",
-      "previousShares": 439,
-      "currentShares": 439,
-      "previousWeight": 0.82,
-      "currentWeight": 0.81,
+      "code": "GOOGL US",
+      "name": "Alphabet公司 Class A",
+      "previousShares": 2595,
+      "currentShares": 2595,
+      "previousWeight": 0.86,
+      "currentWeight": 0.85,
       "sharesDelta": 0,
-      "weightDelta": -0.009999999999999898
+      "weightDelta": -0.010000000000000009
     },
     {
-      "code": "BWXT US",
-      "name": "BWX科技股份有限公司",
-      "previousShares": 10526,
-      "currentShares": 10526,
-      "previousWeight": 2.53,
-      "currentWeight": 2.52,
+      "code": "BABA US",
+      "name": "阿里巴巴",
+      "previousShares": 6114,
+      "currentShares": 6114,
+      "previousWeight": 0.81,
+      "currentWeight": 0.8,
       "sharesDelta": 0,
-      "weightDelta": -0.009999999999999787
+      "weightDelta": -0.010000000000000009
+    },
+    {
+      "code": "CCJ US",
+      "name": "卡梅科公司",
+      "previousShares": 2300,
+      "currentShares": 2300,
+      "previousWeight": 0.28,
+      "currentWeight": 0.27,
+      "sharesDelta": 0,
+      "weightDelta": -0.010000000000000009
     }
   ],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 1,
+    "addedCount": 0,
     "removedCount": 0,
-    "increasedCount": 15,
-    "decreasedCount": 13,
-    "totalChangeCount": 29
+    "increasedCount": 21,
+    "decreasedCount": 17,
+    "totalChangeCount": 38
   }
 }

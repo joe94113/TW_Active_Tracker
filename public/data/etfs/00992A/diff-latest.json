@@ -1,19 +1,140 @@
 {
   "code": "00992A",
   "name": "主動群益科技創新",
-  "fromDisclosureDate": "2026-04-14",
-  "toDisclosureDate": "2026-04-13",
+  "fromDisclosureDate": "2026-04-13",
+  "toDisclosureDate": "2026-04-14",
   "comparisonReady": true,
-  "added": [],
-  "removed": [],
-  "increased": [],
+  "added": [
+    {
+      "code": "8996",
+      "name": "高力",
+      "currentShares": 993000,
+      "currentWeight": 3.95,
+      "sharesDelta": 993000,
+      "weightDelta": 3.95
+    },
+    {
+      "code": "8299",
+      "name": "群聯",
+      "currentShares": 557000,
+      "currentWeight": 3.5,
+      "sharesDelta": 557000,
+      "weightDelta": 3.5
+    },
+    {
+      "code": "3665",
+      "name": "貿聯-KY",
+      "currentShares": 405000,
+      "currentWeight": 3.31,
+      "sharesDelta": 405000,
+      "weightDelta": 3.31
+    }
+  ],
+  "removed": [
+    {
+      "code": "3017",
+      "name": "奇鋐",
+      "previousShares": 380000,
+      "previousWeight": 3.21,
+      "sharesDelta": -380000,
+      "weightDelta": -3.21
+    },
+    {
+      "code": "3163",
+      "name": "波若威",
+      "previousShares": 695000,
+      "previousWeight": 3.2,
+      "sharesDelta": -695000,
+      "weightDelta": -3.2
+    },
+    {
+      "code": "3105",
+      "name": "穩懋",
+      "previousShares": 1764000,
+      "previousWeight": 3.1,
+      "sharesDelta": -1764000,
+      "weightDelta": -3.1
+    }
+  ],
+  "increased": [
+    {
+      "code": "6442",
+      "name": "光聖",
+      "previousShares": 510000,
+      "currentShares": 523000,
+      "previousWeight": 4.36,
+      "currentWeight": 3.87,
+      "sharesDelta": 13000,
+      "weightDelta": -0.4900000000000002
+    },
+    {
+      "code": "3037",
+      "name": "欣興",
+      "previousShares": 1678000,
+      "currentShares": 1720000,
+      "previousWeight": 4.03,
+      "currentWeight": 3.66,
+      "sharesDelta": 42000,
+      "weightDelta": -0.3700000000000001
+    },
+    {
+      "code": "6515",
+      "name": "穎崴",
+      "previousShares": 114000,
+      "currentShares": 117000,
+      "previousWeight": 3.75,
+      "currentWeight": 3.53,
+      "sharesDelta": 3000,
+      "weightDelta": -0.2200000000000002
+    },
+    {
+      "code": "6223",
+      "name": "旺矽",
+      "previousShares": 201000,
+      "currentShares": 206000,
+      "previousWeight": 3.51,
+      "currentWeight": 3.35,
+      "sharesDelta": 5000,
+      "weightDelta": -0.1599999999999997
+    },
+    {
+      "code": "2383",
+      "name": "台光電",
+      "previousShares": 332000,
+      "currentShares": 340000,
+      "previousWeight": 4.24,
+      "currentWeight": 4.37,
+      "sharesDelta": 8000,
+      "weightDelta": 0.1299999999999999
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "previousShares": 926000,
+      "currentShares": 949000,
+      "previousWeight": 7.07,
+      "currentWeight": 6.95,
+      "sharesDelta": 23000,
+      "weightDelta": -0.1200000000000001
+    },
+    {
+      "code": "2345",
+      "name": "智邦",
+      "previousShares": 546000,
+      "currentShares": 560000,
+      "previousWeight": 3.81,
+      "currentWeight": 3.77,
+      "sharesDelta": 14000,
+      "weightDelta": -0.040000000000000036
+    }
+  ],
   "decreased": [],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 0,
-    "removedCount": 0,
-    "increasedCount": 0,
+    "addedCount": 3,
+    "removedCount": 3,
+    "increasedCount": 7,
     "decreasedCount": 0,
-    "totalChangeCount": 0
+    "totalChangeCount": 13
   }
 }
