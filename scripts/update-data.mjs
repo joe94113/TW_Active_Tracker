@@ -34,6 +34,8 @@ const 台北時間格式器 = new Intl.DateTimeFormat('zh-TW', {
   second: '2-digit',
   hour12: false,
 });
+const 預設請求逾時毫秒 = 20000;
+const 預設請求重試次數 = 3;
 
 function 建立ETF項目({
   code,
@@ -1774,41 +1776,112 @@ function 是否一般股票(code) {
   return 是否台股證券代號(code);
 }
 
+function 延遲(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function 取得錯誤代碼(error) {
+  return error?.cause?.code ?? error?.code ?? null;
+}
+
+function 取得錯誤摘要(error) {
+  if (error instanceof Error) {
+    const code = 取得錯誤代碼(error);
+    return code ? `${error.message} (${code})` : error.message;
+  }
+
+  return String(error);
+}
+
+function 是否可重試請求(error) {
+  const status = Number(error?.status ?? error?.cause?.status ?? 0);
+
+  if (status === 408 || status === 429 || status >= 500) {
+    return true;
+  }
+
+  const code = String(取得錯誤代碼(error) ?? '').toUpperCase();
+
+  if (
+    code === 'UND_ERR_CONNECT_TIMEOUT' ||
+    code === 'UND_ERR_HEADERS_TIMEOUT' ||
+    code === 'UND_ERR_BODY_TIMEOUT' ||
+    code === 'ETIMEDOUT' ||
+    code === 'ECONNRESET' ||
+    code === 'EAI_AGAIN' ||
+    code === 'ENOTFOUND'
+  ) {
+    return true;
+  }
+
+  const message = String(error?.message ?? '').toLowerCase();
+  return message.includes('fetch failed') || message.includes('timeout');
+}
+
+async function 發出請求(url, options = {}, { 標籤 = url, 逾時毫秒 = 預設請求逾時毫秒, 重試次數 = 預設請求重試次數 } = {}) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= 重試次數; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: options.signal ?? AbortSignal.timeout(逾時毫秒),
+      });
+
+      if (!response.ok) {
+        const error = new Error(`HTTP ${response.status} ${response.statusText}`);
+        error.status = response.status;
+        throw error;
+      }
+
+      return response;
+    } catch (error) {
+      lastError = error;
+
+      if (attempt >= 重試次數 || !是否可重試請求(error)) {
+        throw error;
+      }
+
+      const 等待毫秒 = Math.min(1200 * 2 ** (attempt - 1), 5000);
+      console.warn(`[請求重試 ${attempt}/${重試次數 - 1}] ${標籤}：${取得錯誤摘要(error)}，${等待毫秒}ms 後重試`);
+      await 延遲(等待毫秒);
+    }
+  }
+
+  throw lastError ?? new Error(`無法完成請求：${標籤}`);
+}
+
 async function 抓取JSON資料(url) {
-  const response = await fetch(url, {
+  const response = await 發出請求(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
       accept: 'application/json, text/plain, */*',
     },
+  }, {
+    標籤: url,
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
 
   return response.json();
 }
 
 async function 抓取文字資料(url, options = {}) {
-  const response = await fetch(url, {
+  const response = await 發出請求(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
       ...(options.headers ?? {}),
     },
     ...options,
+  }, {
+    標籤: url,
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
 
   return response.text();
 }
 
 async function POST抓取JSON資料(url, body, referer) {
-  const response = await fetch(url, {
+  const response = await 發出請求(url, {
     method: 'POST',
     headers: {
       'user-agent': 使用者代理,
@@ -1819,13 +1892,20 @@ async function POST抓取JSON資料(url, body, referer) {
       'x-requested-with': 'XMLHttpRequest',
     },
     body: JSON.stringify(body),
+  }, {
+    標籤: url,
   });
 
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
   return response.json();
+}
+
+async function 抓取JSON資料失敗回傳(url, fallbackValue, 錯誤標籤 = url) {
+  try {
+    return await 抓取JSON資料(url);
+  } catch (error) {
+    console.warn(`[端點略過] ${錯誤標籤}：${取得錯誤摘要(error)}`);
+    return fallbackValue;
+  }
 }
 
 function 建立MIS快照網址(exChanges) {
@@ -2775,15 +2855,15 @@ async function 抓取市場總覽() {
     抓取TWSE盤後總覽(今日查詢字串).catch(() => null),
     抓取TWSE盤後熱門股(今日查詢字串).catch(() => null),
     抓取TWSE盤後估值(今日查詢字串).catch(() => null),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX20'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/exchangeReport/MI_5MINS'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/exchangeReport/FMTQIK'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/opendata/twtazu_od'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/fund/MI_QFIIS_cat'),
-    抓取JSON資料('https://openapi.twse.com.tw/v1/fund/MI_QFIIS_sort_20'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX', [], 'TWSE OpenAPI MI_INDEX'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX20', [], 'TWSE OpenAPI MI_INDEX20'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/exchangeReport/MI_5MINS', [], 'TWSE OpenAPI MI_5MINS'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/exchangeReport/FMTQIK', [], 'TWSE OpenAPI FMTQIK'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL', [], 'TWSE OpenAPI STOCK_DAY_ALL'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL', [], 'TWSE OpenAPI BWIBBU_ALL'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/opendata/twtazu_od', [], 'TWSE OpenAPI twtazu_od'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/fund/MI_QFIIS_cat', [], 'TWSE OpenAPI MI_QFIIS_cat'),
+    抓取JSON資料失敗回傳('https://openapi.twse.com.tw/v1/fund/MI_QFIIS_sort_20', [], 'TWSE OpenAPI MI_QFIIS_sort_20'),
   ]);
   const indexRows = 盤後總覽結果?.indexRows?.length ? 盤後總覽結果.indexRows : indexRowsOpenApi;
   const hotRows = 盤後熱門股結果?.length ? 盤後熱門股結果 : hotRowsOpenApi;
