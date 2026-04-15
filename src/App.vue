@@ -109,26 +109,26 @@ function isActiveRoute(path) {
           </RouterLink>
         </div>
 
+        <nav
+          v-if="!isCompactHeader"
+          class="app-nav"
+          aria-label="主要導覽"
+        >
+          <RouterLink
+            v-for="item in navigationItems"
+            :key="item.path"
+            :to="item.path"
+            class="nav-link"
+            :class="{ 'is-active': isActiveRoute(item.path) }"
+          >
+            {{ item.label }}
+          </RouterLink>
+        </nav>
+
         <div class="app-toolbar">
           <GlobalStockSearch />
         </div>
       </div>
-
-      <nav
-        v-if="!isCompactHeader"
-        class="app-nav"
-        aria-label="主要導覽"
-      >
-        <RouterLink
-          v-for="item in navigationItems"
-          :key="item.path"
-          :to="item.path"
-          class="nav-link"
-          :class="{ 'is-active': isActiveRoute(item.path) }"
-        >
-          {{ item.label }}
-        </RouterLink>
-      </nav>
     </header>
 
     <main class="app-main">
