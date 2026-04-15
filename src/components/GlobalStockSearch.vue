@@ -51,7 +51,7 @@ const localMatches = computed(() => {
     .slice(0, 6)
     .map((item) => ({
       ...item,
-      searchSource: item.hasLocalDetail ? '站內資料' : '盤中快照',
+      searchSource: item.hasLocalDetail ? '站內完整資料' : '站內索引',
       hasLocalDetail: Boolean(item.hasLocalDetail),
     }));
 });
@@ -59,10 +59,7 @@ const localMatches = computed(() => {
 const mergedMatches = computed(() => {
   const localCodes = new Set(localMatches.value.map((item) => item.code));
 
-  return [
-    ...localMatches.value,
-    ...remoteMatches.value.filter((item) => !localCodes.has(item.code)),
-  ].slice(0, 8);
+  return [...localMatches.value, ...remoteMatches.value.filter((item) => !localCodes.has(item.code))].slice(0, 8);
 });
 
 const directLookup = computed(() => {
@@ -78,49 +75,46 @@ const directLookup = computed(() => {
 
   return {
     code: normalizedCode,
-    name: `直接查詢 ${normalizedCode}`,
-    searchSource: '即時補資料',
+    name: `直接查看 ${normalizedCode}`,
+    searchSource: '輸入代號前往',
     hasLocalDetail: false,
   };
 });
 
-watch(
-  normalizedQuery,
-  (keyword) => {
-    if (searchTimer) {
-      window.clearTimeout(searchTimer);
-      searchTimer = null;
-    }
+watch(normalizedQuery, (keyword) => {
+  if (searchTimer) {
+    window.clearTimeout(searchTimer);
+    searchTimer = null;
+  }
 
-    if (keyword.length < 2) {
+  if (keyword.length < 2) {
+    remoteMatches.value = [];
+    isRemoteLoading.value = false;
+    return;
+  }
+
+  if (stockSearchList.value.length) {
+    remoteMatches.value = [];
+    isRemoteLoading.value = false;
+    return;
+  }
+
+  searchTimer = window.setTimeout(async () => {
+    isRemoteLoading.value = true;
+
+    try {
+      remoteMatches.value = (await searchRemoteStocks(keyword, { limit: 8 })).map((item) => ({
+        ...item,
+        searchSource: '即時 API 搜尋',
+        hasLocalDetail: false,
+      }));
+    } catch {
       remoteMatches.value = [];
+    } finally {
       isRemoteLoading.value = false;
-      return;
     }
-
-    if (stockSearchList.value.length) {
-      remoteMatches.value = [];
-      isRemoteLoading.value = false;
-      return;
-    }
-
-    searchTimer = window.setTimeout(async () => {
-      isRemoteLoading.value = true;
-
-      try {
-        remoteMatches.value = (await searchRemoteStocks(keyword, { limit: 8 })).map((item) => ({
-          ...item,
-          searchSource: '即時行情',
-          hasLocalDetail: false,
-        }));
-      } catch {
-        remoteMatches.value = [];
-      } finally {
-        isRemoteLoading.value = false;
-      }
-    }, 180);
-  },
-);
+  }, 180);
+});
 
 onBeforeUnmount(() => {
   if (searchTimer) {
@@ -165,7 +159,7 @@ function submitSearch() {
         v-model="query"
         class="global-search-input"
         type="search"
-        placeholder="搜尋股票代號或名稱"
+        placeholder="搜尋代號或股票名稱"
         @focus="isOpen = true"
         @keydown.enter.prevent="submitSearch"
         @keydown.esc="isOpen = false"
@@ -231,9 +225,9 @@ function submitSearch() {
         </div>
       </button>
 
-      <p v-if="isRemoteLoading" class="global-search-status">正在補更多即時股票資料…</p>
+      <p v-if="isRemoteLoading" class="global-search-status">正在補抓遠端資料…</p>
       <p v-else-if="query.trim().length >= 2 && !mergedMatches.length && !directLookup" class="global-search-status">
-        找不到符合結果，試試 4 碼股票代號直接查詢。
+        找不到符合結果，試著輸入 4 碼代號，或改用股票名稱關鍵字。
       </p>
     </div>
   </div>

@@ -13,17 +13,9 @@ const navigationItems = [
   { label: '主動式 ETF', path: '/etfs' },
 ];
 
-const currentSectionLabel = computed(() => {
-  if (route.path.startsWith('/stocks/')) return '個股研究';
-  if (route.path.startsWith('/etfs/')) return '主動式 ETF';
-  if (route.path.startsWith('/etf-overlap')) return 'ETF 重疊';
-
-  return '首頁';
-});
-
 function formatGeneratedAt(value) {
   if (!value) {
-    return '資料載入中';
+    return '資料整理中';
   }
 
   const date = new Date(value);
@@ -44,10 +36,7 @@ function formatGeneratedAt(value) {
   });
 }
 
-const generatedAtText = computed(() => {
-  return formatGeneratedAt(manifest.value?.generatedAt);
-});
-
+const generatedAtText = computed(() => formatGeneratedAt(manifest.value?.generatedAt));
 const siteIconHref = `${import.meta.env.BASE_URL}favicon.svg`;
 
 const footerStats = computed(() => [
@@ -91,25 +80,23 @@ function isActiveRoute(path) {
           </RouterLink>
         </div>
 
-        <nav class="app-nav" aria-label="主要導覽">
-          <RouterLink
-            v-for="item in navigationItems"
-            :key="item.path"
-            :to="item.path"
-            class="nav-link"
-            :class="{ 'is-active': isActiveRoute(item.path) }"
-          >
-            {{ item.label }}
-          </RouterLink>
-        </nav>
-
-        <GlobalStockSearch />
-
-        <div class="app-header-side compact">
-          <span class="meta-chip">目前頁面：{{ currentSectionLabel }}</span>
-          <span class="meta-text">資料包整理：{{ generatedAtText }}</span>
+        <div class="app-toolbar">
+          <GlobalStockSearch />
+          <span class="meta-text header-meta-text">資料包整理 {{ generatedAtText }}</span>
         </div>
       </div>
+
+      <nav class="app-nav" aria-label="主要導覽">
+        <RouterLink
+          v-for="item in navigationItems"
+          :key="item.path"
+          :to="item.path"
+          class="nav-link"
+          :class="{ 'is-active': isActiveRoute(item.path) }"
+        >
+          {{ item.label }}
+        </RouterLink>
+      </nav>
     </header>
 
     <main class="app-main">
@@ -121,7 +108,7 @@ function isActiveRoute(path) {
         <section class="footer-block">
           <RouterLink class="footer-brand" to="/">台股主動通</RouterLink>
           <p class="footer-text">
-            把大盤、ETF、個股與技術面整合在同一條研究路徑，讓你在盤後與隔日規劃時更快抓到重點。
+            把主動式 ETF、個股、法人籌碼和市場節奏整合在一起，讓你從首頁一路研究到個股頁，快速判斷隔日值得追蹤的標的。
           </p>
         </section>
 
@@ -140,19 +127,19 @@ function isActiveRoute(path) {
         </section>
 
         <section class="footer-block">
-          <h2 class="footer-title">資料節奏</h2>
+          <h2 class="footer-title">資料概況</h2>
           <div class="footer-stat-list">
             <div v-for="item in footerStats" :key="item.label" class="footer-stat">
               <span>{{ item.label }}</span>
               <strong>{{ item.value }}</strong>
             </div>
           </div>
-          <p class="footer-note">資料來源涵蓋 TWSE OpenAPI、ETF 公開揭露與行情圖表資料。</p>
+          <p class="footer-note">資料來源以 TWSE OpenAPI、TWSE / TAIFEX 公開資料與投信揭露頁面為主，僅供研究參考。</p>
         </section>
       </div>
     </footer>
 
-    <nav class="mobile-dock" aria-label="手機快速導覽">
+    <nav class="mobile-dock" aria-label="手機底部導覽">
       <RouterLink
         v-for="item in navigationItems"
         :key="`dock-${item.path}`"

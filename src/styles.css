@@ -100,32 +100,29 @@ input {
   top: 0;
   z-index: 20;
   display: grid;
-  gap: 12px;
-  margin-bottom: 24px;
-  padding: 14px 16px;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 12px 14px;
   border: 1px solid var(--border);
-  border-radius: 20px;
-  backdrop-filter: blur(18px);
-  background: rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
 }
 
 .app-topbar {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 14px;
   align-items: center;
 }
 
-.app-header-side {
-  display: grid;
-  gap: 10px;
-  justify-items: flex-end;
-}
-
-.app-header-side.compact {
-  gap: 6px;
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 0;
 }
 
 .brand-chip {
@@ -138,9 +135,9 @@ input {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-height: 42px;
-  padding: 8px 12px;
-  border-radius: 16px;
+  min-height: 40px;
+  padding: 7px 10px;
+  border-radius: 14px;
   background: rgba(11, 105, 155, 0.08);
   border: 1px solid rgba(11, 105, 155, 0.12);
 }
@@ -185,7 +182,8 @@ input {
 
 .brand-title {
   display: inline-block;
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  font-size: clamp(1rem, 1.3vw, 1.16rem);
+  line-height: 1.1;
 }
 
 .brand-text,
@@ -240,7 +238,7 @@ input {
 .app-nav {
   overflow-x: auto;
   flex-wrap: nowrap;
-  padding-bottom: 2px;
+  padding-bottom: 1px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -261,7 +259,7 @@ input {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 14px;
+  padding: 9px 13px;
   border-radius: 999px;
   border: 1px solid rgba(11, 105, 155, 0.14);
   background: rgba(11, 105, 155, 0.08);
@@ -269,7 +267,7 @@ input {
 
 .nav-link {
   flex: 0 0 auto;
-  min-height: 42px;
+  min-height: 40px;
 }
 
 .nav-link.is-active {
@@ -294,20 +292,20 @@ input {
 
 .global-search {
   position: relative;
-  flex: 1 1 280px;
-  min-width: min(320px, 100%);
-  max-width: 480px;
+  flex: 1 1 320px;
+  min-width: 0;
+  max-width: 520px;
 }
 
 .global-search-box {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 44px;
-  padding: 0 12px;
+  min-height: 42px;
+  padding: 0 10px 0 12px;
   border: 1px solid rgba(11, 105, 155, 0.14);
-  border-radius: 16px;
-  background: rgba(248, 252, 255, 0.94);
+  border-radius: 14px;
+  background: rgba(248, 252, 255, 0.96);
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -333,7 +331,7 @@ input {
 .global-search-input {
   flex: 1 1 auto;
   min-width: 0;
-  min-height: 42px;
+  min-height: 40px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -348,6 +346,9 @@ input {
   background: transparent;
   color: var(--brand);
   cursor: pointer;
+  flex: 0 0 auto;
+  min-height: 34px;
+  padding: 0 4px;
 }
 
 .global-search-menu {
@@ -362,6 +363,8 @@ input {
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 22px 44px rgba(20, 41, 61, 0.12);
+  max-height: min(70vh, 460px);
+  overflow-y: auto;
 }
 
 .global-search-result {
@@ -395,10 +398,12 @@ input {
 .global-search-side {
   display: grid;
   gap: 4px;
+  min-width: 0;
 }
 
 .global-search-main strong {
   font-size: 0.96rem;
+  overflow-wrap: anywhere;
 }
 
 .global-search-meta {
@@ -446,6 +451,12 @@ input {
 
 .global-search-status {
   margin: 2px 4px 4px;
+}
+
+.header-meta-text {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 0.83rem;
 }
 
 .page-shell {
@@ -2385,17 +2396,13 @@ input {
 
 @media (max-width: 900px) {
   .app-shell {
-    padding-top: 16px;
+    padding-top: 12px;
     padding-inline: 12px;
-  }
-
-  .app-header {
-    position: static;
   }
 
   .page-hero,
   .app-header {
-    padding: 20px;
+    padding: 16px;
   }
 
   .page-hero {
@@ -2403,21 +2410,20 @@ input {
   }
 
   .app-header {
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 16px;
   }
 
   .app-topbar {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .app-toolbar {
+    justify-content: stretch;
     flex-direction: column;
-  }
-
-  .app-header-side {
-    justify-items: flex-start;
-  }
-
-  .global-search {
-    width: 100%;
-    max-width: none;
+    align-items: stretch;
+    gap: 8px;
   }
 
   .dual-grid,
@@ -2540,6 +2546,16 @@ input {
   .compact-summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .global-search {
+    width: 100%;
+    max-width: none;
+  }
+
+  .header-meta-text {
+    white-space: normal;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -2550,7 +2566,7 @@ input {
   .app-shell {
     width: 100%;
     max-width: none;
-    padding-inline: 8px;
+    padding-inline: 10px;
     padding-bottom: 112px;
   }
 
@@ -2561,7 +2577,7 @@ input {
   .chart-card,
   .futures-card,
   .info-card {
-    padding: 18px;
+    padding: 14px;
     border-radius: 20px;
   }
 
@@ -2569,23 +2585,15 @@ input {
     padding: 18px 16px;
   }
 
-  .brand-title {
-    font-size: 1.75rem;
+  .app-header {
+    top: max(6px, env(safe-area-inset-top));
+    gap: 8px;
+    padding: 12px;
+    border-radius: 16px;
   }
 
-  .brand-text,
-  .page-text {
-    font-size: 0.96rem;
-  }
-
-  .page-text {
-    margin-top: 8px;
-  }
-
-  .brand-kicker,
-  .page-kicker {
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
+  .app-topbar {
+    gap: 8px;
   }
 
   .mobile-section-nav {
@@ -2635,32 +2643,73 @@ input {
   }
 
   .app-nav {
-    gap: 8px;
-    margin-inline: -2px;
+    gap: 6px;
+    margin-inline: -1px;
   }
 
   .nav-link {
-    padding: 9px 12px;
-    font-size: 0.92rem;
+    min-height: 36px;
+    padding: 8px 12px;
+    font-size: 0.86rem;
   }
 
   .brand-lockup {
-    min-height: 40px;
-    padding: 7px 10px;
+    min-height: 36px;
+    padding: 6px 10px;
+    border-radius: 12px;
   }
 
   .brand-mark {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+  }
+
+  .brand-mark img,
+  .brand-mark svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .brand-title {
+    font-size: 0.98rem;
   }
 
   .global-search-box {
-    min-height: 42px;
+    min-height: 40px;
+    padding-inline: 10px;
   }
 
   .global-search-menu {
-    right: -2px;
-    left: -2px;
+    top: calc(100% + 6px);
+    right: 0;
+    left: 0;
+    padding: 8px;
+    border-radius: 16px;
+  }
+
+  .global-search-result {
+    padding: 11px 12px;
+    gap: 10px;
+  }
+
+  .global-search-main strong {
+    font-size: 0.92rem;
+  }
+
+  .global-search-source,
+  .global-search-status {
+    font-size: 0.78rem;
+  }
+
+  .global-search-chip {
+    min-height: 22px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+  }
+
+  .header-meta-text {
+    display: none;
   }
 
   .app-footer {
