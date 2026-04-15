@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { buildStockEventCalendar } from '../../src/lib/stockInsights.js';
+import { buildSelectionRadar } from './selection-radar.mjs';
 import { formatNumber, formatPercent, formatTaipeiDate } from './close-digest.mjs';
 
 export { formatTaipeiDate } from './close-digest.mjs';
@@ -35,22 +35,6 @@ function normalizeDateKey(value) {
   }
 
   return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : null;
-}
-
-function toDayStamp(dateText) {
-  const stamp = Date.parse(`${dateText}T00:00:00+08:00`);
-  return Number.isFinite(stamp) ? stamp : null;
-}
-
-function diffDays(fromDate, targetDate) {
-  const fromStamp = toDayStamp(fromDate);
-  const targetStamp = toDayStamp(targetDate);
-
-  if (fromStamp === null || targetStamp === null) {
-    return null;
-  }
-
-  return Math.round((targetStamp - fromStamp) / 86400000);
 }
 
 function resolveAlertMarketDate(dashboard) {
@@ -90,70 +74,6 @@ function buildCandidateCodeSet({ dashboard, stockIndex }) {
   return [...codeSet].filter((code) => /^\d{4,6}$/.test(code));
 }
 
-function mapEventPriority(event, score) {
-  const label = String(event?.label ?? '');
-  const isRevenue = label.includes('月營收');
-  const isQuarter = label.includes('季報');
-  const isEtf = label.includes('ETF');
-  const base = isRevenue ? 32 : isQuarter ? 26 : isEtf ? 18 : 14;
-
-  return base + score;
-}
-
-function buildEventEntry({ detail, stockMeta, event, marketDate }) {
-  const daysUntil = diffDays(marketDate, event.date);
-
-  if (daysUntil === null) {
-    return null;
-  }
-
-  return {
-    code: detail.code,
-    name: detail.name,
-    label: event.label,
-    note: event.note,
-    date: event.date,
-    daysUntil,
-    status: event.status,
-    topSignalTitle: stockMeta?.topSignalTitle ?? '技術面整理中',
-    topSignalTone: stockMeta?.topSignalTone ?? 'normal',
-    total5Day: stockMeta?.total5Day ?? null,
-    activeEtfCount: stockMeta?.activeEtfCount ?? 0,
-    return20: stockMeta?.return20 ?? null,
-    priority: mapEventPriority(event, scoreStock(stockMeta)),
-  };
-}
-
-function pickEtfRefreshHighlights(overlap, marketDate) {
-  return [...(overlap?.已串接ETF ?? [])]
-    .filter((item) => normalizeDateKey(item.disclosureDate) === marketDate)
-    .map((item) => ({
-      code: item.code,
-      name: item.name,
-      changeCount:
-        (item.changeSummary?.totalChangeCount ?? 0) ||
-        (item.changeSummary?.addedCount ?? 0) +
-          (item.changeSummary?.removedCount ?? 0) +
-          (item.changeSummary?.increasedCount ?? 0) +
-          (item.changeSummary?.decreasedCount ?? 0),
-    }))
-    .filter((item) => (item.changeCount ?? 0) > 0)
-    .sort((left, right) => (right.changeCount ?? 0) - (left.changeCount ?? 0))
-    .slice(0, 5);
-}
-
-function pickStaleEtfs(overlap, marketDate) {
-  return [...(overlap?.已串接ETF ?? [])]
-    .map((item) => ({
-      code: item.code,
-      name: item.name,
-      disclosureDate: normalizeDateKey(item.disclosureDate),
-    }))
-    .filter((item) => item.disclosureDate && item.disclosureDate < marketDate)
-    .sort((left, right) => String(left.disclosureDate).localeCompare(String(right.disclosureDate)))
-    .slice(0, 5);
-}
-
 function pickIdentityRow(contract, identity) {
   return (contract?.法人資料 ?? []).find((item) => item.身份別 === identity) ?? null;
 }
@@ -187,12 +107,6 @@ function pickFuturesCards(dashboard) {
     .filter((item) => item.name && item.latestClose !== null);
 }
 
-function formatEventEta(daysUntil) {
-  if (daysUntil === 0) return '今天';
-  if (daysUntil === 1) return '明天';
-  return `${daysUntil} 天後`;
-}
-
 function formatFuturesSummaryLine(item) {
   return `• ${item.name}｜收 ${formatNumber(item.latestClose, 0)}｜單日 ${formatPercent(item.changePercent)}｜20日 ${formatPercent(item.return20)}｜RSI ${formatNumber(item.rsi, 1)}｜${item.direction}`;
 }
@@ -209,49 +123,44 @@ function buildFuturesDiscordDescription(item) {
   return lines.join('\n');
 }
 
-function buildDiscordEventFields(summary) {
+function buildDiscordSelectionFields(summary) {
   const fields = [];
 
-  if (summary.upcomingEvents.length) {
+  if (summary.institutionalResonance.length) {
     fields.push({
-      name: '三日內事件',
-      value: summary.upcomingEvents
+      name: '外資 / 投信同步偏多',
+      value: summary.institutionalResonance
         .map(
           (item) =>
-            `• **${item.code} ${item.name}**\n${item.label}｜${formatEventEta(item.daysUntil)}｜20日 ${formatPercent(item.return20)}｜ETF ${formatNumber(item.activeEtfCount, 0)}\n${item.note}`,
+            `• **${item.code} ${item.name}**\n${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)} 股｜20日 ${formatPercent(item.return20)}`,
         )
         .join('\n'),
       inline: false,
     });
   }
 
-  if (summary.recentEvents.length) {
+  if (summary.volumeSqueezeRisers.length) {
     fields.push({
-      name: '今日已揭露',
-      value: summary.recentEvents
+      name: '量縮價漲觀察',
+      value: summary.volumeSqueezeRisers
         .map(
           (item) =>
-            `• **${item.code} ${item.name}**\n${item.label}｜${item.topSignalTitle}｜法人五日 ${formatNumber(item.total5Day, 0)}\n${item.note}`,
+            `• **${item.code} ${item.name}**\n單日 ${formatPercent(item.changePercent)}｜量能為 5 日均量 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高點 ${formatNumber(item.distanceToHigh20, 1)}%`,
         )
         .join('\n'),
       inline: false,
     });
   }
 
-  if (summary.refreshedEtfs.length) {
+  if (summary.consolidationWatch.length) {
     fields.push({
-      name: '主動 ETF 有異動',
-      value: summary.refreshedEtfs
-        .map((item) => `• **${item.code} ${item.name}**\n成分異動 ${formatNumber(item.changeCount, 0)} 檔`)
+      name: '盤整待突破',
+      value: summary.consolidationWatch
+        .map(
+          (item) =>
+            `• **${item.code} ${item.name}**\n30 日箱型 ${formatNumber(item.rangePercent, 1)}%｜距箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜MA20 / MA60 差 ${formatNumber(item.maGapPercent, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
+        )
         .join('\n'),
-      inline: false,
-    });
-  }
-
-  if (summary.staleEtfs.length) {
-    fields.push({
-      name: 'ETF 揭露待追蹤',
-      value: summary.staleEtfs.map((item) => `${item.code}(${item.disclosureDate})`).join('、'),
       inline: false,
     });
   }
@@ -260,9 +169,8 @@ function buildDiscordEventFields(summary) {
 }
 
 export async function loadEventAlertData() {
-  const [dashboard, overlap, stockIndex] = await Promise.all([
+  const [dashboard, stockIndex] = await Promise.all([
     readJson(path.join('public', 'data', 'dashboard.json')),
-    readJson(path.join('public', 'data', 'etf-overlap.json')),
     readJson(path.join('public', 'data', 'stocks', 'index.json')),
   ]);
 
@@ -281,64 +189,35 @@ export async function loadEventAlertData() {
 
   return {
     dashboard,
-    overlap,
     stockIndex,
     stockDetailList,
   };
 }
 
-export function buildEventAlertSummary({ dashboard, overlap, stockIndex, stockDetailList, today = formatTaipeiDate() }) {
+export function buildEventAlertSummary({ dashboard, stockIndex, stockDetailList, today = formatTaipeiDate() }) {
   const marketDate = resolveAlertMarketDate(dashboard);
 
   if (marketDate !== today) {
     return null;
   }
-
-  const stockMetaMap = new Map(stockIndex.map((item) => [item.code, item]));
-  const recentEvents = [];
-  const upcomingEvents = [];
-
-  stockDetailList.forEach((detail) => {
-    const events = buildStockEventCalendar(detail);
-    const stockMeta = stockMetaMap.get(detail.code) ?? {};
-
-    const recent = events
-      .map((event) => buildEventEntry({ detail, stockMeta, event, marketDate }))
-      .filter(Boolean)
-      .filter((item) => item.status === 'recent' && item.daysUntil === 0)
-      .sort((left, right) => right.priority - left.priority)[0];
-
-    const upcoming = events
-      .map((event) => buildEventEntry({ detail, stockMeta, event, marketDate }))
-      .filter(Boolean)
-      .filter((item) => item.status === 'upcoming' && item.daysUntil >= 0 && item.daysUntil <= 3)
-      .sort((left, right) => left.daysUntil - right.daysUntil || right.priority - left.priority)[0];
-
-    if (recent) {
-      recentEvents.push(recent);
-    }
-
-    if (upcoming) {
-      upcomingEvents.push(upcoming);
-    }
+  const selectionRadar = buildSelectionRadar({
+    dashboard,
+    stockMetaList: stockIndex,
+    stockDetailList,
   });
 
   const summary = {
     appName: dashboard?.appName ?? '台股主動通',
     marketDate,
     futuresCards: pickFuturesCards(dashboard),
-    recentEvents: recentEvents.sort((left, right) => right.priority - left.priority).slice(0, 4),
-    upcomingEvents: upcomingEvents.sort((left, right) => left.daysUntil - right.daysUntil || right.priority - left.priority).slice(0, 4),
-    refreshedEtfs: pickEtfRefreshHighlights(overlap, marketDate),
-    staleEtfs: pickStaleEtfs(overlap, marketDate),
+    ...selectionRadar,
   };
 
   if (
     !summary.futuresCards.length &&
-    !summary.recentEvents.length &&
-    !summary.upcomingEvents.length &&
-    !summary.refreshedEtfs.length &&
-    !summary.staleEtfs.length
+    !summary.institutionalResonance.length &&
+    !summary.volumeSqueezeRisers.length &&
+    !summary.consolidationWatch.length
   ) {
     return null;
   }
@@ -352,8 +231,8 @@ export function buildTelegramEventAlertMessage(summary) {
   }
 
   const lines = [
-    `<b>${escapeHtml(summary.appName)}｜期貨與事件雷達 ${escapeHtml(summary.marketDate)}</b>`,
-    '先看小台、微台的盤後節奏，再補三日內真正會影響隔日節奏的事件。',
+    `<b>${escapeHtml(summary.appName)}｜期貨與選股雷達 ${escapeHtml(summary.marketDate)}</b>`,
+    '先看小台、微台的盤後節奏，再補量縮價漲、盤整待突破與雙法人同步布局。',
   ];
 
   if (summary.futuresCards.length) {
@@ -368,40 +247,37 @@ export function buildTelegramEventAlertMessage(summary) {
     });
   }
 
-  if (summary.upcomingEvents.length) {
+  if (summary.institutionalResonance.length) {
     lines.push('');
-    lines.push('<b>三日內事件</b>');
-    summary.upcomingEvents.forEach((item) => {
+    lines.push('<b>外資 / 投信同步偏多</b>');
+    summary.institutionalResonance.forEach((item) => {
       lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(formatEventEta(item.daysUntil))}｜20日 ${escapeHtml(formatPercent(item.return20))}｜ETF ${escapeHtml(formatNumber(item.activeEtfCount, 0))}`,
+        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.signalLabel)}｜20日 ${escapeHtml(formatPercent(item.return20))}`,
       );
-      lines.push(`  ${escapeHtml(item.note)}`);
+      lines.push(`  外資約 ${escapeHtml(formatNumber(item.foreignAccumulated, 0))} 股 / 投信約 ${escapeHtml(formatNumber(item.trustAccumulated, 0))} 股，可視為中短線同步加倉。`);
     });
   }
 
-  if (summary.recentEvents.length) {
+  if (summary.volumeSqueezeRisers.length) {
     lines.push('');
-    lines.push('<b>今日已揭露</b>');
-    summary.recentEvents.forEach((item) => {
+    lines.push('<b>量縮價漲觀察</b>');
+    summary.volumeSqueezeRisers.forEach((item) => {
       lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(item.topSignalTitle)}｜法人五日 ${escapeHtml(formatNumber(item.total5Day, 0))}`,
+        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜單日 ${escapeHtml(formatPercent(item.changePercent))}｜量能為 5 日均量 ${escapeHtml(formatNumber(item.volumeRatio5, 0))}%｜距 20 日高點 ${escapeHtml(formatNumber(item.distanceToHigh20, 1))}%`,
       );
-      lines.push(`  ${escapeHtml(item.note)}`);
+      lines.push('  價格先動、量沒有急放大，適合列入續強觀察名單。');
     });
   }
 
-  if (summary.refreshedEtfs.length) {
+  if (summary.consolidationWatch.length) {
     lines.push('');
-    lines.push('<b>主動 ETF 有異動</b>');
-    summary.refreshedEtfs.forEach((item) => {
-      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜成分異動 ${escapeHtml(formatNumber(item.changeCount, 0))} 檔`);
+    lines.push('<b>盤整待突破</b>');
+    summary.consolidationWatch.forEach((item) => {
+      lines.push(
+        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜30 日箱型 ${escapeHtml(formatNumber(item.rangePercent, 1))}%｜距箱頂 ${escapeHtml(formatNumber(item.distanceToHigh, 1))}%｜RSI ${escapeHtml(formatNumber(item.rsi, 1))}`,
+      );
+      lines.push('  若隔日帶量站上箱頂，通常會比中途追高更容易管理風險。');
     });
-  }
-
-  if (summary.staleEtfs.length) {
-    lines.push('');
-    lines.push('<b>ETF 揭露待追蹤</b>');
-    lines.push(`• ${escapeHtml(summary.staleEtfs.map((item) => `${item.code}(${item.disclosureDate})`).join('、'))}`);
   }
 
   return lines.join('\n');
@@ -412,15 +288,15 @@ export function buildDiscordEventAlertPayload(summary) {
     return null;
   }
 
-  const eventFields = buildDiscordEventFields(summary);
+  const eventFields = buildDiscordSelectionFields(summary);
 
   return {
     username: summary.appName,
     avatar_url: 'https://www.twse.com.tw/rsrc/images/brand/favicon.png',
     embeds: [
       {
-        title: `${summary.appName}｜期貨與事件雷達 ${summary.marketDate}`,
-        description: '先看小台、微台的盤後節奏，再補三日內真正會影響隔日買賣的事件。',
+        title: `${summary.appName}｜期貨與選股雷達 ${summary.marketDate}`,
+        description: '先看小台、微台盤後節奏，再看量縮價漲、盤整待突破與雙法人同步布局。',
         color: 0x0b699b,
         footer: {
           text: '僅供研究參考，不構成投資建議。',
@@ -438,7 +314,7 @@ export function buildDiscordEventAlertPayload(summary) {
       ...(eventFields.length
         ? [
             {
-              title: '隔日事件與 ETF 追蹤',
+              title: '選股雷達',
               color: 0x22466d,
               fields: eventFields,
             },

@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { buildSelectionRadar } from './selection-radar.mjs';
 
 const rootDir = process.cwd();
 
@@ -98,22 +99,6 @@ function resolveDigestMarketDate(dashboard) {
   );
 }
 
-function toDayStamp(dateText) {
-  const stamp = Date.parse(`${dateText}T00:00:00+08:00`);
-  return Number.isFinite(stamp) ? stamp : null;
-}
-
-function diffDays(fromDate, targetDate) {
-  const fromStamp = toDayStamp(fromDate);
-  const targetStamp = toDayStamp(targetDate);
-
-  if (fromStamp === null || targetStamp === null) {
-    return null;
-  }
-
-  return Math.round((targetStamp - fromStamp) / 86400000);
-}
-
 function getAlertPriority(item) {
   if (item.isUnderDisposition) return 3;
   if (item.hasChangedTrading) return 2;
@@ -152,27 +137,6 @@ function pickOfficialRiskRadar(items) {
     .slice(0, 6);
 }
 
-function pickUpcomingDividendWatch(items, marketDate) {
-  return [...items]
-    .map((item) => {
-      const nextEventDate = normalizeDateKey(item.nextExDividendDate);
-      const dayOffset = nextEventDate ? diffDays(marketDate, nextEventDate) : null;
-
-      return {
-        ...item,
-        nextEventDate,
-        dayOffset,
-      };
-    })
-    .filter((item) => item.nextEventDate && item.dayOffset !== null && item.dayOffset >= 0 && item.dayOffset <= 21)
-    .sort((left, right) =>
-      (left.dayOffset ?? Infinity) - (right.dayOffset ?? Infinity) ||
-      String(left.nextEventDate).localeCompare(String(right.nextEventDate)) ||
-      String(left.code).localeCompare(String(right.code)),
-    )
-    .slice(0, 6);
-}
-
 function buildOfficialRadarSummary(items) {
   return {
     dispositions: items.filter((item) => item.isUnderDisposition).length,
@@ -181,52 +145,34 @@ function buildOfficialRadarSummary(items) {
   };
 }
 
-function pickEtfHighlights(overlap) {
-  const combined = [
-    ...(overlap?.共同新增 ?? []).map((item) => ({ ...item, bucket: '共同新增' })),
-    ...(overlap?.共同加碼 ?? []).map((item) => ({ ...item, bucket: '共同加碼' })),
-    ...(overlap?.不重複異動?.新增 ?? []).map((item) => ({ ...item, bucket: '新增' })),
-    ...(overlap?.不重複異動?.加碼 ?? []).map((item) => ({ ...item, bucket: '加碼' })),
-  ];
-
-  return combined
-    .filter((item) => /^\d{4,6}$/.test(String(item.code ?? '').trim()))
-    .sort((left, right) =>
-      (right.出現ETF數 ?? 1) - (left.出現ETF數 ?? 1) ||
-      Math.abs(right.weightDelta ?? 0) - Math.abs(left.weightDelta ?? 0),
-    )
-    .slice(0, 5);
-}
-
-function pickStaleEtfs(overlap, marketDate) {
-  return (overlap?.已串接ETF ?? [])
-    .map((item) => ({
-      ...item,
-      normalizedDisclosureDate: normalizeDateKey(item.disclosureDate),
-    }))
-    .filter((item) => item.normalizedDisclosureDate && item.normalizedDisclosureDate < marketDate)
-    .sort((left, right) => String(left.normalizedDisclosureDate).localeCompare(String(right.normalizedDisclosureDate)))
-    .slice(0, 5)
-    .map(({ normalizedDisclosureDate, ...item }) => item);
-}
-
 export async function loadCloseDigestData() {
-  const [dashboard, overlap, trackedStocks, stockSearchList] = await Promise.all([
+  const [dashboard, trackedStocks, stockSearchList] = await Promise.all([
     readJson(path.join('public', 'data', 'dashboard.json')),
-    readJson(path.join('public', 'data', 'etf-overlap.json')),
     readJson(path.join('public', 'data', 'stocks', 'index.json')),
     readJson(path.join('public', 'data', 'stocks', 'search.json')),
   ]);
+  const trackedCodes = [...new Set((trackedStocks ?? []).map((item) => String(item.code ?? '').trim()).filter(Boolean))];
+  const stockDetailList = (
+    await Promise.all(
+      trackedCodes.map(async (code) => {
+        try {
+          return await readJson(path.join('public', 'data', 'stocks', `${code}.json`));
+        } catch {
+          return null;
+        }
+      }),
+    )
+  ).filter(Boolean);
 
   return {
     dashboard,
-    overlap,
     trackedStocks,
     stockSearchList,
+    stockDetailList,
   };
 }
 
-export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, stockSearchList, today = formatTaipeiDate() }) {
+export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchList, stockDetailList, today = formatTaipeiDate() }) {
   const marketDate = resolveDigestMarketDate(dashboard);
 
   if (marketDate !== today) {
@@ -235,7 +181,11 @@ export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, sto
 
   const selectionUniverse = Array.isArray(stockSearchList) && stockSearchList.length ? stockSearchList : trackedStocks;
   const officialRiskRadar = pickOfficialRiskRadar(selectionUniverse);
-  const upcomingDividendWatch = pickUpcomingDividendWatch(selectionUniverse, marketDate);
+  const selectionRadar = buildSelectionRadar({
+    dashboard,
+    stockMetaList: trackedStocks,
+    stockDetailList,
+  });
 
   return {
     appName: dashboard?.appName ?? '台股主動通',
@@ -247,9 +197,7 @@ export function buildCloseDigestSummary({ dashboard, overlap, trackedStocks, sto
     bearishSignals: pickSignalStocks(trackedStocks, 'down'),
     officialRadarSummary: buildOfficialRadarSummary(selectionUniverse),
     officialRiskRadar,
-    upcomingDividendWatch,
-    etfHighlights: pickEtfHighlights(overlap),
-    staleEtfs: pickStaleEtfs(overlap, marketDate),
+    ...selectionRadar,
   };
 }
 
@@ -303,28 +251,28 @@ export function buildTelegramMessage(summary) {
   );
   appendTelegramSection(
     lines,
-    '即將除息 / 事件接近',
-    summary.upcomingDividendWatch,
+    '外資 / 投信同步偏多',
+    summary.institutionalResonance,
     (item) =>
-      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSelectionSignalTitle ?? '股利事件接近')}｜${escapeHtml(item.nextEventDate)}｜${escapeHtml(item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`)}`,
-    2,
+      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.signalLabel)}｜外資 ${escapeHtml(formatNumber(item.foreignAccumulated, 0))} / 投信 ${escapeHtml(formatNumber(item.trustAccumulated, 0))} 股｜20日 ${escapeHtml(formatPercent(item.return20))}`,
+    3,
   );
   appendTelegramSection(
     lines,
-    '主動 ETF 風向球',
-    summary.etfHighlights,
-    (item) => {
-      const exposureText = item.出現ETF數 ? `${item.出現ETF數} 檔同步` : `${item.etfCode} ${item.etfName}`;
-      return `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.bucket)}｜${escapeHtml(exposureText)}｜權重變化 ${escapeHtml(formatPercent(item.weightDelta))}`;
-    },
-    2,
+    '量縮價漲觀察',
+    summary.volumeSqueezeRisers,
+    (item) =>
+      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜單日 ${escapeHtml(formatPercent(item.changePercent))}｜量能為 5 日均量 ${escapeHtml(formatNumber(item.volumeRatio5, 0))}%｜距 20 日高點 ${escapeHtml(formatNumber(item.distanceToHigh20, 1))}%`,
+    3,
   );
-
-  if (summary.staleEtfs.length) {
-    lines.push('');
-    lines.push('<b>ETF 揭露追蹤</b>');
-    lines.push(`• 以下已串接 ETF 最新揭露日仍非 ${escapeHtml(summary.marketDate)}：${escapeHtml(summary.staleEtfs.map((item) => `${item.code}(${item.disclosureDate})`).join('、'))}`);
-  }
+  appendTelegramSection(
+    lines,
+    '盤整待突破',
+    summary.consolidationWatch,
+    (item) =>
+      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜30 日箱型 ${escapeHtml(formatNumber(item.rangePercent, 1))}%｜距箱頂 ${escapeHtml(formatNumber(item.distanceToHigh, 1))}%｜RSI ${escapeHtml(formatNumber(item.rsi, 1))}`,
+    3,
+  );
 
   return lines.join('\n');
 }
@@ -399,37 +347,33 @@ export function buildDiscordPayload(summary) {
       ],
     },
     {
-      title: '事件與主動 ETF',
+      title: '選股雷達',
       color: 0x13885e,
       fields: [
         {
-          name: '即將除息 / 事件接近',
+          name: '外資 / 投信同步偏多',
           value: toEmbedLines(
-            summary.upcomingDividendWatch.slice(0, 4),
-            (item) => `• **${item.code} ${item.name}**\n${item.topSelectionSignalTitle ?? '股利事件接近'}｜${item.nextEventDate}｜${item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後`}`,
+            summary.institutionalResonance.slice(0, 4),
+            (item) => `• **${item.code} ${item.name}**\n${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)} 股｜20日 ${formatPercent(item.return20)}`,
           ),
           inline: false,
         },
         {
-          name: '主動 ETF 風向球',
+          name: '量縮價漲觀察',
           value: toEmbedLines(
-            summary.etfHighlights.slice(0, 4),
-            (item) => {
-              const exposureText = item.出現ETF數 ? `${item.出現ETF數} 檔同步` : `${item.etfCode} ${item.etfName}`;
-              return `• **${item.code} ${item.name}**\n${item.bucket}｜${exposureText}｜權重變化 ${formatPercent(item.weightDelta)}`;
-            },
+            summary.volumeSqueezeRisers.slice(0, 4),
+            (item) => `• **${item.code} ${item.name}**\n單日 ${formatPercent(item.changePercent)}｜量能為 5 日均量 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高點 ${formatNumber(item.distanceToHigh20, 1)}%`,
           ),
           inline: false,
         },
-        ...(summary.staleEtfs.length
-          ? [
-              {
-                name: 'ETF 揭露追蹤',
-                value: `仍有部分已串接 ETF 未更新到 ${summary.marketDate}：${summary.staleEtfs.map((item) => `${item.code}(${item.disclosureDate})`).join('、')}`,
-                inline: false,
-              },
-            ]
-          : []),
+        {
+          name: '盤整待突破',
+          value: toEmbedLines(
+            summary.consolidationWatch.slice(0, 4),
+            (item) => `• **${item.code} ${item.name}**\n30 日箱型 ${formatNumber(item.rangePercent, 1)}%｜距箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜MA20 / MA60 差 ${formatNumber(item.maGapPercent, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
+          ),
+          inline: false,
+        },
       ],
     },
   ];
