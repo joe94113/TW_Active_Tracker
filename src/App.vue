@@ -82,7 +82,6 @@ function isActiveRoute(path) {
 
         <div class="app-toolbar">
           <GlobalStockSearch />
-          <span class="meta-text header-meta-text">資料包整理 {{ generatedAtText }}</span>
         </div>
       </div>
 

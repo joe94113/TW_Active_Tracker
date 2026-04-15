@@ -1,4 +1,5 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
+import { canUseRemoteJsonFetch } from '../lib/api';
 import { fetchLiveStockSnapshots } from '../lib/liveStockApi';
 
 const DEFAULT_REFRESH_MS = 60000;
@@ -38,6 +39,12 @@ export function useLiveStockSnapshots(codeListRef, options = {}) {
   let refreshTimer = null;
 
   async function refreshSnapshots(force = false) {
+    if (!canUseRemoteJsonFetch()) {
+      snapshotMap.value = new Map();
+      errorMessage.value = '';
+      return snapshotMap.value;
+    }
+
     if (!codes.value.length) {
       snapshotMap.value = new Map();
       errorMessage.value = '';
@@ -76,6 +83,10 @@ export function useLiveStockSnapshots(codeListRef, options = {}) {
   }
 
   function startAutoRefresh() {
+    if (!canUseRemoteJsonFetch()) {
+      return;
+    }
+
     if (refreshTimer) {
       return;
     }
@@ -92,6 +103,12 @@ export function useLiveStockSnapshots(codeListRef, options = {}) {
   watch(
     codes,
     () => {
+      if (!canUseRemoteJsonFetch()) {
+        snapshotMap.value = new Map();
+        errorMessage.value = '';
+        return;
+      }
+
       refreshSnapshots(true);
     },
     { immediate: true },

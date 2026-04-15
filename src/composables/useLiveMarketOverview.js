@@ -1,4 +1,5 @@
 import { computed, onBeforeUnmount, ref } from 'vue';
+import { canUseRemoteJsonFetch } from '../lib/api';
 import { fetchLiveMarketOverview } from '../lib/liveStockApi';
 
 const DEFAULT_REFRESH_MS = 60000;
@@ -33,6 +34,11 @@ export function useLiveMarketOverview(baseMarketOverviewRef, options = {}) {
   let refreshTimer = null;
 
   async function refreshLiveMarketData(force = false) {
+    if (!canUseRemoteJsonFetch()) {
+      liveErrorMessage.value = '';
+      return liveMarketOverview.value ?? baseMarketOverviewRef?.value ?? null;
+    }
+
     if (refreshPromise && !force) {
       return refreshPromise;
     }
@@ -64,6 +70,10 @@ export function useLiveMarketOverview(baseMarketOverviewRef, options = {}) {
   }
 
   function startAutoRefresh() {
+    if (!canUseRemoteJsonFetch()) {
+      return;
+    }
+
     if (refreshTimer) {
       return;
     }
