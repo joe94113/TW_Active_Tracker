@@ -100,6 +100,7 @@ input {
   top: 0;
   z-index: 20;
   display: grid;
+  align-content: start;
   gap: 10px;
   margin-bottom: 20px;
   padding: 12px 14px;
@@ -115,6 +116,7 @@ input {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 12px 14px;
   align-items: start;
+  align-content: start;
 }
 
 .app-toolbar {
@@ -124,6 +126,7 @@ input {
   gap: 12px;
   min-width: 0;
   flex: 1 1 auto;
+  align-self: start;
 }
 
 .brand-chip {
@@ -240,6 +243,7 @@ input {
   overflow-x: auto;
   flex-wrap: nowrap;
   padding-bottom: 1px;
+  align-self: start;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -2425,6 +2429,7 @@ input {
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
+    flex: none;
   }
 
   .dual-grid,
@@ -2549,6 +2554,7 @@ input {
   }
 
   .global-search {
+    flex: none;
     width: 100%;
     max-width: none;
   }
@@ -2588,13 +2594,18 @@ input {
 
   .app-header {
     top: max(6px, env(safe-area-inset-top));
-    gap: 8px;
+    gap: 6px;
+    margin-bottom: 12px;
     padding: 12px;
     border-radius: 16px;
   }
 
   .app-topbar {
-    gap: 8px;
+    gap: 6px;
+  }
+
+  .app-nav {
+    display: none;
   }
 
   .mobile-section-nav {

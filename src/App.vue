@@ -1,11 +1,14 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { useGlobalData } from './composables/useGlobalData';
 import GlobalStockSearch from './components/GlobalStockSearch.vue';
 
 const route = useRoute();
 const { manifest, loadGlobalData } = useGlobalData();
+const isCompactHeader = ref(false);
+let mediaQuery = null;
+let mediaQueryHandler = null;
 
 const navigationItems = [
   { label: '首頁', path: '/' },
@@ -56,6 +59,32 @@ const footerStats = computed(() => [
 
 onMounted(() => {
   loadGlobalData();
+
+  if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+    mediaQuery = window.matchMedia('(max-width: 640px)');
+    isCompactHeader.value = mediaQuery.matches;
+    mediaQueryHandler = (event) => {
+      isCompactHeader.value = event.matches;
+    };
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', mediaQueryHandler);
+    } else if (typeof mediaQuery.addListener === 'function') {
+      mediaQuery.addListener(mediaQueryHandler);
+    }
+  }
+});
+
+onBeforeUnmount(() => {
+  if (!mediaQuery || !mediaQueryHandler) {
+    return;
+  }
+
+  if (typeof mediaQuery.removeEventListener === 'function') {
+    mediaQuery.removeEventListener('change', mediaQueryHandler);
+  } else if (typeof mediaQuery.removeListener === 'function') {
+    mediaQuery.removeListener(mediaQueryHandler);
+  }
 });
 
 function isActiveRoute(path) {
@@ -85,7 +114,11 @@ function isActiveRoute(path) {
         </div>
       </div>
 
-      <nav class="app-nav" aria-label="主要導覽">
+      <nav
+        v-if="!isCompactHeader"
+        class="app-nav"
+        aria-label="主要導覽"
+      >
         <RouterLink
           v-for="item in navigationItems"
           :key="item.path"
