@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { buildSelectionRadar } from './selection-radar.mjs';
+import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
 import { formatNumber, formatPercent, formatTaipeiDate } from './close-digest.mjs';
 
 export { formatTaipeiDate } from './close-digest.mjs';
@@ -165,6 +166,20 @@ function buildDiscordSelectionFields(summary) {
     });
   }
 
+  if (summary.themeMomentumTopics.length) {
+    fields.push({
+      name: '資金轉強題材',
+      value: summary.themeMomentumTopics
+        .map((item) => {
+          const leader = item.leaderStocks?.[0];
+          const catchUp = item.catchUpStocks?.[0];
+          return `• **${item.title}**\n${item.observation}\n龍頭 ${leader ? `${leader.code} ${leader.name}` : '—'}｜補漲 ${catchUp ? `${catchUp.code} ${catchUp.name}` : '—'}`;
+        })
+        .join('\n'),
+      inline: false,
+    });
+  }
+
   return fields;
 }
 
@@ -210,6 +225,7 @@ export function buildEventAlertSummary({ dashboard, stockIndex, stockDetailList,
     appName: dashboard?.appName ?? '台股主動通',
     marketDate,
     futuresCards: pickFuturesCards(dashboard),
+    themeMomentumTopics: buildThemeMomentumTopics(dashboard?.題材雷達, 3),
     ...selectionRadar,
   };
 
@@ -217,7 +233,8 @@ export function buildEventAlertSummary({ dashboard, stockIndex, stockDetailList,
     !summary.futuresCards.length &&
     !summary.institutionalResonance.length &&
     !summary.volumeSqueezeRisers.length &&
-    !summary.consolidationWatch.length
+    !summary.consolidationWatch.length &&
+    !summary.themeMomentumTopics.length
   ) {
     return null;
   }
@@ -277,6 +294,19 @@ export function buildTelegramEventAlertMessage(summary) {
         `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜30 日箱型 ${escapeHtml(formatNumber(item.rangePercent, 1))}%｜距箱頂 ${escapeHtml(formatNumber(item.distanceToHigh, 1))}%｜RSI ${escapeHtml(formatNumber(item.rsi, 1))}`,
       );
       lines.push('  若隔日帶量站上箱頂，通常會比中途追高更容易管理風險。');
+    });
+  }
+
+  if (summary.themeMomentumTopics.length) {
+    lines.push('');
+    lines.push('<b>資金轉強題材</b>');
+    summary.themeMomentumTopics.forEach((item) => {
+      const leader = item.leaderStocks?.[0];
+      const catchUp = item.catchUpStocks?.[0];
+      lines.push(
+        `• ${escapeHtml(item.title)}｜${escapeHtml(formatNumber(item.score, 0))} 分｜龍頭 ${escapeHtml(leader ? `${leader.code} ${leader.name}` : '—')}｜補漲 ${escapeHtml(catchUp ? `${catchUp.code} ${catchUp.name}` : '—')}`,
+      );
+      lines.push(`  ${escapeHtml(item.observation)}`);
     });
   }
 

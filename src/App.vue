@@ -12,6 +12,9 @@ let mediaQueryHandler = null;
 
 const navigationItems = [
   { label: '首頁', path: '/' },
+  { label: '選股', path: '/radar' },
+  { label: '題材雷達', path: '/themes' },
+  { label: '期貨籌碼', path: '/futures' },
   { label: 'ETF 重疊', path: '/etf-overlap' },
   { label: '主動式 ETF', path: '/etfs' },
 ];

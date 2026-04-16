@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { buildSelectionRadar } from './selection-radar.mjs';
+import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
 
 const rootDir = process.cwd();
 
@@ -197,6 +198,7 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
     bearishSignals: pickSignalStocks(trackedStocks, 'down'),
     officialRadarSummary: buildOfficialRadarSummary(selectionUniverse),
     officialRiskRadar,
+    themeMomentumTopics: buildThemeMomentumTopics(dashboard?.題材雷達, 3),
     ...selectionRadar,
   };
 }
@@ -271,6 +273,21 @@ export function buildTelegramMessage(summary) {
     summary.consolidationWatch,
     (item) =>
       `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜30 日箱型 ${escapeHtml(formatNumber(item.rangePercent, 1))}%｜距箱頂 ${escapeHtml(formatNumber(item.distanceToHigh, 1))}%｜RSI ${escapeHtml(formatNumber(item.rsi, 1))}`,
+    3,
+  );
+  appendTelegramSection(
+    lines,
+    '資金轉強題材',
+    summary.themeMomentumTopics,
+    (item) => {
+      const leader = item.leaderStocks?.[0];
+      const catchUp = item.catchUpStocks?.[0];
+      return [
+        `• ${escapeHtml(item.title)}｜${escapeHtml(formatNumber(item.score, 0))} 分`,
+        leader ? `龍頭 ${escapeHtml(leader.code)} ${escapeHtml(leader.name)}` : null,
+        catchUp ? `補漲 ${escapeHtml(catchUp.code)} ${escapeHtml(catchUp.name)}` : null,
+      ].filter(Boolean).join('｜');
+    },
     3,
   );
 
@@ -371,6 +388,18 @@ export function buildDiscordPayload(summary) {
           value: toEmbedLines(
             summary.consolidationWatch.slice(0, 4),
             (item) => `• **${item.code} ${item.name}**\n30 日箱型 ${formatNumber(item.rangePercent, 1)}%｜距箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜MA20 / MA60 差 ${formatNumber(item.maGapPercent, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
+          ),
+          inline: false,
+        },
+        {
+          name: '資金轉強題材',
+          value: toEmbedLines(
+            summary.themeMomentumTopics.slice(0, 3),
+            (item) => {
+              const leader = item.leaderStocks?.[0];
+              const catchUp = item.catchUpStocks?.[0];
+              return `• **${item.title}**\n${item.observation}\n龍頭 ${leader ? `${leader.code} ${leader.name}` : '—'}｜補漲 ${catchUp ? `${catchUp.code} ${catchUp.name}` : '—'}`;
+            },
           ),
           inline: false,
         },

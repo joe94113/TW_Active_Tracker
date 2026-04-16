@@ -856,6 +856,7 @@ export async function fetchLiveFallbackStockDetail(code) {
     持股分散: null,
     融資融券: null,
     交易提醒: selectionSignals,
+    foreignTargetPrice: null,
     主動ETF曝光: {
       count: null,
       items: [],

@@ -21,21 +21,12 @@ import {
   formatTime,
 } from '../lib/formatters';
 
-const TAIPEI_OFFSET_MS = 8 * 60 * 60 * 1000;
-const REFRESH_MINUTES = [
-  ...Array.from({ length: 24 }, (_, index) => (9 * 60) + (index * 15)),
-  14 * 60 + 50,
-  15 * 60 + 20,
-  18 * 60 + 35,
-];
-
 const router = useRouter();
 const { dashboard, manifest, stockList, stockSearchList, etfOverviewList, isLoading, errorMessage, loadGlobalData } = useGlobalData();
 const { favoriteCodes, isFavorite, toggleFavorite, clearFavorites } = useFavoriteStocks();
 const { recentItems, clearRecentStocks } = useRecentStocks();
 const searchQuery = ref('');
 const rankingView = ref('live');
-const nowTimestamp = ref(Date.now());
 const staticMarketOverview = computed(() => dashboard.value?.市場總覽 ?? null);
 const {
   marketOverview,
@@ -57,7 +48,6 @@ const {
   startAutoRefresh: startLiveSnapshotAutoRefresh,
   stopAutoRefresh: stopLiveSnapshotAutoRefresh,
 } = useLiveStockSnapshots(watchedLiveCodes);
-let clockHandle = null;
 
 onMounted(() => {
   loadGlobalData();
@@ -65,23 +55,14 @@ onMounted(() => {
   startAutoRefresh();
   refreshSnapshots();
   startLiveSnapshotAutoRefresh();
-  clockHandle = window.setInterval(() => {
-    nowTimestamp.value = Date.now();
-  }, 60000);
 });
 
 onBeforeUnmount(() => {
   stopAutoRefresh();
   stopLiveSnapshotAutoRefresh();
-
-  if (clockHandle) {
-    window.clearInterval(clockHandle);
-    clockHandle = null;
-  }
 });
 
 const institutionalHighlights = computed(() => dashboard.value?.法人追蹤 ?? null);
-const futuresPositioning = computed(() => dashboard.value?.期貨籌碼 ?? null);
 const activeEtfOverview = computed(() => dashboard.value?.主動ETF總覽 ?? null);
 const marketSummary = computed(() => marketOverview.value?.大盤摘要 ?? {});
 const intradayPulse = computed(() => marketOverview.value?.盤中脈動 ?? {});
@@ -147,82 +128,6 @@ const rankingLiveBadge = computed(() => {
 
   return parts.join(' / ') || '盤中即時';
 });
-const futuresDailyDate = computed(() => futuresPositioning.value?.資料日期 ?? null);
-const futuresStatusSummary = computed(() => {
-  if (liveMarketDate.value && futuresDailyDate.value && liveMarketDate.value !== futuresDailyDate.value) {
-    return `期交所今日日資料尚未公告，暫以 ${formatDate(futuresDailyDate.value)} 的日線與法人籌碼呈現。`;
-  }
-
-  if (futuresDailyDate.value) {
-    return `目前顯示期交所最新日資料 ${formatDate(futuresDailyDate.value)}。`;
-  }
-
-  return '期貨日資料整理中。';
-});
-
-function toTaipeiShiftedDate(dateLike) {
-  const baseDate = dateLike instanceof Date ? dateLike : new Date(dateLike);
-  return new Date(baseDate.getTime() + TAIPEI_OFFSET_MS);
-}
-
-function createTaipeiDate(year, month, day, minutesOfDay) {
-  const hour = Math.floor(minutesOfDay / 60);
-  const minute = minutesOfDay % 60;
-  return new Date(Date.UTC(year, month - 1, day, hour - 8, minute, 0));
-}
-
-function formatTaipeiDateTime(value) {
-  if (!value) {
-    return '-';
-  }
-
-  const date = new Date(value);
-
-  if (Number.isNaN(date.getTime())) {
-    return '-';
-  }
-
-  return date.toLocaleString('zh-TW', {
-    timeZone: 'Asia/Taipei',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-}
-
-function getNextRefreshDate(now = new Date()) {
-  const shiftedNow = toTaipeiShiftedDate(now);
-
-  for (let offset = 0; offset < 10; offset += 1) {
-    const shiftedDay = new Date(shiftedNow.getTime());
-    shiftedDay.setUTCDate(shiftedNow.getUTCDate() + offset);
-    const weekday = shiftedDay.getUTCDay();
-
-    if (weekday === 0 || weekday === 6) {
-      continue;
-    }
-
-    const year = shiftedDay.getUTCFullYear();
-    const month = shiftedDay.getUTCMonth() + 1;
-    const day = shiftedDay.getUTCDate();
-    const currentMinutes = (shiftedNow.getUTCHours() * 60) + shiftedNow.getUTCMinutes();
-
-    for (const minutesOfDay of REFRESH_MINUTES) {
-      if (offset === 0 && minutesOfDay <= currentMinutes) {
-        continue;
-      }
-
-      return createTaipeiDate(year, month, day, minutesOfDay);
-    }
-  }
-
-  return null;
-}
-
-const futuresLastUpdatedLabel = computed(() => formatTaipeiDateTime(manifest.value?.generatedAt));
-const futuresNextRefreshLabel = computed(() => formatTaipeiDateTime(getNextRefreshDate(new Date(nowTimestamp.value))));
 
 const homeSeo = computed(() => ({
   title: '台股大盤、熱門股與主動式 ETF 風向球',
@@ -613,9 +518,6 @@ function formatViewedAt(dateText) {
   });
 }
 
-function getInstitutionalFlow(contract, identity) {
-  return contract?.法人資料?.find((item) => item.身份別 === identity) ?? null;
-}
 </script>
 
 <template>
@@ -1343,57 +1245,10 @@ function getInstitutionalFlow(contract, identity) {
         </div>
       </section>
 
-      <section class="panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">小台與微台籌碼面</h2>
-            <p class="panel-subtitle">{{ futuresStatusSummary }}</p>
-            <div class="tag-row">
-              <span class="meta-chip">日線資料 {{ formatDate(futuresPositioning?.資料日期) }}</span>
-              <span class="meta-chip">最近整理 {{ futuresLastUpdatedLabel }}</span>
-              <span class="meta-chip">下次預計更新 {{ futuresNextRefreshLabel }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="futures-grid">
-          <article v-for="contract in futuresPositioning?.契約列表 ?? []" :key="contract.商品代碼" class="sub-panel">
-            <div class="futures-card-head">
-              <div>
-                <h3>{{ contract.契約名稱 }}</h3>
-                <p class="panel-subtitle">方向 {{ contract.方向 }}</p>
-              </div>
-              <span class="meta-chip">{{ contract.行情代碼 }}</span>
-            </div>
-            <div class="metric-line">
-              <span>外資未平倉淨口數</span>
-              <strong :class="{ 'text-up': (getInstitutionalFlow(contract, '外資')?.未平倉淨口數 ?? 0) > 0, 'text-down': (getInstitutionalFlow(contract, '外資')?.未平倉淨口數 ?? 0) < 0 }">
-                {{ formatAmount(getInstitutionalFlow(contract, '外資')?.未平倉淨口數) }}
-              </strong>
-            </div>
-            <div class="metric-line">
-              <span>自營商未平倉淨口數</span>
-              <strong :class="{ 'text-up': (getInstitutionalFlow(contract, '自營商')?.未平倉淨口數 ?? 0) > 0, 'text-down': (getInstitutionalFlow(contract, '自營商')?.未平倉淨口數 ?? 0) < 0 }">
-                {{ formatAmount(getInstitutionalFlow(contract, '自營商')?.未平倉淨口數) }}
-              </strong>
-            </div>
-            <ul class="bullet-list compact">
-              <li v-for="item in contract.觀察建議 ?? []" :key="item">{{ item }}</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <TechnicalChart
-        v-for="contract in futuresPositioning?.契約列表 ?? []"
-        :key="`${contract.商品代碼}-chart`"
-        :data="contract.技術面資料"
-        :title="`${contract.契約名稱}走勢圖表`"
-      />
-
-      <section class="panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">主動式 ETF 快覽</h2>
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">主動式 ETF 快覽</h2>
             <p class="panel-subtitle">已整理 {{ activeEtfOverview?.已串接檔數 ?? 0 }} 檔完整成分資料</p>
           </div>
           <RouterLink class="action-link" to="/etfs">查看全部 ETF</RouterLink>

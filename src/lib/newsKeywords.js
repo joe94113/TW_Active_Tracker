@@ -18,6 +18,14 @@ const STOP_WORDS = new Set([
   '分析',
   '同步',
   '整理',
+  'nbsp',
+  'cmoney',
+  'yahoo',
+  'yahoo股市',
+  'google',
+  'rss',
+  'factset',
+  '豐雲學堂',
 ]);
 
 const FINANCIAL_TERMS = [
@@ -53,11 +61,15 @@ export function decodeHtmlEntities(text) {
     .replaceAll('&gt;', '>')
     .replaceAll('&quot;', '"')
     .replaceAll('&#39;', "'")
-    .replaceAll('&#x27;', "'");
+    .replaceAll('&#x27;', "'")
+    .replaceAll('&nbsp;', ' ')
+    .replaceAll('&#160;', ' ')
+    .replace(/\u00a0/g, ' ');
 }
 
 export function stripHtml(text) {
-  return decodeHtmlEntities(String(text ?? '').replace(/<[^>]+>/g, ' '))
+  return decodeHtmlEntities(String(text ?? ''))
+    .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }

@@ -4,6 +4,9 @@ import EtfOverlapPage from './pages/EtfOverlapPage.vue';
 import EtfListPage from './pages/EtfListPage.vue';
 import EtfDetailPage from './pages/EtfDetailPage.vue';
 import StockDetailPage from './pages/StockDetailPage.vue';
+import ThemeRadarPage from './pages/ThemeRadarPage.vue';
+import FuturesPage from './pages/FuturesPage.vue';
+import StockRadarPage from './pages/StockRadarPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -12,6 +15,9 @@ export const ROUTE_NAME = {
   ETF_LIST: 'etf-list',
   ETF_DETAIL: 'etf-detail',
   STOCK_DETAIL: 'stock-detail',
+  THEME_RADAR: 'theme-radar',
+  FUTURES: 'futures',
+  STOCK_RADAR: 'stock-radar',
 };
 
 const router = createRouter({
@@ -52,6 +58,33 @@ const router = createRouter({
       meta: {
         title: '主動式 ETF 明細',
         description: '查看主動式 ETF 最新成分股、前一日異動、技術面與持股分散。',
+      },
+    },
+    {
+      path: '/radar',
+      name: ROUTE_NAME.STOCK_RADAR,
+      component: StockRadarPage,
+      meta: {
+        title: '選股雷達',
+        description: '把技術突破、籌碼偏多、整理待發、題材輪動與風險排除整理成同一頁的選股工作台。',
+      },
+    },
+    {
+      path: '/themes',
+      name: ROUTE_NAME.THEME_RADAR,
+      component: ThemeRadarPage,
+      meta: {
+        title: '資金題材雷達',
+        description: '用題材強度排行、龍頭股與補漲股拆開看台股近期資金輪動，快速找到值得深挖的題材與個股。',
+      },
+    },
+    {
+      path: '/futures',
+      name: ROUTE_NAME.FUTURES,
+      component: FuturesPage,
+      meta: {
+        title: '小台 / 微台期貨籌碼與走勢',
+        description: '集中看小型臺指期貨與微型臺指期貨的法人未平倉、方向判讀與技術走勢圖，方便盤後單獨研究。',
       },
     },
     {

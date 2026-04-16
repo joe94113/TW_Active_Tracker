@@ -47,8 +47,10 @@ const marginSnapshot = computed(() => detail.value?.融資融券 ?? null);
 const activeEtfExposure = computed(() => detail.value?.主動ETF曝光 ?? null);
 const industryComparison = computed(() => detail.value?.同產業比較 ?? null);
 const selectionSignals = computed(() => detail.value?.交易提醒 ?? null);
+const foreignTargetPrice = computed(() => detail.value?.foreignTargetPrice ?? null);
 const isTracked = computed(() => isFavorite(stockCode.value));
 const technicalSignals = computed(() => detail.value?.technicalSignals ?? []);
+const foreignTargetPriceItems = computed(() => foreignTargetPrice.value?.items ?? []);
 const selectionAlertItems = computed(() => selectionSignals.value?.alerts ?? []);
 const latestIndicators = computed(() => detail.value?.最新指標 ?? {});
 const indicatorSettings = computed(() => detail.value?.indicatorSettings ?? {});
@@ -136,7 +138,7 @@ const stockSeo = computed(() => {
     title: `${stockName} ${stockCode.value} 技術分析與籌碼面`,
     description,
     routePath: `/stocks/${stockCode.value}`,
-    keywords: [stockCode.value, stockName, '台股', '技術分析', '法人籌碼', '財務分析', '支撐壓力'],
+    keywords: [stockCode.value, stockName, '台股', '技術分析', '法人籌碼', '財務分析', '支撐壓力', '外資目標價'],
     jsonLd: [
       createBreadcrumbJsonLd([
         { name: '台股主動通', url: buildPageUrl('/') },
@@ -703,6 +705,88 @@ watch(
             </section>
           </div>
         </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">外資目標價摘要</h2>
+            <p class="panel-subtitle">
+              從近 {{ foreignTargetPrice?.recentDays ?? 7 }} 天新聞整理券商／外資喊價，先看市場對這檔股票的預期區間。
+            </p>
+          </div>
+          <span class="meta-chip">新聞整理</span>
+        </div>
+
+        <template v-if="foreignTargetPrice?.itemCount">
+          <section class="comparison-stat-grid">
+            <article class="comparison-stat-card">
+              <p class="comparison-stat-label">最新目標價</p>
+              <p class="comparison-stat-value">{{ formatNumber(foreignTargetPrice.latestTargetPrice) }}</p>
+              <p class="comparison-stat-note">
+                {{ foreignTargetPrice.latestBroker ?? '市場摘要' }}
+              </p>
+            </article>
+
+            <article class="comparison-stat-card">
+              <p class="comparison-stat-label">目標價區間</p>
+              <p class="comparison-stat-value">
+                {{ formatNumber(foreignTargetPrice.lowestTargetPrice) }} - {{ formatNumber(foreignTargetPrice.highestTargetPrice) }}
+              </p>
+              <p class="comparison-stat-note">近 {{ foreignTargetPrice.recentDays }} 天新聞提及</p>
+            </article>
+
+            <article class="comparison-stat-card">
+              <p class="comparison-stat-label">平均目標價</p>
+              <p class="comparison-stat-value">{{ formatNumber(foreignTargetPrice.averageTargetPrice) }}</p>
+              <p class="comparison-stat-note">共 {{ formatNumber(foreignTargetPrice.itemCount, 0) }} 則目標價敘述</p>
+            </article>
+
+            <article class="comparison-stat-card">
+              <p class="comparison-stat-label">相對現價空間</p>
+              <p
+                class="comparison-stat-value"
+                :class="{
+                  'text-up': (foreignTargetPrice.premiumToClose ?? 0) > 0,
+                  'text-down': (foreignTargetPrice.premiumToClose ?? 0) < 0,
+                }"
+              >
+                {{ formatPercent(foreignTargetPrice.premiumToClose) }}
+              </p>
+              <p class="comparison-stat-note">以最新目標價對照目前顯示股價</p>
+            </article>
+          </section>
+
+          <ul class="bullet-list compact">
+            <li>{{ foreignTargetPrice.note }}</li>
+            <li>資料來自近 {{ foreignTargetPrice.recentDays }} 天新聞整理，屬市場資訊摘要，不代表官方共識目標價。</li>
+          </ul>
+
+          <div class="table-wrap">
+            <table class="data-table compact-table">
+              <thead>
+                <tr>
+                  <th>日期</th>
+                  <th>券商 / 外資</th>
+                  <th>目標價</th>
+                  <th>動作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in foreignTargetPriceItems" :key="`${item.link}-${item.targetPrice}`">
+                  <td>{{ formatDate(item.publishedAt) }}</td>
+                  <td>{{ item.broker }}</td>
+                  <td>{{ formatNumber(item.targetPrice) }}</td>
+                  <td>{{ item.action }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </template>
+        <div v-else class="empty-state compact">
+          <strong>近期沒有可參考的外資目標價整理</strong>
+          <p>近 {{ foreignTargetPrice?.recentDays ?? 7 }} 天新聞裡若出現券商或外資明確喊價，這裡會自動補上。</p>
+        </div>
       </section>
 
       <section id="news" class="page-section-anchor">
