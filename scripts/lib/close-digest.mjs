@@ -4,6 +4,9 @@ import { buildSelectionRadar } from './selection-radar.mjs';
 import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
 
 const rootDir = process.cwd();
+const siteUrl = 'https://joe94113.github.io/TW_Active_Tracker/';
+const brandIconUrl = `${siteUrl}icon-128.png`;
+const socialCardUrl = `${siteUrl}social-card.png`;
 
 const taipeiDateFormatter = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Taipei',
@@ -60,18 +63,6 @@ async function readJson(relativePath) {
   return JSON.parse(content);
 }
 
-function pickSignalStocks(items, tone) {
-  return [...items]
-    .filter((item) => item.topSignalTone === tone && item.topSignalTitle && item.topSignalTitle !== '技術面中性')
-    .sort((left, right) =>
-      (right.technicalSignals?.[0]?.importance ?? 0) - (left.technicalSignals?.[0]?.importance ?? 0) ||
-      (right.activeEtfCount ?? 0) - (left.activeEtfCount ?? 0) ||
-      Math.abs(right.total5Day ?? 0) - Math.abs(left.total5Day ?? 0) ||
-      Math.abs(right.return20 ?? 0) - Math.abs(left.return20 ?? 0),
-    )
-    .slice(0, 3);
-}
-
 function normalizeDateKey(value) {
   const text = String(value ?? '').trim().replaceAll('/', '-');
 
@@ -100,6 +91,19 @@ function resolveDigestMarketDate(dashboard) {
   );
 }
 
+function pickSignalStocks(items, tone) {
+  return [...(items ?? [])]
+    .filter((item) => item.topSignalTone === tone && item.topSignalTitle)
+    .sort(
+      (left, right) =>
+        (right.technicalSignals?.[0]?.importance ?? 0) - (left.technicalSignals?.[0]?.importance ?? 0) ||
+        (right.activeEtfCount ?? 0) - (left.activeEtfCount ?? 0) ||
+        Math.abs(right.total5Day ?? 0) - Math.abs(left.total5Day ?? 0) ||
+        Math.abs(right.return20 ?? 0) - Math.abs(left.return20 ?? 0),
+    )
+    .slice(0, 4);
+}
+
 function getAlertPriority(item) {
   if (item.isUnderDisposition) return 3;
   if (item.hasChangedTrading) return 2;
@@ -108,42 +112,229 @@ function getAlertPriority(item) {
 }
 
 function getAlertLabel(item) {
-  if (item.isUnderDisposition) return '處置中';
+  if (item.isUnderDisposition) return '處置';
   if (item.hasChangedTrading) return '變更交易';
-  if (item.hasAttentionWarning) return '注意累計';
-  return '觀察';
-}
-
-function getAlertTone(item) {
-  if (item.isUnderDisposition) return 'risk';
-  if (item.hasChangedTrading || item.hasAttentionWarning) return 'warning';
-  return item.selectionSignalTone ?? 'info';
+  if (item.hasAttentionWarning) return '注意股';
+  return '提醒';
 }
 
 function pickOfficialRiskRadar(items) {
-  return [...items]
+  return [...(items ?? [])]
     .filter((item) => item.isUnderDisposition || item.hasChangedTrading || item.hasAttentionWarning)
     .map((item) => ({
       ...item,
       alertLabel: getAlertLabel(item),
-      alertTone: getAlertTone(item),
       priority: getAlertPriority(item),
     }))
-    .sort((left, right) =>
-      (right.priority ?? 0) - (left.priority ?? 0) ||
-      (right.selectionSignalCount ?? 0) - (left.selectionSignalCount ?? 0) ||
-      Math.abs(right.changePercent ?? 0) - Math.abs(left.changePercent ?? 0) ||
-      String(left.code).localeCompare(String(right.code)),
+    .sort(
+      (left, right) =>
+        (right.priority ?? 0) - (left.priority ?? 0) ||
+        (right.selectionSignalCount ?? 0) - (left.selectionSignalCount ?? 0) ||
+        Math.abs(right.changePercent ?? 0) - Math.abs(left.changePercent ?? 0) ||
+        String(left.code).localeCompare(String(right.code)),
     )
-    .slice(0, 6);
+    .slice(0, 4);
 }
 
 function buildOfficialRadarSummary(items) {
   return {
-    dispositions: items.filter((item) => item.isUnderDisposition).length,
-    changedTrading: items.filter((item) => item.hasChangedTrading).length,
-    attentionWarnings: items.filter((item) => item.hasAttentionWarning).length,
+    dispositions: (items ?? []).filter((item) => item.isUnderDisposition).length,
+    changedTrading: (items ?? []).filter((item) => item.hasChangedTrading).length,
+    attentionWarnings: (items ?? []).filter((item) => item.hasAttentionWarning).length,
   };
+}
+
+function takeUniqueByCode(items, usedCodes, formatter, limit = 3) {
+  const results = [];
+
+  for (const item of items ?? []) {
+    const code = String(item?.code ?? '').trim();
+
+    if (!code || usedCodes.has(code)) {
+      continue;
+    }
+
+    usedCodes.add(code);
+    results.push(formatter(item));
+
+    if (results.length >= limit) {
+      break;
+    }
+  }
+
+  return results;
+}
+
+function clampRating(value) {
+  return Math.max(1, Math.min(5, Math.round(value)));
+}
+
+function buildRatingText(value) {
+  const rating = clampRating(value);
+  return `${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}`;
+}
+
+function rateStableInstitutional(item) {
+  const foreign = Math.max(0, Number(item?.foreignAccumulated ?? 0));
+  const trust = Math.max(0, Number(item?.trustAccumulated ?? 0));
+  const return20 = Number(item?.return20 ?? 0);
+  const days = Math.max(Number(item?.foreignDays ?? 0), Number(item?.trustDays ?? 0));
+  const raw = 2.2 + Math.min((foreign + trust) / 30000000, 1.1) + Math.min(return20 / 30, 0.9) + Math.min(days / 8, 0.8);
+  return clampRating(raw);
+}
+
+function rateStableBullish(item) {
+  const return20 = Number(item?.return20 ?? 0);
+  const total5Day = Math.max(0, Number(item?.total5Day ?? 0));
+  const etfCount = Number(item?.activeEtfCount ?? 0);
+  const raw = 2 + Math.min(return20 / 24, 1) + Math.min(total5Day / 8000000, 0.8) + Math.min(etfCount / 4, 0.8);
+  return clampRating(raw);
+}
+
+function rateAggressiveVolume(item) {
+  const volumeRatio5 = Math.max(0, Number(item?.volumeRatio5 ?? 0));
+  const distanceToHigh20 = Math.max(0, Number(item?.distanceToHigh20 ?? 99));
+  const changePercent = Number(item?.changePercent ?? 0);
+  const raw = 2.3 + Math.min(changePercent / 8, 0.9) + Math.max(0, (70 - volumeRatio5) / 120) + Math.max(0, (6 - distanceToHigh20) / 8);
+  return clampRating(raw);
+}
+
+function rateAggressiveConsolidation(item) {
+  const rangePercent = Math.max(0, Number(item?.rangePercent ?? 99));
+  const distanceToHigh = Math.max(0, Number(item?.distanceToHigh ?? 99));
+  const rsi = Number(item?.rsi ?? 50);
+  const raw = 2.1 + Math.max(0, (8 - rangePercent) / 10) + Math.max(0, (2.5 - distanceToHigh) / 3) + Math.max(0, (rsi - 50) / 35);
+  return clampRating(raw);
+}
+
+function buildWatchGroups(summary) {
+  const stableCodes = new Set();
+  const aggressiveCodes = new Set();
+  const stable = [];
+  const aggressive = [];
+
+  stable.push(
+    ...takeUniqueByCode(
+      summary.institutionalResonance,
+      stableCodes,
+      (item) => ({
+        code: item.code,
+        name: item.name,
+        label: '雙法人偏多',
+        rating: rateStableInstitutional(item),
+        detail: `${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)}｜20 日 ${formatPercent(item.return20)}`,
+      }),
+      3,
+    ),
+  );
+
+  stable.push(
+    ...takeUniqueByCode(
+      summary.bullishSignals,
+      stableCodes,
+      (item) => ({
+        code: item.code,
+        name: item.name,
+        label: '偏多焦點',
+        rating: rateStableBullish(item),
+        detail: `${item.topSignalTitle}｜20 日 ${formatPercent(item.return20)}｜五日籌碼 ${formatNumber(item.total5Day, 0)}`,
+      }),
+      2,
+    ),
+  );
+
+  aggressive.push(
+    ...takeUniqueByCode(
+      summary.volumeSqueezeRisers,
+      aggressiveCodes,
+      (item) => ({
+        code: item.code,
+        name: item.name,
+        label: '量縮價漲',
+        rating: rateAggressiveVolume(item),
+        detail: `單日 ${formatPercent(item.changePercent)}｜量比 5 日 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高 ${formatNumber(item.distanceToHigh20, 1)}%`,
+      }),
+      3,
+    ),
+  );
+
+  aggressive.push(
+    ...takeUniqueByCode(
+      summary.consolidationWatch,
+      aggressiveCodes,
+      (item) => ({
+        code: item.code,
+        name: item.name,
+        label: '盤整待發',
+        rating: rateAggressiveConsolidation(item),
+        detail: `30 日箱體 ${formatNumber(item.rangePercent, 1)}%｜離箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
+      }),
+      3,
+    ),
+  );
+
+  const stableSorted = stable.sort((left, right) => (right.rating ?? 0) - (left.rating ?? 0)).slice(0, 5);
+  const stableCodeSet = new Set(stableSorted.map((item) => item.code));
+  const aggressiveDeduped = aggressive
+    .filter((item) => !stableCodeSet.has(item.code))
+    .sort((left, right) => (right.rating ?? 0) - (left.rating ?? 0))
+    .slice(0, 6);
+
+  return {
+    stable: stableSorted,
+    aggressive: aggressiveDeduped,
+  };
+}
+
+function buildTomorrowOutlook(summary) {
+  const outlook = [];
+
+  if (summary.observations?.length) {
+    outlook.push(...summary.observations.slice(0, 2));
+  }
+
+  if (summary.themeMomentumTopics?.length) {
+    const topTheme = summary.themeMomentumTopics[0];
+    const leader = topTheme.leaderStocks?.[0];
+    outlook.push(`資金主線暫看 ${topTheme.title}${leader ? `，龍頭可先看 ${leader.code} ${leader.name}` : ''}。`);
+  }
+
+  if (summary.officialRiskRadar?.length) {
+    const topRisk = summary.officialRiskRadar[0];
+    outlook.push(`${topRisk.code} ${topRisk.name} 出現 ${topRisk.alertLabel}，短線先避開追價。`);
+  } else if (
+    Number(summary.officialRadarSummary?.dispositions ?? 0) === 0 &&
+    Number(summary.officialRadarSummary?.changedTrading ?? 0) === 0 &&
+    Number(summary.officialRadarSummary?.attentionWarnings ?? 0) === 0
+  ) {
+    outlook.push('官方風險股不多，短線盤面相對乾淨，但仍要搭配量價確認。');
+  }
+
+  return outlook.slice(0, 4);
+}
+
+function buildWatchListLines(items) {
+  return items.map((item) => `• ${item.code} ${item.name}｜${item.label}｜${buildRatingText(item.rating)}\n${item.detail}`);
+}
+
+function getMarketThemeColor(summary) {
+  const changePercent = Number(summary?.marketSummary?.漲跌幅 ?? 0);
+  const breadthRatio = Number(summary?.marketBreadth?.強弱比 ?? 1);
+  const sentiment = String(summary?.marketBreadth?.市場情緒 ?? '');
+
+  if (changePercent >= 1.5 || breadthRatio >= 2.2 || sentiment.includes('全面擴散')) {
+    return { primary: 0xd84c4c, secondary: 0xf08c6b };
+  }
+
+  if (changePercent >= 0.2 || breadthRatio >= 1.15 || sentiment.includes('多方')) {
+    return { primary: 0x0b699b, secondary: 0x13885e };
+  }
+
+  if (changePercent <= -1.5 || breadthRatio <= 0.7 || sentiment.includes('空方')) {
+    return { primary: 0x5b6b7a, secondary: 0x7c4d79 };
+  }
+
+  return { primary: 0x56657a, secondary: 0x607d8b };
 }
 
 export async function loadCloseDigestData() {
@@ -188,12 +379,12 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
     stockDetailList,
   });
 
-  return {
+  const summary = {
     appName: dashboard?.appName ?? '台股主動通',
     marketDate,
     marketSummary: dashboard?.市場總覽?.大盤摘要 ?? {},
     marketBreadth: dashboard?.市場總覽?.市場廣度 ?? {},
-    observations: (dashboard?.市場總覽?.觀察摘要 ?? []).slice(0, 2),
+    observations: (dashboard?.市場總覽?.觀察摘要 ?? []).slice(0, 3),
     bullishSignals: pickSignalStocks(trackedStocks, 'up'),
     bearishSignals: pickSignalStocks(trackedStocks, 'down'),
     officialRadarSummary: buildOfficialRadarSummary(selectionUniverse),
@@ -201,18 +392,12 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
     themeMomentumTopics: buildThemeMomentumTopics(dashboard?.題材雷達, 3),
     ...selectionRadar,
   };
-}
 
-function appendTelegramSection(lines, title, items, formatter, limit = 3) {
-  const selected = (items ?? []).slice(0, limit).map(formatter).filter(Boolean);
-
-  if (!selected.length) {
-    return;
-  }
-
-  lines.push('');
-  lines.push(`<b>${title}</b>`);
-  lines.push(...selected);
+  return {
+    ...summary,
+    tomorrowOutlook: buildTomorrowOutlook(summary),
+    watchGroups: buildWatchGroups(summary),
+  };
 }
 
 export function buildTelegramMessage(summary) {
@@ -221,82 +406,36 @@ export function buildTelegramMessage(summary) {
   }
 
   const lines = [
-    `<b>${escapeHtml(summary.appName)}｜盤後快訊 ${escapeHtml(summary.marketDate)}</b>`,
-    `加權指數 ${escapeHtml(formatNumber(summary.marketSummary.加權指數))}（${escapeHtml(formatSigned(summary.marketSummary.漲跌點數))} / ${escapeHtml(formatPercent(summary.marketSummary.漲跌幅))}）`,
-    `市場情緒 ${escapeHtml(summary.marketBreadth.市場情緒 ?? '整理中')}｜上漲 ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.上漲, 0))} / 下跌 ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.下跌, 0))} / 強弱比 ${escapeHtml(formatNumber(summary.marketBreadth?.強弱比))}`,
+    `<b>${escapeHtml(summary.appName)}｜明日盤勢 ${escapeHtml(summary.marketDate)}</b>`,
+    `加權 ${escapeHtml(formatNumber(summary.marketSummary.加權指數))}（${escapeHtml(formatSigned(summary.marketSummary.漲跌點數))} / ${escapeHtml(formatPercent(summary.marketSummary.漲跌幅))}）`,
+    `市場廣度 ${escapeHtml(summary.marketBreadth.市場情緒 ?? '資料整理中')}｜上漲 / 下跌 ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.上漲, 0))} / ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.下跌, 0))}｜強弱比 ${escapeHtml(formatNumber(summary.marketBreadth?.強弱比))}`,
   ];
 
-  appendTelegramSection(lines, '今晚先看', summary.observations, (item) => `• ${escapeHtml(item)}`, 2);
-  appendTelegramSection(
-    lines,
-    '官方交易雷達',
-    summary.officialRiskRadar,
-    (item) =>
-      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.alertLabel)}｜${escapeHtml(item.topSelectionSignalTitle ?? '官方公告提醒')}｜日變動 ${escapeHtml(formatPercent(item.changePercent))}`,
-    3,
-  );
-  appendTelegramSection(
-    lines,
-    '偏多技術訊號',
-    summary.bullishSignals,
-    (item) =>
-      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSignalTitle)}｜20日 ${escapeHtml(formatPercent(item.return20))}｜法人五日 ${escapeHtml(formatNumber(item.total5Day, 0))}`,
-    2,
-  );
-  appendTelegramSection(
-    lines,
-    '偏弱技術訊號',
-    summary.bearishSignals,
-    (item) =>
-      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.topSignalTitle)}｜20日 ${escapeHtml(formatPercent(item.return20))}｜法人五日 ${escapeHtml(formatNumber(item.total5Day, 0))}`,
-    2,
-  );
-  appendTelegramSection(
-    lines,
-    '外資 / 投信同步偏多',
-    summary.institutionalResonance,
-    (item) =>
-      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.signalLabel)}｜外資 ${escapeHtml(formatNumber(item.foreignAccumulated, 0))} / 投信 ${escapeHtml(formatNumber(item.trustAccumulated, 0))} 股｜20日 ${escapeHtml(formatPercent(item.return20))}`,
-    3,
-  );
-  appendTelegramSection(
-    lines,
-    '量縮價漲觀察',
-    summary.volumeSqueezeRisers,
-    (item) =>
-      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜單日 ${escapeHtml(formatPercent(item.changePercent))}｜量能為 5 日均量 ${escapeHtml(formatNumber(item.volumeRatio5, 0))}%｜距 20 日高點 ${escapeHtml(formatNumber(item.distanceToHigh20, 1))}%`,
-    3,
-  );
-  appendTelegramSection(
-    lines,
-    '盤整待突破',
-    summary.consolidationWatch,
-    (item) =>
-      `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜30 日箱型 ${escapeHtml(formatNumber(item.rangePercent, 1))}%｜距箱頂 ${escapeHtml(formatNumber(item.distanceToHigh, 1))}%｜RSI ${escapeHtml(formatNumber(item.rsi, 1))}`,
-    3,
-  );
-  appendTelegramSection(
-    lines,
-    '資金轉強題材',
-    summary.themeMomentumTopics,
-    (item) => {
-      const leader = item.leaderStocks?.[0];
-      const catchUp = item.catchUpStocks?.[0];
-      return [
-        `• ${escapeHtml(item.title)}｜${escapeHtml(formatNumber(item.score, 0))} 分`,
-        leader ? `龍頭 ${escapeHtml(leader.code)} ${escapeHtml(leader.name)}` : null,
-        catchUp ? `補漲 ${escapeHtml(catchUp.code)} ${escapeHtml(catchUp.name)}` : null,
-      ].filter(Boolean).join('｜');
-    },
-    3,
-  );
+  if (summary.tomorrowOutlook.length) {
+    lines.push('');
+    lines.push('<b>明天盤勢</b>');
+    summary.tomorrowOutlook.forEach((item) => lines.push(`• ${escapeHtml(item)}`));
+  }
+
+  if (summary.watchGroups.stable.length) {
+    lines.push('');
+    lines.push('<b>穩健型</b>');
+    summary.watchGroups.stable.forEach((item) => {
+      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}`);
+      lines.push(`  ${escapeHtml(item.detail)}`);
+    });
+  }
+
+  if (summary.watchGroups.aggressive.length) {
+    lines.push('');
+    lines.push('<b>積極型</b>');
+    summary.watchGroups.aggressive.forEach((item) => {
+      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}`);
+      lines.push(`  ${escapeHtml(item.detail)}`);
+    });
+  }
 
   return lines.join('\n');
-}
-
-function toEmbedLines(items, formatter) {
-  const lines = items.map(formatter).filter(Boolean);
-  return lines.length ? lines.join('\n') : '無';
 }
 
 export function buildDiscordPayload(summary) {
@@ -304,113 +443,81 @@ export function buildDiscordPayload(summary) {
     return null;
   }
 
-  const marketUp = Number(summary.marketSummary.漲跌點數 ?? 0) >= 0;
-  const color = marketUp ? 0x0b699b : 0x13885e;
-  const titlePrefix = marketUp ? '偏多收盤' : '震盪收盤';
-
-  const embeds = [
-    {
-      title: `${summary.appName}｜${titlePrefix} ${summary.marketDate}`,
-      description: [
-        `**加權指數** ${formatNumber(summary.marketSummary.加權指數)}（${formatSigned(summary.marketSummary.漲跌點數)} / ${formatPercent(summary.marketSummary.漲跌幅)}）`,
-        `**市場情緒** ${summary.marketBreadth.市場情緒 ?? '整理中'} ｜ **上漲 / 下跌** ${formatNumber(summary.marketBreadth?.股票市場?.上漲, 0)} / ${formatNumber(summary.marketBreadth?.股票市場?.下跌, 0)} ｜ **強弱比** ${formatNumber(summary.marketBreadth?.強弱比)}`,
-      ].join('\n'),
-      color,
-      fields: summary.observations.length
-        ? [
-            {
-              name: '今晚先看',
-              value: toEmbedLines(summary.observations.slice(0, 3), (item) => `• ${item}`),
-              inline: false,
-            },
-          ]
-        : [],
-      footer: {
-        text: '僅供研究參考，不構成投資建議。',
-      },
-      timestamp: new Date(`${summary.marketDate}T11:00:00+08:00`).toISOString(),
-    },
-    {
-      title: '選股線索',
-      color: 0x22466d,
-      fields: [
-        {
-          name: '官方交易雷達',
-          value: [
-            `處置 ${formatNumber(summary.officialRadarSummary?.dispositions, 0)}｜變更交易 ${formatNumber(summary.officialRadarSummary?.changedTrading, 0)}｜注意累計 ${formatNumber(summary.officialRadarSummary?.attentionWarnings, 0)}`,
-            toEmbedLines(
-              summary.officialRiskRadar.slice(0, 4),
-              (item) => `• **${item.code} ${item.name}**\n${item.alertLabel}｜${item.topSelectionSignalTitle ?? '官方公告提醒'}｜日變動 ${formatPercent(item.changePercent)}`,
-            ),
-          ].join('\n'),
-          inline: false,
-        },
-        {
-          name: '偏多技術訊號',
-          value: toEmbedLines(
-            summary.bullishSignals.slice(0, 3),
-            (item) => `• **${item.code} ${item.name}**\n${item.topSignalTitle}｜20日 ${formatPercent(item.return20)}｜法人五日 ${formatNumber(item.total5Day, 0)}`,
-          ),
-          inline: false,
-        },
-        {
-          name: '偏弱技術訊號',
-          value: toEmbedLines(
-            summary.bearishSignals.slice(0, 3),
-            (item) => `• **${item.code} ${item.name}**\n${item.topSignalTitle}｜20日 ${formatPercent(item.return20)}｜法人五日 ${formatNumber(item.total5Day, 0)}`,
-          ),
-          inline: false,
-        },
-      ],
-    },
-    {
-      title: '選股雷達',
-      color: 0x13885e,
-      fields: [
-        {
-          name: '外資 / 投信同步偏多',
-          value: toEmbedLines(
-            summary.institutionalResonance.slice(0, 4),
-            (item) => `• **${item.code} ${item.name}**\n${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)} 股｜20日 ${formatPercent(item.return20)}`,
-          ),
-          inline: false,
-        },
-        {
-          name: '量縮價漲觀察',
-          value: toEmbedLines(
-            summary.volumeSqueezeRisers.slice(0, 4),
-            (item) => `• **${item.code} ${item.name}**\n單日 ${formatPercent(item.changePercent)}｜量能為 5 日均量 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高點 ${formatNumber(item.distanceToHigh20, 1)}%`,
-          ),
-          inline: false,
-        },
-        {
-          name: '盤整待突破',
-          value: toEmbedLines(
-            summary.consolidationWatch.slice(0, 4),
-            (item) => `• **${item.code} ${item.name}**\n30 日箱型 ${formatNumber(item.rangePercent, 1)}%｜距箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜MA20 / MA60 差 ${formatNumber(item.maGapPercent, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
-          ),
-          inline: false,
-        },
-        {
-          name: '資金轉強題材',
-          value: toEmbedLines(
-            summary.themeMomentumTopics.slice(0, 3),
-            (item) => {
-              const leader = item.leaderStocks?.[0];
-              const catchUp = item.catchUpStocks?.[0];
-              return `• **${item.title}**\n${item.observation}\n龍頭 ${leader ? `${leader.code} ${leader.name}` : '—'}｜補漲 ${catchUp ? `${catchUp.code} ${catchUp.name}` : '—'}`;
-            },
-          ),
-          inline: false,
-        },
-      ],
-    },
-  ];
+  const themeColors = getMarketThemeColor(summary);
 
   return {
     username: summary.appName,
-    avatar_url: 'https://www.twse.com.tw/rsrc/images/brand/favicon.png',
-    embeds,
+    avatar_url: brandIconUrl,
+    embeds: [
+      {
+        title: `${summary.appName}｜明日盤勢 ${summary.marketDate}`,
+        url: siteUrl,
+        author: {
+          name: summary.appName,
+          icon_url: brandIconUrl,
+          url: siteUrl,
+        },
+        description: [
+          `**加權指數** ${formatNumber(summary.marketSummary.加權指數)}（${formatSigned(summary.marketSummary.漲跌點數)} / ${formatPercent(summary.marketSummary.漲跌幅)}）`,
+          `**市場廣度** ${summary.marketBreadth.市場情緒 ?? '資料整理中'}｜上漲 / 下跌 ${formatNumber(summary.marketBreadth?.股票市場?.上漲, 0)} / ${formatNumber(summary.marketBreadth?.股票市場?.下跌, 0)}｜強弱比 ${formatNumber(summary.marketBreadth?.強弱比)}`,
+        ].join('\n'),
+        color: themeColors.primary,
+        thumbnail: {
+          url: brandIconUrl,
+        },
+        fields: [
+          {
+            name: '明天盤勢',
+            value: summary.tomorrowOutlook.length
+              ? summary.tomorrowOutlook.map((item) => `• ${item}`).join('\n')
+              : '• 目前沒有足夠的觀察摘要。',
+            inline: false,
+          },
+        ],
+        footer: {
+          text: '僅供研究參考，不構成投資建議。',
+          icon_url: brandIconUrl,
+        },
+        timestamp: new Date(`${summary.marketDate}T18:35:00+08:00`).toISOString(),
+      },
+      ...(summary.watchGroups.stable.length || summary.watchGroups.aggressive.length
+        ? [
+            {
+              title: '最近可留意',
+              url: `${siteUrl}#/radar`,
+              color: themeColors.secondary,
+              image:
+                summary.watchGroups.stable.length && !summary.watchGroups.aggressive.length
+                  ? { url: socialCardUrl }
+                  : undefined,
+              fields: [
+                ...(summary.watchGroups.stable.length
+                  ? [
+                      {
+                        name: '穩健型',
+                        value: buildWatchListLines(summary.watchGroups.stable).join('\n'),
+                        inline: false,
+                      },
+                    ]
+                  : []),
+                ...(summary.watchGroups.aggressive.length
+                  ? [
+                      {
+                        name: '積極型',
+                        value: buildWatchListLines(summary.watchGroups.aggressive).join('\n'),
+                        inline: false,
+                      },
+                    ]
+                  : []),
+              ],
+              footer: {
+                text: '更多選股整理可直接打開選股雷達。',
+                icon_url: brandIconUrl,
+              },
+            },
+          ]
+        : []),
+    ],
     allowed_mentions: {
       parse: [],
     },

@@ -1,12 +1,12 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { buildSelectionRadar } from './selection-radar.mjs';
-import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
 import { formatNumber, formatPercent, formatTaipeiDate } from './close-digest.mjs';
 
 export { formatTaipeiDate } from './close-digest.mjs';
 
 const rootDir = process.cwd();
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -63,14 +63,17 @@ function scoreStock(item) {
 
 function buildCandidateCodeSet({ dashboard, stockIndex }) {
   const codeSet = new Set();
-  const rankedStocks = [...stockIndex]
+  const rankedStocks = [...(stockIndex ?? [])]
     .sort((left, right) => scoreStock(right) - scoreStock(left))
     .slice(0, 240);
 
-  rankedStocks.forEach((item) => codeSet.add(item.code));
+  rankedStocks.forEach((item) => codeSet.add(String(item.code ?? '').trim()));
   (dashboard?.法人追蹤?.外資連買 ?? []).forEach((item) => codeSet.add(String(item.代號 ?? '').trim()));
   (dashboard?.法人追蹤?.投信連買 ?? []).forEach((item) => codeSet.add(String(item.代號 ?? '').trim()));
   (dashboard?.法人追蹤?.土洋對作 ?? []).forEach((item) => codeSet.add(String(item.代號 ?? '').trim()));
+  (dashboard?.市場總覽?.熱門股 ?? []).forEach((item) => codeSet.add(String(item.代號 ?? '').trim()));
+  (dashboard?.市場總覽?.成交排行 ?? []).forEach((item) => codeSet.add(String(item.代號 ?? '').trim()));
+  (dashboard?.市場總覽?.強勢股 ?? []).forEach((item) => codeSet.add(String(item.代號 ?? '').trim()));
 
   return [...codeSet].filter((code) => /^\d{4,6}$/.test(code));
 }
@@ -100,7 +103,7 @@ function pickFuturesCards(dashboard) {
         rsi: latestIndicators.rsi14 ?? latestIndicators.rsi ?? null,
         macdHist: latestIndicators.macdHist ?? null,
         direction: contract?.方向 ?? '區間整理',
-        highlight: contract?.觀察建議?.at(-1) ?? '先看價格與法人方向是否同步。',
+        highlight: contract?.觀察建議?.at(-1) ?? '留意法人未平倉是否開始同方向加碼。',
         foreignNetOi: foreign?.未平倉淨口數 ?? null,
         dealerNetOi: dealer?.未平倉淨口數 ?? null,
       };
@@ -108,79 +111,66 @@ function pickFuturesCards(dashboard) {
     .filter((item) => item.name && item.latestClose !== null);
 }
 
-function formatFuturesSummaryLine(item) {
-  return `• ${item.name}｜收 ${formatNumber(item.latestClose, 0)}｜單日 ${formatPercent(item.changePercent)}｜20日 ${formatPercent(item.return20)}｜RSI ${formatNumber(item.rsi, 1)}｜${item.direction}`;
-}
-
-function buildFuturesDiscordDescription(item) {
-  const lines = [
-    `收 ${formatNumber(item.latestClose, 0)} ｜ 單日 ${formatPercent(item.changePercent)} ｜ 20日 ${formatPercent(item.return20)}`,
-    `RSI ${formatNumber(item.rsi, 1)} ｜ MACD柱 ${formatNumber(item.macdHist, 1)} ｜ 日線 ${item.latestDate ?? '-'}`,
+function buildSelectionFocusList(selectionRadar, limit = 4) {
+  const usedCodes = new Set();
+  const focusList = [];
+  const buckets = [
+    {
+      label: '雙法人偏多',
+      items: selectionRadar.institutionalResonance ?? [],
+      detail: (item) =>
+        `外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)}｜20 日 ${formatPercent(item.return20)}`,
+    },
+    {
+      label: '量縮價漲',
+      items: selectionRadar.volumeSqueezeRisers ?? [],
+      detail: (item) =>
+        `單日 ${formatPercent(item.changePercent)}｜量比 5 日 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高 ${formatNumber(item.distanceToHigh20, 1)}%`,
+    },
+    {
+      label: '盤整待發',
+      items: selectionRadar.consolidationWatch ?? [],
+      detail: (item) =>
+        `30 日箱體 ${formatNumber(item.rangePercent, 1)}%｜離箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
+    },
   ];
 
-  lines.push(`外資 OI ${formatNumber(item.foreignNetOi, 0)} ｜ 自營 OI ${formatNumber(item.dealerNetOi, 0)}`);
-  lines.push(item.highlight ?? '先看價格與法人方向是否同步。');
+  for (const bucket of buckets) {
+    for (const item of bucket.items) {
+      const code = String(item?.code ?? '').trim();
 
-  return lines.join('\n');
+      if (!code || usedCodes.has(code)) {
+        continue;
+      }
+
+      usedCodes.add(code);
+      focusList.push({
+        code,
+        name: item.name,
+        label: bucket.label,
+        detail: bucket.detail(item),
+      });
+
+      if (focusList.length >= limit) {
+        return focusList;
+      }
+    }
+  }
+
+  return focusList;
 }
 
-function buildDiscordSelectionFields(summary) {
-  const fields = [];
+function formatFuturesSummaryLine(item) {
+  return `• ${item.name}｜收 ${formatNumber(item.latestClose, 0)}｜單日 ${formatPercent(item.changePercent)}｜20 日 ${formatPercent(item.return20)}｜RSI ${formatNumber(item.rsi, 1)}｜${item.direction}`;
+}
 
-  if (summary.institutionalResonance.length) {
-    fields.push({
-      name: '外資 / 投信同步偏多',
-      value: summary.institutionalResonance
-        .map(
-          (item) =>
-            `• **${item.code} ${item.name}**\n${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)} 股｜20日 ${formatPercent(item.return20)}`,
-        )
-        .join('\n'),
-      inline: false,
-    });
-  }
-
-  if (summary.volumeSqueezeRisers.length) {
-    fields.push({
-      name: '量縮價漲觀察',
-      value: summary.volumeSqueezeRisers
-        .map(
-          (item) =>
-            `• **${item.code} ${item.name}**\n單日 ${formatPercent(item.changePercent)}｜量能為 5 日均量 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高點 ${formatNumber(item.distanceToHigh20, 1)}%`,
-        )
-        .join('\n'),
-      inline: false,
-    });
-  }
-
-  if (summary.consolidationWatch.length) {
-    fields.push({
-      name: '盤整待突破',
-      value: summary.consolidationWatch
-        .map(
-          (item) =>
-            `• **${item.code} ${item.name}**\n30 日箱型 ${formatNumber(item.rangePercent, 1)}%｜距箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜MA20 / MA60 差 ${formatNumber(item.maGapPercent, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
-        )
-        .join('\n'),
-      inline: false,
-    });
-  }
-
-  if (summary.themeMomentumTopics.length) {
-    fields.push({
-      name: '資金轉強題材',
-      value: summary.themeMomentumTopics
-        .map((item) => {
-          const leader = item.leaderStocks?.[0];
-          const catchUp = item.catchUpStocks?.[0];
-          return `• **${item.title}**\n${item.observation}\n龍頭 ${leader ? `${leader.code} ${leader.name}` : '—'}｜補漲 ${catchUp ? `${catchUp.code} ${catchUp.name}` : '—'}`;
-        })
-        .join('\n'),
-      inline: false,
-    });
-  }
-
-  return fields;
+function buildFuturesDiscordField(item) {
+  return [
+    `收 ${formatNumber(item.latestClose, 0)}｜單日 ${formatPercent(item.changePercent)}｜20 日 ${formatPercent(item.return20)}`,
+    `RSI ${formatNumber(item.rsi, 1)}｜MACD 柱 ${formatNumber(item.macdHist, 1)}｜日線 ${item.latestDate ?? '-'}`,
+    `外資 OI ${formatNumber(item.foreignNetOi, 0)}｜自營 OI ${formatNumber(item.dealerNetOi, 0)}`,
+    item.highlight ?? '留意法人未平倉是否開始同方向加碼。',
+  ].join('\n');
 }
 
 export async function loadEventAlertData() {
@@ -215,6 +205,7 @@ export function buildEventAlertSummary({ dashboard, stockIndex, stockDetailList,
   if (marketDate !== today) {
     return null;
   }
+
   const selectionRadar = buildSelectionRadar({
     dashboard,
     stockMetaList: stockIndex,
@@ -225,17 +216,10 @@ export function buildEventAlertSummary({ dashboard, stockIndex, stockDetailList,
     appName: dashboard?.appName ?? '台股主動通',
     marketDate,
     futuresCards: pickFuturesCards(dashboard),
-    themeMomentumTopics: buildThemeMomentumTopics(dashboard?.題材雷達, 3),
-    ...selectionRadar,
+    focusList: buildSelectionFocusList(selectionRadar),
   };
 
-  if (
-    !summary.futuresCards.length &&
-    !summary.institutionalResonance.length &&
-    !summary.volumeSqueezeRisers.length &&
-    !summary.consolidationWatch.length &&
-    !summary.themeMomentumTopics.length
-  ) {
+  if (!summary.futuresCards.length && !summary.focusList.length) {
     return null;
   }
 
@@ -248,65 +232,22 @@ export function buildTelegramEventAlertMessage(summary) {
   }
 
   const lines = [
-    `<b>${escapeHtml(summary.appName)}｜期貨與選股雷達 ${escapeHtml(summary.marketDate)}</b>`,
-    '先看小台、微台的盤後節奏，再補量縮價漲、盤整待突破與雙法人同步布局。',
+    `<b>${escapeHtml(summary.appName)}｜盤後快看 ${escapeHtml(summary.marketDate)}</b>`,
+    '先看小台 / 微台方向，再看今晚最值得打開個股頁的名單。',
   ];
 
   if (summary.futuresCards.length) {
     lines.push('');
     lines.push('<b>期貨風向球</b>');
-    summary.futuresCards.forEach((item) => {
-      lines.push(formatFuturesSummaryLine(item));
-      lines.push(
-        `  外資 OI ${escapeHtml(formatNumber(item.foreignNetOi, 0))}｜自營 OI ${escapeHtml(formatNumber(item.dealerNetOi, 0))}｜日線 ${escapeHtml(item.latestDate ?? '-')}`,
-      );
-      lines.push(`  ${escapeHtml(item.highlight ?? '先看價格與法人方向是否同步。')}`);
-    });
+    summary.futuresCards.forEach((item) => lines.push(formatFuturesSummaryLine(item)));
   }
 
-  if (summary.institutionalResonance.length) {
+  if (summary.focusList.length) {
     lines.push('');
-    lines.push('<b>外資 / 投信同步偏多</b>');
-    summary.institutionalResonance.forEach((item) => {
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.signalLabel)}｜20日 ${escapeHtml(formatPercent(item.return20))}`,
-      );
-      lines.push(`  外資約 ${escapeHtml(formatNumber(item.foreignAccumulated, 0))} 股 / 投信約 ${escapeHtml(formatNumber(item.trustAccumulated, 0))} 股，可視為中短線同步加倉。`);
-    });
-  }
-
-  if (summary.volumeSqueezeRisers.length) {
-    lines.push('');
-    lines.push('<b>量縮價漲觀察</b>');
-    summary.volumeSqueezeRisers.forEach((item) => {
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜單日 ${escapeHtml(formatPercent(item.changePercent))}｜量能為 5 日均量 ${escapeHtml(formatNumber(item.volumeRatio5, 0))}%｜距 20 日高點 ${escapeHtml(formatNumber(item.distanceToHigh20, 1))}%`,
-      );
-      lines.push('  價格先動、量沒有急放大，適合列入續強觀察名單。');
-    });
-  }
-
-  if (summary.consolidationWatch.length) {
-    lines.push('');
-    lines.push('<b>盤整待突破</b>');
-    summary.consolidationWatch.forEach((item) => {
-      lines.push(
-        `• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜30 日箱型 ${escapeHtml(formatNumber(item.rangePercent, 1))}%｜距箱頂 ${escapeHtml(formatNumber(item.distanceToHigh, 1))}%｜RSI ${escapeHtml(formatNumber(item.rsi, 1))}`,
-      );
-      lines.push('  若隔日帶量站上箱頂，通常會比中途追高更容易管理風險。');
-    });
-  }
-
-  if (summary.themeMomentumTopics.length) {
-    lines.push('');
-    lines.push('<b>資金轉強題材</b>');
-    summary.themeMomentumTopics.forEach((item) => {
-      const leader = item.leaderStocks?.[0];
-      const catchUp = item.catchUpStocks?.[0];
-      lines.push(
-        `• ${escapeHtml(item.title)}｜${escapeHtml(formatNumber(item.score, 0))} 分｜龍頭 ${escapeHtml(leader ? `${leader.code} ${leader.name}` : '—')}｜補漲 ${escapeHtml(catchUp ? `${catchUp.code} ${catchUp.name}` : '—')}`,
-      );
-      lines.push(`  ${escapeHtml(item.observation)}`);
+    lines.push('<b>今晚先看</b>');
+    summary.focusList.forEach((item) => {
+      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}`);
+      lines.push(`  ${escapeHtml(item.detail)}`);
     });
   }
 
@@ -318,39 +259,48 @@ export function buildDiscordEventAlertPayload(summary) {
     return null;
   }
 
-  const eventFields = buildDiscordSelectionFields(summary);
+  const embeds = [
+    {
+      title: `${summary.appName}｜盤後快看 ${summary.marketDate}`,
+      description: '先看小台 / 微台方向，再看今晚最值得打開個股頁的名單。',
+      color: 0x0b699b,
+      footer: {
+        text: '僅供研究參考，不構成投資建議。',
+      },
+      timestamp: new Date(`${summary.marketDate}T18:40:00+08:00`).toISOString(),
+    },
+    ...(summary.futuresCards.length
+      ? [
+          {
+            title: '期貨風向球',
+            color: 0x22466d,
+            fields: summary.futuresCards.map((item) => ({
+              name: item.name,
+              value: buildFuturesDiscordField(item),
+              inline: false,
+            })),
+          },
+        ]
+      : []),
+    ...(summary.focusList.length
+      ? [
+          {
+            title: '今晚先看',
+            color: 0x13885e,
+            fields: summary.focusList.map((item) => ({
+              name: `${item.code} ${item.name}｜${item.label}`,
+              value: item.detail,
+              inline: false,
+            })),
+          },
+        ]
+      : []),
+  ];
 
   return {
     username: summary.appName,
     avatar_url: 'https://www.twse.com.tw/rsrc/images/brand/favicon.png',
-    embeds: [
-      {
-        title: `${summary.appName}｜期貨與選股雷達 ${summary.marketDate}`,
-        description: '先看小台、微台盤後節奏，再看量縮價漲、盤整待突破與雙法人同步布局。',
-        color: 0x0b699b,
-        footer: {
-          text: '僅供研究參考，不構成投資建議。',
-        },
-        timestamp: new Date(`${summary.marketDate}T18:40:00+08:00`).toISOString(),
-      },
-      ...summary.futuresCards.map((item) => ({
-        title: `${item.name}｜${item.direction}`,
-        description: buildFuturesDiscordDescription(item),
-        color: Number(item.changePercent ?? 0) >= 0 ? 0xdc4c4c : 0x1f9d72,
-        footer: {
-          text: `期貨日線 ${item.latestDate ?? '-'}`,
-        },
-      })),
-      ...(eventFields.length
-        ? [
-            {
-              title: '選股雷達',
-              color: 0x22466d,
-              fields: eventFields,
-            },
-          ]
-        : []),
-    ],
+    embeds,
     allowed_mentions: {
       parse: [],
     },
