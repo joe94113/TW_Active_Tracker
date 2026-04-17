@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { formatAmount, formatDate, formatPercent } from '../lib/formatters';
+import { formatAmount, formatDate, formatLots, formatPercent } from '../lib/formatters';
 
 const props = defineProps({
   data: {
@@ -153,7 +153,7 @@ function formatDelta(value) {
             </div>
             <div class="holder-band-meta">
               <span>人數 {{ formatAmount(item.holders) }}</span>
-              <span>股數 {{ formatAmount(item.shares) }}</span>
+              <span>張數 {{ formatLots(item.shares) }}</span>
             </div>
           </article>
         </div>

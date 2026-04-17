@@ -49,6 +49,22 @@ function clampRating(value) {
   return Math.max(1, Math.min(5, Math.round(value)));
 }
 
+function normalizeLots(value) {
+  const amount = Number(value);
+  return Number.isFinite(amount) ? amount / 1000 : null;
+}
+
+function createBaseItem(item) {
+  return {
+    code: item.code,
+    name: item.name,
+    close: item.close ?? null,
+    changePercent: item.changePercent ?? null,
+    return20: item.return20 ?? null,
+    volumeLots: normalizeLots(item.volume),
+  };
+}
+
 export function buildRatingText(value) {
   const rating = clampRating(value);
   return `${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}`;
@@ -102,8 +118,7 @@ function rateAggressiveConsolidation(item) {
 
 function createStableInstitutionalItem(item) {
   return {
-    code: item.code,
-    name: item.name,
+    ...createBaseItem(item),
     label: '雙法人偏多',
     rating: rateStableInstitutional(item),
     detail: `${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)}｜20 日 ${formatPercent(item.return20)}`,
@@ -112,8 +127,7 @@ function createStableInstitutionalItem(item) {
 
 function createStableBullishItem(item) {
   return {
-    code: item.code,
-    name: item.name,
+    ...createBaseItem(item),
     label: '偏多焦點',
     rating: rateStableBullish(item),
     detail: `${item.topSignalTitle}｜20 日 ${formatPercent(item.return20)}｜五日籌碼 ${numberFormatter.format(Math.round(Number(item.total5Day ?? 0)))}`,
@@ -122,21 +136,19 @@ function createStableBullishItem(item) {
 
 function createAggressiveVolumeItem(item) {
   return {
-    code: item.code,
-    name: item.name,
-    label: '量縮價漲',
+    ...createBaseItem(item),
+    label: '量縮價揚',
     rating: rateAggressiveVolume(item),
-    detail: `單日 ${formatPercent(item.changePercent)}｜量比 5 日 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高 ${formatNumber(item.distanceToHigh20, 1)}%`,
+    detail: `單日 ${formatPercent(item.changePercent)}｜量能比 5 日 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高 ${formatNumber(item.distanceToHigh20, 1)}%`,
   };
 }
 
 function createAggressiveConsolidationItem(item) {
   return {
-    code: item.code,
-    name: item.name,
+    ...createBaseItem(item),
     label: '盤整待發',
     rating: rateAggressiveConsolidation(item),
-    detail: `30 日箱體 ${formatNumber(item.rangePercent, 1)}%｜離箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
+    detail: `30 日區間 ${formatNumber(item.rangePercent, 1)}%｜離前高 ${formatNumber(item.distanceToHigh, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
   };
 }
 

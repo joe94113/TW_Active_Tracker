@@ -15,6 +15,7 @@ import { createStockRoute, isStockCode } from '../lib/stockRouting';
 import {
   formatAmount,
   formatDate,
+  formatLots,
   formatNumber,
   formatPercent,
   formatSignedNumber,
@@ -174,7 +175,7 @@ const rankingGroups = computed(() => {
       subtitle: isLive ? '榜單基底採最近同步，價格與量能即時更新' : '盤後成交人氣前段班',
       metricLabel: '成交量',
       items: isLive ? liveHotStocks.value : hotStocks.value,
-      metricValue: (item) => formatAmount(item.成交量),
+      metricValue: (item) => formatLots(item.成交量),
     },
     {
       key: 'strong',
@@ -206,7 +207,7 @@ const summaryCards = computed(() => [
   {
     title: '成交值',
     value: formatAmount(marketSummary.value.成交值),
-    description: `成交量 ${formatAmount(marketSummary.value.成交量)}`,
+    description: `成交量 ${formatLots(marketSummary.value.成交量)}`,
   },
   {
     title: '盤中更新',
@@ -433,7 +434,7 @@ const closeFocusCards = computed(() => [
     items: liveHotStocks.value.slice(0, 3).map((item) => ({
       code: item.代號,
       name: item.名稱,
-      value: `${formatPercent(item.漲跌幅)} / ${formatAmount(item.成交量)}`,
+      value: `${formatPercent(item.漲跌幅)} / ${formatLots(item.成交量)}`,
       tone: (item.漲跌幅 ?? 0) > 0 ? 'up' : (item.漲跌幅 ?? 0) < 0 ? 'down' : 'normal',
     })),
   },
@@ -734,7 +735,7 @@ function formatViewedAt(dateText) {
                 日變動 {{ formatPercent(item.changePercent) }}
               </span>
               <span>20 日 {{ formatPercent(item.return20) }}</span>
-              <span>法人五日 {{ formatAmount(item.total5Day) }}</span>
+              <span>法人五日 {{ formatLots(item.total5Day) }}</span>
               <span :class="['signal-pill', item.displaySignalTone ? `is-${item.displaySignalTone}` : '']">
                 {{ item.displaySignalTitle ?? '技術面整理中' }}
               </span>
@@ -790,7 +791,7 @@ function formatViewedAt(dateText) {
                 日變動 {{ formatPercent(item.changePercent) }}
               </span>
               <span>20 日 {{ formatPercent(item.return20) }}</span>
-              <span>法人五日 {{ formatAmount(item.total5Day) }}</span>
+              <span>法人五日 {{ formatLots(item.total5Day) }}</span>
               <span :class="['signal-pill', item.displaySignalTone ? `is-${item.displaySignalTone}` : '']">
                 {{ item.displaySignalTitle ?? '延續前次研究脈絡' }}
               </span>
@@ -1040,7 +1041,7 @@ function formatViewedAt(dateText) {
                   <td>{{ item.產業名稱 }}</td>
                   <td>{{ formatNumber(item.上市檔數) }}</td>
                   <td>{{ formatPercent(item.外資持股比) }}</td>
-                  <td>{{ formatAmount(item.外資持股數) }}</td>
+                  <td>{{ formatLots(item.外資持股數) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -1156,7 +1157,7 @@ function formatViewedAt(dateText) {
                   <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.代號 }}</RouterLink></td>
                   <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.名稱 }}</RouterLink></td>
                   <td>{{ item.連買天數 }}</td>
-                  <td>{{ formatAmount(item.累計買超股數) }}</td>
+                  <td>{{ formatLots(item.累計買超股數) }}</td>
                   <td>{{ item.其他法人態度 }}</td>
                 </tr>
               </tbody>
@@ -1194,7 +1195,7 @@ function formatViewedAt(dateText) {
                   <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.代號 }}</RouterLink></td>
                   <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.名稱 }}</RouterLink></td>
                   <td>{{ item.連買天數 }}</td>
-                  <td>{{ formatAmount(item.累計買超股數) }}</td>
+                  <td>{{ formatLots(item.累計買超股數) }}</td>
                   <td>{{ item.其他法人態度 }}</td>
                 </tr>
               </tbody>
@@ -1233,10 +1234,10 @@ function formatViewedAt(dateText) {
                 <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.代號 }}</RouterLink></td>
                 <td><RouterLink class="code-link" :to="createStockRoute(item.代號)">{{ item.名稱 }}</RouterLink></td>
                 <td :class="{ 'text-up': (item.外資買賣超 ?? 0) > 0, 'text-down': (item.外資買賣超 ?? 0) < 0 }">
-                  {{ formatAmount(item.外資買賣超) }}
+                  {{ formatLots(item.外資買賣超) }}
                 </td>
                 <td :class="{ 'text-up': (item.投信買賣超 ?? 0) > 0, 'text-down': (item.投信買賣超 ?? 0) < 0 }">
-                  {{ formatAmount(item.投信買賣超) }}
+                  {{ formatLots(item.投信買賣超) }}
                 </td>
                 <td>{{ item.結論 }}</td>
               </tr>

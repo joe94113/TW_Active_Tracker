@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
@@ -9,6 +9,7 @@ import { createStockRoute } from '../lib/stockRouting';
 import {
   formatAmount,
   formatDate,
+  formatLots,
   formatNumber,
   formatPercent,
 } from '../lib/formatters';
@@ -184,10 +185,7 @@ function formatChangeTone(value) {
         <div class="hero-copy">
           <span class="hero-kicker">Theme Radar</span>
           <h1>資金題材雷達</h1>
-          <p>
-            先看今天的主線，再對照近 5 / 10 / 20 個交易日的題材輪動，最後直接在同一頁比龍頭股、補漲股和籌碼面，
-            讓你不用在多個頁面之間來回切換。
-          </p>
+          <p>聚焦近期主線、輪動變化、龍頭股、補漲股與籌碼確認。</p>
           <div v-if="themeRadar.observations?.length" class="theme-radar-summary">
             <span
               v-for="(item, index) in themeRadar.observations"
@@ -236,7 +234,7 @@ function formatChangeTone(value) {
         <div class="panel-header">
           <div>
             <h2 class="panel-title">題材輪動歷史</h2>
-            <p class="panel-subtitle">不只看今天哪個題材熱，直接比較近 5 / 10 / 20 個交易日是升溫、降溫，還是主線切換。</p>
+            <p class="panel-subtitle">近 5 / 10 / 20 日輪動變化</p>
           </div>
           <div class="range-tabs">
             <button
@@ -340,7 +338,7 @@ function formatChangeTone(value) {
             <div class="panel-header">
               <div>
                 <h2 class="panel-title">題材強度排行</h2>
-                <p class="panel-subtitle">先從分數高、主線清楚的題材開始往下挖，再找補漲股。</p>
+                <p class="panel-subtitle">依強度排序</p>
               </div>
             </div>
             <div class="theme-ranking-list">
@@ -369,7 +367,7 @@ function formatChangeTone(value) {
             <div class="panel-header">
               <div>
                 <h2 class="panel-title">研究節奏</h2>
-                <p class="panel-subtitle">先判斷主線，再比較題材內龍頭股與補漲股，最後回到個股頁確認技術與籌碼。</p>
+                <p class="panel-subtitle">主線 / 龍頭 / 補漲</p>
               </div>
             </div>
             <ol class="theme-playbook-list">
@@ -458,7 +456,7 @@ function formatChangeTone(value) {
                   <div class="panel-header compact">
                     <div>
                       <h3 class="panel-title small">題材內龍頭股</h3>
-                      <p class="panel-subtitle">優先看真正帶動題材熱度、成交值與法人資金的股票。</p>
+                      <p class="panel-subtitle">龍頭股</p>
                     </div>
                   </div>
                   <div v-if="topic.leaderStocks?.length" class="theme-stock-list">
@@ -492,7 +490,7 @@ function formatChangeTone(value) {
                   <div class="panel-header compact">
                     <div>
                       <h3 class="panel-title small">題材內補漲股</h3>
-                      <p class="panel-subtitle">先看熱度跟上、漲幅還沒完全拉開的下一棒候選股。</p>
+                      <p class="panel-subtitle">補漲股</p>
                     </div>
                   </div>
                   <div v-if="topic.catchUpStocks?.length" class="theme-stock-list">
@@ -526,7 +524,7 @@ function formatChangeTone(value) {
                   <div class="panel-header compact">
                     <div>
                       <h3 class="panel-title small">近期題材新聞</h3>
-                      <p class="panel-subtitle">只保留近期且和這個題材直接相關的新聞，方便快速確認催化劑。</p>
+                      <p class="panel-subtitle">近期相關新聞</p>
                     </div>
                   </div>
                   <div v-if="topic.headlines?.length" class="theme-headline-list">
@@ -553,7 +551,7 @@ function formatChangeTone(value) {
                 <div class="panel-header compact">
                   <div>
                     <h3 class="panel-title small">同題材個股比較表</h3>
-                    <p class="panel-subtitle">同一頁直接比較漲幅、成交值、外資 / 投信、技術面與外資目標價，不用一檔一檔點。</p>
+                    <p class="panel-subtitle">漲幅 / 成交值 / 法人 / 技術 / 目標價</p>
                   </div>
                 </div>
 
@@ -579,8 +577,8 @@ function formatChangeTone(value) {
                         </td>
                         <td :class="formatChangeTone(stock.return20)">{{ formatPercent(stock.return20) }}</td>
                         <td>{{ formatAmount(stock.turnover) }}</td>
-                        <td :class="formatChangeTone(stock.foreign5Day)">{{ formatAmount(stock.foreign5Day) }}</td>
-                        <td :class="formatChangeTone(stock.investmentTrust5Day)">{{ formatAmount(stock.investmentTrust5Day) }}</td>
+                        <td :class="formatChangeTone(stock.foreign5Day)">{{ formatLots(stock.foreign5Day) }}</td>
+                        <td :class="formatChangeTone(stock.investmentTrust5Day)">{{ formatLots(stock.investmentTrust5Day) }}</td>
                         <td>
                           <span class="status-badge" :class="`is-${stock.topSignalTone || 'info'}`">
                             {{ stock.topSignalTitle ?? '觀察中' }}

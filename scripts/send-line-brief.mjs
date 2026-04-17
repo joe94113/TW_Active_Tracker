@@ -1,9 +1,9 @@
 import {
   buildCloseDigestSummary,
-  buildLineFlexPayload,
   formatTaipeiDate,
   loadCloseDigestData,
 } from './lib/close-digest.mjs';
+import { buildLineFlexPayload } from './lib/line-flex.mjs';
 
 async function sendLineMessage(message) {
   const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN;
@@ -27,6 +27,12 @@ async function sendLineMessage(message) {
   if (!response.ok) {
     const errorText = await response.text();
     throw new Error(`LINE send failed: ${response.status} ${errorText}`);
+  }
+
+  const requestId = response.headers.get('x-line-request-id');
+
+  if (requestId) {
+    console.log(`LINE broadcast accepted. request-id=${requestId}`);
   }
 
   return true;

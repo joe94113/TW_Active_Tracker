@@ -8,7 +8,7 @@ import {
   createSeriesMarkers,
   createChart,
 } from 'lightweight-charts';
-import { formatAmount, formatDate, formatNumber, formatPercent, formatPriceDelta } from '../lib/formatters';
+import { formatAmount, formatDate, formatLots, formatNumber, formatPercent, formatPriceDelta } from '../lib/formatters';
 import {
   buildIndicatorRows,
   buildTechnicalSignalSummary,
@@ -295,7 +295,7 @@ const primaryStats = computed(() => {
     },
     {
       label: '量',
-      value: formatAmount(row.volume),
+      value: formatLots(row.volume),
     },
     ...(row.contractMonth
       ? [

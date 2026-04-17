@@ -4,6 +4,7 @@ import InfoCard from './InfoCard.vue';
 import {
   formatAmount,
   formatDate,
+  formatLots,
   formatNumber,
   formatPercent,
   formatYearMonth,
@@ -84,7 +85,7 @@ const reportPeriod = computed(() => {
           <li>成立日期：{{ formatDate(companyProfile?.成立日期) }}</li>
           <li>上市日期：{{ formatDate(companyProfile?.上市日期) }}</li>
           <li>實收資本額：{{ formatAmount(companyProfile?.實收資本額) }}</li>
-          <li>已發行股數：{{ formatAmount(companyProfile?.已發行股數) }}</li>
+          <li>已發行張數：{{ formatLots(companyProfile?.已發行股數) }}</li>
           <li v-if="companyProfile?.網址">
             公司網站：
             <a class="action-link" :href="companyProfile.網址" target="_blank" rel="noreferrer">前往官網</a>

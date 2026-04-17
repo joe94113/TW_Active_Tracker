@@ -1,11 +1,11 @@
-<script setup>
+﻿<script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import StatusCard from '../components/StatusCard.vue';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import { fetchJson } from '../lib/api';
-import { formatAmount, formatDate, formatNumber, formatPercent } from '../lib/formatters';
+import { formatAmount, formatDate, formatLots, formatNumber, formatPercent } from '../lib/formatters';
 import { createStockRoute } from '../lib/stockRouting';
 import { buildStockRadar } from '../lib/stockRadar';
 import { buildReplayOverview } from '../lib/stockReplay';
@@ -148,8 +148,8 @@ function getStockMetrics(sectionKey, item) {
       ];
     case 'institutional':
       return [
-        { label: '外資 5 日', value: formatAmount(item.foreign5Day) },
-        { label: '投信 5 日', value: formatAmount(item.investmentTrust5Day) },
+        { label: '外資 5 日', value: formatLots(item.foreign5Day) },
+        { label: '投信 5 日', value: formatLots(item.investmentTrust5Day) },
         { label: '主動 ETF', value: `${formatNumber(item.activeEtfCount, 0)} 檔` },
       ];
     case 'squeeze':

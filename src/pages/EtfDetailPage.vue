@@ -18,6 +18,7 @@ import {
   formatPercent,
   formatPriceDelta,
   formatAmount,
+  formatLots,
 } from '../lib/formatters';
 
 const route = useRoute();
@@ -300,7 +301,7 @@ function openStockDetail(code) {
                   </RouterLink>
                   <span v-else>{{ item.name }}</span>
                 </td>
-                <td>{{ formatAmount(item.shares) }}</td>
+                <td>{{ formatLots(item.shares) }}</td>
                 <td>{{ formatPercent(item.weight) }}</td>
               </tr>
             </tbody>
@@ -368,15 +369,15 @@ function openStockDetail(code) {
                       <td>{{ item.name }}</td>
                       <td>
                         <div>{{ formatPercent(item.previousWeight) }}</div>
-                        <div class="muted">{{ formatAmount(item.previousShares) }}</div>
+                        <div class="muted">{{ formatLots(item.previousShares) }}</div>
                       </td>
                       <td>
                         <div>{{ formatPercent(item.currentWeight) }}</div>
-                        <div class="muted">{{ formatAmount(item.currentShares) }}</div>
+                        <div class="muted">{{ formatLots(item.currentShares) }}</div>
                       </td>
                       <td :class="section.statusClass">
                         <div>{{ formatPercent(item.weightDelta) }}</div>
-                        <div class="muted">{{ formatAmount(item.sharesDelta) }}</div>
+                        <div class="muted">{{ formatLots(item.sharesDelta) }}</div>
                       </td>
                     </tr>
                   </tbody>

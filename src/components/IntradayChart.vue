@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import { BaselineSeries, HistogramSeries, LineSeries, createChart } from 'lightweight-charts';
-import { formatAmount, formatDate, formatNumber, formatPercent } from '../lib/formatters';
+import { formatAmount, formatDate, formatLots, formatNumber, formatPercent } from '../lib/formatters';
 import {
   buildConstantLineData,
   chartEnums,
@@ -101,7 +101,7 @@ const infoStats = computed(() => {
     },
     {
       label: '量',
-      value: formatAmount(point.volume),
+      value: formatLots(point.volume),
     },
     {
       label: '振幅',

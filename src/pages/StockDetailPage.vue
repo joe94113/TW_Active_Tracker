@@ -21,6 +21,7 @@ import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
 import {
   formatDate,
   formatAmount,
+  formatLots,
   formatNumber,
   formatPercent,
   formatPriceDelta,
@@ -76,7 +77,7 @@ const laggardText = computed(() =>
 const heroPills = computed(() => [
   companyProfile.value?.產業名稱 ?? '上市股票',
   `資料日 ${formatDate(liveSnapshot.value?.marketDate ?? detail.value?.priceDate)}`,
-  `法人五日 ${formatAmount(institutionalFlows.value?.summary?.total5Day)}`,
+  `法人五日 ${formatLots(institutionalFlows.value?.summary?.total5Day)}`,
   `ETF 持有 ${formatNumber(activeEtfExposure.value?.count)}`,
 ]);
 
@@ -114,7 +115,7 @@ const liveSnapshotCards = computed(() => [
   },
   {
     title: '累計量',
-    value: formatAmount(liveSnapshot.value?.volume),
+    value: formatLots(liveSnapshot.value?.volume),
     description: `更新 ${formatDate(liveSnapshot.value?.marketDate)}`,
   },
 ]);
@@ -184,8 +185,8 @@ const summaryCards = computed(() => {
 const quickCards = computed(() => [
   {
     title: '五日法人合計',
-    value: formatAmount(institutionalFlows.value?.summary?.total5Day),
-    description: `外資 ${formatAmount(institutionalFlows.value?.summary?.foreign5Day)}`,
+    value: formatLots(institutionalFlows.value?.summary?.total5Day),
+    description: `外資 ${formatLots(institutionalFlows.value?.summary?.foreign5Day)}`,
     status:
       (institutionalFlows.value?.summary?.total5Day ?? 0) > 0
         ? 'up'
@@ -195,8 +196,8 @@ const quickCards = computed(() => [
   },
   {
     title: '融資餘額',
-    value: formatAmount(marginSnapshot.value?.marginToday),
-    description: `日增減 ${formatAmount(marginSnapshot.value?.marginChange)}`,
+    value: formatLots(marginSnapshot.value?.marginToday),
+    description: `日增減 ${formatLots(marginSnapshot.value?.marginChange)}`,
     status:
       (marginSnapshot.value?.marginChange ?? 0) > 0
         ? 'up'
@@ -206,8 +207,8 @@ const quickCards = computed(() => [
   },
   {
     title: '融券餘額',
-    value: formatAmount(marginSnapshot.value?.shortToday),
-    description: `日增減 ${formatAmount(marginSnapshot.value?.shortChange)}`,
+    value: formatLots(marginSnapshot.value?.shortToday),
+    description: `日增減 ${formatLots(marginSnapshot.value?.shortChange)}`,
     status:
       (marginSnapshot.value?.shortChange ?? 0) > 0
         ? 'up'
@@ -971,7 +972,7 @@ watch(
                     {{ formatPercent(item.changePercent) }}
                   </td>
                   <td :class="{ 'text-up': (item.total5Day ?? 0) > 0, 'text-down': (item.total5Day ?? 0) < 0 }">
-                    {{ formatAmount(item.total5Day) }}
+                    {{ formatLots(item.total5Day) }}
                   </td>
                 </tr>
               </tbody>
@@ -1028,9 +1029,9 @@ watch(
             </div>
           </div>
           <ul class="bullet-list compact">
-            <li>融資餘額：{{ formatAmount(detail?.融資融券?.marginToday) }}</li>
+            <li>融資餘額：{{ formatLots(detail?.融資融券?.marginToday) }}</li>
             <li>融資使用率：{{ formatPercent(detail?.融資融券?.marginUsage) }}</li>
-            <li>融券餘額：{{ formatAmount(detail?.融資融券?.shortToday) }}</li>
+            <li>融券餘額：{{ formatLots(detail?.融資融券?.shortToday) }}</li>
             <li>券資比：{{ formatPercent(detail?.融資融券?.shortToMarginRatio) }}</li>
             <li v-for="item in detail?.融資融券?.觀察摘要 ?? []" :key="item">{{ item }}</li>
             <li v-if="!(detail?.融資融券?.觀察摘要?.length)">這檔個股目前沒有可用的融資融券補充資料。</li>
@@ -1107,10 +1108,10 @@ watch(
               <tbody>
                 <tr v-for="item in detail?.法人買賣?.days ?? []" :key="item.date">
                   <td>{{ formatDate(item.date) }}</td>
-                  <td :class="{ 'text-up': (item.foreign ?? 0) > 0, 'text-down': (item.foreign ?? 0) < 0 }">{{ formatAmount(item.foreign) }}</td>
-                  <td :class="{ 'text-up': (item.investmentTrust ?? 0) > 0, 'text-down': (item.investmentTrust ?? 0) < 0 }">{{ formatAmount(item.investmentTrust) }}</td>
-                  <td :class="{ 'text-up': (item.dealer ?? 0) > 0, 'text-down': (item.dealer ?? 0) < 0 }">{{ formatAmount(item.dealer) }}</td>
-                  <td :class="{ 'text-up': (item.total ?? 0) > 0, 'text-down': (item.total ?? 0) < 0 }">{{ formatAmount(item.total) }}</td>
+                  <td :class="{ 'text-up': (item.foreign ?? 0) > 0, 'text-down': (item.foreign ?? 0) < 0 }">{{ formatLots(item.foreign) }}</td>
+                  <td :class="{ 'text-up': (item.investmentTrust ?? 0) > 0, 'text-down': (item.investmentTrust ?? 0) < 0 }">{{ formatLots(item.investmentTrust) }}</td>
+                  <td :class="{ 'text-up': (item.dealer ?? 0) > 0, 'text-down': (item.dealer ?? 0) < 0 }">{{ formatLots(item.dealer) }}</td>
+                  <td :class="{ 'text-up': (item.total ?? 0) > 0, 'text-down': (item.total ?? 0) < 0 }">{{ formatLots(item.total) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -1138,7 +1139,7 @@ watch(
                 <tr v-for="item in detail?.持股分散?.bands ?? []" :key="item.level">
                   <td>{{ item.label }}</td>
                   <td>{{ formatAmount(item.holders) }}</td>
-                  <td>{{ formatAmount(item.shares) }}</td>
+                  <td>{{ formatLots(item.shares) }}</td>
                   <td>{{ formatPercent(item.ratio) }}</td>
                 </tr>
               </tbody>

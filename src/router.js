@@ -7,6 +7,7 @@ import StockDetailPage from './pages/StockDetailPage.vue';
 import ThemeRadarPage from './pages/ThemeRadarPage.vue';
 import FuturesPage from './pages/FuturesPage.vue';
 import StockRadarPage from './pages/StockRadarPage.vue';
+import StockClassroomPage from './pages/StockClassroomPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -18,6 +19,7 @@ export const ROUTE_NAME = {
   THEME_RADAR: 'theme-radar',
   FUTURES: 'futures',
   STOCK_RADAR: 'stock-radar',
+  STOCK_CLASSROOM: 'stock-classroom',
 };
 
 const router = createRouter({
@@ -67,6 +69,15 @@ const router = createRouter({
       meta: {
         title: '選股雷達',
         description: '把技術突破、籌碼偏多、整理待發、題材輪動與風險排除整理成同一頁的選股工作台。',
+      },
+    },
+    {
+      path: '/classroom',
+      name: ROUTE_NAME.STOCK_CLASSROOM,
+      component: StockClassroomPage,
+      meta: {
+        title: '股票小教室',
+        description: '用簡單易懂的方式理解技術分析、量價、籌碼、期貨與微台指，建立新手友善的看盤流程。',
       },
     },
     {

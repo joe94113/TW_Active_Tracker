@@ -274,33 +274,37 @@ export function buildTelegramMessage(summary) {
   }
 
   const lines = [
-    `<b>${escapeHtml(summary.appName)}｜明日盤勢 ${escapeHtml(summary.marketDate)}</b>`,
-    `加權 ${escapeHtml(formatNumber(summary.marketSummary.加權指數))}（${escapeHtml(formatSigned(summary.marketSummary.漲跌點數))} / ${escapeHtml(formatPercent(summary.marketSummary.漲跌幅))}）`,
+    `<b>${escapeHtml(summary.appName)}｜${escapeHtml(summary.marketDate)} 更新｜明日趨勢預測</b>`,
+    `加權指數 ${escapeHtml(formatNumber(summary.marketSummary.加權指數))}（${escapeHtml(formatSigned(summary.marketSummary.漲跌點數))} / ${escapeHtml(formatPercent(summary.marketSummary.漲跌幅))}）`,
     `市場廣度 ${escapeHtml(summary.marketBreadth.市場情緒 ?? '資料整理中')}｜上漲 / 下跌 ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.上漲, 0))} / ${escapeHtml(formatNumber(summary.marketBreadth?.股票市場?.下跌, 0))}｜強弱比 ${escapeHtml(formatNumber(summary.marketBreadth?.強弱比))}`,
   ];
 
   if (summary.tomorrowOutlook.length) {
     lines.push('');
-    lines.push('<b>明天盤勢</b>');
+    lines.push('<b>明日趨勢預測</b>');
     summary.tomorrowOutlook.forEach((item) => lines.push(`• ${escapeHtml(item)}`));
   }
 
+  lines.push('');
+  lines.push('<b>🛡 穩健型</b>');
   if (summary.watchGroups.stable.length) {
-    lines.push('');
-    lines.push('<b>穩健型</b>');
     summary.watchGroups.stable.forEach((item) => {
       lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}`);
       lines.push(`  ${escapeHtml(item.detail)}`);
     });
+  } else {
+    lines.push('• 今天沒有特別整齊的穩健型名單，先觀察雙法人是否重新聚焦。');
   }
 
+  lines.push('');
+  lines.push('<b>🔥 積極型</b>');
   if (summary.watchGroups.aggressive.length) {
-    lines.push('');
-    lines.push('<b>積極型</b>');
     summary.watchGroups.aggressive.forEach((item) => {
       lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}`);
       lines.push(`  ${escapeHtml(item.detail)}`);
     });
+  } else {
+    lines.push('• 今天沒有額外的積極型名單，短線先等放量突破訊號再追。');
   }
 
   return lines.join('\n');
@@ -397,6 +401,29 @@ function buildLineWatchRows(items) {
   ]).slice(0, Math.max(items.length * 2 - 1, 0));
 }
 
+function buildLineWatchRowsSafe(items, emptyText) {
+  if (!items?.length) {
+    return [createLineText(emptyText, { color: '#6b7a86' })];
+  }
+
+  return items.flatMap((item) => [
+    {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'xs',
+      contents: [
+        createLineText(`${item.code} ${item.name}`, { size: 'sm', weight: 'bold' }),
+        createLineText(`${item.label}｜${buildRatingText(item.rating)}`, { size: 'xs', color: '#0b699b' }),
+        createLineText(item.detail, { size: 'xs', color: '#4b5c68' }),
+      ],
+    },
+    {
+      type: 'separator',
+      margin: 'md',
+    },
+  ]).slice(0, Math.max(items.length * 2 - 1, 0));
+}
+
 export function buildLineFlexPayload(summary) {
   if (!summary) {
     return null;
@@ -407,12 +434,12 @@ export function buildLineFlexPayload(summary) {
 
   return {
     type: 'flex',
-    altText: `${summary.appName} ${summary.marketDate}｜明日盤勢與最近可留意`,
+    altText: `${summary.appName}｜${summary.marketDate} 更新｜明日趨勢預測`,
     contents: {
       type: 'carousel',
       contents: [
         createLineBubble({
-          title: `明日盤勢｜${summary.marketDate}`,
+          title: `${summary.marketDate} 更新｜明日趨勢預測`,
           accentColor: `#${themeColors.primary.toString(16).padStart(6, '0')}`,
           lines: [
             createLineMetric('加權', `${formatNumber(summary.marketSummary.加權指數)}（${formatSigned(summary.marketSummary.漲跌點數)} / ${formatPercent(summary.marketSummary.漲跌幅)}）`),
@@ -433,14 +460,14 @@ export function buildLineFlexPayload(summary) {
           accentColor: `#${watchGroupColors.stable.toString(16).padStart(6, '0')}`,
           linkUrl: `${siteUrl}#/radar`,
           footerText: '打開選股雷達',
-          lines: buildLineWatchRows(summary.watchGroups.stable),
+          lines: buildLineWatchRowsSafe(summary.watchGroups.stable, '今天沒有特別整齊的穩健型名單，先觀察雙法人是否重新聚焦。'),
         }),
         createLineBubble({
           title: '🔥 積極型',
           accentColor: `#${watchGroupColors.aggressive.toString(16).padStart(6, '0')}`,
           linkUrl: `${siteUrl}#/radar`,
           footerText: '打開選股雷達',
-          lines: buildLineWatchRows(summary.watchGroups.aggressive),
+          lines: buildLineWatchRowsSafe(summary.watchGroups.aggressive, '今天沒有額外的積極型名單，短線先等放量突破訊號再追。'),
         }),
       ],
     },
@@ -460,7 +487,7 @@ export function buildDiscordPayload(summary) {
     avatar_url: brandIconUrl,
     embeds: [
       {
-        title: `${summary.appName}｜明日盤勢 ${summary.marketDate}`,
+        title: `${summary.appName}｜${summary.marketDate} 更新｜明日趨勢預測`,
         url: siteUrl,
         author: {
           name: summary.appName,
@@ -490,47 +517,43 @@ export function buildDiscordPayload(summary) {
         },
         timestamp: new Date(`${summary.marketDate}T18:35:00+08:00`).toISOString(),
       },
-      ...(summary.watchGroups.stable.length
-        ? [
-            {
-              title: '🛡 最近可留意｜穩健型',
-              url: `${siteUrl}#/radar`,
-              color: watchGroupColors.stable,
-              fields: [
-                {
-                  name: '穩健型',
-                  value: buildWatchListLines(summary.watchGroups.stable).join('\n'),
-                  inline: false,
-                },
-              ],
-              footer: {
-                text: '偏向雙法人與趨勢延續，適合先放進追蹤清單。',
-                icon_url: brandIconUrl,
-              },
-            },
-          ]
-        : []),
-      ...(summary.watchGroups.aggressive.length
-        ? [
-            {
-              title: '🔥 最近可留意｜積極型',
-              url: `${siteUrl}#/radar`,
-              color: watchGroupColors.aggressive,
-              image: !summary.watchGroups.stable.length ? { url: socialCardUrl } : undefined,
-              fields: [
-                {
-                  name: '積極型',
-                  value: buildWatchListLines(summary.watchGroups.aggressive).join('\n'),
-                  inline: false,
-                },
-              ],
-              footer: {
-                text: '偏向突破與轉強，適合短線盯盤確認量價。',
-                icon_url: brandIconUrl,
-              },
-            },
-          ]
-        : []),
+      {
+        title: '🛡 最近可留意｜穩健型',
+        url: `${siteUrl}#/radar`,
+        color: watchGroupColors.stable,
+        fields: [
+          {
+            name: '穩健型',
+            value: summary.watchGroups.stable.length
+              ? buildWatchListLines(summary.watchGroups.stable).join('\n')
+              : '今天沒有特別整齊的穩健型名單，先觀察雙法人是否重新聚焦。',
+            inline: false,
+          },
+        ],
+        footer: {
+          text: '偏向雙法人與趨勢延續，適合先放進追蹤清單。',
+          icon_url: brandIconUrl,
+        },
+      },
+      {
+        title: '🔥 最近可留意｜積極型',
+        url: `${siteUrl}#/radar`,
+        color: watchGroupColors.aggressive,
+        image: !summary.watchGroups.stable.length ? { url: socialCardUrl } : undefined,
+        fields: [
+          {
+            name: '積極型',
+            value: summary.watchGroups.aggressive.length
+              ? buildWatchListLines(summary.watchGroups.aggressive).join('\n')
+              : '今天沒有額外的積極型名單，短線先等放量突破訊號再追。',
+            inline: false,
+          },
+        ],
+        footer: {
+          text: '偏向突破與轉強，適合短線盯盤確認量價。',
+          icon_url: brandIconUrl,
+        },
+      },
     ],
     allowed_mentions: {
       parse: [],

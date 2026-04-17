@@ -82,6 +82,24 @@ export function formatAmount(value) {
   return new Intl.NumberFormat('zh-TW').format(number);
 }
 
+export function formatLots(value, digits = 0) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) {
+    return '-';
+  }
+
+  const lots = Number(value) / 1000;
+  const absoluteLots = Math.abs(lots);
+
+  if (absoluteLots >= 10000) {
+    return `${(lots / 10000).toFixed(2)} 萬張`;
+  }
+
+  return `${new Intl.NumberFormat('zh-TW', {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  }).format(lots)} 張`;
+}
+
 export function formatTime(value) {
   if (!value) return '-';
   const text = String(value).padStart(6, '0');

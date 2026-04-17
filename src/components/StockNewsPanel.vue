@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed } from 'vue';
 import { useStockNews } from '../composables/useStockNews';
 import { formatDate } from '../lib/formatters';
@@ -31,7 +31,7 @@ const keywords = computed(() => news.value?.keywords ?? []);
     <div class="panel-header">
       <div>
         <h2 class="panel-title">近期新聞與關鍵字</h2>
-        <p class="panel-subtitle">需要時再載入，整理最近和這檔股票最相關的新聞標題與關鍵字。</p>
+        <p class="panel-subtitle">近期相關新聞與關鍵字</p>
       </div>
       <div class="action-row">
         <button type="button" class="ghost-button" @click="load">
@@ -67,7 +67,7 @@ const keywords = computed(() => news.value?.keywords ?? []);
 
       <div v-else class="empty-state compact">
         <strong>目前沒有可顯示的站內新聞整理</strong>
-        <p>可以先點上方的更多新聞，查看外部即時結果。</p>
+        <p>可先查看外部即時新聞結果。</p>
       </div>
     </template>
 
