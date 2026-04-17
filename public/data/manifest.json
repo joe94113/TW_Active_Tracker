@@ -1,14 +1,16 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-16T09:16:03.915Z",
-  "generatedAtLocalDate": "2026-04-16",
-  "generatedAtLocalTime": "17:16:03",
+  "generatedAt": "2026-04-17T06:55:00.108Z",
+  "generatedAtLocalDate": "2026-04-17",
+  "generatedAtLocalTime": "14:55:00",
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
   "stockSearchPath": "data/stocks/search.json",
   "stockNewsPathTemplate": "data/stocks/news/{code}.json",
   "topicRadarPath": "data/topics/index.json",
+  "topicHistoryPath": "data/topics/history.json",
+  "stockRadarHistoryPath": "data/radar/history.json",
   "topicPathTemplate": "data/topics/{slug}.json",
   "trackedEtfs": [
     {
@@ -316,18 +318,18 @@
       "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/399/portfolio",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
+      "disclosureDate": "2026-04-17",
       "nav": 19.21,
       "aum": 35466528974,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 1,
-        "increasedCount": 4,
-        "decreasedCount": 5,
-        "totalChangeCount": 11
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -340,7 +342,7 @@
       "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=49YTW",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
+      "disclosureDate": "2026-04-17",
       "nav": 24.88,
       "aum": 144742808435,
       "holdingsCount": 51,
@@ -349,9 +351,9 @@
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 39,
-        "decreasedCount": 6,
-        "totalChangeCount": 45
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -364,18 +366,18 @@
       "sourceUrl": "https://www.ctbcinvestments.com.tw/CTWEB/Content/ETF/pcd.aspx?ETF_ID=00983A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-15",
-      "nav": 11.58,
-      "aum": 3272944180,
+      "disclosureDate": "2026-04-16",
+      "nav": 11.55,
+      "aum": 3254452382,
       "holdingsCount": 39,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 13,
-        "decreasedCount": 19,
-        "totalChangeCount": 32
+        "increasedCount": 19,
+        "decreasedCount": 14,
+        "totalChangeCount": 33
       }
     },
     {
@@ -388,18 +390,18 @@
       "sourceUrl": "https://etf.allianzgi.com.tw/tw/00984A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
+      "disclosureDate": "2026-04-17",
       "nav": 13.87,
-      "aum": 5946395460,
+      "aum": 6235670225,
       "holdingsCount": 118,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 99,
+        "decreasedCount": 10,
+        "totalChangeCount": 109
       }
     },
     {
@@ -434,18 +436,18 @@
       "sourceUrl": "https://www.tsit.com.tw/ETF/Home/ETFSeriesDetail/00986A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
+      "disclosureDate": "2026-04-17",
       "nav": 13.09,
-      "aum": 626060880,
-      "holdingsCount": 29,
+      "aum": 626188837,
+      "holdingsCount": 28,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
-        "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "removedCount": 1,
+        "increasedCount": 10,
+        "decreasedCount": 18,
+        "totalChangeCount": 29
       }
     },
     {
@@ -458,17 +460,17 @@
       "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00982D",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-15",
-      "nav": 10.0969,
-      "aum": 895884021,
+      "disclosureDate": "2026-04-16",
+      "nav": 10.0436,
+      "aum": 881112286,
       "holdingsCount": 65,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 62,
-        "decreasedCount": 3,
+        "increasedCount": 63,
+        "decreasedCount": 2,
         "totalChangeCount": 65
       }
     },
@@ -482,18 +484,18 @@
       "sourceUrl": "https://websys.fsit.com.tw/FubonETF/Fund/Assets.aspx?stkId=00983D",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-15",
-      "nav": 10.2564,
-      "aum": 1037912151,
+      "disclosureDate": "2026-04-16",
+      "nav": 10.1994,
+      "aum": 1032147238,
       "holdingsCount": 81,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 29,
-        "decreasedCount": 51,
-        "totalChangeCount": 80
+        "increasedCount": 30,
+        "decreasedCount": 48,
+        "totalChangeCount": 78
       }
     },
     {
@@ -506,18 +508,18 @@
       "sourceUrl": "https://am.jpmorgan.com/tw/zh/asset-management/twetf/products/jpmorgan-taiwan-u-s-tech-leaders-active-etf-tw00000989a5",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 15.13270385,
-      "aum": 1772296876.8,
+      "disclosureDate": "2026-04-17",
+      "nav": 15.25731615,
+      "aum": 1779262437.46,
       "holdingsCount": 66,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 2,
-        "increasedCount": 31,
-        "decreasedCount": 34,
-        "totalChangeCount": 68
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 29,
+        "decreasedCount": 37,
+        "totalChangeCount": 66
       }
     },
     {
@@ -530,18 +532,18 @@
       "sourceUrl": "https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=61YTW",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
+      "disclosureDate": "2026-04-17",
       "nav": 15.21,
       "aum": 20479317885,
       "holdingsCount": 48,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 3,
-        "removedCount": 1,
-        "increasedCount": 11,
-        "decreasedCount": 33,
-        "totalChangeCount": 48
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -554,7 +556,7 @@
       "sourceUrl": "https://www.fhtrust.com.tw/ETF/etf_detail/ETF23",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-14",
+      "disclosureDate": "2026-04-16",
       "nav": null,
       "aum": null,
       "holdingsCount": 10,
@@ -563,8 +565,8 @@
         "comparisonReady": true,
         "addedCount": 1,
         "removedCount": 1,
-        "increasedCount": 6,
-        "decreasedCount": 3,
+        "increasedCount": 4,
+        "decreasedCount": 5,
         "totalChangeCount": 11
       }
     },
@@ -578,18 +580,18 @@
       "sourceUrl": "https://www.yuantaetfs.com/product/detail/00990A/ratio",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 14.45,
-      "aum": 24885448083,
+      "disclosureDate": "2026-04-17",
+      "nav": 14.79,
+      "aum": 25419302919,
       "holdingsCount": 50,
-      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：元大 ETF 資料格式已變更",
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 3,
-        "removedCount": 2,
-        "increasedCount": 30,
-        "decreasedCount": 15,
-        "totalChangeCount": 50
+        "addedCount": 5,
+        "removedCount": 5,
+        "increasedCount": 19,
+        "decreasedCount": 25,
+        "totalChangeCount": 54
       }
     },
     {
@@ -602,18 +604,18 @@
       "sourceUrl": "https://www.tsit.com.tw/ETF/Home/ETFSeriesDetail/00987A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 14.58,
-      "aum": 2130880738,
-      "holdingsCount": 27,
+      "disclosureDate": "2026-04-17",
+      "nav": 14.85,
+      "aum": 2222319575,
+      "holdingsCount": 28,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 0,
+        "addedCount": 1,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 8,
+        "decreasedCount": 19,
+        "totalChangeCount": 28
       }
     },
     {
@@ -626,18 +628,18 @@
       "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/500/portfolio",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 15.28,
-      "aum": 28748951836,
+      "disclosureDate": "2026-04-17",
+      "nav": 15.62,
+      "aum": 29504837508,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 0,
-        "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "addedCount": 1,
+        "removedCount": 1,
+        "increasedCount": 4,
+        "decreasedCount": 5,
+        "totalChangeCount": 11
       }
     },
     {
@@ -698,18 +700,18 @@
       "sourceUrl": "https://etf.allianzgi.com.tw/tw/00993A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
+      "disclosureDate": "2026-04-17",
       "nav": 12,
-      "aum": 12195007758,
+      "aum": 12414800920,
       "holdingsCount": 50,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 19,
+        "decreasedCount": 20,
+        "totalChangeCount": 39
       }
     },
     {
@@ -722,8 +724,8 @@
       "sourceUrl": "https://www.abfunds.com.tw/zh-tw/funds/etf/active/fixed-income/abitl-select-global-high-yield-active-etf.-.TW00000984D0.html",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-15",
-      "nav": 10.1099,
+      "disclosureDate": "2026-04-16",
+      "nav": 10.0813,
       "aum": null,
       "holdingsCount": 170,
       "trackingMessage": "官方來源每日同步",
@@ -731,9 +733,9 @@
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 61,
-        "decreasedCount": 108,
-        "totalChangeCount": 169
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -794,18 +796,18 @@
       "sourceUrl": "https://am.jpmorgan.com/tw/zh/asset-management/twetf/products/jpmorgan-taiwan-taiwan-equity-high-income-active-etf-tw00000401a1",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 11.02718493,
-      "aum": 2678448083.57,
+      "disclosureDate": "2026-04-17",
+      "nav": 11.21205317,
+      "aum": 2740169734.48,
       "holdingsCount": 61,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 21,
+        "decreasedCount": 40,
+        "totalChangeCount": 61
       }
     },
     {
@@ -818,22 +820,22 @@
       "sourceUrl": "https://www.capitalfund.com.tw/etf/product/detail/502/portfolio",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
+      "disclosureDate": "2026-04-17",
       "nav": 10.34,
       "aum": 10263354237,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 1,
+        "addedCount": 0,
+        "removedCount": 0,
         "increasedCount": 0,
-        "decreasedCount": 9,
-        "totalChangeCount": 11
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     }
   ],
-  "latestDisclosureDate": "2026-04-16",
+  "latestDisclosureDate": "2026-04-17",
   "connectedCount": 23,
   "stockDetailCount": 242,
   "pendingEtfs": [],

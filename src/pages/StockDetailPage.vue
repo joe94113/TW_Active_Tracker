@@ -16,6 +16,7 @@ import HolderStructureChart from '../components/HolderStructureChart.vue';
 import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
 import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
+import { buildStockEventPerformance } from '../lib/stockEventPerformance';
 import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
 import {
   formatDate,
@@ -121,6 +122,7 @@ const liveSnapshotCards = computed(() => [
 const keyPriceZones = computed(() => buildKeyPriceZones(detail.value));
 const supportResistance = computed(() => buildSupportResistance(detail.value));
 const stockEventCalendar = computed(() => buildStockEventCalendar(detail.value));
+const stockEventPerformance = computed(() => buildStockEventPerformance(detail.value));
 const recentViewedStocks = computed(() =>
   recentItems.value
     .filter((item) => item.code && item.code !== stockCode.value)
@@ -786,6 +788,79 @@ watch(
         <div v-else class="empty-state compact">
           <strong>近期沒有可參考的外資目標價整理</strong>
           <p>近 {{ foreignTargetPrice?.recentDays ?? 7 }} 天新聞裡若出現券商或外資明確喊價，這裡會自動補上。</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">事件後表現統計</h2>
+            <p class="panel-subtitle">不只看事件日期，直接回看過去 8 次月營收 / 財報觀察窗之後的 3 / 5 / 10 日平均表現。</p>
+          </div>
+          <span class="meta-chip">歷史回放</span>
+        </div>
+
+        <div v-if="stockEventPerformance.length" class="event-performance-grid">
+          <article v-for="entry in stockEventPerformance" :key="entry.key" class="sub-panel event-performance-card">
+            <div class="event-performance-head">
+              <div>
+                <strong>{{ entry.title }}</strong>
+                <p class="muted">{{ entry.note }}</p>
+              </div>
+              <span class="meta-chip">樣本 {{ formatNumber(entry.sampleCount, 0) }}</span>
+            </div>
+
+            <div class="comparison-stat-grid compact-grid">
+              <article v-for="horizon in [3, 5, 10]" :key="`${entry.key}-${horizon}`" class="comparison-stat-card">
+                <p class="comparison-stat-label">{{ horizon }} 日平均</p>
+                <p
+                  class="comparison-stat-value"
+                  :class="{
+                    'text-up': (entry.metrics[horizon]?.averageReturn ?? 0) > 0,
+                    'text-down': (entry.metrics[horizon]?.averageReturn ?? 0) < 0,
+                  }"
+                >
+                  {{ formatPercent(entry.metrics[horizon]?.averageReturn) }}
+                </p>
+                <p class="comparison-stat-note">
+                  勝率 {{ formatPercent(entry.metrics[horizon]?.winRate) }} / 樣本 {{ formatNumber(entry.metrics[horizon]?.sampleCount, 0) }}
+                </p>
+              </article>
+            </div>
+
+            <div class="table-wrap">
+              <table class="data-table compact-table">
+                <thead>
+                  <tr>
+                    <th>事件日期</th>
+                    <th>觀察起點</th>
+                    <th>3 日</th>
+                    <th>5 日</th>
+                    <th>10 日</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="sample in entry.samples" :key="`${entry.key}-${sample.eventDate}`">
+                    <td>{{ formatDate(sample.eventDate) }}</td>
+                    <td>{{ formatDate(sample.tradeDate) }}</td>
+                    <td :class="{ 'text-up': (sample.horizons[3]?.returnPercent ?? 0) > 0, 'text-down': (sample.horizons[3]?.returnPercent ?? 0) < 0 }">
+                      {{ formatPercent(sample.horizons[3]?.returnPercent) }}
+                    </td>
+                    <td :class="{ 'text-up': (sample.horizons[5]?.returnPercent ?? 0) > 0, 'text-down': (sample.horizons[5]?.returnPercent ?? 0) < 0 }">
+                      {{ formatPercent(sample.horizons[5]?.returnPercent) }}
+                    </td>
+                    <td :class="{ 'text-up': (sample.horizons[10]?.returnPercent ?? 0) > 0, 'text-down': (sample.horizons[10]?.returnPercent ?? 0) < 0 }">
+                      {{ formatPercent(sample.horizons[10]?.returnPercent) }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+        <div v-else class="empty-state compact">
+          <strong>事件後表現樣本還不夠</strong>
+          <p>如果這檔股票的歷史價格或事件樣本不夠，這裡會先保留空白；等累積更多資料後會自動補齊。</p>
         </div>
       </section>
 

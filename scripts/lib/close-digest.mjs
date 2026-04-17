@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { buildSelectionRadar } from './selection-radar.mjs';
+import { buildRatingText, buildWatchGroups } from './watch-groups.mjs';
 import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
 
 const rootDir = process.cwd();
@@ -144,148 +145,6 @@ function buildOfficialRadarSummary(items) {
   };
 }
 
-function takeUniqueByCode(items, usedCodes, formatter, limit = 3) {
-  const results = [];
-
-  for (const item of items ?? []) {
-    const code = String(item?.code ?? '').trim();
-
-    if (!code || usedCodes.has(code)) {
-      continue;
-    }
-
-    usedCodes.add(code);
-    results.push(formatter(item));
-
-    if (results.length >= limit) {
-      break;
-    }
-  }
-
-  return results;
-}
-
-function clampRating(value) {
-  return Math.max(1, Math.min(5, Math.round(value)));
-}
-
-function buildRatingText(value) {
-  const rating = clampRating(value);
-  return `${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}`;
-}
-
-function rateStableInstitutional(item) {
-  const foreign = Math.max(0, Number(item?.foreignAccumulated ?? 0));
-  const trust = Math.max(0, Number(item?.trustAccumulated ?? 0));
-  const return20 = Number(item?.return20 ?? 0);
-  const days = Math.max(Number(item?.foreignDays ?? 0), Number(item?.trustDays ?? 0));
-  const raw = 2.2 + Math.min((foreign + trust) / 30000000, 1.1) + Math.min(return20 / 30, 0.9) + Math.min(days / 8, 0.8);
-  return clampRating(raw);
-}
-
-function rateStableBullish(item) {
-  const return20 = Number(item?.return20 ?? 0);
-  const total5Day = Math.max(0, Number(item?.total5Day ?? 0));
-  const etfCount = Number(item?.activeEtfCount ?? 0);
-  const raw = 2 + Math.min(return20 / 24, 1) + Math.min(total5Day / 8000000, 0.8) + Math.min(etfCount / 4, 0.8);
-  return clampRating(raw);
-}
-
-function rateAggressiveVolume(item) {
-  const volumeRatio5 = Math.max(0, Number(item?.volumeRatio5 ?? 0));
-  const distanceToHigh20 = Math.max(0, Number(item?.distanceToHigh20 ?? 99));
-  const changePercent = Number(item?.changePercent ?? 0);
-  const raw = 2.3 + Math.min(changePercent / 8, 0.9) + Math.max(0, (70 - volumeRatio5) / 120) + Math.max(0, (6 - distanceToHigh20) / 8);
-  return clampRating(raw);
-}
-
-function rateAggressiveConsolidation(item) {
-  const rangePercent = Math.max(0, Number(item?.rangePercent ?? 99));
-  const distanceToHigh = Math.max(0, Number(item?.distanceToHigh ?? 99));
-  const rsi = Number(item?.rsi ?? 50);
-  const raw = 2.1 + Math.max(0, (8 - rangePercent) / 10) + Math.max(0, (2.5 - distanceToHigh) / 3) + Math.max(0, (rsi - 50) / 35);
-  return clampRating(raw);
-}
-
-function buildWatchGroups(summary) {
-  const stableCodes = new Set();
-  const aggressiveCodes = new Set();
-  const stable = [];
-  const aggressive = [];
-
-  stable.push(
-    ...takeUniqueByCode(
-      summary.institutionalResonance,
-      stableCodes,
-      (item) => ({
-        code: item.code,
-        name: item.name,
-        label: '雙法人偏多',
-        rating: rateStableInstitutional(item),
-        detail: `${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)}｜20 日 ${formatPercent(item.return20)}`,
-      }),
-      3,
-    ),
-  );
-
-  stable.push(
-    ...takeUniqueByCode(
-      summary.bullishSignals,
-      stableCodes,
-      (item) => ({
-        code: item.code,
-        name: item.name,
-        label: '偏多焦點',
-        rating: rateStableBullish(item),
-        detail: `${item.topSignalTitle}｜20 日 ${formatPercent(item.return20)}｜五日籌碼 ${formatNumber(item.total5Day, 0)}`,
-      }),
-      2,
-    ),
-  );
-
-  aggressive.push(
-    ...takeUniqueByCode(
-      summary.volumeSqueezeRisers,
-      aggressiveCodes,
-      (item) => ({
-        code: item.code,
-        name: item.name,
-        label: '量縮價漲',
-        rating: rateAggressiveVolume(item),
-        detail: `單日 ${formatPercent(item.changePercent)}｜量比 5 日 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高 ${formatNumber(item.distanceToHigh20, 1)}%`,
-      }),
-      3,
-    ),
-  );
-
-  aggressive.push(
-    ...takeUniqueByCode(
-      summary.consolidationWatch,
-      aggressiveCodes,
-      (item) => ({
-        code: item.code,
-        name: item.name,
-        label: '盤整待發',
-        rating: rateAggressiveConsolidation(item),
-        detail: `30 日箱體 ${formatNumber(item.rangePercent, 1)}%｜離箱頂 ${formatNumber(item.distanceToHigh, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
-      }),
-      3,
-    ),
-  );
-
-  const stableSorted = stable.sort((left, right) => (right.rating ?? 0) - (left.rating ?? 0)).slice(0, 5);
-  const stableCodeSet = new Set(stableSorted.map((item) => item.code));
-  const aggressiveDeduped = aggressive
-    .filter((item) => !stableCodeSet.has(item.code))
-    .sort((left, right) => (right.rating ?? 0) - (left.rating ?? 0))
-    .slice(0, 6);
-
-  return {
-    stable: stableSorted,
-    aggressive: aggressiveDeduped,
-  };
-}
-
 function buildTomorrowOutlook(summary) {
   const outlook = [];
 
@@ -335,6 +194,15 @@ function getMarketThemeColor(summary) {
   }
 
   return { primary: 0x56657a, secondary: 0x607d8b };
+}
+
+function getWatchGroupColors(summary) {
+  const marketUp = Number(summary?.marketSummary?.漲跌點數 ?? 0) >= 0;
+
+  return {
+    stable: marketUp ? 0x2f7ea1 : 0x5b6b7a,
+    aggressive: marketUp ? 0xe07a4f : 0x8a5a7b,
+  };
 }
 
 export async function loadCloseDigestData() {
@@ -438,12 +306,154 @@ export function buildTelegramMessage(summary) {
   return lines.join('\n');
 }
 
+function createLineText(text, options = {}) {
+  return {
+    type: 'text',
+    text,
+    wrap: options.wrap ?? true,
+    size: options.size ?? 'sm',
+    color: options.color ?? '#10202d',
+    weight: options.weight ?? 'regular',
+    flex: options.flex ?? 0,
+  };
+}
+
+function createLineMetric(label, value) {
+  return {
+    type: 'box',
+    layout: 'baseline',
+    spacing: 'sm',
+    contents: [
+      createLineText(label, { size: 'xs', color: '#6b7a86', flex: 3 }),
+      createLineText(value, { size: 'sm', weight: 'bold', color: '#10202d', flex: 5 }),
+    ],
+  };
+}
+
+function createLineBubble({ title, accentColor, lines = [], linkUrl = siteUrl, footerText = '打開台股主動通' }) {
+  return {
+    type: 'bubble',
+    size: 'mega',
+    header: {
+      type: 'box',
+      layout: 'vertical',
+      paddingAll: '16px',
+      backgroundColor: accentColor,
+      contents: [
+        createLineText(title, {
+          size: 'md',
+          weight: 'bold',
+          color: '#ffffff',
+        }),
+      ],
+    },
+    body: {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'md',
+      paddingAll: '16px',
+      contents: lines,
+    },
+    footer: {
+      type: 'box',
+      layout: 'vertical',
+      paddingAll: '12px',
+      contents: [
+        {
+          type: 'button',
+          style: 'link',
+          height: 'sm',
+          action: {
+            type: 'uri',
+            label: footerText,
+            uri: linkUrl,
+          },
+        },
+      ],
+    },
+  };
+}
+
+function buildLineWatchRows(items) {
+  if (!items.length) {
+    return [createLineText('今天沒有特別突出的名單。', { color: '#6b7a86' })];
+  }
+
+  return items.flatMap((item) => [
+    {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'xs',
+      contents: [
+        createLineText(`${item.code} ${item.name}`, { size: 'sm', weight: 'bold' }),
+        createLineText(`${item.label}｜${buildRatingText(item.rating)}`, { size: 'xs', color: '#0b699b' }),
+        createLineText(item.detail, { size: 'xs', color: '#4b5c68' }),
+      ],
+    },
+    {
+      type: 'separator',
+      margin: 'md',
+    },
+  ]).slice(0, Math.max(items.length * 2 - 1, 0));
+}
+
+export function buildLineFlexPayload(summary) {
+  if (!summary) {
+    return null;
+  }
+
+  const themeColors = getMarketThemeColor(summary);
+  const watchGroupColors = getWatchGroupColors(summary);
+
+  return {
+    type: 'flex',
+    altText: `${summary.appName} ${summary.marketDate}｜明日盤勢與最近可留意`,
+    contents: {
+      type: 'carousel',
+      contents: [
+        createLineBubble({
+          title: `明日盤勢｜${summary.marketDate}`,
+          accentColor: `#${themeColors.primary.toString(16).padStart(6, '0')}`,
+          lines: [
+            createLineMetric('加權', `${formatNumber(summary.marketSummary.加權指數)}（${formatSigned(summary.marketSummary.漲跌點數)} / ${formatPercent(summary.marketSummary.漲跌幅)}）`),
+            createLineMetric('廣度', `${summary.marketBreadth.市場情緒 ?? '資料整理中'}｜強弱比 ${formatNumber(summary.marketBreadth?.強弱比)}`),
+            {
+              type: 'box',
+              layout: 'vertical',
+              spacing: 'xs',
+              margin: 'md',
+              contents: summary.tomorrowOutlook.length
+                ? summary.tomorrowOutlook.slice(0, 4).map((item) => createLineText(`• ${item}`, { size: 'xs', color: '#4b5c68' }))
+                : [createLineText('• 目前沒有足夠的盤後觀察摘要。', { size: 'xs', color: '#6b7a86' })],
+            },
+          ],
+        }),
+        createLineBubble({
+          title: '🛡 穩健型',
+          accentColor: `#${watchGroupColors.stable.toString(16).padStart(6, '0')}`,
+          linkUrl: `${siteUrl}#/radar`,
+          footerText: '打開選股雷達',
+          lines: buildLineWatchRows(summary.watchGroups.stable),
+        }),
+        createLineBubble({
+          title: '🔥 積極型',
+          accentColor: `#${watchGroupColors.aggressive.toString(16).padStart(6, '0')}`,
+          linkUrl: `${siteUrl}#/radar`,
+          footerText: '打開選股雷達',
+          lines: buildLineWatchRows(summary.watchGroups.aggressive),
+        }),
+      ],
+    },
+  };
+}
+
 export function buildDiscordPayload(summary) {
   if (!summary) {
     return null;
   }
 
   const themeColors = getMarketThemeColor(summary);
+  const watchGroupColors = getWatchGroupColors(summary);
 
   return {
     username: summary.appName,
@@ -480,38 +490,42 @@ export function buildDiscordPayload(summary) {
         },
         timestamp: new Date(`${summary.marketDate}T18:35:00+08:00`).toISOString(),
       },
-      ...(summary.watchGroups.stable.length || summary.watchGroups.aggressive.length
+      ...(summary.watchGroups.stable.length
         ? [
             {
-              title: '最近可留意',
+              title: '🛡 最近可留意｜穩健型',
               url: `${siteUrl}#/radar`,
-              color: themeColors.secondary,
-              image:
-                summary.watchGroups.stable.length && !summary.watchGroups.aggressive.length
-                  ? { url: socialCardUrl }
-                  : undefined,
+              color: watchGroupColors.stable,
               fields: [
-                ...(summary.watchGroups.stable.length
-                  ? [
-                      {
-                        name: '穩健型',
-                        value: buildWatchListLines(summary.watchGroups.stable).join('\n'),
-                        inline: false,
-                      },
-                    ]
-                  : []),
-                ...(summary.watchGroups.aggressive.length
-                  ? [
-                      {
-                        name: '積極型',
-                        value: buildWatchListLines(summary.watchGroups.aggressive).join('\n'),
-                        inline: false,
-                      },
-                    ]
-                  : []),
+                {
+                  name: '穩健型',
+                  value: buildWatchListLines(summary.watchGroups.stable).join('\n'),
+                  inline: false,
+                },
               ],
               footer: {
-                text: '更多選股整理可直接打開選股雷達。',
+                text: '偏向雙法人與趨勢延續，適合先放進追蹤清單。',
+                icon_url: brandIconUrl,
+              },
+            },
+          ]
+        : []),
+      ...(summary.watchGroups.aggressive.length
+        ? [
+            {
+              title: '🔥 最近可留意｜積極型',
+              url: `${siteUrl}#/radar`,
+              color: watchGroupColors.aggressive,
+              image: !summary.watchGroups.stable.length ? { url: socialCardUrl } : undefined,
+              fields: [
+                {
+                  name: '積極型',
+                  value: buildWatchListLines(summary.watchGroups.aggressive).join('\n'),
+                  inline: false,
+                },
+              ],
+              footer: {
+                text: '偏向突破與轉強，適合短線盯盤確認量價。',
                 icon_url: brandIconUrl,
               },
             },

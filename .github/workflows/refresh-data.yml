@@ -96,6 +96,7 @@ jobs:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
 
     steps:
       - name: Checkout
@@ -118,3 +119,6 @@ jobs:
 
       - name: Send Discord digest
         run: node scripts/send-discord-brief.mjs
+
+      - name: Send LINE digest
+        run: node scripts/send-line-brief.mjs
