@@ -29,6 +29,27 @@ async function sendDiscordMessage(payload) {
   return true;
 }
 
+async function sendDiscordMessages(payload) {
+  if (!payload?.embeds?.length) {
+    return false;
+  }
+
+  if (payload.embeds.length === 1) {
+    return sendDiscordMessage(payload);
+  }
+
+  for (const embed of payload.embeds) {
+    await sendDiscordMessage({
+      username: payload.username,
+      avatar_url: payload.avatar_url,
+      embeds: [embed],
+      allowed_mentions: payload.allowed_mentions ?? { parse: [] },
+    });
+  }
+
+  return true;
+}
+
 async function main() {
   const today = formatTaipeiDate();
   const data = await loadCloseDigestData();
@@ -43,7 +64,7 @@ async function main() {
     return;
   }
 
-  const sent = await sendDiscordMessage(payload);
+  const sent = await sendDiscordMessages(payload);
 
   if (sent) {
     console.log(`Discord push sent for ${today}.`);
