@@ -3,7 +3,7 @@
   "name": "力旺電子",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:10.627Z",
+  "generatedAt": "2026-04-17T08:35:40.355Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4113,10 +4113,19 @@
   },
   "主動ETF曝光": {
     "count": 3,
-    "averageWeight": 0.8016666666666667,
-    "totalWeight": 2.4050000000000002,
+    "averageWeight": 1.3483333333333334,
+    "totalWeight": 4.045,
     "latestDisclosureDate": "2026-04-17",
     "items": [
+      {
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "providerLabel": "野村投信",
+        "disclosureDate": "2026-04-17",
+        "weight": 2.14,
+        "shares": 49000,
+        "rank": 16
+      },
       {
         "etfCode": "00401A",
         "etfName": "主動摩根台灣鑫收",
@@ -4130,19 +4139,10 @@
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
         "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-16",
-        "weight": 0.87,
+        "disclosureDate": "2026-04-17",
+        "weight": 0.8,
         "shares": null,
-        "rank": 36
-      },
-      {
-        "etfCode": "00985A",
-        "etfName": "主動野村台灣50",
-        "providerLabel": "野村投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 0.43,
-        "shares": 13000,
-        "rank": 47
+        "rank": 33
       }
     ]
   },

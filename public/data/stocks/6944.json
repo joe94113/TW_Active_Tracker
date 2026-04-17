@@ -3,7 +3,7 @@
   "name": "兆聯實業",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:27.820Z",
+  "generatedAt": "2026-04-17T08:35:51.259Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 10.35%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 808,639 股。"
+    "最近 5 個交易日三大法人合計賣超 764,605 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4183,6 +4183,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-17",
+        "foreign": 1900,
+        "investmentTrust": -826,
+        "dealer": 22912,
+        "total": 23986
+      },
+      {
         "date": "2026-04-16",
         "foreign": -320792,
         "investmentTrust": -825,
@@ -4209,20 +4216,13 @@
         "investmentTrust": 135587,
         "dealer": -27776,
         "total": -358068
-      },
-      {
-        "date": "2026-04-10",
-        "foreign": 34341,
-        "investmentTrust": 0,
-        "dealer": -54389,
-        "total": -20048
       }
     ],
     "summary": {
-      "foreign5Day": -883623,
-      "investmentTrust5Day": 133349,
-      "dealer5Day": -58365,
-      "total5Day": -808639
+      "foreign5Day": -916064,
+      "investmentTrust5Day": 132523,
+      "dealer5Day": 18936,
+      "total5Day": -764605
     }
   },
   "持股分散": {
@@ -4463,9 +4463,9 @@
         "return60": 26.30853994490358,
         "volume": 770292,
         "turnover": null,
-        "foreign5Day": -883623,
-        "investmentTrust5Day": 133349,
-        "total5Day": -808639,
+        "foreign5Day": -916064,
+        "investmentTrust5Day": 132523,
+        "total5Day": -764605,
         "largeHolderRatio": 52.27,
         "retailRatio": 10.77,
         "shortToMarginRatio": 0.3858520900321543,
@@ -4533,9 +4533,9 @@
         "return60": 26.30853994490358,
         "volume": 770292,
         "turnover": null,
-        "foreign5Day": -883623,
-        "investmentTrust5Day": 133349,
-        "total5Day": -808639,
+        "foreign5Day": -916064,
+        "investmentTrust5Day": 132523,
+        "total5Day": -764605,
         "largeHolderRatio": 52.27,
         "retailRatio": 10.77,
         "shortToMarginRatio": 0.3858520900321543,

@@ -3,7 +3,7 @@
   "name": "聚陽",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:55:47.993Z",
+  "generatedAt": "2026-04-17T08:35:24.458Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3495,7 +3495,7 @@
     "RSI14 落在偏低區，若出現量縮止跌，反而可以留意技術性反彈。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -27.61%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 965,642 股。"
+    "最近 5 個交易日三大法人合計賣超 698,496 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4202,6 +4202,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-17",
+        "foreign": -76588,
+        "investmentTrust": -107088,
+        "dealer": -44362,
+        "total": -228038
+      },
+      {
         "date": "2026-04-16",
         "foreign": 219680,
         "investmentTrust": -233580,
@@ -4228,20 +4235,13 @@
         "investmentTrust": -25187,
         "dealer": 16374,
         "total": -177092
-      },
-      {
-        "date": "2026-04-10",
-        "foreign": -447000,
-        "investmentTrust": -38552,
-        "dealer": -9632,
-        "total": -495184
       }
     ],
     "summary": {
-      "foreign5Day": -322589,
-      "investmentTrust5Day": -583280,
-      "dealer5Day": -59773,
-      "total5Day": -965642
+      "foreign5Day": 47823,
+      "investmentTrust5Day": -651816,
+      "dealer5Day": -94503,
+      "total5Day": -698496
     }
   },
   "持股分散": {
@@ -4434,25 +4434,25 @@
   },
   "主動ETF曝光": {
     "count": 3,
-    "averageWeight": 0.6900000000000001,
-    "totalWeight": 2.0700000000000003,
-    "latestDisclosureDate": "2026-04-16",
+    "averageWeight": 0.6333333333333333,
+    "totalWeight": 1.9,
+    "latestDisclosureDate": "2026-04-17",
     "items": [
       {
         "etfCode": "00985A",
         "etfName": "主動野村台灣50",
         "providerLabel": "野村投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.07,
+        "disclosureDate": "2026-04-17",
+        "weight": 1,
         "shares": 433000,
-        "rank": 36
+        "rank": 28
       },
       {
         "etfCode": "00980A",
         "etfName": "主動野村臺灣優選",
         "providerLabel": "野村投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 0.63,
+        "disclosureDate": "2026-04-17",
+        "weight": 0.59,
         "shares": 369000,
         "rank": 46
       },
@@ -4460,10 +4460,10 @@
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
         "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-16",
-        "weight": 0.37,
+        "disclosureDate": "2026-04-17",
+        "weight": 0.31,
         "shares": null,
-        "rank": 50
+        "rank": 52
       }
     ]
   },
@@ -4499,9 +4499,9 @@
         "return60": 5.660375095112521,
         "volume": 2200950,
         "turnover": null,
-        "foreign5Day": 2278650,
-        "investmentTrust5Day": 124000,
-        "total5Day": 2506772,
+        "foreign5Day": 2495018,
+        "investmentTrust5Day": 131000,
+        "total5Day": 2720018,
         "largeHolderRatio": 71.58999999999999,
         "retailRatio": 7.89,
         "shortToMarginRatio": null,
@@ -4567,9 +4567,9 @@
         "return60": -7.231044503791654,
         "volume": 15677158,
         "turnover": null,
-        "foreign5Day": -22044007,
-        "investmentTrust5Day": -273625,
-        "total5Day": -22729831,
+        "foreign5Day": -22386768,
+        "investmentTrust5Day": -257324,
+        "total5Day": -23060377,
         "largeHolderRatio": 88.13,
         "retailRatio": 3.1399999999999997,
         "shortToMarginRatio": 0.027215821464211195,
@@ -4635,9 +4635,9 @@
         "return60": -32.28346456692913,
         "volume": 1160873,
         "turnover": null,
-        "foreign5Day": -322589,
-        "investmentTrust5Day": -583280,
-        "total5Day": -965642,
+        "foreign5Day": 47823,
+        "investmentTrust5Day": -651816,
+        "total5Day": -698496,
         "largeHolderRatio": 70.73,
         "retailRatio": 9.51,
         "shortToMarginRatio": 0.9244992295839755,
@@ -4713,9 +4713,9 @@
         "return60": -32.28346456692913,
         "volume": 1160873,
         "turnover": null,
-        "foreign5Day": -322589,
-        "investmentTrust5Day": -583280,
-        "total5Day": -965642,
+        "foreign5Day": 47823,
+        "investmentTrust5Day": -651816,
+        "total5Day": -698496,
         "largeHolderRatio": 70.73,
         "retailRatio": 9.51,
         "shortToMarginRatio": 0.9244992295839755,
@@ -4789,9 +4789,9 @@
         "return60": -7.231044503791654,
         "volume": 15677158,
         "turnover": null,
-        "foreign5Day": -22044007,
-        "investmentTrust5Day": -273625,
-        "total5Day": -22729831,
+        "foreign5Day": -22386768,
+        "investmentTrust5Day": -257324,
+        "total5Day": -23060377,
         "largeHolderRatio": 88.13,
         "retailRatio": 3.1399999999999997,
         "shortToMarginRatio": 0.027215821464211195,
@@ -4857,9 +4857,9 @@
         "return60": 5.660375095112521,
         "volume": 2200950,
         "turnover": null,
-        "foreign5Day": 2278650,
-        "investmentTrust5Day": 124000,
-        "total5Day": 2506772,
+        "foreign5Day": 2495018,
+        "investmentTrust5Day": 131000,
+        "total5Day": 2720018,
         "largeHolderRatio": 71.58999999999999,
         "retailRatio": 7.89,
         "shortToMarginRatio": null,

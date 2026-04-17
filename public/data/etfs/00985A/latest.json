@@ -1,323 +1,318 @@
 {
   "code": "00985A",
   "name": "主動野村台灣50",
+  "fullName": "主動野村台灣50主動式交易所交易基金",
   "provider": "nomura",
   "providerLabel": "野村投信",
   "sourceName": "野村投信 ETF 官方持股資料",
   "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00985A",
-  "disclosureDate": "2026-04-10",
-  "aum": 8880468706,
-  "nav": 17.23,
-  "units": 515289000,
-  "holdingsCount": 51,
+  "trackingStatus": "已串接",
+  "disclosureDate": "2026-04-17",
+  "aum": 9318426019,
+  "nav": 18.19,
+  "units": 512289000,
+  "holdingsCount": 50,
   "holdings": [
     {
       "code": "2330",
       "name": "台積電",
       "shares": 1144000,
-      "weight": 25.76
+      "weight": 24.92
     },
     {
-      "code": "2412",
-      "name": "中華電",
-      "shares": 2709000,
-      "weight": 4.13
+      "code": "3653",
+      "name": "健策",
+      "shares": 85000,
+      "weight": 4.16
     },
     {
-      "code": "2395",
-      "name": "研華",
-      "shares": 868000,
-      "weight": 3.38
+      "code": "8046",
+      "name": "南電",
+      "shares": 512000,
+      "weight": 3.98
     },
     {
-      "code": "2308",
-      "name": "台達電",
-      "shares": 160000,
-      "weight": 3.13
+      "code": "3665",
+      "name": "貿聯-KY",
+      "shares": 154000,
+      "weight": 3.91
+    },
+    {
+      "code": "6789",
+      "name": "采鈺",
+      "shares": 725000,
+      "weight": 3.35
     },
     {
       "code": "3105",
       "name": "穩懋半導體",
       "shares": 559000,
-      "weight": 2.92
+      "weight": 3.23
     },
     {
-      "code": "3665",
-      "name": "貿聯-KY",
-      "shares": 114000,
-      "weight": 2.82
-    },
-    {
-      "code": "6223",
-      "name": "旺矽科技",
-      "shares": 49000,
-      "weight": 2.55
+      "code": "2308",
+      "name": "台達電",
+      "shares": 160000,
+      "weight": 3.16
     },
     {
       "code": "6805",
       "name": "富世達",
-      "shares": 118000,
-      "weight": 2.48
+      "shares": 155000,
+      "weight": 3.11
     },
     {
-      "code": "8046",
-      "name": "南電",
-      "shares": 279000,
-      "weight": 2.1
+      "code": "6223",
+      "name": "旺矽科技",
+      "shares": 55000,
+      "weight": 3.07
+    },
+    {
+      "code": "3017",
+      "name": "奇鋐",
+      "shares": 114000,
+      "weight": 2.94
+    },
+    {
+      "code": "3189",
+      "name": "景碩",
+      "shares": 659000,
+      "weight": 2.77
+    },
+    {
+      "code": "2454",
+      "name": "聯發科",
+      "shares": 118000,
+      "weight": 2.44
     },
     {
       "code": "2360",
       "name": "致茂",
       "shares": 100000,
-      "weight": 2.01
+      "weight": 2.42
     },
     {
-      "code": "1216",
-      "name": "統一",
-      "shares": 2454000,
-      "weight": 1.98
+      "code": "2345",
+      "name": "智邦",
+      "shares": 107000,
+      "weight": 2.38
     },
     {
-      "code": "3293",
-      "name": "鈊象電子",
-      "shares": 229000,
-      "weight": 1.98
+      "code": "2368",
+      "name": "金像電",
+      "shares": 175000,
+      "weight": 2.21
     },
     {
-      "code": "8299",
-      "name": "群聯電子",
-      "shares": 92000,
-      "weight": 1.72
+      "code": "3529",
+      "name": "力旺電子",
+      "shares": 49000,
+      "weight": 2.14
     },
     {
       "code": "3533",
       "name": "嘉澤",
       "shares": 66000,
-      "weight": 1.69
+      "weight": 1.76
     },
     {
-      "code": "2344",
-      "name": "華邦電",
-      "shares": 1579000,
-      "weight": 1.66
-    },
-    {
-      "code": "2345",
-      "name": "智邦",
-      "shares": 79000,
-      "weight": 1.63
-    },
-    {
-      "code": "3653",
-      "name": "健策",
-      "shares": 35000,
-      "weight": 1.63
-    },
-    {
-      "code": "6789",
-      "name": "采鈺",
-      "shares": 422000,
-      "weight": 1.6
-    },
-    {
-      "code": "4904",
-      "name": "遠傳",
-      "shares": 1496000,
-      "weight": 1.59
-    },
-    {
-      "code": "3189",
-      "name": "景碩",
-      "shares": 349000,
-      "weight": 1.5
-    },
-    {
-      "code": "6442",
-      "name": "光聖",
-      "shares": 57000,
-      "weight": 1.49
-    },
-    {
-      "code": "6488",
-      "name": "環球晶圓",
-      "shares": 267000,
-      "weight": 1.47
+      "code": "8299",
+      "name": "群聯電子",
+      "shares": 92000,
+      "weight": 1.55
     },
     {
       "code": "2383",
       "name": "台光電",
       "shares": 37000,
-      "weight": 1.42
+      "weight": 1.51
     },
     {
-      "code": "2454",
-      "name": "聯發科",
-      "shares": 78000,
-      "weight": 1.38
+      "code": "2344",
+      "name": "華邦電",
+      "shares": 1579000,
+      "weight": 1.49
     },
     {
-      "code": "3264",
-      "name": "欣銓科技",
-      "shares": 609000,
-      "weight": 1.3
-    },
-    {
-      "code": "2317",
-      "name": "鴻海",
-      "shares": 561000,
-      "weight": 1.27
-    },
-    {
-      "code": "2881",
-      "name": "富邦金",
-      "shares": 1258000,
-      "weight": 1.24
-    },
-    {
-      "code": "4749",
-      "name": "新應材",
-      "shares": 117000,
-      "weight": 1.18
-    },
-    {
-      "code": "6239",
-      "name": "力成",
-      "shares": 468000,
-      "weight": 1.13
+      "code": "6442",
+      "name": "光聖",
+      "shares": 64000,
+      "weight": 1.48
     },
     {
       "code": "3661",
       "name": "世芯-KY",
-      "shares": 33000,
-      "weight": 1.12
+      "shares": 39000,
+      "weight": 1.47
     },
     {
-      "code": "6781",
-      "name": "AES-KY",
-      "shares": 101000,
+      "code": "7769",
+      "name": "鴻勁",
+      "shares": 28000,
+      "weight": 1.35
+    },
+    {
+      "code": "2059",
+      "name": "川湖",
+      "shares": 34000,
+      "weight": 1.33
+    },
+    {
+      "code": "8996",
+      "name": "高力",
+      "shares": 96000,
+      "weight": 1.26
+    },
+    {
+      "code": "6515",
+      "name": "穎崴",
+      "shares": 10000,
       "weight": 1.11
     },
     {
-      "code": "3711",
-      "name": "日月光投控",
-      "shares": 248000,
-      "weight": 1.1
-    },
-    {
-      "code": "2368",
-      "name": "金像電",
-      "shares": 90000,
-      "weight": 1.1
-    },
-    {
-      "code": "3017",
-      "name": "奇鋐",
-      "shares": 43000,
-      "weight": 1.1
-    },
-    {
-      "code": "2382",
-      "name": "廣達",
-      "shares": 299000,
-      "weight": 1.08
+      "code": "2412",
+      "name": "中華電",
+      "shares": 684000,
+      "weight": 1.01
     },
     {
       "code": "1477",
       "name": "聚陽",
       "shares": 433000,
-      "weight": 1.07
-    },
-    {
-      "code": "2891",
-      "name": "中信金",
-      "shares": 1631000,
-      "weight": 0.99
+      "weight": 1
     },
     {
       "code": "6669",
       "name": "緯穎",
-      "shares": 24000,
-      "weight": 0.98
+      "shares": 19000,
+      "weight": 0.78
+    },
+    {
+      "code": "6781",
+      "name": "AES-KY",
+      "shares": 69000,
+      "weight": 0.77
+    },
+    {
+      "code": "3711",
+      "name": "日月光投控",
+      "shares": 159000,
+      "weight": 0.75
+    },
+    {
+      "code": "4749",
+      "name": "新應材",
+      "shares": 76000,
+      "weight": 0.73
     },
     {
       "code": "2408",
       "name": "南亞科",
-      "shares": 399000,
-      "weight": 0.97
+      "shares": 265000,
+      "weight": 0.6
     },
     {
-      "code": "7769",
-      "name": "鴻勁",
-      "shares": 20000,
-      "weight": 0.95
+      "code": "2395",
+      "name": "研華",
+      "shares": 128000,
+      "weight": 0.5
     },
     {
       "code": "8210",
       "name": "勤誠",
-      "shares": 92000,
-      "weight": 0.92
-    },
-    {
-      "code": "6415",
-      "name": "矽力*-KY",
-      "shares": 241000,
-      "weight": 0.76
-    },
-    {
-      "code": "1605",
-      "name": "華新",
-      "shares": 2118000,
-      "weight": 0.75
-    },
-    {
-      "code": "2059",
-      "name": "川湖",
-      "shares": 19000,
-      "weight": 0.72
-    },
-    {
-      "code": "4958",
-      "name": "臻鼎-KY",
-      "shares": 202000,
-      "weight": 0.6
-    },
-    {
-      "code": "8996",
-      "name": "高力",
-      "shares": 37000,
-      "weight": 0.43
-    },
-    {
-      "code": "3529",
-      "name": "力旺電子",
-      "shares": 13000,
-      "weight": 0.43
+      "shares": 40000,
+      "weight": 0.44
     },
     {
       "code": "3037",
       "name": "欣興",
       "shares": 53000,
-      "weight": 0.38
+      "weight": 0.37
+    },
+    {
+      "code": "1216",
+      "name": "統一",
+      "shares": 455000,
+      "weight": 0.36
+    },
+    {
+      "code": "6488",
+      "name": "環球晶圓",
+      "shares": 65000,
+      "weight": 0.35
+    },
+    {
+      "code": "3293",
+      "name": "鈊象電子",
+      "shares": 42000,
+      "weight": 0.35
+    },
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "shares": 335000,
+      "weight": 0.32
+    },
+    {
+      "code": "2317",
+      "name": "鴻海",
+      "shares": 143000,
+      "weight": 0.32
+    },
+    {
+      "code": "3264",
+      "name": "欣銓科技",
+      "shares": 165000,
+      "weight": 0.3
+    },
+    {
+      "code": "4904",
+      "name": "遠傳",
+      "shares": 233000,
+      "weight": 0.24
+    },
+    {
+      "code": "4958",
+      "name": "臻鼎-KY",
+      "shares": 77000,
+      "weight": 0.23
+    },
+    {
+      "code": "6239",
+      "name": "力成",
+      "shares": 98000,
+      "weight": 0.22
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "shares": 266000,
+      "weight": 0.15
+    },
+    {
+      "code": "1605",
+      "name": "華新",
+      "shares": 350000,
+      "weight": 0.12
+    },
+    {
+      "code": "6415",
+      "name": "矽力*-KY",
+      "shares": 32000,
+      "weight": 0.11
+    },
+    {
+      "code": "2382",
+      "name": "廣達",
+      "shares": 28000,
+      "weight": 0.1
     },
     {
       "code": "1519",
       "name": "華城",
-      "shares": 37000,
-      "weight": 0.34
-    },
-    {
-      "code": "6515",
-      "name": "穎崴",
-      "shares": 1000,
-      "weight": 0.09
-    },
-    {
-      "code": "2449",
-      "name": "京元電子",
-      "shares": 27000,
-      "weight": 0.08
+      "shares": 8000,
+      "weight": 0.07
     }
   ],
-  "fetchedAt": "2026-04-10T09:26:04.010Z",
-  "fullName": "主動野村台灣50主動式交易所交易基金"
+  "fetchedAt": "2026-04-17T08:34:39.096Z"
 }

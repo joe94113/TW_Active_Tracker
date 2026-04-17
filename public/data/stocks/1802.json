@@ -3,7 +3,7 @@
   "name": "台玻",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:55:49.900Z",
+  "generatedAt": "2026-04-17T08:35:25.577Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 15.76%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 84,470,345 股。"
+    "最近 5 個交易日三大法人合計買超 131,037,808 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4193,6 +4193,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-17",
+        "foreign": 26413023,
+        "investmentTrust": 0,
+        "dealer": -532181,
+        "total": 25880842
+      },
+      {
         "date": "2026-04-16",
         "foreign": -3591128,
         "investmentTrust": -4000,
@@ -4219,20 +4226,13 @@
         "investmentTrust": 0,
         "dealer": 2197152,
         "total": 22745582
-      },
-      {
-        "date": "2026-04-10",
-        "foreign": -18702114,
-        "investmentTrust": 0,
-        "dealer": -1984507,
-        "total": -20686621
       }
     ],
     "summary": {
-      "foreign5Day": 84492526,
+      "foreign5Day": 129607663,
       "investmentTrust5Day": 18000,
-      "dealer5Day": -40181,
-      "total5Day": 84470345
+      "dealer5Day": 1412145,
+      "total5Day": 131037808
     }
   },
   "持股分散": {
@@ -4426,18 +4426,18 @@
   },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 0.21,
-    "totalWeight": 0.21,
-    "latestDisclosureDate": "2026-04-16",
+    "averageWeight": 0.22,
+    "totalWeight": 0.22,
+    "latestDisclosureDate": "2026-04-17",
     "items": [
       {
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
-        "disclosureDate": "2026-04-16",
-        "weight": 0.21,
+        "disclosureDate": "2026-04-17",
+        "weight": 0.22,
         "shares": 90000,
-        "rank": 44
+        "rank": 41
       }
     ]
   },
@@ -4473,9 +4473,9 @@
         "return60": 111.99999128069196,
         "volume": 345927131,
         "turnover": null,
-        "foreign5Day": 84492526,
+        "foreign5Day": 129607663,
         "investmentTrust5Day": 18000,
-        "total5Day": 84470345,
+        "total5Day": 131037808,
         "largeHolderRatio": 78.53,
         "retailRatio": 11.51,
         "shortToMarginRatio": 3.099715722720315,
@@ -4543,9 +4543,9 @@
         "return60": 111.99999128069196,
         "volume": 345927131,
         "turnover": null,
-        "foreign5Day": 84492526,
+        "foreign5Day": 129607663,
         "investmentTrust5Day": 18000,
-        "total5Day": 84470345,
+        "total5Day": 131037808,
         "largeHolderRatio": 78.53,
         "retailRatio": 11.51,
         "shortToMarginRatio": 3.099715722720315,

@@ -3,7 +3,7 @@
   "name": "億豐",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:30.145Z",
+  "generatedAt": "2026-04-17T08:35:53.133Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -6.94%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 126,928 股。"
+    "最近 5 個交易日三大法人合計買超 19,823 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4139,6 +4139,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-17",
+        "foreign": 102916,
+        "investmentTrust": -57362,
+        "dealer": -10002,
+        "total": 35552
+      },
+      {
         "date": "2026-04-16",
         "foreign": 188915,
         "investmentTrust": -1362,
@@ -4165,20 +4172,13 @@
         "investmentTrust": 319,
         "dealer": -23954,
         "total": 41079
-      },
-      {
-        "date": "2026-04-10",
-        "foreign": 140750,
-        "investmentTrust": 907,
-        "dealer": 1000,
-        "total": 142657
       }
     ],
     "summary": {
-      "foreign5Day": 188211,
-      "investmentTrust5Day": -16817,
-      "dealer5Day": -44466,
-      "total5Day": 126928
+      "foreign5Day": 150377,
+      "investmentTrust5Day": -75086,
+      "dealer5Day": -55468,
+      "total5Day": 19823
     }
   },
   "持股分散": {
@@ -4370,18 +4370,18 @@
   },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 0.32,
-    "totalWeight": 0.32,
-    "latestDisclosureDate": "2026-04-16",
+    "averageWeight": 0.26,
+    "totalWeight": 0.26,
+    "latestDisclosureDate": "2026-04-17",
     "items": [
       {
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
         "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-16",
-        "weight": 0.32,
+        "disclosureDate": "2026-04-17",
+        "weight": 0.26,
         "shares": null,
-        "rank": 53
+        "rank": 54
       }
     ]
   },
@@ -4427,9 +4427,9 @@
         "return60": 0.6060590647687816,
         "volume": 10220,
         "turnover": null,
-        "foreign5Day": 30000,
+        "foreign5Day": 41219,
         "investmentTrust5Day": 0,
-        "total5Day": 31000,
+        "total5Day": 40219,
         "largeHolderRatio": 95.49000000000001,
         "retailRatio": 1.26,
         "shortToMarginRatio": null,
@@ -4495,9 +4495,9 @@
         "return60": -2.2546419098143233,
         "volume": 417696,
         "turnover": null,
-        "foreign5Day": 188211,
-        "investmentTrust5Day": -16817,
-        "total5Day": 126928,
+        "foreign5Day": 150377,
+        "investmentTrust5Day": -75086,
+        "total5Day": 19823,
         "largeHolderRatio": 87.81,
         "retailRatio": 1.24,
         "shortToMarginRatio": null,
@@ -4565,9 +4565,9 @@
         "return60": -2.2546419098143233,
         "volume": 417696,
         "turnover": null,
-        "foreign5Day": 188211,
-        "investmentTrust5Day": -16817,
-        "total5Day": 126928,
+        "foreign5Day": 150377,
+        "investmentTrust5Day": -75086,
+        "total5Day": 19823,
         "largeHolderRatio": 87.81,
         "retailRatio": 1.24,
         "shortToMarginRatio": null,
@@ -4633,9 +4633,9 @@
         "return60": 0.6060590647687816,
         "volume": 10220,
         "turnover": null,
-        "foreign5Day": 30000,
+        "foreign5Day": 41219,
         "investmentTrust5Day": 0,
-        "total5Day": 31000,
+        "total5Day": 40219,
         "largeHolderRatio": 95.49000000000001,
         "retailRatio": 1.26,
         "shortToMarginRatio": null,
@@ -4692,7 +4692,7 @@
     ],
     "觀察摘要": [
       "近 20 日報酬低於同產業平均 -1.76%，短線強度落後族群。",
-      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }

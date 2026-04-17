@@ -54,6 +54,25 @@ function normalizeLots(value) {
   return Number.isFinite(amount) ? amount / 1000 : null;
 }
 
+function formatLots(value, digits = 0) {
+  const lots = normalizeLots(value);
+
+  if (lots === null || Number.isNaN(lots)) {
+    return '-';
+  }
+
+  const absoluteLots = Math.abs(lots);
+
+  if (absoluteLots >= 10000) {
+    return `${(lots / 10000).toFixed(2)} 萬張`;
+  }
+
+  return `${new Intl.NumberFormat('zh-TW', {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  }).format(lots)} 張`;
+}
+
 function createBaseItem(item) {
   return {
     code: item.code,
@@ -120,8 +139,9 @@ function createStableInstitutionalItem(item) {
   return {
     ...createBaseItem(item),
     label: '雙法人偏多',
+    setupTag: '法人型',
     rating: rateStableInstitutional(item),
-    detail: `${item.signalLabel}｜外資 ${formatNumber(item.foreignAccumulated, 0)} / 投信 ${formatNumber(item.trustAccumulated, 0)}｜20 日 ${formatPercent(item.return20)}`,
+    detail: `${item.signalLabel}｜外資 ${formatLots(item.foreignAccumulated)} / 投信 ${formatLots(item.trustAccumulated)}｜20 日 ${formatPercent(item.return20)}`,
   };
 }
 
@@ -129,8 +149,9 @@ function createStableBullishItem(item) {
   return {
     ...createBaseItem(item),
     label: '偏多焦點',
+    setupTag: '趨勢型',
     rating: rateStableBullish(item),
-    detail: `${item.topSignalTitle}｜20 日 ${formatPercent(item.return20)}｜五日籌碼 ${numberFormatter.format(Math.round(Number(item.total5Day ?? 0)))}`,
+    detail: `${item.topSignalTitle}｜20 日 ${formatPercent(item.return20)}｜五日籌碼 ${formatLots(item.total5Day)}`,
   };
 }
 
@@ -138,6 +159,7 @@ function createAggressiveVolumeItem(item) {
   return {
     ...createBaseItem(item),
     label: '量縮價揚',
+    setupTag: '量縮型',
     rating: rateAggressiveVolume(item),
     detail: `單日 ${formatPercent(item.changePercent)}｜量能比 5 日 ${formatNumber(item.volumeRatio5, 0)}%｜距 20 日高 ${formatNumber(item.distanceToHigh20, 1)}%`,
   };
@@ -147,6 +169,7 @@ function createAggressiveConsolidationItem(item) {
   return {
     ...createBaseItem(item),
     label: '盤整待發',
+    setupTag: '盤整型',
     rating: rateAggressiveConsolidation(item),
     detail: `30 日區間 ${formatNumber(item.rangePercent, 1)}%｜離前高 ${formatNumber(item.distanceToHigh, 1)}%｜RSI ${formatNumber(item.rsi, 1)}`,
   };

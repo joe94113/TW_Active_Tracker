@@ -963,15 +963,24 @@ async function 抓取Nomura快照(etf) {
   }
 
   const payload = await response.json();
-  const fundAsset = payload?.FundAssets ?? payload?.Data?.FundAssets ?? payload?.fundAssets;
-  const stockTable = payload?.StockComposition ?? payload?.Data?.StockComposition ?? payload?.stockComposition;
+  const entries = payload?.Entries ?? payload?.entries ?? null;
+  const data = entries?.Data ?? entries?.data ?? payload?.Data ?? payload?.data ?? null;
+  const fundAsset = payload?.FundAssets ?? payload?.Data?.FundAssets ?? payload?.fundAssets ?? data?.FundAsset ?? data?.fundAsset;
+  const tables = data?.Table ?? data?.table ?? [];
+  const stockTable =
+    payload?.StockComposition ??
+    payload?.Data?.StockComposition ??
+    payload?.stockComposition ??
+    tables.find((item) => 壓縮文字(item?.TableTitle) === '股票') ??
+    tables[0] ??
+    null;
 
   if (!fundAsset || !stockTable) {
     throw new Error('野村 ETF 回傳格式已變更');
   }
 
   const holdings = 排序持股(
-    (stockTable.Rows ?? stockTable.Data ?? [])
+    (stockTable.Rows ?? stockTable.Data ?? stockTable.rows ?? stockTable.data ?? [])
       .map((row) => ({
         code: 壓縮文字(row?.[0]),
         name: 壓縮文字(row?.[1]),

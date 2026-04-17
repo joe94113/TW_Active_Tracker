@@ -7,8 +7,6 @@ import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
 const rootDir = process.cwd();
 const siteUrl = 'https://joe94113.github.io/TW_Active_Tracker/';
 const brandIconUrl = `${siteUrl}icon-128.png`;
-const socialCardUrl = `${siteUrl}social-card.png`;
-
 const taipeiDateFormatter = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Taipei',
   year: 'numeric',
@@ -176,6 +174,67 @@ function buildWatchListLines(items) {
   return items.map((item) => `• ${item.code} ${item.name}｜${item.label}｜${buildRatingText(item.rating)}\n${item.detail}`);
 }
 
+function buildThemeTopicMap(themeRadar) {
+  const topicMap = new Map();
+
+  for (const topic of themeRadar?.topics ?? []) {
+    const topicTitle = String(topic?.title ?? '').trim();
+
+    if (!topicTitle) {
+      continue;
+    }
+
+    const relatedStocks = [
+      ...(topic?.leaderStocks ?? []),
+      ...(topic?.catchUpStocks ?? []),
+      ...(topic?.relatedStocks ?? []),
+    ];
+
+    for (const stock of relatedStocks) {
+      const code = String(stock?.code ?? '').trim();
+
+      if (!code || topicMap.has(code)) {
+        continue;
+      }
+
+      topicMap.set(code, topicTitle);
+    }
+  }
+
+  return topicMap;
+}
+
+function enrichWatchGroupItems(items, trackedStocks, themeRadar) {
+  const trackedMap = new Map((trackedStocks ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
+  const topicMap = buildThemeTopicMap(themeRadar);
+
+  return (items ?? []).map((item) => {
+    const code = String(item?.code ?? '').trim();
+    const tracked = trackedMap.get(code) ?? {};
+    const rawTargetPrice = Number(tracked?.foreignTargetPrice);
+    const rawTargetPremium = Number(tracked?.foreignTargetPricePremium);
+    const hasSaneTarget =
+      Number.isFinite(rawTargetPrice) &&
+      rawTargetPrice > 0 &&
+      (!Number.isFinite(rawTargetPremium) || Math.abs(rawTargetPremium) <= 80);
+    const targetPrice = hasSaneTarget ? rawTargetPrice : null;
+    const targetPremium = hasSaneTarget && Number.isFinite(rawTargetPremium) ? rawTargetPremium : null;
+
+    return {
+      ...item,
+      industryName: tracked?.industryName ?? null,
+      topicTag: topicMap.get(code) ?? tracked?.industryName ?? null,
+      foreignTargetPrice: targetPrice ?? null,
+      foreignTargetPricePremium: targetPremium ?? null,
+      foreignTargetBroker: tracked?.foreignTargetBroker ?? null,
+      foreignTargetCount: tracked?.foreignTargetCount ?? 0,
+      foreign5Day: tracked?.foreign5Day ?? null,
+      investmentTrust5Day: tracked?.investmentTrust5Day ?? null,
+      total5Day: tracked?.total5Day ?? null,
+    };
+  });
+}
+
 function getMarketThemeColor(summary) {
   const changePercent = Number(summary?.marketSummary?.漲跌幅 ?? 0);
   const breadthRatio = Number(summary?.marketBreadth?.強弱比 ?? 1);
@@ -261,10 +320,15 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
     ...selectionRadar,
   };
 
+  const rawWatchGroups = buildWatchGroups(summary);
+
   return {
     ...summary,
     tomorrowOutlook: buildTomorrowOutlook(summary),
-    watchGroups: buildWatchGroups(summary),
+    watchGroups: {
+      stable: enrichWatchGroupItems(rawWatchGroups.stable, trackedStocks, dashboard?.題材雷達),
+      aggressive: enrichWatchGroupItems(rawWatchGroups.aggressive, trackedStocks, dashboard?.題材雷達),
+    },
   };
 }
 
@@ -521,9 +585,13 @@ export function buildDiscordPayload(summary) {
         title: '🛡 最近可留意｜穩健型',
         url: `${siteUrl}#/radar`,
         color: watchGroupColors.stable,
+        description: '偏向雙法人與趨勢延續，適合先放進追蹤清單。',
+        thumbnail: {
+          url: brandIconUrl,
+        },
         fields: [
           {
-            name: '穩健型',
+            name: '穩健型名單',
             value: summary.watchGroups.stable.length
               ? buildWatchListLines(summary.watchGroups.stable).join('\n')
               : '今天沒有特別整齊的穩健型名單，先觀察雙法人是否重新聚焦。',
@@ -539,10 +607,13 @@ export function buildDiscordPayload(summary) {
         title: '🔥 最近可留意｜積極型',
         url: `${siteUrl}#/radar`,
         color: watchGroupColors.aggressive,
-        image: !summary.watchGroups.stable.length ? { url: socialCardUrl } : undefined,
+        description: '偏向突破與轉強，適合短線盯盤確認量價。',
+        thumbnail: {
+          url: brandIconUrl,
+        },
         fields: [
           {
-            name: '積極型',
+            name: '積極型名單',
             value: summary.watchGroups.aggressive.length
               ? buildWatchListLines(summary.watchGroups.aggressive).join('\n')
               : '今天沒有額外的積極型名單，短線先等放量突破訊號再追。',

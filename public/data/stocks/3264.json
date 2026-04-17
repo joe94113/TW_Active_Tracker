@@ -3,7 +3,7 @@
   "name": "欣銓科技",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:08.389Z",
+  "generatedAt": "2026-04-17T08:35:38.652Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4278,28 +4278,10 @@
   },
   "主動ETF曝光": {
     "count": 6,
-    "averageWeight": 0.8133333333333335,
-    "totalWeight": 4.880000000000001,
+    "averageWeight": 0.6216666666666667,
+    "totalWeight": 3.73,
     "latestDisclosureDate": "2026-04-17",
     "items": [
-      {
-        "etfCode": "00985A",
-        "etfName": "主動野村台灣50",
-        "providerLabel": "野村投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.3,
-        "shares": 609000,
-        "rank": 25
-      },
-      {
-        "etfCode": "00980A",
-        "etfName": "主動野村臺灣優選",
-        "providerLabel": "野村投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.02,
-        "shares": 695000,
-        "rank": 37
-      },
       {
         "etfCode": "00993A",
         "etfName": "主動安聯台灣",
@@ -4310,21 +4292,30 @@
         "rank": 31
       },
       {
+        "etfCode": "00980A",
+        "etfName": "主動野村臺灣優選",
+        "providerLabel": "野村投信",
+        "disclosureDate": "2026-04-17",
+        "weight": 0.88,
+        "shares": 695000,
+        "rank": 40
+      },
+      {
         "etfCode": "00995A",
         "etfName": "主動中信台灣卓越",
         "providerLabel": "中信投信",
-        "disclosureDate": "2026-04-16",
-        "weight": 0.83,
+        "disclosureDate": "2026-04-17",
+        "weight": 0.81,
         "shares": 212200,
-        "rank": 28
+        "rank": 29
       },
       {
         "etfCode": "00981A",
         "etfName": "主動統一台股增長",
         "providerLabel": "統一投信",
         "disclosureDate": "2026-04-17",
-        "weight": 0.37,
-        "shares": 3055000,
+        "weight": 0.38,
+        "shares": 3355000,
         "rank": 35
       },
       {
@@ -4335,6 +4326,15 @@
         "weight": 0.37,
         "shares": 131000,
         "rank": 78
+      },
+      {
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "providerLabel": "野村投信",
+        "disclosureDate": "2026-04-17",
+        "weight": 0.3,
+        "shares": 165000,
+        "rank": 42
       }
     ]
   },

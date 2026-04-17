@@ -1,8 +1,8 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-17T06:55:00.108Z",
+  "generatedAt": "2026-04-17T08:35:06.452Z",
   "generatedAtLocalDate": "2026-04-17",
-  "generatedAtLocalTime": "14:55:00",
+  "generatedAtLocalTime": "16:35:06",
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -296,16 +296,18 @@
       "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00980A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-10",
-      "nav": 18.89,
-      "aum": 12832866134,
+      "disclosureDate": "2026-04-17",
+      "nav": 20.13,
+      "aum": 13539364232,
       "holdingsCount": 50,
-      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：野村 ETF 回傳格式已變更",
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "addedCount": 50,
+        "comparisonReady": true,
+        "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0
+        "increasedCount": 28,
+        "decreasedCount": 22,
+        "totalChangeCount": 50
       }
     },
     {
@@ -343,17 +345,17 @@
       "trackingStatus": "已串接",
       "detailAvailability": "full",
       "disclosureDate": "2026-04-17",
-      "nav": 24.88,
-      "aum": 144742808435,
-      "holdingsCount": 51,
+      "nav": 24.94,
+      "aum": 153527046424,
+      "holdingsCount": 53,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 0,
+        "addedCount": 2,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 41,
+        "decreasedCount": 7,
+        "totalChangeCount": 50
       }
     },
     {
@@ -414,16 +416,18 @@
       "sourceUrl": "https://www.nomurafunds.com.tw/ETFWEB/product-description?fundNo=00985A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-10",
-      "nav": 17.23,
-      "aum": 8880468706,
-      "holdingsCount": 51,
-      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：野村 ETF 回傳格式已變更",
+      "disclosureDate": "2026-04-17",
+      "nav": 18.19,
+      "aum": 9318426019,
+      "holdingsCount": 50,
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
-        "addedCount": 51,
-        "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0
+        "comparisonReady": true,
+        "addedCount": 0,
+        "removedCount": 1,
+        "increasedCount": 23,
+        "decreasedCount": 27,
+        "totalChangeCount": 51
       }
     },
     {
@@ -533,17 +537,17 @@
       "trackingStatus": "已串接",
       "detailAvailability": "full",
       "disclosureDate": "2026-04-17",
-      "nav": 15.21,
-      "aum": 20479317885,
-      "holdingsCount": 48,
+      "nav": 15.6,
+      "aum": 21214493555,
+      "holdingsCount": 51,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 0,
-        "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "addedCount": 4,
+        "removedCount": 1,
+        "increasedCount": 21,
+        "decreasedCount": 21,
+        "totalChangeCount": 47
       }
     },
     {
@@ -676,18 +680,18 @@
       "sourceUrl": "https://www.ctbcinvestments.com.tw/CTWEB/Content/ETF/pcd.aspx?ETF_ID=00995A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 14.32,
-      "aum": 4467365289,
+      "disclosureDate": "2026-04-17",
+      "nav": 14.38,
+      "aum": 4488175398,
       "holdingsCount": 60,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 1,
-        "increasedCount": 21,
-        "decreasedCount": 31,
-        "totalChangeCount": 54
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 27,
+        "decreasedCount": 24,
+        "totalChangeCount": 51
       }
     },
     {
@@ -727,15 +731,15 @@
       "disclosureDate": "2026-04-16",
       "nav": 10.0813,
       "aum": null,
-      "holdingsCount": 170,
+      "holdingsCount": 168,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
-        "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "removedCount": 2,
+        "increasedCount": 166,
+        "decreasedCount": 2,
+        "totalChangeCount": 170
       }
     },
     {
@@ -748,18 +752,18 @@
       "sourceUrl": "https://www.megafunds.com.tw/MEGA/etf/etf_product.aspx?id=23",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 11.45,
-      "aum": 3016103933,
+      "disclosureDate": "2026-04-17",
+      "nav": 11.67,
+      "aum": 3072562300,
       "holdingsCount": 50,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
-        "removedCount": 1,
-        "increasedCount": 19,
-        "decreasedCount": 24,
-        "totalChangeCount": 44
+        "removedCount": 0,
+        "increasedCount": 15,
+        "decreasedCount": 27,
+        "totalChangeCount": 42
       }
     },
     {
@@ -772,18 +776,18 @@
       "sourceUrl": "https://www.cathaysite.com.tw/ETF/00400A",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-16",
-      "nav": 11.81,
-      "aum": 10637171230,
+      "disclosureDate": "2026-04-17",
+      "nav": 11.9,
+      "aum": 12668715778,
       "holdingsCount": 56,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 8,
-        "decreasedCount": 47,
-        "totalChangeCount": 55
+        "increasedCount": 5,
+        "decreasedCount": 51,
+        "totalChangeCount": 56
       }
     },
     {
@@ -821,23 +825,23 @@
       "trackingStatus": "已串接",
       "detailAvailability": "full",
       "disclosureDate": "2026-04-17",
-      "nav": 10.34,
-      "aum": 10263354237,
+      "nav": 10.45,
+      "aum": 10455876786,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 7,
+        "decreasedCount": 3,
+        "totalChangeCount": 10
       }
     }
   ],
   "latestDisclosureDate": "2026-04-17",
   "connectedCount": 23,
-  "stockDetailCount": 242,
+  "stockDetailCount": 240,
   "pendingEtfs": [],
   "failedEtfs": [],
   "sources": [

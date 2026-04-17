@@ -3,7 +3,7 @@
   "name": "寶成",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:30.601Z",
+  "generatedAt": "2026-04-17T08:35:53.414Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -3.96%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 22,641,815 股。"
+    "最近 5 個交易日三大法人合計賣超 23,366,613 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4194,6 +4194,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-17",
+        "foreign": -5172220,
+        "investmentTrust": -1718279,
+        "dealer": -145928,
+        "total": -7036427
+      },
+      {
         "date": "2026-04-16",
         "foreign": -1947669,
         "investmentTrust": -2050797,
@@ -4220,20 +4227,13 @@
         "investmentTrust": 263722,
         "dealer": -43799,
         "total": -6345973
-      },
-      {
-        "date": "2026-04-10",
-        "foreign": -6094334,
-        "investmentTrust": -235774,
-        "dealer": 18479,
-        "total": -6311629
       }
     ],
     "summary": {
-      "foreign5Day": -16999484,
-      "investmentTrust5Day": -5079680,
-      "dealer5Day": -562651,
-      "total5Day": -22641815
+      "foreign5Day": -16077370,
+      "investmentTrust5Day": -6562185,
+      "dealer5Day": -727058,
+      "total5Day": -23366613
     }
   },
   "持股分散": {
@@ -4473,9 +4473,9 @@
         "return60": -29.94011976047904,
         "volume": 1471902,
         "turnover": null,
-        "foreign5Day": 494055,
+        "foreign5Day": 452043,
         "investmentTrust5Day": -1000,
-        "total5Day": 523266,
+        "total5Day": 473567,
         "largeHolderRatio": 88.73,
         "retailRatio": 5.46,
         "shortToMarginRatio": 0.3100088573959256,
@@ -4541,9 +4541,9 @@
         "return60": -2.638522321211991,
         "volume": 74613,
         "turnover": null,
-        "foreign5Day": 38000,
+        "foreign5Day": -12000,
         "investmentTrust5Day": 0,
-        "total5Day": 39030,
+        "total5Day": -10970,
         "largeHolderRatio": 86.57000000000001,
         "retailRatio": 5.819999999999999,
         "shortToMarginRatio": null,
@@ -4609,9 +4609,9 @@
         "return60": -10.720001220703125,
         "volume": 16274198,
         "turnover": null,
-        "foreign5Day": -16999484,
-        "investmentTrust5Day": -5079680,
-        "total5Day": -22641815,
+        "foreign5Day": -16077370,
+        "investmentTrust5Day": -6562185,
+        "total5Day": -23366613,
         "largeHolderRatio": 79.47,
         "retailRatio": 6.18,
         "shortToMarginRatio": 0.4123118228018027,
@@ -4677,9 +4677,9 @@
         "return60": -27.570093457943923,
         "volume": 1534806,
         "turnover": null,
-        "foreign5Day": -1018037,
-        "investmentTrust5Day": 28515,
-        "total5Day": -942823,
+        "foreign5Day": -689748,
+        "investmentTrust5Day": 12193,
+        "total5Day": -644270,
         "largeHolderRatio": 90.35000000000001,
         "retailRatio": 3.42,
         "shortToMarginRatio": 2.0939445387662703,
@@ -4747,9 +4747,9 @@
         "return60": -27.570093457943923,
         "volume": 1534806,
         "turnover": null,
-        "foreign5Day": -1018037,
-        "investmentTrust5Day": 28515,
-        "total5Day": -942823,
+        "foreign5Day": -689748,
+        "investmentTrust5Day": 12193,
+        "total5Day": -644270,
         "largeHolderRatio": 90.35000000000001,
         "retailRatio": 3.42,
         "shortToMarginRatio": 2.0939445387662703,
@@ -4815,9 +4815,9 @@
         "return60": -10.720001220703125,
         "volume": 16274198,
         "turnover": null,
-        "foreign5Day": -16999484,
-        "investmentTrust5Day": -5079680,
-        "total5Day": -22641815,
+        "foreign5Day": -16077370,
+        "investmentTrust5Day": -6562185,
+        "total5Day": -23366613,
         "largeHolderRatio": 79.47,
         "retailRatio": 6.18,
         "shortToMarginRatio": 0.4123118228018027,
@@ -4883,9 +4883,9 @@
         "return60": -2.638522321211991,
         "volume": 74613,
         "turnover": null,
-        "foreign5Day": 38000,
+        "foreign5Day": -12000,
         "investmentTrust5Day": 0,
-        "total5Day": 39030,
+        "total5Day": -10970,
         "largeHolderRatio": 86.57000000000001,
         "retailRatio": 5.819999999999999,
         "shortToMarginRatio": null,

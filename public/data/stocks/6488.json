@@ -3,7 +3,7 @@
   "name": "環球晶",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:24.273Z",
+  "generatedAt": "2026-04-17T08:35:49.088Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4278,36 +4278,36 @@
   },
   "主動ETF曝光": {
     "count": 3,
-    "averageWeight": 1.1266666666666667,
-    "totalWeight": 3.38,
+    "averageWeight": 0.57,
+    "totalWeight": 1.71,
     "latestDisclosureDate": "2026-04-17",
     "items": [
-      {
-        "etfCode": "00985A",
-        "etfName": "主動野村台灣50",
-        "providerLabel": "野村投信",
-        "disclosureDate": "2026-04-10",
-        "weight": 1.47,
-        "shares": 267000,
-        "rank": 22
-      },
       {
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
         "providerLabel": "國泰投信",
-        "disclosureDate": "2026-04-16",
-        "weight": 1.36,
+        "disclosureDate": "2026-04-17",
+        "weight": 1.07,
         "shares": null,
-        "rank": 19
+        "rank": 23
+      },
+      {
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "providerLabel": "野村投信",
+        "disclosureDate": "2026-04-17",
+        "weight": 0.35,
+        "shares": 65000,
+        "rank": 38
       },
       {
         "etfCode": "00981A",
         "etfName": "主動統一台股增長",
         "providerLabel": "統一投信",
         "disclosureDate": "2026-04-17",
-        "weight": 0.55,
-        "shares": 1465000,
-        "rank": 29
+        "weight": 0.29,
+        "shares": 886000,
+        "rank": 37
       }
     ]
   },

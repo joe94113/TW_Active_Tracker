@@ -3,7 +3,7 @@
   "name": "南寶",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:13.420Z",
+  "generatedAt": "2026-04-17T08:35:42.601Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -3487,7 +3487,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 6.11%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計賣超 1,171,237 股。"
+    "最近 5 個交易日三大法人合計賣超 1,334,929 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4194,6 +4194,13 @@
   "法人買賣": {
     "days": [
       {
+        "date": "2026-04-17",
+        "foreign": -67701,
+        "investmentTrust": -41000,
+        "dealer": -117,
+        "total": -108818
+      },
+      {
         "date": "2026-04-16",
         "foreign": -30500,
         "investmentTrust": 1000,
@@ -4220,20 +4227,13 @@
         "investmentTrust": -47000,
         "dealer": -174830,
         "total": -236708
-      },
-      {
-        "date": "2026-04-10",
-        "foreign": 26294,
-        "investmentTrust": -1000,
-        "dealer": 29580,
-        "total": 54874
       }
     ],
     "summary": {
-      "foreign5Day": -924744,
-      "investmentTrust5Day": -83000,
-      "dealer5Day": -163493,
-      "total5Day": -1171237
+      "foreign5Day": -1018739,
+      "investmentTrust5Day": -123000,
+      "dealer5Day": -193190,
+      "total5Day": -1334929
     }
   },
   "持股分散": {
@@ -4473,9 +4473,9 @@
         "return60": 57.58754395993173,
         "volume": 84478159,
         "turnover": null,
-        "foreign5Day": -14043564,
-        "investmentTrust5Day": -7434976,
-        "total5Day": -23002827,
+        "foreign5Day": -1221331,
+        "investmentTrust5Day": 591512,
+        "total5Day": -2812493,
         "largeHolderRatio": 71,
         "retailRatio": 11.81,
         "shortToMarginRatio": 2.6086034427909937,
@@ -4541,9 +4541,9 @@
         "return60": 127.7909857522411,
         "volume": 73450967,
         "turnover": null,
-        "foreign5Day": -19496177,
-        "investmentTrust5Day": 94000,
-        "total5Day": -19542365,
+        "foreign5Day": -2150043,
+        "investmentTrust5Day": 68000,
+        "total5Day": -1881792,
         "largeHolderRatio": 50.949999999999996,
         "retailRatio": 21.59,
         "shortToMarginRatio": 5.250452625226313,
@@ -4609,9 +4609,9 @@
         "return60": 7.253086419753087,
         "volume": 605155,
         "turnover": null,
-        "foreign5Day": -924744,
-        "investmentTrust5Day": -83000,
-        "total5Day": -1171237,
+        "foreign5Day": -1018739,
+        "investmentTrust5Day": -123000,
+        "total5Day": -1334929,
         "largeHolderRatio": 70.39999999999999,
         "retailRatio": 8.790000000000001,
         "shortToMarginRatio": 0.6189821182943603,
@@ -4679,9 +4679,9 @@
         "return60": 7.253086419753087,
         "volume": 605155,
         "turnover": null,
-        "foreign5Day": -924744,
-        "investmentTrust5Day": -83000,
-        "total5Day": -1171237,
+        "foreign5Day": -1018739,
+        "investmentTrust5Day": -123000,
+        "total5Day": -1334929,
         "largeHolderRatio": 70.39999999999999,
         "retailRatio": 8.790000000000001,
         "shortToMarginRatio": 0.6189821182943603,
@@ -4747,9 +4747,9 @@
         "return60": 127.7909857522411,
         "volume": 73450967,
         "turnover": null,
-        "foreign5Day": -19496177,
-        "investmentTrust5Day": 94000,
-        "total5Day": -19542365,
+        "foreign5Day": -2150043,
+        "investmentTrust5Day": 68000,
+        "total5Day": -1881792,
         "largeHolderRatio": 50.949999999999996,
         "retailRatio": 21.59,
         "shortToMarginRatio": 5.250452625226313,
@@ -4815,9 +4815,9 @@
         "return60": 57.58754395993173,
         "volume": 84478159,
         "turnover": null,
-        "foreign5Day": -14043564,
-        "investmentTrust5Day": -7434976,
-        "total5Day": -23002827,
+        "foreign5Day": -1221331,
+        "investmentTrust5Day": 591512,
+        "total5Day": -2812493,
         "largeHolderRatio": 71,
         "retailRatio": 11.81,
         "shortToMarginRatio": 2.6086034427909937,

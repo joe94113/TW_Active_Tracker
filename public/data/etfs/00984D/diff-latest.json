@@ -5,15 +5,1714 @@
   "toDisclosureDate": "2026-04-16",
   "comparisonReady": true,
   "added": [],
-  "removed": [],
-  "increased": [],
-  "decreased": [],
+  "removed": [
+    {
+      "code": "USG3856WAA92",
+      "name": "GGAM FINANCE LTD SER REGS (REG S) 8% 15JUN2028",
+      "previousShares": 397000,
+      "previousWeight": 1.002729,
+      "sharesDelta": -397000,
+      "weightDelta": -1.002729
+    },
+    {
+      "code": "USU68336AC76",
+      "name": "OWENS & MINOR INC SER REGS (REG) (REG S) 6.625% 01APR2030",
+      "previousShares": 294000,
+      "previousWeight": 0.366224,
+      "sharesDelta": -294000,
+      "weightDelta": -0.366224
+    }
+  ],
+  "increased": [
+    {
+      "code": "USU6836GAB42",
+      "name": "ORGANON & CO/ORGANON FOR SER RegS (REG S) 7.875% 15MAY2034",
+      "previousShares": 464000,
+      "currentShares": 464000,
+      "previousWeight": 1.096773,
+      "currentWeight": 1.130474,
+      "sharesDelta": 0,
+      "weightDelta": 0.03370099999999998
+    },
+    {
+      "code": "USU75082AB03",
+      "name": "ROCKET SOFTWARE INC SER REGS (REG S) 9% 28NOV2028",
+      "previousShares": 386000,
+      "currentShares": 386000,
+      "previousWeight": 0.926565,
+      "currentWeight": 0.952563,
+      "sharesDelta": 0,
+      "weightDelta": 0.025998000000000077
+    },
+    {
+      "code": "USU9220NAD31",
+      "name": "VENTURE GLOBAL LNG INC SER REGS (REG S) 9.875% 01FEB2032",
+      "previousShares": 680000,
+      "currentShares": 680000,
+      "previousWeight": 1.767555,
+      "currentWeight": 1.792896,
+      "sharesDelta": 0,
+      "weightDelta": 0.025341000000000058
+    },
+    {
+      "code": "USU2285XAZ97",
+      "name": "CSC HOLDINGS LLC SER REGS (REG S) 11.25% 15MAY2028",
+      "previousShares": 629000,
+      "currentShares": 629000,
+      "previousWeight": 1.25956,
+      "currentWeight": 1.283049,
+      "sharesDelta": 0,
+      "weightDelta": 0.023489000000000093
+    },
+    {
+      "code": "USC07885AL76",
+      "name": "BAUSCH HEALTH COS INC SER REGS (REG) (REG S) 11% 30SEP2028",
+      "previousShares": 469000,
+      "currentShares": 469000,
+      "previousWeight": 1.172252,
+      "currentWeight": 1.195741,
+      "sharesDelta": 0,
+      "weightDelta": 0.02348899999999987
+    },
+    {
+      "code": "US81761LAE20",
+      "name": "SERVICE PROPERTIES TRUST (REG) 8.875% 15JUN2032",
+      "previousShares": 514000,
+      "currentShares": 514000,
+      "previousWeight": 1.261524,
+      "currentWeight": 1.284726,
+      "sharesDelta": 0,
+      "weightDelta": 0.023201999999999945
+    },
+    {
+      "code": "USU18898AA16",
+      "name": "CLOUD SOFTWARE GRP INC SER REGS 9.000000 % 30SEP2029",
+      "previousShares": 471000,
+      "currentShares": 471000,
+      "previousWeight": 1.109301,
+      "currentWeight": 1.132064,
+      "sharesDelta": 0,
+      "weightDelta": 0.022762999999999867
+    },
+    {
+      "code": "USU1638HAD99",
+      "name": "CIVITAS RESOURCES INC SER REGS (REG) (REG S) 9.625% 15JUN2033",
+      "previousShares": 511000,
+      "currentShares": 511000,
+      "previousWeight": 1.378283,
+      "currentWeight": 1.400836,
+      "sharesDelta": 0,
+      "weightDelta": 0.022553000000000045
+    },
+    {
+      "code": "USU17127AX63",
+      "name": "CHS/COMMUNITY HEALTH SYS SER REGS 10.875000 % 15JAN2032",
+      "previousShares": 582000,
+      "currentShares": 582000,
+      "previousWeight": 1.528726,
+      "currentWeight": 1.550619,
+      "sharesDelta": 0,
+      "weightDelta": 0.02189299999999994
+    },
+    {
+      "code": "USU05375AX59",
+      "name": "AVIS BUDGET CAR/FINANCE SER REGS 8.375000 % 15JUN2032",
+      "previousShares": 450000,
+      "currentShares": 450000,
+      "previousWeight": 1.123879,
+      "currentWeight": 1.14575,
+      "sharesDelta": 0,
+      "weightDelta": 0.021870999999999974
+    },
+    {
+      "code": "USU43279AN59",
+      "name": "HILCORP ENERGY I/HILCORP SER REGS (REG S) 8.375% 01NOV2033",
+      "previousShares": 481000,
+      "currentShares": 481000,
+      "previousWeight": 1.240582,
+      "currentWeight": 1.262169,
+      "sharesDelta": 0,
+      "weightDelta": 0.021587000000000023
+    },
+    {
+      "code": "US045941AB79",
+      "name": "ASURION LLC/ASURION CO SER 144A 8.375% 01FEB2034",
+      "previousShares": 610000,
+      "currentShares": 610000,
+      "previousWeight": 1.475017,
+      "currentWeight": 1.496223,
+      "sharesDelta": 0,
+      "weightDelta": 0.021206000000000058
+    },
+    {
+      "code": "USU4526LAL19",
+      "name": "CRESCENT ENERGY FINANCE SER REGS (REG S) 8.375% 15JAN2034",
+      "previousShares": 498000,
+      "currentShares": 498000,
+      "previousWeight": 1.267084,
+      "currentWeight": 1.286592,
+      "sharesDelta": 0,
+      "weightDelta": 0.01950799999999986
+    },
+    {
+      "code": "USU91505AY02",
+      "name": "UNIVISION COMMUNICATIONS SER REGS (REG S) 9.375% 01AUG2032",
+      "previousShares": 517000,
+      "currentShares": 517000,
+      "previousWeight": 1.309373,
+      "currentWeight": 1.32844,
+      "sharesDelta": 0,
+      "weightDelta": 0.019067000000000167
+    },
+    {
+      "code": "US63938CAP32",
+      "name": "NAVIENT CORP (REG) 11.5% 15MAR2031",
+      "previousShares": 477000,
+      "currentShares": 477000,
+      "previousWeight": 1.214244,
+      "currentWeight": 1.233165,
+      "sharesDelta": 0,
+      "weightDelta": 0.018920999999999966
+    },
+    {
+      "code": "USU9840YAB30",
+      "name": "XPLR INFRAST OPERATING SER REGS (REG) (REG S) 8.625% 15MAR2033",
+      "previousShares": 443000,
+      "currentShares": 443000,
+      "previousWeight": 1.149506,
+      "currentWeight": 1.168353,
+      "sharesDelta": 0,
+      "weightDelta": 0.018847000000000058
+    },
+    {
+      "code": "USU2541MAE04",
+      "name": "DIRECTV FIN LLC/COINC SER REGS 10.000000 % 15FEB2031",
+      "previousShares": 446000,
+      "currentShares": 446000,
+      "previousWeight": 1.124059,
+      "currentWeight": 1.142904,
+      "sharesDelta": 0,
+      "weightDelta": 0.018845
+    },
+    {
+      "code": "USU2069EAA83",
+      "name": "COREWEAVE INC SER REGS (REG S) 9.25% 01JUN2030",
+      "previousShares": 470000,
+      "currentShares": 470000,
+      "previousWeight": 1.15667,
+      "currentWeight": 1.175454,
+      "sharesDelta": 0,
+      "weightDelta": 0.018783999999999912
+    },
+    {
+      "code": "USU85974AD27",
+      "name": "SPECIALTY BUILDING PRODU SER REGS 7.750000 % 15OCT2029",
+      "previousShares": 361000,
+      "currentShares": 361000,
+      "previousWeight": 0.780308,
+      "currentWeight": 0.798331,
+      "sharesDelta": 0,
+      "weightDelta": 0.01802300000000001
+    },
+    {
+      "code": "USL6264MAA47",
+      "name": "MAXAM PRILL SARL SER REGS 7.750000 % 15JUL2030",
+      "previousShares": 349000,
+      "currentShares": 349000,
+      "previousWeight": 0.8689,
+      "currentWeight": 0.886843,
+      "sharesDelta": 0,
+      "weightDelta": 0.017943000000000042
+    },
+    {
+      "code": "USU8275QAQ39",
+      "name": "SINCLAIR TELEVISION GROU SER REGS 8.125000 % 15FEB2033",
+      "previousShares": 407000,
+      "currentShares": 407000,
+      "previousWeight": 1.020542,
+      "currentWeight": 1.037598,
+      "sharesDelta": 0,
+      "weightDelta": 0.01705599999999996
+    },
+    {
+      "code": "USU0379NAA73",
+      "name": "APLD COMPUTECO LLC SER REGS 9.250000 % 15-DEC-2030",
+      "previousShares": 408000,
+      "currentShares": 408000,
+      "previousWeight": 1.061812,
+      "currentWeight": 1.078605,
+      "sharesDelta": 0,
+      "weightDelta": 0.016793000000000058
+    },
+    {
+      "code": "USG04584AA97",
+      "name": "ARDONAGH FINCO LTD SER REGS (REG S) 7.75% 15FEB2031",
+      "previousShares": 387000,
+      "currentShares": 387000,
+      "previousWeight": 0.955115,
+      "currentWeight": 0.971759,
+      "sharesDelta": 0,
+      "weightDelta": 0.016643999999999992
+    },
+    {
+      "code": "USC36025AL50",
+      "name": "GARDA WORLD SECURITY SER REGS 8.375000 % 15NOV2032",
+      "previousShares": 435000,
+      "currentShares": 435000,
+      "previousWeight": 1.08384,
+      "currentWeight": 1.100426,
+      "sharesDelta": 0,
+      "weightDelta": 0.01658599999999999
+    },
+    {
+      "code": "USG05891AL32",
+      "name": "ASTON MARTIN CAPITAL HOL SER REGS (REG S) 10% 31MAR2029",
+      "previousShares": 416000,
+      "currentShares": 416000,
+      "previousWeight": 0.776858,
+      "currentWeight": 0.793398,
+      "sharesDelta": 0,
+      "weightDelta": 0.01654
+    },
+    {
+      "code": "USG47718AK02",
+      "name": "INEOS FINANCE PLC SER REGs (REG S) 7.5% 15APR2029",
+      "previousShares": 440000,
+      "currentShares": 440000,
+      "previousWeight": 1.036134,
+      "currentWeight": 1.052649,
+      "sharesDelta": 0,
+      "weightDelta": 0.016514999999999835
+    },
+    {
+      "code": "USU82775AA28",
+      "name": "SIX FLAGS/CAN WON/MILLE SER REGS (REG S) 8.625% 15JAN2032",
+      "previousShares": 484000,
+      "currentShares": 484000,
+      "previousWeight": 1.201985,
+      "currentWeight": 1.218438,
+      "sharesDelta": 0,
+      "weightDelta": 0.01645299999999983
+    },
+    {
+      "code": "USG9444PAG75",
+      "name": "VMED O2 UK FINANCING I SER REGS (REG S) 7.75% 15APR2032",
+      "previousShares": 460000,
+      "currentShares": 460000,
+      "previousWeight": 1.091595,
+      "currentWeight": 1.107916,
+      "sharesDelta": 0,
+      "weightDelta": 0.016320999999999808
+    },
+    {
+      "code": "USG53431AA32",
+      "name": "LCPR SR SECURED FIN DAC SER REGS (REG) (REG S) 6.75% 15OCT2027",
+      "previousShares": 415000,
+      "currentShares": 415000,
+      "previousWeight": 0.6756,
+      "currentWeight": 0.691826,
+      "sharesDelta": 0,
+      "weightDelta": 0.016226000000000074
+    },
+    {
+      "code": "USU1468GAK05",
+      "name": "CARVANA CO VAR PERP 01JUN2031",
+      "previousShares": 431000,
+      "currentShares": 431000,
+      "previousWeight": 1.153624,
+      "currentWeight": 1.169769,
+      "sharesDelta": 0,
+      "weightDelta": 0.016145000000000076
+    },
+    {
+      "code": "US52109SAB51",
+      "name": "LBM ACQUISITION LLC SER 144A 9.500000 % 15JUN2031",
+      "previousShares": 416000,
+      "currentShares": 416000,
+      "previousWeight": 0.874087,
+      "currentWeight": 0.890143,
+      "sharesDelta": 0,
+      "weightDelta": 0.01605600000000007
+    },
+    {
+      "code": "USU31538AH18",
+      "name": "FERRELLGAS LP/FERRELLGAS SER REGS (REG S) 9.25% 15JAN2031",
+      "previousShares": 378000,
+      "currentShares": 378000,
+      "previousWeight": 0.958548,
+      "currentWeight": 0.974263,
+      "sharesDelta": 0,
+      "weightDelta": 0.015715000000000034
+    },
+    {
+      "code": "USU53039AL44",
+      "name": "LIFEPOINT HEALTH INC SER REGS 10.000000 % 01-JUN-2032",
+      "previousShares": 455000,
+      "currentShares": 455000,
+      "previousWeight": 1.154453,
+      "currentWeight": 1.169913,
+      "sharesDelta": 0,
+      "weightDelta": 0.01546000000000003
+    },
+    {
+      "code": "USU85440AF96",
+      "name": "STAPLES INC SER REGS (REG S) 10.75% 01SEP2029",
+      "previousShares": 440000,
+      "currentShares": 440000,
+      "previousWeight": 1.032595,
+      "currentWeight": 1.047818,
+      "sharesDelta": 0,
+      "weightDelta": 0.015222999999999987
+    },
+    {
+      "code": "USU3164VAF14",
+      "name": "GLOBAL PART/GLP FINANCE SER REGS (REG S) 8.25% 15JAN2032",
+      "previousShares": 372000,
+      "currentShares": 372000,
+      "previousWeight": 0.943564,
+      "currentWeight": 0.958766,
+      "sharesDelta": 0,
+      "weightDelta": 0.015202000000000049
+    },
+    {
+      "code": "USU9338EAA83",
+      "name": "VOYAGER PARENT LLC SER REGS 9.250000 % 01JUL2032",
+      "previousShares": 388000,
+      "currentShares": 388000,
+      "previousWeight": 0.998072,
+      "currentWeight": 1.013197,
+      "sharesDelta": 0,
+      "weightDelta": 0.015124999999999944
+    },
+    {
+      "code": "US29357KAK97",
+      "name": "ENOVA INTERNATIONAL INC SER 144A 9.125000 % 01AUG2029",
+      "previousShares": 386000,
+      "currentShares": 386000,
+      "previousWeight": 0.975228,
+      "currentWeight": 0.990246,
+      "sharesDelta": 0,
+      "weightDelta": 0.015017999999999976
+    },
+    {
+      "code": "USU83037AD01",
+      "name": "TALOS PRODUCTION INC SER REGS (REG S) 9.375% 01FEB2031",
+      "previousShares": 372000,
+      "currentShares": 372000,
+      "previousWeight": 0.961294,
+      "currentWeight": 0.975988,
+      "sharesDelta": 0,
+      "weightDelta": 0.014693999999999985
+    },
+    {
+      "code": "USU86057AA10",
+      "name": "SUMMIT MIDSTREAM HOLDING SER REGS (REG S) 8.625% 31OCT2029",
+      "previousShares": 351000,
+      "currentShares": 351000,
+      "previousWeight": 0.889016,
+      "currentWeight": 0.903706,
+      "sharesDelta": 0,
+      "weightDelta": 0.01468999999999998
+    },
+    {
+      "code": "USU59020AA29",
+      "name": "MERLIN ENTERTAINMENTS GR SER REGS (REG S) 7.375% 15FEB2031",
+      "previousShares": 401000,
+      "currentShares": 401000,
+      "previousWeight": 0.799591,
+      "currentWeight": 0.814252,
+      "sharesDelta": 0,
+      "weightDelta": 0.014660999999999924
+    },
+    {
+      "code": "USU22033AC53",
+      "name": "CP ATLAS BUYER INC SER REGS 9.750000 % 15JUL2030",
+      "previousShares": 352000,
+      "currentShares": 352000,
+      "previousWeight": 0.79585,
+      "currentWeight": 0.810448,
+      "sharesDelta": 0,
+      "weightDelta": 0.014598
+    },
+    {
+      "code": "US71677KAD00",
+      "name": "PETSMART INC/PETSMART FI 10.000000 % 15SEP2033",
+      "previousShares": 409000,
+      "currentShares": 409000,
+      "previousWeight": 1.018424,
+      "currentWeight": 1.032964,
+      "sharesDelta": 0,
+      "weightDelta": 0.014539999999999997
+    },
+    {
+      "code": "US855170AA41",
+      "name": "STAR PARENT INC SER 144A 9% 01OCT2030",
+      "previousShares": 412000,
+      "currentShares": 412000,
+      "previousWeight": 1.046246,
+      "currentWeight": 1.060596,
+      "sharesDelta": 0,
+      "weightDelta": 0.014350000000000085
+    },
+    {
+      "code": "USU1900QAB42",
+      "name": "CLYDESDALE ACQUISITION SER REGS (REG) (REG S) 8.75% 15APR2030",
+      "previousShares": 455000,
+      "currentShares": 455000,
+      "previousWeight": 1.040329,
+      "currentWeight": 1.054576,
+      "sharesDelta": 0,
+      "weightDelta": 0.014246999999999899
+    },
+    {
+      "code": "USU24004AA80",
+      "name": "DCLI BIDCO LLC SER REGS 7.750000 % 15NOV2029",
+      "previousShares": 356000,
+      "currentShares": 356000,
+      "previousWeight": 0.884919,
+      "currentWeight": 0.899141,
+      "sharesDelta": 0,
+      "weightDelta": 0.014221999999999957
+    },
+    {
+      "code": "USU7493RAD80",
+      "name": "RADIOLOGY PARTNERS INC SER REGS 8.500000 % 15-JUL-2032",
+      "previousShares": 384000,
+      "currentShares": 384000,
+      "previousWeight": 0.924071,
+      "currentWeight": 0.938043,
+      "sharesDelta": 0,
+      "weightDelta": 0.013971999999999984
+    },
+    {
+      "code": "USD4000PAR31",
+      "name": "IHO VERWALTUNGS GMBH SER REGS (REG) (REG S) 8% 15NOV2032",
+      "previousShares": 367000,
+      "currentShares": 367000,
+      "previousWeight": 0.922807,
+      "currentWeight": 0.936461,
+      "sharesDelta": 0,
+      "weightDelta": 0.013653999999999944
+    },
+    {
+      "code": "US71601VAA35",
+      "name": "PETCO HEALTH & WELLNESS SER 144A (REG) 8.25% 01FEB2031",
+      "previousShares": 401000,
+      "currentShares": 401000,
+      "previousWeight": 0.99057,
+      "currentWeight": 1.004211,
+      "sharesDelta": 0,
+      "weightDelta": 0.013641000000000014
+    },
+    {
+      "code": "USU70453AH58",
+      "name": "PBF HOLDING CO LLC SER REGS 9.875000 % 15MAR2030",
+      "previousShares": 385000,
+      "currentShares": 385000,
+      "previousWeight": 0.998434,
+      "currentWeight": 1.011654,
+      "sharesDelta": 0,
+      "weightDelta": 0.01322000000000001
+    },
+    {
+      "code": "USU0735JAB36",
+      "name": "BEACH ACQUISITION BIDCO 10% 15JUL2033",
+      "previousShares": 299000,
+      "currentShares": 299000,
+      "previousWeight": 0.793488,
+      "currentWeight": 0.806699,
+      "sharesDelta": 0,
+      "weightDelta": 0.013211000000000084
+    },
+    {
+      "code": "USU9033UAE20",
+      "name": "US ACUTE CARE SOLUTIONS SER REGS (REG S) 9.75% 15MAY2029",
+      "previousShares": 375000,
+      "currentShares": 375000,
+      "previousWeight": 0.908261,
+      "currentWeight": 0.920983,
+      "sharesDelta": 0,
+      "weightDelta": 0.012722000000000011
+    },
+    {
+      "code": "US651229AY21",
+      "name": "NEWELL RUBBERMAID INC 6% 01APR2046",
+      "previousShares": 312000,
+      "currentShares": 312000,
+      "previousWeight": 0.650879,
+      "currentWeight": 0.663583,
+      "sharesDelta": 0,
+      "weightDelta": 0.012704000000000049
+    },
+    {
+      "code": "USG7088KAA63",
+      "name": "PHOENIX AVIATION CAPITAL SER REGS 9.250000 % 15JUL2030",
+      "previousShares": 358000,
+      "currentShares": 358000,
+      "previousWeight": 0.888226,
+      "currentWeight": 0.900875,
+      "sharesDelta": 0,
+      "weightDelta": 0.012649000000000021
+    },
+    {
+      "code": "USU02400AD83",
+      "name": "AMC NETWORKS INC (REG) 10.5 % 15-JUL-2032",
+      "previousShares": 408000,
+      "currentShares": 408000,
+      "previousWeight": 1.009546,
+      "currentWeight": 1.022056,
+      "sharesDelta": 0,
+      "weightDelta": 0.012510000000000021
+    },
+    {
+      "code": "USU62000AC58",
+      "name": "MOSS CREEK RESOURCES HLD SER REGS (REG S) 8.25% 01SEP2031",
+      "previousShares": 373000,
+      "currentShares": 373000,
+      "previousWeight": 0.907987,
+      "currentWeight": 0.920389,
+      "sharesDelta": 0,
+      "weightDelta": 0.012402000000000024
+    },
+    {
+      "code": "USU60731AB91",
+      "name": "MOHEGAN TRIBAL / MS DIG SER REGS 11.875000 % 15APR2031",
+      "previousShares": 375000,
+      "currentShares": 375000,
+      "previousWeight": 0.974878,
+      "currentWeight": 0.987253,
+      "sharesDelta": 0,
+      "weightDelta": 0.012375000000000025
+    },
+    {
+      "code": "USU03030AC49",
+      "name": "AMERIGAS PART/FIN CORP SER REGS 9.500000 % 01-JUN-2030",
+      "previousShares": 371000,
+      "currentShares": 371000,
+      "previousWeight": 0.959591,
+      "currentWeight": 0.971895,
+      "sharesDelta": 0,
+      "weightDelta": 0.012303999999999982
+    },
+    {
+      "code": "US48020RAB15",
+      "name": "JONES DESLAURIERS INSURA SER 144A 8.500000 % 15-MAR-2030",
+      "previousShares": 397000,
+      "currentShares": 397000,
+      "previousWeight": 0.992117,
+      "currentWeight": 1.004309,
+      "sharesDelta": 0,
+      "weightDelta": 0.01219199999999987
+    },
+    {
+      "code": "US04020JAA43",
+      "name": "ARETEC ESCROW ISSUER 2 SER 144A (REG) 10% 15AUG2030",
+      "previousShares": 339000,
+      "currentShares": 339000,
+      "previousWeight": 0.874344,
+      "currentWeight": 0.886337,
+      "sharesDelta": 0,
+      "weightDelta": 0.011993000000000031
+    },
+    {
+      "code": "USU42804AY78",
+      "name": "HERTZ CORP/THE SER REGS (REG S) 12.625% 15JUL2029",
+      "previousShares": 408000,
+      "currentShares": 408000,
+      "previousWeight": 0.950496,
+      "currentWeight": 0.962482,
+      "sharesDelta": 0,
+      "weightDelta": 0.011985999999999941
+    },
+    {
+      "code": "USU33825AD93",
+      "name": "FIVE POINT OPERATING CO SER REGS 8.000000 % 01-OCT-2030",
+      "previousShares": 344000,
+      "currentShares": 344000,
+      "previousWeight": 0.851553,
+      "currentWeight": 0.863459,
+      "sharesDelta": 0,
+      "weightDelta": 0.011905999999999972
+    },
+    {
+      "code": "USU7410WAD75",
+      "name": "PRIME HEALTHCARE SERVICE SER REGS (REG S) 9.375% 01SEP2029",
+      "previousShares": 373000,
+      "currentShares": 373000,
+      "previousWeight": 0.941829,
+      "currentWeight": 0.953612,
+      "sharesDelta": 0,
+      "weightDelta": 0.011782999999999988
+    },
+    {
+      "code": "USU92573AA96",
+      "name": "VELOCITY VEHICLE GROUP SER REGS (REG S) 8% 01JUN2029",
+      "previousShares": 370000,
+      "currentShares": 370000,
+      "previousWeight": 0.849946,
+      "currentWeight": 0.861618,
+      "sharesDelta": 0,
+      "weightDelta": 0.011672000000000016
+    },
+    {
+      "code": "USJ57160CZ41",
+      "name": "NISSAN MOTOR CO SER REGS 8.125000 % 17JUL2035",
+      "previousShares": 302000,
+      "currentShares": 302000,
+      "previousWeight": 0.769504,
+      "currentWeight": 0.780959,
+      "sharesDelta": 0,
+      "weightDelta": 0.011454999999999993
+    },
+    {
+      "code": "USJ64264AG96",
+      "name": "RAKUTEN GROUP INC SER REGS (REG S) 11.25% 15FEB2027",
+      "previousShares": 295000,
+      "currentShares": 295000,
+      "previousWeight": 0.743327,
+      "currentWeight": 0.754779,
+      "sharesDelta": 0,
+      "weightDelta": 0.011452000000000018
+    },
+    {
+      "code": "USU44927BD96",
+      "name": "ICAHN ENTERPRISES/FIN SER REGS 10.000000 % 15NOV2029",
+      "previousShares": 278000,
+      "currentShares": 278000,
+      "previousWeight": 0.675011,
+      "currentWeight": 0.686369,
+      "sharesDelta": 0,
+      "weightDelta": 0.01135799999999998
+    },
+    {
+      "code": "USU8729AAA52",
+      "name": "TRANSMONTAIGNE PARTNERS SER REGS 8.500000 % 15JUN2030",
+      "previousShares": 351000,
+      "currentShares": 351000,
+      "previousWeight": 0.885691,
+      "currentWeight": 0.896688,
+      "sharesDelta": 0,
+      "weightDelta": 0.010997000000000035
+    },
+    {
+      "code": "USL2000TAA71",
+      "name": "BREAKWATER ENRGY HOLD SER REGS 9.25 % 15-NOV-2030",
+      "previousShares": 250000,
+      "currentShares": 250000,
+      "previousWeight": 0.640073,
+      "currentWeight": 0.650995,
+      "sharesDelta": 0,
+      "weightDelta": 0.010921999999999987
+    },
+    {
+      "code": "USU86043AJ26",
+      "name": "SABRE GLBL INC SER REGS (REG) 10.750000 % 15NOV2029",
+      "previousShares": 278000,
+      "currentShares": 278000,
+      "previousWeight": 0.585333,
+      "currentWeight": 0.596128,
+      "sharesDelta": 0,
+      "weightDelta": 0.010794999999999999
+    },
+    {
+      "code": "USG00045AA56",
+      "name": "GLOBAL AUTO HO/AAG FH UK SER REGS (REG S) 11.5% 15AUG2029",
+      "previousShares": 363000,
+      "currentShares": 363000,
+      "previousWeight": 0.903712,
+      "currentWeight": 0.914489,
+      "sharesDelta": 0,
+      "weightDelta": 0.010777000000000037
+    },
+    {
+      "code": "USU4608DAB20",
+      "name": "ION PLATFORM FINANCE US SER REGS 7.875000 % 30-SEP-2032",
+      "previousShares": 300000,
+      "currentShares": 300000,
+      "previousWeight": 0.543023,
+      "currentWeight": 0.553659,
+      "sharesDelta": 0,
+      "weightDelta": 0.010635999999999979
+    },
+    {
+      "code": "USU1056LAC55",
+      "name": "BURFORD CAPITAL GLBL FIN SER REGS (REG) (REG S) 9.25% 01JUL2031",
+      "previousShares": 211000,
+      "currentShares": 211000,
+      "previousWeight": 0.476056,
+      "currentWeight": 0.485721,
+      "sharesDelta": 0,
+      "weightDelta": 0.009665000000000035
+    },
+    {
+      "code": "USU86042AA34",
+      "name": "SABRE FINANCIAL BORROWER SER REGS 11.125 % 15-JUN-2029",
+      "previousShares": 204000,
+      "currentShares": 204000,
+      "previousWeight": 0.508166,
+      "currentWeight": 0.517445,
+      "sharesDelta": 0,
+      "weightDelta": 0.009279000000000037
+    },
+    {
+      "code": "US55342UAQ76",
+      "name": "MPT OPER PARTNERSP/FINL SER 144A 8.500000 % 15FEB2032",
+      "previousShares": 327000,
+      "currentShares": 327000,
+      "previousWeight": 0.824878,
+      "currentWeight": 0.834108,
+      "sharesDelta": 0,
+      "weightDelta": 0.00922999999999996
+    },
+    {
+      "code": "USU6415RAE37",
+      "name": "NEWELL BRANDS INC SER REGS 8.500000 % 01JUN2028",
+      "previousShares": 233000,
+      "currentShares": 233000,
+      "previousWeight": 0.590136,
+      "currentWeight": 0.599093,
+      "sharesDelta": 0,
+      "weightDelta": 0.008956999999999993
+    },
+    {
+      "code": "USU2081AAB80",
+      "name": "CORNERSTONE BUILDING SER REGS (REG S) 9.5% 15AUG2029",
+      "previousShares": 334000,
+      "currentShares": 334000,
+      "previousWeight": 0.502036,
+      "currentWeight": 0.510914,
+      "sharesDelta": 0,
+      "weightDelta": 0.008877999999999941
+    },
+    {
+      "code": "USU25783AK41",
+      "name": "RR DONNELLEY & SONS CO SER REGS (REG S) 10.875% 01AUG2029",
+      "previousShares": 199000,
+      "currentShares": 199000,
+      "previousWeight": 0.493137,
+      "currentWeight": 0.501957,
+      "sharesDelta": 0,
+      "weightDelta": 0.008819999999999995
+    },
+    {
+      "code": "US45174HBJ59",
+      "name": "IHEARTCOMMUNICATIONS INC 9.125000 % 01MAY2029",
+      "previousShares": 498000,
+      "currentShares": 498000,
+      "previousWeight": 1.151008,
+      "currentWeight": 1.159796,
+      "sharesDelta": 0,
+      "weightDelta": 0.008788000000000018
+    },
+    {
+      "code": "USG4648GAA51",
+      "name": "HOWDEN UK REFINANCE / US SER REGS (REG S) 8.125% 15FEB2032",
+      "previousShares": 371000,
+      "currentShares": 371000,
+      "previousWeight": 0.868355,
+      "currentWeight": 0.876847,
+      "sharesDelta": 0,
+      "weightDelta": 0.008492000000000055
+    },
+    {
+      "code": "USU90921AG93",
+      "name": "UNISYS CORP SER REGS 10.625000 % 15JAN2031",
+      "previousShares": 170000,
+      "currentShares": 170000,
+      "previousWeight": 0.35511,
+      "currentWeight": 0.363231,
+      "sharesDelta": 0,
+      "weightDelta": 0.008121000000000045
+    },
+    {
+      "code": "USC6900QAA51",
+      "name": "1261229 BC LTD SER REGS 10.000000 % 15APR2032",
+      "previousShares": 200000,
+      "currentShares": 200000,
+      "previousWeight": 0.497478,
+      "currentWeight": 0.505518,
+      "sharesDelta": 0,
+      "weightDelta": 0.008040000000000047
+    },
+    {
+      "code": "USU3828QAA14",
+      "name": "CLUE OPCO LLC SER REGS 9.500000 % 15OCT2031",
+      "previousShares": 152000,
+      "currentShares": 152000,
+      "previousWeight": 0.369945,
+      "currentWeight": 0.377874,
+      "sharesDelta": 0,
+      "weightDelta": 0.007928999999999964
+    },
+    {
+      "code": "USU4609CAB38",
+      "name": "ION PLAT FIN US/SARL SER REGS 9.500000 % 30-MAY-2029",
+      "previousShares": 226000,
+      "currentShares": 226000,
+      "previousWeight": 0.510595,
+      "currentWeight": 0.5185,
+      "sharesDelta": 0,
+      "weightDelta": 0.00790499999999994
+    },
+    {
+      "code": "USU3742LAC10",
+      "name": "GETTY IMAGES INC SER REGS 11.250000 % 21FEB2030",
+      "previousShares": 202000,
+      "currentShares": 202000,
+      "previousWeight": 0.447739,
+      "currentWeight": 0.455527,
+      "sharesDelta": 0,
+      "weightDelta": 0.007788000000000017
+    },
+    {
+      "code": "USU2285XBA38",
+      "name": "CSC HOLDINGS LLC SER REGS (REG S) 11.75% 31JAN2029",
+      "previousShares": 221000,
+      "currentShares": 221000,
+      "previousWeight": 0.397318,
+      "currentWeight": 0.404658,
+      "sharesDelta": 0,
+      "weightDelta": 0.007340000000000013
+    },
+    {
+      "code": "USU63661AA74",
+      "name": "NATIONAL MENTOR HOLDINGS SER REGS (REG) (REG S) 10.5% 15DEC2030",
+      "previousShares": 175000,
+      "currentShares": 175000,
+      "previousWeight": 0.445473,
+      "currentWeight": 0.452386,
+      "sharesDelta": 0,
+      "weightDelta": 0.0069130000000000025
+    },
+    {
+      "code": "USU0203LAB19",
+      "name": "ALTA EQUIPMENT GROUP SER REGS (REG) (REG S) 9% 01JUN2029",
+      "previousShares": 161000,
+      "currentShares": 161000,
+      "previousWeight": 0.364441,
+      "currentWeight": 0.371172,
+      "sharesDelta": 0,
+      "weightDelta": 0.006730999999999987
+    },
+    {
+      "code": "US69902PAA66",
+      "name": "PARADIGM PRNT/CO-ISSUER 8.750000 % 17APR2032",
+      "previousShares": 350000,
+      "currentShares": 350000,
+      "previousWeight": 0.772054,
+      "currentWeight": 0.778721,
+      "sharesDelta": 0,
+      "weightDelta": 0.0066669999999999785
+    },
+    {
+      "code": "USU60712AA12",
+      "name": "MOBIUS MERGER SUB SER REGS 9.000000 % 01JUN2030",
+      "previousShares": 246000,
+      "currentShares": 246000,
+      "previousWeight": 0.427372,
+      "currentWeight": 0.433963,
+      "sharesDelta": 0,
+      "weightDelta": 0.0065910000000000135
+    },
+    {
+      "code": "USC33203AD93",
+      "name": "EMPIRE COMMUNITIES CORP SER REGS (REG S) 9.75% 01MAY2029",
+      "previousShares": 148000,
+      "currentShares": 148000,
+      "previousWeight": 0.365309,
+      "currentWeight": 0.37171,
+      "sharesDelta": 0,
+      "weightDelta": 0.00640099999999999
+    },
+    {
+      "code": "USG2957NAA93",
+      "name": "AVIANCA MIDCO 2 PLC SER REGS 9.625000 % 14FEB2030",
+      "previousShares": 200000,
+      "currentShares": 200000,
+      "previousWeight": 0.47195,
+      "currentWeight": 0.47831,
+      "sharesDelta": 0,
+      "weightDelta": 0.006360000000000032
+    },
+    {
+      "code": "USU71907AA48",
+      "name": "PHH ESCROW ISS LCC/PHH C SER REGS (REG S) 9.875% 01NOV2029",
+      "previousShares": 157000,
+      "currentShares": 157000,
+      "previousWeight": 0.378274,
+      "currentWeight": 0.384558,
+      "sharesDelta": 0,
+      "weightDelta": 0.006284000000000012
+    },
+    {
+      "code": "USD1RA09AB94",
+      "name": "CERDIA FINANZ GMBH SER REGS (REG S) 9.375% 03OCT2031",
+      "previousShares": 200000,
+      "currentShares": 200000,
+      "previousWeight": 0.484016,
+      "currentWeight": 0.490257,
+      "sharesDelta": 0,
+      "weightDelta": 0.0062409999999999966
+    },
+    {
+      "code": "USU45709AD15",
+      "name": "INNOPHOS HOLDINGS INC SER REGS (REG S) 11.5% 15JUN2029",
+      "previousShares": 155000,
+      "currentShares": 155000,
+      "previousWeight": 0.332543,
+      "currentWeight": 0.338435,
+      "sharesDelta": 0,
+      "weightDelta": 0.005892000000000008
+    },
+    {
+      "code": "USC4R906AA53",
+      "name": "GREAT CANADIAN GAMING CO SER REGS (REG S) 8.75% 15NOV2029",
+      "previousShares": 357000,
+      "currentShares": 357000,
+      "previousWeight": 0.837576,
+      "currentWeight": 0.843445,
+      "sharesDelta": 0,
+      "weightDelta": 0.005869000000000013
+    },
+    {
+      "code": "US587118AF73",
+      "name": "THE MEN'S WEARHOUSE LLC SER 144A 9% 01FEB2031",
+      "previousShares": 150000,
+      "currentShares": 150000,
+      "previousWeight": 0.380919,
+      "currentWeight": 0.386773,
+      "sharesDelta": 0,
+      "weightDelta": 0.00585399999999997
+    },
+    {
+      "code": "USU9229LAA45",
+      "name": "VERDE PURCHASER LLC SER REGS (REG) (REG S) 10.5% 30NOV2030",
+      "previousShares": 163000,
+      "currentShares": 163000,
+      "previousWeight": 0.41555,
+      "currentWeight": 0.421369,
+      "sharesDelta": 0,
+      "weightDelta": 0.005819000000000019
+    },
+    {
+      "code": "USU74337AE30",
+      "name": "PROVIDENT FDG/PFG FIN SER REGS (REG S) 9.75% 15SEP2029",
+      "previousShares": 146000,
+      "currentShares": 146000,
+      "previousWeight": 0.368061,
+      "currentWeight": 0.373745,
+      "sharesDelta": 0,
+      "weightDelta": 0.005683999999999967
+    },
+    {
+      "code": "USU6837GAB33",
+      "name": "OSAIC HOLDINGS INC SER REGS 8.000000 % 01AUG2033",
+      "previousShares": 187000,
+      "currentShares": 187000,
+      "previousWeight": 0.459763,
+      "currentWeight": 0.465351,
+      "sharesDelta": 0,
+      "weightDelta": 0.005588000000000037
+    },
+    {
+      "code": "USU7260AAA26",
+      "name": "PLANET FINANCIAL GROUP SER REGS 10.500000 % 15DEC2029",
+      "previousShares": 153000,
+      "currentShares": 153000,
+      "previousWeight": 0.367965,
+      "currentWeight": 0.373417,
+      "sharesDelta": 0,
+      "weightDelta": 0.005452000000000012
+    },
+    {
+      "code": "USU0423UAA70",
+      "name": "ARTERA SERVICES LLC SER REGS 8.500000 % 15FEB2031",
+      "previousShares": 184000,
+      "currentShares": 184000,
+      "previousWeight": 0.38333,
+      "currentWeight": 0.38871,
+      "sharesDelta": 0,
+      "weightDelta": 0.005379999999999996
+    },
+    {
+      "code": "US380355AH08",
+      "name": "GOEASY LTD SER 144A 9.25% 01DEC2028",
+      "previousShares": 260000,
+      "currentShares": 260000,
+      "previousWeight": 0.597374,
+      "currentWeight": 0.602719,
+      "sharesDelta": 0,
+      "weightDelta": 0.005345000000000044
+    },
+    {
+      "code": "USC3117MAA02",
+      "name": "DYE & DURHAM LIMITED SER REGS (REG S) 8.625% 15APR2029",
+      "previousShares": 154000,
+      "currentShares": 154000,
+      "previousWeight": 0.328391,
+      "currentWeight": 0.333686,
+      "sharesDelta": 0,
+      "weightDelta": 0.005294999999999994
+    },
+    {
+      "code": "USU0666HAA24",
+      "name": "BCPE FLAVOR DEBT/ISSUER SER REGS 9.500000 % 01-JUL-2032",
+      "previousShares": 162000,
+      "currentShares": 162000,
+      "previousWeight": 0.368229,
+      "currentWeight": 0.372597,
+      "sharesDelta": 0,
+      "weightDelta": 0.0043680000000000385
+    },
+    {
+      "code": "USU7501WAA37",
+      "name": "RACKSPACE FINANCE LLC SER REGS (REG) (REG S) 3.5% 15MAY2028",
+      "previousShares": 329000,
+      "currentShares": 329000,
+      "previousWeight": 0.379866,
+      "currentWeight": 0.384181,
+      "sharesDelta": 0,
+      "weightDelta": 0.004315000000000013
+    },
+    {
+      "code": "USC39555AE44",
+      "name": "GOEASY LTD SER REGS (REG S) 9.25% 01DEC2028",
+      "previousShares": 208000,
+      "currentShares": 208000,
+      "previousWeight": 0.477899,
+      "currentWeight": 0.482175,
+      "sharesDelta": 0,
+      "weightDelta": 0.004276000000000002
+    },
+    {
+      "code": "USU1052DAB92",
+      "name": "BRAND INDUSTRIAL SERVICE SER REGS 10.375000 % 01AUG2030",
+      "previousShares": 192000,
+      "currentShares": 192000,
+      "previousWeight": 0.436395,
+      "currentWeight": 0.440214,
+      "sharesDelta": 0,
+      "weightDelta": 0.003819000000000017
+    },
+    {
+      "code": "US57767XAB64",
+      "name": "MAV ACQUISITION CORP SER 144A (REG) 8% 01AUG2029",
+      "previousShares": 103000,
+      "currentShares": 103000,
+      "previousWeight": 0.248968,
+      "currentWeight": 0.252757,
+      "sharesDelta": 0,
+      "weightDelta": 0.0037890000000000146
+    },
+    {
+      "code": "USU6837AAA89",
+      "name": "OT MIDCO LTD SER REGS 10.000000 % 15FEB2030",
+      "previousShares": 258000,
+      "currentShares": 258000,
+      "previousWeight": 0.258871,
+      "currentWeight": 0.262398,
+      "sharesDelta": 0,
+      "weightDelta": 0.0035270000000000024
+    },
+    {
+      "code": "US12543DBQ25",
+      "name": "CHS/COMMUNITY HEALTH SYS SER 144A 9.750000 % 15JAN2034",
+      "previousShares": 94000,
+      "currentShares": 94000,
+      "previousWeight": 0.237471,
+      "currentWeight": 0.240929,
+      "sharesDelta": 0,
+      "weightDelta": 0.0034580000000000166
+    },
+    {
+      "code": "US25461LAD47",
+      "name": "DIRECTV FIN LLC/COINC SER 144A 10.000000 % 15FEB2031",
+      "previousShares": 79000,
+      "currentShares": 79000,
+      "previousWeight": 0.199105,
+      "currentWeight": 0.202443,
+      "sharesDelta": 0,
+      "weightDelta": 0.0033380000000000076
+    },
+    {
+      "code": "USU3232FAB32",
+      "name": "FULL HOUSE RESORTS INC SER REGS (REG) (REG S) 8.25% 15FEB2028",
+      "previousShares": 70000,
+      "currentShares": 70000,
+      "previousWeight": 0.157498,
+      "currentWeight": 0.160815,
+      "sharesDelta": 0,
+      "weightDelta": 0.0033170000000000144
+    },
+    {
+      "code": "US77314EAB48",
+      "name": "ROCKET SOFTWARE INC SER 144A 9% 28NOV2028",
+      "previousShares": 45000,
+      "currentShares": 45000,
+      "previousWeight": 0.108019,
+      "currentWeight": 0.11105,
+      "sharesDelta": 0,
+      "weightDelta": 0.003030999999999992
+    },
+    {
+      "code": "USU2542MAA72",
+      "name": "DIRECTV FINANCING LLC SER REGS 8.875000 % 01-FEB-2030",
+      "previousShares": 75000,
+      "currentShares": 75000,
+      "previousWeight": 0.184958,
+      "currentWeight": 0.187661,
+      "sharesDelta": 0,
+      "weightDelta": 0.002702999999999983
+    },
+    {
+      "code": "US053773BK25",
+      "name": "AVIS BUDGET CAR/FINANCE SER 144A 8.375000 % 15JUN2032",
+      "previousShares": 47000,
+      "currentShares": 47000,
+      "previousWeight": 0.117383,
+      "currentWeight": 0.119667,
+      "sharesDelta": 0,
+      "weightDelta": 0.0022839999999999944
+    },
+    {
+      "code": "US640695AC66",
+      "name": "NEPTUNE BIDCO US INC SER 144A 10.375000 % 15-MAY-2031",
+      "previousShares": 52000,
+      "currentShares": 52000,
+      "previousWeight": 0.131766,
+      "currentWeight": 0.133816,
+      "sharesDelta": 0,
+      "weightDelta": 0.0020499999999999963
+    },
+    {
+      "code": "US829259BH26",
+      "name": "SINCLAIR TELEVISION GROU SER 144A 8.125000 % 15FEB2033",
+      "previousShares": 46000,
+      "currentShares": 46000,
+      "previousWeight": 0.115344,
+      "currentWeight": 0.117272,
+      "sharesDelta": 0,
+      "weightDelta": 0.0019279999999999992
+    },
+    {
+      "code": "US92332YAD31",
+      "name": "VENTURE GLOBAL LNG INC SER 144A 9.875% 01FEB2032",
+      "previousShares": 48000,
+      "currentShares": 48000,
+      "previousWeight": 0.124769,
+      "currentWeight": 0.126557,
+      "sharesDelta": 0,
+      "weightDelta": 0.001787999999999998
+    },
+    {
+      "code": "US146869AM47",
+      "name": "CARVANA CO 9% 01JUN2031",
+      "previousShares": 46000,
+      "currentShares": 46000,
+      "previousWeight": 0.123125,
+      "currentWeight": 0.124848,
+      "sharesDelta": 0,
+      "weightDelta": 0.0017230000000000023
+    },
+    {
+      "code": "US914906BA95",
+      "name": "UNIVISION COMMUNICATIONS SER 144A 9.375000 % 01AUG2032",
+      "previousShares": 44000,
+      "currentShares": 44000,
+      "previousWeight": 0.111436,
+      "currentWeight": 0.113059,
+      "sharesDelta": 0,
+      "weightDelta": 0.0016230000000000133
+    },
+    {
+      "code": "USU8528KAA61",
+      "name": "WULF COMPUTE LLC SER REGS 7.750000 % 15-OCT-2030",
+      "previousShares": 50000,
+      "currentShares": 50000,
+      "previousWeight": 0.127745,
+      "currentWeight": 0.12936,
+      "sharesDelta": 0,
+      "weightDelta": 0.0016150000000000053
+    },
+    {
+      "code": "US071734AQ04",
+      "name": "BAUSCH HEALTH COS INC SER 144A (REG) 11% 30SEP2028",
+      "previousShares": 31000,
+      "currentShares": 31000,
+      "previousWeight": 0.077484,
+      "currentWeight": 0.079036,
+      "sharesDelta": 0,
+      "weightDelta": 0.0015519999999999978
+    },
+    {
+      "code": "US86614JAA34",
+      "name": "SUMMIT MIDSTREAM HOLDING SER 144A 8.625% 31OCT2029",
+      "previousShares": 36000,
+      "currentShares": 36000,
+      "previousWeight": 0.091181,
+      "currentWeight": 0.092688,
+      "sharesDelta": 0,
+      "weightDelta": 0.0015070000000000083
+    },
+    {
+      "code": "US855030AQ50",
+      "name": "STAPLES INC SER 144A 10.75% 01SEP2029",
+      "previousShares": 43000,
+      "currentShares": 43000,
+      "previousWeight": 0.100913,
+      "currentWeight": 0.1024,
+      "sharesDelta": 0,
+      "weightDelta": 0.0014870000000000022
+    },
+    {
+      "code": "US909214BX53",
+      "name": "UNISYS CORP SER 144A 10.625000 % 15JAN2031",
+      "previousShares": 29000,
+      "currentShares": 29000,
+      "previousWeight": 0.060578,
+      "currentWeight": 0.061963,
+      "sharesDelta": 0,
+      "weightDelta": 0.0013849999999999973
+    },
+    {
+      "code": "US21873SAB43",
+      "name": "COREWEAVE INC SER 144A 9.250000 % 01JUN2030",
+      "previousShares": 33000,
+      "currentShares": 33000,
+      "previousWeight": 0.081213,
+      "currentWeight": 0.082532,
+      "sharesDelta": 0,
+      "weightDelta": 0.0013190000000000007
+    },
+    {
+      "code": "US75041VAE48",
+      "name": "RADIOLOGY PARTNERS INC SER 144A 8.500000 % 15JUL2032",
+      "previousShares": 36000,
+      "currentShares": 36000,
+      "previousWeight": 0.086632,
+      "currentWeight": 0.087942,
+      "sharesDelta": 0,
+      "weightDelta": 0.0013100000000000056
+    },
+    {
+      "code": "US428040DC08",
+      "name": "HERTZ CORP/THE SER 144A 12.625% 15JUL2029",
+      "previousShares": 44000,
+      "currentShares": 44000,
+      "previousWeight": 0.102504,
+      "currentWeight": 0.103797,
+      "sharesDelta": 0,
+      "weightDelta": 0.0012930000000000025
+    },
+    {
+      "code": "US17888HAD52",
+      "name": "CIVITAS RESOURCES INC SER 144A 9.625000 % 15JUN2033",
+      "previousShares": 27000,
+      "currentShares": 27000,
+      "previousWeight": 0.072825,
+      "currentWeight": 0.074017,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011919999999999986
+    },
+    {
+      "code": "US98380MAB19",
+      "name": "XPLR INFRAST OPERATING SER 144A 8.625000 % 15MAR2033",
+      "previousShares": 28000,
+      "currentShares": 28000,
+      "previousWeight": 0.072655,
+      "currentWeight": 0.073846,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011909999999999976
+    },
+    {
+      "code": "US83003AAA88",
+      "name": "SIX FLAGS/CAN WON/MILLEN SER 144A 8.625% 15JAN2032",
+      "previousShares": 35000,
+      "currentShares": 35000,
+      "previousWeight": 0.08692,
+      "currentWeight": 0.08811,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011899999999999966
+    },
+    {
+      "code": "US36485MAP41",
+      "name": "GARDA WORLD SECURITY SER 144A (REG) 8.375000 % 15NOV2032",
+      "previousShares": 31000,
+      "currentShares": 31000,
+      "previousWeight": 0.077239,
+      "currentWeight": 0.078421,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011820000000000025
+    },
+    {
+      "code": "US431318BC74",
+      "name": "HILCORP ENERGY I/HILCORP SER 144A 8.375% 01NOV2033",
+      "previousShares": 26000,
+      "currentShares": 26000,
+      "previousWeight": 0.067058,
+      "currentWeight": 0.068225,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011669999999999875
+    },
+    {
+      "code": "US53219LAX73",
+      "name": "LIFEPOINT HEALTH INC SER 144A 10% 01JUN2032",
+      "previousShares": 34000,
+      "currentShares": 34000,
+      "previousWeight": 0.086267,
+      "currentWeight": 0.087422,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011550000000000032
+    },
+    {
+      "code": "US00791GAC15",
+      "name": "OSAIC HOLDINGS INC SER 144A 8.000000 % 01AUG2033",
+      "previousShares": 38000,
+      "currentShares": 38000,
+      "previousWeight": 0.093428,
+      "currentWeight": 0.094563,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011349999999999971
+    },
+    {
+      "code": "US62922LAD01",
+      "name": "NGL ENERGY PARTNERS LP SER 144A 8.375% 15FEB2032",
+      "previousShares": 34000,
+      "currentShares": 34000,
+      "previousWeight": 0.086517,
+      "currentWeight": 0.087641,
+      "sharesDelta": 0,
+      "weightDelta": 0.001124
+    },
+    {
+      "code": "US45344LAG86",
+      "name": "CRESCENT ENERGY FINANCE SER 144A 8.375000 % 15JAN2034",
+      "previousShares": 27000,
+      "currentShares": 27000,
+      "previousWeight": 0.068697,
+      "currentWeight": 0.069755,
+      "sharesDelta": 0,
+      "weightDelta": 0.0010580000000000034
+    },
+    {
+      "code": "US45774NAD03",
+      "name": "INNOPHOS HOLDINGS INC SER 144A 11.500000 % 15JUN2029",
+      "previousShares": 27530,
+      "currentShares": 27530,
+      "previousWeight": 0.059064,
+      "currentWeight": 0.06011,
+      "sharesDelta": 0,
+      "weightDelta": 0.0010459999999999983
+    },
+    {
+      "code": "US00202DAA54",
+      "name": "APLD COMPUTECO LLC SER 144A 9.250000 % 15-DEC-2030",
+      "previousShares": 25000,
+      "currentShares": 25000,
+      "previousWeight": 0.065062,
+      "currentWeight": 0.066091,
+      "sharesDelta": 0,
+      "weightDelta": 0.0010290000000000021
+    },
+    {
+      "code": "US18972EAB11",
+      "name": "CLYDESDALE ACQUISITION SER 144A (REG) 8.75% 15APR2030",
+      "previousShares": 32000,
+      "currentShares": 32000,
+      "previousWeight": 0.073166,
+      "currentWeight": 0.074168,
+      "sharesDelta": 0,
+      "weightDelta": 0.0010020000000000029
+    },
+    {
+      "code": "US315292AU60",
+      "name": "FERRELLGAS LP/FERRELLGAS SER 144A 9.250000 % 15-JAN-2031",
+      "previousShares": 24000,
+      "currentShares": 24000,
+      "previousWeight": 0.06086,
+      "currentWeight": 0.061858,
+      "sharesDelta": 0,
+      "weightDelta": 0.0009980000000000058
+    },
+    {
+      "code": "US92921EAA01",
+      "name": "VOYAGER PARENT LLC SER 144A 9.250000 % 01JUL2032",
+      "previousShares": 25000,
+      "currentShares": 25000,
+      "previousWeight": 0.064309,
+      "currentWeight": 0.065283,
+      "sharesDelta": 0,
+      "weightDelta": 0.0009739999999999888
+    },
+    {
+      "code": "US13323NAA00",
+      "name": "CAMELOT RETURN MERGER SU SER 144A (REG) 8.75% 01AUG2028",
+      "previousShares": 27000,
+      "currentShares": 27000,
+      "previousWeight": 0.040625,
+      "currentWeight": 0.041569,
+      "sharesDelta": 0,
+      "weightDelta": 0.0009440000000000004
+    },
+    {
+      "code": "US451102CK14",
+      "name": "ICAHN ENTERPRISES/FIN SER 144A (REG) 10.000000 % 15NOV2029",
+      "previousShares": 23000,
+      "currentShares": 23000,
+      "previousWeight": 0.055846,
+      "currentWeight": 0.056786,
+      "sharesDelta": 0,
+      "weightDelta": 0.0009400000000000033
+    },
+    {
+      "code": "US12597YAC30",
+      "name": "CP ATLAS BUYER INC SER 144A 9.750000 % 15JUL2030",
+      "previousShares": 22000,
+      "currentShares": 22000,
+      "previousWeight": 0.049741,
+      "currentWeight": 0.050653,
+      "sharesDelta": 0,
+      "weightDelta": 0.0009119999999999961
+    },
+    {
+      "code": "US69318FAM05",
+      "name": "PBF HOLDING CO LLC SER 144A 9.875000 % 15MAR2030",
+      "previousShares": 26000,
+      "currentShares": 26000,
+      "previousWeight": 0.067427,
+      "currentWeight": 0.06832,
+      "sharesDelta": 0,
+      "weightDelta": 0.0008930000000000049
+    },
+    {
+      "code": "US90367UAD37",
+      "name": "US ACUTE CARE SOLUTIONS SER 144A 9.75% 15MAY2029",
+      "previousShares": 26000,
+      "currentShares": 26000,
+      "previousWeight": 0.062973,
+      "currentWeight": 0.063855,
+      "sharesDelta": 0,
+      "weightDelta": 0.0008819999999999939
+    },
+    {
+      "code": "US030981AP92",
+      "name": "AMERIGAS PART/FIN CORP SER 144A 9.500000 % 01JUN2030",
+      "previousShares": 26000,
+      "currentShares": 26000,
+      "previousWeight": 0.067249,
+      "currentWeight": 0.068111,
+      "sharesDelta": 0,
+      "weightDelta": 0.0008620000000000017
+    },
+    {
+      "code": "US71910DAA90",
+      "name": "PHOENIX AVIATION 9.250000 % 15JUL2030",
+      "previousShares": 24000,
+      "currentShares": 24000,
+      "previousWeight": 0.059546,
+      "currentWeight": 0.060394,
+      "sharesDelta": 0,
+      "weightDelta": 0.0008480000000000015
+    },
+    {
+      "code": "US60832QAB68",
+      "name": "MOHEGAN TRIBAL / MS DIG SER 144A 11.875000 % 15APR2031",
+      "previousShares": 25000,
+      "currentShares": 25000,
+      "previousWeight": 0.064992,
+      "currentWeight": 0.065817,
+      "sharesDelta": 0,
+      "weightDelta": 0.0008250000000000063
+    },
+    {
+      "code": "US74165HAC25",
+      "name": "PRIME HEALTHCARE SERVICE SER 144A 9.375% 01SEP2029",
+      "previousShares": 26000,
+      "currentShares": 26000,
+      "previousWeight": 0.06565,
+      "currentWeight": 0.066472,
+      "sharesDelta": 0,
+      "weightDelta": 0.0008220000000000033
+    },
+    {
+      "code": "US89377AAA34",
+      "name": "TRANSMONTAIGNE PARTNERS SER 144A 8.500000 % 15JUN2030",
+      "previousShares": 24000,
+      "currentShares": 24000,
+      "previousWeight": 0.06056,
+      "currentWeight": 0.061312,
+      "sharesDelta": 0,
+      "weightDelta": 0.0007519999999999957
+    },
+    {
+      "code": "US61965RAC97",
+      "name": "MOSS CREEK RESOURCES HLD SER 144A 8.25% 01SEP2031",
+      "previousShares": 21000,
+      "currentShares": 21000,
+      "previousWeight": 0.05112,
+      "currentWeight": 0.051818,
+      "sharesDelta": 0,
+      "weightDelta": 0.0006980000000000042
+    },
+    {
+      "code": "US72702AAA51",
+      "name": "PLANET FINANCIAL GROUP SER 144A 10.500000 % 15DEC2029",
+      "previousShares": 19000,
+      "currentShares": 19000,
+      "previousWeight": 0.045695,
+      "currentWeight": 0.046372,
+      "sharesDelta": 0,
+      "weightDelta": 0.000676999999999997
+    },
+    {
+      "code": "US257867BK60",
+      "name": "RR DONNELLEY & SONS CO SER 144A 10.875000 % 01-AUG-2029",
+      "previousShares": 15000,
+      "currentShares": 15000,
+      "previousWeight": 0.037171,
+      "currentWeight": 0.037836,
+      "sharesDelta": 0,
+      "weightDelta": 0.0006649999999999989
+    },
+    {
+      "code": "US63688RAF47",
+      "name": "NATIONAL MENTOR HOLDINGS SER 144A 10.5 % 15-DEC-2030",
+      "previousShares": 15000,
+      "currentShares": 15000,
+      "previousWeight": 0.038183,
+      "currentWeight": 0.038776,
+      "sharesDelta": 0,
+      "weightDelta": 0.0005929999999999963
+    },
+    {
+      "code": "US606950AA10",
+      "name": "MOBIUS MERGER SUB SER 144A 9% 01JUN2030",
+      "previousShares": 18000,
+      "currentShares": 18000,
+      "previousWeight": 0.031271,
+      "currentWeight": 0.031753,
+      "sharesDelta": 0,
+      "weightDelta": 0.00048200000000000326
+    },
+    {
+      "code": "AB:US_5YR_NOTE_CBT_JUN26_30_JUN_2026",
+      "name": "US 5YR NOTE (CBT) JUN26 30-JUN-2026",
+      "previousShares": 12,
+      "currentShares": 12,
+      "previousWeight": 0.03142,
+      "currentWeight": 0.03189,
+      "sharesDelta": 0,
+      "weightDelta": 0.00047000000000000514
+    },
+    {
+      "code": "US04302XAA28",
+      "name": "ARTERA SERVICES LLC SER 144A 8.500000 % 15FEB2031",
+      "previousShares": 15767,
+      "currentShares": 15767,
+      "previousWeight": 0.032848,
+      "currentWeight": 0.033309,
+      "sharesDelta": 0,
+      "weightDelta": 0.00046099999999999614
+    },
+    {
+      "code": "US716964AA94",
+      "name": "PHH ESCROW ISS LCC/PHH C SER 144A 9.875000 % 01NOV2029",
+      "previousShares": 11000,
+      "currentShares": 11000,
+      "previousWeight": 0.026503,
+      "currentWeight": 0.026944,
+      "sharesDelta": 0,
+      "weightDelta": 0.0004410000000000004
+    },
+    {
+      "code": "US072933AA25",
+      "name": "BCPE FLAVOR DEBT 9.500000 % 01JUL2032",
+      "previousShares": 15000,
+      "currentShares": 15000,
+      "previousWeight": 0.034095,
+      "currentWeight": 0.0345,
+      "sharesDelta": 0,
+      "weightDelta": 0.0004050000000000026
+    },
+    {
+      "code": "US389925AA64",
+      "name": "GREAT CANADIAN GAMING CO SER 144A 8.750000 % 15NOV2029",
+      "previousShares": 24000,
+      "currentShares": 24000,
+      "previousWeight": 0.056308,
+      "currentWeight": 0.056702,
+      "sharesDelta": 0,
+      "weightDelta": 0.00039400000000000546
+    },
+    {
+      "code": "US104931AA85",
+      "name": "BRAND INDUSTRIAL SERVICE SER 144A 10.375% 01AUG2030",
+      "previousShares": 16000,
+      "currentShares": 16000,
+      "previousWeight": 0.036366,
+      "currentWeight": 0.036685,
+      "sharesDelta": 0,
+      "weightDelta": 0.00031899999999999984
+    },
+    {
+      "code": "AB:US_10YR_ULTRA_FUT_JUN26_18_JUN_2026",
+      "name": "US 10YR ULTRA FUT JUN26 18-JUN-2026",
+      "previousShares": 6,
+      "currentShares": 6,
+      "previousWeight": 0.0165,
+      "currentWeight": 0.01672,
+      "sharesDelta": 0,
+      "weightDelta": 0.00021999999999999797
+    },
+    {
+      "code": "AB:US_10YR_NOTE_CBT_JUN26_18_JUN_2026",
+      "name": "US 10YR NOTE (CBT)JUN26 18-JUN-2026",
+      "previousShares": 2,
+      "currentShares": 2,
+      "previousWeight": 0.00538,
+      "currentWeight": 0.00546,
+      "sharesDelta": 0,
+      "weightDelta": 0.00007999999999999934
+    },
+    {
+      "code": "AB:US_LONG_BOND_CBT_JUN26_18_JUN_2026",
+      "name": "US LONG BOND(CBT) JUN26 18-JUN-2026",
+      "previousShares": 1,
+      "currentShares": 1,
+      "previousWeight": 0.00276,
+      "currentWeight": 0.00279,
+      "sharesDelta": 0,
+      "weightDelta": 0.00003000000000000008
+    }
+  ],
+  "decreased": [
+    {
+      "code": "USU6536LAC47",
+      "name": "NGL ENERGY PARTNERS LP SER REGS (REG S) 8.375% 15FEB2032",
+      "previousShares": 400000,
+      "currentShares": 211000,
+      "previousWeight": 1.017851,
+      "currentWeight": 0.543887,
+      "sharesDelta": -189000,
+      "weightDelta": -0.47396400000000005
+    },
+    {
+      "code": "AB:US_2YR_NOTE_CBT_JUN26_30_JUN_2026",
+      "name": "US 2YR NOTE (CBT) JUN26 30-JUN-2026",
+      "previousShares": -14,
+      "currentShares": -14,
+      "previousWeight": -0.07022,
+      "currentWeight": -0.07129,
+      "sharesDelta": 0,
+      "weightDelta": -0.0010700000000000015
+    }
+  ],
   "summary": {
     "comparisonReady": true,
     "addedCount": 0,
-    "removedCount": 0,
-    "increasedCount": 0,
-    "decreasedCount": 0,
-    "totalChangeCount": 0
+    "removedCount": 2,
+    "increasedCount": 166,
+    "decreasedCount": 2,
+    "totalChangeCount": 170
   }
 }

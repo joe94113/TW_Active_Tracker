@@ -3,7 +3,7 @@
   "name": "竑騰",
   "kind": "stock",
   "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T06:56:28.197Z",
+  "generatedAt": "2026-04-17T08:35:51.508Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4212,10 +4212,19 @@
   },
   "主動ETF曝光": {
     "count": 2,
-    "averageWeight": 0.45,
-    "totalWeight": 0.9,
+    "averageWeight": 0.5800000000000001,
+    "totalWeight": 1.1600000000000001,
     "latestDisclosureDate": "2026-04-17",
     "items": [
+      {
+        "etfCode": "00995A",
+        "etfName": "主動中信台灣卓越",
+        "providerLabel": "中信投信",
+        "disclosureDate": "2026-04-17",
+        "weight": 0.63,
+        "shares": 15000,
+        "rank": 39
+      },
       {
         "etfCode": "00984A",
         "etfName": "主動安聯台灣高息",
@@ -4224,15 +4233,6 @@
         "weight": 0.53,
         "shares": 18000,
         "rank": 52
-      },
-      {
-        "etfCode": "00995A",
-        "etfName": "主動中信台灣卓越",
-        "providerLabel": "中信投信",
-        "disclosureDate": "2026-04-16",
-        "weight": 0.37,
-        "shares": 9000,
-        "rank": 56
       }
     ]
   },

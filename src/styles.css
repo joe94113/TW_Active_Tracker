@@ -815,6 +815,12 @@ input {
   font-weight: 700;
 }
 
+.footer-link-community {
+  border-color: rgba(67, 203, 255, 0.34);
+  background: linear-gradient(135deg, rgba(36, 160, 242, 0.2), rgba(11, 105, 155, 0.16));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
 .footer-link:hover,
 .footer-link:focus-visible {
   border-color: rgba(122, 177, 211, 0.32);

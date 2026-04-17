@@ -233,6 +233,14 @@ watch(
         </div>
 
         <nav class="footer-link-row" aria-label="頁面導覽">
+          <a
+            class="footer-link footer-link-community"
+            href="https://t.me/+ItoPt4GgiatlODRl"
+            target="_blank"
+            rel="noreferrer"
+          >
+            加入 Telegram 群組
+          </a>
           <RouterLink
             v-for="item in allNavigationItems"
             :key="`footer-${item.path}`"
