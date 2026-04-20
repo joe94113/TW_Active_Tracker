@@ -3,7 +3,7 @@ import {
   formatTaipeiDate,
   loadCloseDigestData,
 } from './lib/close-digest.mjs';
-import { buildLineFlexMessages } from './lib/line-flex.mjs';
+import { buildLineBroadcastMessages } from './lib/line-flex.mjs';
 
 async function sendLineMessage(messages) {
   const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN;
@@ -45,7 +45,7 @@ async function main() {
     ...data,
     today,
   });
-  const payload = buildLineFlexMessages(summary);
+  const payload = buildLineBroadcastMessages(summary);
 
   if (!payload?.messages?.length) {
     console.log(`Skip LINE push: market date does not match today (${today}).`);

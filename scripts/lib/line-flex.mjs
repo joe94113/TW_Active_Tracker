@@ -784,3 +784,64 @@ export function buildLineFlexPayload(summary) {
   const payload = buildLineFlexMessages(summary);
   return payload?.messages?.[0] ?? null;
 }
+
+function buildLineStockCarouselMessage({ summary, title, altText, accentColor, items, emptyText, variant, note }) {
+  if (!items?.length) {
+    return createFlexMessage(
+      altText,
+      buildStockOverviewBubble({
+        title,
+        accentColor,
+        items,
+        emptyText,
+        variant,
+        note,
+      }),
+    );
+  }
+
+  return createFlexMessage(altText, {
+    type: 'carousel',
+    contents: items.slice(0, 5).map((item) =>
+      createStockBubble(item, {
+        accentColor,
+        variant,
+      }),
+    ),
+  });
+}
+
+export function buildLineBroadcastMessages(summary) {
+  if (!summary) {
+    return null;
+  }
+
+  return {
+    messages: [
+      createFlexMessage(
+        `${summary.appName}｜${summary.marketDate} 更新｜明日趨勢預測`,
+        createOutlookBubble(summary),
+      ),
+      buildLineStockCarouselMessage({
+        summary,
+        title: '🛡 穩健型',
+        altText: `${summary.appName}｜${summary.marketDate} 更新｜穩健型`,
+        accentColor: '#2f7ea1',
+        items: summary.watchGroups?.stable ?? [],
+        emptyText: '今天沒有特別突出的穩健型候選，先留意雙法人與趨勢延續的個股。',
+        variant: 'stable',
+        note: '先看雙法人、趨勢延續與回檔不破壞結構的標的。',
+      }),
+      buildLineStockCarouselMessage({
+        summary,
+        title: '🔥 積極型',
+        altText: `${summary.appName}｜${summary.marketDate} 更新｜積極型`,
+        accentColor: '#e07a4f',
+        items: summary.watchGroups?.aggressive ?? [],
+        emptyText: '今天沒有特別突出的積極型候選，先觀察量縮整理與突破前緣個股。',
+        variant: 'aggressive',
+        note: '偏短線節奏，先看量縮價揚、整理待突破與題材剛轉強的標的。',
+      }),
+    ],
+  };
+}
