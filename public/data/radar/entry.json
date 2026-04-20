@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-20T07:24:54.464Z",
+  "generatedAt": "2026-04-20T08:50:01.380Z",
   "marketDate": "2026-04-20",
   "spotlight": {
     "freshStarterCount": 6,
@@ -12,7 +12,7 @@
   "observations": [
     "目前主線先看 AI 伺服器 / ASIC",
     "剛轉強可先看 2412 中華電",
-    "法人轉向可留意 1301 台塑",
+    "法人轉向可留意 2834 臺企銀",
     "補漲候選先看 3189 景碩"
   ],
   "sections": {
@@ -390,31 +390,31 @@
     ],
     "institutionalTurns": [
       {
-        "code": "1301",
-        "name": "台塑",
+        "code": "2834",
+        "name": "臺企銀",
         "industryName": null,
         "themeTitle": null,
         "label": "單法人剛轉向",
         "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
-        "score": 351,
-        "close": 53.400001525878906,
-        "changePercent": -2.0183458240754018,
-        "return20": 12.896410966617688,
+        "score": 197,
+        "close": 16.299999237060547,
+        "changePercent": 0.6172745025411298,
+        "return20": 7.590756749087212,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
         "activeEtfCount": 0,
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
         "foreignTargetPrice": null,
         "premiumToTarget": null,
         "tags": [
           "外資 5 天",
-          "技術面中性"
+          "RSI 超買"
         ],
         "metrics": [
           {
             "label": "外資 5 日",
-            "value": "14.77 萬張"
+            "value": "7.05 萬張"
           },
           {
             "label": "投信 5 日",
@@ -422,7 +422,7 @@
           },
           {
             "label": "20 日",
-            "value": "+12.90%"
+            "value": "+7.59%"
           }
         ]
       },
@@ -433,7 +433,7 @@
         "themeTitle": null,
         "label": "單法人剛轉向",
         "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
-        "score": 144,
+        "score": 152,
         "close": 45.75,
         "changePercent": 1.6666666666666667,
         "return20": 3.156711553656149,
@@ -451,7 +451,7 @@
         "metrics": [
           {
             "label": "外資 5 日",
-            "value": "4.39 萬張"
+            "value": "4.78 萬張"
           },
           {
             "label": "投信 5 日",
@@ -464,13 +464,124 @@
         ]
       },
       {
+        "code": "2884",
+        "name": "玉山金",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 139,
+        "close": 32.75,
+        "changePercent": -0.7575757575757576,
+        "return20": 1.550387596899225,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "技術面中性"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "4.13 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "+1.55%"
+          }
+        ]
+      },
+      {
+        "code": "2301",
+        "name": "光寶科",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 130,
+        "close": 162,
+        "changePercent": 0.6211180124223602,
+        "return20": -4.705882352941177,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "技術面中性"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "3.68 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "-4.71%"
+          }
+        ]
+      },
+      {
+        "code": "2880",
+        "name": "華南金",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 128,
+        "close": 36.150001525878906,
+        "changePercent": 0.556330344075075,
+        "return20": 8.233532557982825,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "技術面中性"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "3.59 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "+8.23%"
+          }
+        ]
+      },
+      {
         "code": "2890",
         "name": "永豐金",
         "industryName": null,
         "themeTitle": null,
         "label": "單法人剛轉向",
         "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
-        "score": 131,
+        "score": 127,
         "close": 32.70000076293945,
         "changePercent": -1.8017972608640118,
         "return20": 2.0280859324554568,
@@ -488,7 +599,7 @@
         "metrics": [
           {
             "label": "外資 5 日",
-            "value": "3.74 萬張"
+            "value": "3.53 萬張"
           },
           {
             "label": "投信 5 日",
@@ -497,117 +608,6 @@
           {
             "label": "20 日",
             "value": "+2.03%"
-          }
-        ]
-      },
-      {
-        "code": "2885",
-        "name": "元大金",
-        "industryName": null,
-        "themeTitle": null,
-        "label": "單法人剛轉向",
-        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
-        "score": 120,
-        "close": 50.20000076293945,
-        "changePercent": -0.9861932790452512,
-        "return20": 12.430009064711447,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 0,
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "外資 5 天",
-          "技術面中性"
-        ],
-        "metrics": [
-          {
-            "label": "外資 5 日",
-            "value": "3.19 萬張"
-          },
-          {
-            "label": "投信 5 日",
-            "value": "0 張"
-          },
-          {
-            "label": "20 日",
-            "value": "+12.43%"
-          }
-        ]
-      },
-      {
-        "code": "3702",
-        "name": "大聯大",
-        "industryName": null,
-        "themeTitle": null,
-        "label": "單法人剛轉向",
-        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
-        "score": 112,
-        "close": 98.80000305175781,
-        "changePercent": 0.6110041977209708,
-        "return20": 6.122453996839907,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 0,
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "外資 5 天",
-          "RSI 超買"
-        ],
-        "metrics": [
-          {
-            "label": "外資 5 日",
-            "value": "2.80 萬張"
-          },
-          {
-            "label": "投信 5 日",
-            "value": "0 張"
-          },
-          {
-            "label": "20 日",
-            "value": "+6.12%"
-          }
-        ]
-      },
-      {
-        "code": "2867",
-        "name": "三商壽",
-        "industryName": null,
-        "themeTitle": null,
-        "label": "單法人剛轉向",
-        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
-        "score": 112,
-        "close": 7.869999885559082,
-        "changePercent": -0.5056885287565968,
-        "return20": 2.3406999609787227,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 0,
-        "topSignalTitle": "KD 高檔死亡交叉",
-        "topSignalTone": "down",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "外資 5 天",
-          "KD 高檔死亡交叉"
-        ],
-        "metrics": [
-          {
-            "label": "外資 5 日",
-            "value": "2.79 萬張"
-          },
-          {
-            "label": "投信 5 日",
-            "value": "0 張"
-          },
-          {
-            "label": "20 日",
-            "value": "+2.34%"
           }
         ]
       }

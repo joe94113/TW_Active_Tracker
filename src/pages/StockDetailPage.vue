@@ -1,9 +1,10 @@
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useStockDetail } from '../composables/useStockDetail';
 import { useStockComparisonSeries } from '../composables/useStockComparisonSeries';
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
+import { useGlobalData } from '../composables/useGlobalData';
 import { useLiveStockSnapshot } from '../composables/useLiveStockSnapshot';
 import { useRecentStocks } from '../composables/useRecentStocks';
 import { useSeoMeta } from '../composables/useSeoMeta';
@@ -38,6 +39,7 @@ watch(
 );
 
 const { detail, isLoading, isEnhancing, errorMessage } = useStockDetail(stockCode);
+const { dashboard, stockSearchList, loadGlobalData } = useGlobalData();
 const { isFavorite, toggleFavorite } = useFavoriteStocks();
 const { snapshot: liveSnapshot, isLoading: isLiveSnapshotLoading } = useLiveStockSnapshot(stockCode, { refreshIntervalMs: 45000 });
 const { recentItems, pushRecentStock } = useRecentStocks();
@@ -76,21 +78,68 @@ const laggardText = computed(() =>
 
 const heroPills = computed(() => [
   companyProfile.value?.產業名稱 ?? '上市股票',
-  `資料日 ${formatDate(liveSnapshot.value?.marketDate ?? detail.value?.priceDate)}`,
+  `資料日 ${formatDate(liveSnapshot.value?.marketDate ?? stockSearchSummary.value?.priceDate ?? detail.value?.priceDate)}`,
   `法人五日 ${formatLots(institutionalFlows.value?.summary?.total5Day)}`,
   `ETF 持有 ${formatNumber(activeEtfExposure.value?.count)}`,
 ]);
 
-const displayQuote = computed(() => {
-  const latestSummary = detail.value?.最新摘要 ?? {};
+const stockSearchSummary = computed(() =>
+  (stockSearchList.value ?? []).find((item) => String(item?.code ?? '') === stockCode.value) ?? null,
+);
+
+const latestMarketDate = computed(() => dashboard.value?.市場總覽?.即時狀態?.marketDate ?? dashboard.value?.市場總覽?.資料日期 ?? null);
+
+const detailFreshness = computed(() => {
+  const detailDate = detail.value?.priceDate ?? null;
+  const summaryDate = stockSearchSummary.value?.priceDate ?? null;
+  const marketDate = liveSnapshot.value?.marketDate ?? latestMarketDate.value ?? summaryDate ?? detailDate ?? null;
+  const referenceDate = summaryDate ?? detailDate ?? marketDate;
+
+  if (!referenceDate || !marketDate) {
+    return {
+      marketDate,
+      detailDate,
+      summaryDate,
+      referenceDate,
+      isCurrent: true,
+      isStale: false,
+      staleDays: 0,
+      warningMessage: '',
+    };
+  }
+
+  const marketTimestamp = new Date(`${marketDate}T00:00:00+08:00`).getTime();
+  const detailTimestamp = new Date(`${referenceDate}T00:00:00+08:00`).getTime();
+  const staleDays = Number.isFinite(marketTimestamp) && Number.isFinite(detailTimestamp)
+    ? Math.max(0, Math.round((marketTimestamp - detailTimestamp) / 86400000))
+    : 0;
+  const isStale = staleDays > 0;
 
   return {
-    close: liveSnapshot.value?.lastPrice ?? latestSummary.close ?? null,
-    change: liveSnapshot.value?.change ?? latestSummary.change ?? null,
-    changePercent: liveSnapshot.value?.changePercent ?? latestSummary.changePercent ?? null,
-    return20: latestSummary.return20 ?? null,
-    return60: latestSummary.return60 ?? null,
-    volume: liveSnapshot.value?.volume ?? latestSummary.volume ?? null,
+    marketDate,
+    detailDate,
+    summaryDate,
+    referenceDate,
+    isCurrent: !isStale,
+    isStale,
+    staleDays,
+    warningMessage: isStale
+      ? `完整技術明細目前停在 ${formatDate(referenceDate)}，最新盤後摘要已用 ${formatDate(marketDate)} 覆蓋；關鍵價位、技術圖與支撐壓力請保守看待。`
+      : `個股明細已更新到 ${formatDate(marketDate)}。`,
+  };
+});
+
+const displayQuote = computed(() => {
+  const latestSummary = detail.value?.最新摘要 ?? {};
+  const latestSearchSummary = stockSearchSummary.value ?? {};
+
+  return {
+    close: liveSnapshot.value?.lastPrice ?? latestSearchSummary.close ?? latestSummary.close ?? null,
+    change: liveSnapshot.value?.change ?? latestSearchSummary.change ?? latestSummary.change ?? null,
+    changePercent: liveSnapshot.value?.changePercent ?? latestSearchSummary.changePercent ?? latestSummary.changePercent ?? null,
+    return20: latestSearchSummary.return20 ?? latestSummary.return20 ?? null,
+    return60: latestSearchSummary.return60 ?? latestSummary.return60 ?? null,
+    volume: liveSnapshot.value?.volume ?? latestSearchSummary.volume ?? latestSummary.volume ?? null,
   };
 });
 
@@ -152,6 +201,10 @@ const stockSeo = computed(() => {
 });
 
 useSeoMeta(stockSeo);
+
+onMounted(() => {
+  void loadGlobalData();
+});
 
 const summaryCards = computed(() => {
   const latestSummary = displayQuote.value;
@@ -434,6 +487,13 @@ watch(
         >
           即時 {{ formatNumber(liveSnapshot.lastPrice) }}
         </span>
+        <span
+          v-if="detailFreshness.referenceDate"
+          class="meta-chip"
+          :class="{ 'is-warning': detailFreshness.isStale }"
+        >
+          {{ detailFreshness.isStale ? `明細延遲 ${detailFreshness.staleDays} 天` : '明細最新' }}
+        </span>
         <span v-if="isEnhancing" class="meta-chip">補抓遠端日線中</span>
         <button
           type="button"
@@ -465,6 +525,33 @@ watch(
     />
 
     <template v-if="detail">
+      <section class="panel stock-freshness-panel" :class="{ 'is-warning': detailFreshness.isStale }">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">資料新鮮度</h2>
+            <p class="panel-subtitle">
+              {{ detailFreshness.warningMessage }}
+            </p>
+          </div>
+          <span class="meta-chip">{{ detailFreshness.marketDate ? `市場日 ${formatDate(detailFreshness.marketDate)}` : '等待市場資料' }}</span>
+        </div>
+
+        <div class="stock-freshness-grid">
+          <article class="stock-freshness-item">
+            <span>完整明細</span>
+            <strong>{{ formatDate(detailFreshness.detailDate ?? detailFreshness.referenceDate) }}</strong>
+          </article>
+          <article class="stock-freshness-item">
+            <span>最新摘要</span>
+            <strong>{{ formatDate(detailFreshness.summaryDate ?? detailFreshness.marketDate) }}</strong>
+          </article>
+          <article class="stock-freshness-item">
+            <span>使用中報價</span>
+            <strong>{{ liveSnapshot?.marketDate ? `即時 ${formatDate(liveSnapshot.marketDate)}` : formatDate(stockSearchSummary?.priceDate ?? detailFreshness.referenceDate) }}</strong>
+          </article>
+        </div>
+      </section>
+
       <nav class="mobile-section-nav stock-mobile-nav" aria-label="個股研究捷徑">
         <a class="mobile-section-link" href="#quote">報價</a>
         <a class="mobile-section-link" href="#signals">技術</a>
