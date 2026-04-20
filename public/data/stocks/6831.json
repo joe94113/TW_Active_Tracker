@@ -2,8 +2,8 @@
   "code": "6831",
   "name": "邁科",
   "kind": "stock",
-  "priceDate": "2026-04-17",
-  "generatedAt": "2026-04-17T08:35:50.921Z",
+  "priceDate": "2026-04-20",
+  "generatedAt": "2026-04-20T09:21:45.461Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -2837,7 +2837,7 @@
       "high": 475,
       "low": 435,
       "close": 475,
-      "volume": 1682688,
+      "volume": 1683747,
       "turnover": null,
       "transactions": null,
       "change": 43,
@@ -2859,6 +2859,35 @@
       "rsi14": 71.92159143820217,
       "k9": 82.16897065643245,
       "d9": 81.21016315017702
+    },
+    {
+      "date": "2026-04-20",
+      "open": 516,
+      "high": 522,
+      "low": 485,
+      "close": 494,
+      "volume": 1837000,
+      "turnover": null,
+      "transactions": null,
+      "change": 19,
+      "changePercent": 4,
+      "maFast": 456.4,
+      "maShort": 439.05,
+      "maMedium": 406.65,
+      "maLong": 317.7583333333333,
+      "rsi": 74.31004389402457,
+      "stochasticK": 80.46237388024458,
+      "stochasticD": 80.96090006019955,
+      "macd": 39.37584399996331,
+      "macdSignal": 34.49668220621145,
+      "macdHist": 4.879161793751855,
+      "ma5": 456.4,
+      "ma10": 439.05,
+      "ma20": 406.65,
+      "ma60": 317.7583333333333,
+      "rsi14": 74.31004389402457,
+      "k9": 80.46237388024458,
+      "d9": 80.96090006019955
     }
   ],
   "technicalSignals": [
@@ -2868,49 +2897,59 @@
       "tone": "down",
       "importance": 2,
       "description": "邁科 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
+    },
+    {
+      "key": "kd-bearish",
+      "title": "KD 高檔死亡交叉",
+      "tone": "down",
+      "importance": 2,
+      "description": "邁科 KD 在高檔轉成死亡交叉，隔日震盪回檔風險升高。"
     }
   ],
   "訊號摘要": [
-    "RSI 超買"
+    "RSI 超買",
+    "KD 高檔死亡交叉"
   ],
   "最新摘要": {
-    "close": 475,
-    "change": 43,
-    "changePercent": 9.953703703703704,
-    "volume": 1682688,
+    "close": 494,
+    "change": 19,
+    "changePercent": 4,
+    "volume": 1837000,
     "turnover": null,
-    "return5": 10.465116279069768,
-    "return20": 49.8422712933754,
-    "return60": 74.31192660550458
+    "return5": 9.899888765294772,
+    "return20": 48.348348348348345,
+    "return60": 83.64312267657994
   },
   "最新指標": {
-    "maFast": 447.5,
-    "maShort": 428.3,
-    "maMedium": 398.6,
-    "maLong": 314.0083333333333,
-    "ma5": 447.5,
-    "ma10": 428.3,
-    "ma20": 398.6,
-    "ma60": 314.0083333333333,
-    "rsi": 71.92159143820217,
-    "rsi14": 71.92159143820217,
-    "stochasticK": 82.16897065643245,
-    "stochasticD": 81.21016315017702,
-    "k9": 82.16897065643245,
-    "d9": 81.21016315017702,
-    "macd": 36.506523123979264,
-    "macdSignal": 33.27689175777349,
-    "macdHist": 3.2296313662057727
+    "maFast": 456.4,
+    "maShort": 439.05,
+    "maMedium": 406.65,
+    "maLong": 317.7583333333333,
+    "ma5": 456.4,
+    "ma10": 439.05,
+    "ma20": 406.65,
+    "ma60": 317.7583333333333,
+    "rsi": 74.31004389402457,
+    "rsi14": 74.31004389402457,
+    "stochasticK": 80.46237388024458,
+    "stochasticD": 80.96090006019955,
+    "k9": 80.46237388024458,
+    "d9": 80.96090006019955,
+    "macd": 39.37584399996331,
+    "macdSignal": 34.49668220621145,
+    "macdHist": 4.879161793751855
   },
   "觀察摘要": [
     "邁科 目前站在 MA20 與 MA60 之上，短中期均線仍偏向多方排列。",
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
-    "近 20 個交易日報酬 49.84%，可用來觀察波段資金是否持續留在主線。",
-    "最近 5 個交易日三大法人合計買超 781,498 股。"
+    "近 20 個交易日報酬 48.35%，可用來觀察波段資金是否持續留在主線。",
+    "最近 5 個交易日三大法人合計買超 712,849 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
+    "TWSE MIS 即時行情",
+    "TWSE STOCK_DAY",
     "TWSE T86",
     "TDCC 1-5",
     "TWSE OpenAPI MI_MARGN",
@@ -3418,16 +3457,16 @@
     "面額": "新台幣 10.0000元",
     "住址": "新北市中和區中正路788號11樓",
     "網址": "www.microloops.com",
-    "更新日期": "2026-04-16"
+    "更新日期": "2026-04-19"
   },
   "評價面": {
-    "本益比": 97.08,
-    "殖利率": 0.69,
-    "股價淨值比": 10.35
+    "本益比": 111.01,
+    "殖利率": 0.61,
+    "股價淨值比": 11.83
   },
   "財務資料": {
     "月營收": {
-      "出表日期": "2026-04-16",
+      "出表日期": "2026-04-17",
       "資料年月": "2026-03",
       "產業名稱": "電腦及週邊設備業",
       "當月營收": 314090,
@@ -3441,7 +3480,7 @@
       "備註": "業績成長"
     },
     "綜合損益表": {
-      "出表日期": "2026-04-17",
+      "出表日期": "2026-04-20",
       "年度": 2025,
       "季別": 4,
       "報表類別": "一般業",
@@ -3455,7 +3494,7 @@
       "每股盈餘": 4.94
     },
     "資產負債表": {
-      "出表日期": "2026-04-17",
+      "出表日期": "2026-04-20",
       "年度": 2025,
       "季別": 4,
       "報表類別": "一般業",
@@ -3472,7 +3511,7 @@
       "最新月營收年增 38.21%，營收動能明顯轉強。",
       "最新季報 EPS 4.94 元，仍具獲利能力。",
       "負債比約 43.84%，資本結構仍在可觀察區間。",
-      "官方估值顯示本益比 97.08 倍、股價淨值比 10.35 倍。"
+      "官方估值顯示本益比 111.01 倍、股價淨值比 11.83 倍。"
     ],
     "資料說明": [
       "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
@@ -3481,6 +3520,13 @@
   },
   "法人買賣": {
     "days": [
+      {
+        "date": "2026-04-20",
+        "foreign": 112200,
+        "investmentTrust": 19794,
+        "dealer": -48932,
+        "total": 83062
+      },
       {
         "date": "2026-04-17",
         "foreign": 650870,
@@ -3508,128 +3554,121 @@
         "investmentTrust": -60000,
         "dealer": 4232,
         "total": -131368
-      },
-      {
-        "date": "2026-04-13",
-        "foreign": 146060,
-        "investmentTrust": 0,
-        "dealer": 5651,
-        "total": 151711
       }
     ],
     "summary": {
-      "foreign5Day": 651800,
-      "investmentTrust5Day": -60000,
-      "dealer5Day": 189698,
-      "total5Day": 781498
+      "foreign5Day": 617940,
+      "investmentTrust5Day": -40206,
+      "dealer5Day": 135115,
+      "total5Day": 712849
     }
   },
   "持股分散": {
-    "date": "2026-04-10",
-    "retailRatio": 12.8,
-    "largeHolderRatio": 60,
-    "retailRatioDelta": 0,
-    "largeHolderRatioDelta": 0,
-    "totalHolders": 8809,
+    "date": "2026-04-17",
+    "retailRatio": 12.959999999999999,
+    "largeHolderRatio": 59.55,
+    "retailRatioDelta": 0.15999999999999837,
+    "largeHolderRatioDelta": -0.45000000000000284,
+    "totalHolders": 9239,
     "totalRatio": 100,
     "bands": [
       {
         "level": 1,
         "label": "1 張以下",
-        "holders": 4421,
-        "shares": 588019,
-        "ratio": 0.87
+        "holders": 4823,
+        "shares": 645987,
+        "ratio": 0.95
       },
       {
         "level": 2,
         "label": "1-5 張",
-        "holders": 3808,
-        "shares": 6165193,
-        "ratio": 9.13
+        "holders": 3832,
+        "shares": 6256265,
+        "ratio": 9.26
       },
       {
         "level": 3,
         "label": "5-10 張",
-        "holders": 248,
-        "shares": 1896085,
-        "ratio": 2.8
+        "holders": 245,
+        "shares": 1858259,
+        "ratio": 2.75
       },
       {
         "level": 4,
         "label": "10-15 張",
-        "holders": 87,
-        "shares": 1114904,
-        "ratio": 1.65
+        "holders": 95,
+        "shares": 1202165,
+        "ratio": 1.78
       },
       {
         "level": 5,
         "label": "15-20 張",
         "holders": 37,
-        "shares": 673942,
+        "shares": 670842,
         "ratio": 0.99
       },
       {
         "level": 6,
         "label": "20-30 張",
-        "holders": 45,
-        "shares": 1138577,
-        "ratio": 1.68
+        "holders": 41,
+        "shares": 1009679,
+        "ratio": 1.49
       },
       {
         "level": 7,
         "label": "30-40 張",
-        "holders": 21,
-        "shares": 757976,
-        "ratio": 1.12
+        "holders": 26,
+        "shares": 928839,
+        "ratio": 1.37
       },
       {
         "level": 8,
         "label": "40-50 張",
-        "holders": 10,
-        "shares": 460521,
-        "ratio": 0.68
+        "holders": 11,
+        "shares": 491206,
+        "ratio": 0.72
       },
       {
         "level": 9,
         "label": "50-100 張",
-        "holders": 47,
-        "shares": 3478385,
-        "ratio": 5.15
+        "holders": 45,
+        "shares": 3348998,
+        "ratio": 4.96
       },
       {
         "level": 10,
         "label": "100-200 張",
-        "holders": 29,
-        "shares": 4067268,
-        "ratio": 6.02
+        "holders": 30,
+        "shares": 4291268,
+        "ratio": 6.35
       },
       {
         "level": 11,
         "label": "200-400 張",
-        "holders": 24,
-        "shares": 6643683,
-        "ratio": 9.84
+        "holders": 23,
+        "shares": 6591095,
+        "ratio": 9.76
       },
       {
         "level": 12,
         "label": "400-600 張",
         "holders": 13,
-        "shares": 6340931,
-        "ratio": 9.39
+        "shares": 6619154,
+        "ratio": 9.8
       },
       {
         "level": 13,
         "label": "600-800 張",
-        "holders": 6,
-        "shares": 4190042,
-        "ratio": 6.2
+        "holders": 5,
+        "shares": 3599659,
+        "ratio": 5.33
       },
       {
         "level": 14,
         "label": "800-1,000 張",
         "holders": 5,
-        "shares": 4373308,
-        "ratio": 6.47
+        "shares": 4380308,
+        "ratio": 6.48
       },
       {
         "level": 15,
@@ -3642,13 +3681,13 @@
         "level": 16,
         "label": "差異數調整",
         "holders": 1,
-        "shares": 3000,
-        "ratio": 0
+        "shares": 7890,
+        "ratio": 0.01
       },
       {
         "level": 17,
         "label": "合計",
-        "holders": 8809,
+        "holders": 9239,
         "shares": 67500000,
         "ratio": 100
       }
@@ -3657,7 +3696,7 @@
   },
   "融資融券": null,
   "交易提醒": {
-    "asOfDate": "2026-04-17",
+    "asOfDate": "2026-04-20",
     "alerts": [
       {
         "key": "short-sale-6831",
@@ -3665,15 +3704,15 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-04-17",
-        "note": "今日可借券賣出股數約 479,101 股，可作為券源與流動性參考。",
+        "date": "2026-04-20",
+        "note": "今日可借券賣出股數約 457,798 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
-        "footnote": "今日可借券賣出股數約 479,101 股，可作為券源與流動性參考。"
+        "footnote": "今日可借券賣出股數約 457,798 股，可作為券源與流動性參考。"
       }
     ],
     "eventCalendar": [],
     "highlights": [
-      "今日可借券賣出股數約 479,101 股，可作為券源與流動性參考。"
+      "今日可借券賣出股數約 457,798 股，可作為券源與流動性參考。"
     ],
     "summary": {
       "riskTone": "info",
@@ -3681,7 +3720,7 @@
       "attentionWarningCount": 0,
       "changedTradingCount": 0,
       "nextExDividendDate": null,
-      "shortSaleAvailableVolume": 479101,
+      "shortSaleAvailableVolume": 457798,
       "alertCount": 1,
       "topTitle": "可借券賣出餘量",
       "topTone": "info"
@@ -3691,14 +3730,14 @@
     "count": 2,
     "averageWeight": 2.79,
     "totalWeight": 5.58,
-    "latestDisclosureDate": "2026-04-17",
+    "latestDisclosureDate": "2026-04-20",
     "items": [
       {
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
-        "disclosureDate": "2026-04-17",
-        "weight": 4.48,
+        "disclosureDate": "2026-04-20",
+        "weight": 4.45,
         "shares": 290000,
         "rank": 5
       },
@@ -3706,10 +3745,10 @@
         "etfCode": "00980A",
         "etfName": "主動野村臺灣優選",
         "providerLabel": "野村投信",
-        "disclosureDate": "2026-04-17",
-        "weight": 1.1,
+        "disclosureDate": "2026-04-20",
+        "weight": 1.13,
         "shares": 314000,
-        "rank": 36
+        "rank": 35
       }
     ]
   },
@@ -3727,33 +3766,32 @@
   },
   "同產業比較": {
     "industryName": "電腦及週邊設備業",
-    "peerCount": 18,
+    "peerCount": 17,
     "rank20Day": 1,
-    "rankDaily": 1,
-    "averageReturn20": 5.128814173868016,
-    "averageChangePercent": 2.029157976780077,
+    "rankDaily": 2,
+    "averageReturn20": 7.502569003326648,
+    "averageChangePercent": 1.3323434355531822,
     "leaders": [
       {
         "code": "6831",
         "name": "邁科",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 475,
-        "change": 43,
-        "changePercent": 9.953703703703704,
-        "return20": 49.8422712933754,
-        "return60": 74.31192660550458,
-        "volume": 1682688,
+        "priceDate": "2026-04-20",
+        "close": 494,
+        "change": 19,
+        "changePercent": 4,
+        "return20": 48.348348348348345,
+        "return60": 83.64312267657994,
+        "volume": 1837000,
         "turnover": null,
-        "foreign5Day": 651800,
-        "investmentTrust5Day": -60000,
-        "total5Day": 781498,
-        "largeHolderRatio": 60,
-        "retailRatio": 12.8,
+        "foreign5Day": 617940,
+        "investmentTrust5Day": -40206,
+        "total5Day": 712849,
+        "largeHolderRatio": 59.55,
+        "retailRatio": 12.959999999999999,
         "shortToMarginRatio": null,
         "activeEtfCount": 2,
         "sparkline20": [
-          333,
           365,
           332,
           338,
@@ -3772,7 +3810,8 @@
           453.5,
           427.5,
           432,
-          475
+          475,
+          494
         ],
         "technicalSignals": [
           {
@@ -3781,14 +3820,22 @@
             "tone": "down",
             "importance": 2,
             "description": "邁科 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
+          },
+          {
+            "key": "kd-bearish",
+            "title": "KD 高檔死亡交叉",
+            "tone": "down",
+            "importance": 2,
+            "description": "邁科 KD 在高檔轉成死亡交叉，隔日震盪回檔風險升高。"
           }
         ],
         "technicalSignalTitles": [
-          "RSI 超買"
+          "RSI 超買",
+          "KD 高檔死亡交叉"
         ],
         "topSignalTitle": "RSI 超買",
         "topSignalTone": "down",
-        "signalCount": 1,
+        "signalCount": 2,
         "topSelectionSignalTitle": "可借券賣出餘量",
         "selectionSignalTone": "info",
         "selectionSignalCount": 1,
@@ -3805,23 +3852,22 @@
         "code": "3017",
         "name": "奇鋐",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 2400,
-        "change": -40,
-        "changePercent": -1.639344262295082,
-        "return20": 29.72972972972973,
-        "return60": 74.54545454545455,
-        "volume": 3882923,
+        "priceDate": "2026-04-20",
+        "close": 2490,
+        "change": 90,
+        "changePercent": 3.75,
+        "return20": 23.573200992555833,
+        "return60": 83.76383763837639,
+        "volume": 3392000,
         "turnover": null,
-        "foreign5Day": -1979448,
-        "investmentTrust5Day": 405584,
-        "total5Day": -1579520,
-        "largeHolderRatio": 68.13,
-        "retailRatio": 7.62,
-        "shortToMarginRatio": 1.4042426053181953,
-        "activeEtfCount": 14,
+        "foreign5Day": -941291,
+        "investmentTrust5Day": 715734,
+        "total5Day": -176783,
+        "largeHolderRatio": 68.35000000000001,
+        "retailRatio": 7.49,
+        "shortToMarginRatio": 1.064773735581189,
+        "activeEtfCount": 13,
         "sparkline20": [
-          2015,
           2050,
           1995,
           1945,
@@ -3840,7 +3886,8 @@
           2310,
           2325,
           2440,
-          2400
+          2400,
+          2490
         ],
         "technicalSignals": [
           {
@@ -3864,32 +3911,99 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null,
-        "foreignTargetPrice": null,
-        "foreignTargetPricePremium": null,
-        "foreignTargetBroker": null,
-        "foreignTargetCount": 0
+        "foreignTargetPrice": 87.05,
+        "foreignTargetPricePremium": -96.50401606425703,
+        "foreignTargetBroker": "市場摘要",
+        "foreignTargetCount": 1
+      },
+      {
+        "code": "2382",
+        "name": "廣達",
+        "industryName": "電腦及週邊設備業",
+        "priceDate": "2026-04-20",
+        "close": 329,
+        "change": 6,
+        "changePercent": 1.8575851393188854,
+        "return20": 14.834205933682373,
+        "return60": 17.290552584670234,
+        "volume": 18837000,
+        "turnover": null,
+        "foreign5Day": 18116362,
+        "investmentTrust5Day": -4401680,
+        "total5Day": 13685017,
+        "largeHolderRatio": 85.67,
+        "retailRatio": 7.239999999999999,
+        "shortToMarginRatio": 10.06899525657611,
+        "activeEtfCount": 7,
+        "sparkline20": [
+          283.5,
+          280,
+          281.5,
+          285,
+          287,
+          289,
+          281,
+          278.5,
+          290.5,
+          284.5,
+          289,
+          307.5,
+          313,
+          321.5,
+          319,
+          323,
+          308.5,
+          318.5,
+          323,
+          329
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "廣達 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "foreignTargetPrice": 23.21,
+        "foreignTargetPricePremium": -92.94528875379939,
+        "foreignTargetBroker": "市場摘要",
+        "foreignTargetCount": 1
       },
       {
         "code": "8210",
         "name": "勤誠",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
+        "priceDate": "2026-04-20",
         "close": 1020,
         "change": 0,
         "changePercent": 0,
-        "return20": 14.606741573033707,
-        "return60": 12.087912087912088,
-        "volume": 2507248,
+        "return20": 14.349775784753364,
+        "return60": 11.964873765093303,
+        "volume": 1930000,
         "turnover": null,
-        "foreign5Day": 1695807,
-        "investmentTrust5Day": 876000,
-        "total5Day": 2727503,
-        "largeHolderRatio": 65.85,
-        "retailRatio": 16.93,
-        "shortToMarginRatio": 1.4356709000552181,
+        "foreign5Day": 1324838,
+        "investmentTrust5Day": 1002000,
+        "total5Day": 2417543,
+        "largeHolderRatio": 69.13,
+        "retailRatio": 15.12,
+        "shortToMarginRatio": 1.2436404748445449,
         "activeEtfCount": 8,
         "sparkline20": [
-          892,
           912,
           893,
           868,
@@ -3907,6 +4021,7 @@
           900,
           961,
           992,
+          1020,
           1020,
           1020
         ],
@@ -3938,26 +4053,93 @@
         "foreignTargetCount": 2
       },
       {
+        "code": "6414",
+        "name": "樺漢",
+        "industryName": "電腦及週邊設備業",
+        "priceDate": "2026-04-20",
+        "close": 310,
+        "change": 6,
+        "changePercent": 1.9736842105263157,
+        "return20": 14.180478821362799,
+        "return60": 5.621805792163544,
+        "volume": 2502000,
+        "turnover": null,
+        "foreign5Day": 4600954,
+        "investmentTrust5Day": -527000,
+        "total5Day": 3978566,
+        "largeHolderRatio": 61.3,
+        "retailRatio": 15.170000000000002,
+        "shortToMarginRatio": 8.466051969823972,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          270,
+          264,
+          265,
+          269,
+          266,
+          264,
+          269,
+          271,
+          274.5,
+          272.5,
+          276,
+          283.5,
+          278,
+          283,
+          287.5,
+          294,
+          294.5,
+          300,
+          304,
+          310
+        ],
+        "technicalSignals": [
+          {
+            "key": "rsi-overbought",
+            "title": "RSI 超買",
+            "tone": "down",
+            "importance": 2,
+            "description": "樺漢 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "RSI 超買"
+        ],
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      },
+      {
         "code": "2376",
         "name": "技嘉",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 281.5,
-        "change": 0.5,
-        "changePercent": 0.1779359430604982,
-        "return20": 12.825651302605209,
-        "return60": 17.291666666666668,
-        "volume": 10838902,
+        "priceDate": "2026-04-20",
+        "close": 279,
+        "change": -2.5,
+        "changePercent": -0.8880994671403196,
+        "return20": 12.727272727272727,
+        "return60": 18.471337579617835,
+        "volume": 7955000,
         "turnover": null,
-        "foreign5Day": 16427295,
-        "investmentTrust5Day": 740972,
-        "total5Day": 17125426,
-        "largeHolderRatio": 63.85,
-        "retailRatio": 19.97,
-        "shortToMarginRatio": 1.6939420040195232,
+        "foreign5Day": 16955983,
+        "investmentTrust5Day": 381273,
+        "total5Day": 17188435,
+        "largeHolderRatio": 66.34,
+        "retailRatio": 18.3,
+        "shortToMarginRatio": 1.8342043242135464,
         "activeEtfCount": 3,
         "sparkline20": [
-          247.5,
           248.5,
           232.5,
           235,
@@ -3976,7 +4158,8 @@
           263.5,
           279,
           281,
-          281.5
+          281.5,
+          279
         ],
         "technicalSignals": [
           {
@@ -4006,45 +4189,45 @@
         "foreignTargetCount": 0
       },
       {
-        "code": "2382",
-        "name": "廣達",
+        "code": "3231",
+        "name": "緯創",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 323,
-        "change": 4.5,
-        "changePercent": 1.4128728414442702,
-        "return20": 10.238907849829351,
-        "return60": 14.13427561837456,
-        "volume": 20056179,
+        "priceDate": "2026-04-20",
+        "close": 140.5,
+        "change": 4,
+        "changePercent": 2.93040293040293,
+        "return20": 10.196078431372548,
+        "return60": -3.767123287671233,
+        "volume": 77769000,
         "turnover": null,
-        "foreign5Day": 10930781,
-        "investmentTrust5Day": -4077824,
-        "total5Day": 6584014,
-        "largeHolderRatio": 85.28,
-        "retailRatio": 7.459999999999999,
-        "shortToMarginRatio": 9.547791417479804,
-        "activeEtfCount": 7,
+        "foreign5Day": 49482456,
+        "investmentTrust5Day": -2842535,
+        "total5Day": 42291499,
+        "largeHolderRatio": 58.31,
+        "retailRatio": 21.75,
+        "shortToMarginRatio": 0.5618276234868759,
+        "activeEtfCount": 2,
         "sparkline20": [
-          286.5,
-          283.5,
-          280,
-          281.5,
-          285,
-          287,
-          289,
-          281,
-          278.5,
-          290.5,
-          284.5,
-          289,
-          307.5,
-          313,
-          321.5,
-          319,
-          323,
-          308.5,
-          318.5,
-          323
+          130,
+          125.5,
+          129,
+          128,
+          127,
+          127,
+          125.5,
+          122.5,
+          127,
+          125,
+          123.5,
+          131,
+          132.5,
+          135,
+          134.5,
+          136.5,
+          133,
+          134,
+          136.5,
+          140.5
         ],
         "technicalSignals": [
           {
@@ -4052,7 +4235,7 @@
             "title": "技術面中性",
             "tone": "normal",
             "importance": 1,
-            "description": "廣達 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "description": "緯創 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -4068,187 +4251,51 @@
         "hasAttentionWarning": false,
         "hasChangedTrading": false,
         "nextExDividendDate": null,
-        "foreignTargetPrice": 23.21,
-        "foreignTargetPricePremium": -92.81424148606811,
-        "foreignTargetBroker": "市場摘要",
-        "foreignTargetCount": 1
-      },
-      {
-        "code": "6414",
-        "name": "樺漢",
-        "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 304,
-        "change": 4,
-        "changePercent": 1.3333333333333335,
-        "return20": 8.960573476702509,
-        "return60": 5.555555555555555,
-        "volume": 1620823,
-        "turnover": null,
-        "foreign5Day": 3663990,
-        "investmentTrust5Day": -135000,
-        "total5Day": 3461043,
-        "largeHolderRatio": 59.31,
-        "retailRatio": 15.84,
-        "shortToMarginRatio": 12.303881090008257,
-        "activeEtfCount": 1,
-        "sparkline20": [
-          271.5,
-          270,
-          264,
-          265,
-          269,
-          266,
-          264,
-          269,
-          271,
-          274.5,
-          272.5,
-          276,
-          283.5,
-          278,
-          283,
-          287.5,
-          294,
-          294.5,
-          300,
-          304
-        ],
-        "technicalSignals": [
-          {
-            "key": "rsi-overbought",
-            "title": "RSI 超買",
-            "tone": "down",
-            "importance": 2,
-            "description": "樺漢 RSI14 已進入 70 以上偏熱區，隔日追價風險較高。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "RSI 超買"
-        ],
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null,
-        "foreignTargetPrice": 381,
-        "foreignTargetPricePremium": 25.32894736842105,
-        "foreignTargetBroker": "市場摘要",
-        "foreignTargetCount": 1
-      },
-      {
-        "code": "4938",
-        "name": "和碩",
-        "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 83,
-        "change": 2.9000015258789062,
-        "changePercent": 3.62047638092758,
-        "return20": 6.138111558923416,
-        "return60": 19.59653915720697,
-        "volume": 26573649,
-        "turnover": null,
-        "foreign5Day": 13501561,
-        "investmentTrust5Day": -2482469,
-        "total5Day": 10105708,
-        "largeHolderRatio": 77.83,
-        "retailRatio": 10.26,
-        "shortToMarginRatio": 0.5319148936170213,
-        "activeEtfCount": 1,
-        "sparkline20": [
-          77.30000305175781,
-          77,
-          75.69999694824219,
-          76.4000015258789,
-          77.4000015258789,
-          80.69999694824219,
-          80.9000015258789,
-          78.5999984741211,
-          76.19999694824219,
-          78.19999694824219,
-          78,
-          77.9000015258789,
-          79.5999984741211,
-          80,
-          80.69999694824219,
-          78,
-          78.5,
-          78.80000305175781,
-          80.0999984741211,
-          83
-        ],
-        "technicalSignals": [
-          {
-            "key": "macd-bullish-cross",
-            "title": "MACD 翻正",
-            "tone": "up",
-            "importance": 3,
-            "description": "和碩 MACD 線上穿訊號線，短線動能重新偏多。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "MACD 翻正"
-        ],
-        "topSignalTitle": "MACD 翻正",
-        "topSignalTone": "up",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null,
         "foreignTargetPrice": null,
         "foreignTargetPricePremium": null,
         "foreignTargetBroker": null,
         "foreignTargetCount": 0
       },
       {
-        "code": "2395",
-        "name": "研華",
+        "code": "2356",
+        "name": "英業達",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 366,
-        "change": 11,
-        "changePercent": 3.0985915492957745,
-        "return20": 4.871060171919771,
-        "return60": 26.8630849220104,
-        "volume": 5321021,
+        "priceDate": "2026-04-20",
+        "close": 46.6,
+        "change": 0.8500000000000014,
+        "changePercent": 1.8579234972677625,
+        "return20": 7.24971042980356,
+        "return60": 6.75830096448478,
+        "volume": 35812000,
         "turnover": null,
-        "foreign5Day": 6300773,
-        "investmentTrust5Day": -1577335,
-        "total5Day": 4874227,
-        "largeHolderRatio": 85.49,
-        "retailRatio": 3.68,
-        "shortToMarginRatio": 0.5005005005005005,
-        "activeEtfCount": 2,
+        "foreign5Day": 47782913,
+        "investmentTrust5Day": -17099184,
+        "total5Day": 32666644,
+        "largeHolderRatio": 68.98,
+        "retailRatio": 14.969999999999999,
+        "shortToMarginRatio": 0.4491511455414538,
+        "activeEtfCount": 0,
         "sparkline20": [
-          342,
-          344,
-          330,
-          330,
-          333.5,
-          339,
-          332.5,
-          321.5,
-          318.5,
-          331,
-          323.5,
-          322.5,
-          348.5,
-          348,
-          346,
-          342.5,
-          344,
-          348,
-          355,
-          366
+          42.79999923706055,
+          41.95000076293945,
+          42.25,
+          42.900001525878906,
+          42.95000076293945,
+          43.099998474121094,
+          41.400001525878906,
+          40.04999923706055,
+          41.099998474121094,
+          40.849998474121094,
+          40.849998474121094,
+          42.650001525878906,
+          43.79999923706055,
+          44.29999923706055,
+          44.54999923706055,
+          44.599998474121094,
+          44.45000076293945,
+          45,
+          45.75,
+          46.6
         ],
         "technicalSignals": [
           {
@@ -4256,7 +4303,7 @@
             "title": "技術面中性",
             "tone": "normal",
             "importance": 1,
-            "description": "研華 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "description": "英業達 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -4283,23 +4330,22 @@
         "code": "3005",
         "name": "神基",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 98.9000015258789,
-        "change": 0.5,
-        "changePercent": 0.508130073421291,
-        "return20": -27.279410642736096,
-        "return60": -15.107294827571755,
-        "volume": 6145537,
+        "priceDate": "2026-04-20",
+        "close": 100.5,
+        "change": 1.5999984741210938,
+        "changePercent": 1.6177941854757467,
+        "return20": -23.574144486692013,
+        "return60": -13.733905579399142,
+        "volume": 4241000,
         "turnover": null,
-        "foreign5Day": -1250788,
-        "investmentTrust5Day": -2411000,
-        "total5Day": -4847457,
-        "largeHolderRatio": 76.57,
-        "retailRatio": 9.93,
-        "shortToMarginRatio": 0.6800941668846455,
+        "foreign5Day": 896833,
+        "investmentTrust5Day": -2612000,
+        "total5Day": -2719937,
+        "largeHolderRatio": 75.68,
+        "retailRatio": 10.42,
+        "shortToMarginRatio": 0.6545454545454545,
         "activeEtfCount": 2,
         "sparkline20": [
-          131.5,
           128.5,
           129,
           127,
@@ -4318,7 +4364,76 @@
           98.0999984741211,
           97.5,
           98.4000015258789,
-          98.9000015258789
+          98.9000015258789,
+          100.5
+        ],
+        "technicalSignals": [
+          {
+            "key": "macd-bullish-cross",
+            "title": "MACD 翻正",
+            "tone": "up",
+            "importance": 3,
+            "description": "神基 MACD 線上穿訊號線，短線動能重新偏多。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "MACD 翻正"
+        ],
+        "topSignalTitle": "MACD 翻正",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": "可借券賣出餘量",
+        "selectionSignalTone": "info",
+        "selectionSignalCount": 1,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      },
+      {
+        "code": "6230",
+        "name": "尼得科超眾",
+        "industryName": "電腦及週邊設備業",
+        "priceDate": "2026-04-20",
+        "close": 160.5,
+        "change": -0.5,
+        "changePercent": -0.3105590062111801,
+        "return20": -10.833333333333334,
+        "return60": 36.016949152542374,
+        "volume": 148000,
+        "turnover": null,
+        "foreign5Day": -51856,
+        "investmentTrust5Day": 0,
+        "total5Day": -48400,
+        "largeHolderRatio": 87.74,
+        "retailRatio": 7.12,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 0,
+        "sparkline20": [
+          176,
+          165,
+          150,
+          155.5,
+          156,
+          152.5,
+          147.5,
+          138.5,
+          144,
+          142,
+          141,
+          146,
+          144.5,
+          144.5,
+          147.5,
+          151.5,
+          161,
+          155,
+          161,
+          160.5
         ],
         "technicalSignals": [
           {
@@ -4326,7 +4441,7 @@
             "title": "技術面中性",
             "tone": "normal",
             "importance": 1,
-            "description": "神基 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "description": "尼得科超眾 目前沒有明確的新訊號，偏向等待下一段量價表態。"
           }
         ],
         "technicalSignalTitles": [
@@ -4351,23 +4466,22 @@
         "code": "2324",
         "name": "仁寶",
         "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 30.350000381469727,
-        "change": 0.9500007629394531,
-        "changePercent": 3.231295153965531,
-        "return20": -7.610344623366851,
-        "return60": 2.707279746409763,
-        "volume": 99505767,
+        "priceDate": "2026-04-20",
+        "close": 30.25,
+        "change": -0.10000038146972656,
+        "changePercent": -0.32949054435854985,
+        "return20": -7.208584613850816,
+        "return60": -0.32949054435854985,
+        "volume": 74170000,
         "turnover": null,
-        "foreign5Day": 51160809,
-        "investmentTrust5Day": -42120392,
-        "total5Day": 10786092,
-        "largeHolderRatio": 67.78,
-        "retailRatio": 13.41,
-        "shortToMarginRatio": 3.0670146287739124,
+        "foreign5Day": 57797238,
+        "investmentTrust5Day": -56716195,
+        "total5Day": 2321184,
+        "largeHolderRatio": 67.95,
+        "retailRatio": 13.35,
+        "shortToMarginRatio": 2.8520459851121,
         "activeEtfCount": 1,
         "sparkline20": [
-          32.599998474121094,
           33,
           32.70000076293945,
           31.700000762939453,
@@ -4386,75 +4500,8 @@
           29.5,
           29.450000762939453,
           29.399999618530273,
-          30.350000381469727
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "仁寶 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null,
-        "foreignTargetPrice": null,
-        "foreignTargetPricePremium": null,
-        "foreignTargetBroker": null,
-        "foreignTargetCount": 0
-      },
-      {
-        "code": "6230",
-        "name": "尼得科超眾",
-        "industryName": "電腦及週邊設備業",
-        "priceDate": "2026-04-17",
-        "close": 161,
-        "change": 6,
-        "changePercent": 3.870967741935484,
-        "return20": -6.9364161849710975,
-        "return60": 43.111111111111114,
-        "volume": 221807,
-        "turnover": null,
-        "foreign5Day": 3214,
-        "investmentTrust5Day": 0,
-        "total5Day": 5161,
-        "largeHolderRatio": 87.67,
-        "retailRatio": 7.21,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          180,
-          176,
-          165,
-          150,
-          155.5,
-          156,
-          152.5,
-          147.5,
-          138.5,
-          144,
-          142,
-          141,
-          146,
-          144.5,
-          144.5,
-          147.5,
-          151.5,
-          161,
-          155,
-          161
+          30.350000381469727,
+          30.25
         ],
         "technicalSignals": [
           {
@@ -4462,7 +4509,7 @@
             "title": "黃金交叉",
             "tone": "up",
             "importance": 3,
-            "description": "尼得科超眾 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
+            "description": "仁寶 快線均線向上突破中期均線，短線趨勢有轉強訊號。"
           }
         ],
         "technicalSignalTitles": [
@@ -4485,7 +4532,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 5.13%，在同族群相對偏強。",
+      "近 20 日報酬優於同產業平均 7.50%，在同族群相對偏強。",
       "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }

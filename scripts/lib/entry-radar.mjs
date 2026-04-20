@@ -1,4 +1,5 @@
 import { TOPIC_DEFINITIONS } from './theme-radar.mjs';
+import { buildSummaryHealthScore, buildSummaryOverheatWarnings } from '../../src/lib/stockHealth.js';
 
 function toNumber(value) {
   const parsed = Number(value);
@@ -106,6 +107,17 @@ function getDominantSignal(detail) {
   return [...signals].sort((left, right) => (toNumber(right?.importance) ?? 0) - (toNumber(left?.importance) ?? 0))[0] ?? null;
 }
 
+function isCurrentDetailDate(detailDate, marketDate) {
+  const normalizedDetailDate = normalizeDate(detailDate);
+  const normalizedMarketDate = normalizeDate(marketDate);
+
+  if (!normalizedDetailDate || !normalizedMarketDate) {
+    return true;
+  }
+
+  return normalizedDetailDate === normalizedMarketDate;
+}
+
 function createDetailMap(stockDetailList = [], stockMetaMap = new Map()) {
   return new Map(
     (stockDetailList ?? [])
@@ -146,6 +158,7 @@ function createDetailMap(stockDetailList = [], stockMetaMap = new Map()) {
             name: detail?.name ?? stockMeta?.name ?? code,
             industryName: stockMeta?.industryName ?? null,
             close: latest.close,
+            priceDate: normalizeDate(detail?.priceDate ?? latest?.date),
             changePercent: percentChange(latest.close, previous?.close),
             return20,
             return60,
@@ -197,6 +210,7 @@ function getMergedStock(code, stockMetaMap, detailMap) {
     name: detail.name ?? meta.name ?? code,
     industryName: detail.industryName ?? meta.industryName ?? null,
     close: toNumber(detail.close ?? meta.close),
+    priceDate: normalizeDate(detail.priceDate ?? meta.priceDate),
     changePercent: toNumber(detail.changePercent ?? meta.changePercent),
     return20: toNumber(detail.return20 ?? meta.return20),
     return60: toNumber(detail.return60 ?? meta.return60),
@@ -223,7 +237,7 @@ function createEntryItem(base = {}, options = {}) {
       ? ((foreignTargetPrice - close) / close) * 100
       : null;
 
-  return {
+  const item = {
     code: String(options.code ?? base.code ?? '').trim(),
     name: options.name ?? base.name ?? null,
     industryName: options.industryName ?? base.industryName ?? null,
@@ -243,6 +257,19 @@ function createEntryItem(base = {}, options = {}) {
     premiumToTarget,
     tags: (options.tags ?? []).filter(Boolean).slice(0, 4),
     metrics: (options.metrics ?? []).filter((metric) => metric?.label && metric?.value),
+  };
+
+  const health = buildSummaryHealthScore(item);
+  const warnings = buildSummaryOverheatWarnings(item);
+
+  return {
+    ...item,
+    healthScore: health.totalScore,
+    healthGrade: health.grade,
+    healthTone: health.tone,
+    warningCount: warnings.length,
+    topWarningTitle: warnings[0]?.title ?? null,
+    topWarningTone: warnings[0]?.tone ?? null,
   };
 }
 
@@ -738,12 +765,15 @@ export function buildEntryRadar({
     normalizeDate(dashboard?.市場總覽?.即時狀態?.marketDate) ??
     normalizeDate(dashboard?.市場總覽?.資料日期) ??
     null;
+  const freshDetailMap = new Map(
+    [...detailMap.entries()].filter(([, item]) => isCurrentDetailDate(item?.priceDate, marketDate)),
+  );
 
-  const freshStarters = buildFreshStarters(selectionRadar, stockMetaMap, detailMap);
-  const nearBreakouts = buildNearBreakouts(selectionRadar, stockMetaMap, detailMap);
-  const institutionalTurns = buildInstitutionalTurns(selectionRadar, stockMetaMap, detailMap, dashboard);
-  const themeIgnitionResult = buildThemeIgnition(themeRadar, themeHistory, stockMetaMap, detailMap);
-  const catchUpCandidates = buildCatchUpCandidates(themeRadar, stockMetaMap, detailMap);
+  const freshStarters = buildFreshStarters(selectionRadar, stockMetaMap, freshDetailMap);
+  const nearBreakouts = buildNearBreakouts(selectionRadar, stockMetaMap, freshDetailMap);
+  const institutionalTurns = buildInstitutionalTurns(selectionRadar, stockMetaMap, freshDetailMap, dashboard);
+  const themeIgnitionResult = buildThemeIgnition(themeRadar, themeHistory, stockMetaMap, freshDetailMap);
+  const catchUpCandidates = buildCatchUpCandidates(themeRadar, stockMetaMap, freshDetailMap);
   const topThemeTitle = themeIgnitionResult.history.currentLeader?.title ?? themeRadar?.topics?.[0]?.title ?? null;
 
   return {

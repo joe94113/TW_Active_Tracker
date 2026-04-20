@@ -280,6 +280,24 @@ input {
   color: #8b5b00;
 }
 
+.meta-chip.is-up {
+  border-color: rgba(19, 136, 94, 0.18);
+  background: rgba(19, 136, 94, 0.12);
+  color: #0f6b4b;
+}
+
+.meta-chip.is-down {
+  border-color: rgba(178, 64, 42, 0.18);
+  background: rgba(178, 64, 42, 0.1);
+  color: #943720;
+}
+
+.meta-chip.is-normal {
+  border-color: rgba(11, 105, 155, 0.16);
+  background: rgba(11, 105, 155, 0.08);
+  color: #0b699b;
+}
+
 .nav-link {
   flex: 0 0 auto;
   min-height: 42px;
@@ -2128,6 +2146,13 @@ input {
   flex: 0 0 auto;
 }
 
+.radar-stock-chip-stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .radar-stock-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2249,6 +2274,13 @@ input {
   align-items: flex-start;
 }
 
+.entry-stock-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .entry-stock-head strong {
   font-size: 1.06rem;
   line-height: 1.45;
@@ -2263,6 +2295,13 @@ input {
 
 .entry-stock-note {
   margin: 0;
+}
+
+.entry-warning-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
 .entry-stock-metric-grid {
@@ -2914,6 +2953,94 @@ input {
 
 .stock-freshness-item strong {
   font-size: 1rem;
+}
+
+.stock-health-panel {
+  gap: 18px;
+}
+
+.stock-health-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 18px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(16, 32, 45, 0.08);
+  background: linear-gradient(135deg, rgba(243, 249, 255, 0.92), rgba(255, 255, 255, 0.98));
+}
+
+.stock-health-label {
+  margin: 0 0 8px;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stock-health-total {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stock-health-total strong {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1;
+}
+
+.stock-health-total span {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+
+.stock-health-summary {
+  margin: 0;
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+.stock-health-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stock-health-item {
+  display: grid;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 32, 45, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.stock-health-item.is-up {
+  border-color: rgba(19, 136, 94, 0.14);
+  background: linear-gradient(135deg, rgba(244, 252, 248, 0.96), rgba(255, 255, 255, 0.94));
+}
+
+.stock-health-item.is-down {
+  border-color: rgba(178, 64, 42, 0.14);
+  background: linear-gradient(135deg, rgba(255, 248, 246, 0.96), rgba(255, 255, 255, 0.94));
+}
+
+.stock-health-item.is-normal {
+  border-color: rgba(11, 105, 155, 0.1);
+  background: linear-gradient(135deg, rgba(244, 249, 253, 0.94), rgba(255, 255, 255, 0.94));
+}
+
+.stock-health-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stock-health-note {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.65;
 }
 
 .etf-diff-layout {
@@ -4506,6 +4633,7 @@ input {
   .classroom-chart-grid,
   .classroom-practice-grid,
   .stock-freshness-grid,
+  .stock-health-grid,
   .entry-card-grid,
   .entry-radar-spotlight-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -4522,5 +4650,9 @@ input {
 
   .classroom-step-card {
     padding: 20px;
+  }
+
+  .stock-health-hero {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

@@ -1,4 +1,5 @@
 import { buildThemeMomentumTopics } from './themeRadar';
+import { buildSummaryHealthScore, buildSummaryOverheatWarnings } from './stockHealth';
 
 function toNumber(value) {
   const parsed = Number(value);
@@ -85,7 +86,7 @@ function calculateCompressionMetrics(stock) {
 }
 
 function normalizeRadarStock(stock, options = {}) {
-  return {
+  const item = {
     code: stock.code,
     name: stock.name,
     industryName: stock.industryName ?? null,
@@ -114,6 +115,19 @@ function normalizeRadarStock(stock, options = {}) {
     note: options.note ?? null,
     tags: options.tags ?? [],
     metrics: options.metrics ?? {},
+  };
+
+  const health = buildSummaryHealthScore(item);
+  const warnings = buildSummaryOverheatWarnings(item);
+
+  return {
+    ...item,
+    healthScore: health.totalScore,
+    healthGrade: health.grade,
+    healthTone: health.tone,
+    warningCount: warnings.length,
+    topWarningTitle: warnings[0]?.title ?? null,
+    topWarningTone: warnings[0]?.tone ?? null,
   };
 }
 

@@ -1,8 +1,8 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-20T08:50:01.380Z",
+  "generatedAt": "2026-04-20T09:20:23.160Z",
   "generatedAtLocalDate": "2026-04-20",
-  "generatedAtLocalTime": "16:50:01",
+  "generatedAtLocalTime": "17:20:23",
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -394,7 +394,7 @@
       "trackingStatus": "已串接",
       "detailAvailability": "full",
       "disclosureDate": "2026-04-20",
-      "nav": 14.02,
+      "nav": 13.91,
       "aum": 6489306032,
       "holdingsCount": 118,
       "trackingMessage": "官方來源每日同步",
@@ -634,17 +634,17 @@
       "trackingStatus": "已串接",
       "detailAvailability": "full",
       "disclosureDate": "2026-04-20",
-      "nav": 15.99,
-      "aum": 32755255821,
+      "nav": 16.51,
+      "aum": 37598077753,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 0,
-        "removedCount": 0,
+        "addedCount": 1,
+        "removedCount": 1,
         "increasedCount": 9,
-        "decreasedCount": 1,
-        "totalChangeCount": 10
+        "decreasedCount": 0,
+        "totalChangeCount": 11
       }
     },
     {
@@ -657,18 +657,18 @@
       "sourceUrl": "https://www.fsitc.com.tw/FundDetail.aspx?ID=150",
       "trackingStatus": "已串接",
       "detailAvailability": "full",
-      "disclosureDate": "2026-04-17",
-      "nav": 15.16,
-      "aum": 3072849342,
+      "disclosureDate": "2026-04-20",
+      "nav": 15.44,
+      "aum": 3277194390,
       "holdingsCount": 38,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 2,
-        "removedCount": 0,
-        "increasedCount": 17,
-        "decreasedCount": 16,
-        "totalChangeCount": 35
+        "removedCount": 2,
+        "increasedCount": 14,
+        "decreasedCount": 19,
+        "totalChangeCount": 37
       }
     },
     {
@@ -829,7 +829,7 @@
       "nav": 10.6,
       "aum": 10556970529,
       "holdingsCount": 10,
-      "trackingMessage": "官方來源暫時無法更新，先沿用最近一次成功快取：群益 ETF 揭露日期解析失敗",
+      "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,

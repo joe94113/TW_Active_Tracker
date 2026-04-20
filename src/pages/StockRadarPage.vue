@@ -186,6 +186,18 @@ function getStockCardTone(sectionKey, item) {
   return 'info';
 }
 
+function getHealthTone(item) {
+  if ((item?.healthScore ?? 0) >= 75) return 'up';
+  if ((item?.healthScore ?? 0) <= 45) return 'down';
+  return 'normal';
+}
+
+function getWarningTone(item) {
+  if (item?.topWarningTone === 'risk') return 'risk';
+  if (item?.topWarningTone === 'warning') return 'warning';
+  return 'info';
+}
+
 function getRiskBadge(item) {
   if (item.isUnderDisposition) return '處置股';
   if (item.hasChangedTrading) return '變更交易';
@@ -285,16 +297,28 @@ function getReplayMetricClass(value) {
                   </div>
                   <div class="radar-stock-side">
                     <span v-if="getRiskBadge(item)" class="status-badge is-risk">{{ getRiskBadge(item) }}</span>
-                    <span v-else class="meta-chip">{{ formatNumber(item.score, 0) }} 分</span>
+                    <div v-else class="radar-stock-chip-stack">
+                      <span class="meta-chip">{{ formatNumber(item.score, 0) }} 分</span>
+                      <span v-if="item.healthScore" class="meta-chip" :class="`is-${getHealthTone(item)}`">體檢 {{ item.healthScore }}</span>
+                    </div>
                   </div>
                 </div>
 
                 <p class="radar-stock-note">{{ item.note }}</p>
 
+                <div v-if="item.topWarningTitle" class="entry-warning-chip-row">
+                  <span class="status-badge" :class="`is-${getWarningTone(item)}`">{{ item.topWarningTitle }}</span>
+                  <span class="muted">看到這個標記就先確認是不是已經追太快。</span>
+                </div>
+
                 <div class="radar-stock-metrics">
                   <div v-for="metric in getStockMetrics(section.key, item)" :key="`${section.key}-${item.code}-${metric.label}`">
                     <span>{{ metric.label }}</span>
                     <strong>{{ metric.value }}</strong>
+                  </div>
+                  <div>
+                    <span>體檢等級</span>
+                    <strong>{{ item.healthGrade ?? '-' }}</strong>
                   </div>
                 </div>
 

@@ -174,6 +174,18 @@ function getItemTone(item) {
   return 'info';
 }
 
+function getHealthTone(item) {
+  if ((item?.healthScore ?? 0) >= 75) return 'up';
+  if ((item?.healthScore ?? 0) <= 45) return 'down';
+  return 'normal';
+}
+
+function getWarningTone(item) {
+  if (item?.topWarningTone === 'risk') return 'risk';
+  if (item?.topWarningTone === 'warning') return 'warning';
+  return 'info';
+}
+
 function getSummaryLine(item) {
   const parts = [
     item?.themeTitle ? `題材 ${item.themeTitle}` : null,
@@ -261,7 +273,12 @@ function getSummaryLine(item) {
                   <div>
                     <div class="entry-stock-title-row">
                       <strong>{{ item.code }} {{ item.name }}</strong>
-                      <span class="meta-chip">{{ item.label }}</span>
+                      <div class="entry-stock-chip-row">
+                        <span class="meta-chip">{{ item.label }}</span>
+                        <span v-if="item.healthScore" class="meta-chip" :class="`is-${getHealthTone(item)}`">
+                          體檢 {{ item.healthScore }}
+                        </span>
+                      </div>
                     </div>
                     <p class="muted">{{ getSummaryLine(item) || '台股個股' }}</p>
                   </div>
@@ -274,6 +291,13 @@ function getSummaryLine(item) {
                 </div>
 
                 <p class="entry-stock-note">{{ item.note }}</p>
+
+                <div v-if="item.topWarningTitle" class="entry-warning-chip-row">
+                  <span class="status-badge" :class="`is-${getWarningTone(item)}`">
+                    {{ item.topWarningTitle }}
+                  </span>
+                  <span class="muted">先確認不是追在短線偏熱的位置。</span>
+                </div>
 
                 <div class="entry-stock-metric-grid">
                   <div class="entry-stock-metric">
@@ -297,6 +321,10 @@ function getSummaryLine(item) {
                   <div class="entry-stock-metric">
                     <span>外資目標價</span>
                     <strong>{{ formatTargetPrice(item) }}</strong>
+                  </div>
+                  <div class="entry-stock-metric">
+                    <span>體檢等級</span>
+                    <strong>{{ item.healthGrade ?? '-' }}</strong>
                   </div>
                 </div>
 

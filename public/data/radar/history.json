@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-20T08:50:01.380Z",
+  "generatedAt": "2026-04-20T09:20:23.160Z",
   "marketDate": "2026-04-20",
   "horizons": [
     3,
@@ -213,44 +213,73 @@
     },
     {
       "marketDate": "2026-04-20",
-      "generatedAt": "2026-04-20T08:50:01.380Z",
-      "stable": [],
+      "generatedAt": "2026-04-20T09:20:23.160Z",
+      "stable": [
+        {
+          "code": "6442",
+          "name": "光聖",
+          "label": "偏多焦點",
+          "rating": 4,
+          "detail": "MACD 翻正｜20 日 +22.80%｜五日籌碼 -466 張",
+          "entryClose": 2370,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "3005",
+          "name": "神基",
+          "label": "偏多焦點",
+          "rating": 2,
+          "detail": "MACD 翻正｜20 日 -23.57%｜五日籌碼 -2,720 張",
+          "entryClose": 100.5,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
       "aggressive": [
+        {
+          "code": "1711",
+          "name": "永光",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +9.91%｜量能比 5 日 17%｜距 20 日高 0%",
+          "entryClose": 52.7,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "6217",
+          "name": "中國探針",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +9.84%｜量能比 5 日 22%｜距 20 日高 0%",
+          "entryClose": 268,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
         {
           "code": "4991",
           "name": "GCS HOLDINGS INC.",
           "label": "量縮價揚",
           "rating": 4,
-          "detail": "單日 +10.00%｜量能比 5 日 33%｜距 20 日高 0%",
-          "entryClose": null,
-          "marketDate": "2026-04-20",
-          "horizons": {
-            "3": null,
-            "5": null,
-            "10": null
-          }
-        },
-        {
-          "code": "8021",
-          "name": "尖點",
-          "label": "量縮價揚",
-          "rating": 4,
-          "detail": "單日 +10.00%｜量能比 5 日 35%｜距 20 日高 0%",
-          "entryClose": null,
-          "marketDate": "2026-04-20",
-          "horizons": {
-            "3": null,
-            "5": null,
-            "10": null
-          }
-        },
-        {
-          "code": "4979",
-          "name": "華星光",
-          "label": "量縮價揚",
-          "rating": 4,
-          "detail": "單日 +9.90%｜量能比 5 日 29%｜距 20 日高 0%",
-          "entryClose": null,
+          "detail": "單日 +9.70%｜量能比 5 日 29%｜距 20 日高 0.1%",
+          "entryClose": 724,
           "marketDate": "2026-04-20",
           "horizons": {
             "3": null,
@@ -262,9 +291,9 @@
           "code": "2412",
           "name": "中華電",
           "label": "盤整待發",
-          "rating": 4,
-          "detail": "30 日區間 3.4%｜離前高 0%｜RSI 64.1",
-          "entryClose": null,
+          "rating": 3,
+          "detail": "30 日區間 3.8%｜離前高 0.7%｜RSI 60.6",
+          "entryClose": 137,
           "marketDate": "2026-04-20",
           "horizons": {
             "3": null,
@@ -273,12 +302,12 @@
           }
         },
         {
-          "code": "2845",
-          "name": "遠東銀",
+          "code": "1341",
+          "name": "富林-KY",
           "label": "盤整待發",
           "rating": 3,
-          "detail": "30 日區間 4.5%｜離前高 0.4%｜RSI 62",
-          "entryClose": null,
+          "detail": "30 日區間 8%｜離前高 0.8%｜RSI 59.1",
+          "entryClose": 60.5,
           "marketDate": "2026-04-20",
           "horizons": {
             "3": null,
@@ -291,8 +320,8 @@
           "name": "華票",
           "label": "盤整待發",
           "rating": 3,
-          "detail": "30 日區間 4.8%｜離前高 0.9%｜RSI 61.8",
-          "entryClose": null,
+          "detail": "30 日區間 4.8%｜離前高 1.2%｜RSI 59.1",
+          "entryClose": 17.15,
           "marketDate": "2026-04-20",
           "horizons": {
             "3": null,
@@ -303,7 +332,7 @@
       ],
       "summary": {
         "stable": {
-          "count": 0,
+          "count": 2,
           "horizons": {
             "3": {
               "sampleCount": 0,

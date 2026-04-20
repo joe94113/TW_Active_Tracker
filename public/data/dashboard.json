@@ -1,6 +1,6 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-20T08:50:01.380Z",
+  "generatedAt": "2026-04-20T09:20:23.160Z",
   "市場總覽": {
     "資料日期": "2026-04-20",
     "盤後資料日期": "2026-04-20",
@@ -44,16 +44,16 @@
       "加權指數": 36958.8,
       "漲跌點數": 154.4600000000064,
       "漲跌幅": 0.4196787661455318,
-      "成交量": 6556753755,
-      "成交值": 859841000649,
-      "成交筆數": 4561586
+      "成交量": 6570707755,
+      "成交值": 871067189829,
+      "成交筆數": 4561627
     },
     "技術面資料": {
       "code": "^TWII",
       "name": "加權指數",
       "kind": "index",
       "priceDate": "2026-04-20",
-      "generatedAt": "2026-04-20T08:50:04.542Z",
+      "generatedAt": "2026-04-20T09:20:25.041Z",
       "indicatorSettings": {
         "maFastPeriod": 5,
         "maShortPeriod": 10,
@@ -4371,18 +4371,24 @@
       {
         "代號": "2330",
         "名稱": "台積電",
+        "開盤價": 2030,
+        "最高價": 2055,
+        "最低價": 2025,
         "收盤價": 2025,
         "漲跌值": -5,
         "漲跌幅": -0.24630541871921183,
         "成交量": 25068000,
-        "成交值": 55468097245,
-        "成交筆數": 98997,
+        "成交值": 62379639275,
+        "成交筆數": 99020,
         "即時更新時間": "2026-04-20T13:30:00+08:00",
         "即時來源": "TWSE 即時行情"
       },
       {
         "代號": "2303",
         "名稱": "聯電",
+        "開盤價": 78,
+        "最高價": 80.2,
+        "最低價": 76.3,
         "收盤價": 76.9,
         "漲跌值": 3.9000000000000057,
         "漲跌幅": 5.342465753424666,
@@ -4393,8 +4399,26 @@
         "即時來源": "TWSE 即時行情"
       },
       {
+        "代號": "2308",
+        "名稱": "台達電",
+        "開盤價": 1860,
+        "最高價": 1980,
+        "最低價": 1860,
+        "收盤價": 1900,
+        "漲跌值": 60,
+        "漲跌幅": 3.260869565217391,
+        "成交量": 9664000,
+        "成交值": 23348579790,
+        "成交筆數": 33366,
+        "即時更新時間": "2026-04-20T13:30:00+08:00",
+        "即時來源": "TWSE 即時行情"
+      },
+      {
         "代號": "2454",
         "名稱": "聯發科",
+        "開盤價": 1960,
+        "最高價": 1965,
+        "最低價": 1895,
         "收盤價": 1900,
         "漲跌值": -25,
         "漲跌幅": -1.2987012987012987,
@@ -4407,6 +4431,9 @@
       {
         "代號": "2337",
         "名稱": "旺宏",
+        "開盤價": 120,
+        "最高價": 125,
+        "最低價": 118,
         "收盤價": 120.5,
         "漲跌值": -10.5,
         "漲跌幅": -8.015267175572518,
@@ -4417,20 +4444,11 @@
         "即時來源": "TWSE 即時行情"
       },
       {
-        "代號": "2308",
-        "名稱": "台達電",
-        "收盤價": 1900,
-        "漲跌值": 60,
-        "漲跌幅": 3.260869565217391,
-        "成交量": 9664000,
-        "成交值": 19912230690,
-        "成交筆數": 33364,
-        "即時更新時間": "2026-04-20T13:30:00+08:00",
-        "即時來源": "TWSE 即時行情"
-      },
-      {
         "代號": "1802",
         "名稱": "台玻",
+        "開盤價": 75.5,
+        "最高價": 76,
+        "最低價": 70.4,
         "收盤價": 70.9,
         "漲跌值": -3.299999999999997,
         "漲跌幅": -4.4474393530997265,
@@ -4443,6 +4461,9 @@
       {
         "代號": "2313",
         "名稱": "華通",
+        "開盤價": 261.5,
+        "最高價": 265,
+        "最低價": 250.5,
         "收盤價": 250.5,
         "漲跌值": -11,
         "漲跌幅": -4.2065009560229445,
@@ -4455,18 +4476,24 @@
       {
         "代號": "2360",
         "名稱": "致茂",
+        "開盤價": 2065,
+        "最高價": 2155,
+        "最低價": 2030,
         "收盤價": 2050,
         "漲跌值": -205,
         "漲跌幅": -9.090909090909092,
         "成交量": 7979000,
-        "成交值": 17819059970,
-        "成交筆數": 30258,
+        "成交值": 17839866470,
+        "成交筆數": 30259,
         "即時更新時間": "2026-04-20T13:30:00+08:00",
         "即時來源": "TWSE 即時行情"
       },
       {
         "代號": "6213",
         "名稱": "聯茂",
+        "開盤價": 273,
+        "最高價": 292,
+        "最低價": 263.5,
         "收盤價": 282,
         "漲跌值": 11.5,
         "漲跌幅": 4.251386321626617,
@@ -4479,6 +4506,9 @@
       {
         "代號": "3450",
         "名稱": "聯鈞",
+        "開盤價": 375,
+        "最高價": 397,
+        "最低價": 364,
         "收盤價": 383,
         "漲跌值": 17,
         "漲跌幅": 4.644808743169399,
@@ -4493,6 +4523,9 @@
       {
         "代號": "2464",
         "名稱": "盟立",
+        "開盤價": 81.5,
+        "最高價": 86.9,
+        "最低價": 81.3,
         "收盤價": 86.9,
         "漲跌值": 7.900000000000006,
         "漲跌幅": 10.000000000000007,
@@ -4505,6 +4538,9 @@
       {
         "代號": "4722",
         "名稱": "國精化",
+        "開盤價": 183,
+        "最高價": 198,
+        "最低價": 183,
         "收盤價": 198,
         "漲跌值": 18,
         "漲跌幅": 10,
@@ -4517,6 +4553,9 @@
       {
         "代號": "6789",
         "名稱": "采鈺",
+        "開盤價": 460,
+        "最高價": 473,
+        "最低價": 460,
         "收盤價": 473,
         "漲跌值": 43,
         "漲跌幅": 10,
@@ -4529,6 +4568,9 @@
       {
         "代號": "3443",
         "名稱": "創意",
+        "開盤價": 3495,
+        "最高價": 3580,
+        "最低價": 3450,
         "收盤價": 3580,
         "漲跌值": 325,
         "漲跌幅": 9.984639016897082,
@@ -4541,6 +4583,9 @@
       {
         "代號": "5292",
         "名稱": "華懋",
+        "開盤價": 235.5,
+        "最高價": 253.5,
+        "最低價": 235.5,
         "收盤價": 253.5,
         "漲跌值": 23,
         "漲跌幅": 9.97830802603037,
@@ -4553,6 +4598,9 @@
       {
         "代號": "6442",
         "名稱": "光聖",
+        "開盤價": 2210,
+        "最高價": 2370,
+        "最低價": 2190,
         "收盤價": 2370,
         "漲跌值": 215,
         "漲跌幅": 9.976798143851507,
@@ -4565,6 +4613,9 @@
       {
         "代號": "6715",
         "名稱": "嘉基",
+        "開盤價": 433,
+        "最高價": 468.5,
+        "最低價": 432,
         "收盤價": 468.5,
         "漲跌值": 42.5,
         "漲跌幅": 9.976525821596244,
@@ -4577,6 +4628,9 @@
       {
         "代號": "6937",
         "名稱": "天虹",
+        "開盤價": 306.5,
+        "最高價": 336.5,
+        "最低價": 306.5,
         "收盤價": 336.5,
         "漲跌值": 30.5,
         "漲跌幅": 9.967320261437909,
@@ -4589,6 +4643,9 @@
       {
         "代號": "3653",
         "名稱": "健策",
+        "開盤價": 4750,
+        "最高價": 5020,
+        "最低價": 4700,
         "收盤價": 5020,
         "漲跌值": 455,
         "漲跌幅": 9.967141292442497,
@@ -4601,6 +4658,9 @@
       {
         "代號": "3189",
         "名稱": "景碩",
+        "開盤價": 397,
+        "最高價": 430.5,
+        "最低價": 396,
         "收盤價": 430.5,
         "漲跌值": 39,
         "漲跌幅": 9.961685823754788,
@@ -4648,9 +4708,9 @@
         "日期": "2026-04-20",
         "指數": 36958.8,
         "漲跌點數": 154.46,
-        "成交量": 6556753755,
-        "成交值": 859841000649,
-        "成交筆數": 4561586
+        "成交量": 6570707755,
+        "成交值": 871067189829,
+        "成交筆數": 4561627
       }
     ],
     "觀察摘要": [
@@ -5469,7 +5529,7 @@
           "name": "小型臺指期貨",
           "kind": "futures",
           "priceDate": "2026-04-20",
-          "generatedAt": "2026-04-20T08:50:15.663Z",
+          "generatedAt": "2026-04-20T09:20:42.586Z",
           "indicatorSettings": {
             "maFastPeriod": 5,
             "maShortPeriod": 10,
@@ -9139,7 +9199,7 @@
           "name": "微型臺指期貨",
           "kind": "futures",
           "priceDate": "2026-04-20",
-          "generatedAt": "2026-04-20T08:50:15.581Z",
+          "generatedAt": "2026-04-20T09:20:41.696Z",
           "indicatorSettings": {
             "maFastPeriod": 5,
             "maShortPeriod": 10,
@@ -12847,7 +12907,7 @@
       {
         "code": "00994A",
         "name": "主動第一金台股優",
-        "disclosureDate": "2026-04-17"
+        "disclosureDate": "2026-04-20"
       },
       {
         "code": "00995A",
@@ -12888,7 +12948,7 @@
     "待串接ETF": []
   },
   "題材雷達": {
-    "generatedAt": "2026-04-20T08:50:01.380Z",
+    "generatedAt": "2026-04-20T09:20:23.160Z",
     "marketDate": "2026-04-20",
     "recentNewsDays": 7,
     "sourceName": "Google News RSS（近 7 天）+ 台股盤面摘要",
@@ -12896,13 +12956,13 @@
       {
         "slug": "ai-server",
         "title": "AI 伺服器 / ASIC",
-        "score": 258,
+        "score": 500,
         "tone": "up",
         "newsCount": 43,
-        "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
+        "hotCount": 2,
+        "institutionalCount": 5,
+        "etfCount": 5,
+        "observation": "熱門股與法人同步轉進，短線資金正在快速聚焦這個題材。",
         "keywords": [
           {
             "keyword": "AI",
@@ -12957,21 +13017,286 @@
             "publishedAt": "2026-04-16T06:14:46.000Z"
           }
         ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
+        "leaderStocks": [
+          {
+            "code": "3443",
+            "name": "創意",
+            "score": 177.4021929127602,
+            "isCoreStock": true,
+            "close": 3580,
+            "changePercent": 9.984639016897082,
+            "return20": 37.16475095785441,
+            "turnover": null,
+            "foreign5Day": -20429,
+            "investmentTrust5Day": 653903,
+            "total5Day": 649303,
+            "activeEtfCount": 7,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 43,
+            "foreignTargetPricePremium": -98.79888268156425,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 4 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "6669",
+            "name": "緯穎",
+            "score": 126.93707692227149,
+            "isCoreStock": true,
+            "close": 3980,
+            "changePercent": 4.599211563731932,
+            "return20": 5.710491367861885,
+            "turnover": null,
+            "foreign5Day": 397436,
+            "investmentTrust5Day": 725632,
+            "total5Day": 1007022,
+            "activeEtfCount": 8,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "8 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "2382",
+            "name": "廣達",
+            "score": 114.92354075827079,
+            "isCoreStock": true,
+            "close": 329,
+            "changePercent": 1.8575851393188854,
+            "return20": 14.834205933682373,
+            "turnover": null,
+            "foreign5Day": 18116362,
+            "investmentTrust5Day": -4401680,
+            "total5Day": 13685017,
+            "activeEtfCount": 7,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 23.21,
+            "foreignTargetPricePremium": -92.94528875379939,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "7 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "3231",
+            "name": "緯創",
+            "score": 105.96767937944408,
+            "isCoreStock": true,
+            "close": 140.5,
+            "changePercent": 2.93040293040293,
+            "return20": 10.196078431372548,
+            "turnover": null,
+            "foreign5Day": 49482456,
+            "investmentTrust5Day": -2842535,
+            "total5Day": 42291499,
+            "activeEtfCount": 2,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 10 名",
+              "外資偏多"
+            ],
+            "catchUpScore": 78.20297349709114
+          },
+          {
+            "code": "3661",
+            "name": "世芯-KY",
+            "score": 108.70821148052269,
+            "isCoreStock": true,
+            "close": 3625,
+            "changePercent": 3.1294452347083923,
+            "return20": 12.577639751552795,
+            "turnover": null,
+            "foreign5Day": 3401500,
+            "investmentTrust5Day": 717308,
+            "total5Day": 4185354,
+            "activeEtfCount": 3,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "3 檔主動式 ETF 持有"
+            ],
+            "catchUpScore": 75.72839781592643
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "3443",
+            "name": "創意",
+            "score": 177.4021929127602,
+            "isCoreStock": true,
+            "close": 3580,
+            "changePercent": 9.984639016897082,
+            "return20": 37.16475095785441,
+            "turnover": null,
+            "foreign5Day": -20429,
+            "investmentTrust5Day": 653903,
+            "total5Day": 649303,
+            "activeEtfCount": 7,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 43,
+            "foreignTargetPricePremium": -98.79888268156425,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 4 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "6669",
+            "name": "緯穎",
+            "score": 126.93707692227149,
+            "isCoreStock": true,
+            "close": 3980,
+            "changePercent": 4.599211563731932,
+            "return20": 5.710491367861885,
+            "turnover": null,
+            "foreign5Day": 397436,
+            "investmentTrust5Day": 725632,
+            "total5Day": 1007022,
+            "activeEtfCount": 8,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "8 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "2382",
+            "name": "廣達",
+            "score": 114.92354075827079,
+            "isCoreStock": true,
+            "close": 329,
+            "changePercent": 1.8575851393188854,
+            "return20": 14.834205933682373,
+            "turnover": null,
+            "foreign5Day": 18116362,
+            "investmentTrust5Day": -4401680,
+            "total5Day": 13685017,
+            "activeEtfCount": 7,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 23.21,
+            "foreignTargetPricePremium": -92.94528875379939,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "7 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3661",
+            "name": "世芯-KY",
+            "score": 108.70821148052269,
+            "isCoreStock": true,
+            "close": 3625,
+            "changePercent": 3.1294452347083923,
+            "return20": 12.577639751552795,
+            "turnover": null,
+            "foreign5Day": 3401500,
+            "investmentTrust5Day": 717308,
+            "total5Day": 4185354,
+            "activeEtfCount": 3,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "3 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3231",
+            "name": "緯創",
+            "score": 105.96767937944408,
+            "isCoreStock": true,
+            "close": 140.5,
+            "changePercent": 2.93040293040293,
+            "return20": 10.196078431372548,
+            "turnover": null,
+            "foreign5Day": 49482456,
+            "investmentTrust5Day": -2842535,
+            "total5Day": 42291499,
+            "activeEtfCount": 2,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 10 名",
+              "外資偏多"
+            ]
+          }
+        ],
         "sourceUrl": "https://news.google.com/search?q=(%22AI%20%E4%BC%BA%E6%9C%8D%E5%99%A8%22%20OR%20ASIC%20OR%20GB200%20OR%20Rubin%20OR%20TPU%20OR%20Trainium)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
       },
       {
         "slug": "cpo",
         "title": "CPO / 矽光子",
-        "score": 234,
+        "score": 432,
         "tone": "up",
         "newsCount": 39,
-        "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
+        "hotCount": 2,
+        "institutionalCount": 1,
+        "etfCount": 5,
+        "observation": "人氣股明顯集中，盤面討論度與成交熱度正在升高。",
         "keywords": [
           {
             "keyword": "漲停",
@@ -13026,21 +13351,255 @@
             "publishedAt": "2026-04-18T00:29:00.000Z"
           }
         ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
+        "leaderStocks": [
+          {
+            "code": "4979",
+            "name": "華星光",
+            "score": 196.57228528592847,
+            "isCoreStock": true,
+            "close": 708,
+            "changePercent": 9.937888198757763,
+            "return20": 80.84291187739464,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 3,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "3 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6442",
+            "name": "光聖",
+            "score": 166.44852914658043,
+            "isCoreStock": true,
+            "close": 2370,
+            "changePercent": 9.976798143851507,
+            "return20": 22.797927461139896,
+            "turnover": null,
+            "foreign5Day": 383464,
+            "investmentTrust5Day": -915703,
+            "total5Day": -465606,
+            "activeEtfCount": 7,
+            "topSignalTitle": "MACD 翻正",
+            "topSignalTone": "up",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 6 名",
+              "外資偏多"
+            ]
+          },
+          {
+            "code": "3443",
+            "name": "創意",
+            "score": 159.4021929127602,
+            "isCoreStock": true,
+            "close": 3580,
+            "changePercent": 9.984639016897082,
+            "return20": 37.16475095785441,
+            "turnover": null,
+            "foreign5Day": -20429,
+            "investmentTrust5Day": 653903,
+            "total5Day": 649303,
+            "activeEtfCount": 7,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 43,
+            "foreignTargetPricePremium": -98.79888268156425,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 0,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 4 名",
+              "投信偏多"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "3363",
+            "name": "上詮",
+            "score": 138.81343875097414,
+            "isCoreStock": true,
+            "close": 988,
+            "changePercent": 9.899888765294772,
+            "return20": 47.90419161676647,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "2 檔主動式 ETF 持有"
+            ],
+            "catchUpScore": 64.1427800683394
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "4979",
+            "name": "華星光",
+            "score": 196.57228528592847,
+            "isCoreStock": true,
+            "close": 708,
+            "changePercent": 9.937888198757763,
+            "return20": 80.84291187739464,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 3,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "3 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6442",
+            "name": "光聖",
+            "score": 166.44852914658043,
+            "isCoreStock": true,
+            "close": 2370,
+            "changePercent": 9.976798143851507,
+            "return20": 22.797927461139896,
+            "turnover": null,
+            "foreign5Day": 383464,
+            "investmentTrust5Day": -915703,
+            "total5Day": -465606,
+            "activeEtfCount": 7,
+            "topSignalTitle": "MACD 翻正",
+            "topSignalTone": "up",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 6 名",
+              "外資偏多"
+            ]
+          },
+          {
+            "code": "3443",
+            "name": "創意",
+            "score": 159.4021929127602,
+            "isCoreStock": true,
+            "close": 3580,
+            "changePercent": 9.984639016897082,
+            "return20": 37.16475095785441,
+            "turnover": null,
+            "foreign5Day": -20429,
+            "investmentTrust5Day": 653903,
+            "total5Day": 649303,
+            "activeEtfCount": 7,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 43,
+            "foreignTargetPricePremium": -98.79888268156425,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 0,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 4 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "6451",
+            "name": "訊芯-KY",
+            "score": 138.94547175305766,
+            "isCoreStock": true,
+            "close": 507,
+            "changePercent": 0.39603960396039606,
+            "return20": 86.39705882352942,
+            "turnover": null,
+            "foreign5Day": -143812,
+            "investmentTrust5Day": 24588,
+            "total5Day": -155566,
+            "activeEtfCount": 1,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "投信偏多",
+              "1 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3363",
+            "name": "上詮",
+            "score": 138.81343875097414,
+            "isCoreStock": true,
+            "close": 988,
+            "changePercent": 9.899888765294772,
+            "return20": 47.90419161676647,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "2 檔主動式 ETF 持有"
+            ]
+          }
+        ],
         "sourceUrl": "https://news.google.com/search?q=(CPO%20OR%20%E7%9F%BD%E5%85%89%E5%AD%90%20OR%20%E5%85%B1%E5%90%8C%E5%B0%81%E8%A3%9D%E5%85%89%E5%AD%B8%20OR%20%E5%85%89%E9%80%9A%E8%A8%8A%20OR%20%E5%85%89%E6%A8%A1%E7%B5%84)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
       },
       {
         "slug": "memory",
         "title": "記憶體 / DDR5",
-        "score": 192,
+        "score": 383,
         "tone": "up",
         "newsCount": 32,
-        "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
+        "hotCount": 3,
+        "institutionalCount": 1,
+        "etfCount": 5,
+        "observation": "人氣股明顯集中，盤面討論度與成交熱度正在升高。",
         "keywords": [
           {
             "keyword": "AI",
@@ -13095,21 +13654,255 @@
             "publishedAt": "2026-04-20T03:48:40.000Z"
           }
         ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
+        "leaderStocks": [
+          {
+            "code": "2337",
+            "name": "旺宏",
+            "score": 135,
+            "isCoreStock": true,
+            "close": 120.5,
+            "changePercent": -8.015267175572518,
+            "return20": -23.248407643312103,
+            "turnover": null,
+            "foreign5Day": -26557314,
+            "investmentTrust5Day": -9828000,
+            "total5Day": -44569146,
+            "activeEtfCount": 2,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 5 名",
+              "成交值第 5 名"
+            ]
+          },
+          {
+            "code": "2344",
+            "name": "華邦電",
+            "score": 116,
+            "isCoreStock": true,
+            "close": 85.7,
+            "changePercent": -2.3918029370908616,
+            "return20": -29.754098360655735,
+            "turnover": null,
+            "foreign5Day": 42282191,
+            "investmentTrust5Day": -47400636,
+            "total5Day": -9741912,
+            "activeEtfCount": 6,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 123,
+            "foreignTargetPricePremium": 43.52392065344223,
+            "foreignTargetBroker": "券商",
+            "foreignTargetCount": 1,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 6 名",
+              "外資偏多"
+            ]
+          },
+          {
+            "code": "2408",
+            "name": "南亞科",
+            "score": 94,
+            "isCoreStock": true,
+            "close": 207,
+            "changePercent": -1.4285714285714286,
+            "return20": -20.384615384615383,
+            "turnover": null,
+            "foreign5Day": -26344505,
+            "investmentTrust5Day": -8410490,
+            "total5Day": -41349407,
+            "activeEtfCount": 3,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "3 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "8299",
+            "name": "群聯電子",
+            "score": 74.42038216560509,
+            "isCoreStock": true,
+            "close": 1635,
+            "changePercent": 4.140127388535031,
+            "return20": -16.581632653061224,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 4,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "4 檔主動式 ETF 持有"
+            ],
+            "catchUpScore": 74.42038216560509
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "2337",
+            "name": "旺宏",
+            "score": 135,
+            "isCoreStock": true,
+            "close": 120.5,
+            "changePercent": -8.015267175572518,
+            "return20": -23.248407643312103,
+            "turnover": null,
+            "foreign5Day": -26557314,
+            "investmentTrust5Day": -9828000,
+            "total5Day": -44569146,
+            "activeEtfCount": 2,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 5 名",
+              "成交值第 5 名"
+            ]
+          },
+          {
+            "code": "2344",
+            "name": "華邦電",
+            "score": 116,
+            "isCoreStock": true,
+            "close": 85.7,
+            "changePercent": -2.3918029370908616,
+            "return20": -29.754098360655735,
+            "turnover": null,
+            "foreign5Day": 42282191,
+            "investmentTrust5Day": -47400636,
+            "total5Day": -9741912,
+            "activeEtfCount": 6,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 123,
+            "foreignTargetPricePremium": 43.52392065344223,
+            "foreignTargetBroker": "券商",
+            "foreignTargetCount": 1,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 6 名",
+              "外資偏多"
+            ]
+          },
+          {
+            "code": "2408",
+            "name": "南亞科",
+            "score": 94,
+            "isCoreStock": true,
+            "close": 207,
+            "changePercent": -1.4285714285714286,
+            "return20": -20.384615384615383,
+            "turnover": null,
+            "foreign5Day": -26344505,
+            "investmentTrust5Day": -8410490,
+            "total5Day": -41349407,
+            "activeEtfCount": 3,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "3 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "8299",
+            "name": "群聯電子",
+            "score": 74.42038216560509,
+            "isCoreStock": true,
+            "close": 1635,
+            "changePercent": 4.140127388535031,
+            "return20": -16.581632653061224,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 4,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "4 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "2303",
+            "name": "聯電",
+            "score": 174.9319953871212,
+            "isCoreStock": false,
+            "close": 76.9,
+            "changePercent": 5.342465753424666,
+            "return20": 31.005109029830223,
+            "turnover": null,
+            "foreign5Day": 171647063,
+            "investmentTrust5Day": 29583905,
+            "total5Day": 210982402,
+            "activeEtfCount": 5,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "熱門股第 1 名",
+              "成交值第 2 名",
+              "外資投信同步偏多"
+            ]
+          }
+        ],
         "sourceUrl": "https://news.google.com/search?q=(%E8%A8%98%E6%86%B6%E9%AB%94%20OR%20DDR5%20OR%20NAND%20OR%20SSD%20OR%20HBM)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
       },
       {
         "slug": "pcb",
         "title": "PCB / CCL",
-        "score": 156,
+        "score": 352,
         "tone": "up",
         "newsCount": 26,
         "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
+        "institutionalCount": 3,
+        "etfCount": 5,
+        "observation": "法人買盤開始連續布局，適合優先追蹤族群中的領頭股。",
         "keywords": [
           {
             "keyword": "漲停",
@@ -13164,228 +13957,258 @@
             "publishedAt": "2026-04-19T13:00:00.000Z"
           }
         ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
+        "leaderStocks": [
+          {
+            "code": "2383",
+            "name": "台光電",
+            "score": 201.84356219267892,
+            "isCoreStock": true,
+            "close": 3850,
+            "changePercent": 1.3157894736842104,
+            "return20": 33.21799307958477,
+            "turnover": null,
+            "foreign5Day": 479168,
+            "investmentTrust5Day": -568130,
+            "total5Day": 45354,
+            "activeEtfCount": 16,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 74.68,
+            "foreignTargetPricePremium": -98.06025974025975,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 5,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "16 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6213",
+            "name": "聯茂",
+            "score": 188.27891144012736,
+            "isCoreStock": true,
+            "close": 282,
+            "changePercent": 4.251386321626617,
+            "return20": 86.13861386138613,
+            "turnover": null,
+            "foreign5Day": -23904903,
+            "investmentTrust5Day": 689000,
+            "total5Day": -24594369,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "成交值第 9 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "8046",
+            "name": "南電",
+            "score": 149.5347889030047,
+            "isCoreStock": true,
+            "close": 796,
+            "changePercent": 9.94475138121547,
+            "return20": 41.889483065953655,
+            "turnover": null,
+            "foreign5Day": 336609,
+            "investmentTrust5Day": 1218104,
+            "total5Day": 1566885,
+            "activeEtfCount": 6,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 0,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "6 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "2368",
+            "name": "金像電",
+            "score": 145.29437916798986,
+            "isCoreStock": true,
+            "close": 1210,
+            "changePercent": 2.9787234042553195,
+            "return20": 20.398009950248756,
+            "turnover": null,
+            "foreign5Day": 791905,
+            "investmentTrust5Day": 1429213,
+            "total5Day": 2031770,
+            "activeEtfCount": 12,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "12 檔主動式 ETF 持有"
+            ],
+            "catchUpScore": 143.75706573515401
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "2383",
+            "name": "台光電",
+            "score": 201.84356219267892,
+            "isCoreStock": true,
+            "close": 3850,
+            "changePercent": 1.3157894736842104,
+            "return20": 33.21799307958477,
+            "turnover": null,
+            "foreign5Day": 479168,
+            "investmentTrust5Day": -568130,
+            "total5Day": 45354,
+            "activeEtfCount": 16,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 74.68,
+            "foreignTargetPricePremium": -98.06025974025975,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 5,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "16 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6213",
+            "name": "聯茂",
+            "score": 188.27891144012736,
+            "isCoreStock": true,
+            "close": 282,
+            "changePercent": 4.251386321626617,
+            "return20": 86.13861386138613,
+            "turnover": null,
+            "foreign5Day": -23904903,
+            "investmentTrust5Day": 689000,
+            "total5Day": -24594369,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "成交值第 9 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "8046",
+            "name": "南電",
+            "score": 149.5347889030047,
+            "isCoreStock": true,
+            "close": 796,
+            "changePercent": 9.94475138121547,
+            "return20": 41.889483065953655,
+            "turnover": null,
+            "foreign5Day": 336609,
+            "investmentTrust5Day": 1218104,
+            "total5Day": 1566885,
+            "activeEtfCount": 6,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 0,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "6 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "2368",
+            "name": "金像電",
+            "score": 145.29437916798986,
+            "isCoreStock": true,
+            "close": 1210,
+            "changePercent": 2.9787234042553195,
+            "return20": 20.398009950248756,
+            "turnover": null,
+            "foreign5Day": 791905,
+            "investmentTrust5Day": 1429213,
+            "total5Day": 2031770,
+            "activeEtfCount": 12,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "12 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6274",
+            "name": "台燿科技",
+            "score": 135.67260853195864,
+            "isCoreStock": true,
+            "close": 950,
+            "changePercent": 0.42283298097251587,
+            "return20": 62.671232876712324,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 8,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 900,
+            "foreignTargetPricePremium": -5.263157894736842,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "8 檔主動式 ETF 持有"
+            ]
+          }
+        ],
         "sourceUrl": "https://news.google.com/search?q=(PCB%20OR%20%E5%8D%B0%E5%88%B7%E9%9B%BB%E8%B7%AF%E6%9D%BF%20OR%20CCL%20OR%20%E9%8A%85%E7%AE%94%E5%9F%BA%E6%9D%BF%20OR%20HDI%20OR%20%E8%BB%9F%E6%9D%BF)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
-      },
-      {
-        "slug": "cowos",
-        "title": "CoWoS / 先進封裝",
-        "score": 138,
-        "tone": "up",
-        "newsCount": 23,
-        "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
-        "keywords": [
-          {
-            "keyword": "AI",
-            "count": 49
-          },
-          {
-            "keyword": "漲停",
-            "count": 35
-          },
-          {
-            "keyword": "台積電",
-            "count": 22
-          },
-          {
-            "keyword": "外資",
-            "count": 18
-          },
-          {
-            "keyword": "半導體",
-            "count": 13
-          },
-          {
-            "keyword": "愛普",
-            "count": 12
-          },
-          {
-            "keyword": "券商分點進出",
-            "count": 9
-          },
-          {
-            "keyword": "買賣統計",
-            "count": 9
-          }
-        ],
-        "headlines": [
-          {
-            "title": "【產業焦點】先進封裝戰場升溫！CoWoS吃緊，4檔受益股搶先卡位 - CMoney投資網誌",
-            "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBka0FMalVyT1JVQVgyX3MtYlA1Z1Z5UkZGREhQdGw1X2NzVDNOVkdSRzRVbEJhbW5lelhMRVNxeEtqZDhta0RFeDl3Q3VrUjNsTzlhUTRfeWhBcXQ4dU1vR3pQTjJqa2VzdWs1cG53VkxCeWR6WWFRU1d0UDM5Zw?oc=5",
-            "source": "CMoney投資網誌",
-            "publishedAt": "2026-04-17T04:01:15.000Z"
-          },
-          {
-            "title": "CoPoS是什麼？概念股有哪些？台積電下一代先進封裝技術全解析 - 商周",
-            "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5ROG1tQ3ZKWEZvdFpJSEJyLVNVa1diNzhTU1o0YXM1eFliWWJyelN3QnZxSkF3eHNaUHNRM2ttSjNjOXpZbHVieExvbVA5T25Sckx1aURzY1dQWlNaM1RzWERvdG1UUQ?oc=5",
-            "source": "商周",
-            "publishedAt": "2026-04-16T10:17:55.000Z"
-          },
-          {
-            "title": "今日漲停跌停股｜綠能與先進封裝領航，太陽能三雄聯合再生、茂迪、元晶聯手亮燈0415｜豐雲學堂2026 年 04 月 - sinotrade.com.tw",
-            "link": "https://news.google.com/rss/articles/CBMilARBVV95cUxNS2dWNjQ5bGNhaERuempEZG5pZTRfU29UMmFySkJiN2xkNEc5TjNuWWxOWmZUUzlSNEdvQXk0ZEV5dHN5NDIxZnFrdkM5VlBvMlczOVdWSWtPWWVKQ0hfa1paZXR3XzZnTndiQkpjb204cEdNRWItU1hUeTlDX1JaaE1jU19wSDIzVzh6cngwRUp2ZlRnUUdaRnFkamVPcWhuMk5nUG9tRWhIdTZXbTRpUEZZVzZtTjhoMG5pVUpmUWNHbDUxOEVwU2hLS3NhSm5MZTI2RC1KdWtob1NWWXpWc3Jka2lzOGc3MlBwTVBHWVNzcjc5Z0F2dEpLUHFvLXpsWUZlR3h6ZzhxNnNpWEhHaktZbkJMeG14UVhyQjJmSTlvQnIzRXE4Rkd0UGVjaE9Pclo5Sk5iWVVzWFdBcW1xcW9TY094c1AwUHIxNnB0YU0wMFJWR1JPdGMzZFFMeTQxNV94ZzNsbDBvbHYtcWFoY3VtYzBEek5sY2h6WEpOajhHcy1wR3JaMnRhd3lFRV9RaHU0YlN4eGNrRXBSdWpiaWJhajYyc3BucjVJRFlXYWNnTnctVkN4N2R5TTRTcGFid3NCSDVXdGZnbGVMLWNPS08zM3h5SWlJTlF0SUZoaFdjby1WeUhLcTNGeHltOEhvZUtZNDgyUGNGS2xGdXVRVmJLMk5CSUxjVDhRRzlxaDl2WEdP?oc=5",
-            "source": "sinotrade.com.tw",
-            "publishedAt": "2026-04-15T21:21:28.000Z"
-          }
-        ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
-        "sourceUrl": "https://news.google.com/search?q=(CoWoS%20OR%20%E5%85%88%E9%80%B2%E5%B0%81%E8%A3%9D%20OR%20SoIC%20OR%20HBM)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
-      },
-      {
-        "slug": "cooling",
-        "title": "散熱 / 液冷",
-        "score": 132,
-        "tone": "up",
-        "newsCount": 22,
-        "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
-        "keywords": [
-          {
-            "keyword": "AI",
-            "count": 79
-          },
-          {
-            "keyword": "漲停",
-            "count": 25
-          },
-          {
-            "keyword": "伺服器",
-            "count": 23
-          },
-          {
-            "keyword": "外資",
-            "count": 10
-          },
-          {
-            "keyword": "獲利",
-            "count": 8
-          },
-          {
-            "keyword": "產業即時新聞",
-            "count": 7
-          },
-          {
-            "keyword": "投信",
-            "count": 6
-          },
-          {
-            "keyword": "法說會",
-            "count": 5
-          }
-        ],
-        "headlines": [
-          {
-            "title": "液冷元年引爆！台股創高雙引擎 健策飆破5,000元、台達電劍指2,000元 - 經濟日報",
-            "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBWVmRDejRCQWRDV2NJQzJxV1ROYVVRdFlZcGlwUmhvQnJaWkhobnplTmtSTGk0YmV5SFFvR3JDTGJheUl0NFpsWUI0YlI0NGFtS1l1TVVJdk96Z9IBX0FVX3lxTFBMZ3YyYU95cGxxazFsNDFCVGRYWDZLWjdkcTlHNXp2Y2M0OHF5Mjg0Nmk2dGFqZDJJVkZVYV9wbE1UcmVjbE9iejlQWkdtV191UG1vNzBzSEZWbzFHWEQ4?oc=5",
-            "source": "經濟日報",
-            "publishedAt": "2026-04-19T13:00:00.000Z"
-          },
-          {
-            "title": "2026液冷滲透率直衝76%！單櫃產值跳升4倍，散熱獲利主升段：奇鋐、雙鴻、晟銘電、台達電 - news.cnyes.com",
-            "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9veTB4djZxblM3V1pZb2gyNFJTRllpUXB1QUI3Q3FwUC1IWE83UDhxS3Y0djlrNGtmYUFHVjdLNTRjd19LenlkR2lLcU13Z2s?oc=5",
-            "source": "news.cnyes.com",
-            "publishedAt": "2026-04-18T13:30:06.000Z"
-          },
-          {
-            "title": "測試設備王 × 液冷快接頭霸主，致茂、富世達吃下Rubin世代訂單｜豐雲學堂 2026 年 04 月 - sinotrade.com.tw",
-            "link": "https://news.google.com/rss/articles/CBMipANBVV95cUxQdjlqSFc3WjROUllMUkpHNUpSY3NvTEJXRmdiNkJxc2xRU09UTjdYLXZJc1pobEZUQTNJTmNOdE5rRjZ6b3k4S2lEei1LcDFyRnU2ZG9zZHpIanF4SEFQcmVXV1d1enAxSFBoSG9fT2ktX3QwR1dBY05DNmlOa0xWM09ZdzJ0MjV5d3RGbG50enVuOEJDRkJWcGlBNW5FMUN4RWE0M01yN2xYclk1Y2dfbklTdFJwaXJPWnJ4Y185QjloR1FkNlMwSlJNWkRTc0lkcjJFdmJmcmxmY2VuVVBUVlNyZEMtQ3FvdzVhMlhPTkE1bmM2Mi1ac01oV1JPMFljaGxxTEowZnVIM2dGV0l2MGlyMUNldk0xUUhib1lvTi1kUGxZN2RhOVhXZkd5TEU4alFLMk5jbTdDd211ZXB0N2JsYU1fcW9XUUYxM1BBMDBNMkphMl9wc1RKUWpEb0JBZ2ZYYTloMmZ4NW9WM1ZHSnJUWlM1cFhGQ0V5NFR1QWQ2V21pS3Nia1BCSWxKeDFfNHU0eHhscnVEd1BSdTAtcXBkdGo?oc=5",
-            "source": "sinotrade.com.tw",
-            "publishedAt": "2026-04-17T03:55:14.000Z"
-          }
-        ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
-        "sourceUrl": "https://news.google.com/search?q=(%E6%95%A3%E7%86%B1%20OR%20%E6%B6%B2%E5%86%B7%20OR%20%E6%B0%B4%E5%86%B7%20OR%20%E7%86%B1%E6%A8%A1%E7%B5%84%20OR%20%E9%A2%A8%E6%89%87)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
-      },
-      {
-        "slug": "robotics",
-        "title": "機器人 / 自動化",
-        "score": 126,
-        "tone": "up",
-        "newsCount": 21,
-        "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
-        "keywords": [
-          {
-            "keyword": "漲停",
-            "count": 33
-          },
-          {
-            "keyword": "AI",
-            "count": 28
-          },
-          {
-            "keyword": "外資",
-            "count": 13
-          },
-          {
-            "keyword": "亞德客",
-            "count": 12
-          },
-          {
-            "keyword": "券商分點進出",
-            "count": 8
-          },
-          {
-            "keyword": "KY",
-            "count": 8
-          },
-          {
-            "keyword": "討論牆",
-            "count": 6
-          },
-          {
-            "keyword": "獲利",
-            "count": 6
-          }
-        ],
-        "headlines": [
-          {
-            "title": "【台股盤前0415】台股再創新高收36296！機器人概念股將發動？「爆量實體紅K」：鑫聯大投控、玉晶光、新復興 - sinotrade.com.tw",
-            "link": "https://news.google.com/rss/articles/CBMixARBVV95cUxQdlFUZHlnY2lJbkVtYXIxNWRDckQ5TmJWc1JVLURfMWtXWE9YSHNVdjhOSklGaEpSUGFiamltSUg4Q3NIRnFtQXRwMDN5TDdRdzJ2NXBUd0JzSGhsZEwyS0JJWUVZbWNKM3NLd3FvT2xQY1cwUTJwNW9STVkyeEdnX3VQMUEteU91ZWxya0Z4cmFNY09ZQWdsNVpPcG5VYkxzZ2t5SjlOYnZQamFFMHZPY0dxSTJObzF3TjZxelhFNkZTMXZ4TFZWc0p6N2FOZHdOOWFmU1pHNVN1eGhfdWx2dHZMaGZROUN3WnhHQ0RFMzdHWTVCY0ppQ291NXdRQkZlUzFrdTVBTzZvQkQ4SFZ5ci1TenVlbWFIMU85VnZsVEt4d1dRZ2VnUkkyR1VzNzNqN0N6OFBnYjhkLXdQUlotcFhCMnBaU2RlcWF5SXNSbWJlOFdncFpnRVdaeGl3OWtiaVNqZTV6a3ZUdTl2eXRBdkQyZ0lYY29qazN1VkxOZXRVX3lyMkFwZ2tTUnJoLXBFNzdocC15MlZfYmtOUXFYN3lRMjJBdVR4S0F4TkVVZ0xERmZUNjZ5dlhpVVFFNUVBTnllX1Z0clFyUUdDOTZvRmlUaUxKSVFLTmo3VDVZY01qa21ZcEFEOW9hWW90UmUwUEQ1TnBDNDhhUDBFbkJidDA4bDFGNjNxdDFfRy0wV3NzbTVGMFZhRUp6VXFNbVZVQjFpbm90X2g2RnNqQ1lLdHMwLVNqWDNpNms0cTNEOE5qNVRw?oc=5",
-            "source": "sinotrade.com.tw",
-            "publishedAt": "2026-04-15T00:12:04.000Z"
-          },
-          {
-            "title": "【最新消息】國家機器人中心成立，「9檔概念股」強勢上攻！ - CMoney投資網誌",
-            "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9vaDJPdDJONm45VXZsZUY0SWVHMllVYW5RYjFSYVJYd0FESXFObWlWeGl3VWhfaE9FNWZONVJjTDgtY2xTRDdCN0czRmNWSlcxOVJ5NlJhdXl4UDQ0MTR6aEY3bkZka2hPY25hMlhtU3FxNTNSUTJjR1hPTDEwQQ?oc=5",
-            "source": "CMoney投資網誌",
-            "publishedAt": "2026-04-14T07:44:58.000Z"
-          },
-          {
-            "title": "台股衝上3萬6千點 機器人大軍終於動了？這六檔攻漲停 - 聯合新聞網",
-            "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5paGR0VnlYc19lWWw4d2NDVEh6RmtleE1fRG4xSU9FUWEzNXk3VlhHdGVqOVo3Zm9NTHo2NjV3NUtzSzNsaGpCZFBiZmZvTGlK0gFWQVVfeXFMTTdNcVVSZnMtLXpoM1ZWbUwxR0ZvY3dmaW1raVNZRmJmMUpORnZfUFZjT3F4bTJQWEhfQmhkeXRwYVEtVXdqQ0NFeTJyZFJ6bkxQT0ZhcGc?oc=5",
-            "source": "聯合新聞網",
-            "publishedAt": "2026-04-14T04:02:42.000Z"
-          }
-        ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
-        "sourceUrl": "https://news.google.com/search?q=(%E6%A9%9F%E5%99%A8%E4%BA%BA%20OR%20%E8%87%AA%E5%8B%95%E5%8C%96%20OR%20%E5%8D%94%E4%BD%9C%E6%A9%9F%E5%99%A8%E4%BA%BA%20OR%20%E5%B7%A5%E6%A5%AD%E8%87%AA%E5%8B%95%E5%8C%96)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
       },
       {
         "slug": "abf",
         "title": "ABF 載板",
-        "score": 108,
+        "score": 349,
         "tone": "up",
         "newsCount": 18,
-        "hotCount": 0,
-        "institutionalCount": 0,
-        "etfCount": 0,
-        "observation": "新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
+        "hotCount": 2,
+        "institutionalCount": 4,
+        "etfCount": 5,
+        "observation": "熱門股與法人同步轉進，短線資金正在快速聚焦這個題材。",
         "keywords": [
           {
             "keyword": "AI",
@@ -13440,16 +14263,1163 @@
             "publishedAt": "2026-04-20T02:13:55.000Z"
           }
         ],
-        "leaderStocks": [],
-        "catchUpStocks": [],
-        "relatedStocks": [],
+        "leaderStocks": [
+          {
+            "code": "8046",
+            "name": "南電",
+            "score": 191.53478890300468,
+            "isCoreStock": true,
+            "close": 796,
+            "changePercent": 9.94475138121547,
+            "return20": 41.889483065953655,
+            "turnover": null,
+            "foreign5Day": 336609,
+            "investmentTrust5Day": 1218104,
+            "total5Day": 1566885,
+            "activeEtfCount": 6,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "6 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3037",
+            "name": "欣興",
+            "score": 179.3555220660469,
+            "isCoreStock": true,
+            "close": 678,
+            "changePercent": 5.443234836702955,
+            "return20": 16.69535283993115,
+            "turnover": null,
+            "foreign5Day": 7487330,
+            "investmentTrust5Day": -5506464,
+            "total5Day": 4762804,
+            "activeEtfCount": 14,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 587.5,
+            "foreignTargetPricePremium": -13.348082595870206,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "14 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3189",
+            "name": "景碩",
+            "score": 148.9150444334547,
+            "isCoreStock": true,
+            "close": 430.5,
+            "changePercent": 9.961685823754788,
+            "return20": 12.25554106910039,
+            "turnover": null,
+            "foreign5Day": 7687597,
+            "investmentTrust5Day": -2730581,
+            "total5Day": 6379935,
+            "activeEtfCount": 4,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 10 名",
+              "外資偏多"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "1802",
+            "name": "台玻",
+            "score": 115.43535449027341,
+            "isCoreStock": false,
+            "close": 70.9,
+            "changePercent": -4.447435423136307,
+            "return20": 16.03928276697045,
+            "turnover": null,
+            "foreign5Day": 46354659,
+            "investmentTrust5Day": 18000,
+            "total5Day": 44331293,
+            "activeEtfCount": 1,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "熱門股第 3 名",
+              "成交值第 6 名",
+              "外資投信同步偏多"
+            ],
+            "catchUpScore": 28.782322754863298
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "8046",
+            "name": "南電",
+            "score": 191.53478890300468,
+            "isCoreStock": true,
+            "close": 796,
+            "changePercent": 9.94475138121547,
+            "return20": 41.889483065953655,
+            "turnover": null,
+            "foreign5Day": 336609,
+            "investmentTrust5Day": 1218104,
+            "total5Day": 1566885,
+            "activeEtfCount": 6,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "外資投信同步偏多",
+              "6 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3037",
+            "name": "欣興",
+            "score": 179.3555220660469,
+            "isCoreStock": true,
+            "close": 678,
+            "changePercent": 5.443234836702955,
+            "return20": 16.69535283993115,
+            "turnover": null,
+            "foreign5Day": 7487330,
+            "investmentTrust5Day": -5506464,
+            "total5Day": 4762804,
+            "activeEtfCount": 14,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 587.5,
+            "foreignTargetPricePremium": -13.348082595870206,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "14 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3189",
+            "name": "景碩",
+            "score": 148.9150444334547,
+            "isCoreStock": true,
+            "close": 430.5,
+            "changePercent": 9.961685823754788,
+            "return20": 12.25554106910039,
+            "turnover": null,
+            "foreign5Day": 7687597,
+            "investmentTrust5Day": -2730581,
+            "total5Day": 6379935,
+            "activeEtfCount": 4,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 10 名",
+              "外資偏多"
+            ]
+          },
+          {
+            "code": "4958",
+            "name": "臻鼎-KY",
+            "score": 122.96145838622861,
+            "isCoreStock": false,
+            "close": 310,
+            "changePercent": 9.929078014184398,
+            "return20": 47.97136038186158,
+            "turnover": null,
+            "foreign5Day": -3766589,
+            "investmentTrust5Day": -725804,
+            "total5Day": -4396653,
+            "activeEtfCount": 5,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "5 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "1802",
+            "name": "台玻",
+            "score": 115.43535449027341,
+            "isCoreStock": false,
+            "close": 70.9,
+            "changePercent": -4.447435423136307,
+            "return20": 16.03928276697045,
+            "turnover": null,
+            "foreign5Day": 46354659,
+            "investmentTrust5Day": 18000,
+            "total5Day": 44331293,
+            "activeEtfCount": 1,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "熱門股第 3 名",
+              "成交值第 6 名",
+              "外資投信同步偏多"
+            ]
+          }
+        ],
         "sourceUrl": "https://news.google.com/search?q=(ABF%20OR%20ABF%E8%BC%89%E6%9D%BF%20OR%20%E8%BC%89%E6%9D%BF%20OR%20IC%E8%BC%89%E6%9D%BF%20OR%20BT%E8%BC%89%E6%9D%BF)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
+      },
+      {
+        "slug": "cooling",
+        "title": "散熱 / 液冷",
+        "score": 303,
+        "tone": "up",
+        "newsCount": 22,
+        "hotCount": 1,
+        "institutionalCount": 2,
+        "etfCount": 4,
+        "observation": "法人買盤開始連續布局，適合優先追蹤族群中的領頭股。",
+        "keywords": [
+          {
+            "keyword": "AI",
+            "count": 79
+          },
+          {
+            "keyword": "漲停",
+            "count": 25
+          },
+          {
+            "keyword": "伺服器",
+            "count": 23
+          },
+          {
+            "keyword": "外資",
+            "count": 10
+          },
+          {
+            "keyword": "獲利",
+            "count": 8
+          },
+          {
+            "keyword": "產業即時新聞",
+            "count": 7
+          },
+          {
+            "keyword": "投信",
+            "count": 6
+          },
+          {
+            "keyword": "法說會",
+            "count": 5
+          }
+        ],
+        "headlines": [
+          {
+            "title": "液冷元年引爆！台股創高雙引擎 健策飆破5,000元、台達電劍指2,000元 - 經濟日報",
+            "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBWVmRDejRCQWRDV2NJQzJxV1ROYVVRdFlZcGlwUmhvQnJaWkhobnplTmtSTGk0YmV5SFFvR3JDTGJheUl0NFpsWUI0YlI0NGFtS1l1TVVJdk96Z9IBX0FVX3lxTFBMZ3YyYU95cGxxazFsNDFCVGRYWDZLWjdkcTlHNXp2Y2M0OHF5Mjg0Nmk2dGFqZDJJVkZVYV9wbE1UcmVjbE9iejlQWkdtV191UG1vNzBzSEZWbzFHWEQ4?oc=5",
+            "source": "經濟日報",
+            "publishedAt": "2026-04-19T13:00:00.000Z"
+          },
+          {
+            "title": "2026液冷滲透率直衝76%！單櫃產值跳升4倍，散熱獲利主升段：奇鋐、雙鴻、晟銘電、台達電 - news.cnyes.com",
+            "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9veTB4djZxblM3V1pZb2gyNFJTRllpUXB1QUI3Q3FwUC1IWE83UDhxS3Y0djlrNGtmYUFHVjdLNTRjd19LenlkR2lLcU13Z2s?oc=5",
+            "source": "news.cnyes.com",
+            "publishedAt": "2026-04-18T13:30:06.000Z"
+          },
+          {
+            "title": "測試設備王 × 液冷快接頭霸主，致茂、富世達吃下Rubin世代訂單｜豐雲學堂 2026 年 04 月 - sinotrade.com.tw",
+            "link": "https://news.google.com/rss/articles/CBMipANBVV95cUxQdjlqSFc3WjROUllMUkpHNUpSY3NvTEJXRmdiNkJxc2xRU09UTjdYLXZJc1pobEZUQTNJTmNOdE5rRjZ6b3k4S2lEei1LcDFyRnU2ZG9zZHpIanF4SEFQcmVXV1d1enAxSFBoSG9fT2ktX3QwR1dBY05DNmlOa0xWM09ZdzJ0MjV5d3RGbG50enVuOEJDRkJWcGlBNW5FMUN4RWE0M01yN2xYclk1Y2dfbklTdFJwaXJPWnJ4Y185QjloR1FkNlMwSlJNWkRTc0lkcjJFdmJmcmxmY2VuVVBUVlNyZEMtQ3FvdzVhMlhPTkE1bmM2Mi1ac01oV1JPMFljaGxxTEowZnVIM2dGV0l2MGlyMUNldk0xUUhib1lvTi1kUGxZN2RhOVhXZkd5TEU4alFLMk5jbTdDd211ZXB0N2JsYU1fcW9XUUYxM1BBMDBNMkphMl9wc1RKUWpEb0JBZ2ZYYTloMmZ4NW9WM1ZHSnJUWlM1cFhGQ0V5NFR1QWQ2V21pS3Nia1BCSWxKeDFfNHU0eHhscnVEd1BSdTAtcXBkdGo?oc=5",
+            "source": "sinotrade.com.tw",
+            "publishedAt": "2026-04-17T03:55:14.000Z"
+          }
+        ],
+        "leaderStocks": [
+          {
+            "code": "3653",
+            "name": "健策",
+            "score": 194.74757772348133,
+            "isCoreStock": true,
+            "close": 5020,
+            "changePercent": 9.967141292442497,
+            "return20": 28.717948717948715,
+            "turnover": null,
+            "foreign5Day": -379164,
+            "investmentTrust5Day": 754742,
+            "total5Day": 297442,
+            "activeEtfCount": 11,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 9 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "3017",
+            "name": "奇鋐",
+            "score": 188.46588089330027,
+            "isCoreStock": true,
+            "close": 2490,
+            "changePercent": 3.75,
+            "return20": 23.573200992555833,
+            "turnover": null,
+            "foreign5Day": -941291,
+            "investmentTrust5Day": 715734,
+            "total5Day": -176783,
+            "activeEtfCount": 13,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 87.05,
+            "foreignTargetPricePremium": -96.50401606425703,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 5,
+            "drivers": [
+              "核心題材股",
+              "投信偏多",
+              "13 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3324",
+            "name": "雙鴻",
+            "score": 79.44927536231884,
+            "isCoreStock": true,
+            "close": 1040,
+            "changePercent": 0.4830917874396135,
+            "return20": -2.803738317757009,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 2,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 58.08,
+            "foreignTargetPricePremium": -94.41538461538461,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "2 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "6230",
+            "name": "尼得科超眾",
+            "score": 46,
+            "isCoreStock": true,
+            "close": 160.5,
+            "changePercent": -0.3105590062111801,
+            "return20": -10.833333333333334,
+            "turnover": null,
+            "foreign5Day": -51856,
+            "investmentTrust5Day": 0,
+            "total5Day": -48400,
+            "activeEtfCount": 0,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股"
+            ],
+            "catchUpScore": 30
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "3653",
+            "name": "健策",
+            "score": 194.74757772348133,
+            "isCoreStock": true,
+            "close": 5020,
+            "changePercent": 9.967141292442497,
+            "return20": 28.717948717948715,
+            "turnover": null,
+            "foreign5Day": -379164,
+            "investmentTrust5Day": 754742,
+            "total5Day": 297442,
+            "activeEtfCount": 11,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "強勢股第 9 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "3017",
+            "name": "奇鋐",
+            "score": 188.46588089330027,
+            "isCoreStock": true,
+            "close": 2490,
+            "changePercent": 3.75,
+            "return20": 23.573200992555833,
+            "turnover": null,
+            "foreign5Day": -941291,
+            "investmentTrust5Day": 715734,
+            "total5Day": -176783,
+            "activeEtfCount": 13,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 87.05,
+            "foreignTargetPricePremium": -96.50401606425703,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 5,
+            "drivers": [
+              "核心題材股",
+              "投信偏多",
+              "13 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3324",
+            "name": "雙鴻",
+            "score": 79.44927536231884,
+            "isCoreStock": true,
+            "close": 1040,
+            "changePercent": 0.4830917874396135,
+            "return20": -2.803738317757009,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 2,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 58.08,
+            "foreignTargetPricePremium": -94.41538461538461,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 3,
+            "drivers": [
+              "核心題材股",
+              "2 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6230",
+            "name": "尼得科超眾",
+            "score": 46,
+            "isCoreStock": true,
+            "close": 160.5,
+            "changePercent": -0.3105590062111801,
+            "return20": -10.833333333333334,
+            "turnover": null,
+            "foreign5Day": -51856,
+            "investmentTrust5Day": 0,
+            "total5Day": -48400,
+            "activeEtfCount": 0,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股"
+            ]
+          },
+          {
+            "code": "2308",
+            "name": "台達電",
+            "score": 169.30838189152848,
+            "isCoreStock": false,
+            "close": 1900,
+            "changePercent": 3.260869565217391,
+            "return20": 30.584192439862544,
+            "turnover": null,
+            "foreign5Day": 1065686,
+            "investmentTrust5Day": 137949,
+            "total5Day": 1701859,
+            "activeEtfCount": 14,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "成交值第 3 名",
+              "外資投信同步偏多",
+              "14 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "sourceUrl": "https://news.google.com/search?q=(%E6%95%A3%E7%86%B1%20OR%20%E6%B6%B2%E5%86%B7%20OR%20%E6%B0%B4%E5%86%B7%20OR%20%E7%86%B1%E6%A8%A1%E7%B5%84%20OR%20%E9%A2%A8%E6%89%87)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
+      },
+      {
+        "slug": "glass-fiber",
+        "title": "玻纖布 / Low Dk",
+        "score": 300,
+        "tone": "up",
+        "newsCount": 16,
+        "hotCount": 1,
+        "institutionalCount": 3,
+        "etfCount": 5,
+        "observation": "法人買盤開始連續布局，適合優先追蹤族群中的領頭股。",
+        "keywords": [
+          {
+            "keyword": "漲停",
+            "count": 27
+          },
+          {
+            "keyword": "AI",
+            "count": 12
+          },
+          {
+            "keyword": "伺服器",
+            "count": 6
+          },
+          {
+            "keyword": "外資",
+            "count": 5
+          },
+          {
+            "keyword": "ABF",
+            "count": 5
+          },
+          {
+            "keyword": "擴產",
+            "count": 4
+          },
+          {
+            "keyword": "半導體",
+            "count": 3
+          },
+          {
+            "keyword": "台玻",
+            "count": 3
+          }
+        ],
+        "headlines": [
+          {
+            "title": "玻纖布重回市場焦點 台玻衝進成交量第四名、富喬創歷史新高 - 經濟日報",
+            "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5oVWlJUHRFdUlKOGMwd3lpckdLS01od09SWENxcU1DTGFVbHpNVkxpX3lfeG1ja3ZYQXhyeFlLcEpmci1QeHJ4SXFVYTU5RnB4S2FLN2VyTHUzd9IBX0FVX3lxTE82ZlhKRERYTEo2bFgzZHFRd2NUTW04MUw3YVBFWW5FTHpwYWs1Q3RXd0ZhMWMxdzFNSU1felROTXpuZUV0aU5BTTVDRE9Oc3MzWDFUbFByUkpqVmRObjAw?oc=5",
+            "source": "經濟日報",
+            "publishedAt": "2026-04-18T09:00:00.000Z"
+          },
+          {
+            "title": "穩懋、台表科、光鋐帶頭衝！光電通訊+功率半導體全面爆發｜今日漲停跌停股0417｜豐雲學堂2026 年 04 月 - sinotrade.com.tw",
+            "link": "https://news.google.com/rss/articles/CBMi8gNBVV95cUxQS3hScDIzZF8zTXJwOGJQRWVWS2dEd2o1TXZ6Wi03NE9ERUVGUjcybDUxMVpJTmUxWkRIYUN0emNIUjJBZnY4alY3clB6bjBUcnduSjU2aU8zWUdVal9BbEpiR3FLUU00QXhhb0pueXdxYlFUYTgwQUVsV1hWYTQ4eTRYUGpyX1ZqUUhUaXBfN0Q2a2hNZTRpSWFLdG50SnFkYmZzcTZqSm96QmhsM3cyVlZvUXBsOWNDbElhdFkwOUF5STdqLWM2MXNwUFJ3WVBnZk92MElramNhWlpYTklYU3FGRFh5VENjc1FITldMdXdyVDZ5ZjBYTGk3ZXM5WU11WXktNy1ST254MzN3RDZwNFVNa3N3V1NFdHBuVlhqSlhOSU9tOXZDWU9NOW5hWWdtOVJXWEtBd0ZXTzAzQm1GTGZNVmpLXzFvRERpWXktVm1CeTJUVmFFX1NZSnlkVzRRQURTSGcwZUZRbkNjbFY2ZXdLaHEtZlJISXphR21qWXVhZFlHeXJFTUV2eEYtdVNBSVhhM3JCUURWTWNQTnRjd2pIaXhUMExKQzlDcFVtWnBNV1dOOEU4NmxUTXJPUDFjNlppNzNWVEV0SG0zY3BZUDY0ZTIzbG9BbnlHNkI2b2xBMkR0OTFmd3diV2g0OG1VeWc?oc=5",
+            "source": "sinotrade.com.tw",
+            "publishedAt": "2026-04-17T10:48:39.000Z"
+          },
+          {
+            "title": "玻纖布缺.營收亮眼 台玻鎖漲停爆量12萬張! - 非凡新聞台",
+            "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1FUXRZU0VzRldoM2NtbUhmMHRxRHZKWmhGcVJ3OTJDeC1pUkxDdUpkZ3B6M3c1YXFxOEFmb0NDTUFhcGNodVdUOFo5ZFhVR1VEdkdNR0VjMUF6WjQ?oc=5",
+            "source": "非凡新聞台",
+            "publishedAt": "2026-04-13T09:51:00.000Z"
+          }
+        ],
+        "leaderStocks": [
+          {
+            "code": "1802",
+            "name": "台玻",
+            "score": 215.4353544902734,
+            "isCoreStock": true,
+            "close": 70.9,
+            "changePercent": -4.447435423136307,
+            "return20": 16.03928276697045,
+            "turnover": null,
+            "foreign5Day": 46354659,
+            "investmentTrust5Day": 18000,
+            "total5Day": 44331293,
+            "activeEtfCount": 1,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 7,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 3 名",
+              "成交值第 6 名"
+            ]
+          },
+          {
+            "code": "6213",
+            "name": "聯茂",
+            "score": 158.27891144012736,
+            "isCoreStock": true,
+            "close": 282,
+            "changePercent": 4.251386321626617,
+            "return20": 86.13861386138613,
+            "turnover": null,
+            "foreign5Day": -23904903,
+            "investmentTrust5Day": 689000,
+            "total5Day": -24594369,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "成交值第 9 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "2383",
+            "name": "台光電",
+            "score": 147.84356219267892,
+            "isCoreStock": true,
+            "close": 3850,
+            "changePercent": 1.3157894736842104,
+            "return20": 33.21799307958477,
+            "turnover": null,
+            "foreign5Day": 479168,
+            "investmentTrust5Day": -568130,
+            "total5Day": 45354,
+            "activeEtfCount": 16,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 74.68,
+            "foreignTargetPricePremium": -98.06025974025975,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "16 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "1303",
+            "name": "南亞",
+            "score": 93.60332873576216,
+            "isCoreStock": true,
+            "close": 85.7,
+            "changePercent": -2.2804983099629075,
+            "return20": 1.7814763730690735,
+            "turnover": null,
+            "foreign5Day": 81371906,
+            "investmentTrust5Day": -24005235,
+            "total5Day": 55727892,
+            "activeEtfCount": 6,
+            "topSignalTitle": "KD 高檔死亡交叉",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "6 檔主動式 ETF 持有"
+            ],
+            "catchUpScore": 105.19833563211891
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "1802",
+            "name": "台玻",
+            "score": 215.4353544902734,
+            "isCoreStock": true,
+            "close": 70.9,
+            "changePercent": -4.447435423136307,
+            "return20": 16.03928276697045,
+            "turnover": null,
+            "foreign5Day": 46354659,
+            "investmentTrust5Day": 18000,
+            "total5Day": 44331293,
+            "activeEtfCount": 1,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 7,
+            "drivers": [
+              "核心題材股",
+              "熱門股第 3 名",
+              "成交值第 6 名"
+            ]
+          },
+          {
+            "code": "6213",
+            "name": "聯茂",
+            "score": 158.27891144012736,
+            "isCoreStock": true,
+            "close": 282,
+            "changePercent": 4.251386321626617,
+            "return20": 86.13861386138613,
+            "turnover": null,
+            "foreign5Day": -23904903,
+            "investmentTrust5Day": 689000,
+            "total5Day": -24594369,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "成交值第 9 名",
+              "投信偏多"
+            ]
+          },
+          {
+            "code": "2383",
+            "name": "台光電",
+            "score": 147.84356219267892,
+            "isCoreStock": true,
+            "close": 3850,
+            "changePercent": 1.3157894736842104,
+            "return20": 33.21799307958477,
+            "turnover": null,
+            "foreign5Day": 479168,
+            "investmentTrust5Day": -568130,
+            "total5Day": 45354,
+            "activeEtfCount": 16,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 74.68,
+            "foreignTargetPricePremium": -98.06025974025975,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 1,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "16 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6274",
+            "name": "台燿科技",
+            "score": 117.67260853195864,
+            "isCoreStock": true,
+            "close": 950,
+            "changePercent": 0.42283298097251587,
+            "return20": 62.671232876712324,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 8,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": 900,
+            "foreignTargetPricePremium": -5.263157894736842,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 0,
+            "drivers": [
+              "核心題材股",
+              "8 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "1303",
+            "name": "南亞",
+            "score": 93.60332873576216,
+            "isCoreStock": true,
+            "close": 85.7,
+            "changePercent": -2.2804983099629075,
+            "return20": 1.7814763730690735,
+            "turnover": null,
+            "foreign5Day": 81371906,
+            "investmentTrust5Day": -24005235,
+            "total5Day": 55727892,
+            "activeEtfCount": 6,
+            "topSignalTitle": "KD 高檔死亡交叉",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 2,
+            "drivers": [
+              "核心題材股",
+              "外資偏多",
+              "6 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "sourceUrl": "https://news.google.com/search?q=(%E7%8E%BB%E7%BA%96%E5%B8%83%20OR%20Low%20Dk%20OR%20Low-loss%20OR%20T-glass%20OR%20%E4%BD%8E%E4%BB%8B%E9%9B%BB)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
+      },
+      {
+        "slug": "cowos",
+        "title": "CoWoS / 先進封裝",
+        "score": 293,
+        "tone": "up",
+        "newsCount": 23,
+        "hotCount": 0,
+        "institutionalCount": 1,
+        "etfCount": 5,
+        "observation": "主動式 ETF 曝光度提升，代表資金已經開始放進投資組合。",
+        "keywords": [
+          {
+            "keyword": "AI",
+            "count": 49
+          },
+          {
+            "keyword": "漲停",
+            "count": 35
+          },
+          {
+            "keyword": "台積電",
+            "count": 22
+          },
+          {
+            "keyword": "外資",
+            "count": 18
+          },
+          {
+            "keyword": "半導體",
+            "count": 13
+          },
+          {
+            "keyword": "愛普",
+            "count": 12
+          },
+          {
+            "keyword": "券商分點進出",
+            "count": 9
+          },
+          {
+            "keyword": "買賣統計",
+            "count": 9
+          }
+        ],
+        "headlines": [
+          {
+            "title": "【產業焦點】先進封裝戰場升溫！CoWoS吃緊，4檔受益股搶先卡位 - CMoney投資網誌",
+            "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBka0FMalVyT1JVQVgyX3MtYlA1Z1Z5UkZGREhQdGw1X2NzVDNOVkdSRzRVbEJhbW5lelhMRVNxeEtqZDhta0RFeDl3Q3VrUjNsTzlhUTRfeWhBcXQ4dU1vR3pQTjJqa2VzdWs1cG53VkxCeWR6WWFRU1d0UDM5Zw?oc=5",
+            "source": "CMoney投資網誌",
+            "publishedAt": "2026-04-17T04:01:15.000Z"
+          },
+          {
+            "title": "CoPoS是什麼？概念股有哪些？台積電下一代先進封裝技術全解析 - 商周",
+            "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5ROG1tQ3ZKWEZvdFpJSEJyLVNVa1diNzhTU1o0YXM1eFliWWJyelN3QnZxSkF3eHNaUHNRM2ttSjNjOXpZbHVieExvbVA5T25Sckx1aURzY1dQWlNaM1RzWERvdG1UUQ?oc=5",
+            "source": "商周",
+            "publishedAt": "2026-04-16T10:17:55.000Z"
+          },
+          {
+            "title": "今日漲停跌停股｜綠能與先進封裝領航，太陽能三雄聯合再生、茂迪、元晶聯手亮燈0415｜豐雲學堂2026 年 04 月 - sinotrade.com.tw",
+            "link": "https://news.google.com/rss/articles/CBMilARBVV95cUxNS2dWNjQ5bGNhaERuempEZG5pZTRfU29UMmFySkJiN2xkNEc5TjNuWWxOWmZUUzlSNEdvQXk0ZEV5dHN5NDIxZnFrdkM5VlBvMlczOVdWSWtPWWVKQ0hfa1paZXR3XzZnTndiQkpjb204cEdNRWItU1hUeTlDX1JaaE1jU19wSDIzVzh6cngwRUp2ZlRnUUdaRnFkamVPcWhuMk5nUG9tRWhIdTZXbTRpUEZZVzZtTjhoMG5pVUpmUWNHbDUxOEVwU2hLS3NhSm5MZTI2RC1KdWtob1NWWXpWc3Jka2lzOGc3MlBwTVBHWVNzcjc5Z0F2dEpLUHFvLXpsWUZlR3h6ZzhxNnNpWEhHaktZbkJMeG14UVhyQjJmSTlvQnIzRXE4Rkd0UGVjaE9Pclo5Sk5iWVVzWFdBcW1xcW9TY094c1AwUHIxNnB0YU0wMFJWR1JPdGMzZFFMeTQxNV94ZzNsbDBvbHYtcWFoY3VtYzBEek5sY2h6WEpOajhHcy1wR3JaMnRhd3lFRV9RaHU0YlN4eGNrRXBSdWpiaWJhajYyc3BucjVJRFlXYWNnTnctVkN4N2R5TTRTcGFid3NCSDVXdGZnbGVMLWNPS08zM3h5SWlJTlF0SUZoaFdjby1WeUhLcTNGeHltOEhvZUtZNDgyUGNGS2xGdXVRVmJLMk5CSUxjVDhRRzlxaDl2WEdP?oc=5",
+            "source": "sinotrade.com.tw",
+            "publishedAt": "2026-04-15T21:21:28.000Z"
+          }
+        ],
+        "leaderStocks": [
+          {
+            "code": "2330",
+            "name": "台積電",
+            "score": 188.51351351351352,
+            "isCoreStock": true,
+            "close": 2025,
+            "changePercent": -0.24630541871921183,
+            "return20": 9.45945945945946,
+            "turnover": null,
+            "foreign5Day": 8975200,
+            "investmentTrust5Day": -760312,
+            "total5Day": 9856021,
+            "activeEtfCount": 17,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 93.01,
+            "foreignTargetPricePremium": -95.40691358024691,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "成交值第 1 名",
+              "外資偏多"
+            ]
+          },
+          {
+            "code": "3583",
+            "name": "辛耘",
+            "score": 167.54520755670688,
+            "isCoreStock": true,
+            "close": 808,
+            "changePercent": 6.315789473684211,
+            "return20": 93.99759903961584,
+            "turnover": null,
+            "foreign5Day": -523692,
+            "investmentTrust5Day": 369918,
+            "total5Day": -200774,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "投信偏多",
+              "2 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3711",
+            "name": "日月光投控",
+            "score": 134.9327004577047,
+            "isCoreStock": true,
+            "close": 461.5,
+            "changePercent": 4.411764705882353,
+            "return20": 32.997118155619596,
+            "turnover": null,
+            "foreign5Day": -3072388,
+            "investmentTrust5Day": 782132,
+            "total5Day": -2382789,
+            "activeEtfCount": 9,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "投信偏多",
+              "9 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "catchUpStocks": [
+          {
+            "code": "6223",
+            "name": "旺矽科技",
+            "score": 120.09822646657571,
+            "isCoreStock": true,
+            "close": 5135,
+            "changePercent": -1.1549566891241578,
+            "return20": 40.10914051841746,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 14,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 0,
+            "drivers": [
+              "核心題材股",
+              "14 檔主動式 ETF 持有"
+            ],
+            "catchUpScore": 113.95088676671215
+          }
+        ],
+        "relatedStocks": [
+          {
+            "code": "2330",
+            "name": "台積電",
+            "score": 188.51351351351352,
+            "isCoreStock": true,
+            "close": 2025,
+            "changePercent": -0.24630541871921183,
+            "return20": 9.45945945945946,
+            "turnover": null,
+            "foreign5Day": 8975200,
+            "investmentTrust5Day": -760312,
+            "total5Day": 9856021,
+            "activeEtfCount": 17,
+            "topSignalTitle": "技術面中性",
+            "topSignalTone": "normal",
+            "foreignTargetPrice": 93.01,
+            "foreignTargetPricePremium": -95.40691358024691,
+            "foreignTargetBroker": "市場摘要",
+            "foreignTargetCount": 2,
+            "newsMentions": 4,
+            "drivers": [
+              "核心題材股",
+              "成交值第 1 名",
+              "外資偏多"
+            ]
+          },
+          {
+            "code": "3583",
+            "name": "辛耘",
+            "score": 167.54520755670688,
+            "isCoreStock": true,
+            "close": 808,
+            "changePercent": 6.315789473684211,
+            "return20": 93.99759903961584,
+            "turnover": null,
+            "foreign5Day": -523692,
+            "investmentTrust5Day": 369918,
+            "total5Day": -200774,
+            "activeEtfCount": 2,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "投信偏多",
+              "2 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "3711",
+            "name": "日月光投控",
+            "score": 134.9327004577047,
+            "isCoreStock": true,
+            "close": 461.5,
+            "changePercent": 4.411764705882353,
+            "return20": 32.997118155619596,
+            "turnover": null,
+            "foreign5Day": -3072388,
+            "investmentTrust5Day": 782132,
+            "total5Day": -2382789,
+            "activeEtfCount": 9,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "投信偏多",
+              "9 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6187",
+            "name": "萬潤",
+            "score": 126.45571298367719,
+            "isCoreStock": true,
+            "close": 1225,
+            "changePercent": 0.823045267489712,
+            "return20": 64.42953020134227,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 5,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 1,
+            "drivers": [
+              "核心題材股",
+              "5 檔主動式 ETF 持有"
+            ]
+          },
+          {
+            "code": "6223",
+            "name": "旺矽科技",
+            "score": 120.09822646657571,
+            "isCoreStock": true,
+            "close": 5135,
+            "changePercent": -1.1549566891241578,
+            "return20": 40.10914051841746,
+            "turnover": null,
+            "foreign5Day": 0,
+            "investmentTrust5Day": 0,
+            "total5Day": 0,
+            "activeEtfCount": 14,
+            "topSignalTitle": "RSI 超買",
+            "topSignalTone": "down",
+            "foreignTargetPrice": null,
+            "foreignTargetPricePremium": null,
+            "foreignTargetBroker": null,
+            "foreignTargetCount": 0,
+            "newsMentions": 0,
+            "drivers": [
+              "核心題材股",
+              "14 檔主動式 ETF 持有"
+            ]
+          }
+        ],
+        "sourceUrl": "https://news.google.com/search?q=(CoWoS%20OR%20%E5%85%88%E9%80%B2%E5%B0%81%E8%A3%9D%20OR%20SoIC%20OR%20HBM)%20%E5%8F%B0%E8%82%A1&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
       }
     ],
     "observations": [
-      "AI 伺服器 / ASIC 目前仍在醞釀期，新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
-      "CPO / 矽光子 目前仍在醞釀期，新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。",
-      "記憶體 / DDR5 目前仍在醞釀期，新聞熱度升溫，但盤面資金尚未完全擴散，適合先建立觀察名單。"
+      "AI 伺服器 / ASIC 目前由 3443 創意 帶頭，熱門股與法人同步轉進，短線資金正在快速聚焦這個題材。",
+      "CPO / 矽光子 目前由 4979 華星光 帶頭，人氣股明顯集中，盤面討論度與成交熱度正在升高。",
+      "記憶體 / DDR5 目前由 2337 旺宏 帶頭，人氣股明顯集中，盤面討論度與成交熱度正在升高。"
     ]
   },
   "免責聲明": [

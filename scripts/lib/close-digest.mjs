@@ -3,6 +3,7 @@ import path from 'node:path';
 import { buildSelectionRadar } from './selection-radar.mjs';
 import { buildRatingText, buildWatchGroups } from './watch-groups.mjs';
 import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
+import { buildSummaryHealthScore, buildSummaryOverheatWarnings } from '../../src/lib/stockHealth.js';
 
 const rootDir = process.cwd();
 const siteUrl = 'https://joe94113.github.io/TW_Active_Tracker/';
@@ -181,7 +182,14 @@ function buildTomorrowOutlook(summary) {
 }
 
 function buildWatchListLines(items) {
-  return items.map((item) => `• ${item.code} ${item.name}｜${item.label}｜${buildRatingText(item.rating)}\n${item.detail}`);
+  return items.map((item) => {
+    const extras = [
+      Number.isFinite(Number(item.healthScore)) ? `體檢 ${item.healthScore}` : null,
+      item.topWarningTitle ? `留意 ${item.topWarningTitle}` : null,
+    ].filter(Boolean);
+
+    return `• ${item.code} ${item.name}｜${item.label}｜${buildRatingText(item.rating)}${extras.length ? `｜${extras.join(' / ')}` : ''}\n${item.detail}`;
+  });
 }
 
 function buildThemeTopicMap(themeRadar) {
@@ -214,13 +222,15 @@ function buildThemeTopicMap(themeRadar) {
   return topicMap;
 }
 
-function enrichWatchGroupItems(items, trackedStocks, themeRadar) {
+function enrichWatchGroupItems(items, trackedStocks, themeRadar, stockDetailList = []) {
   const trackedMap = new Map((trackedStocks ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
+  const detailMap = new Map((stockDetailList ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
   const topicMap = buildThemeTopicMap(themeRadar);
 
   return (items ?? []).map((item) => {
     const code = String(item?.code ?? '').trim();
     const tracked = trackedMap.get(code) ?? {};
+    const detail = detailMap.get(code) ?? {};
     const rawTargetPrice = Number(tracked?.foreignTargetPrice);
     const rawTargetPremium = Number(tracked?.foreignTargetPricePremium);
     const hasSaneTarget =
@@ -230,7 +240,7 @@ function enrichWatchGroupItems(items, trackedStocks, themeRadar) {
     const targetPrice = hasSaneTarget ? rawTargetPrice : null;
     const targetPremium = hasSaneTarget && Number.isFinite(rawTargetPremium) ? rawTargetPremium : null;
 
-    return {
+    const enrichedItem = {
       ...item,
       industryName: tracked?.industryName ?? null,
       topicTag: topicMap.get(code) ?? tracked?.industryName ?? null,
@@ -241,6 +251,29 @@ function enrichWatchGroupItems(items, trackedStocks, themeRadar) {
       foreign5Day: tracked?.foreign5Day ?? null,
       investmentTrust5Day: tracked?.investmentTrust5Day ?? null,
       total5Day: tracked?.total5Day ?? null,
+    };
+
+    const summaryHealth = buildSummaryHealthScore({
+      ...enrichedItem,
+      return20: enrichedItem.return20 ?? detail?.最新摘要?.return20 ?? null,
+      changePercent: enrichedItem.changePercent ?? detail?.最新摘要?.changePercent ?? null,
+      topSignalTone: detail?.technicalSignals?.[0]?.tone ?? enrichedItem.topSignalTone,
+      signalCount: detail?.technicalSignals?.length ?? enrichedItem.signalCount ?? 0,
+    });
+    const warnings = buildSummaryOverheatWarnings({
+      ...enrichedItem,
+      return20: enrichedItem.return20 ?? detail?.最新摘要?.return20 ?? null,
+      changePercent: enrichedItem.changePercent ?? detail?.最新摘要?.changePercent ?? null,
+      topSignalTone: detail?.technicalSignals?.[0]?.tone ?? enrichedItem.topSignalTone,
+    });
+
+    return {
+      ...enrichedItem,
+      healthScore: summaryHealth.totalScore,
+      healthGrade: summaryHealth.grade,
+      warningCount: warnings.length,
+      topWarningTitle: warnings[0]?.title ?? null,
+      topWarningTone: warnings[0]?.tone ?? null,
     };
   });
 }
@@ -344,12 +377,12 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
   const rawWatchGroups = buildWatchGroups(summary);
 
   return {
-    ...summary,
-    tomorrowOutlook: buildTomorrowOutlook(summary),
-    watchGroups: {
-      stable: enrichWatchGroupItems(rawWatchGroups.stable, trackedStocks, dashboard?.題材雷達),
-      aggressive: enrichWatchGroupItems(rawWatchGroups.aggressive, trackedStocks, dashboard?.題材雷達),
-    },
+      ...summary,
+      tomorrowOutlook: buildTomorrowOutlook(summary),
+      watchGroups: {
+      stable: enrichWatchGroupItems(rawWatchGroups.stable, trackedStocks, dashboard?.題材雷達, stockDetailList),
+      aggressive: enrichWatchGroupItems(rawWatchGroups.aggressive, trackedStocks, dashboard?.題材雷達, stockDetailList),
+      },
   };
 }
 
@@ -374,7 +407,11 @@ export function buildTelegramMessage(summary) {
   lines.push('<b>🛡 穩健型</b>');
   if (summary.watchGroups.stable.length) {
     summary.watchGroups.stable.forEach((item) => {
-      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}`);
+      const extras = [
+        Number.isFinite(Number(item.healthScore)) ? `體檢 ${item.healthScore}` : null,
+        item.topWarningTitle ? `留意 ${item.topWarningTitle}` : null,
+      ].filter(Boolean).join(' / ');
+      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}${extras ? `｜${escapeHtml(extras)}` : ''}`);
       lines.push(`  ${escapeHtml(item.detail)}`);
     });
   } else {
@@ -385,7 +422,11 @@ export function buildTelegramMessage(summary) {
   lines.push('<b>🔥 積極型</b>');
   if (summary.watchGroups.aggressive.length) {
     summary.watchGroups.aggressive.forEach((item) => {
-      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}`);
+      const extras = [
+        Number.isFinite(Number(item.healthScore)) ? `體檢 ${item.healthScore}` : null,
+        item.topWarningTitle ? `留意 ${item.topWarningTitle}` : null,
+      ].filter(Boolean).join(' / ');
+      lines.push(`• ${escapeHtml(item.code)} ${escapeHtml(item.name)}｜${escapeHtml(item.label)}｜${escapeHtml(buildRatingText(item.rating))}${extras ? `｜${escapeHtml(extras)}` : ''}`);
       lines.push(`  ${escapeHtml(item.detail)}`);
     });
   } else {

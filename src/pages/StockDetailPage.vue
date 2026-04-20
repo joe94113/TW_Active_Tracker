@@ -18,6 +18,7 @@ import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
 import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
 import { buildStockEventPerformance } from '../lib/stockEventPerformance';
+import { buildOverheatWarnings, buildStockHealthScore } from '../lib/stockHealth';
 import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
 import {
   formatDate,
@@ -173,6 +174,8 @@ const keyPriceZones = computed(() => buildKeyPriceZones(detail.value));
 const supportResistance = computed(() => buildSupportResistance(detail.value));
 const stockEventCalendar = computed(() => buildStockEventCalendar(detail.value));
 const stockEventPerformance = computed(() => buildStockEventPerformance(detail.value));
+const stockHealthScore = computed(() => buildStockHealthScore(detail.value, { currentClose: displayQuote.value.close }));
+const overheatWarnings = computed(() => buildOverheatWarnings(detail.value, { currentClose: displayQuote.value.close }));
 const recentViewedStocks = computed(() =>
   recentItems.value
     .filter((item) => item.code && item.code !== stockCode.value)
@@ -414,6 +417,12 @@ function getSelectionAlertTone(tone) {
   return 'info';
 }
 
+function getHealthTone(score) {
+  if (score >= 75) return 'up';
+  if (score <= 45) return 'down';
+  return 'normal';
+}
+
 function formatEventDistance(dateText) {
   const targetDate = new Date(`${dateText}T00:00:00`);
 
@@ -642,6 +651,75 @@ watch(
         <ul v-if="technicalNarrative.length" class="bullet-list compact">
           <li v-for="item in technicalNarrative" :key="item">{{ item }}</li>
         </ul>
+      </section>
+
+      <section class="dual-grid">
+        <article class="panel insight-panel stock-health-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">個股體檢分數</h2>
+              <p class="panel-subtitle">把技術、籌碼、基本面、題材與風險壓成同一張總表，先看能不能追，再看值不值得等。</p>
+            </div>
+            <span class="meta-chip" :class="`is-${getHealthTone(stockHealthScore.totalScore)}`">
+              {{ stockHealthScore.grade }} / {{ stockHealthScore.totalScore }}
+            </span>
+          </div>
+
+          <div class="stock-health-hero">
+            <div>
+              <p class="stock-health-label">總分</p>
+              <div class="stock-health-total">
+                <strong>{{ stockHealthScore.totalScore }}</strong>
+                <span>/ 100</span>
+              </div>
+            </div>
+            <p class="stock-health-summary">{{ stockHealthScore.summary }}</p>
+          </div>
+
+          <div class="stock-health-grid">
+            <article
+              v-for="item in stockHealthScore.sections"
+              :key="item.key"
+              class="stock-health-item"
+              :class="`is-${item.tone}`"
+            >
+              <div class="stock-health-item-head">
+                <strong>{{ item.label }}</strong>
+                <span class="status-badge" :class="`is-${item.tone}`">{{ item.score }}</span>
+              </div>
+              <p class="stock-health-note">{{ item.note }}</p>
+            </article>
+          </div>
+        </article>
+
+        <article class="panel insight-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">過熱 / 追價風險</h2>
+              <p class="panel-subtitle">這張卡專門幫你看有沒有買在山頭上的風險，先排除最危險的追價情境。</p>
+            </div>
+          </div>
+
+          <div v-if="overheatWarnings.length" class="selection-alert-list">
+            <article
+              v-for="item in overheatWarnings"
+              :key="item.key"
+              class="selection-alert-card"
+              :class="`is-${getSelectionAlertTone(item.tone)}`"
+            >
+              <div class="selection-alert-head">
+                <strong>{{ item.title }}</strong>
+                <span class="status-badge" :class="`is-${getSelectionAlertTone(item.tone)}`">{{ item.badgeLabel }}</span>
+              </div>
+              <p>{{ item.note }}</p>
+              <p v-if="item.detail" class="muted">{{ item.detail }}</p>
+            </article>
+          </div>
+          <div v-else class="empty-state compact">
+            <strong>目前沒有明顯過熱警示</strong>
+            <p>這不代表明天一定會漲，只是代表目前沒有看到特別明顯的追價風險，可以配合支撐壓力和量價節奏分批觀察。</p>
+          </div>
+        </article>
       </section>
 
       <section class="dual-grid">
