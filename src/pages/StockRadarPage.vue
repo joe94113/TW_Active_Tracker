@@ -18,9 +18,12 @@ const isReplayLoading = ref(false);
 const replayError = ref('');
 
 const themeRadar = computed(() => dashboard.value?.題材雷達 ?? null);
+const radarSourceList = computed(() => (stockList.value.length ? stockList.value : stockSearchList.value));
+const hasRadarData = computed(() => Boolean(radarSourceList.value.length));
+
 const radar = computed(() =>
   buildStockRadar({
-    stockSummaries: stockList.value,
+    stockSummaries: radarSourceList.value,
     stockSearchList: stockSearchList.value,
     themeRadar: themeRadar.value,
   }),
@@ -209,11 +212,11 @@ function getReplayMetricClass(value) {
     <StatusCard
       :is-loading="isLoading"
       :error-message="errorMessage"
-      :has-data="Boolean(stockList.length)"
+      :has-data="hasRadarData"
       empty-message="選股雷達資料尚未整理完成。"
     />
 
-    <template v-if="stockList.length">
+    <template v-if="hasRadarData">
       <section class="page-hero compact radar-page-hero">
         <div class="hero-copy">
           <span class="hero-kicker">Selection Radar</span>
@@ -224,7 +227,7 @@ function getReplayMetricClass(value) {
           <div class="theme-radar-summary">
             <span class="theme-observation-chip">資料日期 {{ formatDate(themeRadar?.marketDate) }}</span>
             <span class="theme-observation-chip">主線題材 {{ radar.spotlight.topTheme?.title ?? '等待題材重新聚焦' }}</span>
-            <span class="theme-observation-chip">追蹤個股 {{ formatNumber(stockList.length, 0) }} 檔</span>
+            <span class="theme-observation-chip">追蹤個股 {{ formatNumber(radarSourceList.length, 0) }} 檔</span>
           </div>
         </div>
 

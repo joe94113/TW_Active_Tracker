@@ -156,6 +156,16 @@ function buildTomorrowOutlook(summary) {
     outlook.push(`資金主線暫看 ${topTheme.title}${leader ? `，龍頭可先看 ${leader.code} ${leader.name}` : ''}。`);
   }
 
+  const entryPick =
+    summary.entryRadar?.sections?.freshStarters?.[0] ??
+    summary.entryRadar?.sections?.nearBreakouts?.[0] ??
+    summary.entryRadar?.sections?.institutionalTurns?.[0] ??
+    null;
+
+  if (entryPick) {
+    outlook.push(`起漲卡位可先看 ${entryPick.code} ${entryPick.name}，先觀察 ${entryPick.label} 是否延續。`);
+  }
+
   if (summary.officialRiskRadar?.length) {
     const topRisk = summary.officialRiskRadar[0];
     outlook.push(`${topRisk.code} ${topRisk.name} 出現 ${topRisk.alertLabel}，短線先避開追價。`);
@@ -265,12 +275,21 @@ function getWatchGroupColors(summary) {
 }
 
 export async function loadCloseDigestData() {
-  const [dashboard, trackedStocks, stockSearchList] = await Promise.all([
+  const [dashboard, trackedStocks, stockSearchList, entryRadar] = await Promise.all([
     readJson(path.join('public', 'data', 'dashboard.json')),
     readJson(path.join('public', 'data', 'stocks', 'index.json')),
     readJson(path.join('public', 'data', 'stocks', 'search.json')),
+    readJson(path.join('public', 'data', 'radar', 'entry.json')).catch(() => null),
   ]);
-  const trackedCodes = [...new Set((trackedStocks ?? []).map((item) => String(item.code ?? '').trim()).filter(Boolean))];
+  const effectiveTrackedStocks = Array.isArray(trackedStocks) && trackedStocks.length ? trackedStocks : stockSearchList;
+  const trackedCodes = [
+    ...new Set(
+      (effectiveTrackedStocks ?? [])
+        .filter((item) => item?.hasLocalDetail !== false)
+        .map((item) => String(item.code ?? '').trim())
+        .filter(Boolean),
+    ),
+  ];
   const stockDetailList = (
     await Promise.all(
       trackedCodes.map(async (code) => {
@@ -285,13 +304,14 @@ export async function loadCloseDigestData() {
 
   return {
     dashboard,
-    trackedStocks,
+    trackedStocks: effectiveTrackedStocks,
     stockSearchList,
     stockDetailList,
+    entryRadar,
   };
 }
 
-export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchList, stockDetailList, today = formatTaipeiDate() }) {
+export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchList, stockDetailList, entryRadar = null, today = formatTaipeiDate() }) {
   const marketDate = resolveDigestMarketDate(dashboard);
 
   if (marketDate !== today) {
@@ -317,6 +337,7 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
     officialRadarSummary: buildOfficialRadarSummary(selectionUniverse),
     officialRiskRadar,
     themeMomentumTopics: buildThemeMomentumTopics(dashboard?.題材雷達, 3),
+    entryRadar,
     ...selectionRadar,
   };
 

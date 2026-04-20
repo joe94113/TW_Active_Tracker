@@ -2146,6 +2146,175 @@ input {
   letter-spacing: -0.02em;
 }
 
+.entry-radar-hero,
+.entry-radar-layout,
+.entry-radar-main,
+.entry-radar-spotlight-grid,
+.entry-card-grid,
+.entry-theme-summary {
+  display: grid;
+  gap: 16px;
+}
+
+.entry-radar-hero {
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  align-items: start;
+}
+
+.entry-radar-board {
+  display: grid;
+  gap: 14px;
+}
+
+.entry-radar-spotlight-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.entry-radar-spotlight-card {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(11, 105, 155, 0.12);
+  background:
+    radial-gradient(circle at top right, rgba(19, 136, 94, 0.08), transparent 52%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 249, 253, 0.92));
+}
+
+.entry-radar-spotlight-card strong {
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  letter-spacing: -0.04em;
+}
+
+.entry-radar-spotlight-card p {
+  margin: 0;
+}
+
+.entry-radar-layout {
+  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.5fr);
+  align-items: start;
+}
+
+.entry-radar-main,
+.entry-radar-sidebar {
+  display: grid;
+  gap: 18px;
+}
+
+.entry-radar-section {
+  display: grid;
+  gap: 18px;
+}
+
+.entry-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.entry-stock-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(11, 105, 155, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(247, 251, 255, 0.92));
+  box-shadow: 0 14px 28px rgba(20, 41, 61, 0.06);
+}
+
+.entry-stock-card.is-up {
+  border-color: rgba(19, 136, 94, 0.18);
+}
+
+.entry-stock-card.is-info {
+  border-color: rgba(11, 105, 155, 0.16);
+}
+
+.entry-stock-card.is-down {
+  border-color: rgba(224, 122, 79, 0.2);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 248, 244, 0.92));
+}
+
+.entry-stock-head,
+.entry-stock-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.entry-stock-head strong {
+  font-size: 1.06rem;
+  line-height: 1.45;
+}
+
+.entry-stock-price {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.entry-stock-note {
+  margin: 0;
+}
+
+.entry-stock-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.entry-stock-metric {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(11, 105, 155, 0.06);
+}
+
+.entry-stock-metric span {
+  color: var(--text-soft);
+  font-size: 0.79rem;
+}
+
+.entry-stock-metric strong {
+  font-size: 0.96rem;
+}
+
+.entry-stock-metrics-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.entry-sidebar-card {
+  display: grid;
+  gap: 16px;
+}
+
+.entry-theme-summary {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.entry-theme-history-card {
+  display: grid;
+  gap: 12px;
+}
+
+.entry-theme-history-list {
+  display: grid;
+  gap: 10px;
+}
+
+.entry-theme-history-item {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(11, 105, 155, 0.05);
+}
+
 .radar-theme-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -3129,6 +3298,11 @@ input {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .entry-radar-layout,
+  .entry-radar-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .radar-page-layout,
   .radar-page-hero {
     grid-template-columns: minmax(0, 1fr);
@@ -3150,7 +3324,9 @@ input {
   .radar-stock-grid,
   .radar-theme-grid,
   .radar-theme-columns,
-  .radar-spotlight-grid {
+  .radar-spotlight-grid,
+  .entry-card-grid,
+  .entry-radar-spotlight-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3180,11 +3356,20 @@ input {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .entry-radar-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .theme-hero-board {
     width: 100%;
   }
 
   .radar-stock-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .entry-stock-metric-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -4274,7 +4459,9 @@ input {
   .classroom-card-grid,
   .classroom-step-grid,
   .classroom-chart-grid,
-  .classroom-practice-grid {
+  .classroom-practice-grid,
+  .entry-card-grid,
+  .entry-radar-spotlight-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 

@@ -1,6 +1,7 @@
 ﻿import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { rename, unlink } from 'node:fs/promises';
+import { readdir } from 'node:fs/promises';
 import vm from 'node:vm';
 import * as XLSX from 'xlsx';
 import {
@@ -20,6 +21,7 @@ import { buildThemeRadar, TOPIC_DEFINITIONS } from './lib/theme-radar.mjs';
 import { buildThemeHistorySnapshot, mergeThemeHistory } from './lib/theme-history.mjs';
 import { mergeRadarReplayHistory } from './lib/radar-replay.mjs';
 import { buildSelectionRadar } from './lib/selection-radar.mjs';
+import { buildEntryRadar } from './lib/entry-radar.mjs';
 import { buildWatchGroups } from './lib/watch-groups.mjs';
 
 const 根目錄 = process.cwd();
@@ -4672,11 +4674,25 @@ async function main() {
   });
   const 既有題材歷史 = await 讀取已部署或本地JSON('data/topics/history.json');
   const 題材輪動歷史 = mergeThemeHistory(既有題材歷史, buildThemeHistorySnapshot(題材雷達));
+  const 股票明細檔案列表 = (await readdir(path.join(資料目錄, 'stocks')))
+    .filter((fileName) => /^\d+\.json$/u.test(fileName));
+  const 全部本地股票明細 = (
+    await Promise.all(
+      股票明細檔案列表.map((fileName) => 讀取JSON存在則回傳(path.join(資料目錄, 'stocks', fileName))),
+    )
+  ).filter(Boolean);
   const 選股雷達資料 = buildSelectionRadar({
     dashboard: { 法人追蹤, 市場總覽, 題材雷達 },
-    stockMetaList: 個股摘要清單,
-    stockDetailList: 個股明細清單,
+    stockMetaList: 股票搜尋索引,
+    stockDetailList: 全部本地股票明細,
   });
+  const 起漲卡位雷達 = buildEntryRadar({
+      dashboard: { 市場總覽, 法人追蹤, 題材雷達, generatedAt: 取得現在ISO(現在) },
+      stockMetaList: 股票搜尋索引,
+      stockDetailList: 全部本地股票明細,
+      selectionRadar: 選股雷達資料,
+      themeHistory: 題材輪動歷史,
+    });
   const 選股分組 = buildWatchGroups({
     institutionalResonance: 選股雷達資料.institutionalResonance,
     bullishSignals: 挑選偏多訊號個股(個股摘要清單),
@@ -4718,6 +4734,7 @@ async function main() {
     topicRadarPath: 'data/topics/index.json',
     topicHistoryPath: 'data/topics/history.json',
     stockRadarHistoryPath: 'data/radar/history.json',
+    entryRadarPath: 'data/radar/entry.json',
     topicPathTemplate: 'data/topics/{slug}.json',
     trackedEtfs: 追蹤ETF清單,
     latestOverview: 追蹤ETF清單.map((etf) => {
@@ -4773,6 +4790,7 @@ async function main() {
   await 寫入JSON(path.join(題材資料目錄, 'index.json'), 題材雷達);
   await 寫入JSON(path.join(題材資料目錄, 'history.json'), 題材輪動歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'history.json'), 選股回放歷史);
+  await 寫入JSON(path.join(選股雷達資料目錄, 'entry.json'), 起漲卡位雷達);
   await 寫入JSON(path.join(資料目錄, 'manifest.json'), manifest);
 
   if (failures.length) {

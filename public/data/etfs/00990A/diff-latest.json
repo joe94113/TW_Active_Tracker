@@ -1,543 +1,497 @@
 {
   "code": "00990A",
   "name": "主動元大AI新經濟",
-  "fromDisclosureDate": "2026-04-16",
-  "toDisclosureDate": "2026-04-17",
+  "fromDisclosureDate": "2026-04-17",
+  "toDisclosureDate": "2026-04-20",
   "comparisonReady": true,
   "added": [
     {
-      "code": "GOOGL US",
-      "name": "ALPHABET INC-CL A",
-      "currentShares": 23200,
-      "currentWeight": 0.97,
-      "sharesDelta": 23200,
-      "weightDelta": 0.97
+      "code": "AMD US",
+      "name": "ADVANCED MICRO DEVICES",
+      "currentShares": 23100,
+      "currentWeight": 0.8,
+      "sharesDelta": 23100,
+      "weightDelta": 0.8
     },
     {
-      "code": "APP US",
-      "name": "APPLOVIN CORP-CLASS A",
-      "currentShares": 11880,
-      "currentWeight": 0.69,
-      "sharesDelta": 11880,
-      "weightDelta": 0.69
-    },
-    {
-      "code": "CRWD US",
-      "name": "CROWDSTRIKE HOLDINGS INC - A",
-      "currentShares": 11480,
-      "currentWeight": 0.6,
-      "sharesDelta": 11480,
-      "weightDelta": 0.6
-    },
-    {
-      "code": "PLTR US",
-      "name": "PALANTIR TECHNOLOGIES INC-A",
-      "currentShares": 33200,
-      "currentWeight": 0.59,
-      "sharesDelta": 33200,
-      "weightDelta": 0.59
-    },
-    {
-      "code": "FSLY US",
-      "name": "FASTLY INC - CLASS A",
-      "currentShares": 168600,
-      "currentWeight": 0.52,
-      "sharesDelta": 168600,
-      "weightDelta": 0.52
+      "code": "ORCL US",
+      "name": "ORACLE CORP",
+      "currentShares": 36120,
+      "currentWeight": 0.78,
+      "sharesDelta": 36120,
+      "weightDelta": 0.78
     }
   ],
   "removed": [
     {
-      "code": "ONTO US",
-      "name": "ONTO INNOVATION INC",
-      "previousShares": 21000,
-      "previousWeight": 0.69,
-      "sharesDelta": -21000,
-      "weightDelta": -0.69
-    },
-    {
-      "code": "BESI NA",
-      "name": "BE SEMICONDUCTOR INDUSTRIES",
-      "previousShares": 19584,
-      "previousWeight": 0.64,
-      "sharesDelta": -19584,
-      "weightDelta": -0.64
-    },
-    {
-      "code": "ASML US",
-      "name": "ASML HOLDING NV-NY REG SHS",
-      "previousShares": 2984,
-      "previousWeight": 0.56,
-      "sharesDelta": -2984,
-      "weightDelta": -0.56
-    },
-    {
-      "code": "5536",
-      "name": "聖暉*",
-      "previousShares": 148000,
-      "previousWeight": 0.49,
-      "sharesDelta": -148000,
-      "weightDelta": -0.49
-    },
-    {
-      "code": "7769",
-      "name": "鴻勁",
-      "previousShares": 28000,
-      "previousWeight": 0.48,
-      "sharesDelta": -28000,
-      "weightDelta": -0.48
+      "code": "NBIS US",
+      "name": "NEBIUS GROUP NV",
+      "previousShares": 38400,
+      "previousWeight": 0.79,
+      "sharesDelta": -38400,
+      "weightDelta": -0.79
     }
   ],
   "increased": [
     {
-      "code": "AVGO US",
-      "name": "BROADCOM INC",
-      "previousShares": 21040,
-      "currentShares": 30960,
-      "previousWeight": 1.06,
-      "currentWeight": 1.53,
-      "sharesDelta": 9920,
-      "weightDelta": 0.47
-    },
-    {
-      "code": "LITE US",
-      "name": "LUMENTUM HOLDINGS INC",
-      "previousShares": 75485,
-      "currentShares": 75485,
-      "previousWeight": 7.91,
-      "currentWeight": 8.35,
-      "sharesDelta": 0,
-      "weightDelta": 0.4399999999999995
-    },
-    {
       "code": "AEHR US",
       "name": "AEHR TEST SYSTEMS",
       "previousShares": 127700,
-      "currentShares": 127700,
-      "previousWeight": 1.19,
-      "currentWeight": 1.28,
-      "sharesDelta": 0,
-      "weightDelta": 0.09000000000000008
-    },
-    {
-      "code": "SOI FP",
-      "name": "S.O.I.T.E.C.",
-      "previousShares": 89943,
-      "currentShares": 89943,
-      "previousWeight": 1.04,
-      "currentWeight": 1.13,
-      "sharesDelta": 0,
-      "weightDelta": 0.08999999999999986
-    },
-    {
-      "code": "5706 JP",
-      "name": "MITSUI KINZOKU CO LTD",
-      "previousShares": 92300,
-      "currentShares": 92300,
-      "previousWeight": 2.64,
-      "currentWeight": 2.72,
-      "sharesDelta": 0,
-      "weightDelta": 0.08000000000000007
-    },
-    {
-      "code": "3653",
-      "name": "健策",
-      "previousShares": 110000,
-      "currentShares": 110000,
-      "previousWeight": 1.84,
-      "currentWeight": 1.9,
-      "sharesDelta": 0,
-      "weightDelta": 0.05999999999999983
-    },
-    {
-      "code": "2308",
-      "name": "台達電",
-      "previousShares": 628000,
-      "currentShares": 628000,
-      "previousWeight": 4.5,
-      "currentWeight": 4.56,
-      "sharesDelta": 0,
-      "weightDelta": 0.05999999999999961
-    },
-    {
-      "code": "285A JP",
-      "name": "KIOXIA HOLDINGS CORP",
-      "previousShares": 102900,
-      "currentShares": 102900,
-      "previousWeight": 2.67,
-      "currentWeight": 2.72,
-      "sharesDelta": 0,
-      "weightDelta": 0.050000000000000266
-    },
-    {
-      "code": "6787 JP",
-      "name": "MEIKO ELECTRONICS CO LTD",
-      "previousShares": 85300,
-      "currentShares": 85300,
-      "previousWeight": 1.93,
-      "currentWeight": 1.98,
-      "sharesDelta": 0,
-      "weightDelta": 0.050000000000000044
-    },
-    {
-      "code": "3017",
-      "name": "奇鋐",
-      "previousShares": 130000,
-      "currentShares": 130000,
-      "previousWeight": 1.21,
-      "currentWeight": 1.25,
-      "sharesDelta": 0,
-      "weightDelta": 0.040000000000000036
-    },
-    {
-      "code": "COHR US",
-      "name": "COHERENT CORP",
-      "previousShares": 26174,
-      "currentShares": 26174,
-      "previousWeight": 1.03,
-      "currentWeight": 1.07,
-      "sharesDelta": 0,
-      "weightDelta": 0.040000000000000036
-    },
-    {
-      "code": "5803 JP",
-      "name": "FUJIKURA LTD",
-      "previousShares": 354000,
-      "currentShares": 354000,
-      "previousWeight": 1.61,
-      "currentWeight": 1.65,
-      "sharesDelta": 0,
-      "weightDelta": 0.039999999999999813
-    },
-    {
-      "code": "INTC US",
-      "name": "INTEL CORP",
-      "previousShares": 132600,
-      "currentShares": 132600,
-      "previousWeight": 1.09,
-      "currentWeight": 1.13,
-      "sharesDelta": 0,
-      "weightDelta": 0.039999999999999813
-    },
-    {
-      "code": "009150 KP",
-      "name": "SAMSUNG ELECTRO-MECHANICS CO",
-      "previousShares": 34369,
-      "currentShares": 34369,
-      "previousWeight": 1.82,
+      "currentShares": 177400,
+      "previousWeight": 1.28,
       "currentWeight": 1.85,
-      "sharesDelta": 0,
-      "weightDelta": 0.030000000000000027
-    },
-    {
-      "code": "3037",
-      "name": "欣興",
-      "previousShares": 475000,
-      "currentShares": 475000,
-      "previousWeight": 1.18,
-      "currentWeight": 1.21,
-      "sharesDelta": 0,
-      "weightDelta": 0.030000000000000027
-    },
-    {
-      "code": "2345",
-      "name": "智邦",
-      "previousShares": 221000,
-      "currentShares": 221000,
-      "previousWeight": 1.75,
-      "currentWeight": 1.77,
-      "sharesDelta": 0,
-      "weightDelta": 0.020000000000000018
-    },
-    {
-      "code": "3533",
-      "name": "嘉澤",
-      "previousShares": 73000,
-      "currentShares": 73000,
-      "previousWeight": 0.7,
-      "currentWeight": 0.72,
-      "sharesDelta": 0,
-      "weightDelta": 0.020000000000000018
-    },
-    {
-      "code": "005930 KP",
-      "name": "SAMSUNG ELECTRONICS CO LTD",
-      "previousShares": 143231,
-      "currentShares": 143231,
-      "previousWeight": 2.61,
-      "currentWeight": 2.62,
-      "sharesDelta": 0,
-      "weightDelta": 0.010000000000000231
-    },
-    {
-      "code": "5274",
-      "name": "信驊",
-      "previousShares": 10000,
-      "currentShares": 10000,
-      "previousWeight": 0.56,
-      "currentWeight": 0.57,
-      "sharesDelta": 0,
-      "weightDelta": 0.009999999999999898
-    }
-  ],
-  "decreased": [
-    {
-      "code": "2313",
-      "name": "華通",
-      "previousShares": 1611000,
-      "currentShares": 886000,
-      "previousWeight": 1.7,
-      "currentWeight": 0.91,
-      "sharesDelta": -725000,
-      "weightDelta": -0.7899999999999999
-    },
-    {
-      "code": "AIXA GR",
-      "name": "AIXTRON SE",
-      "previousShares": 363638,
-      "currentShares": 278437,
-      "previousWeight": 2.17,
-      "currentWeight": 1.66,
-      "sharesDelta": -85201,
-      "weightDelta": -0.51
-    },
-    {
-      "code": "5801 JP",
-      "name": "FURUKAWA ELECTRIC CO LTD",
-      "previousShares": 101400,
-      "currentShares": 87400,
-      "previousWeight": 3.59,
-      "currentWeight": 3.12,
-      "sharesDelta": -14000,
-      "weightDelta": -0.46999999999999975
-    },
-    {
-      "code": "SNDK US",
-      "name": "SANDISK CORP",
-      "previousShares": 60293,
-      "currentShares": 55893,
-      "previousWeight": 6.84,
-      "currentWeight": 6.38,
-      "sharesDelta": -4400,
-      "weightDelta": -0.45999999999999996
-    },
-    {
-      "code": "CIEN US",
-      "name": "CIENA CORP",
-      "previousShares": 47242,
-      "currentShares": 42342,
-      "previousWeight": 2.86,
-      "currentWeight": 2.6,
-      "sharesDelta": -4900,
-      "weightDelta": -0.2599999999999998
-    },
-    {
-      "code": "6274",
-      "name": "台燿",
-      "previousShares": 321000,
-      "currentShares": 268000,
-      "previousWeight": 1.22,
-      "currentWeight": 1.01,
-      "sharesDelta": -53000,
-      "weightDelta": -0.20999999999999996
-    },
-    {
-      "code": "GLW US",
-      "name": "CORNING INC",
-      "previousShares": 145895,
-      "currentShares": 145895,
-      "previousWeight": 3.12,
-      "currentWeight": 3.01,
-      "sharesDelta": 0,
-      "weightDelta": -0.11000000000000032
+      "sharesDelta": 49700,
+      "weightDelta": 0.5700000000000001
     },
     {
       "code": "BE US",
       "name": "BLOOM ENERGY CORP- A",
       "previousShares": 97600,
-      "currentShares": 97600,
-      "previousWeight": 2.65,
-      "currentWeight": 2.54,
-      "sharesDelta": 0,
-      "weightDelta": -0.10999999999999988
-    },
-    {
-      "code": "MU US",
-      "name": "MICRON TECHNOLOGY INC",
-      "previousShares": 83471,
-      "currentShares": 83471,
-      "previousWeight": 4.84,
-      "currentWeight": 4.74,
-      "sharesDelta": 0,
-      "weightDelta": -0.09999999999999964
-    },
-    {
-      "code": "TSEM US",
-      "name": "TOWER SEMICONDUCTOR LTD",
-      "previousShares": 118182,
-      "currentShares": 118182,
-      "previousWeight": 3.24,
-      "currentWeight": 3.15,
-      "sharesDelta": 0,
-      "weightDelta": -0.0900000000000003
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "previousShares": 497000,
-      "currentShares": 497000,
-      "previousWeight": 4.15,
-      "currentWeight": 4.08,
-      "sharesDelta": 0,
-      "weightDelta": -0.07000000000000028
-    },
-    {
-      "code": "TER US",
-      "name": "TERADYNE INC",
-      "previousShares": 65100,
-      "currentShares": 65100,
-      "previousWeight": 3.02,
-      "currentWeight": 2.96,
-      "sharesDelta": 0,
-      "weightDelta": -0.06000000000000005
-    },
-    {
-      "code": "WDC US",
-      "name": "WESTERN DIGITAL CORP",
-      "previousShares": 41462,
-      "currentShares": 41462,
-      "previousWeight": 1.92,
-      "currentWeight": 1.86,
-      "sharesDelta": 0,
-      "weightDelta": -0.05999999999999983
-    },
-    {
-      "code": "NVDA US",
-      "name": "NVIDIA CORP",
-      "previousShares": 62250,
-      "currentShares": 62250,
-      "previousWeight": 1.57,
-      "currentWeight": 1.53,
-      "sharesDelta": 0,
-      "weightDelta": -0.040000000000000036
-    },
-    {
-      "code": "2383",
-      "name": "台光電",
-      "previousShares": 144000,
-      "currentShares": 144000,
-      "previousWeight": 2.2,
-      "currentWeight": 2.17,
-      "sharesDelta": 0,
-      "weightDelta": -0.03000000000000025
-    },
-    {
-      "code": "2368",
-      "name": "金像電",
-      "previousShares": 370000,
-      "currentShares": 370000,
-      "previousWeight": 1.73,
-      "currentWeight": 1.7,
-      "sharesDelta": 0,
-      "weightDelta": -0.030000000000000027
-    },
-    {
-      "code": "268A JP",
-      "name": "RIGAKU HOLDINGS CORP",
-      "previousShares": 505300,
-      "currentShares": 505300,
-      "previousWeight": 0.95,
-      "currentWeight": 0.92,
-      "sharesDelta": 0,
-      "weightDelta": -0.029999999999999916
-    },
-    {
-      "code": "CRWV US",
-      "name": "COREWEAVE INC-CL A",
-      "previousShares": 78900,
-      "currentShares": 78900,
-      "previousWeight": 1.19,
-      "currentWeight": 1.17,
-      "sharesDelta": 0,
-      "weightDelta": -0.020000000000000018
-    },
-    {
-      "code": "AMZN US",
-      "name": "AMAZON.COM INC",
-      "previousShares": 32200,
-      "currentShares": 32200,
-      "previousWeight": 1.02,
-      "currentWeight": 1,
-      "sharesDelta": 0,
-      "weightDelta": -0.020000000000000018
-    },
-    {
-      "code": "NBIS US",
-      "name": "NEBIUS GROUP NV",
-      "previousShares": 38400,
-      "currentShares": 38400,
-      "previousWeight": 0.81,
-      "currentWeight": 0.79,
-      "sharesDelta": 0,
-      "weightDelta": -0.020000000000000018
-    },
-    {
-      "code": "META US",
-      "name": "META PLATFORMS INC-CLASS A",
-      "previousShares": 9680,
-      "currentShares": 9680,
-      "previousWeight": 0.83,
-      "currentWeight": 0.81,
-      "sharesDelta": 0,
-      "weightDelta": -0.019999999999999907
+      "currentShares": 109100,
+      "previousWeight": 2.54,
+      "currentWeight": 2.81,
+      "sharesDelta": 11500,
+      "weightDelta": 0.27
     },
     {
       "code": "2360",
       "name": "致茂",
       "previousShares": 226000,
       "currentShares": 226000,
-      "previousWeight": 1.83,
-      "currentWeight": 1.82,
+      "previousWeight": 1.82,
+      "currentWeight": 2,
       "sharesDelta": 0,
-      "weightDelta": -0.010000000000000009
+      "weightDelta": 0.17999999999999994
     },
     {
-      "code": "3110 JP",
-      "name": "NITTO BOSEKI CO LTD",
-      "previousShares": 53700,
-      "currentShares": 53700,
-      "previousWeight": 1.14,
-      "currentWeight": 1.13,
+      "code": "TSEM US",
+      "name": "TOWER SEMICONDUCTOR LTD",
+      "previousShares": 118182,
+      "currentShares": 118182,
+      "previousWeight": 3.15,
+      "currentWeight": 3.32,
       "sharesDelta": 0,
-      "weightDelta": -0.010000000000000009
+      "weightDelta": 0.16999999999999993
     },
     {
-      "code": "000660 KP",
-      "name": "SK HYNIX INC",
-      "previousShares": 10711,
-      "currentShares": 10711,
-      "previousWeight": 1.05,
-      "currentWeight": 1.04,
+      "code": "SOI FP",
+      "name": "S.O.I.T.E.C.",
+      "previousShares": 89943,
+      "currentShares": 89943,
+      "previousWeight": 1.13,
+      "currentWeight": 1.29,
       "sharesDelta": 0,
-      "weightDelta": -0.010000000000000009
+      "weightDelta": 0.16000000000000014
+    },
+    {
+      "code": "AIXA GR",
+      "name": "AIXTRON SE",
+      "previousShares": 278437,
+      "currentShares": 278437,
+      "previousWeight": 1.66,
+      "currentWeight": 1.81,
+      "sharesDelta": 0,
+      "weightDelta": 0.15000000000000013
+    },
+    {
+      "code": "009150 KP",
+      "name": "SAMSUNG ELECTRO-MECHANICS CO",
+      "previousShares": 34369,
+      "currentShares": 34369,
+      "previousWeight": 1.85,
+      "currentWeight": 1.95,
+      "sharesDelta": 0,
+      "weightDelta": 0.09999999999999987
+    },
+    {
+      "code": "3653",
+      "name": "健策",
+      "previousShares": 110000,
+      "currentShares": 110000,
+      "previousWeight": 1.9,
+      "currentWeight": 1.97,
+      "sharesDelta": 0,
+      "weightDelta": 0.07000000000000006
+    },
+    {
+      "code": "CIEN US",
+      "name": "CIENA CORP",
+      "previousShares": 42342,
+      "currentShares": 42342,
+      "previousWeight": 2.6,
+      "currentWeight": 2.67,
+      "sharesDelta": 0,
+      "weightDelta": 0.06999999999999984
+    },
+    {
+      "code": "WDC US",
+      "name": "WESTERN DIGITAL CORP",
+      "previousShares": 41462,
+      "currentShares": 41462,
+      "previousWeight": 1.86,
+      "currentWeight": 1.92,
+      "sharesDelta": 0,
+      "weightDelta": 0.05999999999999983
+    },
+    {
+      "code": "COHR US",
+      "name": "COHERENT CORP",
+      "previousShares": 26174,
+      "currentShares": 26174,
+      "previousWeight": 1.07,
+      "currentWeight": 1.12,
+      "sharesDelta": 0,
+      "weightDelta": 0.050000000000000044
     },
     {
       "code": "2467",
       "name": "志聖",
       "previousShares": 249000,
       "currentShares": 249000,
-      "previousWeight": 0.51,
-      "currentWeight": 0.5,
+      "previousWeight": 0.5,
+      "currentWeight": 0.54,
+      "sharesDelta": 0,
+      "weightDelta": 0.040000000000000036
+    },
+    {
+      "code": "2345",
+      "name": "智邦",
+      "previousShares": 221000,
+      "currentShares": 221000,
+      "previousWeight": 1.77,
+      "currentWeight": 1.8,
+      "sharesDelta": 0,
+      "weightDelta": 0.030000000000000027
+    },
+    {
+      "code": "NVDA US",
+      "name": "NVIDIA CORP",
+      "previousShares": 62250,
+      "currentShares": 62250,
+      "previousWeight": 1.53,
+      "currentWeight": 1.56,
+      "sharesDelta": 0,
+      "weightDelta": 0.030000000000000027
+    },
+    {
+      "code": "AVGO US",
+      "name": "BROADCOM INC",
+      "previousShares": 30960,
+      "currentShares": 30960,
+      "previousWeight": 1.53,
+      "currentWeight": 1.56,
+      "sharesDelta": 0,
+      "weightDelta": 0.030000000000000027
+    },
+    {
+      "code": "3110 JP",
+      "name": "NITTO BOSEKI CO LTD",
+      "previousShares": 53700,
+      "currentShares": 53700,
+      "previousWeight": 1.13,
+      "currentWeight": 1.15,
+      "sharesDelta": 0,
+      "weightDelta": 0.020000000000000018
+    },
+    {
+      "code": "META US",
+      "name": "META PLATFORMS INC-CLASS A",
+      "previousShares": 9680,
+      "currentShares": 9680,
+      "previousWeight": 0.81,
+      "currentWeight": 0.83,
+      "sharesDelta": 0,
+      "weightDelta": 0.019999999999999907
+    },
+    {
+      "code": "2368",
+      "name": "金像電",
+      "previousShares": 370000,
+      "currentShares": 370000,
+      "previousWeight": 1.7,
+      "currentWeight": 1.71,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "GOOGL US",
+      "name": "ALPHABET INC-CL A",
+      "previousShares": 23200,
+      "currentShares": 23200,
+      "previousWeight": 0.97,
+      "currentWeight": 0.98,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "APP US",
+      "name": "APPLOVIN CORP-CLASS A",
+      "previousShares": 11880,
+      "currentShares": 11880,
+      "previousWeight": 0.69,
+      "currentWeight": 0.7,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "PLTR US",
+      "name": "PALANTIR TECHNOLOGIES INC-A",
+      "previousShares": 33200,
+      "currentShares": 33200,
+      "previousWeight": 0.59,
+      "currentWeight": 0.6,
+      "sharesDelta": 0,
+      "weightDelta": 0.010000000000000009
+    },
+    {
+      "code": "6510",
+      "name": "精測",
+      "previousShares": 56000,
+      "currentShares": 56000,
+      "previousWeight": 0.81,
+      "currentWeight": 0.82,
+      "sharesDelta": 0,
+      "weightDelta": 0.009999999999999898
+    }
+  ],
+  "decreased": [
+    {
+      "code": "005930 KP",
+      "name": "SAMSUNG ELECTRONICS CO LTD",
+      "previousShares": 143231,
+      "currentShares": 115810,
+      "previousWeight": 2.62,
+      "currentWeight": 2.09,
+      "sharesDelta": -27421,
+      "weightDelta": -0.5300000000000002
+    },
+    {
+      "code": "268A JP",
+      "name": "RIGAKU HOLDINGS CORP",
+      "previousShares": 505300,
+      "currentShares": 340900,
+      "previousWeight": 0.92,
+      "currentWeight": 0.62,
+      "sharesDelta": -164400,
+      "weightDelta": -0.30000000000000004
+    },
+    {
+      "code": "SNDK US",
+      "name": "SANDISK CORP",
+      "previousShares": 55893,
+      "currentShares": 53293,
+      "previousWeight": 6.38,
+      "currentWeight": 6.09,
+      "sharesDelta": -2600,
+      "weightDelta": -0.29000000000000004
+    },
+    {
+      "code": "285A JP",
+      "name": "KIOXIA HOLDINGS CORP",
+      "previousShares": 102900,
+      "currentShares": 102900,
+      "previousWeight": 2.72,
+      "currentWeight": 2.45,
+      "sharesDelta": 0,
+      "weightDelta": -0.27
+    },
+    {
+      "code": "LITE US",
+      "name": "LUMENTUM HOLDINGS INC",
+      "previousShares": 75485,
+      "currentShares": 72785,
+      "previousWeight": 8.35,
+      "currentWeight": 8.08,
+      "sharesDelta": -2700,
+      "weightDelta": -0.2699999999999996
+    },
+    {
+      "code": "TER US",
+      "name": "TERADYNE INC",
+      "previousShares": 65100,
+      "currentShares": 58500,
+      "previousWeight": 2.96,
+      "currentWeight": 2.76,
+      "sharesDelta": -6600,
+      "weightDelta": -0.20000000000000018
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "previousShares": 497000,
+      "currentShares": 497000,
+      "previousWeight": 4.08,
+      "currentWeight": 3.96,
+      "sharesDelta": 0,
+      "weightDelta": -0.1200000000000001
+    },
+    {
+      "code": "5706 JP",
+      "name": "MITSUI KINZOKU CO LTD",
+      "previousShares": 92300,
+      "currentShares": 92300,
+      "previousWeight": 2.72,
+      "currentWeight": 2.63,
+      "sharesDelta": 0,
+      "weightDelta": -0.0900000000000003
+    },
+    {
+      "code": "6787 JP",
+      "name": "MEIKO ELECTRONICS CO LTD",
+      "previousShares": 85300,
+      "currentShares": 85300,
+      "previousWeight": 1.98,
+      "currentWeight": 1.9,
+      "sharesDelta": 0,
+      "weightDelta": -0.08000000000000007
+    },
+    {
+      "code": "5801 JP",
+      "name": "FURUKAWA ELECTRIC CO LTD",
+      "previousShares": 87400,
+      "currentShares": 87400,
+      "previousWeight": 3.12,
+      "currentWeight": 3.06,
+      "sharesDelta": 0,
+      "weightDelta": -0.06000000000000005
+    },
+    {
+      "code": "5803 JP",
+      "name": "FUJIKURA LTD",
+      "previousShares": 354000,
+      "currentShares": 354000,
+      "previousWeight": 1.65,
+      "currentWeight": 1.59,
+      "sharesDelta": 0,
+      "weightDelta": -0.05999999999999983
+    },
+    {
+      "code": "MU US",
+      "name": "MICRON TECHNOLOGY INC",
+      "previousShares": 83471,
+      "currentShares": 83471,
+      "previousWeight": 4.74,
+      "currentWeight": 4.71,
+      "sharesDelta": 0,
+      "weightDelta": -0.03000000000000025
+    },
+    {
+      "code": "CRWV US",
+      "name": "COREWEAVE INC-CL A",
+      "previousShares": 78900,
+      "currentShares": 78900,
+      "previousWeight": 1.17,
+      "currentWeight": 1.14,
+      "sharesDelta": 0,
+      "weightDelta": -0.030000000000000027
+    },
+    {
+      "code": "000660 KP",
+      "name": "SK HYNIX INC",
+      "previousShares": 10711,
+      "currentShares": 10711,
+      "previousWeight": 1.04,
+      "currentWeight": 1.01,
+      "sharesDelta": 0,
+      "weightDelta": -0.030000000000000027
+    },
+    {
+      "code": "5274",
+      "name": "信驊",
+      "previousShares": 10000,
+      "currentShares": 10000,
+      "previousWeight": 0.57,
+      "currentWeight": 0.54,
+      "sharesDelta": 0,
+      "weightDelta": -0.029999999999999916
+    },
+    {
+      "code": "GLW US",
+      "name": "CORNING INC",
+      "previousShares": 145895,
+      "currentShares": 145895,
+      "previousWeight": 3.01,
+      "currentWeight": 2.98,
+      "sharesDelta": 0,
+      "weightDelta": -0.029999999999999805
+    },
+    {
+      "code": "2383",
+      "name": "台光電",
+      "previousShares": 144000,
+      "currentShares": 144000,
+      "previousWeight": 2.17,
+      "currentWeight": 2.15,
+      "sharesDelta": 0,
+      "weightDelta": -0.020000000000000018
+    },
+    {
+      "code": "3017",
+      "name": "奇鋐",
+      "previousShares": 130000,
+      "currentShares": 130000,
+      "previousWeight": 1.25,
+      "currentWeight": 1.23,
+      "sharesDelta": 0,
+      "weightDelta": -0.020000000000000018
+    },
+    {
+      "code": "2308",
+      "name": "台達電",
+      "previousShares": 628000,
+      "currentShares": 628000,
+      "previousWeight": 4.56,
+      "currentWeight": 4.54,
+      "sharesDelta": 0,
+      "weightDelta": -0.019999999999999574
+    },
+    {
+      "code": "3037",
+      "name": "欣興",
+      "previousShares": 475000,
+      "currentShares": 475000,
+      "previousWeight": 1.21,
+      "currentWeight": 1.2,
+      "sharesDelta": 0,
+      "weightDelta": -0.010000000000000009
+    },
+    {
+      "code": "6274",
+      "name": "台燿",
+      "previousShares": 268000,
+      "currentShares": 268000,
+      "previousWeight": 1.01,
+      "currentWeight": 1,
+      "sharesDelta": 0,
+      "weightDelta": -0.010000000000000009
+    },
+    {
+      "code": "3533",
+      "name": "嘉澤",
+      "previousShares": 73000,
+      "currentShares": 73000,
+      "previousWeight": 0.72,
+      "currentWeight": 0.71,
+      "sharesDelta": 0,
+      "weightDelta": -0.010000000000000009
+    },
+    {
+      "code": "FSLY US",
+      "name": "FASTLY INC - CLASS A",
+      "previousShares": 168600,
+      "currentShares": 168600,
+      "previousWeight": 0.52,
+      "currentWeight": 0.51,
       "sharesDelta": 0,
       "weightDelta": -0.010000000000000009
     }
   ],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 5,
-    "removedCount": 5,
-    "increasedCount": 19,
-    "decreasedCount": 25,
-    "totalChangeCount": 54
+    "addedCount": 2,
+    "removedCount": 1,
+    "increasedCount": 22,
+    "decreasedCount": 23,
+    "totalChangeCount": 48
   }
 }

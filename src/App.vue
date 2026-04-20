@@ -18,12 +18,18 @@ let outsideClickHandler = null;
 
 const primaryNavigationItems = [
   { label: '首頁', path: '/' },
-  { label: '選股雷達', path: '/radar' },
+  { label: '卡位雷達', path: '/entry-radar' },
   { label: '資金題材', path: '/themes' },
   { label: '主動式 ETF', path: '/etfs' },
 ];
 
 const secondaryNavigationItems = [
+  {
+    label: '選股雷達',
+    path: '/radar',
+    tag: '選股',
+    description: '把技術突破、籌碼偏多、整理待發與風險排除集中整理成選股工作台。',
+  },
   {
     label: '股票小教室',
     path: '/classroom',

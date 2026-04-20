@@ -8,6 +8,7 @@ import ThemeRadarPage from './pages/ThemeRadarPage.vue';
 import FuturesPage from './pages/FuturesPage.vue';
 import StockRadarPage from './pages/StockRadarPage.vue';
 import StockClassroomPage from './pages/StockClassroomPage.vue';
+import EntryRadarPage from './pages/EntryRadarPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -20,6 +21,7 @@ export const ROUTE_NAME = {
   FUTURES: 'futures',
   STOCK_RADAR: 'stock-radar',
   STOCK_CLASSROOM: 'stock-classroom',
+  ENTRY_RADAR: 'entry-radar',
 };
 
 const router = createRouter({
@@ -60,6 +62,15 @@ const router = createRouter({
       meta: {
         title: '主動式 ETF 明細',
         description: '查看主動式 ETF 最新成分股、前一日異動、技術面與持股分散。',
+      },
+    },
+    {
+      path: '/entry-radar',
+      name: ROUTE_NAME.ENTRY_RADAR,
+      component: EntryRadarPage,
+      meta: {
+        title: '起漲卡位雷達',
+        description: '把量縮轉強、整理待突破、法人剛轉買、題材剛升溫與補漲候選集中整理，快速找出剛起漲的台股。',
       },
     },
     {
