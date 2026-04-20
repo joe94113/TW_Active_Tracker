@@ -17,7 +17,7 @@ const replayHistory = ref(null);
 const isReplayLoading = ref(false);
 const replayError = ref('');
 
-const themeRadar = computed(() => dashboard.value?.資金題材雷達 ?? null);
+const themeRadar = computed(() => dashboard.value?.題材雷達 ?? null);
 const radar = computed(() =>
   buildStockRadar({
     stockSummaries: stockList.value,
@@ -102,8 +102,9 @@ const pageSeo = computed(() => ({
 
 useSeoMeta(pageSeo);
 
+void loadGlobalData();
+
 onMounted(async () => {
-  await loadGlobalData();
   await loadReplayHistory();
 });
 

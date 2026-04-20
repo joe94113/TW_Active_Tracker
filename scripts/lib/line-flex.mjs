@@ -275,14 +275,33 @@ function getBubblePalette(variant) {
 
 function createStockCard(item, options = {}) {
   const accentColor = options.accentColor ?? '#0b699b';
+  const setupStyle = getSetupTagStyle(item.setupTag, accentColor);
+  const topicText = item.topicTag ?? item.industryName ?? null;
+  const foreignLotsText =
+    Number.isFinite(Number(item.foreign5Day)) && Number(item.foreign5Day) !== 0 ? formatLots(item.foreign5Day) : null;
+  const trustLotsText =
+    Number.isFinite(Number(item.investmentTrust5Day)) && Number(item.investmentTrust5Day) !== 0
+      ? formatLots(item.investmentTrust5Day)
+      : null;
+  const targetText =
+    item.foreignTargetPrice === null || item.foreignTargetPrice === undefined
+      ? null
+      : `${formatNumber(item.foreignTargetPrice)} 元`;
   const priceText =
     item.close === null || item.close === undefined
       ? '—'
-      : `${formatNumber(item.close)}｜單日 ${formatPercent(item.changePercent)}`;
-  const trendText =
+      : `${formatNumber(item.close)} 元｜單日 ${formatPercent(item.changePercent)}`;
+  const firstObservation =
     item.volumeLots === null || item.volumeLots === undefined
-      ? `20日 ${formatPercent(item.return20)}｜量能 —`
+      ? `20日 ${formatPercent(item.return20)}`
       : `20日 ${formatPercent(item.return20)}｜量 ${formatNumber(item.volumeLots, 0)} 張`;
+  const secondObservation = [foreignLotsText ? `外資 ${foreignLotsText}` : null, trustLotsText ? `投信 ${trustLotsText}` : null]
+    .filter(Boolean)
+    .join('｜');
+  const finalObservation =
+    targetText || topicText
+      ? [targetText ? `外資價 ${targetText}` : null, topicText ? `題材 ${topicText}` : null].filter(Boolean).join('｜')
+      : null;
 
   return {
     type: 'box',
@@ -325,6 +344,14 @@ function createStockCard(item, options = {}) {
             backgroundColor: `${accentColor}14`,
             color: accentColor,
           }),
+          ...(item.setupTag
+            ? [
+                createPill(item.setupTag, {
+                  backgroundColor: setupStyle.backgroundColor,
+                  color: setupStyle.color,
+                }),
+              ]
+            : []),
           createPill(
             item.changePercent === null || item.changePercent === undefined
               ? '—'
@@ -351,9 +378,35 @@ function createStockCard(item, options = {}) {
         spacing: 'sm',
         contents: [
           createText('觀察', { size: 'xs', color: '#6b7a86', flex: 2 }),
-          createText(trendText, { size: 'xs', color: '#10202d', flex: 5 }),
+          createText(firstObservation, { size: 'xs', color: '#10202d', flex: 5 }),
         ],
       },
+      ...(secondObservation
+        ? [
+            {
+              type: 'box',
+              layout: 'baseline',
+              spacing: 'sm',
+              contents: [
+                createText('法人', { size: 'xs', color: '#6b7a86', flex: 2 }),
+                createText(secondObservation, { size: 'xs', color: '#10202d', flex: 5 }),
+              ],
+            },
+          ]
+        : []),
+      ...(finalObservation
+        ? [
+            {
+              type: 'box',
+              layout: 'baseline',
+              spacing: 'sm',
+              contents: [
+                createText('補充', { size: 'xs', color: '#6b7a86', flex: 2 }),
+                createText(finalObservation, { size: 'xs', color: '#10202d', flex: 5 }),
+              ],
+            },
+          ]
+        : []),
       createText(item.detail, {
         size: 'xs',
         color: '#4b5c68',
@@ -654,7 +707,7 @@ function buildStockCards(items, emptyText, options = {}) {
     return [createText(emptyText, { color: '#6b7a86' })];
   }
 
-  return items.slice(0, 3).map((item, index) =>
+  return items.slice(0, 2).map((item, index) =>
     createStockCard(item, {
       accentColor: options.accentColor,
       backgroundColor: options.backgroundColors?.[index % (options.backgroundColors?.length || 1)] ?? '#f6fbff',
@@ -671,28 +724,26 @@ function createFlexMessage(altText, contents) {
   };
 }
 
-function buildStockCarouselMessage({ summary, title, accentColor, items, emptyText }) {
-  const variant = title.includes('積極型') ? 'aggressive' : 'stable';
-  const bubbles = items?.length
-    ? items.slice(0, 3).map((item) =>
-        createStockBubble(item, {
-          accentColor,
-          variant,
-        }),
-      )
-    : [
-        createBubble({
-          title,
-          accentColor,
-          linkUrl: `${siteUrl}#/radar`,
-          footerText: '打開選股雷達',
-          contents: [createText(emptyText, { color: '#6b7a86' })],
-        }),
-      ];
+function buildStockOverviewBubble({ title, accentColor, items, emptyText, variant, note }) {
+  const palette = getBubblePalette(variant);
 
-  return createFlexMessage(`${summary.appName}｜${summary.marketDate}｜${title}`, {
-    type: 'carousel',
-    contents: bubbles,
+  return createBubble({
+    title,
+    accentColor,
+    bodyBackgroundColor: palette.bodyBackgroundColor,
+    linkUrl: `${siteUrl}#/radar`,
+    footerText: '打開選股雷達',
+    contents: [
+      createText(note, {
+        size: 'xs',
+        color: '#4b5c68',
+      }),
+      ...buildStockCards(items, emptyText, {
+        accentColor,
+        backgroundColors: [palette.primarySectionBackground, palette.secondarySectionBackground],
+        borderColor: palette.primarySectionBorder,
+      }),
+    ],
   });
 }
 
@@ -705,21 +756,25 @@ export function buildLineFlexMessages(summary) {
     messages: [
       createFlexMessage(`${summary.appName}｜${summary.marketDate} 更新｜明日趨勢預測`, {
         type: 'carousel',
-        contents: [createOutlookBubble(summary)],
-      }),
-      buildStockCarouselMessage({
-        summary,
-        title: '🛡 穩健型',
-        accentColor: '#2f7ea1',
-        items: summary.watchGroups.stable,
-        emptyText: '今天沒有特別整齊的穩健型名單，先觀察雙法人是否重新聚焦。',
-      }),
-      buildStockCarouselMessage({
-        summary,
-        title: '🔥 積極型',
-        accentColor: '#e07a4f',
-        items: summary.watchGroups.aggressive,
-        emptyText: '今天沒有額外的積極型名單，短線先等放量突破訊號再追。',
+        contents: [
+          createOutlookBubble(summary),
+          buildStockOverviewBubble({
+            title: '🛡 穩健型',
+            accentColor: '#2f7ea1',
+            items: summary.watchGroups.stable,
+            emptyText: '今天沒有特別整齊的穩健型名單，先觀察雙法人是否重新聚焦。',
+            variant: 'stable',
+            note: '偏向雙法人與趨勢延續，適合先放進追蹤清單。',
+          }),
+          buildStockOverviewBubble({
+            title: '🔥 積極型',
+            accentColor: '#e07a4f',
+            items: summary.watchGroups.aggressive,
+            emptyText: '今天沒有額外的積極型名單，短線先等放量突破訊號再追。',
+            variant: 'aggressive',
+            note: '偏向突破與轉強，適合短線盯盤確認量價。',
+          }),
+        ],
       }),
     ],
   };
