@@ -10,6 +10,10 @@ import StockRadarPage from './pages/StockRadarPage.vue';
 import StockClassroomPage from './pages/StockClassroomPage.vue';
 import EntryRadarPage from './pages/EntryRadarPage.vue';
 import HighDividendEtfFlowPage from './pages/HighDividendEtfFlowPage.vue';
+import TomorrowWatchlistPage from './pages/TomorrowWatchlistPage.vue';
+import FavoritesHealthPage from './pages/FavoritesHealthPage.vue';
+import StockScannerPage from './pages/StockScannerPage.vue';
+import EventStatsPage from './pages/EventStatsPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -24,6 +28,10 @@ export const ROUTE_NAME = {
   STOCK_CLASSROOM: 'stock-classroom',
   ENTRY_RADAR: 'entry-radar',
   HIGH_DIVIDEND_ETF_FLOW: 'high-dividend-etf-flow',
+  TOMORROW_WATCHLIST: 'tomorrow-watchlist',
+  FAVORITES_HEALTH: 'favorites-health',
+  STOCK_SCANNER: 'stock-scanner',
+  EVENT_STATS: 'event-stats',
 };
 
 const router = createRouter({
@@ -82,6 +90,42 @@ const router = createRouter({
       meta: {
         title: '高股息 ETF 換股雷達',
         description: '用官方高股息 ETF 名單、最近揭露資料與共識加碼 / 減碼清單，快速看高息與收益型 ETF 最近把資金移到哪些台股。',
+      },
+    },
+    {
+      path: '/watchlist',
+      name: ROUTE_NAME.TOMORROW_WATCHLIST,
+      component: TomorrowWatchlistPage,
+      meta: {
+        title: '隔日觀察清單',
+        description: '把明日盤勢、穩健型、積極型與剛轉強名單整理成同一頁，盤後快速看隔日重點。',
+      },
+    },
+    {
+      path: '/favorites-health',
+      name: ROUTE_NAME.FAVORITES_HEALTH,
+      component: FavoritesHealthPage,
+      meta: {
+        title: '自選股健檢中心',
+        description: '把自選股的健康分數、追價風險、五日籌碼與事件後表現集中整理。',
+      },
+    },
+    {
+      path: '/scanner',
+      name: ROUTE_NAME.STOCK_SCANNER,
+      component: StockScannerPage,
+      meta: {
+        title: '選股條件篩選器',
+        description: '用外資、投信、題材、健康度與隔日觀察條件快速掃描台股候選名單。',
+      },
+    },
+    {
+      path: '/event-stats',
+      name: ROUTE_NAME.EVENT_STATS,
+      component: EventStatsPage,
+      meta: {
+        title: '事件後表現統計',
+        description: '整理月營收、法說、財報與除息後的歷史反應，幫助判斷事件交易節奏。',
       },
     },
     {

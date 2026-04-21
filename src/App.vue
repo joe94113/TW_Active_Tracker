@@ -57,6 +57,33 @@ secondaryNavigationItems.push({
   description: '集中看高股息 / 收益型 ETF 最近在買進或賣出哪些台股，順著 ETF 換股方向找標的。',
 });
 
+secondaryNavigationItems.push(
+  {
+    label: '隔日觀察',
+    path: '/watchlist',
+    tag: '盤後',
+    description: '把明日盤勢、穩健型、積極型與剛轉強名單整理在同一頁。',
+  },
+  {
+    label: '自選健檢',
+    path: '/favorites-health',
+    tag: '自選',
+    description: '集中看自選股的健康分數、過熱風險、五日籌碼與事件表現。',
+  },
+  {
+    label: '條件掃描',
+    path: '/scanner',
+    tag: '掃描',
+    description: '用外資、投信、題材、健康度與隔日觀察條件快速篩選台股。',
+  },
+  {
+    label: '事件統計',
+    path: '/event-stats',
+    tag: '統計',
+    description: '整理月營收、法說、財報與除息後的歷史反應，幫助判斷交易節奏。',
+  },
+);
+
 const allNavigationItems = [...primaryNavigationItems, ...secondaryNavigationItems];
 
 function formatGeneratedAt(value) {
