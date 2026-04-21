@@ -4415,6 +4415,34 @@ input {
   line-height: 1.7;
 }
 
+.high-dividend-callout-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.high-dividend-callout {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(11, 105, 155, 0.1);
+  background: rgba(248, 251, 255, 0.92);
+}
+
+.high-dividend-callout p {
+  margin: 0;
+  color: #38516a;
+  line-height: 1.6;
+}
+
+.high-dividend-callout-title {
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
 .high-dividend-etf-chip-row,
 .high-dividend-etf-summary {
   display: flex;
@@ -4489,6 +4517,10 @@ input {
   .high-dividend-etf-columns,
   .high-dividend-stock-metrics,
   .high-dividend-universe-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .high-dividend-callout-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 

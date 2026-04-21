@@ -5,6 +5,7 @@ import StatusCard from '../components/StatusCard.vue';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import { fetchJson } from '../lib/api';
+import { buildSummaryHealthScore, buildSummaryOverheatWarnings } from '../lib/stockHealth';
 import { createStockRoute } from '../lib/stockRouting';
 import {
   formatAmount,
@@ -164,6 +165,121 @@ function formatDisclosureRange(item) {
 function getEtfTopList(items) {
   return (items ?? []).slice(0, 5);
 }
+
+function getHighDividendAction(item, direction = 'buy') {
+  const warnings = buildSummaryOverheatWarnings(item);
+  const health = buildSummaryHealthScore(item);
+  const return20 = Number(item?.return20 ?? 0);
+  const changePercent = Number(item?.changePercent ?? 0);
+  const foreign5Day = Number(item?.foreign5Day ?? 0);
+  const investmentTrust5Day = Number(item?.investmentTrust5Day ?? 0);
+  const targetPremium = Number(item?.foreignTargetPricePremium ?? 999);
+  const signalTitle = item?.topSignalTitle ?? '';
+  const hasInstitutionalSupport = foreign5Day > 0 || investmentTrust5Day > 0;
+  const hasConstructiveSignal =
+    item?.topSignalTone === 'up' ||
+    /MACD|黃金交叉|站回|突破|轉強|翻正|低檔/.test(signalTitle);
+  const isOverheated =
+    return20 >= 30 ||
+    changePercent >= 5 ||
+    targetPremium <= 5 ||
+    warnings.some((warning) => warning.tone === 'risk' || warning.tone === 'warning');
+
+  if (direction === 'buy') {
+    if (isOverheated && health.totalScore >= 58) {
+      return {
+        label: '漲多降溫',
+        tone: 'warning',
+        note: '這檔雖仍被高息 ETF 偏多看待，但短線漲幅已大，殖利率吸引力可能被股價上漲壓低。',
+      };
+    }
+
+    return {
+      label: '高息偏多',
+      tone: hasInstitutionalSupport || hasConstructiveSignal ? 'up' : 'info',
+      note:
+        hasInstitutionalSupport || hasConstructiveSignal
+          ? '高息 ETF 與籌碼 / 技術面同步偏正向，較適合列為高息資金偏多的追蹤標的。'
+          : 'ETF 有買盤共識，但更像高息配置名單，若要追動能最好再搭配起漲卡位雷達判斷。',
+    };
+  }
+
+  const reversalCandidate =
+    health.totalScore >= 58 &&
+    return20 <= 18 &&
+    changePercent > -4 &&
+    (hasInstitutionalSupport || hasConstructiveSignal);
+
+  if (reversalCandidate) {
+    return {
+      label: '低接觀察',
+      tone: 'info',
+      note: '雖被高息 ETF 減碼，但籌碼與技術面尚未明顯轉弱，若回到支撐可列反轉觀察。',
+    };
+  }
+
+  return {
+    label: '高息調節',
+    tone: 'risk',
+    note: '高息 ETF 共識在退場，常見原因是殖利率優勢下降或權重調整，短線先別把它當高息主力股。',
+  };
+}
+
+function getMomentumAction(item, direction = 'buy') {
+  const warnings = buildSummaryOverheatWarnings(item);
+  const health = buildSummaryHealthScore(item);
+  const return20 = Number(item?.return20 ?? 0);
+  const changePercent = Number(item?.changePercent ?? 0);
+  const foreign5Day = Number(item?.foreign5Day ?? 0);
+  const investmentTrust5Day = Number(item?.investmentTrust5Day ?? 0);
+  const signalTitle = item?.topSignalTitle ?? '';
+  const hasBuySupport = foreign5Day > 0 || investmentTrust5Day > 0;
+  const isConstructiveSignal =
+    item?.topSignalTone === 'up' || /MACD|黃金交叉|站回|突破|翻正|轉強|低檔/.test(signalTitle);
+  const isWeakSignal = item?.topSignalTone === 'down' || /跌破|轉弱|失守|壓回/.test(signalTitle);
+  const isOverheated =
+    return20 >= 30 ||
+    changePercent >= 5 ||
+    warnings.some((warning) => warning.key === 'return20-overheat' || warning.key === 'day-surge');
+
+  if (direction === 'buy') {
+    if (isOverheated) {
+      return {
+        label: '偏熱不追',
+        tone: 'warning',
+        note: '從短線動能看已經跑太快，比較像強勢股延伸段，追價風險偏高。',
+      };
+    }
+
+    if (isConstructiveSignal && hasBuySupport && health.totalScore >= 62) {
+      return {
+        label: '動能可追',
+        tone: 'up',
+        note: '技術面與籌碼同步偏多，若隔日量價維持，較像可以順勢追蹤的動能股。',
+      };
+    }
+
+    return {
+      label: '剛轉強觀察',
+      tone: 'info',
+      note: '已有初步轉強跡象，但最好再等一根確認棒或量能補上，再提高優先順序。',
+    };
+  }
+
+  if (!isWeakSignal && (hasBuySupport || isConstructiveSignal) && return20 <= 20 && health.totalScore >= 58) {
+    return {
+      label: '反彈可看',
+      tone: 'info',
+      note: '雖然被高息 ETF 調節，但短線動能尚未明顯破壞，可列入支撐反彈觀察。',
+    };
+  }
+
+  return {
+    label: '動能轉弱',
+    tone: 'risk',
+    note: '短線結構偏弱或買盤轉淡，先別把它當隔日優先進攻名單。',
+  };
+}
 </script>
 
 <template>
@@ -282,6 +398,23 @@ function getEtfTopList(items) {
                 先看 ETF 共識是不是正在把資金往這檔集中。
               </p>
 
+              <div class="high-dividend-callout-grid">
+                <div class="high-dividend-callout">
+                  <span class="high-dividend-callout-title">高息角度</span>
+                  <span class="status-badge" :class="`is-${getHighDividendAction(item, 'buy').tone}`">
+                    {{ getHighDividendAction(item, 'buy').label }}
+                  </span>
+                  <p>{{ getHighDividendAction(item, 'buy').note }}</p>
+                </div>
+                <div class="high-dividend-callout">
+                  <span class="high-dividend-callout-title">動能角度</span>
+                  <span class="status-badge" :class="`is-${getMomentumAction(item, 'buy').tone}`">
+                    {{ getMomentumAction(item, 'buy').label }}
+                  </span>
+                  <p>{{ getMomentumAction(item, 'buy').note }}</p>
+                </div>
+              </div>
+
               <div class="high-dividend-stock-metrics">
                 <div>
                   <span>收盤</span>
@@ -356,6 +489,23 @@ function getEtfTopList(items) {
                 權重合計 {{ formatPercent(item.weightDeltaTotal) }}，張數 {{ formatLots(item.sharesDeltaTotal) }}，
                 如果短線又剛好碰壓力，先留意是不是 ETF 在邊走邊退。
               </p>
+
+              <div class="high-dividend-callout-grid">
+                <div class="high-dividend-callout">
+                  <span class="high-dividend-callout-title">高息角度</span>
+                  <span class="status-badge" :class="`is-${getHighDividendAction(item, 'sell').tone}`">
+                    {{ getHighDividendAction(item, 'sell').label }}
+                  </span>
+                  <p>{{ getHighDividendAction(item, 'sell').note }}</p>
+                </div>
+                <div class="high-dividend-callout">
+                  <span class="high-dividend-callout-title">動能角度</span>
+                  <span class="status-badge" :class="`is-${getMomentumAction(item, 'sell').tone}`">
+                    {{ getMomentumAction(item, 'sell').label }}
+                  </span>
+                  <p>{{ getMomentumAction(item, 'sell').note }}</p>
+                </div>
+              </div>
 
               <div class="high-dividend-stock-metrics">
                 <div>
