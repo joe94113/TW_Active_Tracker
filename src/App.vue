@@ -50,6 +50,13 @@ const secondaryNavigationItems = [
   },
 ];
 
+secondaryNavigationItems.push({
+  label: '高息 ETF',
+  path: '/high-dividend-etfs',
+  tag: '換股',
+  description: '集中看高股息 / 收益型 ETF 最近在買進或賣出哪些台股，順著 ETF 換股方向找標的。',
+});
+
 const allNavigationItems = [...primaryNavigationItems, ...secondaryNavigationItems];
 
 function formatGeneratedAt(value) {

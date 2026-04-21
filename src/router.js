@@ -9,6 +9,7 @@ import FuturesPage from './pages/FuturesPage.vue';
 import StockRadarPage from './pages/StockRadarPage.vue';
 import StockClassroomPage from './pages/StockClassroomPage.vue';
 import EntryRadarPage from './pages/EntryRadarPage.vue';
+import HighDividendEtfFlowPage from './pages/HighDividendEtfFlowPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -22,6 +23,7 @@ export const ROUTE_NAME = {
   STOCK_RADAR: 'stock-radar',
   STOCK_CLASSROOM: 'stock-classroom',
   ENTRY_RADAR: 'entry-radar',
+  HIGH_DIVIDEND_ETF_FLOW: 'high-dividend-etf-flow',
 };
 
 const router = createRouter({
@@ -71,6 +73,15 @@ const router = createRouter({
       meta: {
         title: '起漲卡位雷達',
         description: '把量縮轉強、整理待突破、法人剛轉買、題材剛升溫與補漲候選集中整理，快速找出剛起漲的台股。',
+      },
+    },
+    {
+      path: '/high-dividend-etfs',
+      name: ROUTE_NAME.HIGH_DIVIDEND_ETF_FLOW,
+      component: HighDividendEtfFlowPage,
+      meta: {
+        title: '高股息 ETF 換股雷達',
+        description: '用官方高股息 ETF 名單、最近揭露資料與共識加碼 / 減碼清單，快速看高息與收益型 ETF 最近把資金移到哪些台股。',
       },
     },
     {

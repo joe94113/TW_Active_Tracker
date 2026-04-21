@@ -49,6 +49,7 @@ const 台北時間格式器 = new Intl.DateTimeFormat('zh-TW', {
 });
 const 預設請求逾時毫秒 = 20000;
 const 預設請求重試次數 = 3;
+const 高股息ETF關鍵字 = ['高息', '高股息', '入息', '收益', '豐收', '鑫收'];
 
 function 建立ETF項目({
   code,
@@ -2012,6 +2013,11 @@ async function 抓取JSON資料(url) {
   return response.json();
 }
 
+function 是否高股息ETF名稱(name) {
+  const text = 壓縮文字(name);
+  return 高股息ETF關鍵字.some((keyword) => text.includes(keyword));
+}
+
 async function 抓取文字資料(url, options = {}) {
   const response = await 發出請求(url, {
     headers: {
@@ -3959,6 +3965,219 @@ function 建立主動ETF總覽(successes, pending) {
   };
 }
 
+async function 抓取台股高股息ETF名單() {
+  const payload = await 抓取JSON資料('https://www.twse.com.tw/zh/ETFReport/ETFWeekly?date=&response=json');
+  const rows = Array.isArray(payload?.data) ? payload.data : [];
+
+  return rows
+    .map((row) => {
+      const code = 壓縮文字(row?.[0]);
+      const name = 壓縮文字(row?.[1]);
+
+      if (!code || !name || !是否高股息ETF名稱(name)) {
+        return null;
+      }
+
+      return {
+        code,
+        name,
+        tradeValue: 取數字(row?.[2]),
+        tradeVolume: 取數字(row?.[3]),
+        transactions: 取數字(row?.[4]),
+        averagePrice: 取數字(row?.[5]),
+      };
+    })
+    .filter(Boolean)
+    .sort((left, right) => (right.tradeValue ?? 0) - (left.tradeValue ?? 0) || left.code.localeCompare(right.code));
+}
+
+function 建立高股息ETF異動項目(item, stockSummaryMap) {
+  const stockSummary = stockSummaryMap.get(item.code) ?? null;
+
+  return {
+    code: item.code,
+    name: item.name ?? stockSummary?.name ?? item.code,
+    sharesDelta: item.sharesDelta ?? null,
+    weightDelta: item.weightDelta ?? null,
+    previousShares: item.previousShares ?? null,
+    currentShares: item.currentShares ?? null,
+    previousWeight: item.previousWeight ?? null,
+    currentWeight: item.currentWeight ?? null,
+    priceDate: stockSummary?.priceDate ?? null,
+    close: stockSummary?.close ?? null,
+    change: stockSummary?.change ?? null,
+    changePercent: stockSummary?.changePercent ?? null,
+    return20: stockSummary?.return20 ?? null,
+    volume: stockSummary?.volume ?? null,
+    turnover: stockSummary?.turnover ?? null,
+    industryName: stockSummary?.industryName ?? null,
+    foreign5Day: stockSummary?.foreign5Day ?? null,
+    investmentTrust5Day: stockSummary?.investmentTrust5Day ?? null,
+    total5Day: stockSummary?.total5Day ?? null,
+    topSignalTitle: stockSummary?.topSignalTitle ?? null,
+    topSignalTone: stockSummary?.topSignalTone ?? null,
+    activeEtfCount: stockSummary?.activeEtfCount ?? 0,
+    foreignTargetPrice: stockSummary?.foreignTargetPrice ?? null,
+    foreignTargetPricePremium: stockSummary?.foreignTargetPricePremium ?? null,
+    foreignTargetBroker: stockSummary?.foreignTargetBroker ?? null,
+  };
+}
+
+function 聚合高股息ETF異動(ETF結果, stockSummaryMap, fieldNames) {
+  const map = new Map();
+
+  for (const result of ETF結果) {
+    for (const fieldName of fieldNames) {
+      for (const item of result.diff?.[fieldName] ?? []) {
+        if (!是否一般股票(item.code)) continue;
+
+        if (!map.has(item.code)) {
+          map.set(item.code, {
+            code: item.code,
+            name: item.name,
+            etfCount: 0,
+            sharesDeltaTotal: 0,
+            weightDeltaTotal: 0,
+            etfs: [],
+          });
+        }
+
+        const entry = map.get(item.code);
+        entry.etfCount += 1;
+        entry.sharesDeltaTotal += Number(item.sharesDelta ?? 0);
+        entry.weightDeltaTotal += Number(item.weightDelta ?? 0);
+        entry.etfs.push({
+          etfCode: result.etf.code,
+          etfName: result.etf.name,
+          sharesDelta: item.sharesDelta ?? null,
+          weightDelta: item.weightDelta ?? null,
+        });
+      }
+    }
+  }
+
+  return [...map.values()]
+    .map((item) => ({
+      ...建立高股息ETF異動項目(item, stockSummaryMap),
+      etfCount: item.etfCount,
+      sharesDeltaTotal: item.sharesDeltaTotal || null,
+      weightDeltaTotal: item.weightDeltaTotal || null,
+      etfs: item.etfs.sort(
+        (left, right) => Math.abs(right.weightDelta ?? 0) - Math.abs(left.weightDelta ?? 0) || (right.sharesDelta ?? 0) - (left.sharesDelta ?? 0),
+      ),
+    }))
+    .sort(
+      (left, right) =>
+        (right.etfCount ?? 0) - (left.etfCount ?? 0) ||
+        Math.abs(right.weightDeltaTotal ?? 0) - Math.abs(left.weightDeltaTotal ?? 0) ||
+        Math.abs(right.sharesDeltaTotal ?? 0) - Math.abs(left.sharesDeltaTotal ?? 0),
+    )
+    .slice(0, 24);
+}
+
+function 建立高股息ETF換股雷達({ trackedEtfs, etfResults, stockSummaries, universe, generatedAt, marketDate }) {
+  const trackedHighDividendEtfs = trackedEtfs.filter((item) => 是否高股息ETF名稱(item.fullName ?? item.name));
+  const trackedMap = new Map(trackedHighDividendEtfs.map((item) => [item.code, item]));
+  const resultMap = new Map(etfResults.map((item) => [item.etf.code, item]));
+  const stockSummaryMap = new Map(stockSummaries.map((item) => [item.code, item]));
+  const comparisonResults = trackedHighDividendEtfs.map((etf) => {
+    const result = resultMap.get(etf.code);
+    const topBuys = result?.diff?.comparisonReady
+      ? [...(result.diff.added ?? []), ...(result.diff.increased ?? [])]
+          .filter((item) => 是否一般股票(item.code))
+          .map((item) => 建立高股息ETF異動項目(item, stockSummaryMap))
+          .sort(
+            (left, right) =>
+              Math.abs(right.weightDelta ?? 0) - Math.abs(left.weightDelta ?? 0) ||
+              Math.abs(right.sharesDelta ?? 0) - Math.abs(left.sharesDelta ?? 0),
+          )
+          .slice(0, 8)
+      : [];
+    const topSells = result?.diff?.comparisonReady
+      ? [...(result.diff.removed ?? []), ...(result.diff.decreased ?? [])]
+          .filter((item) => 是否一般股票(item.code))
+          .map((item) => 建立高股息ETF異動項目(item, stockSummaryMap))
+          .sort(
+            (left, right) =>
+              Math.abs(right.weightDelta ?? 0) - Math.abs(left.weightDelta ?? 0) ||
+              Math.abs(right.sharesDelta ?? 0) - Math.abs(left.sharesDelta ?? 0),
+          )
+          .slice(0, 8)
+      : [];
+
+    return {
+      code: etf.code,
+      name: etf.name,
+      fullName: etf.fullName,
+      providerLabel: etf.providerLabel,
+      sourceName: etf.sourceName,
+      sourceUrl: etf.sourceUrl,
+      disclosureDate: result?.snapshot?.disclosureDate ?? null,
+      fromDisclosureDate: result?.diff?.fromDisclosureDate ?? null,
+      toDisclosureDate: result?.diff?.toDisclosureDate ?? null,
+      comparisonReady: Boolean(result?.diff?.comparisonReady),
+      summary: result?.diff?.summary ?? {
+        addedCount: 0,
+        removedCount: 0,
+        increasedCount: 0,
+        decreasedCount: 0,
+      },
+      topBuys,
+      topSells,
+    };
+  });
+
+  const officialUniverse = universe
+    .map((item) => {
+      const trackedEtf = trackedMap.get(item.code) ?? null;
+      const result = resultMap.get(item.code) ?? null;
+
+      return {
+        ...item,
+        isTracked: Boolean(trackedEtf),
+        providerLabel: trackedEtf?.providerLabel ?? null,
+        detailAvailability: result?.snapshot ? 'full' : 'market',
+        trackingStatus: trackedEtf?.trackingStatus ?? '官方名單已收錄，持股異動待串接',
+        latestDisclosureDate: result?.snapshot?.disclosureDate ?? null,
+        comparisonReady: Boolean(result?.diff?.comparisonReady),
+      };
+    })
+    .sort(
+      (left, right) =>
+        Number(right.isTracked) - Number(left.isTracked) ||
+        (right.tradeValue ?? 0) - (left.tradeValue ?? 0) ||
+        left.code.localeCompare(right.code),
+    );
+
+  const comparisonReadyResults = etfResults.filter((item) => trackedMap.has(item.etf.code) && item.diff?.comparisonReady);
+  const aggregateBuys = 聚合高股息ETF異動(comparisonReadyResults, stockSummaryMap, ['added', 'increased']);
+  const aggregateSells = 聚合高股息ETF異動(comparisonReadyResults, stockSummaryMap, ['removed', 'decreased']);
+  const latestDisclosureDate = comparisonResults
+    .map((item) => item.disclosureDate)
+    .filter(Boolean)
+    .sort()
+    .at(-1) ?? null;
+
+  return {
+    appName: '台股主動通',
+    generatedAt,
+    marketDate,
+    latestDisclosureDate,
+    marketHighDividendEtfCount: officialUniverse.length,
+    trackedHighDividendEtfCount: trackedHighDividendEtfs.length,
+    comparisonReadyCount: comparisonResults.filter((item) => item.comparisonReady).length,
+    officialUniverse,
+    aggregateBuys,
+    aggregateSells,
+    trackedEtfs: comparisonResults,
+    notes: [
+      '高股息 ETF 名單來自 TWSE ETFWeekly，依名稱中的高息 / 高股息 / 入息 / 收益 / 豐收 / 鑫收等關鍵字過濾。',
+      '買進 / 賣出共識目前只統計站上已串接持股異動資料的高股息 / 收益型 ETF。',
+      '股票補充欄位會同步帶入股價、20 日表現、外資 / 投信五日與近期技術面，方便判斷是不是值得再追。',
+    ],
+  };
+}
+
 function 建立共同持股(successes) {
   const map = new Map();
 
@@ -4856,6 +5075,10 @@ async function main() {
   const 個股新聞清單 = await 批次抓取個股新聞(個股候選清單);
   const 個股新聞索引 = new Map(個股新聞清單.map((item) => [item.code, item]));
   const 題材新聞清單 = await 批次抓取題材新聞(TOPIC_DEFINITIONS);
+  const 台股高股息ETF名單 = await 抓取台股高股息ETF名單().catch((error) => {
+    console.warn(`[TWSE ETFWeekly 略過] ${error instanceof Error ? error.message : String(error)}`);
+    return [];
+  });
   const { summaries: 個股摘要清單, details: 個股明細清單 } = await 寫入個股明細資料(個股候選清單, 日資料清單, tdcc索引, {
     評價索引,
     公司概況索引,
@@ -4881,6 +5104,14 @@ async function main() {
   });
   const 主動ETF總覽 = 建立主動ETF總覽(successes, pending);
   const ETF重疊分析 = 建立ETF重疊分析(successes);
+  const 高股息ETF換股雷達 = 建立高股息ETF換股雷達({
+    trackedEtfs: 追蹤ETF清單,
+    etfResults: successes,
+    stockSummaries: 個股摘要清單,
+    universe: 台股高股息ETF名單,
+    generatedAt: 取得現在ISO(現在),
+    marketDate: 市場總覽.即時狀態?.marketDate ?? 市場總覽.資料日期 ?? null,
+  });
   const 題材雷達 = buildThemeRadar({
     stockSummaries: 個股摘要清單,
     stockNewsList: 個股新聞清單,
@@ -4945,6 +5176,7 @@ async function main() {
     topicHistoryPath: 'data/topics/history.json',
     stockRadarHistoryPath: 'data/radar/history.json',
     entryRadarPath: 'data/radar/entry.json',
+    highDividendEtfFlowPath: 'data/etfs/high-dividend-flow.json',
     topicPathTemplate: 'data/topics/{slug}.json',
     trackedEtfs: 追蹤ETF清單,
     latestOverview: 追蹤ETF清單.map((etf) => {
@@ -5001,6 +5233,7 @@ async function main() {
   await 寫入JSON(path.join(題材資料目錄, 'history.json'), 題材輪動歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'history.json'), 選股回放歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'entry.json'), 起漲卡位雷達);
+  await 寫入JSON(path.join(ETF資料目錄, 'high-dividend-flow.json'), 高股息ETF換股雷達);
   await 寫入JSON(path.join(資料目錄, 'manifest.json'), manifest);
 
   if (failures.length) {
