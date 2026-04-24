@@ -1,0 +1,137 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="36" fill="url(#bg)" />
+  <g opacity="0.18">
+    <path d="M72 120H1128" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M72 210H1128" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M72 300H1128" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M72 390H1128" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M72 480H1128" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M240 86V544" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M452 86V544" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M664 86V544" stroke="#E9F4FF" stroke-width="2" />
+    <path d="M876 86V544" stroke="#E9F4FF" stroke-width="2" />
+  </g>
+
+  <rect x="72" y="78" width="470" height="474" rx="40" fill="url(#panel)" fill-opacity="0.94" />
+  <rect x="114" y="144" width="24" height="208" rx="12" fill="#47D6A0" />
+  <rect x="180" y="104" width="24" height="248" rx="12" fill="#8BD6FF" />
+  <rect x="246" y="190" width="24" height="162" rx="12" fill="#F5B85D" />
+  <rect x="312" y="132" width="24" height="220" rx="12" fill="#FF7C66" />
+  <rect x="378" y="166" width="24" height="186" rx="12" fill="#47D6A0" />
+  <path
+    d="M106 304L192 254L258 270L324 216L390 236L464 170"
+    stroke="#F7FAFF"
+    stroke-width="12"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="106" cy="304" r="9" fill="#F7FAFF" />
+  <circle cx="192" cy="254" r="9" fill="#F7FAFF" />
+  <circle cx="258" cy="270" r="9" fill="#F7FAFF" />
+  <circle cx="324" cy="216" r="9" fill="#F7FAFF" />
+  <circle cx="390" cy="236" r="9" fill="#F7FAFF" />
+  <circle cx="464" cy="170" r="9" fill="#F7FAFF" />
+
+  <text
+    x="606"
+    y="176"
+    fill="#C5E6FF"
+    font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+    font-size="30"
+    font-weight="600"
+  >
+    台股大盤、熱門股、主動式 ETF 風向球
+  </text>
+  <text
+    x="606"
+    y="278"
+    fill="#FFFFFF"
+    font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+    font-size="74"
+    font-weight="700"
+  >
+    台股主動通
+  </text>
+  <text
+    x="606"
+    y="350"
+    fill="#E0F2FF"
+    font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+    font-size="34"
+    font-weight="500"
+  >
+    整合即時盤勢、排行、法人籌碼、技術分析與
+  </text>
+  <text
+    x="606"
+    y="394"
+    fill="#E0F2FF"
+    font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+    font-size="34"
+    font-weight="500"
+  >
+    個股研究路徑，快速掌握隔日觀察重點。
+  </text>
+
+  <g>
+    <rect x="606" y="438" width="166" height="60" rx="30" fill="#0F7CB7" />
+    <text
+      x="689"
+      y="477"
+      text-anchor="middle"
+      fill="#FFFFFF"
+      font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+      font-size="26"
+      font-weight="600"
+    >
+      大盤節奏
+    </text>
+    <rect x="790" y="438" width="182" height="60" rx="30" fill="#0A4F79" />
+    <text
+      x="881"
+      y="477"
+      text-anchor="middle"
+      fill="#FFFFFF"
+      font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+      font-size="26"
+      font-weight="600"
+    >
+      ETF 異動
+    </text>
+    <rect x="990" y="438" width="136" height="60" rx="30" fill="#12486B" />
+    <text
+      x="1058"
+      y="477"
+      text-anchor="middle"
+      fill="#FFFFFF"
+      font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+      font-size="26"
+      font-weight="600"
+    >
+      個股研究
+    </text>
+  </g>
+
+  <text
+    x="606"
+    y="538"
+    fill="#CDEBFF"
+    font-family="'IBM Plex Sans TC', 'Noto Sans TC', sans-serif"
+    font-size="24"
+    font-weight="500"
+  >
+    資料來源整合 TWSE、TAIFEX 與官方 ETF 持股揭露
+  </text>
+
+  <defs>
+    <linearGradient id="bg" x1="48" y1="30" x2="1144" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#062D46" />
+      <stop offset="0.52" stop-color="#0A5B88" />
+      <stop offset="1" stop-color="#0E7AB6" />
+    </linearGradient>
+    <linearGradient id="panel" x1="72" y1="78" x2="542" y2="552" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B699B" />
+      <stop offset="1" stop-color="#05304B" />
+    </linearGradient>
+  </defs>
+</svg>

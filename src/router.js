@@ -14,6 +14,7 @@ import TomorrowWatchlistPage from './pages/TomorrowWatchlistPage.vue';
 import FavoritesHealthPage from './pages/FavoritesHealthPage.vue';
 import StockScannerPage from './pages/StockScannerPage.vue';
 import EventStatsPage from './pages/EventStatsPage.vue';
+import OfficialRadarPage from './pages/OfficialRadarPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -32,6 +33,7 @@ export const ROUTE_NAME = {
   FAVORITES_HEALTH: 'favorites-health',
   STOCK_SCANNER: 'stock-scanner',
   EVENT_STATS: 'event-stats',
+  OFFICIAL_RADAR: 'official-radar',
 };
 
 const router = createRouter({
@@ -126,6 +128,15 @@ const router = createRouter({
       meta: {
         title: '事件後表現統計',
         description: '整理月營收、法說、財報與除息後的歷史反應，幫助判斷事件交易節奏。',
+      },
+    },
+    {
+      path: '/official-radar',
+      name: ROUTE_NAME.OFFICIAL_RADAR,
+      component: OfficialRadarPage,
+      meta: {
+        title: '官方交易雷達',
+        description: '把處置股、變更交易、注意股與即將除息事件集中整理，先看哪些股票需要避開、哪些事件值得提前觀察。',
       },
     },
     {

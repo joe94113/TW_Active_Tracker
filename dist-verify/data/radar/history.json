@@ -1,0 +1,377 @@
+{
+  "generatedAt": "2026-04-21T02:54:13.848Z",
+  "marketDate": "2026-04-20",
+  "horizons": [
+    3,
+    5,
+    10
+  ],
+  "snapshots": [
+    {
+      "marketDate": "2026-04-17",
+      "generatedAt": "2026-04-17T08:35:06.452Z",
+      "stable": [
+        {
+          "code": "2327",
+          "name": "國巨*",
+          "label": "雙法人偏多",
+          "rating": 4,
+          "detail": "雙法人五日同步買超｜外資 42,066,031 / 投信 8,526,101｜20 日 +12.83%",
+          "entryClose": 316.5,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2376",
+          "name": "技嘉",
+          "label": "雙法人偏多",
+          "rating": 4,
+          "detail": "雙法人五日同步買超｜外資 16,427,295 / 投信 740,972｜20 日 +12.83%",
+          "entryClose": 281.5,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2455",
+          "name": "全新",
+          "label": "偏多焦點",
+          "rating": 4,
+          "detail": "MACD 翻正｜20 日 +36.48%｜五日籌碼 2,867,300",
+          "entryClose": 310.5,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2501",
+          "name": "國建",
+          "label": "雙法人偏多",
+          "rating": 3,
+          "detail": "雙法人五日同步買超｜外資 6,388,484 / 投信 95,000｜20 日 +4.26%",
+          "entryClose": 24.450000762939453,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "1519",
+          "name": "華城",
+          "label": "偏多焦點",
+          "rating": 3,
+          "detail": "黃金交叉｜20 日 -6.14%｜五日籌碼 -2,700,193",
+          "entryClose": 872,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "aggressive": [
+        {
+          "code": "4991",
+          "name": "GCS HOLDINGS INC.",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +10.00%｜量能比 5 日 33%｜距 20 日高 0%",
+          "entryClose": 660,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "8021",
+          "name": "尖點",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +10.00%｜量能比 5 日 35%｜距 20 日高 0%",
+          "entryClose": 390.5,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "4979",
+          "name": "華星光",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +9.90%｜量能比 5 日 29%｜距 20 日高 0%",
+          "entryClose": 644,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2412",
+          "name": "中華電",
+          "label": "盤整待發",
+          "rating": 4,
+          "detail": "30 日區間 3.4%｜離前高 0%｜RSI 64.1",
+          "entryClose": 137.5,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2820",
+          "name": "華票",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 4.8%｜離前高 0.9%｜RSI 61.8",
+          "entryClose": 17.200000762939453,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "1341",
+          "name": "富林-KY",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 7.4%｜離前高 0.7%｜RSI 57.7",
+          "entryClose": 60.29999923706055,
+          "marketDate": "2026-04-17",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "summary": {
+        "stable": {
+          "count": 5,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        },
+        "aggressive": {
+          "count": 6,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        }
+      }
+    },
+    {
+      "marketDate": "2026-04-20",
+      "generatedAt": "2026-04-21T02:54:13.848Z",
+      "stable": [
+        {
+          "code": "6805",
+          "name": "富世達",
+          "label": "偏多焦點",
+          "rating": 3,
+          "detail": "黃金交叉｜20 日 -3.50%｜五日籌碼 46 張",
+          "entryClose": 1930,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2449",
+          "name": "京元電子",
+          "label": "偏多焦點",
+          "rating": 2,
+          "detail": "MACD 翻正｜20 日 -9.42%｜五日籌碼 -1.96 萬張",
+          "entryClose": 279,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "aggressive": [
+        {
+          "code": "6789",
+          "name": "采鈺",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +9.94%｜量能比 5 日 12%｜距 20 日高 0%",
+          "entryClose": 520,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "6147",
+          "name": "頎邦",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +8.30%｜量能比 5 日 34%｜距 20 日高 1.5%",
+          "entryClose": 137,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "3037",
+          "name": "欣興",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +4.72%｜量能比 5 日 46%｜距 20 日高 0%",
+          "entryClose": 710,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2412",
+          "name": "中華電",
+          "label": "盤整待發",
+          "rating": 4,
+          "detail": "30 日區間 3.8%｜離前高 0.4%｜RSI 62.8",
+          "entryClose": 137.5,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2820",
+          "name": "華票",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 4.8%｜離前高 1.2%｜RSI 59.1",
+          "entryClose": 17.149999618530273,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "4560",
+          "name": "強信-KY",
+          "label": "盤整待發",
+          "rating": 2,
+          "detail": "30 日區間 6.4%｜離前高 2.4%｜RSI 56.7",
+          "entryClose": 33.29999923706055,
+          "marketDate": "2026-04-20",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "summary": {
+        "stable": {
+          "count": 2,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        },
+        "aggressive": {
+          "count": 6,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        }
+      }
+    }
+  ]
+}

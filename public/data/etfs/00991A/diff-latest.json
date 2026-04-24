@@ -1,121 +1,129 @@
 {
   "code": "00991A",
   "name": "主動復華未來50",
-  "fromDisclosureDate": "2026-04-17",
-  "toDisclosureDate": "2026-04-20",
+  "fromDisclosureDate": "2026-04-20",
+  "toDisclosureDate": "2026-04-22",
   "comparisonReady": true,
-  "added": [],
-  "removed": [],
+  "added": [
+    {
+      "code": "2408",
+      "name": "南亞科",
+      "currentShares": 6200000,
+      "currentWeight": 4.16,
+      "sharesDelta": 6200000,
+      "weightDelta": 4.16
+    }
+  ],
+  "removed": [
+    {
+      "code": "6223",
+      "name": "旺矽科技",
+      "previousShares": 260000,
+      "previousWeight": 4.299,
+      "sharesDelta": -260000,
+      "weightDelta": -4.299
+    }
+  ],
   "increased": [
     {
-      "code": "3037",
-      "name": "欣興",
-      "previousShares": 3200000,
-      "currentShares": 3200000,
-      "previousWeight": 6.717,
-      "currentWeight": 6.986,
+      "code": "5274",
+      "name": "信驊科技",
+      "previousShares": 100000,
+      "currentShares": 100000,
+      "previousWeight": 4.645,
+      "currentWeight": 4.929,
       "sharesDelta": 0,
-      "weightDelta": 0.26900000000000013
+      "weightDelta": 0.2840000000000007
     },
     {
       "code": "8299",
       "name": "群聯電子",
       "previousShares": 1300000,
       "currentShares": 1300000,
-      "previousWeight": 6.663,
-      "currentWeight": 6.844,
+      "previousWeight": 6.844,
+      "currentWeight": 7.07,
       "sharesDelta": 0,
-      "weightDelta": 0.18100000000000005
-    },
-    {
-      "code": "5274",
-      "name": "信驊科技",
-      "previousShares": 100000,
-      "currentShares": 100000,
-      "previousWeight": 4.506,
-      "currentWeight": 4.645,
-      "sharesDelta": 0,
-      "weightDelta": 0.13899999999999935
-    },
-    {
-      "code": "3017",
-      "name": "奇鋐",
-      "previousShares": 550000,
-      "currentShares": 550000,
-      "previousWeight": 4.309,
-      "currentWeight": 4.41,
-      "sharesDelta": 0,
-      "weightDelta": 0.10099999999999998
-    }
-  ],
-  "decreased": [
-    {
-      "code": "6223",
-      "name": "旺矽科技",
-      "previousShares": 270000,
-      "currentShares": 260000,
-      "previousWeight": 4.579,
-      "currentWeight": 4.299,
-      "sharesDelta": -10000,
-      "weightDelta": -0.27999999999999936
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "previousShares": 2500000,
-      "currentShares": 2500000,
-      "previousWeight": 16.567,
-      "currentWeight": 16.301,
-      "sharesDelta": 0,
-      "weightDelta": -0.2660000000000018
+      "weightDelta": 0.22599999999999998
     },
     {
       "code": "2345",
       "name": "智邦",
       "previousShares": 700000,
       "currentShares": 700000,
-      "previousWeight": 4.73,
-      "currentWeight": 4.519,
+      "previousWeight": 4.519,
+      "currentWeight": 4.719,
       "sharesDelta": 0,
-      "weightDelta": -0.2110000000000003
+      "weightDelta": 0.20000000000000018
     },
     {
-      "code": "2383",
-      "name": "台光電",
-      "previousShares": 780000,
-      "currentShares": 770000,
-      "previousWeight": 9.676,
-      "currentWeight": 9.546,
-      "sharesDelta": -10000,
-      "weightDelta": -0.13000000000000078
+      "code": "3017",
+      "name": "奇鋐",
+      "previousShares": 550000,
+      "currentShares": 550000,
+      "previousWeight": 4.41,
+      "currentWeight": 4.542,
+      "sharesDelta": 0,
+      "weightDelta": 0.13199999999999967
     },
     {
       "code": "7769",
       "name": "鴻勁",
       "previousShares": 300000,
       "currentShares": 300000,
-      "previousWeight": 4.407,
-      "currentWeight": 4.294,
+      "previousWeight": 4.294,
+      "currentWeight": 4.362,
       "sharesDelta": 0,
-      "weightDelta": -0.11300000000000043
+      "weightDelta": 0.0680000000000005
+    },
+    {
+      "code": "2383",
+      "name": "台光電",
+      "previousShares": 770000,
+      "currentShares": 770000,
+      "previousWeight": 9.546,
+      "currentWeight": 9.591,
+      "sharesDelta": 0,
+      "weightDelta": 0.04499999999999993
+    },
+    {
+      "code": "3037",
+      "name": "欣興",
+      "previousShares": 3200000,
+      "currentShares": 3200000,
+      "previousWeight": 6.986,
+      "currentWeight": 7.021,
+      "sharesDelta": 0,
+      "weightDelta": 0.03500000000000014
+    }
+  ],
+  "decreased": [
+    {
+      "code": "2330",
+      "name": "台積電",
+      "previousShares": 2500000,
+      "currentShares": 2300000,
+      "previousWeight": 16.301,
+      "currentWeight": 14.447,
+      "sharesDelta": -200000,
+      "weightDelta": -1.8539999999999992
     },
     {
       "code": "2308",
       "name": "台達電",
-      "previousShares": 1130000,
-      "currentShares": 1100000,
-      "previousWeight": 6.787,
-      "currentWeight": 6.73,
-      "sharesDelta": -30000,
-      "weightDelta": -0.056999999999999496
+      "previousShares": 1100000,
+      "currentShares": 1020000,
+      "previousWeight": 6.73,
+      "currentWeight": 6.298,
+      "sharesDelta": -80000,
+      "weightDelta": -0.4320000000000004
     }
   ],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 0,
-    "removedCount": 0,
-    "increasedCount": 4,
-    "decreasedCount": 6,
-    "totalChangeCount": 10
+    "addedCount": 1,
+    "removedCount": 1,
+    "increasedCount": 7,
+    "decreasedCount": 2,
+    "totalChangeCount": 11
   }
 }

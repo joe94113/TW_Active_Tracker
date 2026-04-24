@@ -1,0 +1,61 @@
+{
+  "updatedAt": "2026-04-24T00:00:00+08:00",
+  "note": "產品發表 / 展會 / 法說會事件清單。可手動編輯此檔新增事件；startDate 與 endDate 為 YYYY-MM-DD。themes 與 industries 用於關聯 Theme Radar。",
+  "items": [
+    {
+      "slug": "computex-2026",
+      "title": "COMPUTEX 2026",
+      "startDate": "2026-06-02",
+      "endDate": "2026-06-05",
+      "themes": ["AI", "AI 伺服器", "PC", "CPO", "液冷", "散熱"],
+      "industries": ["半導體業", "電腦及週邊設備業", "電子零組件業"],
+      "tone": "up",
+      "url": "https://www.computextaipei.com.tw/",
+      "note": "台北國際電腦展，AI 伺服器、散熱、光通訊等供應鏈典型催化事件。"
+    },
+    {
+      "slug": "ces-2026",
+      "title": "CES 2026",
+      "startDate": "2026-01-06",
+      "endDate": "2026-01-09",
+      "themes": ["AI", "電動車", "智慧家電", "VR", "AR"],
+      "industries": ["半導體業", "電腦及週邊設備業", "汽車工業"],
+      "tone": "up",
+      "url": "https://www.ces.tech/",
+      "note": "美國消費性電子展，為消費電子與車用電子指標展會。"
+    },
+    {
+      "slug": "wwdc-2026",
+      "title": "Apple WWDC 2026",
+      "startDate": "2026-06-08",
+      "endDate": "2026-06-12",
+      "themes": ["蘋概", "Apple 供應鏈"],
+      "industries": ["電子零組件業", "半導體業"],
+      "tone": "normal",
+      "url": "https://developer.apple.com/wwdc/",
+      "note": "蘋果開發者大會，可能揭示下一代軟硬體方向，影響蘋概。"
+    },
+    {
+      "slug": "gtc-2026",
+      "title": "NVIDIA GTC 2026",
+      "startDate": "2026-03-16",
+      "endDate": "2026-03-20",
+      "themes": ["AI 伺服器", "CPO", "AI", "HBM"],
+      "industries": ["半導體業", "電腦及週邊設備業"],
+      "tone": "up",
+      "url": "https://www.nvidia.com/gtc/",
+      "note": "NVIDIA 年度開發者大會，AI 供應鏈重大催化。"
+    },
+    {
+      "slug": "semicon-taiwan-2026",
+      "title": "SEMICON Taiwan 2026",
+      "startDate": "2026-09-08",
+      "endDate": "2026-09-10",
+      "themes": ["半導體設備", "先進製程", "記憶體"],
+      "industries": ["半導體業"],
+      "tone": "up",
+      "url": "https://www.semicontaiwan.org/",
+      "note": "台灣半導體展，設備與材料供應鏈重要舞台。"
+    }
+  ]
+}

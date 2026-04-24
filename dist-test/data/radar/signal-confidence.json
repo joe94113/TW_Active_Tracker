@@ -1,0 +1,6 @@
+{
+  "updatedAt": "2026-04-24T00:00:00+08:00",
+  "lookbackDays": 60,
+  "note": "訊號可信度統計。每個訊號以過去 N 日的後續 20 日表現統計勝率與平均報酬。samples < 30 時前端會 fallback 至 DEFAULT_SIGNAL_WEIGHTS。實際統計由 scripts/update-data.mjs 的信號可信度模組產出。",
+  "signals": {}
+}

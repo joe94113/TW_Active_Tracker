@@ -1,11 +1,9 @@
-const REMOTE_FETCH_ENABLED_HOSTS = new Set(['localhost', '127.0.0.1', '::1']);
-
 export function canUseRemoteJsonFetch() {
   if (typeof window === 'undefined') {
     return true;
   }
 
-  return REMOTE_FETCH_ENABLED_HOSTS.has(window.location.hostname);
+  return String(import.meta.env.VITE_ENABLE_REMOTE_JSON_FETCH ?? '').trim().toLowerCase() === 'true';
 }
 
 export async function fetchJson(path) {

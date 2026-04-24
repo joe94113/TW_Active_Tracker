@@ -17,6 +17,15 @@ function getToneFromScore(score) {
   return 'normal';
 }
 
+function buildGrade(score) {
+  if (score >= 85) return 'A+';
+  if (score >= 78) return 'A';
+  if (score >= 70) return 'B+';
+  if (score >= 62) return 'B';
+  if (score >= 55) return 'C';
+  return 'D';
+}
+
 function createSection(key, label, score, note) {
   return {
     key,
@@ -27,13 +36,57 @@ function createSection(key, label, score, note) {
   };
 }
 
+function getIndustryPePercentile(source = {}) {
+  return toNumber(source?.industryValuation?.pePercentile ?? source?.pePercentile);
+}
+
+function getDailyTradeValue(source = {}) {
+  return toNumber(source?.avgTradeValue ?? source?.dailyTradeValue);
+}
+
+function getSignalConfidence(source = {}) {
+  return toNumber(source?.signalConfidence);
+}
+
+function getMarginSurge(source = {}) {
+  return Boolean(
+    source?.hasMarginSurge ||
+      (toNumber(source?.marginUsage) !== null && toNumber(source?.marginUsage) >= 40) ||
+      (toNumber(source?.marginChange) !== null && toNumber(source?.marginChange) >= 800000),
+  );
+}
+
+function getLiquidityState(source = {}) {
+  const liquidityKey = source?.liquidityTier?.key ?? source?.liquidityTier;
+  const tradeValue = getDailyTradeValue(source);
+
+  return {
+    liquidityKey,
+    tradeValue,
+    isVeryLow: liquidityKey === 'very-low' || (tradeValue !== null && tradeValue < 5_000_000),
+    isLow: liquidityKey === 'low' || (tradeValue !== null && tradeValue < 20_000_000),
+  };
+}
+
+function extractDispositionRisk(reminders) {
+  const summary = reminders?.summary ?? {};
+  return {
+    isUnderDisposition: Boolean(summary.activeDispositionCount),
+    hasAttention: Boolean(summary.attentionWarningCount),
+    hasChangedTrading: Boolean(summary.changedTradingCount),
+  };
+}
+
 function buildSummaryOverheatWarningsInternal(stock = {}) {
   const warnings = [];
   const return20 = toNumber(stock.return20);
   const dayChangePercent = toNumber(stock.changePercent);
+  const pePercentile = getIndustryPePercentile(stock);
   const peRatio = toNumber(stock.peRatio);
   const activeEtfCount = toNumber(stock.activeEtfCount);
   const foreignTargetPremium = toNumber(stock.foreignTargetPricePremium ?? stock.premiumToTarget);
+  const { isVeryLow, isLow } = getLiquidityState(stock);
+  const marginSurge = getMarginSurge(stock);
 
   if (stock.isUnderDisposition || stock.hasChangedTrading) {
     warnings.push({
@@ -56,35 +109,53 @@ function buildSummaryOverheatWarningsInternal(stock = {}) {
   if (dayChangePercent !== null && dayChangePercent >= 7) {
     warnings.push({
       key: 'day-surge',
-      title: '單日漲幅偏大',
-      badgeLabel: '短打',
+      title: '單日急漲偏熱',
+      badgeLabel: '追價風險',
       tone: 'warning',
     });
   }
 
-  if (peRatio !== null && peRatio >= 45) {
+  if ((pePercentile !== null && pePercentile >= 85) || (peRatio !== null && peRatio >= 45)) {
     warnings.push({
       key: 'valuation-hot',
-      title: '本益比偏高',
-      badgeLabel: '估值',
-      tone: peRatio >= 70 ? 'risk' : 'warning',
+      title: '估值偏熱',
+      badgeLabel: '估值高',
+      tone: pePercentile !== null && pePercentile >= 92 ? 'risk' : 'warning',
     });
   }
 
   if (foreignTargetPremium !== null && foreignTargetPremium <= 5) {
     warnings.push({
       key: 'target-limited',
-      title: foreignTargetPremium < 0 ? '目標價已被超過' : '目標價空間有限',
-      badgeLabel: '目標價',
+      title: foreignTargetPremium < 0 ? '目標價已落後現價' : '目標價空間有限',
+      badgeLabel: '空間小',
       tone: foreignTargetPremium < 0 ? 'risk' : 'warning',
+    });
+  }
+
+  if (marginSurge) {
+    warnings.push({
+      key: 'margin-surge',
+      title: '融資增溫偏快',
+      badgeLabel: '槓桿升溫',
+      tone: 'warning',
+    });
+  }
+
+  if (isVeryLow || isLow) {
+    warnings.push({
+      key: 'liquidity-thin',
+      title: isVeryLow ? '流動性偏低' : '成交量偏薄',
+      badgeLabel: '不易交易',
+      tone: isVeryLow ? 'risk' : 'warning',
     });
   }
 
   if ((activeEtfCount ?? 0) === 0 && stock.topSignalTone === 'down') {
     warnings.push({
       key: 'weak-setup',
-      title: '技術轉弱中',
-      badgeLabel: '技術',
+      title: '題材支撐偏弱',
+      badgeLabel: '續航弱',
       tone: 'warning',
     });
   }
@@ -92,13 +163,13 @@ function buildSummaryOverheatWarningsInternal(stock = {}) {
   if (stock.hasAttentionWarning) {
     warnings.push({
       key: 'attention',
-      title: '近期列入注意股',
+      title: '注意股監控中',
       badgeLabel: '留意',
       tone: 'warning',
     });
   }
 
-  return warnings.slice(0, 4);
+  return warnings.slice(0, 5);
 }
 
 export function buildSummaryOverheatWarnings(stock = {}) {
@@ -108,59 +179,70 @@ export function buildSummaryOverheatWarnings(stock = {}) {
 export function buildSummaryHealthScore(stock = {}) {
   const return20 = toNumber(stock.return20);
   const dayChangePercent = toNumber(stock.changePercent);
-  const peRatio = toNumber(stock.peRatio);
-  const pbRatio = toNumber(stock.pbRatio);
   const dividendYield = toNumber(stock.dividendYield);
+  const pePercentile = getIndustryPePercentile(stock);
   const foreign5Day = toNumber(stock.foreign5Day);
   const investmentTrust5Day = toNumber(stock.investmentTrust5Day);
   const total5Day = toNumber(stock.total5Day);
   const activeEtfCount = toNumber(stock.activeEtfCount);
   const signalCount = toNumber(stock.signalCount);
+  const signalConfidence = getSignalConfidence(stock);
+  const volumeQualityScore = toNumber(stock.volumeQualityScore);
+  const industryRankPct = toNumber(stock.industryRankPct);
   const warningCount = buildSummaryOverheatWarningsInternal(stock).length;
+  const marginSurge = getMarginSurge(stock);
+  const { isVeryLow, isLow } = getLiquidityState(stock);
 
-  let technicalScore = 48;
+  let technicalScore = 46;
   if (stock.topSignalTone === 'up') technicalScore += 18;
-  if ((signalCount ?? 0) >= 2) technicalScore += 10;
-  if (return20 !== null && return20 > 0 && return20 <= 30) technicalScore += 12;
-  if (dayChangePercent !== null && dayChangePercent > 0 && dayChangePercent < 7) technicalScore += 8;
-  if (stock.topSignalTone === 'down') technicalScore -= 12;
+  if ((signalCount ?? 0) >= 2) technicalScore += 8;
+  if (return20 !== null && return20 > 0 && return20 <= 25) technicalScore += 12;
+  if (return20 !== null && return20 > 25 && return20 <= 40) technicalScore += 6;
+  if (dayChangePercent !== null && dayChangePercent > 0 && dayChangePercent < 5) technicalScore += 6;
+  if (volumeQualityScore !== null) technicalScore += (volumeQualityScore - 50) * 0.18;
+  if (signalConfidence !== null) technicalScore += signalConfidence * 14;
+  if (stock.topSignalTone === 'down') technicalScore -= 14;
   technicalScore = clampScore(technicalScore);
 
   let chipScore = 45;
   if ((total5Day ?? 0) > 0) chipScore += 16;
   if ((foreign5Day ?? 0) > 0) chipScore += 10;
   if ((investmentTrust5Day ?? 0) > 0) chipScore += 10;
-  if ((activeEtfCount ?? 0) > 0) chipScore += Math.min(activeEtfCount * 5, 15);
+  if ((activeEtfCount ?? 0) > 0) chipScore += Math.min(activeEtfCount * 4, 12);
+  if (marginSurge) chipScore -= 10;
   if (stock.isUnderDisposition || stock.hasChangedTrading) chipScore -= 20;
   chipScore = clampScore(chipScore);
 
-  let fundamentalScore = 48;
-  if (dividendYield !== null && dividendYield >= 3) fundamentalScore += 10;
-  if (peRatio !== null && peRatio <= 25) fundamentalScore += 10;
-  if (pbRatio !== null && pbRatio <= 3) fundamentalScore += 10;
-  if (peRatio !== null && peRatio >= 60) fundamentalScore -= 15;
-  if (pbRatio !== null && pbRatio >= 8) fundamentalScore -= 12;
+  let fundamentalScore = 46;
+  if (dividendYield !== null && dividendYield >= 3) fundamentalScore += 8;
+  if (pePercentile !== null && pePercentile <= 30) fundamentalScore += 12;
+  else if (pePercentile !== null && pePercentile <= 45) fundamentalScore += 6;
+  else if (pePercentile !== null && pePercentile >= 85) fundamentalScore -= 10;
   fundamentalScore = clampScore(fundamentalScore);
 
   let themeScore = 42;
-  if ((activeEtfCount ?? 0) >= 3) themeScore += 18;
-  else if ((activeEtfCount ?? 0) > 0) themeScore += 10;
-  if ((return20 ?? 0) > 0 && (return20 ?? 0) <= 30) themeScore += 8;
+  if ((activeEtfCount ?? 0) >= 3) themeScore += 16;
+  else if ((activeEtfCount ?? 0) > 0) themeScore += 8;
+  if (industryRankPct !== null && industryRankPct <= 35) themeScore += 12;
+  if (return20 !== null && return20 > 0 && return20 <= 30) themeScore += 6;
   themeScore = clampScore(themeScore);
 
-  let riskScore = 80;
+  let riskScore = 82;
   if (stock.isUnderDisposition) riskScore -= 35;
   if (stock.hasChangedTrading) riskScore -= 20;
   if (stock.hasAttentionWarning) riskScore -= 10;
   if (warningCount >= 3) riskScore -= 15;
   if (return20 !== null && return20 >= 40) riskScore -= 12;
   if (dayChangePercent !== null && dayChangePercent >= 7) riskScore -= 8;
+  if (marginSurge) riskScore -= 8;
+  if (isVeryLow) riskScore -= 18;
+  else if (isLow) riskScore -= 8;
   riskScore = clampScore(riskScore);
 
   const totalScore = clampScore(
     technicalScore * 0.28 +
-      chipScore * 0.25 +
-      fundamentalScore * 0.17 +
+      chipScore * 0.24 +
+      fundamentalScore * 0.18 +
       themeScore * 0.12 +
       riskScore * 0.18,
   );
@@ -174,38 +256,20 @@ export function buildSummaryHealthScore(stock = {}) {
   };
 }
 
-function buildGrade(score) {
-  if (score >= 85) return 'A+';
-  if (score >= 78) return 'A';
-  if (score >= 70) return 'B+';
-  if (score >= 62) return 'B';
-  if (score >= 55) return 'C';
-  return 'D';
-}
-
 function buildOverallSummary(totalScore, riskScore, warningCount) {
   if (riskScore <= 40 || warningCount >= 3) {
-    return '短線追價風險偏高，先等回測或量價重新整理，再考慮分批切入。';
+    return '目前最需要先看風險，不適合只因為訊號漂亮就直接追價。';
   }
 
   if (totalScore >= 78 && riskScore >= 65) {
-    return '整體結構偏健康，可先放進核心追蹤名單，等量價確認再分批布局。';
+    return '整體結構偏強，若量價與族群同步，適合列入隔日優先觀察名單。';
   }
 
   if (totalScore >= 62) {
-    return '條件中上，但還需要觀察量能、法人或支撐區是否續強。';
+    return '整體條件中性偏多，適合等關鍵價位或量能確認後再出手。';
   }
 
-  return '目前偏向觀察名單，除非有新的法人、題材或技術轉強，否則不宜急追。';
-}
-
-function extractDispositionRisk(reminders) {
-  const summary = reminders?.summary ?? {};
-  return {
-    isUnderDisposition: (summary.activeDispositionCount ?? 0) > 0,
-    hasAttention: (summary.attentionWarningCount ?? 0) > 0,
-    hasChangedTrading: (summary.changedTradingCount ?? 0) > 0,
-  };
+  return '目前偏向整理或弱勢，先觀察支撐與籌碼變化，比追價更重要。';
 }
 
 export function buildOverheatWarnings(detail, options = {}) {
@@ -220,7 +284,7 @@ export function buildOverheatWarnings(detail, options = {}) {
   const return20 = toNumber(latestSummary.return20);
   const dayChangePercent = toNumber(latestSummary.changePercent);
   const marginUsage = toNumber(margin.marginUsage);
-  const marginChangeLots = toNumber(margin.marginChange);
+  const marginChange = toNumber(margin.marginChange);
   const targetPremium = toNumber(foreignTargetPrice.premiumToClose);
   const downSignals = (detail?.technicalSignals ?? []).filter((item) => item?.tone === 'down');
   const { isUnderDisposition, hasAttention, hasChangedTrading } = extractDispositionRisk(reminders);
@@ -232,8 +296,8 @@ export function buildOverheatWarnings(detail, options = {}) {
       title: isUnderDisposition ? '處置交易中' : '變更交易中',
       badgeLabel: '高風險',
       tone: 'risk',
-      note: reminders?.summary?.topTitle ?? '目前有交易限制，隔日波動與流動性風險都要提高警覺。',
-      detail: reminders?.alerts?.[0]?.note ?? '這類股票容易放大追價成本，通常不適合在情緒最熱時硬追。',
+      note: reminders?.summary?.topTitle ?? '這檔股票目前有交易限制，短線先把風險放在報酬前面。',
+      detail: reminders?.alerts?.[0]?.note ?? '若已被處置或變更交易，隔日波動可能明顯放大，先不要只看單日漲跌決定進場。',
     });
   }
 
@@ -243,22 +307,21 @@ export function buildOverheatWarnings(detail, options = {}) {
       title: '20 日漲幅偏大',
       badgeLabel: '過熱',
       tone: return20 >= 50 ? 'risk' : 'warning',
-      note: `近 20 日已上漲 ${return20.toFixed(2)}%，若量能跟不上，短線容易先震盪洗籌碼。`,
-      detail: '這類型比較適合等回測月線、前高或量縮後再看，而不是看到長紅才追。',
+      note: `近 20 日已上漲 ${return20.toFixed(2)}%，短線要先提防追高後震盪。`,
+      detail: '漲很多不代表一定不能買，但比較適合等回測支撐、量能重新整理後再看。',
     });
   }
 
   if (close !== null && ma20 !== null) {
     const premiumToMa20 = ((close - ma20) / ma20) * 100;
-
     if (premiumToMa20 >= 12) {
       warnings.push({
         key: 'ma20-premium',
-        title: '價格偏離月線',
-        badgeLabel: '追價風險',
+        title: '股價偏離月線',
+        badgeLabel: '離均線遠',
         tone: premiumToMa20 >= 18 ? 'risk' : 'warning',
-        note: `現價高於 MA20 約 ${premiumToMa20.toFixed(2)}%，短線若沒新量支撐，容易先拉回修正。`,
-        detail: '先觀察量能是否續強，或等靠近 20 日線與前波支撐再評估分批進場。',
+        note: `收盤高於月線 ${premiumToMa20.toFixed(2)}%，短線如果沒有新量能，容易先回測均線。`,
+        detail: '離均線越遠，越要留意是不是情緒推高；這種時候分批比一次追滿更重要。',
       });
     }
   }
@@ -266,69 +329,69 @@ export function buildOverheatWarnings(detail, options = {}) {
   if (rsi !== null && rsi >= 72) {
     warnings.push({
       key: 'rsi-overheat',
-      title: 'RSI 進入偏熱區',
-      badgeLabel: '偏熱',
+      title: 'RSI 偏熱',
+      badgeLabel: '動能過熱',
       tone: rsi >= 78 ? 'risk' : 'warning',
-      note: `RSI 目前來到 ${rsi.toFixed(1)}，動能仍強，但隔日追價風險也同步升高。`,
-      detail: 'RSI 偏高不代表一定反轉，但若同時出現爆量、長上影或法人轉賣，就要更保守。',
+      note: `RSI 來到 ${rsi.toFixed(1)}，代表短線買盤已經偏擁擠。`,
+      detail: 'RSI 高不是一定會跌，但代表再往上追的勝率通常沒有剛轉強時漂亮。',
     });
   }
 
   if (targetPremium !== null && targetPremium <= 5) {
     warnings.push({
       key: 'target-price-room',
-      title: targetPremium < 0 ? '目標價已被超過' : '目標價空間有限',
-      badgeLabel: '估值',
+      title: targetPremium < 0 ? '目標價低於現價' : '目標價空間有限',
+      badgeLabel: '上方空間小',
       tone: targetPremium < 0 ? 'risk' : 'warning',
       note:
         targetPremium < 0
-          ? `目前股價已高於近期外資目標價均值約 ${Math.abs(targetPremium).toFixed(2)}%。`
-          : `近期外資目標價空間僅剩 ${targetPremium.toFixed(2)}%，追價勝率相對下降。`,
-      detail: '這時候更適合等獲利預期或新催化上修，不然容易變成估值先跑過基本面。',
+          ? `目前價格已高於近期外資目標價約 ${Math.abs(targetPremium).toFixed(2)}%。`
+          : `距離近期外資目標價只剩約 ${targetPremium.toFixed(2)}% 空間。`,
+      detail: '不是說一定不能漲，而是代表市場已經先反映一大段，隔日追價的報酬風險比會變差。',
     });
   }
 
   if (marginUsage !== null && marginUsage >= 30) {
     warnings.push({
       key: 'margin-usage',
-      title: '融資使用率升高',
-      badgeLabel: '槓桿',
+      title: '融資使用偏高',
+      badgeLabel: '槓桿升溫',
       tone: marginUsage >= 40 ? 'risk' : 'warning',
-      note: `融資使用率約 ${marginUsage.toFixed(2)}%，槓桿籌碼偏熱時，波動通常也會放大。`,
-      detail: '若股價同時遠離均線或處在高檔，融資籌碼過熱時更容易出現急跌洗盤。',
+      note: `融資使用率 ${marginUsage.toFixed(2)}%，短線如果不如預期，容易放大震盪。`,
+      detail: '融資比重高的股票，常常在回檔時跌得比較急，進場更需要控制部位。',
     });
   }
 
-  if (marginChangeLots !== null && marginChangeLots >= 800) {
+  if (marginChange !== null && marginChange >= 800000) {
     warnings.push({
       key: 'margin-surge',
-      title: '融資單日大增',
-      badgeLabel: '浮額',
+      title: '融資單日暴增',
+      badgeLabel: '槓桿擁擠',
       tone: 'warning',
-      note: `融資單日增加約 ${Math.round(marginChangeLots)} 張，留意短線浮額變重。`,
-      detail: '若後續沒有成交值與法人買盤接力，隔日追價部位容易先承受震盪。',
+      note: `融資單日增加約 ${(marginChange / 1000).toFixed(0)} 張，代表短線槓桿資金明顯進場。`,
+      detail: '如果股價只是被槓桿推高而不是穩定放量，隔日追價容易遇到大震盪。',
     });
   }
 
   if (hasAttention) {
     warnings.push({
       key: 'attention-warning',
-      title: '近期列入注意股',
+      title: '注意股監控中',
       badgeLabel: '留意',
       tone: 'warning',
-      note: '注意股不一定代表轉弱，但表示波動與交易節奏已明顯升高。',
-      detail: '這類股票較適合縮小部位、拉高紀律，避免單筆押太重。',
+      note: '這檔股票近期被列為注意股，短線籌碼和情緒都可能偏躁動。',
+      detail: '注意股不代表一定走弱，但表示短線交易風險和波動都比較高。',
     });
   }
 
   if (dayChangePercent !== null && dayChangePercent >= 7) {
     warnings.push({
       key: 'large-up-day',
-      title: '單日漲幅偏大',
-      badgeLabel: '短打',
+      title: '單日急漲偏熱',
+      badgeLabel: '追價風險',
       tone: 'warning',
-      note: `單日上漲 ${dayChangePercent.toFixed(2)}%，隔日若沒續量，容易先開高震盪。`,
-      detail: '追這種長紅時更要看隔日量價是否延續，不然容易追在短線情緒峰值。',
+      note: `單日上漲 ${dayChangePercent.toFixed(2)}%，隔日要先看能不能守住大量區。`,
+      detail: '如果只是單日情緒推高，隔天很容易先出現震盪洗盤。',
     });
   }
 
@@ -336,10 +399,10 @@ export function buildOverheatWarnings(detail, options = {}) {
     warnings.push({
       key: 'down-signal',
       title: downSignals[0].title,
-      badgeLabel: '技術',
+      badgeLabel: '訊號轉弱',
       tone: 'warning',
       note: downSignals[0].description,
-      detail: '如果後續又跌回支撐區下方，代表短線節奏可能開始轉弱。',
+      detail: '當技術面已經先轉弱時，再追價的容錯率會明顯變差。',
     });
   }
 
@@ -356,6 +419,12 @@ export function buildStockHealthScore(detail, options = {}) {
   const foreignTargetPrice = detail?.foreignTargetPrice ?? {};
   const reminders = detail?.交易提醒 ?? {};
   const technicalSignals = detail?.technicalSignals ?? [];
+  const industryValuation = options.industryValuation ?? null;
+  const signalConfidence = toNumber(options.signalConfidence ?? null);
+  const volumeQualityScore = toNumber(options.volumeQualityScore ?? null);
+  const dailyTradeValue = toNumber(options.dailyTradeValue ?? null);
+  const liquidityKey = options.liquidityTier?.key ?? options.liquidityTier ?? null;
+  const pePercentile = toNumber(industryValuation?.pePercentile);
   const close = toNumber(options.currentClose) ?? toNumber(latestSummary.close);
   const ma20 = toNumber(latestIndicators.maMedium ?? latestIndicators.ma20);
   const ma60 = toNumber(latestIndicators.maLong ?? latestIndicators.ma60);
@@ -365,7 +434,7 @@ export function buildStockHealthScore(detail, options = {}) {
   const revenueYoY = toNumber(financials?.月營收?.年增率);
   const cumulativeRevenueYoY = toNumber(financials?.月營收?.累計年增率);
   const eps = toNumber(financials?.綜合損益表?.每股盈餘);
-  const debtRatio = toNumber(financials?.資產負債表?.負債比);
+  const debtRatio = toNumber(financials?.資產負債表?.負債比率);
   const foreign5Day = toNumber(institutional.foreign5Day);
   const investmentTrust5Day = toNumber(institutional.investmentTrust5Day);
   const total5Day = toNumber(institutional.total5Day);
@@ -377,14 +446,25 @@ export function buildStockHealthScore(detail, options = {}) {
   const targetPremium = toNumber(foreignTargetPrice.premiumToClose);
   const { isUnderDisposition, hasAttention, hasChangedTrading } = extractDispositionRisk(reminders);
   const warningCount = buildOverheatWarnings(detail, options).length;
+  const marginSurge = getMarginSurge({
+    hasMarginSurge: options.hasMarginSurge,
+    marginUsage: detail?.融資融券?.marginUsage,
+    marginChange,
+  });
+  const { isVeryLow, isLow } = getLiquidityState({
+    liquidityTier: liquidityKey,
+    dailyTradeValue,
+  });
 
   let technicalScore = 45;
   if (close !== null && ma20 !== null && close > ma20) technicalScore += 15;
   if (ma20 !== null && ma60 !== null && ma20 > ma60) technicalScore += 12;
-  if (macdHist !== null && macdHist > 0) technicalScore += 12;
-  if (rsi !== null && rsi >= 45 && rsi <= 70) technicalScore += 10;
-  if (return20 !== null && return20 > 0 && return20 <= 35) technicalScore += 8;
-  if (technicalSignals.some((item) => item?.tone === 'up')) technicalScore += 8;
+  if (macdHist !== null && macdHist > 0) technicalScore += 10;
+  if (rsi !== null && rsi >= 45 && rsi <= 70) technicalScore += 8;
+  if (return20 !== null && return20 > 0 && return20 <= 30) technicalScore += 8;
+  if (technicalSignals.some((item) => item?.tone === 'up')) technicalScore += 6;
+  if (signalConfidence !== null) technicalScore += signalConfidence * 12;
+  if (volumeQualityScore !== null) technicalScore += (volumeQualityScore - 50) * 0.15;
   if (rsi !== null && rsi >= 75) technicalScore -= 15;
   if (technicalSignals.some((item) => item?.tone === 'down')) technicalScore -= 10;
   technicalScore = clampScore(technicalScore);
@@ -394,7 +474,7 @@ export function buildStockHealthScore(detail, options = {}) {
   if (foreign5Day !== null && foreign5Day > 0) chipScore += 12;
   if (investmentTrust5Day !== null && investmentTrust5Day > 0) chipScore += 10;
   if (marginChange !== null && marginChange <= 0) chipScore += 6;
-  if (marginChange !== null && marginChange >= 800) chipScore -= 12;
+  if (marginSurge) chipScore -= 12;
   if (isUnderDisposition || hasChangedTrading) chipScore -= 18;
   if (hasAttention) chipScore -= 8;
   chipScore = clampScore(chipScore);
@@ -403,21 +483,25 @@ export function buildStockHealthScore(detail, options = {}) {
   if (revenueYoY !== null && revenueYoY >= 15) fundamentalScore += 15;
   else if (revenueYoY !== null && revenueYoY > 0) fundamentalScore += 8;
   else if (revenueYoY !== null && revenueYoY < 0) fundamentalScore -= 10;
-  if (cumulativeRevenueYoY !== null && cumulativeRevenueYoY >= 10) fundamentalScore += 10;
-  if (eps !== null && eps > 0) fundamentalScore += 12;
+  if (cumulativeRevenueYoY !== null && cumulativeRevenueYoY >= 10) fundamentalScore += 8;
+  if (eps !== null && eps > 0) fundamentalScore += 10;
   if (debtRatio !== null && debtRatio <= 50) fundamentalScore += 8;
   if (debtRatio !== null && debtRatio >= 65) fundamentalScore -= 12;
+  if (pePercentile !== null) {
+    if (pePercentile <= 25) fundamentalScore += 10;
+    else if (pePercentile <= 45) fundamentalScore += 5;
+    else if (pePercentile >= 85) fundamentalScore -= 8;
+    else if (pePercentile >= 70) fundamentalScore -= 4;
+  }
   fundamentalScore = clampScore(fundamentalScore);
 
   let themeScore = 42;
   if (activeEtfCount !== null && activeEtfCount >= 3) themeScore += 18;
   else if (activeEtfCount !== null && activeEtfCount > 0) themeScore += 10;
-  if (rank20Day !== null && peerCount !== null && rank20Day <= Math.max(3, Math.round(peerCount * 0.35))) themeScore += 16;
-  if (
-    return20 !== null &&
-    industryAverageReturn20 !== null &&
-    return20 > industryAverageReturn20
-  ) {
+  if (rank20Day !== null && peerCount !== null && rank20Day <= Math.max(3, Math.round(peerCount * 0.35))) {
+    themeScore += 16;
+  }
+  if (return20 !== null && industryAverageReturn20 !== null && return20 > industryAverageReturn20) {
     themeScore += 10;
   }
   if (targetPremium !== null && targetPremium >= 10) themeScore += 8;
@@ -430,10 +514,9 @@ export function buildStockHealthScore(detail, options = {}) {
   if (return20 !== null && return20 >= 40) riskScore -= 15;
   if (rsi !== null && rsi >= 75) riskScore -= 15;
   if (targetPremium !== null && targetPremium <= 0) riskScore -= 12;
-  if (close !== null && ma20 !== null) {
-    const premiumToMa20 = ((close - ma20) / ma20) * 100;
-    if (premiumToMa20 >= 15) riskScore -= 10;
-  }
+  if (marginSurge) riskScore -= 10;
+  if (isVeryLow) riskScore -= 18;
+  else if (isLow) riskScore -= 8;
   riskScore = clampScore(riskScore);
 
   const totalScore = clampScore(
@@ -449,31 +532,51 @@ export function buildStockHealthScore(detail, options = {}) {
       'technical',
       '技術面',
       technicalScore,
-      technicalScore >= 75 ? '均線、動能與價格結構偏健康。' : technicalScore >= 55 ? '技術條件中性偏多，但還沒到非常漂亮。' : '技術面仍偏弱或已經偏熱，追價要保守。',
+      technicalScore >= 75
+        ? '均線、動能與量價節奏大致站在偏多一側。'
+        : technicalScore >= 55
+          ? '技術面有轉強跡象，但還要看量能與隔日續航。'
+          : '技術面還沒整理出優勢，先不要只因為單日上漲就追。',
     ),
     createSection(
       'chip',
       '籌碼面',
       chipScore,
-      chipScore >= 75 ? '法人買盤與浮額結構相對友善。' : chipScore >= 55 ? '籌碼中性偏多，仍需觀察是否續買。' : '籌碼承接力道偏弱，暫時不適合重壓。',
+      chipScore >= 75
+        ? '法人與資金流向偏多，短線支撐較完整。'
+        : chipScore >= 55
+          ? '籌碼有改善，但還沒有強到可以忽略風險。'
+          : '籌碼支持度偏弱，容易出現衝高後整理。',
     ),
     createSection(
       'fundamental',
       '基本面',
       fundamentalScore,
-      fundamentalScore >= 75 ? '營收與獲利動能都有支撐。' : fundamentalScore >= 55 ? '基本面尚可，但需要後續數字確認。' : '基本面支撐較弱，題材或籌碼要更強才值得追蹤。',
+      fundamentalScore >= 75
+        ? '營收、獲利與估值位置大致健康。'
+        : fundamentalScore >= 55
+          ? '基本面大致中性，可搭配技術面一起判斷。'
+          : '基本面目前沒有太多加分，追價要更保守。',
     ),
     createSection(
       'theme',
       '題材面',
       themeScore,
-      themeScore >= 75 ? '題材與 ETF / 同族群相對強勢同步加分。' : themeScore >= 55 ? '仍有題材保護，但還不是最明顯主線。' : '題材辨識度不高，容易缺少資金接力。',
+      themeScore >= 75
+        ? '題材、ETF 曝光與族群相對強度都有跟上。'
+        : themeScore >= 55
+          ? '題材有延續性，但還需要觀察是不是主線。'
+          : '題材支撐不夠明確，續航要打折看待。',
     ),
     createSection(
       'risk',
       '風險控管',
       riskScore,
-      riskScore >= 75 ? '目前沒有太明顯的追價風險。' : riskScore >= 55 ? '風險尚可，但要搭配支撐壓力與量價看。' : '追價風險偏高，建議先等整理或確認。',
+      riskScore >= 75
+        ? '目前沒有看到特別明顯的追價風險。'
+        : riskScore >= 55
+          ? '可以觀察，但進場最好先想好退場條件。'
+          : '風險偏高，先保留現金比急著進場更重要。',
     ),
   ];
 

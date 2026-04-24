@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
@@ -8,6 +8,7 @@ import { useLiveStockSnapshots } from '../composables/useLiveStockSnapshots';
 import { useRecentStocks } from '../composables/useRecentStocks';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import StatusCard from '../components/StatusCard.vue';
+import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
 import InfoCard from '../components/InfoCard.vue';
 import IntradayChart from '../components/IntradayChart.vue';
 import TechnicalChart from '../components/TechnicalChart.vue';
@@ -26,7 +27,6 @@ const router = useRouter();
 const { dashboard, manifest, stockList, stockSearchList, etfOverviewList, isLoading, errorMessage, loadGlobalData } = useGlobalData();
 const { favoriteCodes, isFavorite, toggleFavorite, clearFavorites } = useFavoriteStocks();
 const { recentItems, clearRecentStocks } = useRecentStocks();
-const searchQuery = ref('');
 const rankingView = ref('live');
 const staticMarketOverview = computed(() => dashboard.value?.市場總覽 ?? null);
 const {
@@ -244,26 +244,6 @@ const marketBreadthCards = computed(() => [
   },
 ]);
 
-const filteredStocks = computed(() => {
-  const keyword = searchQuery.value.trim().toLowerCase();
-
-  if (!keyword) {
-    return stockList.value.slice(0, 8);
-  }
-
-  const sourceList = stockSearchList.value.length ? stockSearchList.value : stockList.value;
-
-  return sourceList
-    .filter((item) => [item.code, item.name].some((field) => String(field ?? '').toLowerCase().includes(keyword)))
-    .slice(0, 8);
-});
-
-const canDirectLookup = computed(() => {
-  const normalizedCode = searchQuery.value.trim();
-
-  return isStockCode(normalizedCode) && !filteredStocks.value.some((item) => item.code === normalizedCode);
-});
-
 const favoriteStocks = computed(() =>
   favoriteCodes.value
     .map((code) => stockList.value.find((item) => item.code === code))
@@ -324,108 +304,6 @@ const recentViewedStocks = computed(() =>
     .filter((item) => item.code)
     .slice(0, 6),
 );
-
-const stockSelectionUniverse = computed(() => (stockSearchList.value.length ? stockSearchList.value : stockList.value));
-
-function normalizeDateKey(value) {
-  const text = String(value ?? '').trim().replaceAll('/', '-');
-
-  if (!text) {
-    return null;
-  }
-
-  if (/^\d{8}$/.test(text)) {
-    return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`;
-  }
-
-  if (/^\d{7}$/.test(text)) {
-    return `${Number(text.slice(0, 3)) + 1911}-${text.slice(3, 5)}-${text.slice(5, 7)}`;
-  }
-
-  return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : null;
-}
-
-function getReferenceDateKey() {
-  return normalizeDateKey(liveMarketDate.value) ?? normalizeDateKey(manifest.value?.generatedAt?.slice(0, 10)) ?? new Date().toISOString().slice(0, 10);
-}
-
-function getDateOffset(referenceDateText, targetDateText) {
-  const referenceDate = new Date(`${referenceDateText}T00:00:00+08:00`);
-  const targetDate = new Date(`${targetDateText}T00:00:00+08:00`);
-
-  if (Number.isNaN(referenceDate.getTime()) || Number.isNaN(targetDate.getTime())) {
-    return null;
-  }
-
-  return Math.round((targetDate.getTime() - referenceDate.getTime()) / 86400000);
-}
-
-function getAlertPriority(item) {
-  if (item.isUnderDisposition) return 3;
-  if (item.hasChangedTrading) return 2;
-  if (item.hasAttentionWarning) return 1;
-  return 0;
-}
-
-function getAlertLabel(item) {
-  if (item.isUnderDisposition) return '處置中';
-  if (item.hasChangedTrading) return '變更交易';
-  if (item.hasAttentionWarning) return '注意累計';
-  return '觀察';
-}
-
-function getAlertTone(item) {
-  if (item.isUnderDisposition) return 'risk';
-  if (item.hasChangedTrading || item.hasAttentionWarning) return 'warning';
-  return item.selectionSignalTone ?? 'info';
-}
-
-const officialRiskRadar = computed(() =>
-  stockSelectionUniverse.value
-    .filter((item) => item.isUnderDisposition || item.hasChangedTrading || item.hasAttentionWarning)
-    .map((item) => ({
-      ...item,
-      alertLabel: getAlertLabel(item),
-      alertTone: getAlertTone(item),
-      priority: getAlertPriority(item),
-    }))
-    .sort((left, right) =>
-      (right.priority ?? 0) - (left.priority ?? 0) ||
-      (right.selectionSignalCount ?? 0) - (left.selectionSignalCount ?? 0) ||
-      Math.abs(right.changePercent ?? 0) - Math.abs(left.changePercent ?? 0) ||
-      String(left.code).localeCompare(String(right.code)),
-    )
-    .slice(0, 8),
-);
-
-const upcomingDividendWatch = computed(() => {
-  const referenceDate = getReferenceDateKey();
-
-  return stockSelectionUniverse.value
-    .map((item) => {
-      const eventDate = normalizeDateKey(item.nextExDividendDate);
-      const dayOffset = eventDate ? getDateOffset(referenceDate, eventDate) : null;
-
-      return {
-        ...item,
-        nextEventDate: eventDate,
-        dayOffset,
-      };
-    })
-    .filter((item) => item.nextEventDate && item.dayOffset !== null && item.dayOffset >= 0 && item.dayOffset <= 21)
-    .sort((left, right) =>
-      (left.dayOffset ?? Infinity) - (right.dayOffset ?? Infinity) ||
-      String(left.nextEventDate).localeCompare(String(right.nextEventDate)) ||
-      String(left.code).localeCompare(String(right.code)),
-    )
-    .slice(0, 8);
-});
-
-const officialRadarSummary = computed(() => ({
-  dispositions: stockSelectionUniverse.value.filter((item) => item.isUnderDisposition).length,
-  changedTrading: stockSelectionUniverse.value.filter((item) => item.hasChangedTrading).length,
-  attentionWarnings: stockSelectionUniverse.value.filter((item) => item.hasAttentionWarning).length,
-}));
 
 const closeFocusCards = computed(() => [
   {
@@ -499,9 +377,67 @@ const closeFocusCards = computed(() => [
   },
 ]);
 
+const dualInstitutionalBuys = computed(() => {
+  const foreignList = institutionalHighlights.value?.['外資連買'] ?? [];
+  const trustList = institutionalHighlights.value?.['投信連買'] ?? [];
+  const trustMap = new Map(
+    trustList.map((item) => [String(item?.代號 ?? '').trim(), item]),
+  );
+
+  return foreignList
+    .map((foreignItem) => {
+      const code = String(foreignItem?.代號 ?? '').trim();
+      const trustItem = trustMap.get(code);
+      if (!trustItem) return null;
+
+      const foreignDays = Number(foreignItem?.連買天數 ?? 0);
+      const trustDays = Number(trustItem?.連買天數 ?? 0);
+      const foreignNet = Number(foreignItem?.外資買賣超 ?? 0);
+      const trustNet = Number(trustItem?.投信買賣超 ?? 0);
+
+      return {
+        code,
+        name: foreignItem?.名稱 ?? trustItem?.名稱 ?? code,
+        foreignDays,
+        trustDays,
+        foreignNet,
+        trustNet,
+        close: foreignItem?.收盤價 ?? trustItem?.收盤價 ?? null,
+        changePercent: foreignItem?.漲跌幅 ?? trustItem?.漲跌幅 ?? null,
+        turnover: foreignItem?.成交值 ?? trustItem?.成交值 ?? null,
+        totalNet: foreignNet + trustNet,
+      };
+    })
+    .filter(Boolean)
+    .sort((left, right) =>
+      (right.totalNet ?? 0) - (left.totalNet ?? 0) ||
+      (right.foreignDays + right.trustDays) - (left.foreignDays + left.trustDays) ||
+      String(left.code).localeCompare(String(right.code)),
+    )
+    .slice(0, 8);
+});
+
 function openStockDetail(code) {
   if (!isStockCode(code)) return;
   router.push(createStockRoute(code));
+}
+
+function getCloseFocusRoute(item) {
+  if (!item?.code) return null;
+
+  const code = String(item.code).trim();
+  if (!code) return null;
+
+  const matchedEtf = etfOverviewList.value.some((etf) => String(etf?.code ?? '').trim() === code);
+  if (matchedEtf) {
+    return `/etfs/${code}`;
+  }
+
+  if (isStockCode(code)) {
+    return createStockRoute(code);
+  }
+
+  return null;
 }
 
 function formatViewedAt(dateText) {
@@ -531,6 +467,17 @@ function formatViewedAt(dateText) {
     />
 
     <template v-if="dashboard">
+      <div class="home-freshness-row">
+        <div class="home-freshness-strip">
+          <span class="home-freshness-label">資料狀態</span>
+          <DataFreshnessBadge
+            :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
+            :market-date="liveMarketDate ?? dashboard?.marketDate"
+            variant="inline"
+          />
+        </div>
+      </div>
+
       <section class="card-grid compact-summary-grid">
         <InfoCard
           v-for="item in summaryCards"
@@ -544,9 +491,7 @@ function formatViewedAt(dateText) {
 
       <nav class="mobile-section-nav home-mobile-nav" aria-label="首頁快速導覽">
         <a class="mobile-section-link" href="#close-focus">盤後重點</a>
-        <a class="mobile-section-link" href="#official-radar">官方提醒</a>
         <a class="mobile-section-link" href="#favorites">自選股</a>
-        <a class="mobile-section-link" href="#stock-search">搜尋</a>
         <a class="mobile-section-link" href="#market-ranking">排行</a>
       </nav>
 
@@ -571,118 +516,24 @@ function formatViewedAt(dateText) {
               </div>
             </div>
             <div class="focus-card-list">
-              <div
+              <component
+                :is="getCloseFocusRoute(item) ? RouterLink : 'div'"
                 v-for="item in card.items"
                 :key="`${card.title}-${item.code}`"
+                :to="getCloseFocusRoute(item) ?? undefined"
                 class="focus-card-item"
+                :class="{ 'is-clickable': Boolean(getCloseFocusRoute(item)) }"
               >
                 <div>
                   <strong>{{ item.code }} {{ item.name }}</strong>
                 </div>
                 <span :class="{ 'text-up': item.tone === 'up', 'text-down': item.tone === 'down' }">{{ item.value }}</span>
-              </div>
+              </component>
             </div>
           </article>
         </section>
       </section>
 
-      <section id="official-radar" class="panel home-panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">官方交易雷達</h2>
-            <p class="panel-subtitle">把處置、注意累計、變更交易與即將除息的股票先整理好，隔日選股時更快避開風險或提前排事件。</p>
-          </div>
-          <span class="meta-chip">資料日 {{ formatDate(liveMarketDate ?? manifest?.generatedAt?.slice(0, 10)) }}</span>
-        </div>
-
-        <section class="triple-grid">
-          <article class="focus-card official-radar-card">
-            <div class="focus-card-head">
-              <div>
-                <h3>盤後風險雷達</h3>
-                <p class="panel-subtitle">先看真正會影響隔日下單節奏的官方提醒。</p>
-              </div>
-            </div>
-            <div class="official-radar-summary">
-              <span class="status-badge is-risk">處置 {{ formatNumber(officialRadarSummary.dispositions) }}</span>
-              <span class="status-badge is-warning">變更交易 {{ formatNumber(officialRadarSummary.changedTrading) }}</span>
-              <span class="status-badge is-info">注意累計 {{ formatNumber(officialRadarSummary.attentionWarnings) }}</span>
-            </div>
-            <div v-if="officialRiskRadar.length" class="focus-card-list">
-              <div
-                v-for="item in officialRiskRadar.slice(0, 4)"
-                :key="`risk-${item.code}`"
-                class="focus-card-item"
-              >
-                <div>
-                  <strong>{{ item.code }} {{ item.name }}</strong>
-                  <p class="muted">{{ item.topSelectionSignalTitle ?? '官方公告提醒' }}</p>
-                </div>
-                <span class="status-badge" :class="`is-${item.alertTone}`">{{ item.alertLabel }}</span>
-              </div>
-            </div>
-            <p v-else class="muted">目前沒有新的處置、變更交易或注意累計提醒。</p>
-          </article>
-
-          <article class="focus-card official-radar-card">
-            <div class="focus-card-head">
-              <div>
-                <h3>注意 / 處置排行</h3>
-                <p class="panel-subtitle">先看風險優先級，再決定隔日要不要碰。</p>
-              </div>
-            </div>
-            <div v-if="officialRiskRadar.length" class="focus-card-list">
-              <button
-                v-for="item in officialRiskRadar.slice(0, 5)"
-                :key="`risk-rank-${item.code}`"
-                type="button"
-                class="focus-card-item official-radar-row"
-                @click="openStockDetail(item.code)"
-              >
-                <div>
-                  <strong>{{ item.code }} {{ item.name }}</strong>
-                  <p class="muted">{{ item.topSelectionSignalTitle ?? '官方公告提醒' }}</p>
-                </div>
-                <div class="official-radar-side">
-                  <span class="status-badge" :class="`is-${item.alertTone}`">{{ item.alertLabel }}</span>
-                  <span :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
-                    {{ formatPercent(item.changePercent) }}
-                  </span>
-                </div>
-              </button>
-            </div>
-            <p v-else class="muted">今天目前沒有需要優先避開的官方風險標的。</p>
-          </article>
-
-          <article class="focus-card official-radar-card">
-            <div class="focus-card-head">
-              <div>
-                <h3>即將除息 / 事件接近</h3>
-                <p class="panel-subtitle">先把股利事件排進研究節奏，避免隔日價位誤判。</p>
-              </div>
-            </div>
-            <div v-if="upcomingDividendWatch.length" class="focus-card-list">
-              <button
-                v-for="item in upcomingDividendWatch.slice(0, 5)"
-                :key="`dividend-${item.code}`"
-                type="button"
-                class="focus-card-item official-radar-row"
-                @click="openStockDetail(item.code)"
-              >
-                <div>
-                  <strong>{{ item.code }} {{ item.name }}</strong>
-                  <p class="muted">{{ item.topSelectionSignalTitle ?? '股利事件接近' }}</p>
-                </div>
-                <div class="official-radar-side">
-                  <span class="meta-chip">{{ formatDate(item.nextEventDate) }}</span>
-                  <span class="status-badge is-info">{{ item.dayOffset === 0 ? '今天' : `${item.dayOffset} 天後` }}</span>
-                </div>
-              </button>
-            </div>
-            <p v-else class="muted">未來 21 天內沒有抓到新的除權息事件。</p>
-          </article>
-        </section>
-      </section>
 
       <section id="favorites" class="panel home-panel">
         <div class="panel-header">
@@ -804,71 +655,6 @@ function formatViewedAt(dateText) {
         </div>
       </section>
 
-      <section id="stock-search" class="panel home-panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">個股快速搜尋</h2>
-            <p class="panel-subtitle">輸入代號或名稱，快速打開個股頁。</p>
-          </div>
-          <span class="meta-chip">已整理 {{ manifest?.stockDetailCount ?? 0 }} 檔</span>
-        </div>
-        <input
-          v-model="searchQuery"
-          class="search-input"
-          type="text"
-          placeholder="輸入代號或名稱，例如 2330、台積電"
-        />
-        <ul v-if="filteredStocks.length" class="stack-list search-result-list">
-          <li v-for="item in filteredStocks" :key="item.code">
-            <RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.code }}</RouterLink>
-            <span>
-              {{ item.name }}
-              <span
-                v-if="item.topSelectionSignalTitle || item.topSignalTitle"
-                class="signal-pill inline-signal-chip"
-                :class="(item.selectionSignalTone ?? item.topSignalTone) ? `is-${item.selectionSignalTone ?? item.topSignalTone}` : ''"
-              >
-                {{ item.topSelectionSignalTitle ?? item.topSignalTitle }}
-              </span>
-            </span>
-            <span class="search-row-actions">
-              <span class="muted">
-                {{
-                  item.hasLocalDetail === false
-                    ? '即時補資料'
-                    : item.isUnderDisposition
-                      ? '處置中'
-                      : item.hasChangedTrading
-                        ? '變更交易'
-                        : item.hasAttentionWarning
-                          ? '注意累計'
-                    : item.activeEtfCount
-                      ? `${item.activeEtfCount} 檔 ETF 持有`
-                      : '查看個股頁'
-                }}
-                <template v-if="item.return20 !== null && item.return20 !== undefined">・20 日 {{ formatPercent(item.return20) }}</template>
-              </span>
-              <button
-                type="button"
-                class="favorite-toggle"
-                :class="{ 'is-active': isFavorite(item.code) }"
-                @click="item.hasLocalDetail === false ? openStockDetail(item.code) : toggleFavorite(item.code)"
-              >
-                {{ item.hasLocalDetail === false ? '前往查看' : (isFavorite(item.code) ? '已追蹤' : '加入自選') }}
-              </button>
-            </span>
-          </li>
-        </ul>
-        <button
-          v-if="canDirectLookup"
-          type="button"
-          class="ghost-button"
-          @click="openStockDetail(searchQuery.trim())"
-        >
-          直接查詢 {{ searchQuery.trim() }} 即時資料
-        </button>
-        <p v-else class="muted">找不到符合的個股，試試代號前幾碼、完整公司名稱，或直接輸入 4 碼代號查詢。</p>
-      </section>
 
       <IntradayChart
         v-if="marketOverview?.盤中走勢"
@@ -882,7 +668,50 @@ function formatViewedAt(dateText) {
         title="加權指數盤勢圖表"
       />
 
-      <section class="dual-grid">
+      <section class="triple-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">雙法人連買</h2>
+              <p class="panel-subtitle">外資與投信同時站在買方，先看這批交集名單。</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>代號</th>
+                  <th>名稱</th>
+                  <th>外資</th>
+                  <th>投信</th>
+                  <th>單日漲跌</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="item in dualInstitutionalBuys"
+                  :key="`dual-${item.code}`"
+                  class="clickable-row"
+                  tabindex="0"
+                  @click="openStockDetail(item.code)"
+                  @keydown.enter="openStockDetail(item.code)"
+                >
+                  <td><RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.code }}</RouterLink></td>
+                  <td><RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.name }}</RouterLink></td>
+                  <td>{{ item.foreignDays }} 天 / {{ formatLots(item.foreignNet) }}</td>
+                  <td>{{ item.trustDays }} 天 / {{ formatLots(item.trustNet) }}</td>
+                  <td :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
+                    {{ formatPercent(item.changePercent) }}
+                  </td>
+                </tr>
+                <tr v-if="!dualInstitutionalBuys.length">
+                  <td colspan="5" class="muted">目前沒有外資與投信同時連買的股票。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
         <article class="panel">
           <div class="panel-header">
             <div>
@@ -1263,3 +1092,4 @@ function formatViewedAt(dateText) {
     </template>
   </section>
 </template>
+

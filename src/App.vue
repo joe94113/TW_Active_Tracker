@@ -84,6 +84,13 @@ secondaryNavigationItems.push(
   },
 );
 
+secondaryNavigationItems.push({
+  label: '官方交易雷達',
+  path: '/official-radar',
+  tag: '風險',
+  description: '集中看處置股、變更交易、注意股與即將除息事件，盤後先確認哪些股票需要避開、哪些事件值得提前留意。',
+});
+
 const allNavigationItems = [...primaryNavigationItems, ...secondaryNavigationItems];
 
 function formatGeneratedAt(value) {

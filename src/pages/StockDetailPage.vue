@@ -20,6 +20,14 @@ import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } f
 import { buildStockEventPerformance } from '../lib/stockEventPerformance';
 import { buildOverheatWarnings, buildStockHealthScore } from '../lib/stockHealth';
 import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
+import { buildIndustryValuationIndex, computeIndustryValuation, describeValuation } from '../lib/industryValuation';
+import { scoreVolumeQuality } from '../lib/volumeQuality';
+import { detectPatterns } from '../lib/patternDetection';
+import { aggregateSignalConfidence, describeConfidence } from '../lib/signalConfidence';
+import { buildEarningsIndex, findNextEarnings, buildEarningsRiskBadge, buildProductEventIndex, findUpcomingThemeEvents } from '../lib/marketCalendar';
+import { buildInsiderHoldingsIndex, classifyInsiderTrend } from '../lib/insiderHoldings';
+import { computeAvgTradeValue, classifyLiquidity, formatTradeValue } from '../lib/liquidity';
+import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
 import {
   formatDate,
   formatAmount,
@@ -40,10 +48,20 @@ watch(
 );
 
 const { detail, isLoading, isEnhancing, errorMessage } = useStockDetail(stockCode);
-const { dashboard, stockSearchList, loadGlobalData } = useGlobalData();
+const {
+  dashboard,
+  stockList,
+  stockSearchList,
+  earningsCalendar,
+  productEvents,
+  insiderHoldings,
+  signalConfidenceStats,
+  manifest: globalManifest,
+  loadGlobalData,
+} = useGlobalData();
 const { isFavorite, toggleFavorite } = useFavoriteStocks();
 const { snapshot: liveSnapshot, isLoading: isLiveSnapshotLoading } = useLiveStockSnapshot(stockCode, { refreshIntervalMs: 45000 });
-const { recentItems, pushRecentStock } = useRecentStocks();
+const { pushRecentStock } = useRecentStocks();
 
 const companyProfile = computed(() => detail.value?.公司概況 ?? null);
 const holderDistribution = computed(() => detail.value?.持股分散 ?? null);
@@ -174,14 +192,69 @@ const keyPriceZones = computed(() => buildKeyPriceZones(detail.value));
 const supportResistance = computed(() => buildSupportResistance(detail.value));
 const stockEventCalendar = computed(() => buildStockEventCalendar(detail.value));
 const stockEventPerformance = computed(() => buildStockEventPerformance(detail.value));
-const stockHealthScore = computed(() => buildStockHealthScore(detail.value, { currentClose: displayQuote.value.close }));
+const stockHealthScore = computed(() => buildStockHealthScore(detail.value, {
+  currentClose: displayQuote.value.close,
+  industryValuation: industryValuation.value,
+  signalConfidence: signalConfidence.value?.aggregate ?? null,
+  volumeQualityScore: volumeQuality.value?.score ?? null,
+  dailyTradeValue: dailyTradeValue.value,
+  liquidityTier: liquidityTier.value,
+  hasMarginSurge:
+    (detail.value?.融資融券?.marginUsage ?? 0) >= 40 ||
+    (detail.value?.融資融券?.marginChange ?? 0) >= 800000,
+}));
 const overheatWarnings = computed(() => buildOverheatWarnings(detail.value, { currentClose: displayQuote.value.close }));
-const recentViewedStocks = computed(() =>
-  recentItems.value
-    .filter((item) => item.code && item.code !== stockCode.value)
-    .slice(0, 6),
+
+// === 新增：產業估值、量能品質、型態、訊號可信度、財報、內部人 ===
+const industryValuationIndex = computed(() => buildIndustryValuationIndex(stockList.value ?? []));
+const industryValuation = computed(() => {
+  const industryName = companyProfile.value?.產業名稱 ?? null;
+  return computeIndustryValuation(
+    { industryName, peRatio: detail.value?.評價面?.本益比, pbRatio: detail.value?.評價面?.股價淨值比, dividendYield: detail.value?.評價面?.殖利率 },
+    industryValuationIndex.value,
+  );
+});
+const industryValuationText = computed(() => describeValuation(industryValuation.value));
+
+const historicalBars = computed(() => detail.value?.歷史資料 ?? []);
+const volumeQuality = computed(() => {
+  const volumes = historicalBars.value
+    .map((bar) => Number(bar?.volume ?? 0))
+    .filter((value) => Number.isFinite(value));
+  if (volumes.length < 5) return null;
+  return scoreVolumeQuality(volumes.slice(-20));
+});
+
+const patternSignals = computed(() => detectPatterns(historicalBars.value));
+
+const signalConfidence = computed(() =>
+  aggregateSignalConfidence(technicalSignals.value, signalConfidenceStats.value),
 );
 
+const dailyTradeValue = computed(() =>
+  computeAvgTradeValue({
+    close: displayQuote.value.close,
+    volume: displayQuote.value.volume,
+    turnover: detail.value?.最新摘要?.turnover,
+    sparkline20: detail.value?.歷史資料?.slice(-20).map((b) => b.close) ?? null,
+  }),
+);
+const liquidityTier = computed(() => classifyLiquidity(dailyTradeValue.value));
+
+const earningsIndex = computed(() => buildEarningsIndex(earningsCalendar.value));
+const nextEarnings = computed(() => findNextEarnings(stockCode.value, earningsIndex.value, new Date()));
+const earningsRiskBadge = computed(() => buildEarningsRiskBadge(nextEarnings.value));
+
+const productEventIndex = computed(() => buildProductEventIndex(productEvents.value));
+const upcomingThemeEvents = computed(() => {
+  const industryName = companyProfile.value?.產業名稱;
+  if (!industryName) return [];
+  return findUpcomingThemeEvents(industryName, productEventIndex.value, new Date(), 60);
+});
+
+const insiderIndex = computed(() => buildInsiderHoldingsIndex(insiderHoldings.value));
+const insiderTrend = computed(() => classifyInsiderTrend(stockCode.value, insiderIndex.value));
+const recentViewedStocks = computed(() => []);
 const stockSeo = computed(() => {
   const stockName = detail.value?.name ?? companyProfile.value?.公司名稱 ?? stockCode.value;
   const industryName = companyProfile.value?.產業名稱 ? `${companyProfile.value.產業名稱}個股` : '台股個股';
@@ -718,6 +791,138 @@ watch(
           <div v-else class="empty-state compact">
             <strong>目前沒有明顯過熱警示</strong>
             <p>這不代表明天一定會漲，只是代表目前沒有看到特別明顯的追價風險，可以配合支撐壓力和量價節奏分批觀察。</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- 新增：進階分析面板（產業估值、量能、型態、訊號可信度、財報、內部人） -->
+      <section class="dual-grid advanced-insight-grid">
+        <article class="panel insight-panel insight-panel-primary">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">進階結構分析</h2>
+              <p class="panel-subtitle">同產業估值百分位、量能品質、型態與技術訊號可信度，一次看清楚目前狀態。</p>
+            </div>
+          </div>
+
+          <div class="advanced-metric-grid">
+            <div class="advanced-metric-cell">
+              <span class="muted">產業相對估值</span>
+              <strong>{{ industryValuationText ?? '資料不足' }}</strong>
+              <p v-if="industryValuation.peerCount" class="muted small">
+                同產業樣本 {{ industryValuation.peerCount }} 檔
+                <template v-if="industryValuation.peRelative">
+                  · PE / 產業中位 = {{ industryValuation.peRelative.toFixed(2) }}x
+                </template>
+              </p>
+            </div>
+            <div class="advanced-metric-cell">
+              <span class="muted">量能品質</span>
+              <strong v-if="volumeQuality">
+                {{ volumeQuality.score }} / 100 · {{ volumeQuality.label }}
+              </strong>
+              <strong v-else>—</strong>
+              <p v-if="volumeQuality" class="muted small">
+                5 日 / 20 日均量比
+                <template v-if="volumeQuality.ratio5to20">
+                  {{ volumeQuality.ratio5to20.toFixed(2) }}x
+                </template>
+                · 最大單日占比 {{ volumeQuality.maxShare ? Math.round(volumeQuality.maxShare * 100) : '-' }}%
+              </p>
+            </div>
+            <div class="advanced-metric-cell">
+              <span class="muted">技術訊號可信度</span>
+              <strong :class="`text-${describeConfidence(signalConfidence.aggregate).tone}`">
+                {{ Math.round(signalConfidence.aggregate * 100) }}% · {{ describeConfidence(signalConfidence.aggregate).label }}
+              </strong>
+              <p class="muted small">
+                依歷史後續 20 日表現動態加權；訊號越多且獨立，信心度越高
+              </p>
+            </div>
+            <div class="advanced-metric-cell">
+              <span class="muted">流動性</span>
+              <strong>
+                {{ formatTradeValue(dailyTradeValue) }}
+                <template v-if="liquidityTier?.label"> · {{ liquidityTier.label }}</template>
+              </strong>
+              <p class="muted small">近日成交值（元）</p>
+            </div>
+          </div>
+
+          <div v-if="patternSignals.length" class="stock-technical-signal-list advanced-pattern-list">
+            <article
+              v-for="pattern in patternSignals"
+              :key="pattern.key"
+              class="stock-technical-signal"
+              :class="pattern.tone ? `is-${pattern.tone}` : ''"
+            >
+              <div class="stock-technical-signal-head">
+                <strong>型態：{{ pattern.title }}</strong>
+                <span class="meta-chip">信心 {{ pattern.confidence }}</span>
+              </div>
+              <p>{{ pattern.note }}</p>
+            </article>
+          </div>
+        </article>
+
+        <article class="panel insight-panel insight-panel-secondary">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">事件與內部人</h2>
+              <p class="panel-subtitle">下次財報、題材催化事件與董監持股變動，幫你把時間維度也考進來。</p>
+            </div>
+          </div>
+
+          <div class="selection-alert-list advanced-alert-list">
+            <article
+              v-if="earningsRiskBadge"
+              class="selection-alert-card"
+              :class="`is-${earningsRiskBadge.tone}`"
+            >
+              <div class="selection-alert-head">
+                <strong>{{ earningsRiskBadge.title }}</strong>
+                <span class="status-badge" :class="`is-${earningsRiskBadge.tone}`">財報</span>
+              </div>
+              <p v-if="earningsRiskBadge.note">{{ earningsRiskBadge.note }}</p>
+              <p v-if="nextEarnings?.expectedDate" class="muted">預計公告日：{{ formatDate(nextEarnings.expectedDate) }}{{ nextEarnings.quarter ? ` · ${nextEarnings.quarter}` : '' }}</p>
+            </article>
+
+            <article
+              v-for="event in upcomingThemeEvents.slice(0, 3)"
+              :key="event.slug"
+              class="selection-alert-card"
+              :class="`is-${event.tone === 'up' ? 'info' : event.tone}`"
+            >
+              <div class="selection-alert-head">
+                <strong>{{ event.title }}</strong>
+                <span class="status-badge is-info">題材催化</span>
+              </div>
+              <p>{{ event.note || '同產業相關事件。' }}</p>
+              <p class="muted">
+                {{ formatDate(event.startDate) }}
+                <template v-if="event.daysUntil >= 0">· 距今 {{ event.daysUntil }} 天</template>
+                <template v-else>· 進行中 / 剛結束</template>
+                <template v-if="event.url"> · <a :href="event.url" target="_blank" rel="noopener">活動官網</a></template>
+              </p>
+            </article>
+
+            <article
+              v-if="insiderTrend.signal"
+              class="selection-alert-card"
+              :class="`is-${insiderTrend.signal.tone}`"
+            >
+              <div class="selection-alert-head">
+                <strong>{{ insiderTrend.signal.title }}</strong>
+                <span class="status-badge" :class="`is-${insiderTrend.signal.tone}`">內部人</span>
+              </div>
+              <p>{{ insiderTrend.signal.note }}</p>
+              <p v-if="insiderTrend.record?.reportMonth" class="muted">資料月份：{{ insiderTrend.record.reportMonth }}</p>
+            </article>
+
+            <div v-if="!earningsRiskBadge && !upcomingThemeEvents.length && !insiderTrend.signal" class="empty-state compact">
+              <strong>近期沒有特別的時間面事件</strong>
+              <p>若有財報公告日、題材展會或內部人異動，這裡會自動更新。</p>
+            </div>
           </div>
         </article>
       </section>

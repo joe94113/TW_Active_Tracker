@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import StatusCard from '../components/StatusCard.vue';
+import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
 import { fetchJson } from '../lib/api';
 import { createStockRoute } from '../lib/stockRouting';
 import {
@@ -15,8 +16,54 @@ import {
 } from '../lib/formatters';
 import { buildThemeHistoryOverview } from '../lib/themeHistory';
 import { getThemeToneLabel } from '../lib/themeRadar';
+import { buildProductEventIndex, findUpcomingThemeEvents } from '../lib/marketCalendar';
 
-const { manifest, dashboard, isLoading, errorMessage, loadGlobalData } = useGlobalData();
+const { manifest, dashboard, productEvents, isLoading, errorMessage, loadGlobalData } = useGlobalData();
+
+const productEventIndex = computed(() => buildProductEventIndex(productEvents.value));
+
+// 為每個題材找出未來 60 天內的催化事件
+const themeEventMap = computed(() => {
+  const map = new Map();
+  const asOf = new Date();
+  const index = productEventIndex.value;
+  if (!index) return map;
+  for (const topic of topics.value) {
+    const keywordTexts = (topic.keywords ?? [])
+      .map((entry) => (typeof entry === 'string' ? entry : entry?.keyword))
+      .filter(Boolean);
+    const keys = [topic.title, topic.slug, ...keywordTexts].filter(Boolean);
+    const events = [];
+    const seen = new Set();
+    for (const key of keys) {
+      const results = findUpcomingThemeEvents(key, index, asOf, 60) ?? [];
+      for (const event of results) {
+        const eventKey = event.slug ?? event.title ?? `${event.date}-${event.title}`;
+        if (seen.has(eventKey)) continue;
+        seen.add(eventKey);
+        events.push(event);
+      }
+    }
+    if (events.length) {
+      events.sort((a, b) => (a.daysUntil ?? 9999) - (b.daysUntil ?? 9999));
+      map.set(topic.slug ?? topic.title, events.slice(0, 3));
+    }
+  }
+  return map;
+});
+
+function getTopicEvents(topic) {
+  return themeEventMap.value.get(topic.slug ?? topic.title) ?? [];
+}
+
+function formatEventCountdown(event) {
+  const days = Number(event?.daysUntil);
+  if (!Number.isFinite(days)) return '';
+  if (days === 0) return '今日';
+  if (days === 1) return '明日';
+  if (days < 0) return `已過 ${Math.abs(days)} 天`;
+  return `倒數 ${days} 天`;
+}
 const themeHistory = ref(null);
 const isHistoryLoading = ref(false);
 const historyError = ref('');
@@ -194,6 +241,12 @@ function formatChangeTone(value) {
             >
               {{ item }}
             </span>
+          </div>
+          <div class="theme-hero-freshness">
+            <DataFreshnessBadge
+              :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
+              :market-date="themeRadar.marketDate ?? dashboard?.marketDate"
+            />
           </div>
         </div>
 
@@ -407,6 +460,18 @@ function formatChangeTone(value) {
                 <span>法人 {{ formatNumber(topic.institutionalCount, 0) }}</span>
                 <span>ETF {{ formatNumber(topic.etfCount, 0) }}</span>
               </div>
+              <div v-if="getTopicEvents(topic).length" class="theme-event-row">
+                <span class="theme-event-title">近期催化</span>
+                <span
+                  v-for="event in getTopicEvents(topic).slice(0, 2)"
+                  :key="`brief-event-${topic.slug}-${event.slug ?? event.title}`"
+                  class="theme-event-chip"
+                  :class="`is-${event.tone ?? 'info'}`"
+                  :title="event.title"
+                >
+                  {{ event.title }}・{{ formatEventCountdown(event) }}
+                </span>
+              </div>
               <div class="theme-brief-links">
                 <a class="ghost-button" :href="`#${getTopicAnchor(topic.slug)}`">看題材拆解</a>
               </div>
@@ -449,6 +514,32 @@ function formatChangeTone(value) {
                 >
                   {{ keyword.keyword }}
                 </span>
+              </div>
+
+              <div v-if="getTopicEvents(topic).length" class="theme-event-panel">
+                <div class="theme-event-header">
+                  <h4>題材催化劑</h4>
+                  <span class="muted">未來 60 天內重點展會 / 產品發表會</span>
+                </div>
+                <div class="theme-event-list">
+                  <div
+                    v-for="event in getTopicEvents(topic)"
+                    :key="`event-${topic.slug}-${event.slug ?? event.title}`"
+                    class="theme-event-item"
+                    :class="`is-${event.tone ?? 'info'}`"
+                  >
+                    <div class="theme-event-meta">
+                      <strong>{{ event.title }}</strong>
+                      <span class="theme-event-countdown">{{ formatEventCountdown(event) }}</span>
+                    </div>
+                    <div class="theme-event-sub">
+                      <span>{{ event.date }}</span>
+                      <span v-if="event.location">・{{ event.location }}</span>
+                      <span v-if="event.category">・{{ event.category }}</span>
+                    </div>
+                    <p v-if="event.note" class="theme-event-note">{{ event.note }}</p>
+                  </div>
+                </div>
               </div>
 
               <section class="theme-topic-content-grid">
