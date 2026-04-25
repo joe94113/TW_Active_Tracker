@@ -220,6 +220,8 @@ const summaryCards = computed(() => [
     description: `最新揭露 ${formatDate(manifest.value?.latestDisclosureDate)}`,
   },
 ]);
+const primarySummaryCards = computed(() => summaryCards.value.slice(0, 3));
+const etfSummaryCard = computed(() => summaryCards.value[3] ?? null);
 
 const marketBreadthCards = computed(() => [
   {
@@ -467,26 +469,35 @@ function formatViewedAt(dateText) {
     />
 
     <template v-if="dashboard">
-      <div class="home-freshness-row">
-        <div class="home-freshness-strip">
-          <span class="home-freshness-label">資料狀態</span>
-          <DataFreshnessBadge
-            :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
-            :market-date="liveMarketDate ?? dashboard?.marketDate"
-            variant="inline"
-          />
-        </div>
-      </div>
-
-      <section class="card-grid compact-summary-grid">
+      <section class="card-grid compact-summary-grid home-summary-grid">
         <InfoCard
-          v-for="item in summaryCards"
+          v-for="item in primarySummaryCards"
           :key="item.title"
           :title="item.title"
           :value="item.value"
           :description="item.description"
           :status="item.status"
         />
+
+        <article v-if="etfSummaryCard" class="info-card home-summary-mini-card">
+          <div class="home-summary-mini-copy">
+            <p class="info-card-title">{{ etfSummaryCard.title }}</p>
+            <p class="info-card-value">{{ etfSummaryCard.value }}</p>
+            <p class="info-card-note">{{ etfSummaryCard.description }}</p>
+          </div>
+        </article>
+
+        <article class="info-card home-summary-mini-card home-freshness-summary-card">
+          <div class="home-summary-mini-copy">
+            <p class="info-card-title">資料狀態</p>
+            <DataFreshnessBadge
+              :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
+              :market-date="liveMarketDate ?? dashboard?.marketDate"
+              size="compact"
+              variant="panel"
+            />
+          </div>
+        </article>
       </section>
 
       <nav class="mobile-section-nav home-mobile-nav" aria-label="首頁快速導覽">

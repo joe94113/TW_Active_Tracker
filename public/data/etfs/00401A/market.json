@@ -3,7 +3,7 @@
   "name": "主動摩根台灣鑫收",
   "kind": "etf",
   "priceDate": "2026-04-24",
-  "generatedAt": "2026-04-24T09:29:40.646Z",
+  "generatedAt": "2026-04-25T10:03:45.073Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -43,6 +43,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -72,6 +73,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -101,6 +103,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -130,6 +133,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -159,6 +163,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -188,6 +193,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -217,6 +223,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -246,6 +253,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": null,
       "d9": null
@@ -275,6 +283,7 @@
       "ma10": null,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": 65.42288096912279,
       "d9": 55.14096032304093
@@ -304,6 +313,7 @@
       "ma10": 11.228999996185303,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": 65.98969394071953,
       "d9": 58.75720486226712
@@ -314,7 +324,7 @@
       "high": 11.859999656677246,
       "low": 11.600000381469727,
       "close": 11.779999732971191,
-      "volume": 11803130,
+      "volume": 11822160,
       "turnover": null,
       "transactions": null,
       "change": 0.2199993133544922,
@@ -333,6 +343,7 @@
       "ma10": 11.346000003814698,
       "ma20": null,
       "ma60": null,
+      "ma240": null,
       "rsi14": null,
       "k9": 70.55562192084109,
       "d9": 62.690010548458446
@@ -354,7 +365,7 @@
     "close": 11.779999732971191,
     "change": 0.2199993133544922,
     "changePercent": 1.9031081779302117,
-    "volume": 11803130,
+    "volume": 11822160,
     "turnover": null,
     "return5": 3.605979345108402,
     "return20": null,
@@ -369,6 +380,7 @@
     "ma10": 11.346000003814698,
     "ma20": null,
     "ma60": null,
+    "ma240": null,
     "rsi": null,
     "rsi14": null,
     "stochasticK": 70.55562192084109,
@@ -377,7 +389,9 @@
     "d9": 62.690010548458446,
     "macd": 0.2846777603466748,
     "macdSignal": 0.1826117556840579,
-    "macdHist": 0.1020660046626169
+    "macdHist": 0.1020660046626169,
+    "maBullStack": false,
+    "maStackCrossedAbove240": false
   },
   "觀察摘要": [
     "主動摩根台灣鑫收 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
@@ -404,7 +418,7 @@
         "price": 11.760000228881836,
         "high": 11.770000457763672,
         "low": 11.720000267028809,
-        "volume": 109000,
+        "volume": 0,
         "change": 0.20000022888183544,
         "changePercent": 1.730105786175047
       },
@@ -997,118 +1011,118 @@
     ]
   },
   "持股分散": {
-    "date": "2026-04-17",
-    "retailRatio": 17.64,
-    "largeHolderRatio": 24.970000000000002,
-    "retailRatioDelta": 0,
-    "largeHolderRatioDelta": 0,
-    "totalHolders": 13639,
+    "date": "2026-04-24",
+    "retailRatio": 20.47,
+    "largeHolderRatio": 18.95,
+    "retailRatioDelta": 2.8299999999999983,
+    "largeHolderRatioDelta": -6.020000000000003,
+    "totalHolders": 16917,
     "totalRatio": 100,
     "bands": [
       {
         "level": 1,
         "label": "1 張以下",
-        "holders": 551,
-        "shares": 113378,
-        "ratio": 0.04
+        "holders": 832,
+        "shares": 181793,
+        "ratio": 0.07
       },
       {
         "level": 2,
         "label": "1-5 張",
-        "holders": 7327,
-        "shares": 18478020,
-        "ratio": 7.6
+        "holders": 9380,
+        "shares": 23416099,
+        "ratio": 9.22
       },
       {
         "level": 3,
         "label": "5-10 張",
-        "holders": 2585,
-        "shares": 24300625,
-        "ratio": 10
+        "holders": 3064,
+        "shares": 28401643,
+        "ratio": 11.18
       },
       {
         "level": 4,
         "label": "10-15 張",
-        "holders": 413,
-        "shares": 5676428,
-        "ratio": 2.33
+        "holders": 560,
+        "shares": 7573918,
+        "ratio": 2.98
       },
       {
         "level": 5,
         "label": "15-20 張",
-        "holders": 858,
-        "shares": 17001580,
-        "ratio": 6.99
+        "holders": 1015,
+        "shares": 19993675,
+        "ratio": 7.87
       },
       {
         "level": 6,
         "label": "20-30 張",
-        "holders": 643,
-        "shares": 18365715,
-        "ratio": 7.56
+        "holders": 706,
+        "shares": 20077303,
+        "ratio": 7.9
       },
       {
         "level": 7,
         "label": "30-40 張",
-        "holders": 166,
-        "shares": 6284368,
-        "ratio": 2.58
+        "holders": 217,
+        "shares": 8166980,
+        "ratio": 3.21
       },
       {
         "level": 8,
         "label": "40-50 張",
-        "holders": 484,
-        "shares": 24058000,
-        "ratio": 9.9
+        "holders": 460,
+        "shares": 22797000,
+        "ratio": 8.97
       },
       {
         "level": 9,
         "label": "50-100 張",
-        "holders": 426,
-        "shares": 37813630,
-        "ratio": 15.56
+        "holders": 466,
+        "shares": 40142396,
+        "ratio": 15.81
       },
       {
         "level": 10,
         "label": "100-200 張",
-        "holders": 122,
-        "shares": 20234000,
-        "ratio": 8.33
+        "holders": 145,
+        "shares": 23347694,
+        "ratio": 9.19
       },
       {
         "level": 11,
         "label": "200-400 張",
-        "holders": 33,
-        "shares": 9883000,
-        "ratio": 4.06
+        "holders": 40,
+        "shares": 11626000,
+        "ratio": 4.57
       },
       {
         "level": 12,
         "label": "400-600 張",
-        "holders": 11,
-        "shares": 5718000,
-        "ratio": 2.35
+        "holders": 12,
+        "shares": 5849000,
+        "ratio": 2.3
       },
       {
         "level": 13,
         "label": "600-800 張",
-        "holders": 5,
-        "shares": 3534000,
-        "ratio": 1.45
+        "holders": 4,
+        "shares": 2696000,
+        "ratio": 1.06
       },
       {
         "level": 14,
         "label": "800-1,000 張",
-        "holders": 2,
-        "shares": 2000000,
-        "ratio": 0.82
+        "holders": 6,
+        "shares": 5454756,
+        "ratio": 2.14
       },
       {
         "level": 15,
         "label": "1,000 張以上",
-        "holders": 13,
-        "shares": 49434256,
-        "ratio": 20.35
+        "holders": 10,
+        "shares": 34170743,
+        "ratio": 13.45
       },
       {
         "level": 16,
@@ -1120,8 +1134,8 @@
       {
         "level": 17,
         "label": "合計",
-        "holders": 13639,
-        "shares": 242895000,
+        "holders": 16917,
+        "shares": 253895000,
         "ratio": 100
       }
     ],

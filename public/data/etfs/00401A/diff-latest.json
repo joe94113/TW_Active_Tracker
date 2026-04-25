@@ -1,696 +1,698 @@
 {
   "code": "00401A",
   "name": "主動摩根台灣鑫收",
-  "fromDisclosureDate": "2026-04-21",
-  "toDisclosureDate": "2026-04-24",
+  "fromDisclosureDate": "2026-04-24",
+  "toDisclosureDate": "2026-04-25",
   "comparisonReady": true,
-  "added": [
+  "added": [],
+  "removed": [
     {
       "code": "6669.PLC",
       "name": "TAIEX FUTURES MAY26 20-MAY-2026",
-      "currentShares": 28,
-      "currentWeight": 7.253,
-      "sharesDelta": 28,
-      "weightDelta": 7.253
+      "previousShares": 28,
+      "previousWeight": 7.253,
+      "sharesDelta": -28,
+      "weightDelta": -7.253
     },
     {
       "code": "6669.PLC",
       "name": "TWSE 05/20/26 C33000 Index",
-      "currentShares": -240,
-      "currentWeight": -2.0654,
-      "sharesDelta": -240,
-      "weightDelta": -2.0654
-    },
-    {
-      "code": "4958",
-      "name": "臻鼎-KY",
-      "currentShares": 173000,
-      "currentWeight": 1.9239,
-      "sharesDelta": 173000,
-      "weightDelta": 1.9239
+      "previousShares": -240,
+      "previousWeight": -2.0654,
+      "sharesDelta": 240,
+      "weightDelta": 2.0654
     },
     {
       "code": "6669.PLC",
       "name": "TWSE 05/20/26 C36900 Index",
-      "currentShares": -100,
-      "currentWeight": -0.3097,
-      "sharesDelta": -100,
-      "weightDelta": -0.3097
+      "previousShares": -100,
+      "previousWeight": -0.3097,
+      "sharesDelta": 100,
+      "weightDelta": 0.3097
     },
     {
       "code": "6669.PLC",
       "name": "TWSE 05/20/26 C37400 Index",
-      "currentShares": -18,
-      "currentWeight": -0.0459,
-      "sharesDelta": -18,
-      "weightDelta": -0.0459
+      "previousShares": -18,
+      "previousWeight": -0.0459,
+      "sharesDelta": 18,
+      "weightDelta": 0.0459
     },
     {
       "code": "6669.PLC",
       "name": "TWSE 05/20/26 C37200 Index",
-      "currentShares": -10,
-      "currentWeight": -0.0275,
-      "sharesDelta": -10,
-      "weightDelta": -0.0275
+      "previousShares": -10,
+      "previousWeight": -0.0275,
+      "sharesDelta": 10,
+      "weightDelta": 0.0275
     },
     {
       "code": "6669.PLC",
       "name": "TWSE 05/20/26 C37600 Index",
-      "currentShares": -10,
-      "currentWeight": -0.0236,
-      "sharesDelta": -10,
-      "weightDelta": -0.0236
+      "previousShares": -10,
+      "previousWeight": -0.0236,
+      "sharesDelta": 10,
+      "weightDelta": 0.0236
     },
     {
       "code": "6669.PLC",
       "name": "TWSE 06/17/26 C37400 Index",
-      "currentShares": -2,
-      "currentWeight": -0.0069,
-      "sharesDelta": -2,
-      "weightDelta": -0.0069
+      "previousShares": -2,
+      "previousWeight": -0.0069,
+      "sharesDelta": 2,
+      "weightDelta": 0.0069
     }
   ],
-  "removed": [],
   "increased": [
     {
       "code": "2454",
       "name": "聯發科",
-      "previousShares": 63000,
+      "previousShares": 65000,
       "currentShares": 65000,
-      "previousWeight": 4.345,
-      "currentWeight": 4.9265,
-      "sharesDelta": 2000,
-      "weightDelta": 0.5815000000000001
-    },
-    {
-      "code": "6669",
-      "name": "緯穎",
-      "previousShares": 16000,
-      "currentShares": 19000,
-      "previousWeight": 2.3115,
-      "currentWeight": 2.7631,
-      "sharesDelta": 3000,
-      "weightDelta": 0.4516
-    },
-    {
-      "code": "2313",
-      "name": "華通",
-      "previousShares": 120000,
-      "currentShares": 197000,
-      "previousWeight": 1.0912,
-      "currentWeight": 1.4999,
-      "sharesDelta": 77000,
-      "weightDelta": 0.40870000000000006
-    },
-    {
-      "code": "3711",
-      "name": "日月光投控",
-      "previousShares": 145000,
-      "currentShares": 168000,
-      "previousWeight": 2.4291,
-      "currentWeight": 2.6702,
-      "sharesDelta": 23000,
-      "weightDelta": 0.24109999999999987
-    },
-    {
-      "code": "6285",
-      "name": "啟碁",
-      "previousShares": 291000,
-      "currentShares": 325000,
-      "previousWeight": 2.6566,
-      "currentWeight": 2.4188,
-      "sharesDelta": 34000,
-      "weightDelta": -0.2378
-    },
-    {
-      "code": "7769",
-      "name": "鴻勁",
-      "previousShares": 14000,
-      "currentShares": 15000,
-      "previousWeight": 2.2589,
-      "currentWeight": 2.4688,
-      "sharesDelta": 1000,
-      "weightDelta": 0.20989999999999975
-    },
-    {
-      "code": "2345",
-      "name": "智邦",
-      "previousShares": 29000,
-      "currentShares": 32000,
-      "previousWeight": 2.1106,
-      "currentWeight": 2.2776,
-      "sharesDelta": 3000,
-      "weightDelta": 0.16700000000000026
-    },
-    {
-      "code": "2885",
-      "name": "元大金",
-      "previousShares": 874000,
-      "currentShares": 1029000,
-      "previousWeight": 1.6244,
-      "currentWeight": 1.7676,
-      "sharesDelta": 155000,
-      "weightDelta": 0.1432
-    },
-    {
-      "code": "3665",
-      "name": "貿聯-KY",
-      "previousShares": 24000,
-      "currentShares": 24000,
-      "previousWeight": 2.1431,
-      "currentWeight": 2.2625,
+      "previousWeight": 4.9265,
+      "currentWeight": 5.3206,
       "sharesDelta": 0,
-      "weightDelta": 0.11940000000000017
-    },
-    {
-      "code": "3044",
-      "name": "健鼎",
-      "previousShares": 129000,
-      "currentShares": 129000,
-      "previousWeight": 1.9363,
-      "currentWeight": 2.0415,
-      "sharesDelta": 0,
-      "weightDelta": 0.10520000000000018
-    },
-    {
-      "code": "2360",
-      "name": "致茂",
-      "previousShares": 34000,
-      "currentShares": 37000,
-      "previousWeight": 2.5301,
-      "currentWeight": 2.4562,
-      "sharesDelta": 3000,
-      "weightDelta": -0.07390000000000008
-    },
-    {
-      "code": "8021",
-      "name": "尖點",
-      "previousShares": 68000,
-      "currentShares": 68000,
-      "previousWeight": 1.0318,
-      "currentWeight": 1.0971,
-      "sharesDelta": 0,
-      "weightDelta": 0.06529999999999991
-    },
-    {
-      "code": "5274",
-      "name": "ASPEED TECHNOLOGY INC ORD TWD10",
-      "previousShares": 2000,
-      "currentShares": 2000,
-      "previousWeight": 1.0472,
-      "currentWeight": 1.0724,
-      "sharesDelta": 0,
-      "weightDelta": 0.02520000000000011
+      "weightDelta": 0.3940999999999999
     },
     {
       "code": "2383",
       "name": "台光電",
       "previousShares": 29000,
       "currentShares": 29000,
-      "previousWeight": 4.0528,
-      "currentWeight": 4.0685,
+      "previousWeight": 4.0685,
+      "currentWeight": 4.3626,
       "sharesDelta": 0,
-      "weightDelta": 0.015699999999999825
-    },
-    {
-      "code": "3037",
-      "name": "欣興",
-      "previousShares": 30000,
-      "currentShares": 30000,
-      "previousWeight": 0.7383,
-      "currentWeight": 0.7473,
-      "sharesDelta": 0,
-      "weightDelta": 0.009000000000000008
-    },
-    {
-      "code": "8210",
-      "name": "勤誠",
-      "previousShares": 13000,
-      "currentShares": 13000,
-      "previousWeight": 0.4813,
-      "currentWeight": 0.4893,
-      "sharesDelta": 0,
-      "weightDelta": 0.008000000000000007
-    },
-    {
-      "code": "2317",
-      "name": "鴻海",
-      "previousShares": 11000,
-      "currentShares": 11000,
-      "previousWeight": 0.0829,
-      "currentWeight": 0.0847,
-      "sharesDelta": 0,
-      "weightDelta": 0.001799999999999996
-    }
-  ],
-  "decreased": [
-    {
-      "code": "6223",
-      "name": "MPI CORP ORD TWD10",
-      "previousShares": 12000,
-      "currentShares": 12000,
-      "previousWeight": 2.2368,
-      "currentWeight": 1.9669,
-      "sharesDelta": 0,
-      "weightDelta": -0.26990000000000003
+      "weightDelta": 0.29409999999999936
     },
     {
       "code": "2330",
       "name": "台積電",
       "previousShares": 113000,
       "currentShares": 113000,
-      "previousWeight": 8.3062,
-      "currentWeight": 8.0426,
+      "previousWeight": 8.0426,
+      "currentWeight": 8.3001,
       "sharesDelta": 0,
-      "weightDelta": -0.2636000000000003
+      "weightDelta": 0.2575000000000003
     },
     {
-      "code": "3167",
-      "name": "大量",
-      "previousShares": 96000,
-      "currentShares": 96000,
-      "previousWeight": 2.3348,
-      "currentWeight": 2.0991,
+      "code": "6669",
+      "name": "緯穎",
+      "previousShares": 19000,
+      "currentShares": 19000,
+      "previousWeight": 2.7631,
+      "currentWeight": 2.9604,
       "sharesDelta": 0,
-      "weightDelta": -0.23570000000000002
-    },
-    {
-      "code": "4991",
-      "name": "GCS HOLDINGS INC.",
-      "previousShares": 49000,
-      "currentShares": 49000,
-      "previousWeight": 1.2878,
-      "currentWeight": 1.0647,
-      "sharesDelta": 0,
-      "weightDelta": -0.22310000000000008
-    },
-    {
-      "code": "3491",
-      "name": "UNIVERSAL MICROWAVE TECHNOLOGY ORD TWD10",
-      "previousShares": 24000,
-      "currentShares": 24000,
-      "previousWeight": 1.4767,
-      "currentWeight": 1.2729,
-      "sharesDelta": 0,
-      "weightDelta": -0.20379999999999998
-    },
-    {
-      "code": "2303",
-      "name": "聯電",
-      "previousShares": 718000,
-      "currentShares": 718000,
-      "previousWeight": 2.0042,
-      "currentWeight": 1.8082,
-      "sharesDelta": 0,
-      "weightDelta": -0.19599999999999995
-    },
-    {
-      "code": "3529",
-      "name": "EMEMORY TECHNOLOGY INC",
-      "previousShares": 8000,
-      "currentShares": 8000,
-      "previousWeight": 1.2734,
-      "currentWeight": 1.0895,
-      "sharesDelta": 0,
-      "weightDelta": -0.18390000000000017
-    },
-    {
-      "code": "2891",
-      "name": "中信金",
-      "previousShares": 1217000,
-      "currentShares": 1217000,
-      "previousWeight": 2.3458,
-      "currentWeight": 2.1946,
-      "sharesDelta": 0,
-      "weightDelta": -0.15120000000000022
-    },
-    {
-      "code": "2883",
-      "name": "凱基金",
-      "previousShares": 1956000,
-      "currentShares": 1956000,
-      "previousWeight": 1.4768,
-      "currentWeight": 1.352,
-      "sharesDelta": 0,
-      "weightDelta": -0.1247999999999998
-    },
-    {
-      "code": "2882",
-      "name": "國泰金",
-      "previousShares": 838000,
-      "currentShares": 838000,
-      "previousWeight": 2.2692,
-      "currentWeight": 2.1449,
-      "sharesDelta": 0,
-      "weightDelta": -0.1243000000000003
-    },
-    {
-      "code": "6515",
-      "name": "穎崴",
-      "previousShares": 5000,
-      "currentShares": 5000,
-      "previousWeight": 1.9593,
-      "currentWeight": 1.8358,
-      "sharesDelta": 0,
-      "weightDelta": -0.12349999999999994
-    },
-    {
-      "code": "2884",
-      "name": "玉山金",
-      "previousShares": 1423000,
-      "currentShares": 1423000,
-      "previousWeight": 1.6968,
-      "currentWeight": 1.5801,
-      "sharesDelta": 0,
-      "weightDelta": -0.11670000000000003
+      "weightDelta": 0.1972999999999998
     },
     {
       "code": "2308",
       "name": "台達電",
       "previousShares": 94000,
       "currentShares": 94000,
-      "previousWeight": 6.4831,
-      "currentWeight": 6.3687,
+      "previousWeight": 6.3687,
+      "currentWeight": 6.5569,
       "sharesDelta": 0,
-      "weightDelta": -0.11440000000000072
-    },
-    {
-      "code": "3131",
-      "name": "GRAND PLASTIC TECHNOLOGY CORP ORD TWD 10",
-      "previousShares": 13000,
-      "currentShares": 13000,
-      "previousWeight": 1.5148,
-      "currentWeight": 1.4012,
-      "sharesDelta": 0,
-      "weightDelta": -0.11359999999999992
-    },
-    {
-      "code": "4904",
-      "name": "遠傳",
-      "previousShares": 388000,
-      "currentShares": 388000,
-      "previousWeight": 1.3831,
-      "currentWeight": 1.2732,
-      "sharesDelta": 0,
-      "weightDelta": -0.10989999999999989
-    },
-    {
-      "code": "5347",
-      "name": "VANGUARD INTERNATIONAL SEMICONDUCTOR CORPORATION ORD TWD10",
-      "previousShares": 246000,
-      "currentShares": 246000,
-      "previousWeight": 1.2412,
-      "currentWeight": 1.1448,
-      "sharesDelta": 0,
-      "weightDelta": -0.09640000000000004
-    },
-    {
-      "code": "2412",
-      "name": "中華電",
-      "previousShares": 289000,
-      "currentShares": 289000,
-      "previousWeight": 1.4372,
-      "currentWeight": 1.3449,
-      "sharesDelta": 0,
-      "weightDelta": -0.09230000000000005
+      "weightDelta": 0.18820000000000014
     },
     {
       "code": "2382",
       "name": "廣達",
       "previousShares": 99000,
-      "currentShares": 99000,
-      "previousWeight": 1.1823,
-      "currentWeight": 1.0908,
-      "sharesDelta": 0,
-      "weightDelta": -0.09149999999999991
+      "currentShares": 116000,
+      "previousWeight": 1.0908,
+      "currentWeight": 1.2595,
+      "sharesDelta": 17000,
+      "weightDelta": 0.16870000000000007
     },
     {
-      "code": "2887",
-      "name": "台新新光金",
-      "previousShares": 1308000,
-      "currentShares": 1308000,
-      "previousWeight": 1.1514,
-      "currentWeight": 1.0607,
+      "code": "3167",
+      "name": "大量",
+      "previousShares": 96000,
+      "currentShares": 96000,
+      "previousWeight": 2.0991,
+      "currentWeight": 2.2655,
       "sharesDelta": 0,
-      "weightDelta": -0.0907
-    },
-    {
-      "code": "2357",
-      "name": "華碩",
-      "previousShares": 59000,
-      "currentShares": 59000,
-      "previousWeight": 1.2957,
-      "currentWeight": 1.2073,
-      "sharesDelta": 0,
-      "weightDelta": -0.08840000000000003
+      "weightDelta": 0.16639999999999988
     },
     {
       "code": "2379",
       "name": "瑞昱",
       "previousShares": 80000,
-      "currentShares": 80000,
-      "previousWeight": 1.5623,
-      "currentWeight": 1.4837,
-      "sharesDelta": 0,
-      "weightDelta": -0.0786
+      "currentShares": 90000,
+      "previousWeight": 1.4837,
+      "currentWeight": 1.6307,
+      "sharesDelta": 10000,
+      "weightDelta": 0.14700000000000002
     },
     {
-      "code": "3034",
-      "name": "聯詠",
-      "previousShares": 61000,
-      "currentShares": 61000,
-      "previousWeight": 0.9189,
-      "currentWeight": 0.8474,
-      "sharesDelta": 0,
-      "weightDelta": -0.07150000000000001
-    },
-    {
-      "code": "2467",
-      "name": "志聖",
-      "previousShares": 29000,
-      "currentShares": 29000,
-      "previousWeight": 0.6,
-      "currentWeight": 0.5339,
-      "sharesDelta": 0,
-      "weightDelta": -0.06609999999999994
-    },
-    {
-      "code": "5871",
-      "name": "中租-KY",
-      "previousShares": 289000,
-      "currentShares": 289000,
-      "previousWeight": 1.2589,
-      "currentWeight": 1.1966,
-      "sharesDelta": 0,
-      "weightDelta": -0.0622999999999998
-    },
-    {
-      "code": "2603",
-      "name": "長榮",
-      "previousShares": 224000,
-      "currentShares": 224000,
-      "previousWeight": 1.6018,
-      "currentWeight": 1.5406,
-      "sharesDelta": 0,
-      "weightDelta": -0.06119999999999992
-    },
-    {
-      "code": "2881",
-      "name": "富邦金",
-      "previousShares": 411000,
-      "currentShares": 411000,
-      "previousWeight": 1.3009,
-      "currentWeight": 1.2418,
-      "sharesDelta": 0,
-      "weightDelta": -0.05909999999999993
-    },
-    {
-      "code": "2886",
-      "name": "兆豐金",
-      "previousShares": 706000,
-      "currentShares": 706000,
-      "previousWeight": 1.0187,
-      "currentWeight": 0.9615,
-      "sharesDelta": 0,
-      "weightDelta": -0.05719999999999992
-    },
-    {
-      "code": "3008",
-      "name": "大立光",
-      "previousShares": 4000,
-      "currentShares": 4000,
-      "previousWeight": 0.3935,
-      "currentWeight": 0.3401,
-      "sharesDelta": 0,
-      "weightDelta": -0.0534
-    },
-    {
-      "code": "2890",
-      "name": "永豐金",
-      "previousShares": 524000,
-      "currentShares": 524000,
-      "previousWeight": 0.6125,
-      "currentWeight": 0.5657,
-      "sharesDelta": 0,
-      "weightDelta": -0.046800000000000064
-    },
-    {
-      "code": "6187",
-      "name": "ALL RING TECH CO LTD ORD TWD10",
-      "previousShares": 26000,
-      "currentShares": 26000,
-      "previousWeight": 1.1561,
-      "currentWeight": 1.1165,
-      "sharesDelta": 0,
-      "weightDelta": -0.03959999999999986
-    },
-    {
-      "code": "1519",
-      "name": "華城",
-      "previousShares": 14000,
-      "currentShares": 14000,
-      "previousWeight": 0.4528,
-      "currentWeight": 0.4201,
-      "sharesDelta": 0,
-      "weightDelta": -0.03270000000000001
-    },
-    {
-      "code": "2912",
-      "name": "統一超",
-      "previousShares": 53000,
-      "currentShares": 53000,
-      "previousWeight": 0.4579,
-      "currentWeight": 0.4253,
-      "sharesDelta": 0,
-      "weightDelta": -0.03259999999999996
-    },
-    {
-      "code": "3231",
-      "name": "緯創",
-      "previousShares": 95000,
-      "currentShares": 95000,
-      "previousWeight": 0.4845,
-      "currentWeight": 0.4535,
-      "sharesDelta": 0,
-      "weightDelta": -0.030999999999999972
-    },
-    {
-      "code": "1216",
-      "name": "統一",
+      "code": "3711",
+      "name": "日月光投控",
       "previousShares": 168000,
       "currentShares": 168000,
-      "previousWeight": 0.4427,
-      "currentWeight": 0.4133,
+      "previousWeight": 2.6702,
+      "currentWeight": 2.8012,
       "sharesDelta": 0,
-      "weightDelta": -0.02939999999999998
+      "weightDelta": 0.13100000000000023
     },
     {
       "code": "2368",
       "name": "金像電",
       "previousShares": 38000,
       "currentShares": 38000,
-      "previousWeight": 1.669,
-      "currentWeight": 1.6449,
+      "previousWeight": 1.6449,
+      "currentWeight": 1.7756,
       "sharesDelta": 0,
-      "weightDelta": -0.02410000000000001
+      "weightDelta": 0.13070000000000004
     },
     {
-      "code": "3005",
-      "name": "神基",
-      "previousShares": 74000,
-      "currentShares": 74000,
-      "previousWeight": 0.27,
-      "currentWeight": 0.2481,
+      "code": "4958",
+      "name": "臻鼎-KY",
+      "previousShares": 173000,
+      "currentShares": 173000,
+      "previousWeight": 1.9239,
+      "currentWeight": 2.0209,
       "sharesDelta": 0,
-      "weightDelta": -0.02190000000000003
+      "weightDelta": 0.0970000000000002
     },
     {
-      "code": "4938",
-      "name": "和碩",
-      "previousShares": 154000,
-      "currentShares": 154000,
-      "previousWeight": 0.4623,
-      "currentWeight": 0.4426,
+      "code": "3037",
+      "name": "欣興",
+      "previousShares": 30000,
+      "currentShares": 30000,
+      "previousWeight": 0.7473,
+      "currentWeight": 0.7967,
       "sharesDelta": 0,
-      "weightDelta": -0.019699999999999995
+      "weightDelta": 0.0494
     },
     {
-      "code": "1301",
-      "name": "台塑",
-      "previousShares": 52000,
-      "currentShares": 52000,
-      "previousWeight": 0.0993,
-      "currentWeight": 0.0907,
+      "code": "3044",
+      "name": "健鼎",
+      "previousShares": 129000,
+      "currentShares": 129000,
+      "previousWeight": 2.0415,
+      "currentWeight": 2.0837,
       "sharesDelta": 0,
-      "weightDelta": -0.008599999999999997
+      "weightDelta": 0.04219999999999979
     },
     {
-      "code": "6944",
-      "name": "兆聯實業",
-      "previousShares": 23000,
-      "currentShares": 23000,
-      "previousWeight": 0.7698,
-      "currentWeight": 0.7634,
+      "code": "8210",
+      "name": "勤誠",
+      "previousShares": 13000,
+      "currentShares": 13000,
+      "previousWeight": 0.4893,
+      "currentWeight": 0.5288,
       "sharesDelta": 0,
-      "weightDelta": -0.006400000000000072
+      "weightDelta": 0.039500000000000035
+    },
+    {
+      "code": "5274",
+      "name": "ASPEED TECHNOLOGY INC ORD TWD10",
+      "previousShares": 2000,
+      "currentShares": 2000,
+      "previousWeight": 1.0724,
+      "currentWeight": 1.1006,
+      "sharesDelta": 0,
+      "weightDelta": 0.028200000000000003
+    },
+    {
+      "code": "2345",
+      "name": "智邦",
+      "previousShares": 32000,
+      "currentShares": 32000,
+      "previousWeight": 2.2776,
+      "currentWeight": 2.3021,
+      "sharesDelta": 0,
+      "weightDelta": 0.024499999999999744
+    },
+    {
+      "code": "5347",
+      "name": "VANGUARD INTERNATIONAL SEMICONDUCTOR CORPORATION ORD TWD10",
+      "previousShares": 246000,
+      "currentShares": 246000,
+      "previousWeight": 1.1448,
+      "currentWeight": 1.1619,
+      "sharesDelta": 0,
+      "weightDelta": 0.017099999999999893
+    },
+    {
+      "code": "3034",
+      "name": "聯詠",
+      "previousShares": 61000,
+      "currentShares": 61000,
+      "previousWeight": 0.8474,
+      "currentWeight": 0.8572,
+      "sharesDelta": 0,
+      "weightDelta": 0.00979999999999992
     },
     {
       "code": "2301",
       "name": "光寶科",
       "previousShares": 17000,
       "currentShares": 17000,
-      "previousWeight": 0.1018,
-      "currentWeight": 0.0957,
+      "previousWeight": 0.0957,
+      "currentWeight": 0.0969,
       "sharesDelta": 0,
-      "weightDelta": -0.006100000000000008
+      "weightDelta": 0.0012000000000000066
+    }
+  ],
+  "decreased": [
+    {
+      "code": "3131",
+      "name": "GRAND PLASTIC TECHNOLOGY CORP ORD TWD 10",
+      "previousShares": 13000,
+      "currentShares": 11000,
+      "previousWeight": 1.4012,
+      "currentWeight": 1.1574,
+      "sharesDelta": -2000,
+      "weightDelta": -0.24380000000000002
     },
     {
       "code": "3653",
       "name": "健策",
       "previousShares": 10000,
-      "currentShares": 10000,
-      "previousWeight": 1.8222,
-      "currentWeight": 1.817,
+      "currentShares": 9000,
+      "previousWeight": 1.817,
+      "currentWeight": 1.6247,
+      "sharesDelta": -1000,
+      "weightDelta": -0.19229999999999992
+    },
+    {
+      "code": "6515",
+      "name": "穎崴",
+      "previousShares": 5000,
+      "currentShares": 5000,
+      "previousWeight": 1.8358,
+      "currentWeight": 1.6909,
       "sharesDelta": 0,
-      "weightDelta": -0.0052000000000000934
+      "weightDelta": -0.14490000000000003
+    },
+    {
+      "code": "6285",
+      "name": "啟碁",
+      "previousShares": 325000,
+      "currentShares": 325000,
+      "previousWeight": 2.4188,
+      "currentWeight": 2.2779,
+      "sharesDelta": 0,
+      "weightDelta": -0.14090000000000025
+    },
+    {
+      "code": "6187",
+      "name": "ALL RING TECH CO LTD ORD TWD10",
+      "previousShares": 26000,
+      "currentShares": 26000,
+      "previousWeight": 1.1165,
+      "currentWeight": 1.0226,
+      "sharesDelta": 0,
+      "weightDelta": -0.0939000000000001
+    },
+    {
+      "code": "6223",
+      "name": "MPI CORP ORD TWD10",
+      "previousShares": 12000,
+      "currentShares": 12000,
+      "previousWeight": 1.9669,
+      "currentWeight": 1.8758,
+      "sharesDelta": 0,
+      "weightDelta": -0.09110000000000018
+    },
+    {
+      "code": "7769",
+      "name": "鴻勁",
+      "previousShares": 15000,
+      "currentShares": 15000,
+      "previousWeight": 2.4688,
+      "currentWeight": 2.3851,
+      "sharesDelta": 0,
+      "weightDelta": -0.08369999999999989
+    },
+    {
+      "code": "4991",
+      "name": "GCS HOLDINGS INC.",
+      "previousShares": 49000,
+      "currentShares": 49000,
+      "previousWeight": 1.0647,
+      "currentWeight": 0.9817,
+      "sharesDelta": 0,
+      "weightDelta": -0.08299999999999996
+    },
+    {
+      "code": "2313",
+      "name": "華通",
+      "previousShares": 197000,
+      "currentShares": 197000,
+      "previousWeight": 1.4999,
+      "currentWeight": 1.4205,
+      "sharesDelta": 0,
+      "weightDelta": -0.07939999999999992
+    },
+    {
+      "code": "2360",
+      "name": "致茂",
+      "previousShares": 37000,
+      "currentShares": 37000,
+      "previousWeight": 2.4562,
+      "currentWeight": 2.3881,
+      "sharesDelta": 0,
+      "weightDelta": -0.06809999999999983
+    },
+    {
+      "code": "8021",
+      "name": "尖點",
+      "previousShares": 68000,
+      "currentShares": 68000,
+      "previousWeight": 1.0971,
+      "currentWeight": 1.0309,
+      "sharesDelta": 0,
+      "weightDelta": -0.06620000000000004
+    },
+    {
+      "code": "2357",
+      "name": "華碩",
+      "previousShares": 59000,
+      "currentShares": 59000,
+      "previousWeight": 1.2073,
+      "currentWeight": 1.1603,
+      "sharesDelta": 0,
+      "weightDelta": -0.04699999999999993
+    },
+    {
+      "code": "3529",
+      "name": "EMEMORY TECHNOLOGY INC",
+      "previousShares": 8000,
+      "currentShares": 8000,
+      "previousWeight": 1.0895,
+      "currentWeight": 1.0488,
+      "sharesDelta": 0,
+      "weightDelta": -0.04069999999999996
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "previousShares": 1029000,
+      "currentShares": 1029000,
+      "previousWeight": 1.7676,
+      "currentWeight": 1.7278,
+      "sharesDelta": 0,
+      "weightDelta": -0.03980000000000006
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "previousShares": 838000,
+      "currentShares": 838000,
+      "previousWeight": 2.1449,
+      "currentWeight": 2.11,
+      "sharesDelta": 0,
+      "weightDelta": -0.03489999999999993
+    },
+    {
+      "code": "3665",
+      "name": "貿聯-KY",
+      "previousShares": 24000,
+      "currentShares": 24000,
+      "previousWeight": 2.2625,
+      "currentWeight": 2.2308,
+      "sharesDelta": 0,
+      "weightDelta": -0.031700000000000284
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "previousShares": 1217000,
+      "currentShares": 1217000,
+      "previousWeight": 2.1946,
+      "currentWeight": 2.1642,
+      "sharesDelta": 0,
+      "weightDelta": -0.03039999999999976
+    },
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "previousShares": 411000,
+      "currentShares": 411000,
+      "previousWeight": 1.2418,
+      "currentWeight": 1.2131,
+      "sharesDelta": 0,
+      "weightDelta": -0.028699999999999948
+    },
+    {
+      "code": "2412",
+      "name": "中華電",
+      "previousShares": 289000,
+      "currentShares": 289000,
+      "previousWeight": 1.3449,
+      "currentWeight": 1.3164,
+      "sharesDelta": 0,
+      "weightDelta": -0.02849999999999997
+    },
+    {
+      "code": "2603",
+      "name": "長榮",
+      "previousShares": 224000,
+      "currentShares": 224000,
+      "previousWeight": 1.5406,
+      "currentWeight": 1.5173,
+      "sharesDelta": 0,
+      "weightDelta": -0.023299999999999876
+    },
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "previousShares": 1423000,
+      "currentShares": 1423000,
+      "previousWeight": 1.5801,
+      "currentWeight": 1.5571,
+      "sharesDelta": 0,
+      "weightDelta": -0.02300000000000013
+    },
+    {
+      "code": "2886",
+      "name": "兆豐金",
+      "previousShares": 706000,
+      "currentShares": 706000,
+      "previousWeight": 0.9615,
+      "currentWeight": 0.9386,
+      "sharesDelta": 0,
+      "weightDelta": -0.02290000000000003
+    },
+    {
+      "code": "2912",
+      "name": "統一超",
+      "previousShares": 53000,
+      "currentShares": 53000,
+      "previousWeight": 0.4253,
+      "currentWeight": 0.4062,
+      "sharesDelta": 0,
+      "weightDelta": -0.019100000000000006
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "previousShares": 1956000,
+      "currentShares": 1956000,
+      "previousWeight": 1.352,
+      "currentWeight": 1.3348,
+      "sharesDelta": 0,
+      "weightDelta": -0.017200000000000104
+    },
+    {
+      "code": "5871",
+      "name": "中租-KY",
+      "previousShares": 289000,
+      "currentShares": 289000,
+      "previousWeight": 1.1966,
+      "currentWeight": 1.1804,
+      "sharesDelta": 0,
+      "weightDelta": -0.016200000000000214
+    },
+    {
+      "code": "4904",
+      "name": "遠傳",
+      "previousShares": 388000,
+      "currentShares": 388000,
+      "previousWeight": 1.2732,
+      "currentWeight": 1.26,
+      "sharesDelta": 0,
+      "weightDelta": -0.0132000000000001
+    },
+    {
+      "code": "2303",
+      "name": "聯電",
+      "previousShares": 718000,
+      "currentShares": 718000,
+      "previousWeight": 1.8082,
+      "currentWeight": 1.7982,
+      "sharesDelta": 0,
+      "weightDelta": -0.010000000000000009
+    },
+    {
+      "code": "1216",
+      "name": "統一",
+      "previousShares": 168000,
+      "currentShares": 168000,
+      "previousWeight": 0.4133,
+      "currentWeight": 0.4038,
+      "sharesDelta": 0,
+      "weightDelta": -0.009500000000000008
+    },
+    {
+      "code": "2467",
+      "name": "志聖",
+      "previousShares": 29000,
+      "currentShares": 29000,
+      "previousWeight": 0.5339,
+      "currentWeight": 0.5245,
+      "sharesDelta": 0,
+      "weightDelta": -0.009400000000000075
+    },
+    {
+      "code": "3005",
+      "name": "神基",
+      "previousShares": 74000,
+      "currentShares": 74000,
+      "previousWeight": 0.2481,
+      "currentWeight": 0.2403,
+      "sharesDelta": 0,
+      "weightDelta": -0.007799999999999974
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "previousShares": 1308000,
+      "currentShares": 1308000,
+      "previousWeight": 1.0607,
+      "currentWeight": 1.0531,
+      "sharesDelta": 0,
+      "weightDelta": -0.007600000000000051
+    },
+    {
+      "code": "3491",
+      "name": "UNIVERSAL MICROWAVE TECHNOLOGY ORD TWD10",
+      "previousShares": 24000,
+      "currentShares": 24000,
+      "previousWeight": 1.2729,
+      "currentWeight": 1.2667,
+      "sharesDelta": 0,
+      "weightDelta": -0.006199999999999983
+    },
+    {
+      "code": "4938",
+      "name": "和碩",
+      "previousShares": 154000,
+      "currentShares": 154000,
+      "previousWeight": 0.4426,
+      "currentWeight": 0.4364,
+      "sharesDelta": 0,
+      "weightDelta": -0.006199999999999983
+    },
+    {
+      "code": "1519",
+      "name": "華城",
+      "previousShares": 14000,
+      "currentShares": 14000,
+      "previousWeight": 0.4201,
+      "currentWeight": 0.417,
+      "sharesDelta": 0,
+      "weightDelta": -0.0030999999999999917
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "previousShares": 524000,
+      "currentShares": 524000,
+      "previousWeight": 0.5657,
+      "currentWeight": 0.5628,
+      "sharesDelta": 0,
+      "weightDelta": -0.0029000000000000137
+    },
+    {
+      "code": "1301",
+      "name": "台塑",
+      "previousShares": 52000,
+      "currentShares": 52000,
+      "previousWeight": 0.0907,
+      "currentWeight": 0.0878,
+      "sharesDelta": 0,
+      "weightDelta": -0.0029
+    },
+    {
+      "code": "2317",
+      "name": "鴻海",
+      "previousShares": 11000,
+      "currentShares": 11000,
+      "previousWeight": 0.0847,
+      "currentWeight": 0.0819,
+      "sharesDelta": 0,
+      "weightDelta": -0.002799999999999997
+    },
+    {
+      "code": "3231",
+      "name": "緯創",
+      "previousShares": 95000,
+      "currentShares": 95000,
+      "previousWeight": 0.4535,
+      "currentWeight": 0.4519,
+      "sharesDelta": 0,
+      "weightDelta": -0.0015999999999999903
     },
     {
       "code": "2609",
       "name": "陽明",
       "previousShares": 46000,
       "currentShares": 46000,
-      "previousWeight": 0.0837,
-      "currentWeight": 0.0789,
+      "previousWeight": 0.0789,
+      "currentWeight": 0.0775,
       "sharesDelta": 0,
-      "weightDelta": -0.004799999999999999
+      "weightDelta": -0.0013999999999999985
     },
     {
-      "code": "2615",
-      "name": "萬海",
-      "previousShares": 29000,
-      "currentShares": 29000,
-      "previousWeight": 0.0776,
-      "currentWeight": 0.0733,
+      "code": "3008",
+      "name": "大立光",
+      "previousShares": 4000,
+      "currentShares": 4000,
+      "previousWeight": 0.3401,
+      "currentWeight": 0.3389,
       "sharesDelta": 0,
-      "weightDelta": -0.004299999999999998
+      "weightDelta": -0.0012000000000000344
     },
     {
       "code": "6409",
       "name": "旭隼",
       "previousShares": 2000,
       "currentShares": 2000,
-      "previousWeight": 0.0561,
-      "currentWeight": 0.0525,
+      "previousWeight": 0.0525,
+      "currentWeight": 0.0514,
       "sharesDelta": 0,
-      "weightDelta": -0.003599999999999999
+      "weightDelta": -0.0010999999999999968
+    },
+    {
+      "code": "6944",
+      "name": "兆聯實業",
+      "previousShares": 23000,
+      "currentShares": 23000,
+      "previousWeight": 0.7634,
+      "currentWeight": 0.7624,
+      "sharesDelta": 0,
+      "weightDelta": -0.0010000000000000009
+    },
+    {
+      "code": "2615",
+      "name": "萬海",
+      "previousShares": 29000,
+      "currentShares": 29000,
+      "previousWeight": 0.0733,
+      "currentWeight": 0.0723,
+      "sharesDelta": 0,
+      "weightDelta": -0.0010000000000000009
     }
   ],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 8,
-    "removedCount": 0,
-    "increasedCount": 17,
-    "decreasedCount": 44,
+    "addedCount": 0,
+    "removedCount": 7,
+    "increasedCount": 19,
+    "decreasedCount": 43,
     "totalChangeCount": 69
   }
 }

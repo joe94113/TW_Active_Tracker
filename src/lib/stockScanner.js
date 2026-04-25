@@ -19,6 +19,8 @@ export const DEFAULT_SCANNER_FILTERS = {
   foreignBuy: false,
   trustBuy: false,
   dualBuy: false,
+  revenueDualGrowth: false,
+  maStackAbove240: false,
   activeEtf: false,
   bullishSignal: false,
   healthyOnly: false,
@@ -149,6 +151,17 @@ export function createScannerRow(stock = {}, nextDayCodeSet = new Set(), context
     marginUsage,
     marginChange,
     hasMarginSurge: marginSurge,
+    monthlyRevenueMoM: toNumber(stock.monthlyRevenueMoM),
+    monthlyRevenueYoY: toNumber(stock.monthlyRevenueYoY),
+    monthlyRevenueDualGrowth: Boolean(stock.monthlyRevenueDualGrowth),
+    monthlyRevenueDate: stock.monthlyRevenueDate ?? null,
+    ma5: toNumber(stock.ma5),
+    ma10: toNumber(stock.ma10),
+    ma20: toNumber(stock.ma20),
+    ma60: toNumber(stock.ma60),
+    ma240: toNumber(stock.ma240),
+    maBullStack: Boolean(stock.maBullStack),
+    maStackCrossedAbove240: Boolean(stock.maStackCrossedAbove240),
 
     industryRank,
     industryPeerCount: peerCount,
@@ -182,6 +195,8 @@ export function filterScannerRows(rows = [], filters = DEFAULT_SCANNER_FILTERS) 
     if (filters.foreignBuy && (toNumber(row.foreign5Day) ?? 0) <= 0) return false;
     if (filters.trustBuy && (toNumber(row.investmentTrust5Day) ?? 0) <= 0) return false;
     if (filters.dualBuy && !((toNumber(row.foreign5Day) ?? 0) > 0 && (toNumber(row.investmentTrust5Day) ?? 0) > 0)) return false;
+    if (filters.revenueDualGrowth && !row.monthlyRevenueDualGrowth) return false;
+    if (filters.maStackAbove240 && !row.maStackCrossedAbove240 && !row.maBullStack) return false;
     if (filters.activeEtf && (toNumber(row.activeEtfCount) ?? 0) <= 0) return false;
     if (filters.bullishSignal && row.topSignalTone !== 'up') return false;
     if (filters.healthyOnly && (toNumber(row.healthScore) ?? 0) < 62) return false;
@@ -220,6 +235,8 @@ function computeCompositeScore(row) {
   const return20Bonus = Math.max(toNumber(row.return20) ?? 0, 0);
   const changeBonus = Math.max(toNumber(row.changePercent) ?? 0, 0) * 2;
   const etfBonus = (toNumber(row.activeEtfCount) ?? 0) * 3;
+  const revenueBonus = row.monthlyRevenueDualGrowth ? 8 : 0;
+  const ma240Bonus = row.maStackCrossedAbove240 ? 10 : row.maBullStack ? 6 : 0;
 
   const volumeQualityBonus =
     toNumber(row.volumeQualityScore) !== null ? ((toNumber(row.volumeQualityScore) ?? 0) - 50) * 0.12 : 0;
@@ -262,6 +279,8 @@ function computeCompositeScore(row) {
     return20Bonus +
     changeBonus +
     etfBonus +
+    revenueBonus +
+    ma240Bonus +
     volumeQualityBonus +
     confidenceBonus +
     industryStrengthBonus +
