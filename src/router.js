@@ -15,6 +15,7 @@ import FavoritesHealthPage from './pages/FavoritesHealthPage.vue';
 import StockScannerPage from './pages/StockScannerPage.vue';
 import EventStatsPage from './pages/EventStatsPage.vue';
 import OfficialRadarPage from './pages/OfficialRadarPage.vue';
+import BrokerBranchRadarPage from './pages/BrokerBranchRadarPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -34,6 +35,7 @@ export const ROUTE_NAME = {
   STOCK_SCANNER: 'stock-scanner',
   EVENT_STATS: 'event-stats',
   OFFICIAL_RADAR: 'official-radar',
+  BROKER_BRANCH_RADAR: 'broker-branch-radar',
 };
 
 const router = createRouter({
@@ -137,6 +139,15 @@ const router = createRouter({
       meta: {
         title: '官方交易雷達',
         description: '把處置股、變更交易、注意股與即將除息事件集中整理，先看哪些股票需要避開、哪些事件值得提前觀察。',
+      },
+    },
+    {
+      path: '/broker-branches',
+      name: ROUTE_NAME.BROKER_BRANCH_RADAR,
+      component: BrokerBranchRadarPage,
+      meta: {
+        title: '勝率分點雷達',
+        description: '整理勝率較高的券商分點最近買賣了哪些台股，並直接給出值得觀察的推薦名單。',
       },
     },
     {

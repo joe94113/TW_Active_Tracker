@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-25T10:03:35.333Z",
-  "marketDate": "2026-04-24",
+  "generatedAt": "2026-04-29T06:45:02.138Z",
+  "marketDate": "2026-04-29",
   "horizons": [
     3,
     5,
@@ -101,8 +101,8 @@
             "5": {
               "tradingDays": 5,
               "exitDate": "2026-04-24",
-              "exitClose": 25.6,
-              "returnPercent": 4.703473215443335
+              "exitClose": 25.600000381469727,
+              "returnPercent": 4.7034747756466615
             },
             "10": null
           }
@@ -247,8 +247,8 @@
             "5": {
               "tradingDays": 5,
               "exitDate": "2026-04-24",
-              "exitClose": 16.8,
-              "returnPercent": -2.3255857278874497
+              "exitClose": 16.799999237060547,
+              "returnPercent": -2.325590163581752
             },
             "10": null
           }
@@ -271,8 +271,8 @@
             "5": {
               "tradingDays": 5,
               "exitDate": "2026-04-24",
-              "exitClose": 59.5,
-              "returnPercent": -1.3266985857088787
+              "exitClose": 61,
+              "returnPercent": 1.160863634819469
             },
             "10": null
           }
@@ -289,7 +289,7 @@
             },
             "5": {
               "sampleCount": 5,
-              "averageReturn": 2.067534682116415,
+              "averageReturn": 2.0675349941570804,
               "winRate": 60
             },
             "10": {
@@ -309,8 +309,8 @@
             },
             "5": {
               "sampleCount": 6,
-              "averageReturn": -0.9203369738093684,
-              "winRate": 16.666666666666664
+              "averageReturn": -0.5057440096703609,
+              "winRate": 33.33333333333333
             },
             "10": {
               "sampleCount": 0,
@@ -340,7 +340,12 @@
               "exitClose": 1910,
               "returnPercent": -1.0362694300518136
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 2070,
+              "returnPercent": 7.253886010362693
+            },
             "10": null
           }
         },
@@ -359,7 +364,12 @@
               "exitClose": 277.5,
               "returnPercent": -0.5376344086021506
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 283.5,
+              "returnPercent": 1.6129032258064515
+            },
             "10": null
           }
         }
@@ -380,7 +390,12 @@
               "exitClose": 515,
               "returnPercent": -0.9615384615384616
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 557,
+              "returnPercent": 7.115384615384615
+            },
             "10": null
           }
         },
@@ -399,7 +414,12 @@
               "exitClose": 134,
               "returnPercent": -2.18978102189781
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 131,
+              "returnPercent": -4.37956204379562
+            },
             "10": null
           }
         },
@@ -418,7 +438,12 @@
               "exitClose": 728,
               "returnPercent": 2.535211267605634
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 839,
+              "returnPercent": 18.169014084507044
+            },
             "10": null
           }
         },
@@ -437,7 +462,12 @@
               "exitClose": 136,
               "returnPercent": -1.090909090909091
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 137,
+              "returnPercent": -0.36363636363636365
+            },
             "10": null
           }
         },
@@ -456,7 +486,12 @@
               "exitClose": 16.899999618530273,
               "returnPercent": -1.4577259799462583
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 16.850000381469727,
+              "returnPercent": -1.749266727308862
+            },
             "10": null
           }
         },
@@ -475,7 +510,12 @@
               "exitClose": 34.349998474121094,
               "returnPercent": 3.153150934285824
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-27",
+              "exitClose": 35.599998474121094,
+              "returnPercent": 6.906904774042187
+            },
             "10": null
           }
         }
@@ -490,9 +530,9 @@
               "winRate": 0
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 2,
+              "averageReturn": 4.433394618084573,
+              "winRate": 100
             },
             "10": {
               "sampleCount": 0,
@@ -510,9 +550,9 @@
               "winRate": 33.33333333333333
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 6,
+              "averageReturn": 4.2831397231988335,
+              "winRate": 50
             },
             "10": {
               "sampleCount": 0,
@@ -542,7 +582,12 @@
               "exitClose": 1915,
               "returnPercent": 0
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-28",
+              "exitClose": 2085,
+              "returnPercent": 8.87728459530026
+            },
             "10": null
           }
         },
@@ -561,7 +606,12 @@
               "exitClose": 286,
               "returnPercent": 1.7793594306049825
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-28",
+              "exitClose": 283.5,
+              "returnPercent": 0.8896797153024912
+            },
             "10": null
           }
         }
@@ -596,7 +646,12 @@
               "exitClose": 224,
               "returnPercent": 9.535452322738386
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-28",
+              "exitClose": 230.5,
+              "returnPercent": 12.71393643031785
+            },
             "10": null
           }
         },
@@ -615,7 +670,12 @@
               "exitClose": 4035,
               "returnPercent": 8.032128514056225
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-28",
+              "exitClose": 4190,
+              "returnPercent": 12.182061579651942
+            },
             "10": null
           }
         },
@@ -631,10 +691,15 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-04-24",
-              "exitClose": 35.3,
-              "returnPercent": 5.8470764617691025
+              "exitClose": 35.29999923706055,
+              "returnPercent": 5.847074174094589
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-28",
+              "exitClose": 37.25,
+              "returnPercent": 11.694152923538226
+            },
             "10": null
           }
         },
@@ -653,7 +718,12 @@
               "exitClose": 135.5,
               "returnPercent": -1.094890510948905
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-28",
+              "exitClose": 137,
+              "returnPercent": 0
+            },
             "10": null
           }
         },
@@ -669,10 +739,15 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-04-24",
-              "exitClose": 16.8,
-              "returnPercent": -1.4662756598240467
+              "exitClose": 16.799999237060547,
+              "returnPercent": -1.4662801345422511
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-28",
+              "exitClose": 17,
+              "returnPercent": -0.29325513196481356
+            },
             "10": null
           }
         }
@@ -687,9 +762,9 @@
               "winRate": 50
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 2,
+              "averageReturn": 4.883482155301376,
+              "winRate": 100
             },
             "10": {
               "sampleCount": 0,
@@ -703,13 +778,13 @@
           "horizons": {
             "3": {
               "sampleCount": 5,
-              "averageReturn": 4.170698225558153,
+              "averageReturn": 4.170696873079608,
               "winRate": 60
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 5,
+              "averageReturn": 7.25937916030864,
+              "winRate": 60
             },
             "10": {
               "sampleCount": 0,
@@ -733,8 +808,18 @@
           "entryClose": 397,
           "marketDate": "2026-04-22",
           "horizons": {
-            "3": null,
-            "5": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-27",
+              "exitClose": 440,
+              "returnPercent": 10.831234256926953
+            },
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-29",
+              "exitClose": 455,
+              "returnPercent": 14.609571788413097
+            },
             "10": null
           }
         },
@@ -747,8 +832,18 @@
           "entryClose": 216,
           "marketDate": "2026-04-22",
           "horizons": {
-            "3": null,
-            "5": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-27",
+              "exitClose": 215,
+              "returnPercent": -0.4629629629629629
+            },
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-29",
+              "exitClose": 212,
+              "returnPercent": -1.8518518518518516
+            },
             "10": null
           }
         }
@@ -763,8 +858,18 @@
           "entryClose": 136,
           "marketDate": "2026-04-22",
           "horizons": {
-            "3": null,
-            "5": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-27",
+              "exitClose": 137,
+              "returnPercent": 0.7352941176470588
+            },
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-29",
+              "exitClose": 136.5,
+              "returnPercent": 0.3676470588235294
+            },
             "10": null
           }
         },
@@ -777,8 +882,18 @@
           "entryClose": 39.70000076293945,
           "marketDate": "2026-04-22",
           "horizons": {
-            "3": null,
-            "5": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-27",
+              "exitClose": 39.79999923706055,
+              "returnPercent": 0.25188532040141376
+            },
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-29",
+              "exitClose": 40.1,
+              "returnPercent": 1.0075547339383266
+            },
             "10": null
           }
         },
@@ -791,8 +906,18 @@
           "entryClose": 35.70000076293945,
           "marketDate": "2026-04-22",
           "horizons": {
-            "3": null,
-            "5": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-27",
+              "exitClose": 35.25,
+              "returnPercent": -1.2605063118278799
+            },
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-04-29",
+              "exitClose": 35.4,
+              "returnPercent": -0.840338253580343
+            },
             "10": null
           }
         }
@@ -802,14 +927,14 @@
           "count": 2,
           "horizons": {
             "3": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 2,
+              "averageReturn": 5.184135646981995,
+              "winRate": 50
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 2,
+              "averageReturn": 6.378859968280623,
+              "winRate": 50
             },
             "10": {
               "sampleCount": 0,
@@ -822,14 +947,14 @@
           "count": 3,
           "horizons": {
             "3": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 3,
+              "averageReturn": -0.09110895792646911,
+              "winRate": 66.66666666666666
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 3,
+              "averageReturn": 0.17828784639383768,
+              "winRate": 66.66666666666666
             },
             "10": {
               "sampleCount": 0,
@@ -853,7 +978,12 @@
           "entryClose": 2195,
           "marketDate": "2026-04-23",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-28",
+              "exitClose": 2715,
+              "returnPercent": 23.690205011389523
+            },
             "5": null,
             "10": null
           }
@@ -883,7 +1013,12 @@
           "entryClose": 25.8,
           "marketDate": "2026-04-23",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-28",
+              "exitClose": 22.100000381469727,
+              "returnPercent": -14.341083792753
+            },
             "5": null,
             "10": null
           }
@@ -897,7 +1032,12 @@
           "entryClose": 36.05,
           "marketDate": "2026-04-23",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-28",
+              "exitClose": 35.29999923706055,
+              "returnPercent": -2.0804459443535377
+            },
             "5": null,
             "10": null
           }
@@ -911,7 +1051,12 @@
           "entryClose": 39.8,
           "marketDate": "2026-04-23",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-28",
+              "exitClose": 40.150001525878906,
+              "returnPercent": 0.8794008187912289
+            },
             "5": null,
             "10": null
           }
@@ -924,6 +1069,370 @@
           "detail": "30 日區間 3.8%｜離前高 1.5%｜RSI 53.6",
           "entryClose": 136,
           "marketDate": "2026-04-23",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-28",
+              "exitClose": 137,
+              "returnPercent": 0.7352941176470588
+            },
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "summary": {
+        "stable": {
+          "count": 2,
+          "horizons": {
+            "3": {
+              "sampleCount": 1,
+              "averageReturn": 23.690205011389523,
+              "winRate": 100
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        },
+        "aggressive": {
+          "count": 4,
+          "horizons": {
+            "3": {
+              "sampleCount": 4,
+              "averageReturn": -3.701708700167063,
+              "winRate": 50
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        }
+      }
+    },
+    {
+      "marketDate": "2026-04-24",
+      "generatedAt": "2026-04-25T10:03:35.333Z",
+      "stable": [
+        {
+          "code": "2449",
+          "name": "京元電子",
+          "label": "偏多焦點",
+          "rating": 3,
+          "detail": "黃金交叉｜20 日 -0.87%｜五日籌碼 -3,533 張",
+          "entryClose": 286,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-29",
+              "exitClose": 283.5,
+              "returnPercent": -0.8741258741258742
+            },
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "6005",
+          "name": "群益證",
+          "label": "偏多焦點",
+          "rating": 2,
+          "detail": "黃金交叉｜20 日 +0.18%｜五日籌碼 -1.22 萬張",
+          "entryClose": 28.25,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-29",
+              "exitClose": 28.1,
+              "returnPercent": -0.5309734513274286
+            },
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "aggressive": [
+        {
+          "code": "6147",
+          "name": "頎邦",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +8.21%｜量能比 5 日 79%｜距 20 日高 2.8%",
+          "entryClose": 145,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-29",
+              "exitClose": 158,
+              "returnPercent": 8.96551724137931
+            },
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "6415",
+          "name": "矽力*-KY",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +4.93%｜量能比 5 日 33%｜距 20 日高 1.5%",
+          "entryClose": 436,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-29",
+              "exitClose": 393,
+              "returnPercent": -9.862385321100918
+            },
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "4979",
+          "name": "華星光",
+          "label": "量縮價揚",
+          "rating": 3,
+          "detail": "單日 +6.53%｜量能比 5 日 76%｜距 20 日高 17.2%",
+          "entryClose": 604,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-29",
+              "exitClose": 560,
+              "returnPercent": -7.28476821192053
+            },
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "5876",
+          "name": "上海商銀",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 4.3%｜離前高 0.5%｜RSI 54.1",
+          "entryClose": 39.8,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2412",
+          "name": "中華電",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 3.8%｜離前高 1.8%｜RSI 50.4",
+          "entryClose": 135.5,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-29",
+              "exitClose": 136.5,
+              "returnPercent": 0.7380073800738007
+            },
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2886",
+          "name": "兆豐金",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 5.5%｜離前高 1.1%｜RSI 51.6",
+          "entryClose": 39.55,
+          "marketDate": "2026-04-24",
+          "horizons": {
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-04-29",
+              "exitClose": 40.1,
+              "returnPercent": 1.3906447534766229
+            },
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "summary": {
+        "stable": {
+          "count": 2,
+          "horizons": {
+            "3": {
+              "sampleCount": 2,
+              "averageReturn": -0.7025496627266514,
+              "winRate": 0
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        },
+        "aggressive": {
+          "count": 6,
+          "horizons": {
+            "3": {
+              "sampleCount": 5,
+              "averageReturn": -1.2105968316183433,
+              "winRate": 60
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        }
+      }
+    },
+    {
+      "marketDate": "2026-04-27",
+      "generatedAt": "2026-04-27T12:08:43.867Z",
+      "stable": [
+        {
+          "code": "2408",
+          "name": "南亞科",
+          "label": "偏多焦點",
+          "rating": 4,
+          "detail": "黃金交叉｜20 日 +0.44%｜五日籌碼 1.56 萬張",
+          "entryClose": 226.5,
+          "marketDate": "2026-04-27",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "5289",
+          "name": "宜鼎國際",
+          "label": "偏多焦點",
+          "rating": 3,
+          "detail": "MACD 翻正｜20 日 +29.91%｜五日籌碼 0 張",
+          "entryClose": 1190,
+          "marketDate": "2026-04-27",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "aggressive": [
+        {
+          "code": "4540",
+          "name": "全球傳動",
+          "label": "量縮價揚",
+          "rating": 3,
+          "detail": "單日 +2.79%｜量能比 5 日 39%｜距 20 日高 13.6%",
+          "entryClose": 55.3,
+          "marketDate": "2026-04-27",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "3529",
+          "name": "力旺電子",
+          "label": "量縮價揚",
+          "rating": 3,
+          "detail": "單日 +3.72%｜量能比 5 日 67%｜距 20 日高 13%",
+          "entryClose": 4045,
+          "marketDate": "2026-04-27",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "7750",
+          "name": "新代",
+          "label": "量縮價揚",
+          "rating": 3,
+          "detail": "單日 +3.07%｜量能比 5 日 51%｜距 20 日高 6.4%",
+          "entryClose": 2185,
+          "marketDate": "2026-04-27",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2412",
+          "name": "中華電",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 3.8%｜離前高 0.7%｜RSI 58.5",
+          "entryClose": 137,
+          "marketDate": "2026-04-27",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2886",
+          "name": "兆豐金",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 6.1%｜離前高 1%｜RSI 54.9",
+          "entryClose": 39.8,
+          "marketDate": "2026-04-27",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2884",
+          "name": "玉山金",
+          "label": "盤整待發",
+          "rating": 2,
+          "detail": "30 日區間 7.8%｜離前高 2.2%｜RSI 48.4",
+          "entryClose": 32.55,
+          "marketDate": "2026-04-27",
           "horizons": {
             "3": null,
             "5": null,
@@ -953,7 +1462,7 @@
           }
         },
         "aggressive": {
-          "count": 4,
+          "count": 6,
           "horizons": {
             "3": {
               "sampleCount": 0,
@@ -975,17 +1484,17 @@
       }
     },
     {
-      "marketDate": "2026-04-24",
-      "generatedAt": "2026-04-25T10:03:35.333Z",
+      "marketDate": "2026-04-28",
+      "generatedAt": "2026-04-28T12:11:36.917Z",
       "stable": [
         {
-          "code": "2449",
-          "name": "京元電子",
+          "code": "2337",
+          "name": "旺宏",
           "label": "偏多焦點",
-          "rating": 3,
-          "detail": "黃金交叉｜20 日 -0.87%｜五日籌碼 -3,533 張",
-          "entryClose": 286,
-          "marketDate": "2026-04-24",
+          "rating": 5,
+          "detail": "黃金交叉｜20 日 +27.60%｜五日籌碼 3.60 萬張",
+          "entryClose": 159.5,
+          "marketDate": "2026-04-28",
           "horizons": {
             "3": null,
             "5": null,
@@ -993,13 +1502,13 @@
           }
         },
         {
-          "code": "6005",
-          "name": "群益證",
+          "code": "2327",
+          "name": "國巨*",
           "label": "偏多焦點",
-          "rating": 2,
-          "detail": "黃金交叉｜20 日 +0.18%｜五日籌碼 -1.22 萬張",
-          "entryClose": 28.25,
-          "marketDate": "2026-04-24",
+          "rating": 4,
+          "detail": "MACD 翻正｜20 日 +25.58%｜五日籌碼 1,023 張",
+          "entryClose": 326.5,
+          "marketDate": "2026-04-28",
           "horizons": {
             "3": null,
             "5": null,
@@ -1009,13 +1518,13 @@
       ],
       "aggressive": [
         {
-          "code": "6147",
-          "name": "頎邦",
+          "code": "1711",
+          "name": "永光",
           "label": "量縮價揚",
           "rating": 4,
-          "detail": "單日 +8.21%｜量能比 5 日 79%｜距 20 日高 2.8%",
-          "entryClose": 145,
-          "marketDate": "2026-04-24",
+          "detail": "單日 +9.96%｜量能比 5 日 8%｜距 20 日高 14.2%",
+          "entryClose": 56.3,
+          "marketDate": "2026-04-28",
           "horizons": {
             "3": null,
             "5": null,
@@ -1023,13 +1532,13 @@
           }
         },
         {
-          "code": "6415",
-          "name": "矽力*-KY",
+          "code": "3167",
+          "name": "大量",
           "label": "量縮價揚",
           "rating": 4,
-          "detail": "單日 +4.93%｜量能比 5 日 33%｜距 20 日高 1.5%",
-          "entryClose": 436,
-          "marketDate": "2026-04-24",
+          "detail": "單日 +9.93%｜量能比 5 日 84%｜距 20 日高 0%",
+          "entryClose": 742,
+          "marketDate": "2026-04-28",
           "horizons": {
             "3": null,
             "5": null,
@@ -1037,27 +1546,13 @@
           }
         },
         {
-          "code": "4979",
-          "name": "華星光",
+          "code": "2467",
+          "name": "志聖",
           "label": "量縮價揚",
           "rating": 3,
-          "detail": "單日 +6.53%｜量能比 5 日 76%｜距 20 日高 17.2%",
-          "entryClose": 604,
-          "marketDate": "2026-04-24",
-          "horizons": {
-            "3": null,
-            "5": null,
-            "10": null
-          }
-        },
-        {
-          "code": "5876",
-          "name": "上海商銀",
-          "label": "盤整待發",
-          "rating": 3,
-          "detail": "30 日區間 4.3%｜離前高 0.5%｜RSI 54.1",
-          "entryClose": 39.8,
-          "marketDate": "2026-04-24",
+          "detail": "單日 +9.99%｜量能比 5 日 83%｜距 20 日高 12.3%",
+          "entryClose": 545,
+          "marketDate": "2026-04-28",
           "horizons": {
             "3": null,
             "5": null,
@@ -1069,9 +1564,9 @@
           "name": "中華電",
           "label": "盤整待發",
           "rating": 3,
-          "detail": "30 日區間 3.8%｜離前高 1.8%｜RSI 50.4",
-          "entryClose": 135.5,
-          "marketDate": "2026-04-24",
+          "detail": "30 日區間 3.8%｜離前高 0.7%｜RSI 58.5",
+          "entryClose": 137,
+          "marketDate": "2026-04-28",
           "horizons": {
             "3": null,
             "5": null,
@@ -1083,9 +1578,185 @@
           "name": "兆豐金",
           "label": "盤整待發",
           "rating": 3,
-          "detail": "30 日區間 5.5%｜離前高 1.1%｜RSI 51.6",
-          "entryClose": 39.55,
-          "marketDate": "2026-04-24",
+          "detail": "30 日區間 6.1%｜離前高 0.1%｜RSI 59.1",
+          "entryClose": 40.15,
+          "marketDate": "2026-04-28",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2762",
+          "name": "世界健身-KY",
+          "label": "盤整待發",
+          "rating": 2,
+          "detail": "30 日區間 5.4%｜離前高 2.7%｜RSI 51.6",
+          "entryClose": 73.5,
+          "marketDate": "2026-04-28",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "summary": {
+        "stable": {
+          "count": 2,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        },
+        "aggressive": {
+          "count": 6,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        }
+      }
+    },
+    {
+      "marketDate": "2026-04-29",
+      "generatedAt": "2026-04-29T06:45:02.138Z",
+      "stable": [
+        {
+          "code": "2337",
+          "name": "旺宏",
+          "label": "偏多焦點",
+          "rating": 5,
+          "detail": "MACD 翻正｜20 日 +30.47%｜五日籌碼 3.60 萬張",
+          "entryClose": 167,
+          "marketDate": "2026-04-29",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2344",
+          "name": "華邦電",
+          "label": "偏多焦點",
+          "rating": 4,
+          "detail": "黃金交叉｜20 日 -0.32%｜五日籌碼 4.74 萬張",
+          "entryClose": 92.7,
+          "marketDate": "2026-04-29",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "aggressive": [
+        {
+          "code": "3653",
+          "name": "健策",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +10.00%｜量能比 5 日 57%｜距 20 日高 4.4%",
+          "entryClose": 5445,
+          "marketDate": "2026-04-29",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "6643",
+          "name": "M31",
+          "label": "量縮價揚",
+          "rating": 3,
+          "detail": "單日 +3.44%｜量能比 5 日 19%｜距 20 日高 19%",
+          "entryClose": 542,
+          "marketDate": "2026-04-29",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "1711",
+          "name": "永光",
+          "label": "量縮價揚",
+          "rating": 3,
+          "detail": "單日 +1.60%｜量能比 5 日 12%｜距 20 日高 12.4%",
+          "entryClose": 57.2,
+          "marketDate": "2026-04-29",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "1722",
+          "name": "台肥",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 10.6%｜離前高 0%｜RSI 67.6",
+          "entryClose": 48.7,
+          "marketDate": "2026-04-29",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2881",
+          "name": "富邦金",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 7%｜離前高 0%｜RSI 63.8",
+          "entryClose": 91.3,
+          "marketDate": "2026-04-29",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2412",
+          "name": "中華電",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 3.8%｜離前高 1.1%｜RSI 55",
+          "entryClose": 136.5,
+          "marketDate": "2026-04-29",
           "horizons": {
             "3": null,
             "5": null,

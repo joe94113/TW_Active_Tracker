@@ -91,6 +91,13 @@ secondaryNavigationItems.push({
   description: '集中看處置股、變更交易、注意股與即將除息事件，盤後先確認哪些股票需要避開、哪些事件值得提前留意。',
 });
 
+secondaryNavigationItems.push({
+  label: '勝率分點雷達',
+  path: '/broker-branches',
+  tag: '分點',
+  description: '整理勝率高的券商分點最近偏多、偏空與推薦台股，直接看分點資金最近卡位了哪些股票。',
+});
+
 const allNavigationItems = [...primaryNavigationItems, ...secondaryNavigationItems];
 
 function formatGeneratedAt(value) {

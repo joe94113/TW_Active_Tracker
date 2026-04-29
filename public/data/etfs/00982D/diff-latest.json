@@ -1,591 +1,361 @@
 {
   "code": "00982D",
   "name": "主動富邦動態入息",
-  "fromDisclosureDate": "2026-04-20",
-  "toDisclosureDate": "2026-04-23",
+  "fromDisclosureDate": "2026-04-27",
+  "toDisclosureDate": "2026-04-28",
   "comparisonReady": true,
   "added": [],
   "removed": [],
   "increased": [
     {
-      "code": "LQDW US",
-      "name": "ISHARES INVESTMENT GRADE CORPO",
-      "previousShares": 100000,
-      "currentShares": 100000,
-      "previousWeight": 8.6562,
-      "currentWeight": 8.7157,
-      "sharesDelta": 0,
-      "weightDelta": 0.059499999999999886
-    },
-    {
       "code": "TLTW US",
       "name": "ISHARES 20+ YEAR TREASURY BOND",
       "previousShares": 100000,
       "currentShares": 100000,
-      "previousWeight": 8.0906,
-      "currentWeight": 8.1303,
+      "previousWeight": 8.1077,
+      "currentWeight": 8.1251,
       "sharesDelta": 0,
-      "weightDelta": 0.039699999999999847
-    },
-    {
-      "code": "US260543BY86",
-      "name": "DOW 9.4 05/15/39",
-      "previousShares": 500000,
-      "currentShares": 500000,
-      "previousWeight": 2.2855,
-      "currentWeight": 2.3174,
-      "sharesDelta": 0,
-      "weightDelta": 0.03190000000000026
-    },
-    {
-      "code": "US04686JAL52",
-      "name": "ATH 6 5/8 05/19/55",
-      "previousShares": 500000,
-      "currentShares": 500000,
-      "previousWeight": 1.7503,
-      "currentWeight": 1.7726,
-      "sharesDelta": 0,
-      "weightDelta": 0.022299999999999986
-    },
-    {
-      "code": "US172967EW71",
-      "name": "C 8 1/8 07/15/39",
-      "previousShares": 600000,
-      "currentShares": 600000,
-      "previousWeight": 2.7228,
-      "currentWeight": 2.7404,
-      "sharesDelta": 0,
-      "weightDelta": 0.017600000000000282
-    },
-    {
-      "code": "US054989AD07",
-      "name": "BATSLN 7.081 08/02/53",
-      "previousShares": 600000,
-      "currentShares": 600000,
-      "previousWeight": 2.4174,
-      "currentWeight": 2.4334,
-      "sharesDelta": 0,
-      "weightDelta": 0.01599999999999957
-    },
-    {
-      "code": "US617446HD43",
-      "name": "MS 7 1/4 04/01/32",
-      "previousShares": 590000,
-      "currentShares": 590000,
-      "previousWeight": 2.4114,
-      "currentWeight": 2.4268,
-      "sharesDelta": 0,
-      "weightDelta": 0.01540000000000008
-    },
-    {
-      "code": "US13645RAD61",
-      "name": "CP 7 1/8 10/15/31",
-      "previousShares": 590000,
-      "currentShares": 590000,
-      "previousWeight": 2.3742,
-      "currentWeight": 2.3895,
-      "sharesDelta": 0,
-      "weightDelta": 0.01529999999999987
-    },
-    {
-      "code": "US879385AD49",
-      "name": "TELEFO 8 1/4 09/15/30",
-      "previousShares": 580000,
-      "currentShares": 580000,
-      "previousWeight": 2.3657,
-      "currentWeight": 2.3809,
-      "sharesDelta": 0,
-      "weightDelta": 0.015200000000000102
-    },
-    {
-      "code": "US06849RAC60",
-      "name": "ABXCN 7 1/2 09/15/38",
-      "previousShares": 500000,
-      "currentShares": 500000,
-      "previousWeight": 2.1047,
-      "currentWeight": 2.1194,
-      "sharesDelta": 0,
-      "weightDelta": 0.01470000000000038
-    },
-    {
-      "code": "US24703TAJ51",
-      "name": "DELL 8.1 07/15/36",
-      "previousShares": 580000,
-      "currentShares": 580000,
-      "previousWeight": 2.5018,
-      "currentWeight": 2.5163,
-      "sharesDelta": 0,
-      "weightDelta": 0.014500000000000401
-    },
-    {
-      "code": "US852060AT99",
-      "name": "S 8 3/4 03/15/32",
-      "previousShares": 570000,
-      "currentShares": 570000,
-      "previousWeight": 2.4528,
-      "currentWeight": 2.4671,
-      "sharesDelta": 0,
-      "weightDelta": 0.01429999999999998
-    },
-    {
-      "code": "US8935268Z94",
-      "name": "TRPCN 7 5/8 01/15/39",
-      "previousShares": 590000,
-      "currentShares": 590000,
-      "previousWeight": 2.5183,
-      "currentWeight": 2.5323,
-      "sharesDelta": 0,
-      "weightDelta": 0.014000000000000234
-    },
-    {
-      "code": "TNM6F",
-      "name": "2026/06超長10年美國債券",
-      "previousShares": -10,
-      "currentShares": -10,
-      "previousWeight": 4.0856,
-      "currentWeight": 4.099,
-      "sharesDelta": 0,
-      "weightDelta": 0.013399999999999856
-    },
-    {
-      "code": "US24703TAK25",
-      "name": "DELL 8.35 07/15/46",
-      "previousShares": 580000,
-      "currentShares": 580000,
-      "previousWeight": 2.6206,
-      "currentWeight": 2.6329,
-      "sharesDelta": 0,
-      "weightDelta": 0.012299999999999756
-    },
-    {
-      "code": "US406216AY74",
-      "name": "HAL 7.45 09/15/39",
-      "previousShares": 610000,
-      "currentShares": 610000,
-      "previousWeight": 2.5967,
-      "currentWeight": 2.6089,
-      "sharesDelta": 0,
-      "weightDelta": 0.012200000000000433
-    },
-    {
-      "code": "US743263AE50",
-      "name": "DUK 7 3/4 03/01/31",
-      "previousShares": 640000,
-      "currentShares": 640000,
-      "previousWeight": 2.6039,
-      "currentWeight": 2.6151,
-      "sharesDelta": 0,
-      "weightDelta": 0.011200000000000099
-    },
-    {
-      "code": "US06738ECE32",
-      "name": "BACR 7.437 11/02/33",
-      "previousShares": 600000,
-      "currentShares": 600000,
-      "previousWeight": 2.4305,
-      "currentWeight": 2.4413,
-      "sharesDelta": 0,
-      "weightDelta": 0.010800000000000143
-    },
-    {
-      "code": "US03523TBF49",
-      "name": "ABIBB 8.2 01/15/39",
-      "previousShares": 530000,
-      "currentShares": 530000,
-      "previousWeight": 2.4189,
-      "currentWeight": 2.429,
-      "sharesDelta": 0,
-      "weightDelta": 0.010099999999999998
-    },
-    {
-      "code": "US25156PAD50",
-      "name": "DT 9 1/4 06/01/32",
-      "previousShares": 430000,
-      "currentShares": 430000,
-      "previousWeight": 1.8995,
-      "currentWeight": 1.9094,
-      "sharesDelta": 0,
-      "weightDelta": 0.00990000000000002
-    },
-    {
-      "code": "US260543DH36",
-      "name": "DOW 6.9 05/15/53",
-      "previousShares": 174000,
-      "currentShares": 174000,
-      "previousWeight": 0.643,
-      "currentWeight": 0.6522,
-      "sharesDelta": 0,
-      "weightDelta": 0.009199999999999986
-    },
-    {
-      "code": "US694308KH99",
-      "name": "PCG 6 3/4 01/15/53",
-      "previousShares": 580000,
-      "currentShares": 580000,
-      "previousWeight": 2.2008,
-      "currentWeight": 2.2099,
-      "sharesDelta": 0,
-      "weightDelta": 0.009100000000000108
-    },
-    {
-      "code": "US36962GXZ26",
-      "name": "GE 6 3/4 03/15/32",
-      "previousShares": 460000,
-      "currentShares": 460000,
-      "previousWeight": 1.8486,
-      "currentWeight": 1.8577,
-      "sharesDelta": 0,
-      "weightDelta": 0.009099999999999886
-    },
-    {
-      "code": "US694308KK29",
-      "name": "PCG 6.7 04/01/53",
-      "previousShares": 580000,
-      "currentShares": 580000,
-      "previousWeight": 2.1891,
-      "currentWeight": 2.1979,
-      "sharesDelta": 0,
-      "weightDelta": 0.008800000000000363
-    },
-    {
-      "code": "US013716AQ81",
-      "name": "RIOLN 7 1/4 03/15/31",
-      "previousShares": 340000,
-      "currentShares": 340000,
-      "previousWeight": 1.3656,
-      "currentWeight": 1.3732,
-      "sharesDelta": 0,
-      "weightDelta": 0.007600000000000051
-    },
-    {
-      "code": "US68389XCK90",
-      "name": "ORCL 6.9 11/09/52",
-      "previousShares": 400000,
-      "currentShares": 400000,
-      "previousWeight": 1.3884,
-      "currentWeight": 1.3959,
-      "sharesDelta": 0,
-      "weightDelta": 0.00749999999999984
-    },
-    {
-      "code": "US86722TAB89",
-      "name": "SUCN 6.85 06/01/39",
-      "previousShares": 370000,
-      "currentShares": 370000,
-      "previousWeight": 1.4784,
-      "currentWeight": 1.485,
-      "sharesDelta": 0,
-      "weightDelta": 0.006600000000000161
-    },
-    {
-      "code": "US36962G4B75",
-      "name": "GE 6 7/8 01/10/39",
-      "previousShares": 390000,
-      "currentShares": 390000,
-      "previousWeight": 1.6304,
-      "currentWeight": 1.6367,
-      "sharesDelta": 0,
-      "weightDelta": 0.006299999999999972
-    },
-    {
-      "code": "US87938WAC73",
-      "name": "TELEFONICA EMISIONES SAU 7.045 06/20/36",
-      "previousShares": 330000,
-      "currentShares": 330000,
-      "previousWeight": 1.3227,
-      "currentWeight": 1.3288,
-      "sharesDelta": 0,
-      "weightDelta": 0.006099999999999994
-    },
-    {
-      "code": "US92344GAM87",
-      "name": "VZ 7 3/4 12/01/30",
-      "previousShares": 250000,
-      "currentShares": 250000,
-      "previousWeight": 1.0158,
-      "currentWeight": 1.0217,
-      "sharesDelta": 0,
-      "weightDelta": 0.005900000000000016
-    },
-    {
-      "code": "US054989AC24",
-      "name": "BATSLN 7.079 08/02/43",
-      "previousShares": 320000,
-      "currentShares": 320000,
-      "previousWeight": 1.2815,
-      "currentWeight": 1.2873,
-      "sharesDelta": 0,
-      "weightDelta": 0.005800000000000027
-    },
-    {
-      "code": "US37045VAK61",
-      "name": "GM 6.6 04/01/36",
-      "previousShares": 340000,
-      "currentShares": 340000,
-      "previousWeight": 1.3179,
-      "currentWeight": 1.3234,
-      "sharesDelta": 0,
-      "weightDelta": 0.005499999999999838
+      "weightDelta": 0.017400000000000304
     },
     {
       "code": "US37045VAL45",
       "name": "GM 6 3/4 04/01/46",
       "previousShares": 620000,
       "currentShares": 620000,
-      "previousWeight": 2.3565,
-      "currentWeight": 2.3616,
+      "previousWeight": 2.3486,
+      "currentWeight": 2.3607,
       "sharesDelta": 0,
-      "weightDelta": 0.0051000000000001044
+      "weightDelta": 0.012100000000000222
     },
     {
-      "code": "US927804FG41",
-      "name": "D 8 7/8 11/15/38",
-      "previousShares": 270000,
-      "currentShares": 270000,
-      "previousWeight": 1.2789,
-      "currentWeight": 1.2838,
+      "code": "LQDW US",
+      "name": "ISHARES INVESTMENT GRADE CORPO",
+      "previousShares": 100000,
+      "currentShares": 100000,
+      "previousWeight": 8.7034,
+      "currentWeight": 8.7127,
       "sharesDelta": 0,
-      "weightDelta": 0.0049000000000001265
+      "weightDelta": 0.009299999999999642
     },
     {
-      "code": "US404280DW61",
-      "name": "HSBC 6.332 03/09/44",
-      "previousShares": 200000,
-      "currentShares": 200000,
-      "previousWeight": 0.7676,
-      "currentWeight": 0.7722,
+      "code": "US694308KK29",
+      "name": "PCG 6.7 04/01/53",
+      "previousShares": 580000,
+      "currentShares": 580000,
+      "previousWeight": 2.1876,
+      "currentWeight": 2.1943,
       "sharesDelta": 0,
-      "weightDelta": 0.0046000000000000485
+      "weightDelta": 0.006699999999999928
     },
     {
-      "code": "US717081CY74",
-      "name": "PFE 7.2 03/15/39",
-      "previousShares": 300000,
-      "currentShares": 300000,
-      "previousWeight": 1.2746,
-      "currentWeight": 1.2788,
+      "code": "US054989AD07",
+      "name": "BATSLN 7.081 08/02/53",
+      "previousShares": 600000,
+      "currentShares": 600000,
+      "previousWeight": 2.4151,
+      "currentWeight": 2.4216,
+      "sharesDelta": 0,
+      "weightDelta": 0.006500000000000394
+    },
+    {
+      "code": "US694308KH99",
+      "name": "PCG 6 3/4 01/15/53",
+      "previousShares": 580000,
+      "currentShares": 580000,
+      "previousWeight": 2.1995,
+      "currentWeight": 2.2048,
+      "sharesDelta": 0,
+      "weightDelta": 0.005300000000000082
+    },
+    {
+      "code": "US260543BY86",
+      "name": "DOW 9.4 05/15/39",
+      "previousShares": 500000,
+      "currentShares": 500000,
+      "previousWeight": 2.3235,
+      "currentWeight": 2.3277,
       "sharesDelta": 0,
       "weightDelta": 0.0041999999999999815
     },
     {
-      "code": "US251799AA02",
-      "name": "DVN 7.95 04/15/32",
-      "previousShares": 200000,
-      "currentShares": 200000,
-      "previousWeight": 0.8318,
-      "currentWeight": 0.836,
+      "code": "US24703TAK25",
+      "name": "DELL 8.35 07/15/46",
+      "previousShares": 580000,
+      "currentShares": 580000,
+      "previousWeight": 2.6207,
+      "currentWeight": 2.6246,
       "sharesDelta": 0,
-      "weightDelta": 0.0041999999999999815
+      "weightDelta": 0.0039000000000002366
     },
     {
       "code": "US42824CAY57",
       "name": "HPE 6.35 10/15/45",
       "previousShares": 200000,
       "currentShares": 200000,
-      "previousWeight": 0.7303,
-      "currentWeight": 0.7344,
+      "previousWeight": 0.7328,
+      "currentWeight": 0.7357,
       "sharesDelta": 0,
-      "weightDelta": 0.0041000000000001036
-    },
-    {
-      "code": "US50076QAR74",
-      "name": "KHC 6 7/8 01/26/39",
-      "previousShares": 210000,
-      "currentShares": 210000,
-      "previousWeight": 0.8305,
-      "currentWeight": 0.8345,
-      "sharesDelta": 0,
-      "weightDelta": 0.0040000000000000036
-    },
-    {
-      "code": "US548661CP07",
-      "name": "LOW 6.65 09/15/37",
-      "previousShares": 200000,
-      "currentShares": 200000,
-      "previousWeight": 0.7959,
-      "currentWeight": 0.7997,
-      "sharesDelta": 0,
-      "weightDelta": 0.0037999999999999146
+      "weightDelta": 0.0029000000000000137
     },
     {
       "code": "US254687EZ57",
       "name": "DIS 7 3/4 12/01/45",
       "previousShares": 280000,
       "currentShares": 280000,
-      "previousWeight": 1.2655,
-      "currentWeight": 1.2692,
+      "previousWeight": 1.2634,
+      "currentWeight": 1.2663,
       "sharesDelta": 0,
-      "weightDelta": 0.0037000000000000366
+      "weightDelta": 0.0028999999999999027
+    },
+    {
+      "code": "US927804FG41",
+      "name": "D 8 7/8 11/15/38",
+      "previousShares": 270000,
+      "currentShares": 270000,
+      "previousWeight": 1.2777,
+      "currentWeight": 1.2805,
+      "sharesDelta": 0,
+      "weightDelta": 0.0027999999999999137
+    },
+    {
+      "code": "US054989AC24",
+      "name": "BATSLN 7.079 08/02/43",
+      "previousShares": 320000,
+      "currentShares": 320000,
+      "previousWeight": 1.2819,
+      "currentWeight": 1.2843,
+      "sharesDelta": 0,
+      "weightDelta": 0.0023999999999999577
+    },
+    {
+      "code": "US36962GXZ26",
+      "name": "GE 6 3/4 03/15/32",
+      "previousShares": 460000,
+      "currentShares": 460000,
+      "previousWeight": 1.8513,
+      "currentWeight": 1.8536,
+      "sharesDelta": 0,
+      "weightDelta": 0.0022999999999999687
+    },
+    {
+      "code": "US13645RAD61",
+      "name": "CP 7 1/8 10/15/31",
+      "previousShares": 590000,
+      "currentShares": 590000,
+      "previousWeight": 2.3863,
+      "currentWeight": 2.3885,
+      "sharesDelta": 0,
+      "weightDelta": 0.002200000000000202
+    },
+    {
+      "code": "US03523TBF49",
+      "name": "ABIBB 8.2 01/15/39",
+      "previousShares": 530000,
+      "currentShares": 530000,
+      "previousWeight": 2.4204,
+      "currentWeight": 2.4222,
+      "sharesDelta": 0,
+      "weightDelta": 0.0018000000000002458
+    },
+    {
+      "code": "US8935268Z94",
+      "name": "TRPCN 7 5/8 01/15/39",
+      "previousShares": 590000,
+      "currentShares": 590000,
+      "previousWeight": 2.524,
+      "currentWeight": 2.5257,
+      "sharesDelta": 0,
+      "weightDelta": 0.0017000000000000348
     },
     {
       "code": "US969457BM15",
       "name": "WMB 8 3/4 03/15/32",
       "previousShares": 200000,
       "currentShares": 200000,
-      "previousWeight": 0.8606,
-      "currentWeight": 0.8642,
+      "previousWeight": 0.862,
+      "currentWeight": 0.8637,
       "sharesDelta": 0,
-      "weightDelta": 0.0035999999999999366
+      "weightDelta": 0.0017000000000000348
     },
     {
-      "code": "US494550AW68",
-      "name": "KMI 6.95 01/15/38",
-      "previousShares": 320000,
-      "currentShares": 320000,
-      "previousWeight": 1.2998,
-      "currentWeight": 1.3034,
+      "code": "US260543DH36",
+      "name": "DOW 6.9 05/15/53",
+      "previousShares": 174000,
+      "currentShares": 174000,
+      "previousWeight": 0.6496,
+      "currentWeight": 0.6512,
       "sharesDelta": 0,
-      "weightDelta": 0.0035999999999998256
+      "weightDelta": 0.0016000000000000458
+    },
+    {
+      "code": "US404280DW61",
+      "name": "HSBC 6.332 03/09/44",
+      "previousShares": 200000,
+      "currentShares": 200000,
+      "previousWeight": 0.769,
+      "currentWeight": 0.7706,
+      "sharesDelta": 0,
+      "weightDelta": 0.0015999999999999348
+    },
+    {
+      "code": "TNM6F",
+      "name": "2026/06超長10年美國債券",
+      "previousShares": -10,
+      "currentShares": -10,
+      "previousWeight": 4.0915,
+      "currentWeight": 4.0928,
+      "sharesDelta": 0,
+      "weightDelta": 0.001300000000000523
+    },
+    {
+      "code": "US37045VAK61",
+      "name": "GM 6.6 04/01/36",
+      "previousShares": 340000,
+      "currentShares": 340000,
+      "previousWeight": 1.3181,
+      "currentWeight": 1.3194,
+      "sharesDelta": 0,
+      "weightDelta": 0.0012999999999998568
+    },
+    {
+      "code": "US879385AD49",
+      "name": "TELEFO 8 1/4 09/15/30",
+      "previousShares": 580000,
+      "currentShares": 580000,
+      "previousWeight": 2.378,
+      "currentWeight": 2.3792,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011999999999998678
+    },
+    {
+      "code": "US04686JAL52",
+      "name": "ATH 6 5/8 05/19/55",
+      "previousShares": 500000,
+      "currentShares": 500000,
+      "previousWeight": 1.7618,
+      "currentWeight": 1.763,
+      "sharesDelta": 0,
+      "weightDelta": 0.0011999999999998678
+    },
+    {
+      "code": "US25156PAD50",
+      "name": "DT 9 1/4 06/01/32",
+      "previousShares": 430000,
+      "currentShares": 430000,
+      "previousWeight": 1.9081,
+      "currentWeight": 1.9092,
+      "sharesDelta": 0,
+      "weightDelta": 0.001100000000000101
     },
     {
       "code": "US210385AE04",
       "name": "CEG 6 1/2 10/01/53",
       "previousShares": 200000,
       "currentShares": 200000,
-      "previousWeight": 0.7763,
-      "currentWeight": 0.7797,
+      "previousWeight": 0.7754,
+      "currentWeight": 0.7765,
       "sharesDelta": 0,
-      "weightDelta": 0.0033999999999999586
+      "weightDelta": 0.0010999999999999899
     },
     {
       "code": "US682680BN20",
       "name": "OKE 6 5/8 09/01/53",
       "previousShares": 140000,
       "currentShares": 140000,
-      "previousWeight": 0.5233,
-      "currentWeight": 0.5266,
+      "previousWeight": 0.5234,
+      "currentWeight": 0.5245,
       "sharesDelta": 0,
-      "weightDelta": 0.0032999999999999696
+      "weightDelta": 0.0010999999999999899
     },
     {
-      "code": "US303901BR22",
-      "name": "FFHCN 6.35 03/22/54",
-      "previousShares": 110000,
-      "currentShares": 110000,
-      "previousWeight": 0.4078,
-      "currentWeight": 0.411,
+      "code": "US617446HD43",
+      "name": "MS 7 1/4 04/01/32",
+      "previousShares": 590000,
+      "currentShares": 590000,
+      "previousWeight": 2.4233,
+      "currentWeight": 2.4243,
       "sharesDelta": 0,
-      "weightDelta": 0.0031999999999999806
+      "weightDelta": 0.001000000000000334
     },
     {
-      "code": "US832696AZ12",
-      "name": "SJM 6 1/2 11/15/53",
-      "previousShares": 60000,
-      "currentShares": 60000,
-      "previousWeight": 0.2283,
-      "currentWeight": 0.2308,
+      "code": "US641423BU11",
+      "name": "BRKHEC 6 3/4 07/01/37",
+      "previousShares": 160000,
+      "currentShares": 160000,
+      "previousWeight": 0.6453,
+      "currentWeight": 0.6462,
       "sharesDelta": 0,
-      "weightDelta": 0.0025000000000000022
-    },
-    {
-      "code": "US03040WAD74",
-      "name": "AWK 6.593 10/15/37",
-      "previousShares": 100000,
-      "currentShares": 100000,
-      "previousWeight": 0.4072,
-      "currentWeight": 0.4096,
-      "sharesDelta": 0,
-      "weightDelta": 0.0024000000000000132
-    },
-    {
-      "code": "US871829BN62",
-      "name": "SYY 6.6 04/01/50",
-      "previousShares": 60000,
-      "currentShares": 60000,
-      "previousWeight": 0.2271,
-      "currentWeight": 0.2294,
-      "sharesDelta": 0,
-      "weightDelta": 0.0022999999999999965
-    },
-    {
-      "code": "US209111EU37",
-      "name": "ED 6 3/4 04/01/38",
-      "previousShares": 100000,
-      "currentShares": 100000,
-      "previousWeight": 0.4091,
-      "currentWeight": 0.4112,
-      "sharesDelta": 0,
-      "weightDelta": 0.0020999999999999908
+      "weightDelta": 0.0009000000000000119
     },
     {
       "code": "US87612GAD34",
       "name": "TRGP 6 1/2 02/15/53",
       "previousShares": 60000,
       "currentShares": 60000,
-      "previousWeight": 0.2242,
-      "currentWeight": 0.226,
+      "previousWeight": 0.2249,
+      "currentWeight": 0.2258,
       "sharesDelta": 0,
-      "weightDelta": 0.001799999999999996
+      "weightDelta": 0.0009000000000000119
     },
     {
-      "code": "US101137AL15",
-      "name": "BSX 7 3/8 01/15/40",
-      "previousShares": 120000,
-      "currentShares": 120000,
-      "previousWeight": 0.5152,
-      "currentWeight": 0.5167,
+      "code": "US013716AQ81",
+      "name": "RIOLN 7 1/4 03/15/31",
+      "previousShares": 340000,
+      "currentShares": 340000,
+      "previousWeight": 1.3716,
+      "currentWeight": 1.3723,
       "sharesDelta": 0,
-      "weightDelta": 0.0015000000000000568
+      "weightDelta": 0.000700000000000145
     },
     {
-      "code": "US832696AY47",
-      "name": "SJM 6 1/2 11/15/43",
-      "previousShares": 60000,
-      "currentShares": 60000,
-      "previousWeight": 0.2281,
-      "currentWeight": 0.2296,
+      "code": "US548661CP07",
+      "name": "LOW 6.65 09/15/37",
+      "previousShares": 200000,
+      "currentShares": 200000,
+      "previousWeight": 0.7968,
+      "currentWeight": 0.7974,
       "sharesDelta": 0,
-      "weightDelta": 0.0015000000000000013
-    },
-    {
-      "code": "US38141GGM06",
-      "name": "GS 6 1/4 02/01/41",
-      "previousShares": 60000,
-      "currentShares": 60000,
-      "previousWeight": 0.2306,
-      "currentWeight": 0.2319,
-      "sharesDelta": 0,
-      "weightDelta": 0.0012999999999999956
-    },
-    {
-      "code": "US20030NAV38",
-      "name": "CMCSA 6.95 08/15/37",
-      "previousShares": 100000,
-      "currentShares": 100000,
-      "previousWeight": 0.4073,
-      "currentWeight": 0.4085,
-      "sharesDelta": 0,
-      "weightDelta": 0.0011999999999999789
-    },
-    {
-      "code": "US91913YAL48",
-      "name": "VLO 6 5/8 06/15/37",
-      "previousShares": 50000,
-      "currentShares": 50000,
-      "previousWeight": 0.198,
-      "currentWeight": 0.1992,
-      "sharesDelta": 0,
-      "weightDelta": 0.0011999999999999789
-    },
-    {
-      "code": "US00817YAF51",
-      "name": "AET 6 5/8 06/15/36",
-      "previousShares": 60000,
-      "currentShares": 60000,
-      "previousWeight": 0.2352,
-      "currentWeight": 0.2363,
-      "sharesDelta": 0,
-      "weightDelta": 0.0011000000000000176
+      "weightDelta": 0.0006000000000000449
     },
     {
       "code": "US91324PBK75",
       "name": "UNITEDHEALTH GROUP INC 6.875 02/15/38",
       "previousShares": 100000,
       "currentShares": 100000,
-      "previousWeight": 0.4111,
-      "currentWeight": 0.4122,
+      "previousWeight": 0.4112,
+      "currentWeight": 0.4118,
       "sharesDelta": 0,
-      "weightDelta": 0.0010999999999999899
+      "weightDelta": 0.0005999999999999894
+    },
+    {
+      "code": "US832696AZ12",
+      "name": "SJM 6 1/2 11/15/53",
+      "previousShares": 60000,
+      "currentShares": 60000,
+      "previousWeight": 0.2288,
+      "currentWeight": 0.2294,
+      "sharesDelta": 0,
+      "weightDelta": 0.0005999999999999894
+    },
+    {
+      "code": "US743263AE50",
+      "name": "DUK 7 3/4 03/01/31",
+      "previousShares": 640000,
+      "currentShares": 640000,
+      "previousWeight": 2.6109,
+      "currentWeight": 2.6115,
+      "sharesDelta": 0,
+      "weightDelta": 0.0005999999999999339
+    },
+    {
+      "code": "US251799AA02",
+      "name": "DVN 7.95 04/15/32",
+      "previousShares": 200000,
+      "currentShares": 200000,
+      "previousWeight": 0.8349,
+      "currentWeight": 0.8354,
+      "sharesDelta": 0,
+      "weightDelta": 0.000500000000000056
     },
     {
       "code": "US56585AAF93",
@@ -593,9 +363,39 @@
       "previousShares": 60000,
       "currentShares": 60000,
       "previousWeight": 0.232,
-      "currentWeight": 0.233,
+      "currentWeight": 0.2325,
       "sharesDelta": 0,
-      "weightDelta": 0.0010000000000000009
+      "weightDelta": 0.0005000000000000004
+    },
+    {
+      "code": "US832696AY47",
+      "name": "SJM 6 1/2 11/15/43",
+      "previousShares": 60000,
+      "currentShares": 60000,
+      "previousWeight": 0.2284,
+      "currentWeight": 0.2289,
+      "sharesDelta": 0,
+      "weightDelta": 0.0005000000000000004
+    },
+    {
+      "code": "US303901BR22",
+      "name": "FFHCN 6.35 03/22/54",
+      "previousShares": 110000,
+      "currentShares": 110000,
+      "previousWeight": 0.4083,
+      "currentWeight": 0.4087,
+      "sharesDelta": 0,
+      "weightDelta": 0.00040000000000001146
+    },
+    {
+      "code": "US00206RAS13",
+      "name": "T 6.55 02/15/39",
+      "previousShares": 60000,
+      "currentShares": 60000,
+      "previousWeight": 0.2357,
+      "currentWeight": 0.2361,
+      "sharesDelta": 0,
+      "weightDelta": 0.00040000000000001146
     },
     {
       "code": "US29273RAR03",
@@ -603,69 +403,249 @@
       "previousShares": 60000,
       "currentShares": 60000,
       "previousWeight": 0.2276,
-      "currentWeight": 0.2286,
+      "currentWeight": 0.228,
       "sharesDelta": 0,
-      "weightDelta": 0.0010000000000000009
+      "weightDelta": 0.00040000000000001146
     },
     {
-      "code": "US29250NBZ78",
-      "name": "ENBCN 6.7 11/15/53",
-      "previousShares": 50000,
-      "currentShares": 50000,
-      "previousWeight": 0.1977,
-      "currentWeight": 0.1987,
+      "code": "US406216AY74",
+      "name": "HAL 7.45 09/15/39",
+      "previousShares": 610000,
+      "currentShares": 610000,
+      "previousWeight": 2.6051,
+      "currentWeight": 2.6055,
       "sharesDelta": 0,
-      "weightDelta": 0.0010000000000000009
+      "weightDelta": 0.00039999999999995595
+    },
+    {
+      "code": "US36962G4B75",
+      "name": "GE 6 7/8 01/10/39",
+      "previousShares": 390000,
+      "currentShares": 390000,
+      "previousWeight": 1.6315,
+      "currentWeight": 1.6319,
+      "sharesDelta": 0,
+      "weightDelta": 0.00039999999999995595
+    },
+    {
+      "code": "US86722TAB89",
+      "name": "SUCN 6.85 06/01/39",
+      "previousShares": 370000,
+      "currentShares": 370000,
+      "previousWeight": 1.4818,
+      "currentWeight": 1.4822,
+      "sharesDelta": 0,
+      "weightDelta": 0.00039999999999995595
+    },
+    {
+      "code": "US06849RAC60",
+      "name": "ABXCN 7 1/2 09/15/38",
+      "previousShares": 500000,
+      "currentShares": 500000,
+      "previousWeight": 2.1127,
+      "currentWeight": 2.113,
+      "sharesDelta": 0,
+      "weightDelta": 0.000300000000000189
+    },
+    {
+      "code": "US20030NAV38",
+      "name": "CMCSA 6.95 08/15/37",
+      "previousShares": 100000,
+      "currentShares": 100000,
+      "previousWeight": 0.4069,
+      "currentWeight": 0.4072,
+      "sharesDelta": 0,
+      "weightDelta": 0.00030000000000002247
+    },
+    {
+      "code": "US209111EU37",
+      "name": "ED 6 3/4 04/01/38",
+      "previousShares": 100000,
+      "currentShares": 100000,
+      "previousWeight": 0.4096,
+      "currentWeight": 0.4099,
+      "sharesDelta": 0,
+      "weightDelta": 0.00029999999999996696
     },
     {
       "code": "US58013MEF77",
       "name": "MCD 6.3 03/01/38",
       "previousShares": 60000,
       "currentShares": 60000,
-      "previousWeight": 0.2375,
-      "currentWeight": 0.2384,
+      "previousWeight": 0.2376,
+      "currentWeight": 0.2378,
       "sharesDelta": 0,
-      "weightDelta": 0.0009000000000000119
+      "weightDelta": 0.00020000000000000573
     },
     {
-      "code": "US00206RAS13",
-      "name": "T 6.55 02/15/39",
+      "code": "US00817YAF51",
+      "name": "AET 6 5/8 06/15/36",
       "previousShares": 60000,
       "currentShares": 60000,
-      "previousWeight": 0.2356,
-      "currentWeight": 0.2365,
+      "previousWeight": 0.2354,
+      "currentWeight": 0.2356,
       "sharesDelta": 0,
-      "weightDelta": 0.0008999999999999841
+      "weightDelta": 0.00020000000000000573
+    },
+    {
+      "code": "US91913YAL48",
+      "name": "VLO 6 5/8 06/15/37",
+      "previousShares": 50000,
+      "currentShares": 50000,
+      "previousWeight": 0.1989,
+      "currentWeight": 0.1991,
+      "sharesDelta": 0,
+      "weightDelta": 0.00020000000000000573
+    },
+    {
+      "code": "US101137AL15",
+      "name": "BSX 7 3/8 01/15/40",
+      "previousShares": 120000,
+      "currentShares": 120000,
+      "previousWeight": 0.5137,
+      "currentWeight": 0.5138,
+      "sharesDelta": 0,
+      "weightDelta": 0.00009999999999998899
     }
   ],
   "decreased": [
     {
-      "code": "US641423BU11",
-      "name": "BRKHEC 6 3/4 07/01/37",
-      "previousShares": 300000,
-      "currentShares": 160000,
-      "previousWeight": 1.2067,
-      "currentWeight": 0.6482,
-      "sharesDelta": -140000,
-      "weightDelta": -0.5585000000000001
+      "code": "US172967EW71",
+      "name": "C 8 1/8 07/15/39",
+      "previousShares": 600000,
+      "currentShares": 600000,
+      "previousWeight": 2.732,
+      "currentWeight": 2.726,
+      "sharesDelta": 0,
+      "weightDelta": -0.006000000000000227
+    },
+    {
+      "code": "US852060AT99",
+      "name": "S 8 3/4 03/15/32",
+      "previousShares": 570000,
+      "currentShares": 570000,
+      "previousWeight": 2.4621,
+      "currentWeight": 2.4604,
+      "sharesDelta": 0,
+      "weightDelta": -0.0017000000000000348
+    },
+    {
+      "code": "US87938WAC73",
+      "name": "TELEFONICA EMISIONES SAU 7.045 06/20/36",
+      "previousShares": 330000,
+      "currentShares": 330000,
+      "previousWeight": 1.3243,
+      "currentWeight": 1.3226,
+      "sharesDelta": 0,
+      "weightDelta": -0.0017000000000000348
+    },
+    {
+      "code": "US50076QAR74",
+      "name": "KHC 6 7/8 01/26/39",
+      "previousShares": 210000,
+      "currentShares": 210000,
+      "previousWeight": 0.8312,
+      "currentWeight": 0.8296,
+      "sharesDelta": 0,
+      "weightDelta": -0.0016000000000000458
+    },
+    {
+      "code": "US494550AW68",
+      "name": "KMI 6.95 01/15/38",
+      "previousShares": 320000,
+      "currentShares": 320000,
+      "previousWeight": 1.3004,
+      "currentWeight": 1.299,
+      "sharesDelta": 0,
+      "weightDelta": -0.0014000000000000679
     },
     {
       "code": "US68389XAE58",
       "name": "ORCL 6 1/2 04/15/38",
       "previousShares": 100000,
       "currentShares": 100000,
-      "previousWeight": 0.3683,
-      "currentWeight": 0.3677,
+      "previousWeight": 0.3638,
+      "currentWeight": 0.3624,
+      "sharesDelta": 0,
+      "weightDelta": -0.0014000000000000123
+    },
+    {
+      "code": "US717081CY74",
+      "name": "PFE 7.2 03/15/39",
+      "previousShares": 300000,
+      "currentShares": 300000,
+      "previousWeight": 1.2732,
+      "currentWeight": 1.2719,
+      "sharesDelta": 0,
+      "weightDelta": -0.0013000000000000789
+    },
+    {
+      "code": "US24703TAJ51",
+      "name": "DELL 8.1 07/15/36",
+      "previousShares": 580000,
+      "currentShares": 580000,
+      "previousWeight": 2.5078,
+      "currentWeight": 2.5069,
+      "sharesDelta": 0,
+      "weightDelta": -0.0009000000000001229
+    },
+    {
+      "code": "US68389XCK90",
+      "name": "ORCL 6.9 11/09/52",
+      "previousShares": 400000,
+      "currentShares": 400000,
+      "previousWeight": 1.374,
+      "currentWeight": 1.3731,
+      "sharesDelta": 0,
+      "weightDelta": -0.0009000000000001229
+    },
+    {
+      "code": "US38141GGM06",
+      "name": "GS 6 1/4 02/01/41",
+      "previousShares": 60000,
+      "currentShares": 60000,
+      "previousWeight": 0.2309,
+      "currentWeight": 0.2303,
       "sharesDelta": 0,
       "weightDelta": -0.0005999999999999894
+    },
+    {
+      "code": "US871829BN62",
+      "name": "SYY 6.6 04/01/50",
+      "previousShares": 60000,
+      "currentShares": 60000,
+      "previousWeight": 0.2277,
+      "currentWeight": 0.2274,
+      "sharesDelta": 0,
+      "weightDelta": -0.00030000000000002247
+    },
+    {
+      "code": "US92344GAM87",
+      "name": "VZ 7 3/4 12/01/30",
+      "previousShares": 250000,
+      "currentShares": 250000,
+      "previousWeight": 1.02,
+      "currentWeight": 1.0198,
+      "sharesDelta": 0,
+      "weightDelta": -0.00019999999999997797
+    },
+    {
+      "code": "US06738ECE32",
+      "name": "BACR 7.437 11/02/33",
+      "previousShares": 600000,
+      "currentShares": 600000,
+      "previousWeight": 2.4376,
+      "currentWeight": 2.4375,
+      "sharesDelta": 0,
+      "weightDelta": -0.00010000000000021103
     }
   ],
   "summary": {
     "comparisonReady": true,
     "addedCount": 0,
     "removedCount": 0,
-    "increasedCount": 63,
-    "decreasedCount": 2,
-    "totalChangeCount": 65
+    "increasedCount": 50,
+    "decreasedCount": 13,
+    "totalChangeCount": 63
   }
 }

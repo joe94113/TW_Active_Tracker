@@ -28,6 +28,7 @@ import { mergeRadarReplayHistory } from './lib/radar-replay.mjs';
 import { buildSelectionRadar } from './lib/selection-radar.mjs';
 import { buildEntryRadar } from './lib/entry-radar.mjs';
 import { buildWatchGroups } from './lib/watch-groups.mjs';
+import { buildBrokerBranchRadar } from './lib/broker-branch-radar.mjs';
 import {
   buildEarningsCalendar,
   buildProductEvents,
@@ -625,17 +626,15 @@ async function 讀取已部署或本地JSON(relativePath) {
 }
 
 async function 抓取HTML(url) {
-  const response = await fetch(url, {
+  const response = await 發出請求(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
       accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     },
+  }, {
+    標籤: url,
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
 
   const bytes = new Uint8Array(await response.arrayBuffer());
   const utf8 = new TextDecoder('utf-8').decode(bytes);
@@ -5611,6 +5610,15 @@ async function main() {
       selectionRadar: 選股雷達資料,
       themeHistory: 題材輪動歷史,
     });
+  const 分點勝率雷達 = await buildBrokerBranchRadar({
+    stockMetaList: 股票搜尋索引,
+    selectionRadar: 選股雷達資料,
+    entryRadar: 起漲卡位雷達,
+    themeRadar: 題材雷達,
+    generatedAt: 產生時間,
+    marketDate: 資料市場日,
+    fetchHtml: 抓取HTML,
+  });
   const 選股分組 = buildWatchGroups({
     institutionalResonance: 選股雷達資料.institutionalResonance,
     bullishSignals: 挑選偏多訊號個股(個股摘要清單),
@@ -5653,6 +5661,7 @@ async function main() {
     topicHistoryPath: 'data/topics/history.json',
     stockRadarHistoryPath: 'data/radar/history.json',
     entryRadarPath: 'data/radar/entry.json',
+    brokerBranchRadarPath: 'data/radar/broker-branches.json',
     highDividendEtfFlowPath: 'data/etfs/high-dividend-flow.json',
     earningsCalendarPath: 'data/calendar/earnings.json',
     productEventsPath: 'data/calendar/product-events.json',
@@ -5715,6 +5724,7 @@ async function main() {
   await 寫入JSON(path.join(題材資料目錄, 'history.json'), 題材輪動歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'history.json'), 選股回放歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'entry.json'), 起漲卡位雷達);
+  await 寫入JSON(path.join(選股雷達資料目錄, 'broker-branches.json'), 分點勝率雷達);
   await 寫入JSON(path.join(選股雷達資料目錄, 'signal-confidence.json'), 訊號可信度資料);
   await 寫入JSON(path.join(ETF資料目錄, 'high-dividend-flow.json'), 高股息ETF換股雷達);
   const 財報日曆資料目錄 = path.join(資料目錄, 'calendar');
