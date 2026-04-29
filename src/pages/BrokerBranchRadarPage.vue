@@ -207,6 +207,21 @@ function formatBranchScore(value) {
   return `${formatNumber(value)} 分`;
 }
 
+function formatBranchReplayWinRate(stats) {
+  const value = stats?.horizon5?.winRate;
+  return value === null || value === undefined ? '樣本累積中' : formatPercent(value);
+}
+
+function formatBranchReplayAverage(stats) {
+  const value = stats?.horizon5?.averageReturn;
+  return value === null || value === undefined ? '樣本累積中' : formatPercent(value);
+}
+
+function formatBranchReplaySamples(stats) {
+  const value = stats?.horizon5?.sampleCount ?? 0;
+  return value ? `${formatNumber(value)} 筆` : '樣本累積中';
+}
+
 function getCoverageText(item) {
   const names = (item?.branchNames ?? []).slice(0, 3).join('、');
   return item?.branchCount ? `${formatNumber(item.branchCount)} 家分點：${names}` : '分點資料整理中';
@@ -234,6 +249,16 @@ function getCoverageText(item) {
             <span class="theme-observation-chip">資料日期 {{ formatDate(brokerRadar.marketDate) }}</span>
             <span class="theme-observation-chip">候選股 {{ formatNumber(brokerRadar.summary?.candidateStockCount ?? 0) }} 檔</span>
             <span class="theme-observation-chip">成功覆蓋 {{ formatNumber(brokerRadar.summary?.stockCoverageCount ?? 0) }} 檔</span>
+            <span v-if="brokerRadar.historicalSummary?.snapshotCount" class="theme-observation-chip">
+              分點回看 {{ formatNumber(brokerRadar.historicalSummary.snapshotCount) }} 個交易日
+            </span>
+            <span
+              v-if="brokerRadar.historicalSummary?.bestWinRateBranch?.horizon5?.winRate !== null && brokerRadar.historicalSummary?.bestWinRateBranch?.horizon5?.winRate !== undefined"
+              class="theme-observation-chip"
+            >
+              5 日勝率最佳 {{ brokerRadar.historicalSummary.bestWinRateBranch.name }}
+              {{ formatPercent(brokerRadar.historicalSummary.bestWinRateBranch.horizon5.winRate) }}
+            </span>
             <span
               v-for="(item, index) in brokerRadar.observations ?? []"
               :key="`broker-observation-${index}`"
@@ -464,6 +489,11 @@ function getCoverageText(item) {
                   <div>
                     <strong>{{ branch.name }}</strong>
                     <p class="muted">候選股命中 {{ formatNumber(branch.candidateHits) }} 檔 / 分點分數 {{ formatBranchScore(branch.score) }}</p>
+                    <p v-if="branch.historicalStats" class="muted">
+                      近 {{ formatNumber(branch.historicalStats.recentPickCount ?? 0) }} 次偏多回看 · 5 日勝率
+                      {{ formatBranchReplayWinRate(branch.historicalStats) }} · 平均
+                      {{ formatBranchReplayAverage(branch.historicalStats) }}
+                    </p>
                   </div>
                   <a class="ghost-button" :href="branch.sourceUrl" target="_blank" rel="noreferrer">查看分點</a>
                 </div>
@@ -486,6 +516,16 @@ function getCoverageText(item) {
                   <div>
                     <span>近期偏空</span>
                     <strong>{{ formatNumber(branch.latestSells.length) }} 檔</strong>
+                  </div>
+                  <div>
+                    <span>近 20 次勝率</span>
+                    <strong>{{ formatBranchReplayWinRate(branch.historicalStats) }}</strong>
+                  </div>
+                  <div>
+                    <span>平均 5 日</span>
+                    <strong :class="{ 'text-up': (branch.historicalStats?.horizon5?.averageReturn ?? 0) > 0, 'text-down': (branch.historicalStats?.horizon5?.averageReturn ?? 0) < 0 }">
+                      {{ formatBranchReplayAverage(branch.historicalStats) }}
+                    </strong>
                   </div>
                 </div>
 

@@ -1,8 +1,8 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-04-29T06:45:02.138Z",
+  "generatedAt": "2026-04-29T07:06:12.439Z",
   "generatedAtLocalDate": "2026-04-29",
-  "generatedAtLocalTime": "14:45:02",
+  "generatedAtLocalTime": "15:06:12",
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -13,6 +13,7 @@
   "stockRadarHistoryPath": "data/radar/history.json",
   "entryRadarPath": "data/radar/entry.json",
   "brokerBranchRadarPath": "data/radar/broker-branches.json",
+  "brokerBranchHistoryPath": "data/radar/broker-branches-history.json",
   "highDividendEtfFlowPath": "data/etfs/high-dividend-flow.json",
   "earningsCalendarPath": "data/calendar/earnings.json",
   "productEventsPath": "data/calendar/product-events.json",
@@ -832,23 +833,23 @@
       "trackingStatus": "已串接",
       "detailAvailability": "full",
       "disclosureDate": "2026-04-29",
-      "nav": 11.12,
-      "aum": 10670522188,
+      "nav": 10.88,
+      "aum": 10445448464,
       "holdingsCount": 10,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 5,
+        "decreasedCount": 4,
+        "totalChangeCount": 9
       }
     }
   ],
   "latestDisclosureDate": "2026-04-29",
   "connectedCount": 23,
-  "stockDetailCount": 247,
+  "stockDetailCount": 248,
   "pendingEtfs": [],
   "failedEtfs": [],
   "sources": [

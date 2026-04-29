@@ -25,6 +25,7 @@ import { aggregateSignalConfidence } from '../src/lib/signalConfidence.js';
 import { buildThemeRadar, TOPIC_DEFINITIONS } from './lib/theme-radar.mjs';
 import { buildThemeHistorySnapshot, mergeThemeHistory } from './lib/theme-history.mjs';
 import { mergeRadarReplayHistory } from './lib/radar-replay.mjs';
+import { mergeBrokerBranchHistory } from './lib/broker-branch-history.mjs';
 import { buildSelectionRadar } from './lib/selection-radar.mjs';
 import { buildEntryRadar } from './lib/entry-radar.mjs';
 import { buildWatchGroups } from './lib/watch-groups.mjs';
@@ -5619,6 +5620,32 @@ async function main() {
     marketDate: 資料市場日,
     fetchHtml: 抓取HTML,
   });
+  const 既有分點回放 = await 讀取已部署或本地JSON('data/radar/broker-branches-history.json');
+  const 分點回放歷史 = mergeBrokerBranchHistory({
+    existingHistory: 既有分點回放,
+    marketDate: 資料市場日,
+    generatedAt: 產生時間,
+    brokerRadar: 分點勝率雷達,
+    detailList: 個股明細清單,
+  });
+  const 分點歷史摘要映射 = new Map((分點回放歷史.branchSummaries ?? []).map((item) => [item.bno, item]));
+  const 分點勝率雷達資料 = {
+    ...分點勝率雷達,
+    historicalSummary: {
+      snapshotCount: 分點回放歷史.snapshots?.length ?? 0,
+      trackedBranchCount: 分點回放歷史.branchSummaries?.length ?? 0,
+      bestWinRateBranch: (分點回放歷史.branchSummaries ?? []).find(
+        (item) => (item?.horizon5?.sampleCount ?? 0) >= 5 && item?.horizon5?.winRate !== null,
+      ) ?? null,
+      bestAverageReturnBranch: [...(分點回放歷史.branchSummaries ?? [])]
+        .filter((item) => (item?.horizon5?.sampleCount ?? 0) >= 5 && item?.horizon5?.averageReturn !== null)
+        .sort((left, right) => (right?.horizon5?.averageReturn ?? -Infinity) - (left?.horizon5?.averageReturn ?? -Infinity))[0] ?? null,
+    },
+    topBranches: (分點勝率雷達.topBranches ?? []).map((branch) => ({
+      ...branch,
+      historicalStats: 分點歷史摘要映射.get(branch.bno) ?? null,
+    })),
+  };
   const 選股分組 = buildWatchGroups({
     institutionalResonance: 選股雷達資料.institutionalResonance,
     bullishSignals: 挑選偏多訊號個股(個股摘要清單),
@@ -5662,6 +5689,7 @@ async function main() {
     stockRadarHistoryPath: 'data/radar/history.json',
     entryRadarPath: 'data/radar/entry.json',
     brokerBranchRadarPath: 'data/radar/broker-branches.json',
+    brokerBranchHistoryPath: 'data/radar/broker-branches-history.json',
     highDividendEtfFlowPath: 'data/etfs/high-dividend-flow.json',
     earningsCalendarPath: 'data/calendar/earnings.json',
     productEventsPath: 'data/calendar/product-events.json',
@@ -5724,7 +5752,8 @@ async function main() {
   await 寫入JSON(path.join(題材資料目錄, 'history.json'), 題材輪動歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'history.json'), 選股回放歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'entry.json'), 起漲卡位雷達);
-  await 寫入JSON(path.join(選股雷達資料目錄, 'broker-branches.json'), 分點勝率雷達);
+  await 寫入JSON(path.join(選股雷達資料目錄, 'broker-branches.json'), 分點勝率雷達資料);
+  await 寫入JSON(path.join(選股雷達資料目錄, 'broker-branches-history.json'), 分點回放歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'signal-confidence.json'), 訊號可信度資料);
   await 寫入JSON(path.join(ETF資料目錄, 'high-dividend-flow.json'), 高股息ETF換股雷達);
   const 財報日曆資料目錄 = path.join(資料目錄, 'calendar');

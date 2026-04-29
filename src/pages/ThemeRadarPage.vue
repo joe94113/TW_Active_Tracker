@@ -81,6 +81,30 @@ const selectedHistoryTrend = computed(() => historyOverview.value.trendsByWindow
   previousLeader: null,
 });
 
+const heroSummaryItems = computed(() => [
+  {
+    label: '目前主線',
+    value: topTopic.value?.title ?? '等待主線集中',
+    note: topTopic.value?.observation ?? '先看成交值、新聞與法人是否逐步集中。',
+  },
+  {
+    label: `${selectedWindow.value} 日升溫`,
+    value: selectedHistoryTrend.value.warming[0]?.title ?? '暫無明顯升溫',
+    note:
+      selectedHistoryTrend.value.warming[0]?.scoreChange !== undefined
+        ? `強度變化 ${formatNumber(selectedHistoryTrend.value.warming[0]?.scoreChange, 0)}`
+        : '先觀察是否有連續三天升溫的題材。',
+  },
+  {
+    label: `${selectedWindow.value} 日降溫`,
+    value: selectedHistoryTrend.value.cooling[0]?.title ?? '暫無明顯降溫',
+    note:
+      selectedHistoryTrend.value.cooling[0]?.scoreChange !== undefined
+        ? `強度變化 ${formatNumber(selectedHistoryTrend.value.cooling[0]?.scoreChange, 0)}`
+        : '降溫題材通常代表短線資金開始輪出。',
+  },
+]);
+
 const spotlightCards = computed(() => {
   const newsLeader = [...topics.value]
     .sort((left, right) => (right.newsCount ?? 0) - (left.newsCount ?? 0) || (right.score ?? 0) - (left.score ?? 0))[0] ?? null;
@@ -232,20 +256,23 @@ function formatChangeTone(value) {
         <div class="hero-copy">
           <span class="hero-kicker">Theme Radar</span>
           <h1>資金題材雷達</h1>
-          <p>聚焦近期主線、輪動變化、龍頭股、補漲股與籌碼確認。</p>
-          <div v-if="themeRadar.observations?.length" class="theme-radar-summary">
-            <span
-              v-for="(item, index) in themeRadar.observations"
-              :key="`theme-observation-${index}`"
-              class="theme-observation-chip"
+          <p class="page-subtitle">先看主線題材有沒有集中，再看誰正在升溫、誰已經降溫，最後回頭挑龍頭與補漲股。</p>
+          <div class="hero-summary-grid theme-hero-summary-grid">
+            <article
+              v-for="item in heroSummaryItems"
+              :key="item.label"
+              class="hero-summary-card"
             >
-              {{ item }}
-            </span>
+              <span class="hero-summary-label">{{ item.label }}</span>
+              <strong class="hero-summary-value">{{ item.value }}</strong>
+              <p class="hero-summary-note">{{ item.note }}</p>
+            </article>
           </div>
           <div class="theme-hero-freshness">
             <DataFreshnessBadge
               :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
               :market-date="themeRadar.marketDate ?? dashboard?.marketDate"
+              size="compact"
             />
           </div>
         </div>
@@ -265,6 +292,19 @@ function formatChangeTone(value) {
               <span class="hero-stat-label">歷史快照</span>
               <strong>{{ formatNumber(historyOverview.snapshotCount, 0) }}</strong>
               <span class="meta-text">用近 5 / 10 / 20 日看輪動</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="hero-stat-label">主線狀態</span>
+              <strong>
+                {{
+                  !topTopic?.slug
+                    ? '等待主線'
+                    : selectedHistoryTrend.previousLeader?.slug && selectedHistoryTrend.previousLeader.slug === topTopic.slug
+                      ? '主線延續'
+                      : '主線切換'
+                }}
+              </strong>
+              <span class="meta-text">切到 {{ selectedWindow }} 日視角看輪動節奏</span>
             </div>
           </div>
           <div class="theme-spotlight-grid">

@@ -1,6 +1,6 @@
 {
   "appName": "台股主動通",
-  "產生時間": "2026-04-29T06:46:21.420Z",
+  "產生時間": "2026-04-29T07:07:20.330Z",
   "最新揭露日期": "2026-04-29",
   "已串接ETF數": 23,
   "單股一般上限線": 10,
@@ -4268,6 +4268,36 @@
       ]
     },
     {
+      "code": "TER US",
+      "name": "泰瑞達公司",
+      "清單": [
+        {
+          "etfCode": "00983A",
+          "etfName": "主動中信ARK創新",
+          "sharesDelta": 0,
+          "weightDelta": -0.16000000000000014
+        },
+        {
+          "etfCode": "00990A",
+          "etfName": "主動元大AI新經濟",
+          "sharesDelta": 0,
+          "weightDelta": -0.0900000000000003
+        },
+        {
+          "etfCode": "00997A",
+          "etfName": "主動群益美國增長",
+          "sharesDelta": 0,
+          "weightDelta": -0.13999999999999968
+        }
+      ],
+      "出現ETF數": 3,
+      "ETF代號": [
+        "00983A",
+        "00990A",
+        "00997A"
+      ]
+    },
+    {
       "code": "2308",
       "name": "台達電",
       "清單": [
@@ -4411,29 +4441,6 @@
           "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
           "weightDelta": -0.04999999999999982
-        }
-      ],
-      "出現ETF數": 2,
-      "ETF代號": [
-        "00980A",
-        "00400A"
-      ]
-    },
-    {
-      "code": "2881",
-      "name": "富邦金",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 0,
-          "weightDelta": -0.010000000000000009
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": -0.010000000000000009
         }
       ],
       "出現ETF數": 2,
@@ -4594,6 +4601,14 @@
         "weightDelta": 0.45999999999999996
       },
       {
+        "code": "MU US",
+        "name": "美光科技公司",
+        "etfCode": "00997A",
+        "etfName": "主動群益美國增長",
+        "sharesDelta": 3200,
+        "weightDelta": 0.4200000000000008
+      },
+      {
         "code": "3131",
         "name": "弘塑科技",
         "etfCode": "00996A",
@@ -4608,6 +4623,14 @@
         "etfName": "主動國泰動能高息",
         "sharesDelta": 0,
         "weightDelta": 0.33999999999999997
+      },
+      {
+        "code": "SNDK US",
+        "name": "晟碟公司（德拉瓦州）",
+        "etfCode": "00997A",
+        "etfName": "主動群益美國增長",
+        "sharesDelta": 1550,
+        "weightDelta": 0.3000000000000007
       },
       {
         "code": "6488",
@@ -4770,6 +4793,14 @@
         "weightDelta": 0.04999999999999982
       },
       {
+        "code": "4062 JP",
+        "name": "揖斐電有限公司",
+        "etfCode": "00997A",
+        "etfName": "主動群益美國增長",
+        "sharesDelta": 0,
+        "weightDelta": 0.04999999999999982
+      },
+      {
         "code": "META",
         "name": "META PLATFORMS INC COM USD.000006",
         "etfCode": "00989A",
@@ -4792,30 +4823,6 @@
         "etfName": "主動摩根美國科技",
         "sharesDelta": 0,
         "weightDelta": 0.04489999999999994
-      },
-      {
-        "code": "SHOP US",
-        "name": "Shopify公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 0,
-        "weightDelta": 0.040000000000000036
-      },
-      {
-        "code": "COIN US",
-        "name": "比特幣基地全球公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 0,
-        "weightDelta": 0.040000000000000036
-      },
-      {
-        "code": "BLSH US",
-        "name": "Bullish",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 0,
-        "weightDelta": 0.040000000000000036
       }
     ],
     "減碼": [
@@ -4826,14 +4833,6 @@
         "etfName": "主動兆豐台灣豐收",
         "sharesDelta": -11000,
         "weightDelta": -0.52
-      },
-      {
-        "code": "LITE US",
-        "name": "LUMENTUM HOLDINGS INC",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 0,
-        "weightDelta": -0.40000000000000036
       },
       {
         "code": "ILMN US",
@@ -4964,14 +4963,6 @@
         "weightDelta": -0.1100000000000001
       },
       {
-        "code": "CIEN US",
-        "name": "CIENA CORP",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 0,
-        "weightDelta": -0.10000000000000009
-      },
-      {
         "code": "6526",
         "name": "達發",
         "etfCode": "00996A",
@@ -5058,6 +5049,22 @@
         "etfName": "主動摩根美國科技",
         "sharesDelta": 0,
         "weightDelta": -0.0605
+      },
+      {
+        "code": "TSEM US",
+        "name": "TOWER SEMICONDUCTOR LTD",
+        "etfCode": "00990A",
+        "etfName": "主動元大AI新經濟",
+        "sharesDelta": 0,
+        "weightDelta": -0.06000000000000005
+      },
+      {
+        "code": "6510",
+        "name": "精測",
+        "etfCode": "00994A",
+        "etfName": "主動第一金台股優",
+        "sharesDelta": 0,
+        "weightDelta": -0.05999999999999994
       }
     ]
   },
@@ -5356,9 +5363,9 @@
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 0,
-        "decreasedCount": 0,
-        "totalChangeCount": 0
+        "increasedCount": 5,
+        "decreasedCount": 4,
+        "totalChangeCount": 9
       }
     }
   ],

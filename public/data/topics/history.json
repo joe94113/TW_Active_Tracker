@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-29T06:45:02.138Z",
+  "generatedAt": "2026-04-29T07:06:12.439Z",
   "marketDate": "2026-04-29",
   "snapshots": [
     {
@@ -964,7 +964,7 @@
     },
     {
       "marketDate": "2026-04-29",
-      "generatedAt": "2026-04-29T06:45:02.138Z",
+      "generatedAt": "2026-04-29T07:06:12.439Z",
       "leaderSlug": "ai-server",
       "leaderTitle": "AI 伺服器 / ASIC",
       "topics": [
@@ -985,7 +985,7 @@
         {
           "slug": "memory",
           "title": "記憶體 / DDR5",
-          "score": 500,
+          "score": 503,
           "tone": "up",
           "newsCount": 36,
           "hotCount": 4,
@@ -999,11 +999,11 @@
         {
           "slug": "pcb",
           "title": "PCB / CCL",
-          "score": 412,
+          "score": 450,
           "tone": "up",
-          "newsCount": 37,
+          "newsCount": 38,
           "hotCount": 0,
-          "institutionalCount": 2,
+          "institutionalCount": 4,
           "etfCount": 5,
           "leaderCode": "2383",
           "leaderName": "台光電",
@@ -1013,16 +1013,16 @@
         {
           "slug": "emerging-tw",
           "title": "TW 題材",
-          "score": 365,
+          "score": 350,
           "tone": "up",
           "newsCount": 6,
           "hotCount": 3,
-          "institutionalCount": 5,
+          "institutionalCount": 4,
           "etfCount": 5,
           "leaderCode": "3653",
           "leaderName": "健策",
-          "catchUpCode": "2360",
-          "catchUpName": "致茂"
+          "catchUpCode": "2344",
+          "catchUpName": "華邦電"
         },
         {
           "slug": "cpo",
@@ -1041,16 +1041,30 @@
         {
           "slug": "cooling",
           "title": "散熱 / 液冷",
-          "score": 316,
+          "score": 334,
           "tone": "up",
           "newsCount": 23,
           "hotCount": 2,
-          "institutionalCount": 1,
+          "institutionalCount": 2,
           "etfCount": 4,
           "leaderCode": "3653",
           "leaderName": "健策",
           "catchUpCode": "6230",
           "catchUpName": "尼得科超眾"
+        },
+        {
+          "slug": "abf",
+          "title": "ABF 載板",
+          "score": 297,
+          "tone": "up",
+          "newsCount": 18,
+          "hotCount": 0,
+          "institutionalCount": 3,
+          "etfCount": 5,
+          "leaderCode": "3037",
+          "leaderName": "欣興",
+          "catchUpCode": null,
+          "catchUpName": null
         },
         {
           "slug": "glass-fiber",
@@ -1065,20 +1079,6 @@
           "leaderName": "台玻",
           "catchUpCode": "1815",
           "catchUpName": "富喬"
-        },
-        {
-          "slug": "abf",
-          "title": "ABF 載板",
-          "score": 265,
-          "tone": "up",
-          "newsCount": 18,
-          "hotCount": 0,
-          "institutionalCount": 1,
-          "etfCount": 5,
-          "leaderCode": "3037",
-          "leaderName": "欣興",
-          "catchUpCode": null,
-          "catchUpName": null
         }
       ]
     }

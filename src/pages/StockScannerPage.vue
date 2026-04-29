@@ -114,6 +114,24 @@ const overviewCards = computed(() => [
   },
 ]);
 
+const heroSummaryItems = computed(() => [
+  {
+    label: '資料日',
+    value: formatDate(manifest.value?.generatedAtLocalDate) || '尚未整理',
+    note: '先確認這次掃描用的是哪一天的個股與法人資料。',
+  },
+  {
+    label: '回放基準',
+    value: latestReplaySnapshot.value?.marketDate ? formatDate(latestReplaySnapshot.value.marketDate) : '樣本累積中',
+    note: '用最近一次盤後觀察名單來比對隔日與後續表現。',
+  },
+  {
+    label: 'ETF 涵蓋',
+    value: `${formatNumber(universe.value.filter((item) => (item.activeEtfCount ?? 0) > 0).length)} 檔`,
+    note: '先知道哪些股票同時被主動式 ETF 關注。',
+  },
+]);
+
 const pageSeo = computed(() => ({
   title: '選股條件篩選器',
   description: '把月營收、法人買盤、技術面、流動性與風險條件整合在同一頁，快速挑出比較可交易的台股名單。',
@@ -235,11 +253,17 @@ function buildReasonChips(row) {
         <div class="hero-copy">
           <span class="hero-kicker">Stock Scanner</span>
           <h1>選股條件篩選器</h1>
-          <p>把月營收、法人買盤、技術面、流動性和風險條件放在同一頁。你可以先縮小範圍，再點進個股確認是不是值得放進觀察清單。</p>
-          <div class="theme-radar-summary">
-            <span class="theme-observation-chip">資料日 {{ formatDate(manifest?.generatedAtLocalDate) }}</span>
-            <span class="theme-observation-chip">回放基準 {{ latestReplaySnapshot?.marketDate ? formatDate(latestReplaySnapshot.marketDate) : '尚未整理' }}</span>
-            <span class="theme-observation-chip">主動式 ETF 涵蓋 {{ formatNumber(universe.filter((item) => (item.activeEtfCount ?? 0) > 0).length) }} 檔</span>
+          <p class="page-subtitle">先用條件把股票池縮小，再去看哪些股票同時具備趨勢、量能、籌碼與風險控管條件。</p>
+          <div class="hero-summary-grid scanner-hero-summary-grid">
+            <article
+              v-for="item in heroSummaryItems"
+              :key="item.label"
+              class="hero-summary-card"
+            >
+              <span class="hero-summary-label">{{ item.label }}</span>
+              <strong class="hero-summary-value">{{ item.value }}</strong>
+              <p class="hero-summary-note">{{ item.note }}</p>
+            </article>
           </div>
         </div>
 

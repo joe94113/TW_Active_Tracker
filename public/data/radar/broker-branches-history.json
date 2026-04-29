@@ -1,0 +1,1209 @@
+{
+  "generatedAt": "2026-04-29T07:06:12.439Z",
+  "marketDate": "2026-04-29",
+  "horizons": [
+    3,
+    5,
+    10
+  ],
+  "snapshots": [
+    {
+      "marketDate": "2026-04-29",
+      "generatedAt": "2026-04-29T07:06:12.439Z",
+      "branches": [
+        {
+          "bno": "9800",
+          "name": "元大",
+          "score": 939.49,
+          "picks": [
+            {
+              "code": "1802",
+              "name": "台玻",
+              "entryClose": 66.2,
+              "netLots": 11689000,
+              "performance": -2.85,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2312",
+              "name": "金寶",
+              "entryClose": 28.6,
+              "netLots": 7349000,
+              "performance": -1.63,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 74.5,
+              "netLots": 6498000,
+              "performance": -1.02,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2337",
+              "name": "旺宏",
+              "entryClose": 167,
+              "netLots": 6025000,
+              "performance": 1.13,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2408",
+              "name": "南亞科",
+              "entryClose": 235,
+              "netLots": 4247000,
+              "performance": -0.27,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "8440",
+          "name": "摩根大通",
+          "score": 906.32,
+          "picks": [
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 24.1,
+              "netLots": 11141000,
+              "performance": -0.75,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2891",
+              "name": "中信金",
+              "entryClose": 53.1,
+              "netLots": 7773000,
+              "performance": -0.39,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2337",
+              "name": "旺宏",
+              "entryClose": 167,
+              "netLots": 7594000,
+              "performance": 6.92,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2886",
+              "name": "兆豐金",
+              "entryClose": 40.1,
+              "netLots": 6063000,
+              "performance": 0.27,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "9105",
+              "name": "泰金寶-DR",
+              "entryClose": 6,
+              "netLots": 3512000,
+              "performance": -0.39,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "1470",
+          "name": "台灣摩根士丹利",
+          "score": 902.5,
+          "picks": [
+            {
+              "code": "2883",
+              "name": "凱基金",
+              "entryClose": 21.7,
+              "netLots": 11166000,
+              "performance": 2.56,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 24.1,
+              "netLots": 7872000,
+              "performance": -0.75,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 74.5,
+              "netLots": 6132000,
+              "performance": -2.43,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2891",
+              "name": "中信金",
+              "entryClose": 53.1,
+              "netLots": 5840000,
+              "performance": -0.43,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2027",
+              "name": "大成鋼",
+              "entryClose": 38.5,
+              "netLots": 5419000,
+              "performance": 2.06,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9676",
+          "name": "富邦-仁愛",
+          "score": 882.91,
+          "picks": [
+            {
+              "code": "1815",
+              "name": "富喬",
+              "entryClose": 110.5,
+              "netLots": 569000,
+              "performance": 0.39,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2911",
+              "name": "麗嬰房",
+              "entryClose": 5.3,
+              "netLots": 500000,
+              "performance": -10.59,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "8027",
+              "name": "鈦昇",
+              "entryClose": 176,
+              "netLots": 378000,
+              "performance": 7.3,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "6531",
+              "name": "愛普*",
+              "entryClose": 820,
+              "netLots": 351000,
+              "performance": 2.23,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2474",
+              "name": "可成",
+              "entryClose": 216.5,
+              "netLots": 186000,
+              "performance": -6.64,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "1480",
+          "name": "美商高盛",
+          "score": 877.96,
+          "picks": [
+            {
+              "code": "2337",
+              "name": "旺宏",
+              "entryClose": 167,
+              "netLots": 8419000,
+              "performance": 4.74,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 24,
+              "netLots": 8325000,
+              "performance": -2.22,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2408",
+              "name": "南亞科",
+              "entryClose": 235,
+              "netLots": 7541000,
+              "performance": -0.67,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2886",
+              "name": "兆豐金",
+              "entryClose": 40.1,
+              "netLots": 7507000,
+              "performance": 0.26,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "4958",
+              "name": "臻鼎-KY",
+              "entryClose": 383,
+              "netLots": 5912000,
+              "performance": 0.17,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "5850",
+          "name": "統一",
+          "score": 859.77,
+          "picks": [
+            {
+              "code": "2312",
+              "name": "金寶",
+              "entryClose": 28.6,
+              "netLots": 3288000,
+              "performance": -4.86,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2337",
+              "name": "旺宏",
+              "entryClose": 167,
+              "netLots": 2987000,
+              "performance": 1.35,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2317",
+              "name": "鴻海",
+              "entryClose": 225,
+              "netLots": 1302000,
+              "performance": -0.02,
+              "sourceType": "stock-branch-cmoney",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "4958",
+              "name": "臻鼎-KY",
+              "entryClose": 383,
+              "netLots": 1278000,
+              "performance": -1.24,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2489",
+              "name": "瑞軒",
+              "entryClose": 42,
+              "netLots": 1191000,
+              "performance": 9.82,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9268",
+          "name": "凱基-台北",
+          "score": 832,
+          "picks": [
+            {
+              "code": "2883",
+              "name": "凱基金",
+              "entryClose": 21.7,
+              "netLots": 11082000,
+              "performance": 2.32,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 74.5,
+              "netLots": 5381000,
+              "performance": -0.15,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3006",
+              "name": "晶豪科",
+              "entryClose": 175,
+              "netLots": 2453000,
+              "performance": -0.33,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "9105",
+              "name": "泰金寶-DR",
+              "entryClose": 6,
+              "netLots": 2323000,
+              "performance": -0.27,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2027",
+              "name": "大成鋼",
+              "entryClose": 38.5,
+              "netLots": 2260000,
+              "performance": 1.77,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9600",
+          "name": "富邦",
+          "score": 784,
+          "picks": [
+            {
+              "code": "2337",
+              "name": "旺宏",
+              "entryClose": 167,
+              "netLots": 12301000,
+              "performance": 2.14,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2312",
+              "name": "金寶",
+              "entryClose": 28.6,
+              "netLots": 10886000,
+              "performance": -5.04,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2317",
+              "name": "鴻海",
+              "entryClose": 225,
+              "netLots": 4765000,
+              "performance": -0.66,
+              "sourceType": "stock-branch-cmoney",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2409",
+              "name": "友達",
+              "entryClose": 17.3,
+              "netLots": 3658000,
+              "performance": -0.68,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "4958",
+              "name": "臻鼎-KY",
+              "entryClose": 383,
+              "netLots": 2889000,
+              "performance": -1.32,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "1440",
+          "name": "美林",
+          "score": 756,
+          "picks": [
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 74.5,
+              "netLots": 11089000,
+              "performance": 0.7,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "1301",
+              "name": "台塑",
+              "entryClose": 51,
+              "netLots": 3397000,
+              "performance": 0.24,
+              "sourceType": "stock-branch-cmoney",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "6770",
+              "name": "力積電",
+              "entryClose": 53.5,
+              "netLots": 3113000,
+              "performance": -2.51,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 24.1,
+              "netLots": 3042000,
+              "performance": -0.59,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "1326",
+              "name": "台化",
+              "entryClose": 52.5,
+              "netLots": 2790000,
+              "performance": 1.52,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9207",
+          "name": "凱基-永和",
+          "score": 654.99,
+          "picks": [
+            {
+              "code": "1802",
+              "name": "台玻",
+              "entryClose": 66.2,
+              "netLots": 1245000,
+              "performance": -4.43,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3714",
+              "name": "富采",
+              "entryClose": 73.7,
+              "netLots": 904000,
+              "performance": 3.37,
+              "sourceType": null,
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2426",
+              "name": "鼎元",
+              "entryClose": 59.5,
+              "netLots": 500000,
+              "performance": 12.26,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3051",
+              "name": "力特",
+              "entryClose": 27.5,
+              "netLots": 488000,
+              "performance": 2.45,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "6218",
+              "name": "豪勉",
+              "entryClose": 39.3,
+              "netLots": 301000,
+              "performance": 9.93,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-04-29",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "branchSummaries": [
+    {
+      "bno": "1440",
+      "name": "美林",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "1470",
+      "name": "台灣摩根士丹利",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "1480",
+      "name": "美商高盛",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "5850",
+      "name": "統一",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "8440",
+      "name": "摩根大通",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9207",
+      "name": "凱基-永和",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9268",
+      "name": "凱基-台北",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9600",
+      "name": "富邦",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9676",
+      "name": "富邦-仁愛",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9800",
+      "name": "元大",
+      "snapshotCount": 1,
+      "recentPickCount": 5,
+      "latestMarketDate": "2026-04-29",
+      "horizon3": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    }
+  ]
+}

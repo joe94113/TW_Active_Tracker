@@ -6,14 +6,106 @@
   "comparisonReady": true,
   "added": [],
   "removed": [],
-  "increased": [],
-  "decreased": [],
+  "increased": [
+    {
+      "code": "NVDA US",
+      "name": "輝達公司",
+      "previousShares": 51463,
+      "currentShares": 60763,
+      "previousWeight": 3.28,
+      "currentWeight": 3.91,
+      "sharesDelta": 9300,
+      "weightDelta": 0.6300000000000003
+    },
+    {
+      "code": "MU US",
+      "name": "美光科技公司",
+      "previousShares": 26277,
+      "currentShares": 29477,
+      "previousWeight": 4.06,
+      "currentWeight": 4.48,
+      "sharesDelta": 3200,
+      "weightDelta": 0.4200000000000008
+    },
+    {
+      "code": "SNDK US",
+      "name": "晟碟公司（德拉瓦州）",
+      "previousShares": 12752,
+      "currentShares": 14302,
+      "previousWeight": 4.02,
+      "currentWeight": 4.32,
+      "sharesDelta": 1550,
+      "weightDelta": 0.3000000000000007
+    },
+    {
+      "code": "GOOGL US",
+      "name": "ALPHABET INC-CL A",
+      "previousShares": 44124,
+      "currentShares": 44124,
+      "previousWeight": 4.55,
+      "currentWeight": 4.66,
+      "sharesDelta": 0,
+      "weightDelta": 0.11000000000000032
+    },
+    {
+      "code": "4062 JP",
+      "name": "揖斐電有限公司",
+      "previousShares": 135868,
+      "currentShares": 135868,
+      "previousWeight": 3.18,
+      "currentWeight": 3.23,
+      "sharesDelta": 0,
+      "weightDelta": 0.04999999999999982
+    }
+  ],
+  "decreased": [
+    {
+      "code": "LITE US",
+      "name": "魯門特姆控股公司",
+      "previousShares": 19055,
+      "currentShares": 19055,
+      "previousWeight": 4.82,
+      "currentWeight": 4.55,
+      "sharesDelta": 0,
+      "weightDelta": -0.27000000000000046
+    },
+    {
+      "code": "TER US",
+      "name": "泰瑞達公司",
+      "previousShares": 38057,
+      "currentShares": 38057,
+      "previousWeight": 4.5,
+      "currentWeight": 4.36,
+      "sharesDelta": 0,
+      "weightDelta": -0.13999999999999968
+    },
+    {
+      "code": "CIEN US",
+      "name": "喜雅納公司",
+      "previousShares": 21093,
+      "currentShares": 21093,
+      "previousWeight": 3.14,
+      "currentWeight": 3.01,
+      "sharesDelta": 0,
+      "weightDelta": -0.13000000000000034
+    },
+    {
+      "code": "STX US",
+      "name": "希捷科技控股公開有限公司",
+      "previousShares": 29967,
+      "currentShares": 29967,
+      "previousWeight": 5.26,
+      "currentWeight": 5.23,
+      "sharesDelta": 0,
+      "weightDelta": -0.02999999999999936
+    }
+  ],
   "summary": {
     "comparisonReady": true,
     "addedCount": 0,
     "removedCount": 0,
-    "increasedCount": 0,
-    "decreasedCount": 0,
-    "totalChangeCount": 0
+    "increasedCount": 5,
+    "decreasedCount": 4,
+    "totalChangeCount": 9
   }
 }
