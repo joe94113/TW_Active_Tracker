@@ -14,6 +14,7 @@ import StockFinancialOverview from '../components/StockFinancialOverview.vue';
 import IntradayChart from '../components/IntradayChart.vue';
 import TechnicalChart from '../components/TechnicalChart.vue';
 import HolderStructureChart from '../components/HolderStructureChart.vue';
+import IntradayChipFlowChart from '../components/IntradayChipFlowChart.vue';
 import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
 import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
@@ -460,6 +461,33 @@ const technicalNarrative = computed(() => {
   return narratives.slice(0, 3);
 });
 
+const priorityInsightCards = computed(() => {
+  const heatWarning = overheatWarnings.value[0] ?? null;
+  const firstSignal = technicalSignals.value[0] ?? null;
+  const firstNarrative = technicalNarrative.value[0] ?? null;
+
+  return [
+    {
+      title: '體檢總分',
+      value: `${stockHealthScore.value.grade} / ${stockHealthScore.value.totalScore}`,
+      description: stockHealthScore.value.summary,
+      status: getHealthTone(stockHealthScore.value.totalScore),
+    },
+    {
+      title: '追價風險',
+      value: heatWarning ? heatWarning.badgeLabel : '目前可控',
+      description: heatWarning ? heatWarning.note : '目前沒有明顯過熱訊號，仍要留意量價配合。',
+      status: getSelectionAlertTone(heatWarning?.tone ?? 'normal'),
+    },
+    {
+      title: '技術快讀',
+      value: firstSignal?.title ?? '結構整理中',
+      description: firstNarrative ?? '先看價格和月線的相對位置，再決定追強或等拉回。',
+      status: firstSignal?.tone ?? 'normal',
+    },
+  ];
+});
+
 function getPriceZoneTone(role) {
   if (role === 'support') return 'support';
   if (role === 'resistance') return 'resistance';
@@ -634,6 +662,25 @@ watch(
         </div>
       </section>
 
+      <section class="panel stock-priority-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">操作快讀</h2>
+            <p class="panel-subtitle">先看體檢分數、追價風險和技術快讀，再決定要不要往下研究圖表與籌碼。</p>
+          </div>
+        </div>
+
+        <section class="card-grid compact-summary-grid stock-priority-grid">
+          <InfoCard
+            v-for="item in priorityInsightCards"
+            :key="`priority-${item.title}`"
+            :title="item.title"
+            :value="item.value"
+            :description="item.description"
+            :status="item.status"
+          />
+        </section>
+      </section>
       <nav class="mobile-section-nav stock-mobile-nav" aria-label="個股研究捷徑">
         <a class="mobile-section-link" href="#quote">報價</a>
         <a class="mobile-section-link" href="#signals">技術</a>
@@ -1352,20 +1399,25 @@ watch(
           <p v-else class="muted">同族群比較清單尚未建立完成。</p>
         </article>
       </section>
-
       <section id="chart" class="page-section-anchor chart-stack">
-      <IntradayChart
-        v-if="detail?.盤中走勢"
-        :data="detail.盤中走勢"
-        title="個股盤中分時圖"
-      />
+        <IntradayChart
+          v-if="detail?.['盤中走勢']"
+          :data="detail['盤中走勢']"
+          title="個股盤中分時圖"
+        />
 
-      <TechnicalChart
-        :data="detail"
-        :comparison-series="comparisonSeries"
-        :comparison-loading="isComparisonSeriesLoading"
-        title="個股技術分析圖表"
-      />
+        <IntradayChipFlowChart
+          v-if="detail?.['盤中走勢']"
+          :data="detail['盤中走勢']"
+          title="盤中大戶 / 散戶估算圖"
+        />
+
+        <TechnicalChart
+          :data="detail"
+          :comparison-series="comparisonSeries"
+          :comparison-loading="isComparisonSeriesLoading"
+          title="個股技術分析圖表"
+        />
       </section>
 
       <HolderStructureChart
