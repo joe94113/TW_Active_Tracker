@@ -1,7 +1,7 @@
 {
   "appName": "台股主動通",
-  "產生時間": "2026-05-05T10:14:06.873Z",
-  "最新揭露日期": "2026-05-05",
+  "產生時間": "2026-05-06T02:31:43.482Z",
+  "最新揭露日期": "2026-05-06",
   "已串接ETF數": 23,
   "單股一般上限線": 10,
   "單股接近上限線": 8,
@@ -22,22 +22,22 @@
     {
       "code": "00982A",
       "name": "主動群益台灣強棒",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00981A",
       "name": "主動統一台股增長",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00983A",
       "name": "主動中信ARK創新",
-      "disclosureDate": "2026-05-04"
+      "disclosureDate": "2026-05-05"
     },
     {
       "code": "00984A",
       "name": "主動安聯台灣高息",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00985A",
@@ -47,27 +47,27 @@
     {
       "code": "00986A",
       "name": "主動台新龍頭成長",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00982D",
       "name": "主動富邦動態入息",
-      "disclosureDate": "2026-05-04"
+      "disclosureDate": "2026-05-05"
     },
     {
       "code": "00983D",
       "name": "主動富邦複合收益",
-      "disclosureDate": "2026-05-04"
+      "disclosureDate": "2026-05-05"
     },
     {
       "code": "00989A",
       "name": "主動摩根美國科技",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00988A",
       "name": "主動統一全球創新",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00991A",
@@ -77,17 +77,17 @@
     {
       "code": "00990A",
       "name": "主動元大AI新經濟",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00987A",
       "name": "主動台新優勢成長",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00992A",
       "name": "主動群益科技創新",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00994A",
@@ -102,12 +102,12 @@
     {
       "code": "00993A",
       "name": "主動安聯台灣",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00984D",
       "name": "主動聯博全球非投",
-      "disclosureDate": "2026-05-04"
+      "disclosureDate": "2026-05-05"
     },
     {
       "code": "00996A",
@@ -122,12 +122,12 @@
     {
       "code": "00401A",
       "name": "主動摩根台灣鑫收",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     },
     {
       "code": "00997A",
       "name": "主動群益美國增長",
-      "disclosureDate": "2026-05-05"
+      "disclosureDate": "2026-05-06"
     }
   ],
   "單股重壓": [
@@ -211,8 +211,8 @@
       "highExposureCount": 2,
       "atCapCount": 0,
       "isIndexHeavyCandidate": true,
-      "taiexWeight": 43.90701978220968,
-      "applicableSingleStockCap": 43.90701978220968,
+      "taiexWeight": 43.906917142139385,
+      "applicableSingleStockCap": 43.906917142139385,
       "generalCapLine": 10,
       "reminderLine": 20,
       "grossExposureCapLine": 25,
@@ -260,7 +260,7 @@
       "highExposureCount": 0,
       "atCapCount": 0,
       "isIndexHeavyCandidate": false,
-      "taiexWeight": 0.23322901663999804,
+      "taiexWeight": 0.23322847142780234,
       "applicableSingleStockCap": 10,
       "generalCapLine": 10,
       "reminderLine": 20,
@@ -296,7 +296,7 @@
       "highExposureCount": 0,
       "atCapCount": 0,
       "isIndexHeavyCandidate": false,
-      "taiexWeight": 1.2753817116354198,
+      "taiexWeight": 1.275378730215383,
       "applicableSingleStockCap": 10,
       "generalCapLine": 10,
       "reminderLine": 20,
@@ -326,7 +326,7 @@
       "highExposureCount": 0,
       "atCapCount": 0,
       "isIndexHeavyCandidate": false,
-      "taiexWeight": 3.80789055303718,
+      "taiexWeight": 3.807881651450236,
       "applicableSingleStockCap": 10,
       "generalCapLine": 10,
       "reminderLine": 20,
@@ -2830,7 +2830,9 @@
       ]
     }
   ],
-  "共同新增": [
+  "共同新增": [],
+  "共同剔除": [],
+  "共同加碼": [
     {
       "code": "TWSE 05/20/26 C40700",
       "name": "TAIEX FUTURES MAY26 20-MAY-2026",
@@ -2838,73 +2840,66 @@
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 31,
-          "weightDelta": 7.3435
+          "sharesDelta": 271,
+          "weightDelta": 10.1388
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -240,
-          "weightDelta": -2.7953
+          "sharesDelta": 238,
+          "weightDelta": 2.7826
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -100,
-          "weightDelta": -0.6177
+          "sharesDelta": 231,
+          "weightDelta": 2.7788
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -18,
-          "weightDelta": -0.0992
+          "sharesDelta": 236,
+          "weightDelta": 2.7782
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -10,
-          "weightDelta": -0.0577
+          "sharesDelta": 234,
+          "weightDelta": 2.7762000000000002
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -10,
-          "weightDelta": -0.0525
+          "sharesDelta": 229,
+          "weightDelta": 2.762
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -11,
-          "weightDelta": -0.0333
+          "sharesDelta": 230,
+          "weightDelta": 2.7428
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -6,
-          "weightDelta": -0.0191
+          "sharesDelta": 230,
+          "weightDelta": 2.7376
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -4,
-          "weightDelta": -0.0171
+          "sharesDelta": 222,
+          "weightDelta": 2.6961
         },
         {
           "etfCode": "00401A",
           "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -9,
-          "weightDelta": -0.0165
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -2,
-          "weightDelta": -0.0127
+          "sharesDelta": 140,
+          "weightDelta": 2.1776
         }
       ],
-      "出現ETF數": 11,
+      "出現ETF數": 10,
       "ETF代號": [
-        "00401A",
         "00401A",
         "00401A",
         "00401A",
@@ -2917,167 +2912,6 @@
         "00401A"
       ]
     },
-    {
-      "code": "6187",
-      "name": "萬潤",
-      "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 1223000,
-          "weightDelta": 0.63
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 78000,
-          "weightDelta": 1.57
-        }
-      ],
-      "出現ETF數": 2,
-      "ETF代號": [
-        "00981A",
-        "00984A"
-      ]
-    },
-    {
-      "code": "2408",
-      "name": "南亞科",
-      "清單": [
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 161000,
-          "weightDelta": 1.2128
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 48000,
-          "weightDelta": 0.25
-        }
-      ],
-      "出現ETF數": 2,
-      "ETF代號": [
-        "00987A",
-        "00994A"
-      ]
-    }
-  ],
-  "共同剔除": [
-    {
-      "code": "TWSE 06/17/26 C37400",
-      "name": "TAIEX FUTURES MAY26 20-MAY-2026",
-      "清單": [
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -28,
-          "weightDelta": -7.0922
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 240,
-          "weightDelta": 2.6086
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 100,
-          "weightDelta": 0.518
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 18,
-          "weightDelta": 0.0815
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 10,
-          "weightDelta": 0.0478
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 10,
-          "weightDelta": 0.0427
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 2,
-          "weightDelta": 0.011
-        }
-      ],
-      "出現ETF數": 7,
-      "ETF代號": [
-        "00401A",
-        "00401A",
-        "00401A",
-        "00401A",
-        "00401A",
-        "00401A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "6510",
-      "name": "精測",
-      "清單": [
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -17000,
-          "weightDelta": -0.95
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": -56000,
-          "weightDelta": -0.77
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": -422000,
-          "weightDelta": -3.15
-        }
-      ],
-      "出現ETF數": 3,
-      "ETF代號": [
-        "00984A",
-        "00990A",
-        "00992A"
-      ]
-    },
-    {
-      "code": "1303",
-      "name": "南亞",
-      "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": -1374000,
-          "weightDelta": -0.05
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -357000,
-          "weightDelta": -0.48
-        }
-      ],
-      "出現ETF數": 2,
-      "ETF代號": [
-        "00981A",
-        "00984A"
-      ]
-    }
-  ],
-  "共同加碼": [
     {
       "code": "2454",
       "name": "聯發科",
@@ -3089,34 +2923,10 @@
           "weightDelta": 0.18000000000000016
         },
         {
-          "etfCode": "00982A",
-          "etfName": "主動群益台灣強棒",
-          "sharesDelta": 0,
-          "weightDelta": 0.3299999999999996
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 0,
-          "weightDelta": 0.4400000000000004
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 0,
-          "weightDelta": 0.04999999999999999
-        },
-        {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
           "weightDelta": 0.5300000000000002
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 30000,
-          "weightDelta": 0.4700000000000002
         },
         {
           "etfCode": "00994A",
@@ -3131,12 +2941,6 @@
           "weightDelta": 0.3800000000000008
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 23000,
-          "weightDelta": 0.69
-        },
-        {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
@@ -3147,318 +2951,16 @@
           "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
           "weightDelta": 0.6299999999999999
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": 0.5016000000000007
-        }
-      ],
-      "出現ETF數": 12,
-      "ETF代號": [
-        "00980A",
-        "00982A",
-        "00981A",
-        "00984A",
-        "00985A",
-        "00988A",
-        "00994A",
-        "00995A",
-        "00993A",
-        "00996A",
-        "00400A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "6274",
-      "name": "台燿科技",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 0,
-          "weightDelta": 0.08000000000000007
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 238000,
-          "weightDelta": 0.28
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 18000,
-          "weightDelta": 0.45000000000000007
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 0,
-          "weightDelta": 0.06000000000000005
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": 0.5012999999999996
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 15000,
-          "weightDelta": 0.46999999999999975
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": 0.1200000000000001
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": 0.050000000000000044
-        }
-      ],
-      "出現ETF數": 8,
-      "ETF代號": [
-        "00980A",
-        "00981A",
-        "00984A",
-        "00990A",
-        "00987A",
-        "00994A",
-        "00995A",
-        "00400A"
-      ]
-    },
-    {
-      "code": "2360",
-      "name": "致茂",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 29000,
-          "weightDelta": 0.18000000000000016
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 17000,
-          "weightDelta": 0.6499999999999999
-        },
-        {
-          "etfCode": "00985A",
-          "etfName": "主動野村台灣50",
-          "sharesDelta": 0,
-          "weightDelta": 0.08999999999999986
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 0,
-          "weightDelta": 0.030000000000000027
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 0,
-          "weightDelta": 0.020000000000000018
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 2000,
-          "weightDelta": 0.1200000000000001
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 3000,
-          "weightDelta": 0.14509999999999978
-        }
-      ],
-      "出現ETF數": 7,
-      "ETF代號": [
-        "00980A",
-        "00984A",
-        "00985A",
-        "00988A",
-        "00990A",
-        "00993A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 24000,
-          "weightDelta": -0.1399999999999988
-        },
-        {
-          "etfCode": "00982A",
-          "etfName": "主動群益台灣強棒",
-          "sharesDelta": 68000,
-          "weightDelta": -0.40000000000000036
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 1021000,
-          "weightDelta": 0.14000000000000057
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 98000,
-          "weightDelta": 0.56
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 19000,
-          "weightDelta": 0.6581000000000001
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 6000,
-          "weightDelta": 0.08999999999999986
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 11000,
-          "weightDelta": 0.07530000000000037
-        }
-      ],
-      "出現ETF數": 7,
-      "ETF代號": [
-        "00980A",
-        "00982A",
-        "00981A",
-        "00990A",
-        "00987A",
-        "00995A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "2383",
-      "name": "台光電",
-      "清單": [
-        {
-          "etfCode": "00982A",
-          "etfName": "主動群益台灣強棒",
-          "sharesDelta": 20000,
-          "weightDelta": 0.08000000000000007
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 80000,
-          "weightDelta": -0.040000000000000924
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 0,
-          "weightDelta": 0.11999999999999988
-        },
-        {
-          "etfCode": "00985A",
-          "etfName": "主動野村台灣50",
-          "sharesDelta": 0,
-          "weightDelta": 0.07000000000000006
-        },
-        {
-          "etfCode": "00991A",
-          "etfName": "主動復華未來50",
-          "sharesDelta": 0,
-          "weightDelta": 0.08699999999999974
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": 0.17999999999999972
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 0,
-          "weightDelta": 0.3700000000000001
-        }
-      ],
-      "出現ETF數": 7,
-      "ETF代號": [
-        "00982A",
-        "00981A",
-        "00984A",
-        "00985A",
-        "00991A",
-        "00992A",
-        "00993A"
-      ]
-    },
-    {
-      "code": "5274",
-      "name": "信驊科技",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 3000,
-          "weightDelta": 0.27
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 100000,
-          "weightDelta": 0.6800000000000002
-        },
-        {
-          "etfCode": "00991A",
-          "etfName": "主動復華未來50",
-          "sharesDelta": 0,
-          "weightDelta": 0.055000000000000604
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": 0.029999999999999805
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 1000,
-          "weightDelta": 0.26
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": 0.0009999999999998899
         }
       ],
       "出現ETF數": 6,
       "ETF代號": [
         "00980A",
-        "00981A",
-        "00991A",
+        "00985A",
+        "00994A",
         "00995A",
-        "00993A",
-        "00401A"
+        "00996A",
+        "00400A"
       ]
     },
     {
@@ -3484,12 +2986,6 @@
           "weightDelta": 0.11999999999999988
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 51000,
-          "weightDelta": 0.56
-        },
-        {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
@@ -3502,292 +2998,13 @@
           "weightDelta": 0.10000000000000009
         }
       ],
-      "出現ETF數": 6,
+      "出現ETF數": 5,
       "ETF代號": [
         "00980A",
         "00985A",
         "00995A",
-        "00993A",
         "00996A",
         "00400A"
-      ]
-    },
-    {
-      "code": "2345",
-      "name": "智邦",
-      "清單": [
-        {
-          "etfCode": "00982A",
-          "etfName": "主動群益台灣強棒",
-          "sharesDelta": 31000,
-          "weightDelta": 0.08999999999999986
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 100000,
-          "weightDelta": 0
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 14000,
-          "weightDelta": 0.56
-        },
-        {
-          "etfCode": "00985A",
-          "etfName": "主動野村台灣50",
-          "sharesDelta": 0,
-          "weightDelta": 0.08999999999999986
-        },
-        {
-          "etfCode": "00991A",
-          "etfName": "主動復華未來50",
-          "sharesDelta": 30000,
-          "weightDelta": 0.24800000000000022
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": 0.1499999999999999
-        }
-      ],
-      "出現ETF數": 6,
-      "ETF代號": [
-        "00982A",
-        "00981A",
-        "00984A",
-        "00985A",
-        "00991A",
-        "00992A"
-      ]
-    },
-    {
-      "code": "2449",
-      "name": "京元電子",
-      "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 199000,
-          "weightDelta": 0.21999999999999997
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 90000,
-          "weightDelta": 0.6499999999999999
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": 0.10999999999999988
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": 0.010000000000000002
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": 0.06000000000000005
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 153000,
-          "weightDelta": 1.6496
-        }
-      ],
-      "出現ETF數": 6,
-      "ETF代號": [
-        "00981A",
-        "00994A",
-        "00995A",
-        "00996A",
-        "00400A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "2368",
-      "name": "金像電",
-      "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 20000,
-          "weightDelta": -0.16999999999999993
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 19000,
-          "weightDelta": 0.45999999999999996
-        },
-        {
-          "etfCode": "00985A",
-          "etfName": "主動野村台灣50",
-          "sharesDelta": 0,
-          "weightDelta": 0.09999999999999964
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": 0.10999999999999943
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": 0.030000000000000027
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": 0.0600000000000005
-        }
-      ],
-      "出現ETF數": 6,
-      "ETF代號": [
-        "00981A",
-        "00984A",
-        "00985A",
-        "00995A",
-        "00996A",
-        "00400A"
-      ]
-    },
-    {
-      "code": "3443",
-      "name": "創意",
-      "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 217000,
-          "weightDelta": 0.42000000000000004
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": 0.03139999999999965
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 9000,
-          "weightDelta": 0.8300000000000001
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": 0.030000000000000027
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": 0.06999999999999984
-        }
-      ],
-      "出現ETF數": 5,
-      "ETF代號": [
-        "00981A",
-        "00987A",
-        "00994A",
-        "00995A",
-        "00996A"
-      ]
-    },
-    {
-      "code": "3037",
-      "name": "欣興",
-      "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 1099000,
-          "weightDelta": 0.3500000000000001
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 147000,
-          "weightDelta": 0.41999999999999993
-        },
-        {
-          "etfCode": "00991A",
-          "etfName": "主動復華未來50",
-          "sharesDelta": 0,
-          "weightDelta": 0.18299999999999983
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 159000,
-          "weightDelta": 0.51
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 62000,
-          "weightDelta": 1.5118
-        }
-      ],
-      "出現ETF數": 5,
-      "ETF代號": [
-        "00981A",
-        "00988A",
-        "00991A",
-        "00990A",
-        "00987A"
-      ]
-    },
-    {
-      "code": "3189",
-      "name": "景碩",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 100000,
-          "weightDelta": 0.30000000000000004
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 1000,
-          "weightDelta": -0.06999999999999984
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 95000,
-          "weightDelta": 0.7600000000000001
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 891000,
-          "weightDelta": 3.96
-        }
-      ],
-      "出現ETF數": 4,
-      "ETF代號": [
-        "00980A",
-        "00981A",
-        "00984A",
-        "00993A"
       ]
     },
     {
@@ -3828,6 +3045,306 @@
       ]
     },
     {
+      "code": "6274",
+      "name": "台燿科技",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 0,
+          "weightDelta": 0.08000000000000007
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 15000,
+          "weightDelta": 0.46999999999999975
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": 0.1200000000000001
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": 0.050000000000000044
+        }
+      ],
+      "出現ETF數": 4,
+      "ETF代號": [
+        "00980A",
+        "00994A",
+        "00995A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "2368",
+      "name": "金像電",
+      "清單": [
+        {
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": 0,
+          "weightDelta": 0.09999999999999964
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": 0.10999999999999943
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": 0.030000000000000027
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": 0.0600000000000005
+        }
+      ],
+      "出現ETF數": 4,
+      "ETF代號": [
+        "00985A",
+        "00995A",
+        "00996A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "2449",
+      "name": "京元電子",
+      "清單": [
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 90000,
+          "weightDelta": 0.6499999999999999
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": 0.10999999999999988
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": 0.010000000000000002
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": 0.06000000000000005
+        }
+      ],
+      "出現ETF數": 4,
+      "ETF代號": [
+        "00994A",
+        "00995A",
+        "00996A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "3081",
+      "name": "聯亞光電工業",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 20000,
+          "weightDelta": 0.33999999999999997
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 7000,
+          "weightDelta": 0.38
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 4000,
+          "weightDelta": 0.21999999999999997
+        }
+      ],
+      "出現ETF數": 3,
+      "ETF代號": [
+        "00980A",
+        "00994A",
+        "00995A"
+      ]
+    },
+    {
+      "code": "5274",
+      "name": "信驊科技",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 3000,
+          "weightDelta": 0.27
+        },
+        {
+          "etfCode": "00991A",
+          "etfName": "主動復華未來50",
+          "sharesDelta": 0,
+          "weightDelta": 0.055000000000000604
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": 0.029999999999999805
+        }
+      ],
+      "出現ETF數": 3,
+      "ETF代號": [
+        "00980A",
+        "00991A",
+        "00995A"
+      ]
+    },
+    {
+      "code": "8299",
+      "name": "群聯電子",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 0,
+          "weightDelta": 0.019999999999999796
+        },
+        {
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": 0,
+          "weightDelta": 0.06000000000000005
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 15000,
+          "weightDelta": 0.6399999999999999
+        }
+      ],
+      "出現ETF數": 3,
+      "ETF代號": [
+        "00980A",
+        "00985A",
+        "00994A"
+      ]
+    },
+    {
+      "code": "3443",
+      "name": "創意",
+      "清單": [
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 9000,
+          "weightDelta": 0.8300000000000001
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": 0.030000000000000027
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": 0.06999999999999984
+        }
+      ],
+      "出現ETF數": 3,
+      "ETF代號": [
+        "00994A",
+        "00995A",
+        "00996A"
+      ]
+    },
+    {
+      "code": "2360",
+      "name": "致茂",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 29000,
+          "weightDelta": 0.18000000000000016
+        },
+        {
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": 0,
+          "weightDelta": 0.08999999999999986
+        }
+      ],
+      "出現ETF數": 2,
+      "ETF代號": [
+        "00980A",
+        "00985A"
+      ]
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 24000,
+          "weightDelta": -0.1399999999999988
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 6000,
+          "weightDelta": 0.08999999999999986
+        }
+      ],
+      "出現ETF數": 2,
+      "ETF代號": [
+        "00980A",
+        "00995A"
+      ]
+    },
+    {
+      "code": "6831",
+      "name": "邁科",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 0,
+          "weightDelta": 0.040000000000000036
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": 0.3400000000000003
+        }
+      ],
+      "出現ETF數": 2,
+      "ETF代號": [
+        "00980A",
+        "00996A"
+      ]
+    },
+    {
       "code": "3264",
       "name": "欣銓科技",
       "清單": [
@@ -3838,29 +3355,15 @@
           "weightDelta": 0.01999999999999999
         },
         {
-          "etfCode": "00982A",
-          "etfName": "主動群益台灣強棒",
-          "sharesDelta": 0,
-          "weightDelta": 0.28000000000000025
-        },
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 2097000,
-          "weightDelta": 0.22000000000000003
-        },
-        {
           "etfCode": "00995A",
           "etfName": "主動中信台灣卓越",
           "sharesDelta": 0,
           "weightDelta": 0.07000000000000006
         }
       ],
-      "出現ETF數": 4,
+      "出現ETF數": 2,
       "ETF代號": [
         "00980A",
-        "00982A",
-        "00981A",
         "00995A"
       ]
     },
@@ -3875,178 +3378,108 @@
           "weightDelta": 0.009999999999999787
         },
         {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 3250000,
-          "weightDelta": 0.25
-        },
-        {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
           "weightDelta": 0.010000000000000009
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 113000,
-          "weightDelta": 0.7781
         }
       ],
-      "出現ETF數": 4,
+      "出現ETF數": 2,
       "ETF代號": [
         "00980A",
-        "00981A",
-        "00985A",
-        "00401A"
+        "00985A"
       ]
     },
     {
-      "code": "6669",
-      "name": "緯穎",
+      "code": "2059",
+      "name": "川湖",
       "清單": [
         {
-          "etfCode": "00982A",
-          "etfName": "主動群益台灣強棒",
-          "sharesDelta": 22000,
-          "weightDelta": -0.41000000000000014
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": 74000,
+          "weightDelta": 2.86
         },
         {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 134000,
-          "weightDelta": -0.10000000000000009
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 14000,
-          "weightDelta": 0.53
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 2000,
-          "weightDelta": -0.024599999999999955
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": 0.020000000000000018
         }
       ],
-      "出現ETF數": 4,
+      "出現ETF數": 2,
       "ETF代號": [
-        "00982A",
-        "00981A",
-        "00993A",
-        "00401A"
+        "00985A",
+        "00400A"
       ]
     },
     {
-      "code": "3105",
-      "name": "穩懋",
+      "code": "7769",
+      "name": "鴻勁",
       "清單": [
         {
-          "etfCode": "00982A",
-          "etfName": "主動群益台灣強棒",
-          "sharesDelta": 172000,
-          "weightDelta": 0.23000000000000043
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": 0.22999999999999998
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 27000,
-          "weightDelta": 0.31000000000000005
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": 12000,
+          "weightDelta": 0.9700000000000006
         },
         {
           "etfCode": "00995A",
           "etfName": "主動中信台灣卓越",
           "sharesDelta": 0,
-          "weightDelta": 0.030000000000000027
+          "weightDelta": 0.05999999999999983
         }
       ],
-      "出現ETF數": 4,
+      "出現ETF數": 2,
       "ETF代號": [
-        "00982A",
-        "00992A",
-        "00994A",
+        "00985A",
         "00995A"
       ]
     },
     {
-      "code": "3665",
-      "name": "貿聯-KY",
+      "code": "2345",
+      "name": "智邦",
       "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 246000,
-          "weightDelta": 0.21999999999999975
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 2000,
-          "weightDelta": 0.16000000000000003
-        },
         {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
-          "weightDelta": 0.16000000000000014
+          "weightDelta": 0.08999999999999986
         },
         {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": 0.18000000000000016
+          "etfCode": "00991A",
+          "etfName": "主動復華未來50",
+          "sharesDelta": 30000,
+          "weightDelta": 0.24800000000000022
         }
       ],
-      "出現ETF數": 4,
+      "出現ETF數": 2,
       "ETF代號": [
-        "00981A",
-        "00984A",
         "00985A",
-        "00992A"
+        "00991A"
       ]
     },
     {
-      "code": "8046",
-      "name": "南電",
+      "code": "2383",
+      "name": "台光電",
       "清單": [
         {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 20000,
-          "weightDelta": -0.16000000000000014
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
           "sharesDelta": 0,
-          "weightDelta": 0.020000000000000018
+          "weightDelta": 0.07000000000000006
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": 75000,
-          "weightDelta": 0.6399999999999999
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
+          "etfCode": "00991A",
+          "etfName": "主動復華未來50",
           "sharesDelta": 0,
-          "weightDelta": 0.009999999999999787
+          "weightDelta": 0.08699999999999974
         }
       ],
-      "出現ETF數": 4,
+      "出現ETF數": 2,
       "ETF代號": [
-        "00981A",
-        "00995A",
-        "00993A",
-        "00996A"
+        "00985A",
+        "00991A"
       ]
     }
   ],
@@ -4062,46 +3495,10 @@
           "weightDelta": -0.3599999999999999
         },
         {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 0,
-          "weightDelta": -0.5499999999999998
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -3000,
-          "weightDelta": -0.16000000000000003
-        },
-        {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
           "weightDelta": -0.15000000000000036
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.22999999999999998
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 0,
-          "weightDelta": -0.07000000000000006
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.9133999999999993
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.2200000000000002
         },
         {
           "etfCode": "00994A",
@@ -4116,12 +3513,6 @@
           "weightDelta": -0.2999999999999998
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -6000,
-          "weightDelta": -0.15000000000000002
-        },
-        {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": -9000,
@@ -4134,114 +3525,14 @@
           "weightDelta": -1.2999999999999998
         }
       ],
-      "出現ETF數": 13,
+      "出現ETF數": 6,
       "ETF代號": [
         "00980A",
-        "00981A",
-        "00984A",
         "00985A",
-        "00988A",
-        "00990A",
-        "00987A",
-        "00992A",
         "00994A",
         "00995A",
-        "00993A",
         "00996A",
         "00400A"
-      ]
-    },
-    {
-      "code": "2308",
-      "name": "台達電",
-      "清單": [
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -13000,
-          "weightDelta": -0.4
-        },
-        {
-          "etfCode": "00985A",
-          "etfName": "主動野村台灣50",
-          "sharesDelta": 0,
-          "weightDelta": -0.050000000000000266
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.040000000000000036
-        },
-        {
-          "etfCode": "00991A",
-          "etfName": "主動復華未來50",
-          "sharesDelta": 0,
-          "weightDelta": -0.1719999999999997
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 0,
-          "weightDelta": -0.20999999999999996
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.6306000000000003
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 0,
-          "weightDelta": -0.40000000000000036
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": -0.17999999999999972
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -3000,
-          "weightDelta": -0.030000000000000027
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": -0.17000000000000082
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": -0.2599999999999998
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": -0.49260000000000037
-        }
-      ],
-      "出現ETF數": 12,
-      "ETF代號": [
-        "00984A",
-        "00985A",
-        "00988A",
-        "00991A",
-        "00990A",
-        "00987A",
-        "00994A",
-        "00995A",
-        "00993A",
-        "00996A",
-        "00400A",
-        "00401A"
       ]
     },
     {
@@ -4255,34 +3546,10 @@
           "weightDelta": -0.32000000000000006
         },
         {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 0,
-          "weightDelta": -0.5999999999999996
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 0,
-          "weightDelta": -0.050000000000000044
-        },
-        {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": -9000,
           "weightDelta": -0.54
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 0,
-          "weightDelta": -0.039999999999999813
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.4697
         },
         {
           "etfCode": "00994A",
@@ -4307,27 +3574,16 @@
           "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
           "weightDelta": -0.33000000000000007
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": -0.17819999999999991
         }
       ],
-      "出現ETF數": 11,
+      "出現ETF數": 6,
       "ETF代號": [
         "00980A",
-        "00981A",
-        "00984A",
         "00985A",
-        "00990A",
-        "00987A",
         "00994A",
         "00995A",
         "00996A",
-        "00400A",
-        "00401A"
+        "00400A"
       ]
     },
     {
@@ -4341,28 +3597,10 @@
           "weightDelta": -0.2999999999999998
         },
         {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": -358000,
-          "weightDelta": -0.53
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": 0,
-          "weightDelta": -0.010000000000000009
-        },
-        {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
           "weightDelta": -0.1100000000000001
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.3459000000000001
         },
         {
           "etfCode": "00994A",
@@ -4377,12 +3615,6 @@
           "weightDelta": -0.09999999999999998
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -3000,
-          "weightDelta": -0.09000000000000008
-        },
-        {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
@@ -4395,16 +3627,12 @@
           "weightDelta": -0.45999999999999996
         }
       ],
-      "出現ETF數": 10,
+      "出現ETF數": 6,
       "ETF代號": [
         "00980A",
-        "00981A",
-        "00984A",
         "00985A",
-        "00987A",
         "00994A",
         "00995A",
-        "00993A",
         "00996A",
         "00400A"
       ]
@@ -4420,22 +3648,10 @@
           "weightDelta": -0.18999999999999995
         },
         {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -5000,
-          "weightDelta": -0.35
-        },
-        {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
           "weightDelta": -0.020000000000000018
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.46649999999999947
         },
         {
           "etfCode": "00994A",
@@ -4450,12 +3666,6 @@
           "weightDelta": -0.14000000000000012
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -2000,
-          "weightDelta": -0.040000000000000036
-        },
-        {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
@@ -4466,103 +3676,65 @@
           "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
           "weightDelta": -0.08000000000000007
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": -0.1572
         }
       ],
-      "出現ETF數": 10,
+      "出現ETF數": 6,
       "ETF代號": [
         "00980A",
-        "00984A",
         "00985A",
-        "00987A",
         "00994A",
         "00995A",
-        "00993A",
         "00996A",
-        "00400A",
-        "00401A"
+        "00400A"
       ]
     },
     {
-      "code": "2330",
-      "name": "台積電",
+      "code": "2308",
+      "name": "台達電",
       "清單": [
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -10000,
-          "weightDelta": -0.27000000000000046
-        },
         {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
-          "weightDelta": -0.5300000000000011
-        },
-        {
-          "etfCode": "00986A",
-          "etfName": "主動台新龍頭成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.10870000000000068
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.19999999999999996
+          "weightDelta": -0.050000000000000266
         },
         {
           "etfCode": "00991A",
           "etfName": "主動復華未來50",
           "sharesDelta": 0,
-          "weightDelta": -0.9800000000000004
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.1900000000000004
+          "weightDelta": -0.1719999999999997
         },
         {
           "etfCode": "00994A",
           "etfName": "主動第一金台股優",
           "sharesDelta": 0,
-          "weightDelta": -1.0600000000000005
+          "weightDelta": -0.40000000000000036
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -50000,
-          "weightDelta": -0.6899999999999995
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": -0.17999999999999972
         },
         {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
-          "weightDelta": -0.16999999999999993
+          "weightDelta": -0.17000000000000082
         },
         {
           "etfCode": "00400A",
           "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
-          "weightDelta": -0.23000000000000043
+          "weightDelta": -0.2599999999999998
         }
       ],
-      "出現ETF數": 10,
+      "出現ETF數": 6,
       "ETF代號": [
-        "00984A",
         "00985A",
-        "00986A",
-        "00988A",
         "00991A",
-        "00992A",
         "00994A",
-        "00993A",
+        "00995A",
         "00996A",
         "00400A"
       ]
@@ -4576,24 +3748,6 @@
           "etfName": "主動野村臺灣優選",
           "sharesDelta": 0,
           "weightDelta": -0.20000000000000018
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.3500000000000001
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": 0,
-          "weightDelta": -0.010000000000000231
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.3370999999999995
         },
         {
           "etfCode": "00994A",
@@ -4618,227 +3772,15 @@
           "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
           "weightDelta": -0.1200000000000001
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -1197,
-          "weightDelta": -0.2482000000000002
         }
       ],
-      "出現ETF數": 9,
+      "出現ETF數": 5,
       "ETF代號": [
         "00980A",
-        "00988A",
-        "00990A",
-        "00987A",
         "00994A",
         "00995A",
         "00996A",
-        "00400A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "3037",
-      "name": "欣興",
-      "清單": [
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -59000,
-          "weightDelta": -0.5999999999999999
-        },
-        {
-          "etfCode": "00985A",
-          "etfName": "主動野村台灣50",
-          "sharesDelta": -47000,
-          "weightDelta": -0.37
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": -8000,
-          "weightDelta": 0.1900000000000004
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 0,
-          "weightDelta": -0.25
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": -0.06000000000000005
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -812000,
-          "weightDelta": -5.17
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": -0.040000000000000036
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": -0.10999999999999943
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": -0.007000000000000006
-        }
-      ],
-      "出現ETF數": 9,
-      "ETF代號": [
-        "00984A",
-        "00985A",
-        "00992A",
-        "00994A",
-        "00995A",
-        "00993A",
-        "00996A",
-        "00400A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "2345",
-      "name": "智邦",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 0,
-          "weightDelta": -0.17000000000000037
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.16419999999999968
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 0,
-          "weightDelta": -0.3099999999999996
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": -0.04999999999999982
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -4000,
-          "weightDelta": 0.020000000000000018
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": -0.020000000000000018
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": -0.06000000000000005
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": -0.03629999999999978
-        }
-      ],
-      "出現ETF數": 8,
-      "ETF代號": [
-        "00980A",
-        "00987A",
-        "00994A",
-        "00995A",
-        "00993A",
-        "00996A",
-        "00400A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "3665",
-      "name": "貿聯-KY",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 0,
-          "weightDelta": -0.1599999999999997
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.1927999999999992
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 0,
-          "weightDelta": -0.3200000000000003
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": -0.16000000000000014
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -7000,
-          "weightDelta": -0.050000000000000044
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": -0.10000000000000009
-        },
-        {
-          "etfCode": "00400A",
-          "etfName": "主動國泰動能高息",
-          "sharesDelta": 0,
-          "weightDelta": -0.1200000000000001
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": -0.020199999999999774
-        }
-      ],
-      "出現ETF數": 8,
-      "ETF代號": [
-        "00980A",
-        "00987A",
-        "00994A",
-        "00995A",
-        "00993A",
-        "00996A",
-        "00400A",
-        "00401A"
+        "00400A"
       ]
     },
     {
@@ -4856,18 +3798,6 @@
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
           "weightDelta": -0.07999999999999985
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.2178
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.20999999999999996
         },
         {
           "etfCode": "00994A",
@@ -4888,14 +3818,100 @@
           "weightDelta": -0.030000000000000027
         }
       ],
-      "出現ETF數": 7,
+      "出現ETF數": 5,
       "ETF代號": [
         "00980A",
         "00985A",
-        "00987A",
-        "00992A",
         "00994A",
         "00995A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "2345",
+      "name": "智邦",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 0,
+          "weightDelta": -0.17000000000000037
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 0,
+          "weightDelta": -0.3099999999999996
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": -0.04999999999999982
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": -0.020000000000000018
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": -0.06000000000000005
+        }
+      ],
+      "出現ETF數": 5,
+      "ETF代號": [
+        "00980A",
+        "00994A",
+        "00995A",
+        "00996A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "3665",
+      "name": "貿聯-KY",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 0,
+          "weightDelta": -0.1599999999999997
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 0,
+          "weightDelta": -0.3200000000000003
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": -0.16000000000000014
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": -0.10000000000000009
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": -0.1200000000000001
+        }
+      ],
+      "出現ETF數": 5,
+      "ETF代號": [
+        "00980A",
+        "00994A",
+        "00995A",
+        "00996A",
         "00400A"
       ]
     },
@@ -4922,12 +3938,6 @@
           "weightDelta": -0.020000000000000018
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -57000,
-          "weightDelta": -0.08999999999999986
-        },
-        {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
@@ -4938,23 +3948,103 @@
           "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
           "weightDelta": -0.030000000000000027
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": 0,
-          "weightDelta": -0.04479999999999995
         }
       ],
-      "出現ETF數": 7,
+      "出現ETF數": 5,
       "ETF代號": [
         "00985A",
         "00994A",
         "00995A",
-        "00993A",
         "00996A",
-        "00400A",
-        "00401A"
+        "00400A"
+      ]
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "清單": [
+        {
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": 0,
+          "weightDelta": -0.5300000000000011
+        },
+        {
+          "etfCode": "00991A",
+          "etfName": "主動復華未來50",
+          "sharesDelta": 0,
+          "weightDelta": -0.9800000000000004
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 0,
+          "weightDelta": -1.0600000000000005
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": -0.16999999999999993
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": -0.23000000000000043
+        }
+      ],
+      "出現ETF數": 5,
+      "ETF代號": [
+        "00985A",
+        "00991A",
+        "00994A",
+        "00996A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "3037",
+      "name": "欣興",
+      "清單": [
+        {
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": -47000,
+          "weightDelta": -0.37
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 0,
+          "weightDelta": -0.25
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": -0.06000000000000005
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": -0.040000000000000036
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": -0.10999999999999943
+        }
+      ],
+      "出現ETF數": 5,
+      "ETF代號": [
+        "00985A",
+        "00994A",
+        "00995A",
+        "00996A",
+        "00400A"
       ]
     },
     {
@@ -4974,12 +4064,6 @@
           "weightDelta": -0.039999999999999925
         },
         {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.009999999999999787
-        },
-        {
           "etfCode": "00994A",
           "etfName": "主動第一金台股優",
           "sharesDelta": -3100,
@@ -4990,124 +4074,14 @@
           "etfName": "主動中信台灣卓越",
           "sharesDelta": 0,
           "weightDelta": -0.1599999999999997
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -1000,
-          "weightDelta": -0.4542999999999999
         }
       ],
-      "出現ETF數": 6,
+      "出現ETF數": 4,
       "ETF代號": [
         "00980A",
         "00985A",
-        "00988A",
         "00994A",
-        "00995A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "3711",
-      "name": "日月光投控",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 0,
-          "weightDelta": -0.10000000000000009
-        },
-        {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -50000,
-          "weightDelta": -0.33999999999999997
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.07000000000000006
-        },
-        {
-          "etfCode": "00995A",
-          "etfName": "主動中信台灣卓越",
-          "sharesDelta": 0,
-          "weightDelta": -0.030000000000000027
-        },
-        {
-          "etfCode": "00996A",
-          "etfName": "主動兆豐台灣豐收",
-          "sharesDelta": 0,
-          "weightDelta": -0.029999999999999805
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -12000,
-          "weightDelta": -0.3118000000000003
-        }
-      ],
-      "出現ETF數": 6,
-      "ETF代號": [
-        "00980A",
-        "00984A",
-        "00988A",
-        "00995A",
-        "00996A",
-        "00401A"
-      ]
-    },
-    {
-      "code": "2368",
-      "name": "金像電",
-      "清單": [
-        {
-          "etfCode": "00980A",
-          "etfName": "主動野村臺灣優選",
-          "sharesDelta": 0,
-          "weightDelta": -0.050000000000000266
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": -103000,
-          "weightDelta": -0.6099999999999999
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.1937000000000002
-        },
-        {
-          "etfCode": "00994A",
-          "etfName": "主動第一金台股優",
-          "sharesDelta": 0,
-          "weightDelta": -0.13000000000000078
-        },
-        {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -18000,
-          "weightDelta": -0.11999999999999988
-        },
-        {
-          "etfCode": "00401A",
-          "etfName": "主動摩根台灣鑫收",
-          "sharesDelta": -4000,
-          "weightDelta": -0.23110000000000008
-        }
-      ],
-      "出現ETF數": 6,
-      "ETF代號": [
-        "00980A",
-        "00990A",
-        "00987A",
-        "00994A",
-        "00993A",
-        "00401A"
+        "00995A"
       ]
     },
     {
@@ -5133,157 +4107,175 @@
           "weightDelta": -0.020000000000000018
         },
         {
-          "etfCode": "00993A",
-          "etfName": "主動安聯台灣",
-          "sharesDelta": -2000,
-          "weightDelta": -0.10000000000000009
-        },
-        {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
           "weightDelta": -0.14000000000000012
         }
       ],
-      "出現ETF數": 5,
+      "出現ETF數": 4,
       "ETF代號": [
         "00980A",
         "00985A",
         "00995A",
-        "00993A",
         "00996A"
       ]
     },
     {
-      "code": "6510",
-      "name": "精測",
+      "code": "2360",
+      "name": "致茂",
       "清單": [
-        {
-          "etfCode": "00981A",
-          "etfName": "主動統一台股增長",
-          "sharesDelta": 0,
-          "weightDelta": -0.1499999999999999
-        },
-        {
-          "etfCode": "00987A",
-          "etfName": "主動台新優勢成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.15399999999999991
-        },
         {
           "etfCode": "00994A",
           "etfName": "主動第一金台股優",
-          "sharesDelta": -1000,
-          "weightDelta": -0.11999999999999994
+          "sharesDelta": 0,
+          "weightDelta": -0.33999999999999986
         },
         {
           "etfCode": "00995A",
           "etfName": "主動中信台灣卓越",
           "sharesDelta": 0,
-          "weightDelta": -0.04999999999999982
+          "weightDelta": -0.030000000000000027
         },
         {
           "etfCode": "00996A",
           "etfName": "主動兆豐台灣豐收",
           "sharesDelta": 0,
-          "weightDelta": -0.08999999999999986
+          "weightDelta": -0.050000000000000044
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": -0.22999999999999954
         }
       ],
-      "出現ETF數": 5,
+      "出現ETF數": 4,
       "ETF代號": [
-        "00981A",
-        "00987A",
         "00994A",
+        "00995A",
+        "00996A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "3711",
+      "name": "日月光投控",
+      "清單": [
+        {
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
+          "sharesDelta": 0,
+          "weightDelta": -0.10000000000000009
+        },
+        {
+          "etfCode": "00995A",
+          "etfName": "主動中信台灣卓越",
+          "sharesDelta": 0,
+          "weightDelta": -0.030000000000000027
+        },
+        {
+          "etfCode": "00996A",
+          "etfName": "主動兆豐台灣豐收",
+          "sharesDelta": 0,
+          "weightDelta": -0.029999999999999805
+        }
+      ],
+      "出現ETF數": 3,
+      "ETF代號": [
+        "00980A",
         "00995A",
         "00996A"
       ]
     },
     {
-      "code": "TER US",
-      "name": "泰瑞達公司",
+      "code": "3293",
+      "name": "鈊象電子",
       "清單": [
         {
-          "etfCode": "00983A",
-          "etfName": "主動中信ARK創新",
-          "sharesDelta": -2000,
-          "weightDelta": -1.2599999999999998
-        },
-        {
-          "etfCode": "00986A",
-          "etfName": "主動台新龍頭成長",
-          "sharesDelta": -399,
-          "weightDelta": -1.5077999999999996
-        },
-        {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
-          "sharesDelta": -705,
-          "weightDelta": -0.49
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": -15600,
-          "weightDelta": -1.0499999999999998
-        },
-        {
-          "etfCode": "00997A",
-          "etfName": "主動群益美國增長",
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
           "sharesDelta": 0,
-          "weightDelta": -0.8000000000000003
+          "weightDelta": -0.030000000000000027
+        },
+        {
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": 0,
+          "weightDelta": -0.01999999999999999
+        },
+        {
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
+          "sharesDelta": 0,
+          "weightDelta": -0.010000000000000009
         }
       ],
-      "出現ETF數": 5,
+      "出現ETF數": 3,
       "ETF代號": [
-        "00983A",
-        "00986A",
-        "00988A",
-        "00990A",
-        "00997A"
+        "00980A",
+        "00985A",
+        "00400A"
       ]
     },
     {
-      "code": "NVDA US",
-      "name": "輝達",
+      "code": "1519",
+      "name": "華城",
       "清單": [
         {
-          "etfCode": "00983A",
-          "etfName": "主動中信ARK創新",
+          "etfCode": "00980A",
+          "etfName": "主動野村臺灣優選",
           "sharesDelta": 0,
-          "weightDelta": -0.18999999999999995
+          "weightDelta": -0.030000000000000027
         },
         {
-          "etfCode": "00986A",
-          "etfName": "主動台新龍頭成長",
-          "sharesDelta": 0,
-          "weightDelta": -0.7141000000000002
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": -3000,
+          "weightDelta": -0.030000000000000006
         },
         {
-          "etfCode": "00988A",
-          "etfName": "主動統一全球創新",
+          "etfCode": "00400A",
+          "etfName": "主動國泰動能高息",
           "sharesDelta": 0,
-          "weightDelta": -0.15000000000000002
-        },
-        {
-          "etfCode": "00990A",
-          "etfName": "主動元大AI新經濟",
-          "sharesDelta": -156900,
-          "weightDelta": -4.1
-        },
-        {
-          "etfCode": "00997A",
-          "etfName": "主動群益美國增長",
-          "sharesDelta": 0,
-          "weightDelta": -0.5700000000000003
+          "weightDelta": -0.050000000000000044
         }
       ],
-      "出現ETF數": 5,
+      "出現ETF數": 3,
       "ETF代號": [
-        "00983A",
-        "00986A",
-        "00988A",
-        "00990A",
-        "00997A"
+        "00980A",
+        "00985A",
+        "00400A"
+      ]
+    },
+    {
+      "code": "8046",
+      "name": "南電",
+      "清單": [
+        {
+          "etfCode": "00985A",
+          "etfName": "主動野村台灣50",
+          "sharesDelta": -52000,
+          "weightDelta": -0.41999999999999993
+        },
+        {
+          "etfCode": "00991A",
+          "etfName": "主動復華未來50",
+          "sharesDelta": 0,
+          "weightDelta": -0.07099999999999973
+        },
+        {
+          "etfCode": "00994A",
+          "etfName": "主動第一金台股優",
+          "sharesDelta": 0,
+          "weightDelta": -0.1900000000000004
+        }
+      ],
+      "出現ETF數": 3,
+      "ETF代號": [
+        "00985A",
+        "00991A",
+        "00994A"
       ]
     },
     {
@@ -5291,22 +4283,10 @@
       "name": "高力",
       "清單": [
         {
-          "etfCode": "00984A",
-          "etfName": "主動安聯台灣高息",
-          "sharesDelta": -45000,
-          "weightDelta": -0.7899999999999999
-        },
-        {
           "etfCode": "00985A",
           "etfName": "主動野村台灣50",
           "sharesDelta": 0,
           "weightDelta": -0.020000000000000018
-        },
-        {
-          "etfCode": "00992A",
-          "etfName": "主動群益科技創新",
-          "sharesDelta": 0,
-          "weightDelta": -0.10000000000000009
         },
         {
           "etfCode": "00994A",
@@ -5321,11 +4301,9 @@
           "weightDelta": -0.019999999999999962
         }
       ],
-      "出現ETF數": 5,
+      "出現ETF數": 3,
       "ETF代號": [
-        "00984A",
         "00985A",
-        "00992A",
         "00994A",
         "00995A"
       ]
@@ -5334,44 +4312,12 @@
   "不重複異動": {
     "新增": [
       {
-        "code": "2360",
-        "name": "致茂",
-        "etfCode": "00982A",
-        "etfName": "主動群益台灣強棒",
-        "sharesDelta": 756000,
-        "weightDelta": 3.91
-      },
-      {
         "code": "2368",
         "name": "金像電",
         "etfCode": "00991A",
         "etfName": "主動復華未來50",
         "sharesDelta": 1080000,
         "weightDelta": 3.879
-      },
-      {
-        "code": "6442",
-        "name": "光聖",
-        "etfCode": "00992A",
-        "etfName": "主動群益科技創新",
-        "sharesDelta": 785000,
-        "weightDelta": 3.14
-      },
-      {
-        "code": "8028",
-        "name": "昇陽半導體",
-        "etfCode": "00987A",
-        "etfName": "主動台新優勢成長",
-        "sharesDelta": 255000,
-        "weightDelta": 1.8048
-      },
-      {
-        "code": "STX US",
-        "name": "SEAGATE TECHNOLOGY HOLDINGS",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 18360,
-        "weightDelta": 1.47
       },
       {
         "code": "3037",
@@ -5382,196 +4328,20 @@
         "weightDelta": 1.37
       },
       {
-        "code": "5347",
-        "name": "世界",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 2498000,
-        "weightDelta": 1.29
+        "code": "3044",
+        "name": "健鼎",
+        "etfCode": "00994A",
+        "etfName": "主動第一金台股優",
+        "sharesDelta": 30000,
+        "weightDelta": 0.29
       },
       {
-        "code": "USU6302XAB20",
-        "name": "OAK-EAGLE ACQUIRECO INC 8.75% 01JUL2034",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 741000,
-        "weightDelta": 1.191705
-      },
-      {
-        "code": "FORM US",
-        "name": "FORMFACTOR INC",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 63300,
-        "weightDelta": 0.92
-      },
-      {
-        "code": "AEHR US",
-        "name": "AEHR TEST SYSTEMS",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 95700,
-        "weightDelta": 0.89
-      },
-      {
-        "code": "US87110CAA53",
-        "name": "SWORD PURCHASER LLC SER 144A (REG) 10.5% 15APR2034",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 499000,
-        "weightDelta": 0.780632
-      },
-      {
-        "code": "1216",
-        "name": "統一",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 692000,
-        "weightDelta": 0.72
-      },
-      {
-        "code": "INTC US",
-        "name": "INTEL CORP",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 69505,
-        "weightDelta": 0.72
-      },
-      {
-        "code": "XS2806383159",
-        "name": "FIBERCOP SPA SER REGS 7.721000 % 04JUN2038",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 462000,
-        "weightDelta": 0.713429
-      },
-      {
-        "code": "1785",
-        "name": "光洋科",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 297000,
-        "weightDelta": 0.71
-      },
-      {
-        "code": "3026",
-        "name": "禾伸堂",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 183000,
-        "weightDelta": 0.68
-      },
-      {
-        "code": "NOK US",
-        "name": "NOKIA CORP-SPON ADR",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 477710,
-        "weightDelta": 0.68
-      },
-      {
-        "code": "US876511AG15",
-        "name": "TASEKO MINES LTD SER 144A 8.25% 01MAY2030",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 367000,
-        "weightDelta": 0.592788
-      },
-      {
-        "code": "US83056PAA12",
-        "name": "SKEENA RESOURCES LIMITED SER 144A 8.5% 01APR2031",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 355000,
-        "weightDelta": 0.574379
-      },
-      {
-        "code": "4062 JP",
-        "name": "IBIDEN CO LTD",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 61900,
-        "weightDelta": 0.57
-      },
-      {
-        "code": "2356",
-        "name": "英業達",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 801000,
-        "weightDelta": 0.56
-      },
-      {
-        "code": "4991",
-        "name": "環宇-KY",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
+        "code": "2408",
+        "name": "南亞科",
+        "etfCode": "00994A",
+        "etfName": "主動第一金台股優",
         "sharesDelta": 48000,
-        "weightDelta": 0.54
-      },
-      {
-        "code": "8069",
-        "name": "元太",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 241000,
-        "weightDelta": 0.5
-      },
-      {
-        "code": "6223",
-        "name": "旺矽",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": 24000,
-        "weightDelta": 0.46
-      },
-      {
-        "code": "6274",
-        "name": "台燿",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": 45000,
-        "weightDelta": 0.44
-      },
-      {
-        "code": "3706",
-        "name": "神達",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 295000,
-        "weightDelta": 0.37
-      },
-      {
-        "code": "6584",
-        "name": "南俊國際",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 34000,
-        "weightDelta": 0.36
-      },
-      {
-        "code": "3374",
-        "name": "精材",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 117000,
-        "weightDelta": 0.35
-      },
-      {
-        "code": "6139",
-        "name": "亞翔",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 34000,
-        "weightDelta": 0.35
-      },
-      {
-        "code": "3563",
-        "name": "牧德",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 27000,
-        "weightDelta": 0.35
+        "weightDelta": 0.25
       }
     ],
     "剔除": [
@@ -5584,462 +4354,30 @@
         "weightDelta": -3.953
       },
       {
-        "code": "3017",
-        "name": "奇鋐",
-        "etfCode": "00982A",
-        "etfName": "主動群益台灣強棒",
-        "sharesDelta": -538000,
-        "weightDelta": -3.84
-      },
-      {
-        "code": "7751",
-        "name": "竑騰",
-        "etfCode": "00987A",
-        "etfName": "主動台新優勢成長",
-        "sharesDelta": -22000,
-        "weightDelta": -2.0088
-      },
-      {
-        "code": "2337",
-        "name": "旺宏",
-        "etfCode": "00987A",
-        "etfName": "主動台新優勢成長",
-        "sharesDelta": -340000,
-        "weightDelta": -1.8238
-      },
-      {
-        "code": "USU4R90AAC29",
-        "name": "HLF 12 1/4 04/15/29",
-        "etfCode": "00983D",
-        "etfName": "主動富邦複合收益",
-        "sharesDelta": -450000,
-        "weightDelta": -1.4531
-      },
-      {
-        "code": "ORCL US",
-        "name": "ORACLE CORP",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": -58680,
-        "weightDelta": -1.14
-      },
-      {
-        "code": "8996",
-        "name": "高力",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -122000,
-        "weightDelta": -1.14
-      },
-      {
-        "code": "3533",
-        "name": "嘉澤",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": -101000,
-        "weightDelta": -1.01
-      },
-      {
-        "code": "2376",
-        "name": "技嘉",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -203000,
-        "weightDelta": -0.86
-      },
-      {
-        "code": "MELI US",
-        "name": "MercadoLibre Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": -439,
-        "weightDelta": -0.85
-      },
-      {
-        "code": "CRWD US",
-        "name": "CROWDSTRIKE HOLDINGS INC - A",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": -15200,
-        "weightDelta": -0.81
-      },
-      {
-        "code": "6446",
-        "name": "藥華藥",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -85000,
-        "weightDelta": -0.8
-      },
-      {
-        "code": "HOOD US",
-        "name": "ROBINHOOD MARKETS INC - A",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": -70000,
-        "weightDelta": -0.78
-      },
-      {
-        "code": "APP US",
-        "name": "APPLOVIN CORP-CLASS A",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": -14160,
-        "weightDelta": -0.75
-      },
-      {
-        "code": "PLTR US",
-        "name": "PALANTIR TECHNOLOGIES INC-A",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": -33200,
-        "weightDelta": -0.55
-      },
-      {
-        "code": "2347",
-        "name": "聯強",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -809000,
-        "weightDelta": -0.53
-      },
-      {
-        "code": "2313",
-        "name": "華通",
-        "etfCode": "00987A",
-        "etfName": "主動台新優勢成長",
-        "sharesDelta": -65000,
-        "weightDelta": -0.5235
-      },
-      {
-        "code": "8150",
-        "name": "南茂",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -496000,
-        "weightDelta": -0.51
-      },
-      {
-        "code": "2467",
-        "name": "志聖",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": -249000,
-        "weightDelta": -0.51
-      },
-      {
-        "code": "2492",
-        "name": "華新科",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -226000,
-        "weightDelta": -0.48
-      },
-      {
-        "code": "2885",
-        "name": "元大金",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -1143000,
-        "weightDelta": -0.48
-      },
-      {
-        "code": "1815",
-        "name": "富喬工業",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -277000,
-        "weightDelta": -0.47
-      },
-      {
-        "code": "2395",
-        "name": "研華",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -161000,
-        "weightDelta": -0.47
-      },
-      {
-        "code": "6239",
-        "name": "力成",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -141000,
-        "weightDelta": -0.46
-      },
-      {
-        "code": "3023",
-        "name": "信邦",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -210000,
-        "weightDelta": -0.46
-      },
-      {
-        "code": "2481",
-        "name": "強茂",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -570000,
-        "weightDelta": -0.45
-      },
-      {
-        "code": "4904",
-        "name": "遠傳",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -586000,
-        "weightDelta": -0.44
-      },
-      {
-        "code": "6257",
-        "name": "矽格",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -157000,
-        "weightDelta": -0.43
-      },
-      {
-        "code": "6830",
-        "name": "汎銓",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -40000,
-        "weightDelta": -0.43
-      },
-      {
-        "code": "3481",
-        "name": "群創",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -1109000,
-        "weightDelta": -0.41
+        "code": "6139",
+        "name": "亞翔",
+        "etfCode": "00995A",
+        "etfName": "主動中信台灣卓越",
+        "sharesDelta": -2000,
+        "weightDelta": -0.03
       }
     ],
     "加碼": [
       {
-        "code": "CRCL US",
-        "name": "Circle Internet Group Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 0,
-        "weightDelta": 1.08
+        "code": "2891",
+        "name": "中信金",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": 2241000,
+        "weightDelta": 1.1099999999999999
       },
       {
-        "code": "1519",
-        "name": "華城",
-        "etfCode": "00401A",
-        "etfName": "主動摩根台灣鑫收",
-        "sharesDelta": 41000,
-        "weightDelta": 1.0304
-      },
-      {
-        "code": "8155",
-        "name": "博智",
-        "etfCode": "00987A",
-        "etfName": "主動台新優勢成長",
-        "sharesDelta": 76000,
-        "weightDelta": 0.9606999999999999
-      },
-      {
-        "code": "STX US",
-        "name": "Seagate Technology Holdin",
-        "etfCode": "00997A",
-        "etfName": "主動群益美國增長",
-        "sharesDelta": 0,
-        "weightDelta": 0.9099999999999993
-      },
-      {
-        "code": "MSFT",
-        "name": "MICROSOFT CORP",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": 1006,
-        "weightDelta": 0.8860000000000001
-      },
-      {
-        "code": "5536",
-        "name": "聖暉*",
-        "etfCode": "00982A",
-        "etfName": "主動群益台灣強棒",
-        "sharesDelta": 147000,
-        "weightDelta": -0.6200000000000001
-      },
-      {
-        "code": "2049",
-        "name": "上銀",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": 209000,
-        "weightDelta": 0.5800000000000001
-      },
-      {
-        "code": "4062 JP",
-        "name": "IBIDEN CO LTD",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": 60000,
-        "weightDelta": 0.56
-      },
-      {
-        "code": "006400 KS",
-        "name": "Samsung SDI Co Ltd",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": 10000,
-        "weightDelta": 0.56
-      },
-      {
-        "code": "1815",
-        "name": "富喬工業",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": 581000,
-        "weightDelta": 0.56
-      },
-      {
-        "code": "2027",
-        "name": "大成鋼",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": 1746000,
-        "weightDelta": 0.54
-      },
-      {
-        "code": "SOI FP",
-        "name": "S.O.I.T.E.C.",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 0,
-        "weightDelta": 0.53
-      },
-      {
-        "code": "009150 KP",
-        "name": "SAMSUNG ELECTRO-MECHANICS CO",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 7515,
-        "weightDelta": 0.52
-      },
-      {
-        "code": "5234",
-        "name": "達興材料",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": 149000,
-        "weightDelta": 0.52
-      },
-      {
-        "code": "010120 KP",
-        "name": "LS ELECTRIC CO LTD",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 23009,
-        "weightDelta": 0.5199999999999999
-      },
-      {
-        "code": "2610",
-        "name": "華航",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": 3471000,
-        "weightDelta": 0.51
-      },
-      {
-        "code": "4749",
-        "name": "新應材",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": 62000,
-        "weightDelta": 0.49
-      },
-      {
-        "code": "AIXA GR",
-        "name": "AIXTRON SE",
-        "etfCode": "00990A",
-        "etfName": "主動元大AI新經濟",
-        "sharesDelta": 66401,
-        "weightDelta": 0.44999999999999996
-      },
-      {
-        "code": "6997 JP",
-        "name": "NIPPON CHEMI-CON CORP",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": 201000,
-        "weightDelta": 0.43999999999999995
-      },
-      {
-        "code": "AB:US_2YR_NOTE_CBT_JUN26_30_JUN_2026",
-        "name": "US 2YR NOTE (CBT) JUN26 30-JUN-2026",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 0,
-        "weightDelta": 0.38647974499999993
-      },
-      {
-        "code": "2880",
-        "name": "華南金",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 722000,
-        "weightDelta": 0.31999999999999984
-      },
-      {
-        "code": "USU4609CAB38",
-        "name": "ION PLAT FIN US/SARL SER REGS 9.500000 % 30-MAY-2029",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 234000,
-        "weightDelta": 0.310565
-      },
-      {
-        "code": "2486",
-        "name": "一詮",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 19000,
-        "weightDelta": 0.30000000000000004
-      },
-      {
-        "code": "3045",
-        "name": "台灣大",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": 192000,
-        "weightDelta": 0.2899999999999996
-      },
-      {
-        "code": "USG94A0BAA17",
-        "name": "VIRGIN MEDI O2 VI DAC 8.5% 15MAR2033",
-        "etfCode": "00984D",
-        "etfName": "主動聯博全球非投",
-        "sharesDelta": 232000,
-        "weightDelta": 0.289501
-      },
-      {
-        "code": "009150 KS",
-        "name": "Samsung Electro-Mechanics co(009150 ks)",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": 2823,
-        "weightDelta": 0.2799999999999998
-      },
-      {
-        "code": "AIXA GY",
-        "name": "AIXTRON SE",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": 45000,
-        "weightDelta": 0.27
-      },
-      {
-        "code": "SHOP US",
-        "name": "Shopify公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": 0,
-        "weightDelta": 0.2400000000000002
+        "code": "2881",
+        "name": "富邦金",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": 1198000,
+        "weightDelta": 1.02
       },
       {
         "code": "AMD US",
@@ -6047,18 +4385,242 @@
         "etfCode": "00983A",
         "etfName": "主動中信ARK創新",
         "sharesDelta": 0,
-        "weightDelta": 0.23999999999999932
+        "weightDelta": 0.47000000000000064
       },
       {
-        "code": "6739",
-        "name": "竹陞科技",
-        "etfCode": "00987A",
-        "etfName": "主動台新優勢成長",
-        "sharesDelta": 5000,
-        "weightDelta": -0.2338
+        "code": "US111021AE12",
+        "name": "BRITEL 9 5/8 12/15/30",
+        "etfCode": "00983D",
+        "etfName": "主動富邦複合收益",
+        "sharesDelta": 120000,
+        "weightDelta": 0.40789999999999993
+      },
+      {
+        "code": "US233835AQ08",
+        "name": "MBGGR 8 1/2 01/18/31",
+        "etfCode": "00983D",
+        "etfName": "主動富邦複合收益",
+        "sharesDelta": 120000,
+        "weightDelta": 0.39470000000000005
+      },
+      {
+        "code": "TER US",
+        "name": "泰瑞達公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.3899999999999997
+      },
+      {
+        "code": "US25156PAD50",
+        "name": "DT 9 1/4 06/01/32",
+        "etfCode": "00983D",
+        "etfName": "主動富邦複合收益",
+        "sharesDelta": 100000,
+        "weightDelta": 0.3526999999999999
+      },
+      {
+        "code": "US879385AD49",
+        "name": "TELEFO 8 1/4 09/15/30",
+        "etfCode": "00983D",
+        "etfName": "主動富邦複合收益",
+        "sharesDelta": 100000,
+        "weightDelta": 0.32300000000000006
+      },
+      {
+        "code": "US720198AG56",
+        "name": "PDM 9 1/4 07/20/28",
+        "etfCode": "00983D",
+        "etfName": "主動富邦複合收益",
+        "sharesDelta": 100000,
+        "weightDelta": 0.3137
+      },
+      {
+        "code": "BLSH US",
+        "name": "Bullish",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 3000,
+        "weightDelta": 0.30999999999999994
+      },
+      {
+        "code": "4904",
+        "name": "遠傳",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": 353000,
+        "weightDelta": 0.30999999999999994
+      },
+      {
+        "code": "3189",
+        "name": "景碩",
+        "etfCode": "00980A",
+        "etfName": "主動野村臺灣優選",
+        "sharesDelta": 100000,
+        "weightDelta": 0.30000000000000004
+      },
+      {
+        "code": "HOOD US",
+        "name": "羅賓漢市場公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 3000,
+        "weightDelta": 0.28
+      },
+      {
+        "code": "TXG US",
+        "name": "10X Genomics Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.20999999999999996
+      },
+      {
+        "code": "ROKU US",
+        "name": "Roku Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.1999999999999993
+      },
+      {
+        "code": "3037",
+        "name": "欣興",
+        "etfCode": "00991A",
+        "etfName": "主動復華未來50",
+        "sharesDelta": 0,
+        "weightDelta": 0.18299999999999983
+      },
+      {
+        "code": "8996",
+        "name": "高力",
+        "etfCode": "00980A",
+        "etfName": "主動野村臺灣優選",
+        "sharesDelta": 38000,
+        "weightDelta": 0.16999999999999993
+      },
+      {
+        "code": "CRWV US",
+        "name": "CoreWeave Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.16000000000000014
+      },
+      {
+        "code": "3665",
+        "name": "貿聯-KY",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": 0,
+        "weightDelta": 0.16000000000000014
+      },
+      {
+        "code": "TWST US",
+        "name": "Twist Bioscience Corp",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.13999999999999968
+      },
+      {
+        "code": "2308",
+        "name": "台達電",
+        "etfCode": "00980A",
+        "etfName": "主動野村臺灣優選",
+        "sharesDelta": 40000,
+        "weightDelta": 0.1299999999999999
+      },
+      {
+        "code": "COIN US",
+        "name": "比特幣基地全球公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.1200000000000001
+      },
+      {
+        "code": "TSM US",
+        "name": "台積電",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.11000000000000032
+      },
+      {
+        "code": "6830",
+        "name": "汎銓",
+        "etfCode": "00996A",
+        "etfName": "主動兆豐台灣豐收",
+        "sharesDelta": 0,
+        "weightDelta": 0.11000000000000032
+      },
+      {
+        "code": "NVDA US",
+        "name": "輝達",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.10999999999999988
+      },
+      {
+        "code": "XYZ US",
+        "name": "布洛克公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.10999999999999988
+      },
+      {
+        "code": "AVGO US",
+        "name": "博通公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.10999999999999988
+      },
+      {
+        "code": "P US",
+        "name": "愛惠浦公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.10999999999999988
+      },
+      {
+        "code": "CRSP US",
+        "name": "CRISPR治療公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.10000000000000009
+      },
+      {
+        "code": "BMNR US",
+        "name": "BitMine Immersion Technologi",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": 0.08999999999999986
       }
     ],
     "減碼": [
+      {
+        "code": "3529",
+        "name": "力旺電子",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": -26000,
+        "weightDelta": -0.98
+      },
+      {
+        "code": "6415",
+        "name": "矽力*-KY",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": -221000,
+        "weightDelta": -0.8499999999999999
+      },
       {
         "code": "6488",
         "name": "環球晶圓",
@@ -6068,76 +4630,44 @@
         "weightDelta": -0.75
       },
       {
+        "code": "2474",
+        "name": "可成",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": -288000,
+        "weightDelta": -0.6799999999999999
+      },
+      {
+        "code": "SHOP US",
+        "name": "Shopify公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.6600000000000001
+      },
+      {
         "code": "KTOS US",
         "name": "克瑞拓斯安全防衛公司",
         "etfCode": "00983A",
         "etfName": "主動中信ARK創新",
-        "sharesDelta": -10000,
-        "weightDelta": -0.6600000000000001
+        "sharesDelta": -8000,
+        "weightDelta": -0.5299999999999998
       },
       {
-        "code": "COHR US",
-        "name": "COHERENT INC",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": -12000,
-        "weightDelta": -0.6599999999999999
-      },
-      {
-        "code": "TEM US",
-        "name": "Tempus AI Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": -20000,
-        "weightDelta": -0.6400000000000006
-      },
-      {
-        "code": "3702",
-        "name": "大聯大",
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "sharesDelta": -1054000,
-        "weightDelta": -0.6399999999999997
-      },
-      {
-        "code": "META",
-        "name": "META PLATFORMS INC COM USD.000006",
+        "code": "INTC",
+        "name": "INTEL CORP",
         "etfCode": "00989A",
         "etfName": "主動摩根美國科技",
-        "sharesDelta": -154,
-        "weightDelta": -0.4981
+        "sharesDelta": -467,
+        "weightDelta": 0.4618000000000002
       },
       {
-        "code": "3167",
-        "name": "大量",
-        "etfCode": "00401A",
-        "etfName": "主動摩根台灣鑫收",
-        "sharesDelta": -16000,
-        "weightDelta": -0.49240000000000017
-      },
-      {
-        "code": "SOFI US",
-        "name": "SoFi Technologies Inc",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": -15000,
-        "weightDelta": -0.47
-      },
-      {
-        "code": "NVDA",
-        "name": "NVIDIA CORPORATION",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": -535,
-        "weightDelta": -0.46899999999999986
-      },
-      {
-        "code": "TSLA US",
-        "name": "特斯拉公司",
-        "etfCode": "00983A",
-        "etfName": "主動中信ARK創新",
-        "sharesDelta": -1823,
-        "weightDelta": -0.46000000000000085
+        "code": "3105",
+        "name": "穩懋半導體",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": -99000,
+        "weightDelta": -0.4600000000000001
       },
       {
         "code": "6781",
@@ -6148,156 +4678,172 @@
         "weightDelta": -0.45999999999999996
       },
       {
-        "code": "8112",
-        "name": "至上",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -341000,
-        "weightDelta": -0.44
-      },
-      {
-        "code": "LITE US",
-        "name": "魯門特姆控股公司",
-        "etfCode": "00986A",
-        "etfName": "主動台新龍頭成長",
-        "sharesDelta": -100,
-        "weightDelta": 0.4358000000000004
-      },
-      {
-        "code": "TWLO",
-        "name": "TWILIO INC - A SHRS COM NPV",
+        "code": "DOCN",
+        "name": "DIGITALOCEAN HOLDINGS INC COM USD.000025000",
         "etfCode": "00989A",
         "etfName": "主動摩根美國科技",
-        "sharesDelta": -330,
-        "weightDelta": 0.4122999999999999
+        "sharesDelta": -155,
+        "weightDelta": 0.4054
       },
       {
-        "code": "USQ60976AD18",
-        "name": "MINAU 9 1/4 10/01/28",
+        "code": "8299",
+        "name": "群聯電子",
+        "etfCode": "00991A",
+        "etfName": "主動復華未來50",
+        "sharesDelta": 0,
+        "weightDelta": -0.35799999999999965
+      },
+      {
+        "code": "SHOP",
+        "name": "SHOPIFY INC - CLASS A",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -105,
+        "weightDelta": -0.32099999999999995
+      },
+      {
+        "code": "AMZN US",
+        "name": "亞馬遜公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": -1500,
+        "weightDelta": -0.2999999999999998
+      },
+      {
+        "code": "SOFI US",
+        "name": "SoFi Technologies Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": -15000,
+        "weightDelta": -0.21999999999999997
+      },
+      {
+        "code": "TEM US",
+        "name": "Tempus AI Inc",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": -5000,
+        "weightDelta": -0.17999999999999972
+      },
+      {
+        "code": "LRCX",
+        "name": "LAM RESEARCH CORP COM USD.001000000",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -138,
+        "weightDelta": 0.1738000000000004
+      },
+      {
+        "code": "3264",
+        "name": "欣銓科技",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": -96000,
+        "weightDelta": -0.17
+      },
+      {
+        "code": "6239",
+        "name": "力成",
+        "etfCode": "00985A",
+        "etfName": "主動野村台灣50",
+        "sharesDelta": -73000,
+        "weightDelta": -0.15999999999999998
+      },
+      {
+        "code": "SNDK",
+        "name": "SANDISK CORP/DE COM USD 0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -20,
+        "weightDelta": 0.1440999999999999
+      },
+      {
+        "code": "PLTR US",
+        "name": "帕蘭提爾科技公司",
+        "etfCode": "00983A",
+        "etfName": "主動中信ARK創新",
+        "sharesDelta": 0,
+        "weightDelta": -0.13999999999999968
+      },
+      {
+        "code": "LQDW US",
+        "name": "ISHARES INVESTMENT GRADE CORPO",
         "etfCode": "00983D",
         "etfName": "主動富邦複合收益",
-        "sharesDelta": -127000,
-        "weightDelta": -0.39959999999999996
-      },
-      {
-        "code": "FORM US",
-        "name": "FORMFACTOR INC",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
         "sharesDelta": 0,
-        "weightDelta": -0.3699999999999999
+        "weightDelta": -0.13289999999999935
       },
       {
-        "code": "2303",
-        "name": "聯電",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -586000,
-        "weightDelta": -0.3599999999999999
-      },
-      {
-        "code": "CIEN",
-        "name": "CIENA CORP COM USD0.01",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": -662,
-        "weightDelta": -0.3371999999999997
-      },
-      {
-        "code": "2377",
-        "name": "微星",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -217000,
-        "weightDelta": -0.32
-      },
-      {
-        "code": "9910",
-        "name": "豐泰",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -241000,
-        "weightDelta": -0.26
-      },
-      {
-        "code": "HOOD",
-        "name": "ROBINHOOD MARKETS INC - A COM USD.000100000",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": -773,
-        "weightDelta": -0.25760000000000005
-      },
-      {
-        "code": "2379",
-        "name": "瑞昱",
-        "etfCode": "00401A",
-        "etfName": "主動摩根台灣鑫收",
+        "code": "TLTW US",
+        "name": "ISHARES 20+ YEAR TREASURY BOND",
+        "etfCode": "00983D",
+        "etfName": "主動富邦複合收益",
         "sharesDelta": 0,
-        "weightDelta": -0.2521
+        "weightDelta": -0.11610000000000031
       },
       {
-        "code": "GOOG",
-        "name": "ALPHABET INC COM USD 0.001",
+        "code": "TSLA",
+        "name": "TESLA INC COM USD0.001",
         "etfCode": "00989A",
         "etfName": "主動摩根美國科技",
-        "sharesDelta": -310,
-        "weightDelta": 0.24820000000000064
+        "sharesDelta": -129,
+        "weightDelta": -0.11509999999999998
       },
       {
-        "code": "BE",
-        "name": "BLOOM ENERGY CORP- A",
+        "code": "NET",
+        "name": "CLOUDFLARE INC - CLASS A COM USD.001000000",
         "etfCode": "00989A",
         "etfName": "主動摩根美國科技",
-        "sharesDelta": -56,
-        "weightDelta": 0.2468999999999999
+        "sharesDelta": -126,
+        "weightDelta": 0.11370000000000013
       },
       {
-        "code": "3081",
-        "name": "聯亞光電",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -9000,
-        "weightDelta": -0.23999999999999988
-      },
-      {
-        "code": "ZM",
-        "name": "ZOOM COMMUNICATIONS INC",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": -327,
-        "weightDelta": 0.23740000000000006
-      },
-      {
-        "code": "LMND",
-        "name": "LEMONADE INC COM USD 0.000010000",
-        "etfCode": "00989A",
-        "etfName": "主動摩根美國科技",
-        "sharesDelta": -294,
-        "weightDelta": -0.21160000000000012
-      },
-      {
-        "code": "6501 JT",
-        "name": "日立製作所有限公司",
-        "etfCode": "00986A",
-        "etfName": "主動台新龍頭成長",
+        "code": "2382",
+        "name": "廣達",
+        "etfCode": "00980A",
+        "etfName": "主動野村臺灣優選",
         "sharesDelta": 0,
-        "weightDelta": -0.20579999999999998
+        "weightDelta": -0.10999999999999988
       },
       {
-        "code": "SOI FP",
-        "name": "S.O.I.T.E.C.",
-        "etfCode": "00988A",
-        "etfName": "主動統一全球創新",
-        "sharesDelta": -23198,
-        "weightDelta": -0.19999999999999996
+        "code": "MU",
+        "name": "MICRON TECHNOLOGY",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -36,
+        "weightDelta": 0.10870000000000002
       },
       {
-        "code": "3714",
-        "name": "富采",
-        "etfCode": "00984A",
-        "etfName": "主動安聯台灣高息",
-        "sharesDelta": -193000,
-        "weightDelta": -0.19
+        "code": "NVDA",
+        "name": "NVIDIA CORPORATION",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -225,
+        "weightDelta": -0.10850000000000026
+      },
+      {
+        "code": "FN",
+        "name": "FABRINET ORD USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -22,
+        "weightDelta": -0.1070000000000001
+      },
+      {
+        "code": "TTWO",
+        "name": "TAKE-TWO INTERACTIVE SOFTWARE COM USD0.01",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -199,
+        "weightDelta": -0.10680000000000023
+      },
+      {
+        "code": "META",
+        "name": "META PLATFORMS INC COM USD.000006",
+        "etfCode": "00989A",
+        "etfName": "主動摩根美國科技",
+        "sharesDelta": -75,
+        "weightDelta": -0.10670000000000002
       }
     ]
   },
@@ -6318,53 +4864,53 @@
     {
       "code": "00982A",
       "name": "主動群益台灣強棒",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 1,
-        "increasedCount": 9,
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
         "decreasedCount": 0,
-        "totalChangeCount": 11
+        "totalChangeCount": 0
       }
     },
     {
       "code": "00981A",
       "name": "主動統一台股增長",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 2,
-        "removedCount": 2,
-        "increasedCount": 40,
-        "decreasedCount": 8,
-        "totalChangeCount": 52
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
       "code": "00983A",
       "name": "主動中信ARK創新",
-      "disclosureDate": "2026-05-04",
+      "disclosureDate": "2026-05-05",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 1,
-        "increasedCount": 24,
-        "decreasedCount": 10,
-        "totalChangeCount": 36
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 30,
+        "decreasedCount": 7,
+        "totalChangeCount": 37
       }
     },
     {
       "code": "00984A",
       "name": "主動安聯台灣高息",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 20,
-        "removedCount": 23,
-        "increasedCount": 59,
-        "decreasedCount": 35,
-        "totalChangeCount": 137
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -6383,66 +4929,66 @@
     {
       "code": "00986A",
       "name": "主動台新龍頭成長",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 12,
-        "decreasedCount": 15,
-        "totalChangeCount": 27
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
       "code": "00982D",
       "name": "主動富邦動態入息",
-      "disclosureDate": "2026-05-04",
+      "disclosureDate": "2026-05-05",
       "summary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 35,
-        "decreasedCount": 26,
-        "totalChangeCount": 61
+        "increasedCount": 32,
+        "decreasedCount": 32,
+        "totalChangeCount": 64
       }
     },
     {
       "code": "00983D",
       "name": "主動富邦複合收益",
-      "disclosureDate": "2026-05-04",
-      "summary": {
-        "comparisonReady": true,
-        "addedCount": 0,
-        "removedCount": 1,
-        "increasedCount": 21,
-        "decreasedCount": 62,
-        "totalChangeCount": 84
-      }
-    },
-    {
-      "code": "00989A",
-      "name": "主動摩根美國科技",
       "disclosureDate": "2026-05-05",
       "summary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
         "increasedCount": 5,
-        "decreasedCount": 59,
+        "decreasedCount": 79,
+        "totalChangeCount": 84
+      }
+    },
+    {
+      "code": "00989A",
+      "name": "主動摩根美國科技",
+      "disclosureDate": "2026-05-06",
+      "summary": {
+        "comparisonReady": true,
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 7,
+        "decreasedCount": 57,
         "totalChangeCount": 64
       }
     },
     {
       "code": "00988A",
       "name": "主動統一全球創新",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 1,
-        "increasedCount": 16,
-        "decreasedCount": 31,
-        "totalChangeCount": 49
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -6461,40 +5007,40 @@
     {
       "code": "00990A",
       "name": "主動元大AI新經濟",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 7,
-        "removedCount": 7,
-        "increasedCount": 17,
-        "decreasedCount": 23,
-        "totalChangeCount": 54
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
       "code": "00987A",
       "name": "主動台新優勢成長",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 2,
-        "removedCount": 3,
-        "increasedCount": 11,
-        "decreasedCount": 15,
-        "totalChangeCount": 31
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
       "code": "00992A",
       "name": "主動群益科技創新",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 1,
-        "increasedCount": 4,
-        "decreasedCount": 5,
-        "totalChangeCount": 11
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -6526,27 +5072,27 @@
     {
       "code": "00993A",
       "name": "主動安聯台灣",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 1,
-        "removedCount": 7,
-        "increasedCount": 29,
-        "decreasedCount": 20,
-        "totalChangeCount": 57
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
       "code": "00984D",
       "name": "主動聯博全球非投",
-      "disclosureDate": "2026-05-04",
+      "disclosureDate": "2026-05-05",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 17,
+        "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 54,
-        "decreasedCount": 174,
-        "totalChangeCount": 245
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     },
     {
@@ -6578,27 +5124,27 @@
     {
       "code": "00401A",
       "name": "主動摩根台灣鑫收",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
-        "addedCount": 11,
-        "removedCount": 7,
-        "increasedCount": 19,
-        "decreasedCount": 44,
-        "totalChangeCount": 81
+        "addedCount": 0,
+        "removedCount": 0,
+        "increasedCount": 10,
+        "decreasedCount": 0,
+        "totalChangeCount": 10
       }
     },
     {
       "code": "00997A",
       "name": "主動群益美國增長",
-      "disclosureDate": "2026-05-05",
+      "disclosureDate": "2026-05-06",
       "summary": {
         "comparisonReady": true,
         "addedCount": 0,
         "removedCount": 0,
-        "increasedCount": 7,
-        "decreasedCount": 3,
-        "totalChangeCount": 10
+        "increasedCount": 0,
+        "decreasedCount": 0,
+        "totalChangeCount": 0
       }
     }
   ],

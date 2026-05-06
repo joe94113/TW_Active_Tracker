@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-05T10:13:02.226Z",
-  "marketDate": "2026-05-05",
+  "generatedAt": "2026-05-06T02:30:33.623Z",
+  "marketDate": "2026-05-06",
   "snapshots": [
     {
       "marketDate": "2026-04-17",
@@ -1217,8 +1217,8 @@
           "hotCount": 3,
           "institutionalCount": 4,
           "etfCount": 5,
-          "leaderCode": "2408",
-          "leaderName": "南亞科",
+          "leaderCode": null,
+          "leaderName": null,
           "catchUpCode": null,
           "catchUpName": null
         },
@@ -1231,10 +1231,10 @@
           "hotCount": 0,
           "institutionalCount": 2,
           "etfCount": 5,
-          "leaderCode": "3443",
-          "leaderName": "創意",
-          "catchUpCode": "2356",
-          "catchUpName": "英業達"
+          "leaderCode": null,
+          "leaderName": null,
+          "catchUpCode": null,
+          "catchUpName": null
         },
         {
           "slug": "cpo",
@@ -1245,10 +1245,10 @@
           "hotCount": 0,
           "institutionalCount": 1,
           "etfCount": 5,
-          "leaderCode": "3443",
-          "leaderName": "創意",
-          "catchUpCode": "3363",
-          "catchUpName": "上詮"
+          "leaderCode": null,
+          "leaderName": null,
+          "catchUpCode": null,
+          "catchUpName": null
         },
         {
           "slug": "glass-fiber",
@@ -1259,10 +1259,10 @@
           "hotCount": 2,
           "institutionalCount": 2,
           "etfCount": 5,
-          "leaderCode": "6274",
-          "leaderName": "台燿科技",
-          "catchUpCode": "1303",
-          "catchUpName": "南亞"
+          "leaderCode": null,
+          "leaderName": null,
+          "catchUpCode": null,
+          "catchUpName": null
         },
         {
           "slug": "pcb",
@@ -1273,8 +1273,8 @@
           "hotCount": 0,
           "institutionalCount": 1,
           "etfCount": 5,
-          "leaderCode": "6274",
-          "leaderName": "台燿科技",
+          "leaderCode": null,
+          "leaderName": null,
           "catchUpCode": null,
           "catchUpName": null
         },
@@ -1287,8 +1287,8 @@
           "hotCount": 0,
           "institutionalCount": 0,
           "etfCount": 4,
-          "leaderCode": "2330",
-          "leaderName": "台積電",
+          "leaderCode": null,
+          "leaderName": null,
           "catchUpCode": null,
           "catchUpName": null
         },
@@ -1301,10 +1301,10 @@
           "hotCount": 1,
           "institutionalCount": 4,
           "etfCount": 1,
-          "leaderCode": "2049",
-          "leaderName": "上銀",
-          "catchUpCode": "2354",
-          "catchUpName": "鴻準"
+          "leaderCode": null,
+          "leaderName": null,
+          "catchUpCode": null,
+          "catchUpName": null
         },
         {
           "slug": "abf",
@@ -1315,10 +1315,130 @@
           "hotCount": 0,
           "institutionalCount": 1,
           "etfCount": 5,
-          "leaderCode": "3037",
-          "leaderName": "欣興",
+          "leaderCode": null,
+          "leaderName": null,
           "catchUpCode": null,
           "catchUpName": null
+        }
+      ]
+    },
+    {
+      "marketDate": "2026-05-06",
+      "generatedAt": "2026-05-06T02:30:33.623Z",
+      "leaderSlug": "memory",
+      "leaderTitle": "記憶體 / DDR5",
+      "topics": [
+        {
+          "slug": "memory",
+          "title": "記憶體 / DDR5",
+          "score": 423,
+          "tone": "up",
+          "newsCount": 34,
+          "hotCount": 4,
+          "institutionalCount": 1,
+          "etfCount": 5,
+          "leaderCode": "2344",
+          "leaderName": "華邦電",
+          "catchUpCode": null,
+          "catchUpName": null
+        },
+        {
+          "slug": "ai-server",
+          "title": "AI 伺服器 / ASIC",
+          "score": 413,
+          "tone": "up",
+          "newsCount": 47,
+          "hotCount": 0,
+          "institutionalCount": 1,
+          "etfCount": 5,
+          "leaderCode": "6669",
+          "leaderName": "緯穎",
+          "catchUpCode": "2382",
+          "catchUpName": "廣達"
+        },
+        {
+          "slug": "cpo",
+          "title": "CPO / 矽光子",
+          "score": 401,
+          "tone": "up",
+          "newsCount": 40,
+          "hotCount": 0,
+          "institutionalCount": 3,
+          "etfCount": 5,
+          "leaderCode": "2345",
+          "leaderName": "智邦",
+          "catchUpCode": null,
+          "catchUpName": null
+        },
+        {
+          "slug": "pcb",
+          "title": "PCB / CCL",
+          "score": 314,
+          "tone": "up",
+          "newsCount": 28,
+          "hotCount": 0,
+          "institutionalCount": 1,
+          "etfCount": 5,
+          "leaderCode": "2383",
+          "leaderName": "台光電",
+          "catchUpCode": null,
+          "catchUpName": null
+        },
+        {
+          "slug": "cowos",
+          "title": "CoWoS / 先進封裝",
+          "score": 308,
+          "tone": "up",
+          "newsCount": 32,
+          "hotCount": 0,
+          "institutionalCount": 0,
+          "etfCount": 5,
+          "leaderCode": "2330",
+          "leaderName": "台積電",
+          "catchUpCode": "6187",
+          "catchUpName": "萬潤"
+        },
+        {
+          "slug": "robotics",
+          "title": "機器人 / 自動化",
+          "score": 295,
+          "tone": "up",
+          "newsCount": 25,
+          "hotCount": 1,
+          "institutionalCount": 4,
+          "etfCount": 1,
+          "leaderCode": "2049",
+          "leaderName": "上銀",
+          "catchUpCode": "2354",
+          "catchUpName": "鴻準"
+        },
+        {
+          "slug": "glass-fiber",
+          "title": "玻纖布 / Low Dk",
+          "score": 292,
+          "tone": "up",
+          "newsCount": 18,
+          "hotCount": 2,
+          "institutionalCount": 2,
+          "etfCount": 5,
+          "leaderCode": "1802",
+          "leaderName": "台玻",
+          "catchUpCode": null,
+          "catchUpName": null
+        },
+        {
+          "slug": "emerging-csp",
+          "title": "CSP 題材",
+          "score": 284,
+          "tone": "up",
+          "newsCount": 6,
+          "hotCount": 3,
+          "institutionalCount": 1,
+          "etfCount": 5,
+          "leaderCode": "8210",
+          "leaderName": "勤誠",
+          "catchUpCode": "2059",
+          "catchUpName": "川湖"
         }
       ]
     }
