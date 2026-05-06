@@ -541,6 +541,9 @@ function formatViewedAt(dateText) {
                 <h3>{{ card.title }}</h3>
                 <p class="panel-subtitle">{{ card.subtitle }}</p>
               </div>
+              <span v-if="card.items?.length" class="focus-card-head-meta">
+                {{ formatNumber(card.items.length, 0) }} 檔
+              </span>
             </div>
             <div class="focus-card-list">
               <component
@@ -551,10 +554,15 @@ function formatViewedAt(dateText) {
                 class="focus-card-item"
                 :class="{ 'is-clickable': Boolean(getCloseFocusRoute(item)) }"
               >
-                <div>
+                <div class="focus-card-item-main">
                   <strong>{{ item.code }} {{ item.name }}</strong>
                 </div>
-                <span :class="{ 'text-up': item.tone === 'up', 'text-down': item.tone === 'down' }">{{ item.value }}</span>
+                <span
+                  class="focus-card-item-value"
+                  :class="{ 'text-up': item.tone === 'up', 'text-down': item.tone === 'down' }"
+                >
+                  {{ item.value }}
+                </span>
               </component>
             </div>
           </article>
