@@ -7,7 +7,7 @@ import {
 } from 'lightweight-charts';
 import { formatDate, formatTime } from './formatters';
 
-export const chartPalette = {
+export const lightChartPalette = {
   background: '#f8fbff',
   panelBackground: '#ffffff',
   text: '#5b7288',
@@ -15,6 +15,8 @@ export const chartPalette = {
   border: 'rgba(16, 32, 45, 0.12)',
   grid: 'rgba(16, 32, 45, 0.08)',
   crosshair: 'rgba(11, 105, 155, 0.32)',
+  separator: 'rgba(16, 32, 45, 0.08)',
+  separatorHover: 'rgba(11, 105, 155, 0.14)',
   brand: '#0b699b',
   brandSoft: 'rgba(11, 105, 155, 0.16)',
   line: '#1f6feb',
@@ -44,6 +46,84 @@ export const chartPalette = {
   histogramUp: 'rgba(209, 75, 50, 0.7)',
   histogramDown: 'rgba(19, 136, 94, 0.66)',
 };
+
+export const darkChartPalette = {
+  background: '#08111a',
+  panelBackground: '#0d1825',
+  text: '#97abc0',
+  textStrong: '#eef5fb',
+  border: 'rgba(148, 163, 184, 0.2)',
+  grid: 'rgba(148, 163, 184, 0.1)',
+  crosshair: 'rgba(103, 201, 255, 0.34)',
+  separator: 'rgba(148, 163, 184, 0.08)',
+  separatorHover: 'rgba(103, 201, 255, 0.16)',
+  brand: '#67c9ff',
+  brandSoft: 'rgba(103, 201, 255, 0.16)',
+  line: '#7ab8ff',
+  up: '#ff8c75',
+  down: '#2fd0a3',
+  ma5: '#f9a34b',
+  ma10: '#b48cff',
+  ma20: '#6ba8ff',
+  ma60: '#b08968',
+  rsi: '#d38bff',
+  k: '#ffba4d',
+  d: '#4dd4c4',
+  macd: '#3cd2b8',
+  signal: '#ff9854',
+  support: '#2fd0a3',
+  supportSoft: 'rgba(47, 208, 163, 0.22)',
+  resistance: '#ff8c75',
+  resistanceSoft: 'rgba(255, 140, 117, 0.22)',
+  reference: '#97abc0',
+  guide: 'rgba(151, 171, 192, 0.42)',
+  zoneUpTop: 'rgba(255, 140, 117, 0.26)',
+  zoneUpBottom: 'rgba(255, 140, 117, 0.05)',
+  zoneDownTop: 'rgba(47, 208, 163, 0.22)',
+  zoneDownBottom: 'rgba(47, 208, 163, 0.04)',
+  volumeUp: 'rgba(255, 140, 117, 0.76)',
+  volumeDown: 'rgba(47, 208, 163, 0.74)',
+  histogramUp: 'rgba(255, 140, 117, 0.74)',
+  histogramDown: 'rgba(47, 208, 163, 0.7)',
+};
+
+export function getChartThemeName() {
+  if (typeof document === 'undefined') {
+    return 'light';
+  }
+
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+}
+
+export function getActiveChartPalette() {
+  return getChartThemeName() === 'dark' ? darkChartPalette : lightChartPalette;
+}
+
+export const chartPalette = new Proxy(
+  {},
+  {
+    get(_target, property) {
+      return getActiveChartPalette()[property];
+    },
+    has(_target, property) {
+      return property in lightChartPalette;
+    },
+    ownKeys() {
+      return Reflect.ownKeys(lightChartPalette);
+    },
+    getOwnPropertyDescriptor(_target, property) {
+      if (!(property in lightChartPalette)) {
+        return undefined;
+      }
+
+      return {
+        enumerable: true,
+        configurable: true,
+        value: getActiveChartPalette()[property],
+      };
+    },
+  },
+);
 
 export const chartEnums = {
   ColorType,
@@ -150,47 +230,49 @@ export function createBaseChartOptions({
   interactive = true,
   lockEdges = true,
 } = {}) {
+  const palette = getActiveChartPalette();
+
   return {
     autoSize: true,
     layout: {
       background: {
         type: ColorType.Solid,
-        color: chartPalette.background,
+        color: palette.background,
       },
-      textColor: chartPalette.text,
+      textColor: palette.text,
       fontFamily: '"Noto Sans TC", "Microsoft JhengHei", sans-serif',
       panes: {
         enableResize: true,
-        separatorColor: 'rgba(16, 32, 45, 0.08)',
-        separatorHoverColor: 'rgba(11, 105, 155, 0.14)',
+        separatorColor: palette.separator,
+        separatorHoverColor: palette.separatorHover,
       },
       attributionLogo: false,
     },
     grid: {
       vertLines: {
-        color: chartPalette.grid,
+        color: palette.grid,
       },
       horzLines: {
-        color: chartPalette.grid,
+        color: palette.grid,
       },
     },
     crosshair: {
       mode: CrosshairMode.Normal,
       vertLine: {
         width: 1,
-        color: chartPalette.crosshair,
+        color: palette.crosshair,
         style: LineStyle.Dashed,
-        labelBackgroundColor: chartPalette.brand,
+        labelBackgroundColor: palette.brand,
       },
       horzLine: {
         width: 1,
-        color: chartPalette.crosshair,
+        color: palette.crosshair,
         style: LineStyle.Dashed,
-        labelBackgroundColor: chartPalette.brand,
+        labelBackgroundColor: palette.brand,
       },
     },
     rightPriceScale: {
-      borderColor: chartPalette.border,
+      borderColor: palette.border,
       scaleMargins: {
         top: 0.08,
         bottom: 0.08,
@@ -200,7 +282,7 @@ export function createBaseChartOptions({
       visible: false,
     },
     timeScale: {
-      borderColor: chartPalette.border,
+      borderColor: palette.border,
       rightOffset,
       barSpacing: 9,
       minBarSpacing: 5,
@@ -230,6 +312,31 @@ export function createBaseChartOptions({
       pinch: interactive,
     },
   };
+}
+
+export function observeChartTheme(onChange) {
+  if (typeof document === 'undefined' || typeof MutationObserver === 'undefined') {
+    return () => {};
+  }
+
+  let previousTheme = getChartThemeName();
+  const root = document.documentElement;
+  const observer = new MutationObserver(() => {
+    const nextTheme = getChartThemeName();
+    if (nextTheme === previousTheme) {
+      return;
+    }
+
+    previousTheme = nextTheme;
+    onChange?.(nextTheme);
+  });
+
+  observer.observe(root, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+
+  return () => observer.disconnect();
 }
 
 export function buildConstantLineData(rows, value) {

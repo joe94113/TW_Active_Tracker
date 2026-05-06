@@ -207,8 +207,8 @@ function getSummaryLine(item) {
     />
 
     <template v-if="entryRadar">
-      <section class="page-hero compact entry-radar-hero">
-        <div class="hero-copy">
+      <section class="page-hero compact entry-radar-hero rounded-[2rem] border border-slate-200/70 bg-white/90 p-6 shadow-[0_28px_90px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
+        <div class="hero-copy space-y-5">
           <span class="hero-kicker">Early Entry Radar</span>
           <h1>起漲卡位雷達</h1>
           <p>先抓剛起漲、還沒走太遠的候選，再配題材輪動與法人轉向，縮小明日優先觀察名單。</p>
@@ -224,9 +224,13 @@ function getSummaryLine(item) {
           </div>
         </div>
 
-        <aside class="entry-radar-board">
+        <aside class="entry-radar-board rounded-[1.6rem] border border-slate-200/70 bg-slate-50/75 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-900/72 dark:ring-slate-800/70">
           <div class="entry-radar-spotlight-grid">
-            <article v-for="card in heroCards" :key="card.key" class="entry-radar-spotlight-card">
+            <article
+              v-for="card in heroCards"
+              :key="card.key"
+              class="entry-radar-spotlight-card rounded-[1.35rem] border border-slate-200/70 bg-white/85 shadow-[0_16px_36px_rgba(15,23,42,0.08)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70"
+            >
               <span class="theme-spotlight-label">{{ card.label }}</span>
               <strong>{{ card.value }}</strong>
               <p>{{ card.note }}</p>

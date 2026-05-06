@@ -25,7 +25,13 @@ function getWindowExtremes(rows, size) {
   };
 }
 
-function buildEventDateFromYearMonth(yearMonth, day = 10) {
+function toUtcStamp(dateText) {
+  if (!dateText) return null;
+  const stamp = Date.parse(`${dateText}T00:00:00Z`);
+  return Number.isFinite(stamp) ? stamp : null;
+}
+
+function buildEventDateFromYearMonth(yearMonth, day = 10, asOfDate = null) {
   if (!yearMonth) return null;
 
   const normalized = String(yearMonth).replaceAll('/', '').replaceAll('-', '');
@@ -37,11 +43,16 @@ function buildEventDateFromYearMonth(yearMonth, day = 10) {
   const year = Number(normalized.slice(0, 4));
   const month = Number(normalized.slice(4, 6)) - 1;
   const nextMonthDate = new Date(Date.UTC(year, month + 1, day));
+  const asOfStamp = toUtcStamp(asOfDate);
+
+  while (asOfStamp !== null && nextMonthDate.getTime() <= asOfStamp) {
+    nextMonthDate.setUTCMonth(nextMonthDate.getUTCMonth() + 1);
+  }
 
   return nextMonthDate.toISOString().slice(0, 10);
 }
 
-function buildQuarterEventDate(year, quarter) {
+function buildQuarterEventDate(year, quarter, asOfDate = null) {
   const numericYear = Number(year);
   const numericQuarter = Number(quarter);
 
@@ -51,7 +62,55 @@ function buildQuarterEventDate(year, quarter) {
 
   const quarterEndMonth = numericQuarter * 3;
   const eventDate = new Date(Date.UTC(numericYear, quarterEndMonth + 1, 14));
+  const asOfStamp = toUtcStamp(asOfDate);
+
+  while (asOfStamp !== null && eventDate.getTime() <= asOfStamp) {
+    eventDate.setUTCMonth(eventDate.getUTCMonth() + 3);
+  }
+
   return eventDate.toISOString().slice(0, 10);
+}
+
+function resolveAlertEventLabel(alert) {
+  switch (alert?.type) {
+    case 'disposition':
+      return '處置交易開始';
+    case 'attention':
+      return '注意交易公告';
+    case 'changed-trading':
+      return '變更交易公告';
+    case 'short-sale':
+      return '借券賣出餘量更新';
+    default:
+      return alert?.badgeLabel || alert?.title || '交易提醒';
+  }
+}
+
+function resolveAlertEventStatus(alertDate, asOfDate) {
+  if (!alertDate) return 'reference';
+  if (!asOfDate) return 'recent';
+  return String(alertDate) > String(asOfDate) ? 'upcoming' : 'recent';
+}
+
+function buildAlertEventCalendar(selectionSignals) {
+  const asOfDate = selectionSignals?.asOfDate ?? null;
+  const alerts = Array.isArray(selectionSignals?.alerts) ? selectionSignals.alerts : [];
+
+  return alerts
+    .map((alert) => {
+      if (!alert?.date) {
+        return null;
+      }
+
+      return {
+        key: `alert-${alert.key ?? `${alert.type ?? 'note'}-${alert.date}`}`,
+        label: resolveAlertEventLabel(alert),
+        date: alert.date,
+        status: resolveAlertEventStatus(alert.date, asOfDate),
+        note: alert.note || alert.detail || alert.footnote || null,
+      };
+    })
+    .filter(Boolean);
 }
 
 export function buildKeyPriceZones(detail) {
@@ -104,6 +163,7 @@ export function buildStockEventCalendar(detail) {
   const incomeStatement = detail?.財務資料?.綜合損益表 ?? null;
   const etfExposure = detail?.主動ETF曝光 ?? null;
   const selectionSignals = detail?.交易提醒 ?? null;
+  const asOfDate = detail?.priceDate ?? selectionSignals?.asOfDate ?? null;
   const events = [];
 
   if (monthlyRevenue?.出表日期) {
@@ -116,7 +176,7 @@ export function buildStockEventCalendar(detail) {
     });
   }
 
-  const nextRevenueDate = buildEventDateFromYearMonth(monthlyRevenue?.資料年月, 10);
+  const nextRevenueDate = buildEventDateFromYearMonth(monthlyRevenue?.資料年月, 10, asOfDate);
   if (nextRevenueDate) {
     events.push({
       key: 'next-revenue',
@@ -127,7 +187,7 @@ export function buildStockEventCalendar(detail) {
     });
   }
 
-  const nextQuarterDate = buildQuarterEventDate(incomeStatement?.年度, incomeStatement?.季別);
+  const nextQuarterDate = buildQuarterEventDate(incomeStatement?.年度, incomeStatement?.季別, asOfDate);
   if (nextQuarterDate) {
     events.push({
       key: 'next-quarter',
@@ -152,8 +212,17 @@ export function buildStockEventCalendar(detail) {
     events.push(...selectionSignals.eventCalendar);
   }
 
+  events.push(...buildAlertEventCalendar(selectionSignals));
+
   return events
     .filter((item) => item.date)
-    .filter((item, index, list) => list.findIndex((candidate) => candidate.key === item.key) === index)
+    .filter(
+      (item, index, list) =>
+        list.findIndex(
+          (candidate) =>
+            candidate.key === item.key ||
+            (candidate.date === item.date && candidate.label === item.label),
+        ) === index,
+    )
     .sort((left, right) => String(left.date).localeCompare(String(right.date)));
 }

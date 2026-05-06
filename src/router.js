@@ -16,6 +16,10 @@ import StockScannerPage from './pages/StockScannerPage.vue';
 import EventStatsPage from './pages/EventStatsPage.vue';
 import OfficialRadarPage from './pages/OfficialRadarPage.vue';
 import BrokerBranchRadarPage from './pages/BrokerBranchRadarPage.vue';
+import WatchboardPage from './pages/WatchboardPage.vue';
+import IndustryPulsePage from './pages/IndustryPulsePage.vue';
+import GlobalMarketsPage from './pages/GlobalMarketsPage.vue';
+import MarketBuzzPage from './pages/MarketBuzzPage.vue';
 import { applySeoMeta } from './lib/seo';
 
 export const ROUTE_NAME = {
@@ -36,6 +40,10 @@ export const ROUTE_NAME = {
   EVENT_STATS: 'event-stats',
   OFFICIAL_RADAR: 'official-radar',
   BROKER_BRANCH_RADAR: 'broker-branch-radar',
+  WATCHBOARD: 'watchboard',
+  INDUSTRY_PULSE: 'industry-pulse',
+  GLOBAL_MARKETS: 'global-markets',
+  MARKET_BUZZ: 'market-buzz',
 };
 
 const router = createRouter({
@@ -148,6 +156,42 @@ const router = createRouter({
       meta: {
         title: '勝率分點雷達',
         description: '整理勝率較高的券商分點最近買賣了哪些台股，並直接給出值得觀察的推薦名單。',
+      },
+    },
+    {
+      path: '/watchboard',
+      name: ROUTE_NAME.WATCHBOARD,
+      component: WatchboardPage,
+      meta: {
+        title: '自選股即時看盤面板',
+        description: '把自選股集中放在同一頁，看價格、漲跌、雙法人、題材與風險，盤中盤後都能快速掃描。',
+      },
+    },
+    {
+      path: '/industry-pulse',
+      name: ROUTE_NAME.INDUSTRY_PULSE,
+      component: IndustryPulsePage,
+      meta: {
+        title: '產業即時動向 / 瞬間波動',
+        description: '用最新盤後資料整理產業升溫排行與突然放量的股票，幫你找隔日優先觀察的方向。',
+      },
+    },
+    {
+      path: '/global-markets',
+      name: ROUTE_NAME.GLOBAL_MARKETS,
+      component: GlobalMarketsPage,
+      meta: {
+        title: '國際盤 / 原物料 / 外匯儀表板',
+        description: '把國際股指、原油、黃金與外匯放在同一頁，盤前先看全球風向再判斷台股節奏。',
+      },
+    },
+    {
+      path: '/market-buzz',
+      name: ROUTE_NAME.MARKET_BUZZ,
+      component: MarketBuzzPage,
+      meta: {
+        title: '熱門新聞關鍵詞 + 市場熱度',
+        description: '整理近期熱門新聞關鍵詞、題材熱度與話題股，快速判斷市場最近在關注什麼。',
       },
     },
     {

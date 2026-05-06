@@ -15,6 +15,7 @@ import IntradayChart from '../components/IntradayChart.vue';
 import TechnicalChart from '../components/TechnicalChart.vue';
 import HolderStructureChart from '../components/HolderStructureChart.vue';
 import IntradayChipFlowChart from '../components/IntradayChipFlowChart.vue';
+import EventCalendarLinks from '../components/EventCalendarLinks.vue';
 import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
 import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
@@ -40,13 +41,40 @@ import {
 
 const route = useRoute();
 const stockCode = ref(String(route.params.code ?? ''));
+const activeStockTab = ref('overview');
+const stockTabs = [
+  { key: 'overview', label: '重點' },
+  { key: 'charts', label: '圖表' },
+  { key: 'chips', label: '籌碼' },
+  { key: 'financials', label: '財務' },
+  { key: 'news', label: '新聞' },
+];
 
 watch(
   () => route.params.code,
   (value) => {
     stockCode.value = String(value ?? '');
+    activeStockTab.value = 'overview';
   },
 );
+
+function focusStockTab(tabKey) {
+  activeStockTab.value = tabKey;
+
+  if (typeof window === 'undefined') return;
+
+  window.requestAnimationFrame(() => {
+    const target = document.querySelector('.stock-tabbar');
+
+    if (!target) {
+      return;
+    }
+
+    const topOffset = window.innerWidth <= 640 ? 92 : 108;
+    const top = window.scrollY + target.getBoundingClientRect().top - topOffset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+}
 
 const { detail, isLoading, isEnhancing, errorMessage } = useStockDetail(stockCode);
 const {
@@ -576,7 +604,7 @@ watch(
 </script>
 
 <template>
-  <section class="page-shell">
+  <section class="page-shell stock-detail-page">
     <div class="page-hero compact">
       <div>
         <p class="page-kicker">個股明細</p>
@@ -689,7 +717,28 @@ watch(
         <a class="mobile-section-link" href="#financials">財務</a>
       </nav>
 
-      <section id="quote" v-if="isLiveFallback || liveSnapshot?.lastPrice" class="panel">
+      <nav
+        class="stock-tabbar rounded-[1.55rem] border border-slate-200/70 bg-white/88 p-2 shadow-[0_18px_42px_rgba(15,23,42,0.08)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70"
+        aria-label="個股頁籤"
+      >
+        <button
+          v-for="tab in stockTabs"
+          :key="tab.key"
+          type="button"
+          class="stock-tabbar-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[1rem] px-4 py-3 text-sm font-semibold tracking-tight transition-all duration-200"
+          :class="{ 'is-active': activeStockTab === tab.key }"
+          @click="focusStockTab(tab.key)"
+        >
+          {{ tab.label }}
+        </button>
+      </nav>
+
+      <section
+        id="quote"
+        v-show="activeStockTab === 'overview'"
+        v-if="isLiveFallback || liveSnapshot?.lastPrice"
+        class="panel"
+      >
         <div class="panel-header">
           <div>
             <h2 class="panel-title">即時快照</h2>
@@ -712,7 +761,7 @@ watch(
         </section>
       </section>
 
-      <section class="card-grid compact-summary-grid">
+      <section v-show="activeStockTab === 'overview'" class="card-grid compact-summary-grid">
         <InfoCard
           v-for="item in summaryCards"
           :key="item.title"
@@ -723,7 +772,7 @@ watch(
         />
       </section>
 
-      <section class="card-grid compact-summary-grid">
+      <section v-show="activeStockTab === 'overview'" class="card-grid compact-summary-grid">
         <InfoCard
           v-for="item in quickCards"
           :key="`quick-${item.title}`"
@@ -734,7 +783,7 @@ watch(
         />
       </section>
 
-      <section id="signals" class="panel">
+      <section id="signals" v-show="activeStockTab === 'overview'" class="panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">技術分析快讀</h2>
@@ -773,7 +822,7 @@ watch(
         </ul>
       </section>
 
-      <section class="dual-grid">
+      <section v-show="activeStockTab === 'overview'" class="dual-grid">
         <article class="panel insight-panel stock-health-panel">
           <div class="panel-header">
             <div>
@@ -843,7 +892,7 @@ watch(
       </section>
 
       <!-- 新增：進階分析面板（產業估值、量能、型態、訊號可信度、財報、內部人） -->
-      <section class="dual-grid advanced-insight-grid">
+      <section v-show="activeStockTab === 'overview'" class="dual-grid advanced-insight-grid">
         <article class="panel insight-panel insight-panel-primary">
           <div class="panel-header">
             <div>
@@ -945,6 +994,16 @@ watch(
                 <span class="status-badge is-info">題材催化</span>
               </div>
               <p>{{ event.note || '同產業相關事件。' }}</p>
+              <EventCalendarLinks
+                :title="event.title"
+                :start-date="event.startDate"
+                :end-date="event.endDate || event.startDate"
+                :note="event.note || `${companyProfile?.產業名稱 ?? '相關產業'} 題材催化事件`"
+                source-name="題材催化事件"
+                :url="event.url || ''"
+                :location="event.location || ''"
+                compact
+              />
               <p class="muted">
                 {{ formatDate(event.startDate) }}
                 <template v-if="event.daysUntil >= 0">· 距今 {{ event.daysUntil }} 天</template>
@@ -974,7 +1033,7 @@ watch(
         </article>
       </section>
 
-      <section class="dual-grid">
+      <section v-show="activeStockTab === 'overview'" class="dual-grid">
         <article class="panel insight-panel">
           <div class="panel-header">
             <div>
@@ -1026,6 +1085,14 @@ watch(
                 </div>
                 <p class="event-note">{{ item.note }}</p>
               </div>
+              <EventCalendarLinks
+                :title="`${stockCode} ${detail?.name ?? companyProfile?.公司名稱 ?? ''}｜${item.label}`"
+                :start-date="item.date"
+                :end-date="item.date"
+                :note="item.note"
+                source-name="台股主動通事件日曆"
+                compact
+              />
               <div class="event-side">
                 <strong class="event-date">{{ formatDate(item.date) }}</strong>
                 <span class="muted">{{ formatEventDistance(item.date) }}</span>
@@ -1039,7 +1106,7 @@ watch(
         </article>
       </section>
 
-      <section class="dual-grid">
+      <section v-show="activeStockTab === 'overview'" class="dual-grid">
         <article class="panel insight-panel">
           <div class="panel-header">
             <div>
@@ -1127,7 +1194,7 @@ watch(
         </article>
       </section>
 
-      <section class="panel">
+      <section v-show="activeStockTab === 'overview'" class="panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">外資目標價摘要</h2>
@@ -1209,7 +1276,7 @@ watch(
         </div>
       </section>
 
-      <section class="panel">
+      <section v-show="activeStockTab === 'overview'" class="panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">事件後表現統計</h2>
@@ -1282,11 +1349,11 @@ watch(
         </div>
       </section>
 
-      <section id="news" class="page-section-anchor">
+      <section id="news" v-show="activeStockTab === 'news'" class="page-section-anchor">
         <StockNewsPanel :code="stockCode" :stock-name="detail?.name ?? stockCode" />
       </section>
 
-      <section v-if="recentViewedStocks.length" class="panel">
+      <section v-if="false && recentViewedStocks.length" class="panel">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">最近瀏覽</h2>
@@ -1315,7 +1382,7 @@ watch(
         </div>
       </section>
 
-      <section class="dual-grid">
+      <section id="chips" v-show="activeStockTab === 'chips'" class="dual-grid page-section-anchor">
         <article class="panel">
           <div class="panel-header">
             <div>
@@ -1399,7 +1466,7 @@ watch(
           <p v-else class="muted">同族群比較清單尚未建立完成。</p>
         </article>
       </section>
-      <section id="chart" class="page-section-anchor chart-stack">
+      <section id="chart" v-show="activeStockTab === 'charts'" class="page-section-anchor chart-stack">
         <IntradayChart
           v-if="detail?.['盤中走勢']"
           :data="detail['盤中走勢']"
@@ -1421,16 +1488,17 @@ watch(
       </section>
 
       <HolderStructureChart
+        v-show="activeStockTab === 'chips'"
         v-if="detail?.持股分散"
         :data="detail.持股分散"
         title="個股大戶 / 散戶拆解圖表"
       />
 
-      <section id="financials" class="page-section-anchor">
+      <section id="financials" v-show="activeStockTab === 'financials'" class="page-section-anchor">
         <StockFinancialOverview :data="detail" />
       </section>
 
-      <section class="dual-grid">
+      <section v-show="activeStockTab === 'chips'" class="dual-grid">
         <article class="panel">
           <div class="panel-header">
             <div>
@@ -1461,7 +1529,7 @@ watch(
         </article>
       </section>
 
-      <section class="dual-grid">
+      <section v-show="activeStockTab === 'chips'" class="dual-grid">
         <article class="panel">
           <div class="panel-header">
             <div>
@@ -1508,7 +1576,7 @@ watch(
         </article>
       </section>
 
-      <section class="dual-grid">
+      <section v-show="activeStockTab === 'chips'" class="dual-grid">
         <article class="panel">
           <div class="panel-header">
             <div>

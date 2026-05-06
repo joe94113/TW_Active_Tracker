@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import InfoCard from '../components/InfoCard.vue';
 import StatusCard from '../components/StatusCard.vue';
+import EventCalendarLinks from '../components/EventCalendarLinks.vue';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import { createStockRoute } from '../lib/stockRouting';
@@ -270,6 +271,14 @@ onMounted(() => {
                   <div>
                     <strong>{{ item.code }} {{ item.name }}</strong>
                     <p class="muted">{{ item.topSelectionSignalTitle ?? '先確認殖利率與填息機率，再決定是否納入觀察。' }}</p>
+                    <EventCalendarLinks
+                      :title="`${item.code} ${item.name} 除息觀察`"
+                      :start-date="item.nextEventDate"
+                      :end-date="item.nextEventDate"
+                      :note="item.topSelectionSignalTitle ?? '搭配殖利率、填息習性與籌碼一起看。'"
+                      :source-name="'官方交易雷達'"
+                      compact
+                    />
                   </div>
                   <div class="official-radar-side">
                     <span class="meta-chip">{{ formatDate(item.nextEventDate) }}</span>

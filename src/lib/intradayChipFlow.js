@@ -48,7 +48,7 @@ function describeDominance(largeCumulativeLots, retailCumulativeLots) {
   if (largeCumulativeLots < 0 && retailCumulativeLots > 0) return '散戶偏多';
   if (largeCumulativeLots > 0 && retailCumulativeLots > 0) return '同步偏多';
   if (largeCumulativeLots < 0 && retailCumulativeLots < 0) return '同步偏空';
-  return '買賣拉鋸';
+  return '多空拉鋸';
 }
 
 export function estimateIntradayChipFlow(data) {
@@ -112,7 +112,8 @@ export function estimateIntradayChipFlow(data) {
     marketDate: data?.marketDate ?? latest?.dateTime?.slice(0, 10) ?? null,
     updatedAt: data?.updatedAt ?? latest?.dateTime ?? null,
     previousClose: data?.previousClose ?? null,
-    methodology: '依 5 分鐘價量、價格位移與量能分位估算，非交易所原始大戶 / 散戶資料。',
+    methodology:
+      '使用每 5 分鐘價量變化、價格位移與相對量能，估算盤中大戶與散戶的買賣節奏；適合搭配分時圖輔助觀察，非交易所原始分點資料。',
     dominantSide: describeDominance(largeCumulativeLots, retailCumulativeLots),
     rows,
     summary: {

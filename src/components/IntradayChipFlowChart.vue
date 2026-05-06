@@ -7,6 +7,7 @@ import {
   chartPalette,
   createBaseChartOptions,
   normalizeNumber,
+  observeChartTheme,
   serializeChartTime,
   toUtcTimestamp,
 } from '../lib/charting';
@@ -23,6 +24,10 @@ const props = defineProps({
 });
 
 const flow = computed(() => estimateIntradayChipFlow(props.data));
+const displayTitle = computed(() => {
+  const title = String(props.title ?? '').trim();
+  return !title || title.includes('?') ? '盤中大戶 / 散戶估算圖' : title;
+});
 const hoveredKey = ref(null);
 
 const largeHost = ref(null);
@@ -33,6 +38,7 @@ const retailChart = shallowRef(null);
 
 const largeLineSeries = shallowRef(null);
 const retailLineSeries = shallowRef(null);
+let stopThemeObserver = null;
 
 const isInteractive = computed(() => (flow.value?.rows?.length ?? 0) > 1);
 
@@ -58,7 +64,7 @@ const summaryCards = computed(() => {
       title: '量能節奏',
       value: `${formatNumber(flow.value.summary.averageTurnoverRatio.toFixed(2))} 倍`,
       tone: flow.value.summary.averageTurnoverRatio >= 1.1 ? 'up' : 'normal',
-      note: '相對當日中位量能',
+      note: '相對近期平均量能',
     },
   ];
 });
@@ -151,8 +157,8 @@ function buildPanel(flowData, hovered, latest, type) {
     type,
     title: isLarge ? '大戶估算' : '散戶估算',
     subtitle: isLarge
-      ? '觀察盤中是否有明顯承接與拉抬，適合搭配分時圖一起看。'
-      : '觀察追價與殺低情緒是否升溫，判斷短線換手品質。',
+      ? '用價量節奏估算盤中偏向主力吸收或主力調節的換手區。'
+      : '用價量節奏估算盤中散戶追價或減碼的參與強弱。',
     total: latest?.[cumulativeKey] ?? 0,
     latest: latest?.[netKey] ?? 0,
     averageShare:
@@ -300,7 +306,12 @@ function setRetailHost(element) {
   retailHost.value = element;
 }
 
-onMounted(renderCharts);
+onMounted(() => {
+  renderCharts();
+  stopThemeObserver = observeChartTheme(() => {
+    renderCharts();
+  });
+});
 
 watch(flow, () => {
   hoveredKey.value = null;
@@ -308,6 +319,7 @@ watch(flow, () => {
 });
 
 onBeforeUnmount(() => {
+  stopThemeObserver?.();
   destroyChart(largeChart, largeLineSeries);
   destroyChart(retailChart, retailLineSeries);
 });
@@ -317,9 +329,9 @@ onBeforeUnmount(() => {
   <section v-if="flow" class="panel chart-panel chip-flow-panel">
     <div class="panel-header">
       <div>
-        <h2 class="panel-title">{{ title }}</h2>
+        <h2 class="panel-title">{{ displayTitle }}</h2>
         <p class="panel-subtitle">
-          用 5 分鐘價量推估大戶與散戶的盤中方向，適合搭配分時圖一起看追價力道與換手節奏。
+          以 5 分鐘價量變化估算大戶與散戶的當日買賣節奏，適合搭配分時圖一起看盤中換手。
         </p>
       </div>
       <div class="indicator-group">
@@ -362,7 +374,7 @@ onBeforeUnmount(() => {
             <strong :class="`text-${getTone(panel.latest)}`">{{ formatLotsValue(panel.latest) }}</strong>
           </div>
           <div>
-            <span class="chip-flow-stat-label">估算參與比重</span>
+            <span class="chip-flow-stat-label">參與占比均值</span>
             <strong>{{ formatRatio(panel.averageShare) }}</strong>
           </div>
         </div>
@@ -372,12 +384,12 @@ onBeforeUnmount(() => {
             {{ panel.display.isHovered ? `游標 ${panel.display.time}` : `最新 ${panel.display.time}` }}
           </span>
           <span :class="`text-${getTone(panel.display.net)}`">
-            區間 {{ formatLotsValue(panel.display.net, 1) }}
+            5 分鐘 {{ formatLotsValue(panel.display.net, 1) }}
           </span>
           <span :class="`text-${getTone(panel.display.cumulative)}`">
             累積 {{ formatLotsValue(panel.display.cumulative, 1) }}
           </span>
-          <span>參與 {{ formatRatio(panel.display.share) }}</span>
+          <span>占比 {{ formatRatio(panel.display.share) }}</span>
           <span>量能 {{ formatTurnoverRatio(panel.display.turnoverRatio) }}</span>
         </div>
 

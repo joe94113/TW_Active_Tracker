@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import { BaselineSeries, HistogramSeries, LineSeries, createChart } from 'lightweight-charts';
-import { formatAmount, formatDate, formatLots, formatNumber, formatPercent } from '../lib/formatters';
+import { formatDate, formatLots, formatNumber, formatPercent } from '../lib/formatters';
 import {
   buildConstantLineData,
   chartEnums,
@@ -10,6 +10,7 @@ import {
   formatCrosshairLabel,
   formatTickMark,
   normalizeNumber,
+  observeChartTheme,
   serializeChartTime,
   toUtcTimestamp,
 } from '../lib/charting';
@@ -25,9 +26,15 @@ const props = defineProps({
   },
 });
 
+const displayTitle = computed(() => {
+  const title = String(props.title ?? '').trim();
+  return !title || title.includes('?') ? '盤中分時圖' : title;
+});
+
 const chartHost = ref(null);
 const chartApi = shallowRef(null);
 const hoveredKey = ref(null);
+let stopThemeObserver = null;
 
 const points = computed(() =>
   (props.data?.points ?? [])
@@ -87,7 +94,7 @@ const infoStats = computed(() => {
       emphasis: true,
     },
     {
-      label: '價格',
+      label: '現價',
       value: formatNumber(point.price),
     },
     {
@@ -100,11 +107,11 @@ const infoStats = computed(() => {
       value: `${formatNumber(point.high)} / ${formatNumber(point.low)}`,
     },
     {
-      label: '量',
+      label: '成交量',
       value: formatLots(point.volume),
     },
     {
-      label: '振幅',
+      label: '震幅',
       value: formatPercent(sessionRangePercent.value),
     },
   ];
@@ -263,9 +270,13 @@ watch(
 
 onMounted(() => {
   renderChart();
+  stopThemeObserver = observeChartTheme(() => {
+    renderChart();
+  });
 });
 
 onBeforeUnmount(() => {
+  stopThemeObserver?.();
   destroyChart();
 });
 </script>
@@ -274,9 +285,9 @@ onBeforeUnmount(() => {
   <section class="panel chart-panel">
     <div class="panel-header">
       <div>
-        <h2 class="panel-title">{{ title }}</h2>
+        <h2 class="panel-title">{{ displayTitle }}</h2>
         <p class="panel-subtitle">
-          盤中 5 分鐘資料，已補上十字線同步價量、前收基準線與漲跌背景區。
+          盤中 5 分鐘價量圖，搭配即時漲跌、量能和高低區間，適合先看當天節奏有沒有轉強。
         </p>
       </div>
     </div>
@@ -302,12 +313,12 @@ onBeforeUnmount(() => {
       <div ref="chartHost" class="market-chart-host is-intraday" />
 
       <p class="chart-footnote">
-        交易日 {{ formatDate(data?.marketDate) }}，十字線會同步對應價格與量能柱，沒有資料的區段不開放額外縮放或捲動。
+        資料日 {{ formatDate(data?.marketDate) }}，價格與量能會依目前可取得的盤中資料更新。
       </p>
     </div>
 
     <p v-else class="muted">
-      {{ data?.錯誤訊息 ? `目前無法取得盤中分時資料：${data.錯誤訊息}` : '目前沒有足夠的盤中分時資料。' }}
+      {{ data?.message ? `目前沒有可繪製的盤中資料：${data.message}` : '目前還沒有足夠的盤中資料可顯示。' }}
     </p>
   </section>
 </template>

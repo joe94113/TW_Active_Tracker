@@ -11,10 +11,16 @@ const isCompactHeader = ref(false);
 const isMoreMenuOpen = ref(false);
 const desktopMoreMenuRef = ref(null);
 const mobileMoreMenuRef = ref(null);
+const themePreference = ref('system');
+const resolvedTheme = ref('light');
 
 let mediaQuery = null;
 let mediaQueryHandler = null;
 let outsideClickHandler = null;
+let colorSchemeQuery = null;
+let colorSchemeHandler = null;
+
+const THEME_STORAGE_KEY = 'tw-active-tracker-theme';
 
 const primaryNavigationItems = [
   { label: '首頁', path: '/' },
@@ -58,6 +64,30 @@ secondaryNavigationItems.push({
 });
 
 secondaryNavigationItems.push(
+  {
+    label: '自選看盤',
+    path: '/watchboard',
+    tag: '自選',
+    description: '把自選股集中在同一頁，看價格、雙法人、題材與風險，盤中盤後都能快速掃描。',
+  },
+  {
+    label: '產業脈動',
+    path: '/industry-pulse',
+    tag: '產業',
+    description: '先看哪個產業升溫，再看哪些股票今天突然放量或波動加大。',
+  },
+  {
+    label: '國際盤',
+    path: '/global-markets',
+    tag: '全球',
+    description: '把美股、亞洲股市、原油、黃金與外匯放在同一頁，盤前先看全球風向。',
+  },
+  {
+    label: '新聞熱度',
+    path: '/market-buzz',
+    tag: '熱度',
+    description: '整理近期熱門新聞關鍵詞、題材熱度與話題股，快速抓市場最近在看什麼。',
+  },
   {
     label: '隔日觀察',
     path: '/watchlist',
@@ -139,9 +169,38 @@ function toggleMoreMenu() {
   isMoreMenuOpen.value = !isMoreMenuOpen.value;
 }
 
+function resolveSystemTheme() {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return 'light';
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function applyTheme(preference = themePreference.value) {
+  const nextTheme = preference === 'system' ? resolveSystemTheme() : preference;
+  resolvedTheme.value = nextTheme;
+
+  if (typeof document !== 'undefined') {
+    document.documentElement.dataset.theme = nextTheme;
+  }
+}
+
+function toggleTheme() {
+  themePreference.value = resolvedTheme.value === 'dark' ? 'light' : 'dark';
+
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(THEME_STORAGE_KEY, themePreference.value);
+  }
+
+  applyTheme();
+}
+
 const generatedAtText = computed(() => formatGeneratedAt(manifest.value?.generatedAt));
 const siteIconHref = `${import.meta.env.BASE_URL}favicon.svg`;
 const isMoreActive = computed(() => secondaryNavigationItems.some((item) => isActiveRoute(item.path)));
+const themeToggleLabel = computed(() => (resolvedTheme.value === 'dark' ? '日間' : '夜間'));
+const themeToggleHint = computed(() => (resolvedTheme.value === 'dark' ? '切換為淺色模式' : '切換為深色模式'));
 
 const footerStats = computed(() => [
   {
@@ -161,6 +220,14 @@ const footerStats = computed(() => [
 onMounted(() => {
   loadGlobalData();
 
+  if (typeof window !== 'undefined') {
+    const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      themePreference.value = storedTheme;
+    }
+  }
+  applyTheme();
+
   if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
     mediaQuery = window.matchMedia('(max-width: 900px)');
     isCompactHeader.value = mediaQuery.matches;
@@ -173,6 +240,19 @@ onMounted(() => {
       mediaQuery.addEventListener('change', mediaQueryHandler);
     } else if (typeof mediaQuery.addListener === 'function') {
       mediaQuery.addListener(mediaQueryHandler);
+    }
+
+    colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    colorSchemeHandler = () => {
+      if (themePreference.value === 'system') {
+        applyTheme();
+      }
+    };
+
+    if (typeof colorSchemeQuery.addEventListener === 'function') {
+      colorSchemeQuery.addEventListener('change', colorSchemeHandler);
+    } else if (typeof colorSchemeQuery.addListener === 'function') {
+      colorSchemeQuery.addListener(colorSchemeHandler);
     }
   }
 
@@ -204,6 +284,14 @@ onBeforeUnmount(() => {
     }
   }
 
+  if (colorSchemeQuery && colorSchemeHandler) {
+    if (typeof colorSchemeQuery.removeEventListener === 'function') {
+      colorSchemeQuery.removeEventListener('change', colorSchemeHandler);
+    } else if (typeof colorSchemeQuery.removeListener === 'function') {
+      colorSchemeQuery.removeListener(colorSchemeHandler);
+    }
+  }
+
   if (outsideClickHandler && typeof document !== 'undefined') {
     document.removeEventListener('pointerdown', outsideClickHandler);
   }
@@ -218,7 +306,7 @@ watch(
 </script>
 
 <template>
-  <div class="app-shell">
+  <div class="app-shell min-h-screen">
     <header class="app-header">
       <div class="app-topbar">
         <div class="brand-chip">
@@ -271,11 +359,46 @@ watch(
 
         <div class="app-toolbar">
           <GlobalStockSearch />
+          <button
+            type="button"
+            class="theme-toggle"
+            :aria-label="themeToggleHint"
+            :title="themeToggleHint"
+            :aria-pressed="String(resolvedTheme === 'dark')"
+            @click="toggleTheme"
+          >
+            <span class="theme-toggle-icon" aria-hidden="true">
+              <svg
+                v-if="resolvedTheme === 'dark'"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="4.2"></circle>
+                <path d="M12 2.6v2.3M12 19.1v2.3M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.6 12h2.3M19.1 12h2.3M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"></path>
+              </svg>
+              <svg
+                v-else
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20.2 14.2A8.4 8.4 0 1 1 9.8 3.8a6.9 6.9 0 0 0 10.4 10.4Z"></path>
+              </svg>
+            </span>
+            <span class="theme-toggle-label">{{ themeToggleLabel }}</span>
+          </button>
         </div>
       </div>
     </header>
 
-    <main class="app-main">
+    <main class="app-main mx-auto w-full">
       <RouterView />
     </main>
 

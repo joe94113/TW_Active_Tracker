@@ -58,6 +58,24 @@ const spotlightCards = computed(() => [
   },
 ]);
 
+const heroSummaryItems = computed(() => [
+  {
+    label: '資料日期',
+    value: formatDate(themeRadar.value?.marketDate) ?? '等待更新',
+    note: '盤後整包資料整理完成後，選股條件與回放會一起刷新。',
+  },
+  {
+    label: '主線題材',
+    value: radar.value.spotlight.topTheme?.title ?? '等待題材聚焦',
+    note: radar.value.spotlight.topTheme?.observation ?? '先看題材、法人與量價有沒有站到同一邊。',
+  },
+  {
+    label: '追蹤個股',
+    value: `${formatNumber(radarSourceList.value.length, 0)} 檔`,
+    note: '從全股票池裡先找出可交易、訊號乾淨、風險相對可控的名單。',
+  },
+]);
+
 const stockSections = computed(() => [
   {
     key: 'technical',
@@ -229,23 +247,33 @@ function getReplayMetricClass(value) {
     />
 
     <template v-if="hasRadarData">
-      <section class="page-hero compact radar-page-hero">
-        <div class="hero-copy">
+      <section class="page-hero compact radar-page-hero rounded-[2rem] border border-slate-200/70 bg-white/90 p-6 shadow-[0_28px_90px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
+        <div class="hero-copy space-y-5">
           <span class="hero-kicker">Selection Radar</span>
           <h1>選股雷達</h1>
-          <p>
+          <p class="max-w-3xl text-balance leading-7 text-slate-600 dark:text-slate-300">
             把技術突破、籌碼偏多、整理待發、估值支撐與風險排除整理成同一頁，再搭配題材輪動和每日回放，方便你盤後快速縮小選股範圍。
           </p>
-          <div class="theme-radar-summary">
-            <span class="theme-observation-chip">資料日期 {{ formatDate(themeRadar?.marketDate) }}</span>
-            <span class="theme-observation-chip">主線題材 {{ radar.spotlight.topTheme?.title ?? '等待題材重新聚焦' }}</span>
-            <span class="theme-observation-chip">追蹤個股 {{ formatNumber(radarSourceList.length, 0) }} 檔</span>
+          <div class="hero-summary-grid">
+            <article
+              v-for="item in heroSummaryItems"
+              :key="item.label"
+              class="hero-summary-card rounded-[1.35rem] border border-slate-200/70 bg-white/85 shadow-[0_18px_40px_rgba(15,23,42,0.08)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-900/75 dark:ring-slate-800/70"
+            >
+              <span class="hero-summary-label">{{ item.label }}</span>
+              <strong class="hero-summary-value">{{ item.value }}</strong>
+              <p class="hero-summary-note">{{ item.note }}</p>
+            </article>
           </div>
         </div>
 
-        <aside class="radar-hero-board">
+        <aside class="radar-hero-board rounded-[1.6rem] border border-slate-200/70 bg-slate-50/75 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-900/72 dark:ring-slate-800/70">
           <div class="radar-spotlight-grid">
-            <article v-for="card in spotlightCards" :key="card.key" class="radar-spotlight-card">
+            <article
+              v-for="card in spotlightCards"
+              :key="card.key"
+              class="radar-spotlight-card rounded-[1.35rem] border border-slate-200/70 bg-white/85 shadow-[0_16px_36px_rgba(15,23,42,0.08)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70"
+            >
               <span class="theme-spotlight-label">{{ card.label }}</span>
               <strong>{{ card.value }}</strong>
               <p>{{ card.note }}</p>

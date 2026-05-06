@@ -14,10 +14,6 @@ function getTopicScore(snapshot, slug) {
   return toNumber(topic?.score);
 }
 
-function getTopicMeta(snapshot, slug) {
-  return snapshot?.topics?.find((item) => item.slug === slug) ?? null;
-}
-
 function computeDelta(currentValue, previousValue) {
   if (currentValue === null || previousValue === null) {
     return null;
@@ -29,10 +25,10 @@ function computeDelta(currentValue, previousValue) {
 function buildTrendLabel(delta) {
   if (delta === null) return '資料不足';
   if (delta >= 18) return '快速升溫';
-  if (delta >= 6) return '升溫中';
+  if (delta >= 6) return '穩定升溫';
   if (delta <= -18) return '快速降溫';
-  if (delta <= -6) return '降溫中';
-  return '延續中';
+  if (delta <= -6) return '逐步降溫';
+  return '區間整理';
 }
 
 function buildTrendTone(delta) {
@@ -56,9 +52,7 @@ export function buildThemeHistoryOverview(history, currentTopics = [], windows =
         return [windowSize, computeDelta(currentScore, previousScore)];
       }),
     );
-    const recentSeries = snapshots
-      .slice(-10)
-      .map((snapshot) => getTopicScore(snapshot, topic.slug) ?? 0);
+    const scoreChange = deltas[5] ?? deltas[10] ?? deltas[20] ?? null;
 
     return {
       slug: topic.slug,
@@ -68,9 +62,12 @@ export function buildThemeHistoryOverview(history, currentTopics = [], windows =
       leaderCode: topic.leaderStocks?.[0]?.code ?? null,
       leaderName: topic.leaderStocks?.[0]?.name ?? null,
       deltas,
-      recentSeries,
-      trendLabel: buildTrendLabel(deltas[5] ?? deltas[10] ?? deltas[20] ?? null),
-      trendTone: buildTrendTone(deltas[5] ?? deltas[10] ?? deltas[20] ?? null),
+      recentSeries: snapshots
+        .slice(-10)
+        .map((snapshot) => getTopicScore(snapshot, topic.slug) ?? 0),
+      scoreChange,
+      trendLabel: buildTrendLabel(scoreChange),
+      trendTone: buildTrendTone(scoreChange),
     };
   });
 

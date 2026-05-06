@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref, shallowRef, watch } from 'vue';
 import {
   BaselineSeries,
@@ -24,6 +24,7 @@ import {
   formatCrosshairLabel,
   formatTickMark,
   normalizeNumber,
+  observeChartTheme,
   serializeChartTime,
   toBusinessDay,
 } from '../lib/charting';
@@ -36,7 +37,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: '技術分析圖表',
+    default: '個股技術分析圖表',
   },
   comparisonSeries: {
     type: Array,
@@ -47,6 +48,125 @@ const props = defineProps({
     default: false,
   },
 });
+
+function isBrokenText(value) {
+  const text = String(value ?? '').trim();
+  return !text || text.includes('?');
+}
+
+function getRangeLabel(key) {
+  switch (key) {
+    case 'day':
+      return '天';
+    case 'week':
+      return '週';
+    case 'month':
+      return '月';
+    case 'quarter':
+      return '季';
+    case 'halfYear':
+      return '半年';
+    default:
+      return key;
+  }
+}
+
+function getRangeDescription(key) {
+  switch (key) {
+    case 'day':
+      return '近 5 個交易日';
+    case 'week':
+      return '近 10 個交易日';
+    case 'month':
+      return '近 22 個交易日';
+    case 'quarter':
+      return '近 66 個交易日';
+    case 'halfYear':
+      return '近 120 個交易日';
+    default:
+      return '近期交易日';
+  }
+}
+
+function getOverlayLabel(key, fallback) {
+  switch (key) {
+    case 'volume':
+      return '量能';
+    case 'zone':
+      return '價位帶';
+    case 'levels':
+      return '支撐壓力';
+    case 'events':
+      return '事件點';
+    default:
+      return fallback;
+  }
+}
+
+function getIndicatorInputLabel(key, fallback) {
+  switch (key) {
+    case 'macdFastPeriod':
+      return '快線';
+    case 'macdSlowPeriod':
+      return '慢線';
+    case 'macdSignalPeriod':
+      return '訊號';
+    case 'stochasticPeriod':
+      return 'KD 週期';
+    case 'stochasticKPeriod':
+      return 'K 平滑';
+    case 'stochasticDPeriod':
+      return 'D 平滑';
+    default:
+      return fallback;
+  }
+}
+
+function getEventMarkerText(label) {
+  if (label.includes('處置') && label.includes('結束')) return '處結';
+  if (label.includes('處置') && label.includes('開始')) return '處開';
+  if (label.includes('處置')) return '處置';
+  if (label.includes('注意')) return '注意';
+  if (label.includes('營收')) return '營收';
+  if (label.includes('財報') || label.includes('季報') || label.includes('法說')) return '財報';
+  if (label.includes('除息') || label.includes('股利')) return '除息';
+  if (label.includes('變更交易')) return '變更';
+  if (label.includes('ETF')) return 'ETF';
+  return '事件';
+}
+
+function getEventStatusLabel(status) {
+  if (status === 'recent') return '近期';
+  if (status === 'upcoming') return '即將';
+  return '參考';
+}
+
+function getImportanceLabel(importance) {
+  if (importance >= 3) return '高優先';
+  if (importance === 2) return '觀察';
+  return '參考';
+}
+
+function findPriceRows(source) {
+  if (!source || typeof source !== 'object') {
+    return [];
+  }
+
+  return Object.values(source).find(
+    (value) =>
+      Array.isArray(value)
+      && value.some(
+        (row) =>
+          row
+          && typeof row === 'object'
+          && 'date' in row
+          && 'open' in row
+          && 'high' in row
+          && 'low' in row
+          && 'close' in row,
+      ),
+  ) ?? [];
+}
 
 const rangeOptions = [
   { key: 'day', label: '天', description: '近 5 個交易日', size: 5 },
@@ -71,6 +191,7 @@ const hoveredKey = ref(null);
 const chartHost = ref(null);
 const chartApi = shallowRef(null);
 const selectedComparisonCodes = ref([]);
+let stopThemeObserver = null;
 
 const rawIndicatorSettings = reactive({
   ...defaultIndicatorSettings,
@@ -99,6 +220,26 @@ watch(
 );
 
 const indicatorSettings = computed(() => sanitizeIndicatorSettings(rawIndicatorSettings));
+const displayTitle = computed(() => (isBrokenText(props.title) ? '個股技術分析圖表' : props.title));
+const displayRangeOptions = computed(() =>
+  rangeOptions.map((item) => ({
+    ...item,
+    label: getRangeLabel(item.key),
+    description: getRangeDescription(item.key),
+  })),
+);
+const displayOverlayOptions = computed(() =>
+  overlayOptions.value.map((item) => ({
+    ...item,
+    label: getOverlayLabel(item.key, item.label),
+  })),
+);
+const displayActiveIndicatorInputs = computed(() =>
+  activeIndicatorInputs.value.map((item) => ({
+    ...item,
+    label: getIndicatorInputLabel(item.key, item.label),
+  })),
+);
 
 const overlayOptions = computed(() => [
   { key: 'maFast', label: `MA${indicatorSettings.value.maFastPeriod}` },
@@ -106,8 +247,8 @@ const overlayOptions = computed(() => [
   { key: 'maMedium', label: `MA${indicatorSettings.value.maMediumPeriod}` },
   { key: 'maLong', label: `MA${indicatorSettings.value.maLongPeriod}` },
   { key: 'volume', label: '量能' },
-  { key: 'zone', label: '漲跌區' },
-  { key: 'levels', label: '價位帶' },
+  { key: 'zone', label: '價位帶' },
+  { key: 'levels', label: '支撐壓力' },
   { key: 'events', label: '事件點' },
 ]);
 
@@ -139,7 +280,7 @@ const activeIndicatorInputs = computed(() => {
 });
 
 const normalizedBaseRows = computed(() =>
-  (props.data?.歷史資料 ?? [])
+  findPriceRows(props.data)
     .map((row) => {
       const time = toBusinessDay(row.date);
       const open = normalizeNumber(row.open, true);
@@ -182,7 +323,7 @@ const enrichedRows = computed(() =>
 );
 
 const activeRangeConfig = computed(() =>
-  rangeOptions.find((item) => item.key === activeRange.value) ?? rangeOptions.at(-1),
+  displayRangeOptions.value.find((item) => item.key === activeRange.value) ?? displayRangeOptions.value.at(-1),
 );
 
 const chartRows = computed(() =>
@@ -200,6 +341,9 @@ const isInteractive = computed(() => chartRows.value.length > 1);
 
 const overlaySignature = computed(() =>
   overlayOptions.value.map((item) => `${item.key}:${overlayState[item.key] ? '1' : '0'}`).join('|'),
+);
+const chartSubtitle = computed(
+  () => `${activeRangeConfig.value.description}，已整合 K 線、量能、十字線同步 hover、可調指標參數與多檔比較疊圖。`,
 );
 
 const rangeReturn = computed(() => {
@@ -223,7 +367,7 @@ const technicalSignals = computed(() =>
 
 const priceZones = computed(() =>
   buildKeyPriceZones(props.data)
-    .filter((item) => item.value !== null && item.label !== '目前價')
+    .filter((item) => item.value !== null)
     .filter((item) => !['MA20', 'MA60'].includes(item.label)),
 );
 
@@ -234,35 +378,10 @@ const nearestSupport = computed(() => supportResistance.value.supports[0] ?? nul
 const nextUpcomingEvent = computed(() =>
   stockEvents.value.find((item) => item.status === 'upcoming') ?? null,
 );
-const chartLevelStats = computed(() => [
-  {
-    label: '最近壓力',
-    value: nearestResistance.value
-      ? `${formatNumber(nearestResistance.value.low)} - ${formatNumber(nearestResistance.value.high)}`
-      : '-',
-    tone: 'down',
-  },
-  {
-    label: '最近支撐',
-    value: nearestSupport.value
-      ? `${formatNumber(nearestSupport.value.low)} - ${formatNumber(nearestSupport.value.high)}`
-      : '-',
-    tone: 'up',
-  },
-  {
-    label: '下一個事件',
-    value: nextUpcomingEvent.value
-      ? `${nextUpcomingEvent.value.label} ${formatDate(nextUpcomingEvent.value.date)}`
-      : '-',
-  },
-]);
 
-const primaryStats = computed(() => {
+const uiPrimaryStats = computed(() => {
   const row = displayRow.value;
-
-  if (!row) {
-    return [];
-  }
+  if (!row) return [];
 
   return [
     {
@@ -270,58 +389,31 @@ const primaryStats = computed(() => {
       value: hoveredKey.value ? formatCrosshairLabel(hoveredKey.value) : formatDate(row.date),
       emphasis: true,
     },
-    {
-      label: '開',
-      value: formatNumber(row.open),
-    },
-    {
-      label: '高',
-      value: formatNumber(row.high),
-      tone: 'up',
-    },
-    {
-      label: '低',
-      value: formatNumber(row.low),
-      tone: 'down',
-    },
-    {
-      label: '收',
-      value: formatNumber(row.close),
-    },
+    { label: '開', value: formatNumber(row.open) },
+    { label: '高', value: formatNumber(row.high), tone: 'up' },
+    { label: '低', value: formatNumber(row.low), tone: 'down' },
+    { label: '收', value: formatNumber(row.close) },
     {
       label: '漲跌',
       value: `${formatPriceDelta(row.change)} / ${formatPercent(row.changePercent)}`,
       tone: (row.change ?? 0) > 0 ? 'up' : (row.change ?? 0) < 0 ? 'down' : undefined,
     },
-    {
-      label: '量',
-      value: formatLots(row.volume),
-    },
-    ...(row.contractMonth
-      ? [
-          {
-            label: '契約月',
-            value: row.contractMonth,
-          },
-        ]
-      : []),
+    { label: '成交量', value: formatLots(row.volume) },
+    ...(row.contractMonth ? [{ label: '契約', value: row.contractMonth }] : []),
   ];
 });
 
-const indicatorStats = computed(() => {
+const uiIndicatorStats = computed(() => {
   const row = displayRow.value;
   const settings = indicatorSettings.value;
-
-  if (!row) {
-    return [];
-  }
+  if (!row) return [];
 
   if (activeIndicator.value === 'macd') {
     return [
       { label: `MACD ${settings.macdFastPeriod}/${settings.macdSlowPeriod}`, value: formatNumber(row.macd) },
       { label: `訊號 ${settings.macdSignalPeriod}`, value: formatNumber(row.macdSignal) },
       {
-        label: '柱狀體',
+        label: '柱體',
         value: formatNumber(row.macdHist),
         tone: (row.macdHist ?? 0) > 0 ? 'up' : (row.macdHist ?? 0) < 0 ? 'down' : undefined,
       },
@@ -346,10 +438,43 @@ const indicatorStats = computed(() => {
   ];
 });
 
+const uiChartLevelStats = computed(() => [
+  {
+    label: '最近壓力',
+    value: nearestResistance.value
+      ? `${formatNumber(nearestResistance.value.low)} - ${formatNumber(nearestResistance.value.high)}`
+      : '-',
+    tone: 'down',
+  },
+  {
+    label: '最近支撐',
+    value: nearestSupport.value
+      ? `${formatNumber(nearestSupport.value.low)} - ${formatNumber(nearestSupport.value.high)}`
+      : '-',
+    tone: 'up',
+  },
+  {
+    label: '下一事件',
+    value: nextUpcomingEvent.value
+      ? `${nextUpcomingEvent.value.label} ${formatDate(nextUpcomingEvent.value.date)}`
+      : '-',
+  },
+]);
+
+const uiActiveEventHeadline = computed(() => (hoveredKey.value && activeEventEntries.value.length ? '對應事件' : '事件焦點'));
+const uiChartFootnote = computed(() => {
+  const notes = ['可切換時間區間、技術指標與比較標的，先看趨勢，再看量價和事件節奏。'];
+  if (hasFuturesContractMonth.value) {
+    notes.push('如果是期貨資料，圖上也會保留契約月份，方便辨識換倉前後的節奏。');
+  }
+  return notes.join(' ');
+});
+const uiEmptyStateMessage = computed(() => `目前還沒有足夠資料可繪製${displayTitle.value}`);
+
 const comparisonCandidates = computed(() =>
   (props.comparisonSeries ?? [])
     .map((item) => {
-      const rows = (item?.歷史資料 ?? [])
+      const rows = findPriceRows(item)
         .map((row) => {
           const time = toBusinessDay(row.date);
           const close = normalizeNumber(row.close, true);
@@ -511,15 +636,29 @@ function addChartPriceLine(series, {
 }
 
 function mapEventLabelToMarkerText(label) {
-  if (label.includes('月營收')) return '營收';
-  if (label.includes('季報')) return '季報';
-  if (label.includes('除權') || label.includes('除息') || label.includes('股利')) return '股利';
-  if (label.includes('處置')) return '處置';
-  if (label.includes('ETF')) return 'ETF';
-  return '事件';
+  return getEventMarkerText(label);
 }
 
-function mapEventToMarkerTone(status) {
+function mapEventToMarkerTone(event) {
+  const status = event?.status;
+  const label = String(event?.label ?? '');
+
+  if (label.includes('處置') && label.includes('結束')) {
+    return {
+      color: '#12b886',
+      shape: 'arrowUp',
+      position: 'belowBar',
+    };
+  }
+
+  if (label.includes('處置') && label.includes('開始')) {
+    return {
+      color: chartPalette.resistance,
+      shape: 'arrowDown',
+      position: 'aboveBar',
+    };
+  }
+
   if (status === 'recent') {
     return {
       color: chartPalette.resistance,
@@ -544,16 +683,14 @@ function mapEventToMarkerTone(status) {
 }
 
 function describeEventStatus(status) {
-  if (status === 'recent') return '最近事件';
-  if (status === 'upcoming') return '即將到來';
-  return '參考揭露';
+  return getEventStatusLabel(status);
 }
 
 function describeEventDistance(dateText) {
   const targetDate = new Date(`${dateText}T00:00:00`);
 
   if (Number.isNaN(targetDate.getTime())) {
-    return '日期整理中';
+    return '日期格式異常';
   }
 
   const today = new Date();
@@ -562,7 +699,7 @@ function describeEventDistance(dateText) {
   const diffDays = Math.round((targetDate.getTime() - today.getTime()) / 86400000);
 
   if (diffDays === 0) {
-    return '就在今天';
+    return '今天';
   }
 
   if (diffDays > 0) {
@@ -640,7 +777,7 @@ const chartEventEntries = computed(() => {
         return null;
       }
 
-      const markerTone = mapEventToMarkerTone(item.status);
+      const markerTone = mapEventToMarkerTone(item);
 
       return {
         key: item.key,
@@ -652,8 +789,8 @@ const chartEventEntries = computed(() => {
           position: markerTone.position,
           shape: markerTone.shape,
           color: markerTone.color,
-          text: mapEventLabelToMarkerText(item.label),
-          size: item.status === 'upcoming' ? 1.3 : 1,
+          text: getEventMarkerText(item.label),
+          size: item.status === 'upcoming' ? 1.6 : 1.35,
         },
       };
     })
@@ -661,6 +798,17 @@ const chartEventEntries = computed(() => {
 });
 
 const chartEventMarkers = computed(() => chartEventEntries.value.map((item) => item.marker));
+const chartEventTimelineItems = computed(() =>
+  chartEventEntries.value.map((item) => ({
+    key: item.key,
+    time: item.time,
+    label: item.event.label,
+    markerText: getEventMarkerText(item.event.label),
+    status: item.event.status,
+    date: item.event.date,
+    note: item.event.note,
+  })),
+);
 const chartEventLookup = computed(() => {
   const lookup = new Map();
 
@@ -722,7 +870,7 @@ const activeEventEntries = computed(() => {
   return chartEventEntries.value.length ? [chartEventEntries.value.at(-1)] : [];
 });
 
-const activeEventHeadline = computed(() => (hoveredKey.value && activeEventEntries.value.length ? '事件說明' : '下一個事件'));
+const activeEventHeadline = computed(() => (hoveredKey.value && activeEventEntries.value.length ? '對應事件' : '事件焦點'));
 
 function handleCrosshairMove(event) {
   if (!event?.time) {
@@ -1100,9 +1248,13 @@ watch(
 
 onMounted(() => {
   renderChart();
+  stopThemeObserver = observeChartTheme(() => {
+    renderChart();
+  });
 });
 
 onBeforeUnmount(() => {
+  stopThemeObserver?.();
   destroyChart();
 });
 </script>
@@ -1111,16 +1263,16 @@ onBeforeUnmount(() => {
   <section class="panel chart-panel">
     <div class="panel-header">
       <div>
-        <h2 class="panel-title">{{ title }}</h2>
+        <h2 class="panel-title">{{ displayTitle }}</h2>
         <p class="panel-subtitle">
-          {{ activeRangeConfig.description }}，已整合 K 線、量能、十字線同步 hover、可調指標參數與多檔比較疊圖。
+          {{ chartSubtitle }}
         </p>
       </div>
       <div class="chart-header-actions">
         <span class="meta-chip">日線最新 {{ formatDate(dataAsOfDate) }}</span>
         <div class="range-tabs" role="tablist" aria-label="圖表區間">
           <button
-            v-for="item in rangeOptions"
+            v-for="item in displayRangeOptions"
             :key="item.key"
             type="button"
             class="range-tab"
@@ -1137,7 +1289,7 @@ onBeforeUnmount(() => {
       <div class="chart-info-strip">
         <div class="chart-info-grid">
           <div
-            v-for="item in primaryStats"
+            v-for="item in uiPrimaryStats"
             :key="item.label"
             class="chart-info-chip"
             :class="[
@@ -1151,7 +1303,7 @@ onBeforeUnmount(() => {
         </div>
         <div class="chart-info-grid compact">
           <div
-            v-for="item in indicatorStats"
+            v-for="item in uiIndicatorStats"
             :key="`${activeIndicator}-${item.label}`"
             class="chart-info-chip"
             :class="item.tone ? `is-${item.tone}` : ''"
@@ -1166,7 +1318,7 @@ onBeforeUnmount(() => {
             </strong>
           </div>
           <div
-            v-for="item in chartLevelStats"
+            v-for="item in uiChartLevelStats"
             :key="item.label"
             class="chart-info-chip"
             :class="item.tone ? `is-${item.tone}` : ''"
@@ -1195,7 +1347,7 @@ onBeforeUnmount(() => {
         <div class="toolbar-group">
           <span class="toolbar-label">圖層</span>
           <button
-            v-for="item in overlayOptions"
+            v-for="item in displayOverlayOptions"
             :key="item.key"
             type="button"
             class="chart-toggle"
@@ -1230,7 +1382,7 @@ onBeforeUnmount(() => {
           <div class="chart-parameter-group is-inline">
             <span class="toolbar-label chart-parameter-group-label">目前指標參數</span>
             <label
-              v-for="item in activeIndicatorInputs"
+              v-for="item in displayActiveIndicatorInputs"
               :key="item.key"
               class="chart-parameter-input"
             >
@@ -1254,10 +1406,10 @@ onBeforeUnmount(() => {
       <div v-if="comparisonCandidates.length" class="chart-compare-panel">
         <div class="chart-compare-head">
           <div>
-            <p class="comparison-stat-label">多檔比較疊圖</p>
-            <p class="comparison-stat-note">以目前主圖第一根 K 線為共同基準做標準化疊圖，最多可同時比較 3 檔。</p>
+            <p class="comparison-stat-label">比較標的</p>
+            <p class="comparison-stat-note">可加入最多 3 檔股票，同區間一起看相對漲跌與強弱。</p>
           </div>
-          <span v-if="comparisonLoading" class="meta-chip">比較標的載入中</span>
+          <span v-if="comparisonLoading" class="meta-chip">比較資料載入中</span>
         </div>
 
         <div class="chart-compare-picker">
@@ -1286,18 +1438,33 @@ onBeforeUnmount(() => {
             <p class="comparison-stat-value" :class="{ 'text-up': item.returnPercent > 0, 'text-down': item.returnPercent < 0 }">
               {{ item.value }}
             </p>
-            <p class="comparison-stat-note">同區間標準化報酬</p>
+            <p class="comparison-stat-note">同區間相對報酬</p>
           </div>
         </div>
       </div>
 
       <div ref="chartHost" class="market-chart-host is-technical" />
 
+      <div v-if="chartEventTimelineItems.length" class="chart-event-rail">
+        <button
+          v-for="item in chartEventTimelineItems"
+          :key="`event-rail-${item.key}`"
+          type="button"
+          class="chart-event-pill"
+          :class="`is-${item.status === 'reference' ? 'reference' : item.status}`"
+          @click="hoveredKey = String(item.time)"
+        >
+          <span class="chart-event-pill-marker">{{ item.markerText }}</span>
+          <span class="chart-event-pill-text">{{ item.label }}</span>
+          <span class="chart-event-pill-date">{{ formatDate(item.date) }}</span>
+        </button>
+      </div>
+
       <div v-if="activeEventEntries.length" class="chart-event-callout">
         <div class="chart-event-callout-head">
           <div>
-            <span class="chart-info-label">{{ activeEventHeadline }}</span>
-            <strong>{{ activeEventEntries.length > 1 ? `同日 ${activeEventEntries.length} 個事件` : activeEventEntries[0].event.label }}</strong>
+            <span class="chart-info-label">{{ uiActiveEventHeadline }}</span>
+            <strong>{{ activeEventEntries.length > 1 ? `共 ${activeEventEntries.length} 個事件` : activeEventEntries[0].event.label }}</strong>
           </div>
           <span class="meta-chip">{{ hoveredKey ? formatCrosshairLabel(hoveredKey) : formatDate(activeEventEntries[0].event.date) }}</span>
         </div>
@@ -1311,7 +1478,7 @@ onBeforeUnmount(() => {
             <div class="chart-event-item-head">
               <strong>{{ item.event.label }}</strong>
               <span class="status-badge" :class="`is-${item.event.status === 'reference' ? 'event-reference' : item.event.status}`">
-                {{ describeEventStatus(item.event.status) }}
+                {{ getEventStatusLabel(item.event.status) }}
               </span>
             </div>
             <p>{{ item.event.note }}</p>
@@ -1332,18 +1499,19 @@ onBeforeUnmount(() => {
         >
           <div class="chart-signal-head">
             <strong>{{ signal.title }}</strong>
-            <span class="meta-chip">{{ signal.importance >= 3 ? '高優先' : signal.importance === 2 ? '留意' : '觀察' }}</span>
+            <span class="meta-chip">{{ getImportanceLabel(signal.importance) }}</span>
           </div>
           <p>{{ signal.description }}</p>
         </article>
       </div>
 
       <p class="chart-footnote">
-        十字線會同步顯示價量與指標數值，價位帶與事件點都可以獨立切換，沒有資料的區段不開放額外縮放或捲動。
-        <template v-if="hasFuturesContractMonth">期貨資料遇到換倉時，均線會自動斷開避免錯誤連線。</template>
+        {{ uiChartFootnote }}
       </p>
     </div>
 
-    <p v-else class="muted">目前還沒有足夠的歷史價格資料可以繪製 {{ title }}。</p>
+    <p v-else class="muted">{{ uiEmptyStateMessage }}</p>
   </section>
 </template>
+
+

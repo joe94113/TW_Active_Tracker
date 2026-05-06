@@ -26,6 +26,7 @@ import { buildThemeRadar, TOPIC_DEFINITIONS } from './lib/theme-radar.mjs';
 import { buildThemeHistorySnapshot, mergeThemeHistory } from './lib/theme-history.mjs';
 import { mergeRadarReplayHistory } from './lib/radar-replay.mjs';
 import { mergeBrokerBranchHistory } from './lib/broker-branch-history.mjs';
+import { buildGlobalMarketsDashboard, GLOBAL_MARKET_SYMBOLS } from './lib/global-markets.mjs';
 import { buildSelectionRadar } from './lib/selection-radar.mjs';
 import { buildEntryRadar } from './lib/entry-radar.mjs';
 import { buildWatchGroups } from './lib/watch-groups.mjs';
@@ -43,6 +44,7 @@ const ETF資料目錄 = path.join(資料目錄, 'etfs');
 const 個股新聞資料目錄 = path.join(資料目錄, 'stocks', 'news');
 const 題材資料目錄 = path.join(資料目錄, 'topics');
 const 選股雷達資料目錄 = path.join(資料目錄, 'radar');
+const 市場資料目錄 = path.join(資料目錄, 'markets');
 const 已部署站台網址 = 'https://joe94113.github.io/TW_Active_Tracker/';
 const RECENT_NEWS_WINDOW_DAYS = 7;
 const 使用者代理 =
@@ -2531,6 +2533,26 @@ async function 抓取指數歷史日線(symbol, monthCount = 6) {
   return 抓取Yahoo歷史日線([symbol], monthCount);
 }
 
+async function 建立國際市場儀表板(市場資料日期, 產生時間) {
+  const seriesEntries = await Promise.all(
+    GLOBAL_MARKET_SYMBOLS.map(async (symbol) => {
+      try {
+        const rows = await 抓取指數歷史日線(symbol, 6);
+        return [symbol, rows];
+      } catch (error) {
+        console.warn(`[國際市場資料略過] ${symbol} ${error instanceof Error ? error.message : String(error)}`);
+        return [symbol, []];
+      }
+    }),
+  );
+
+  return buildGlobalMarketsDashboard({
+    seriesMap: new Map(seriesEntries),
+    generatedAt: 產生時間,
+    marketDate: 市場資料日期,
+  });
+}
+
 async function 抓取Yahoo盤中分時(代號清單) {
   let payload = null;
   let result = null;
@@ -3743,6 +3765,31 @@ function 建立連買資料(日資料清單, key) {
     .slice(0, 12);
 }
 
+function 建立雙法人同買超資料(日資料清單, 外資連買 = [], 投信連買 = []) {
+  const 最新資料 = 日資料清單[0]?.資料 ?? [];
+  const 外資連買索引 = new Map(外資連買.map((item) => [item.代號, item]));
+  const 投信連買索引 = new Map(投信連買.map((item) => [item.代號, item]));
+
+  return 最新資料
+    .filter((item) => (item.外資買賣超 ?? 0) > 0 && (item.投信買賣超 ?? 0) > 0)
+    .map((item) => {
+      const 外資連買資料 = 外資連買索引.get(item.代號);
+      const 投信連買資料 = 投信連買索引.get(item.代號);
+      return {
+        ...item,
+        外資連買天數: 外資連買資料?.連買天數 ?? 0,
+        投信連買天數: 投信連買資料?.連買天數 ?? 0,
+        累計雙法人買超股數: (item.外資買賣超 ?? 0) + (item.投信買賣超 ?? 0),
+        觀察: '雙法人同買超',
+      };
+    })
+    .sort((left, right) =>
+      (right.累計雙法人買超股數 ?? 0) - (left.累計雙法人買超股數 ?? 0) ||
+      (right.外資連買天數 + right.投信連買天數) - (left.外資連買天數 + left.投信連買天數),
+    )
+    .slice(0, 12);
+}
+
 function 建立土洋對作資料(日資料清單) {
   const 最新資料 = 日資料清單[0]?.資料 ?? [];
 
@@ -3790,6 +3837,7 @@ function 抓取法人追蹤(日資料清單) {
 
   const 外資連買 = 建立連買資料(日資料清單, '外資買賣超');
   const 投信連買 = 建立連買資料(日資料清單, '投信買賣超');
+  const 雙法人同買超 = 建立雙法人同買超資料(日資料清單, 外資連買, 投信連買);
   const 土洋對作 = 建立土洋對作資料(日資料清單);
   const 觀察摘要 = [];
 
@@ -3812,6 +3860,7 @@ function 抓取法人追蹤(日資料清單) {
     回溯交易日: 日資料清單.map((item) => item.日期),
     外資連買,
     投信連買,
+    雙法人同買超,
     土洋對作,
     觀察摘要,
     資料說明: [
@@ -5589,6 +5638,7 @@ async function main() {
     generatedAt: 產生時間,
     marketDate: 資料市場日,
   });
+  const 國際市場儀表板 = await 建立國際市場儀表板(資料市場日, 產生時間);
   const 題材雷達 = buildThemeRadar({
     stockSummaries: 強化個股摘要清單,
     stockNewsList: 個股新聞清單,
@@ -5669,6 +5719,7 @@ async function main() {
     期貨籌碼,
     主動ETF總覽,
     題材雷達,
+    國際市場儀表板,
     免責聲明: [
       '本站資料來自公開官方來源與投信揭露頁面，僅供資訊整理與研究參考。',
       '首頁的籌碼觀察與交易建議屬於統計推論，不構成任何投資建議。',
@@ -5695,6 +5746,7 @@ async function main() {
     productEventsPath: 'data/calendar/product-events.json',
     insiderHoldingsPath: 'data/insider/holdings.json',
     signalConfidencePath: 'data/radar/signal-confidence.json',
+    globalMarketsPath: 'data/markets/global.json',
     topicPathTemplate: 'data/topics/{slug}.json',
     trackedEtfs: 追蹤ETF清單,
     latestOverview: 追蹤ETF清單.map((etf) => {
@@ -5756,6 +5808,7 @@ async function main() {
   await 寫入JSON(path.join(選股雷達資料目錄, 'broker-branches-history.json'), 分點回放歷史);
   await 寫入JSON(path.join(選股雷達資料目錄, 'signal-confidence.json'), 訊號可信度資料);
   await 寫入JSON(path.join(ETF資料目錄, 'high-dividend-flow.json'), 高股息ETF換股雷達);
+  await 寫入JSON(path.join(市場資料目錄, 'global.json'), 國際市場儀表板);
   const 財報日曆資料目錄 = path.join(資料目錄, 'calendar');
   const 內部人資料目錄 = path.join(資料目錄, 'insider');
   await 寫入JSON(path.join(財報日曆資料目錄, 'earnings.json'), 財報日曆資料);

@@ -10,6 +10,7 @@ const earningsCalendar = ref(null);
 const productEvents = ref(null);
 const insiderHoldings = ref(null);
 const signalConfidenceStats = ref(null);
+const globalMarkets = ref(null);
 const isLoading = ref(false);
 const errorMessage = ref('');
 
@@ -43,6 +44,7 @@ async function loadGlobalData() {
         productEventsData,
         insiderData,
         signalConfidenceData,
+        globalMarketsData,
       ] = await Promise.all([
         fetchJson(manifestData.dashboardPath ?? 'data/dashboard.json'),
         fetchJson(manifestData.overlapPath ?? 'data/etf-overlap.json'),
@@ -52,6 +54,7 @@ async function loadGlobalData() {
         fetchJsonOptional(manifestData.productEventsPath ?? 'data/calendar/product-events.json'),
         fetchJsonOptional(manifestData.insiderHoldingsPath ?? 'data/insider/holdings.json'),
         fetchJsonOptional(manifestData.signalConfidencePath ?? 'data/radar/signal-confidence.json'),
+        fetchJsonOptional(manifestData.globalMarketsPath ?? 'data/markets/global.json'),
       ]);
 
       manifest.value = manifestData;
@@ -63,6 +66,7 @@ async function loadGlobalData() {
       productEvents.value = productEventsData;
       insiderHoldings.value = insiderData;
       signalConfidenceStats.value = signalConfidenceData;
+      globalMarkets.value = globalMarketsData;
     } catch (error) {
       errorMessage.value = error instanceof Error ? error.message : 'Global data load failed';
       throw error;
@@ -91,7 +95,8 @@ export function useGlobalData() {
     productEvents: computed(() => productEvents.value),
     insiderHoldings: computed(() => insiderHoldings.value),
     signalConfidenceStats: computed(() => signalConfidenceStats.value),
+    globalMarkets: computed(() => globalMarkets.value),
   };
 }
 
-export const use全域資料 = useGlobalData;
+export const useGlobalDataState = useGlobalData;

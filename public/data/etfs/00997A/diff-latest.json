@@ -1,111 +1,121 @@
 {
   "code": "00997A",
   "name": "主動群益美國增長",
-  "fromDisclosureDate": "2026-04-28",
-  "toDisclosureDate": "2026-04-29",
+  "fromDisclosureDate": "2026-04-29",
+  "toDisclosureDate": "2026-05-05",
   "comparisonReady": true,
   "added": [],
   "removed": [],
   "increased": [
     {
-      "code": "NVDA US",
-      "name": "輝達公司",
-      "previousShares": 51463,
-      "currentShares": 60763,
-      "previousWeight": 3.28,
-      "currentWeight": 3.91,
-      "sharesDelta": 9300,
-      "weightDelta": 0.6300000000000003
+      "code": "LITE US",
+      "name": "Lumentum Holdings Inc",
+      "previousShares": 19055,
+      "currentShares": 22255,
+      "previousWeight": 4.55,
+      "currentWeight": 6.02,
+      "sharesDelta": 3200,
+      "weightDelta": 1.4699999999999998
+    },
+    {
+      "code": "STX US",
+      "name": "Seagate Technology Holdin",
+      "previousShares": 29967,
+      "currentShares": 29967,
+      "previousWeight": 5.23,
+      "currentWeight": 6.14,
+      "sharesDelta": 0,
+      "weightDelta": 0.9099999999999993
     },
     {
       "code": "MU US",
-      "name": "美光科技公司",
-      "previousShares": 26277,
-      "currentShares": 29477,
-      "previousWeight": 4.06,
-      "currentWeight": 4.48,
-      "sharesDelta": 3200,
-      "weightDelta": 0.4200000000000008
+      "name": "Micron Technology Inc",
+      "previousShares": 29477,
+      "currentShares": 33077,
+      "previousWeight": 4.48,
+      "currentWeight": 5.29,
+      "sharesDelta": 3600,
+      "weightDelta": 0.8099999999999996
     },
     {
       "code": "SNDK US",
-      "name": "晟碟公司（德拉瓦州）",
-      "previousShares": 12752,
+      "name": "Sandisk Corp/DE",
+      "previousShares": 14302,
       "currentShares": 14302,
-      "previousWeight": 4.02,
-      "currentWeight": 4.32,
-      "sharesDelta": 1550,
-      "weightDelta": 0.3000000000000007
+      "previousWeight": 4.32,
+      "currentWeight": 4.98,
+      "sharesDelta": 0,
+      "weightDelta": 0.6600000000000001
+    },
+    {
+      "code": "WDC US",
+      "name": "Western Digital Corp",
+      "previousShares": 50940,
+      "currentShares": 50940,
+      "previousWeight": 6.01,
+      "currentWeight": 6.25,
+      "sharesDelta": 0,
+      "weightDelta": 0.2400000000000002
+    },
+    {
+      "code": "CIEN US",
+      "name": "Ciena Corp",
+      "previousShares": 21093,
+      "currentShares": 21093,
+      "previousWeight": 3.01,
+      "currentWeight": 3.15,
+      "sharesDelta": 0,
+      "weightDelta": 0.14000000000000012
     },
     {
       "code": "GOOGL US",
       "name": "ALPHABET INC-CL A",
       "previousShares": 44124,
       "currentShares": 44124,
-      "previousWeight": 4.55,
-      "currentWeight": 4.66,
+      "previousWeight": 4.66,
+      "currentWeight": 4.69,
       "sharesDelta": 0,
-      "weightDelta": 0.11000000000000032
-    },
-    {
-      "code": "4062 JP",
-      "name": "揖斐電有限公司",
-      "previousShares": 135868,
-      "currentShares": 135868,
-      "previousWeight": 3.18,
-      "currentWeight": 3.23,
-      "sharesDelta": 0,
-      "weightDelta": 0.04999999999999982
+      "weightDelta": 0.03000000000000025
     }
   ],
   "decreased": [
     {
-      "code": "LITE US",
-      "name": "魯門特姆控股公司",
-      "previousShares": 19055,
-      "currentShares": 19055,
-      "previousWeight": 4.82,
-      "currentWeight": 4.55,
-      "sharesDelta": 0,
-      "weightDelta": -0.27000000000000046
-    },
-    {
       "code": "TER US",
-      "name": "泰瑞達公司",
+      "name": "Teradyne Inc",
       "previousShares": 38057,
       "currentShares": 38057,
-      "previousWeight": 4.5,
-      "currentWeight": 4.36,
+      "previousWeight": 4.36,
+      "currentWeight": 3.56,
       "sharesDelta": 0,
-      "weightDelta": -0.13999999999999968
+      "weightDelta": -0.8000000000000003
     },
     {
-      "code": "CIEN US",
-      "name": "喜雅納公司",
-      "previousShares": 21093,
-      "currentShares": 21093,
-      "previousWeight": 3.14,
-      "currentWeight": 3.01,
+      "code": "NVDA US",
+      "name": "NVIDIA Corp",
+      "previousShares": 60763,
+      "currentShares": 60763,
+      "previousWeight": 3.91,
+      "currentWeight": 3.34,
       "sharesDelta": 0,
-      "weightDelta": -0.13000000000000034
+      "weightDelta": -0.5700000000000003
     },
     {
-      "code": "STX US",
-      "name": "希捷科技控股公開有限公司",
-      "previousShares": 29967,
-      "currentShares": 29967,
-      "previousWeight": 5.26,
-      "currentWeight": 5.23,
+      "code": "4062 JP",
+      "name": "Ibiden Co Ltd",
+      "previousShares": 135868,
+      "currentShares": 135868,
+      "previousWeight": 3.23,
+      "currentWeight": 3.21,
       "sharesDelta": 0,
-      "weightDelta": -0.02999999999999936
+      "weightDelta": -0.020000000000000018
     }
   ],
   "summary": {
     "comparisonReady": true,
     "addedCount": 0,
     "removedCount": 0,
-    "increasedCount": 5,
-    "decreasedCount": 4,
-    "totalChangeCount": 9
+    "increasedCount": 7,
+    "decreasedCount": 3,
+    "totalChangeCount": 10
   }
 }

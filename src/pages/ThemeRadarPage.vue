@@ -5,6 +5,7 @@ import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import StatusCard from '../components/StatusCard.vue';
 import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
+import EventCalendarLinks from '../components/EventCalendarLinks.vue';
 import { fetchJson } from '../lib/api';
 import { createStockRoute } from '../lib/stockRouting';
 import {
@@ -252,8 +253,8 @@ function formatChangeTone(value) {
     />
 
     <template v-if="themeRadar">
-      <section class="page-hero compact theme-page-hero">
-        <div class="hero-copy">
+      <section class="page-hero compact theme-page-hero rounded-[2rem] border border-slate-200/70 bg-white/90 p-6 shadow-[0_28px_90px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
+        <div class="hero-copy space-y-5">
           <span class="hero-kicker">Theme Radar</span>
           <h1>資金題材雷達</h1>
           <p class="page-subtitle">先看主線題材有沒有集中，再看誰正在升溫、誰已經降溫，最後回頭挑龍頭與補漲股。</p>
@@ -261,7 +262,7 @@ function formatChangeTone(value) {
             <article
               v-for="item in heroSummaryItems"
               :key="item.label"
-              class="hero-summary-card"
+              class="hero-summary-card rounded-[1.35rem] border border-slate-200/70 bg-white/85 shadow-[0_18px_40px_rgba(15,23,42,0.08)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-900/75 dark:ring-slate-800/70"
             >
               <span class="hero-summary-label">{{ item.label }}</span>
               <strong class="hero-summary-value">{{ item.value }}</strong>
@@ -279,21 +280,21 @@ function formatChangeTone(value) {
 
         <aside class="theme-hero-board">
           <div class="theme-hero-board-meta">
-            <div class="hero-stat-card">
+            <div class="hero-stat-card rounded-[1.2rem] border border-slate-200/70 bg-white/85 shadow-[0_14px_30px_rgba(15,23,42,0.07)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
               <span class="hero-stat-label">資料日</span>
               <strong>{{ formatDate(themeRadar.marketDate) }}</strong>
             </div>
-            <div class="hero-stat-card">
+            <div class="hero-stat-card rounded-[1.2rem] border border-slate-200/70 bg-white/85 shadow-[0_14px_30px_rgba(15,23,42,0.07)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
               <span class="hero-stat-label">題材數</span>
               <strong>{{ formatNumber(topics.length, 0) }}</strong>
               <span class="meta-text">目前主線與支線題材</span>
             </div>
-            <div class="hero-stat-card">
+            <div class="hero-stat-card rounded-[1.2rem] border border-slate-200/70 bg-white/85 shadow-[0_14px_30px_rgba(15,23,42,0.07)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
               <span class="hero-stat-label">歷史快照</span>
               <strong>{{ formatNumber(historyOverview.snapshotCount, 0) }}</strong>
               <span class="meta-text">用近 5 / 10 / 20 日看輪動</span>
             </div>
-            <div class="hero-stat-card">
+            <div class="hero-stat-card rounded-[1.2rem] border border-slate-200/70 bg-white/85 shadow-[0_14px_30px_rgba(15,23,42,0.07)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
               <span class="hero-stat-label">主線狀態</span>
               <strong>
                 {{
@@ -311,7 +312,7 @@ function formatChangeTone(value) {
             <article
               v-for="card in spotlightCards"
               :key="card.key"
-              class="theme-spotlight-card"
+              class="theme-spotlight-card rounded-[1.3rem] shadow-[0_16px_38px_rgba(15,23,42,0.08)] ring-1 ring-white/60 dark:ring-slate-800/70"
               :class="`is-${card.tone}`"
             >
               <span class="theme-spotlight-label">{{ card.label }}</span>
@@ -578,6 +579,16 @@ function formatChangeTone(value) {
                       <span v-if="event.category">・{{ event.category }}</span>
                     </div>
                     <p v-if="event.note" class="theme-event-note">{{ event.note }}</p>
+                    <EventCalendarLinks
+                      :title="event.title"
+                      :start-date="event.startDate || event.date"
+                      :end-date="event.endDate || event.startDate || event.date"
+                      :note="event.note || `${topic.title} 題材催化事件`"
+                      :source-name="'產品 / 題材事件資料'"
+                      :url="event.url || ''"
+                      :location="event.location || ''"
+                      compact
+                    />
                   </div>
                 </div>
               </div>

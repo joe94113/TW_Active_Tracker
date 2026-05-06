@@ -5,8 +5,8 @@ function toNumber(value) {
 
 export function getThemeToneLabel(tone) {
   if (tone === 'up') return '資金偏多';
-  if (tone === 'info') return '熱度升溫';
-  return '觀察中';
+  if (tone === 'info') return '輪動整理';
+  return '資金降溫';
 }
 
 export function getLeaderStocks(topic, limit = 3) {

@@ -310,7 +310,7 @@ const recentViewedStocks = computed(() =>
 const closeFocusCards = computed(() => [
   {
     title: '熱門股',
-    subtitle: liveStatus.value?.updatedAt ? '榜單採最近一次整理，盤中價格與量能即時更新' : '先看成交量與價差集中的股票',
+    subtitle: liveStatus.value?.updatedAt ? '盤中價量同步更新' : '成交最集中的股票',
     items: liveHotStocks.value.slice(0, 3).map((item) => ({
       code: item.代號,
       name: item.名稱,
@@ -320,7 +320,7 @@ const closeFocusCards = computed(() => [
   },
   {
     title: 'ETF 異動',
-    subtitle: '主動式 ETF 最新換股節奏',
+    subtitle: '主動式 ETF 換股重點',
     items: etfOverviewList.value
       .filter((item) => item.detailAvailability === 'full')
       .sort(
@@ -361,7 +361,7 @@ const closeFocusCards = computed(() => [
   },
   {
     title: '法人連買',
-    subtitle: '盤後先看資金連續流向',
+    subtitle: '連買天數優先看',
     items: [
       ...(institutionalHighlights.value?.外資連買 ?? []).slice(0, 2).map((item) => ({
         code: item.代號,
@@ -380,6 +380,22 @@ const closeFocusCards = computed(() => [
 ]);
 
 const dualInstitutionalBuys = computed(() => {
+  const sameDayBuys = institutionalHighlights.value?.['雙法人同買超'] ?? [];
+  if (sameDayBuys.length) {
+    return sameDayBuys.map((item) => ({
+      code: String(item?.代號 ?? '').trim(),
+      name: item?.名稱 ?? item?.代號 ?? '',
+      foreignDays: Number(item?.外資連買天數 ?? 0),
+      trustDays: Number(item?.投信連買天數 ?? 0),
+      foreignNet: Number(item?.外資買賣超 ?? 0),
+      trustNet: Number(item?.投信買賣超 ?? 0),
+      close: item?.收盤價 ?? null,
+      changePercent: item?.漲跌幅 ?? null,
+      turnover: item?.成交值 ?? null,
+      totalNet: Number(item?.累計雙法人買超股數 ?? 0),
+    }));
+  }
+
   const foreignList = institutionalHighlights.value?.['外資連買'] ?? [];
   const trustList = institutionalHighlights.value?.['投信連買'] ?? [];
   const trustMap = new Map(
@@ -460,7 +476,7 @@ function formatViewedAt(dateText) {
 </script>
 
 <template>
-  <section class="page-shell">
+  <section class="page-shell home-page">
     <StatusCard
       :is-loading="isLoading"
       :error-message="errorMessage"
@@ -469,7 +485,7 @@ function formatViewedAt(dateText) {
     />
 
     <template v-if="dashboard">
-      <section class="card-grid compact-summary-grid home-summary-grid">
+      <section class="card-grid compact-summary-grid home-summary-grid items-stretch [grid-auto-rows:1fr]">
         <InfoCard
           v-for="item in primarySummaryCards"
           :key="item.title"
@@ -479,16 +495,16 @@ function formatViewedAt(dateText) {
           :status="item.status"
         />
 
-        <article v-if="etfSummaryCard" class="info-card home-summary-mini-card">
-          <div class="home-summary-mini-copy">
+        <article v-if="etfSummaryCard" class="info-card home-summary-mini-card rounded-[1.5rem] border border-slate-200/70 bg-white/90 shadow-[0_18px_42px_rgba(15,23,42,0.08)] ring-1 ring-white/75 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
+          <div class="home-summary-mini-copy flex h-full flex-col justify-between gap-3">
             <p class="info-card-title">{{ etfSummaryCard.title }}</p>
             <p class="info-card-value">{{ etfSummaryCard.value }}</p>
             <p class="info-card-note">{{ etfSummaryCard.description }}</p>
           </div>
         </article>
 
-        <article class="info-card home-summary-mini-card home-freshness-summary-card">
-          <div class="home-summary-mini-copy">
+        <article class="info-card home-summary-mini-card home-freshness-summary-card rounded-[1.5rem] border border-slate-200/70 bg-white/90 shadow-[0_18px_42px_rgba(15,23,42,0.08)] ring-1 ring-white/75 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
+          <div class="home-summary-mini-copy flex h-full flex-col justify-between gap-3">
             <p class="info-card-title">資料狀態</p>
             <DataFreshnessBadge
               :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
@@ -506,7 +522,7 @@ function formatViewedAt(dateText) {
         <a class="mobile-section-link" href="#market-ranking">排行</a>
       </nav>
 
-      <section id="close-focus" class="panel home-panel">
+      <section id="close-focus" class="panel home-panel rounded-[2rem] border border-slate-200/70 bg-white/90 shadow-[0_28px_88px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/76 dark:ring-slate-800/70">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">盤後重點卡</h2>
@@ -518,7 +534,7 @@ function formatViewedAt(dateText) {
           <article
             v-for="card in closeFocusCards"
             :key="card.title"
-            class="focus-card"
+            class="focus-card rounded-[1.5rem] border border-slate-200/70 bg-slate-50/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-900/72 dark:ring-slate-800/70"
           >
             <div class="focus-card-head">
               <div>
@@ -546,7 +562,7 @@ function formatViewedAt(dateText) {
       </section>
 
 
-      <section id="favorites" class="panel home-panel">
+      <section id="favorites" class="panel home-panel rounded-[2rem] border border-slate-200/70 bg-white/90 shadow-[0_28px_88px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/76 dark:ring-slate-800/70">
         <div class="panel-header">
           <div>
             <h2 class="panel-title">自選股</h2>
@@ -610,14 +626,17 @@ function formatViewedAt(dateText) {
         </div>
       </section>
 
-      <section id="recent-viewed" class="panel home-panel">
+      <section
+        v-if="recentViewedStocks.length"
+        id="recent-viewed"
+        class="panel home-panel recent-stocks-panel is-compact"
+      >
         <div class="panel-header">
           <div>
             <h2 class="panel-title">最近瀏覽</h2>
-            <p class="panel-subtitle">剛剛看過的股票會先留在這裡，方便回頭接著研究。</p>
+            <p class="panel-subtitle">保留最近研究過的股票，想回頭接續時可以快速打開。</p>
           </div>
           <button
-            v-if="recentViewedStocks.length"
             type="button"
             class="ghost-button"
             @click="clearRecentStocks"
@@ -626,9 +645,9 @@ function formatViewedAt(dateText) {
           </button>
         </div>
 
-        <div v-if="recentViewedStocks.length" class="recent-stocks-grid">
+        <div class="recent-stocks-grid compact">
           <article
-            v-for="item in recentViewedStocks"
+            v-for="item in recentViewedStocks.slice(0, 6)"
             :key="`home-recent-${item.code}`"
             class="favorite-card recent-stock-card"
           >
@@ -639,30 +658,17 @@ function formatViewedAt(dateText) {
               </div>
               <span class="recent-stock-time">最後查看 {{ formatViewedAt(item.viewedAt) }}</span>
             </div>
-            <div class="favorite-trend-block">
-              <div class="favorite-trend-meta">
-                <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
-                  {{ formatPercent(item.return20) }}
-                </strong>
-                <span>{{ item.liveUpdatedAt ? `即時價 ${formatNumber(item.livePrice)}` : (item.displaySignalTitle ?? '延續前次研究脈絡') }}</span>
-              </div>
-            </div>
             <div class="favorite-metrics">
-              <span>產業 {{ item.industryName ?? '未分類' }}</span>
+              <span>{{ item.liveUpdatedAt ? `即時價 ${formatNumber(item.livePrice)}` : `產業 ${item.industryName ?? '未分類'}` }}</span>
               <span :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
                 日變動 {{ formatPercent(item.changePercent) }}
               </span>
               <span>20 日 {{ formatPercent(item.return20) }}</span>
-              <span>法人五日 {{ formatLots(item.total5Day) }}</span>
               <span :class="['signal-pill', item.displaySignalTone ? `is-${item.displaySignalTone}` : '']">
                 {{ item.displaySignalTitle ?? '延續前次研究脈絡' }}
               </span>
             </div>
           </article>
-        </div>
-        <div v-else class="empty-state">
-          <strong>最近瀏覽會出現在這裡</strong>
-          <p>只要點進個股頁，我就會把最近研究過的股票整理成回訪入口。</p>
         </div>
       </section>
 
@@ -683,8 +689,8 @@ function formatViewedAt(dateText) {
         <article class="panel">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">雙法人連買</h2>
-              <p class="panel-subtitle">外資與投信同時站在買方，先看這批交集名單。</p>
+              <h2 class="panel-title">雙法人同買超</h2>
+              <p class="panel-subtitle">優先看今天外資與投信同時買超的股票，再補參考連買天數。</p>
             </div>
           </div>
           <div class="table-wrap">
@@ -709,14 +715,14 @@ function formatViewedAt(dateText) {
                 >
                   <td><RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.code }}</RouterLink></td>
                   <td><RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.name }}</RouterLink></td>
-                  <td>{{ item.foreignDays }} 天 / {{ formatLots(item.foreignNet) }}</td>
-                  <td>{{ item.trustDays }} 天 / {{ formatLots(item.trustNet) }}</td>
+                  <td>{{ formatLots(item.foreignNet) }}<span v-if="item.foreignDays" class="muted"> / 連買 {{ item.foreignDays }} 天</span></td>
+                  <td>{{ formatLots(item.trustNet) }}<span v-if="item.trustDays" class="muted"> / 連買 {{ item.trustDays }} 天</span></td>
                   <td :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
                     {{ formatPercent(item.changePercent) }}
                   </td>
                 </tr>
                 <tr v-if="!dualInstitutionalBuys.length">
-                  <td colspan="5" class="muted">目前沒有外資與投信同時連買的股票。</td>
+                  <td colspan="5" class="muted">今天沒有外資與投信同時買超的股票。</td>
                 </tr>
               </tbody>
             </table>
