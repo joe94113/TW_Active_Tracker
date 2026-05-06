@@ -6,14 +6,116 @@
   "comparisonReady": true,
   "added": [],
   "removed": [],
-  "increased": [],
-  "decreased": [],
+  "increased": [
+    {
+      "code": "SNDK US",
+      "name": "Sandisk Corp/DE",
+      "previousShares": 14302,
+      "currentShares": 14302,
+      "previousWeight": 4.98,
+      "currentWeight": 5.43,
+      "sharesDelta": 0,
+      "weightDelta": 0.4499999999999993
+    },
+    {
+      "code": "MU US",
+      "name": "Micron Technology Inc",
+      "previousShares": 33077,
+      "currentShares": 33077,
+      "previousWeight": 5.29,
+      "currentWeight": 5.71,
+      "sharesDelta": 0,
+      "weightDelta": 0.41999999999999993
+    },
+    {
+      "code": "WDC US",
+      "name": "Western Digital Corp",
+      "previousShares": 50940,
+      "currentShares": 50940,
+      "previousWeight": 6.25,
+      "currentWeight": 6.39,
+      "sharesDelta": 0,
+      "weightDelta": 0.13999999999999968
+    },
+    {
+      "code": "TER US",
+      "name": "Teradyne Inc",
+      "previousShares": 38057,
+      "currentShares": 38057,
+      "previousWeight": 3.56,
+      "currentWeight": 3.67,
+      "sharesDelta": 0,
+      "weightDelta": 0.10999999999999988
+    },
+    {
+      "code": "STX US",
+      "name": "Seagate Technology Holdin",
+      "previousShares": 29967,
+      "currentShares": 29967,
+      "previousWeight": 6.14,
+      "currentWeight": 6.23,
+      "sharesDelta": 0,
+      "weightDelta": 0.09000000000000075
+    }
+  ],
+  "decreased": [
+    {
+      "code": "NVDA US",
+      "name": "NVIDIA Corp",
+      "previousShares": 60763,
+      "currentShares": 60763,
+      "previousWeight": 3.34,
+      "currentWeight": 3.22,
+      "sharesDelta": 0,
+      "weightDelta": -0.11999999999999966
+    },
+    {
+      "code": "4062 JP",
+      "name": "Ibiden Co Ltd",
+      "previousShares": 135868,
+      "currentShares": 135868,
+      "previousWeight": 3.21,
+      "currentWeight": 3.12,
+      "sharesDelta": 0,
+      "weightDelta": -0.08999999999999986
+    },
+    {
+      "code": "GOOGL US",
+      "name": "ALPHABET INC-CL A",
+      "previousShares": 44124,
+      "currentShares": 44124,
+      "previousWeight": 4.69,
+      "currentWeight": 4.62,
+      "sharesDelta": 0,
+      "weightDelta": -0.07000000000000028
+    },
+    {
+      "code": "LITE US",
+      "name": "Lumentum Holdings Inc",
+      "previousShares": 22255,
+      "currentShares": 22255,
+      "previousWeight": 6.02,
+      "currentWeight": 5.97,
+      "sharesDelta": 0,
+      "weightDelta": -0.04999999999999982
+    },
+    {
+      "code": "CIEN US",
+      "name": "Ciena Corp",
+      "previousShares": 21093,
+      "currentShares": 21093,
+      "previousWeight": 3.15,
+      "currentWeight": 3.1,
+      "sharesDelta": 0,
+      "weightDelta": -0.04999999999999982
+    }
+  ],
   "summary": {
     "comparisonReady": true,
     "addedCount": 0,
     "removedCount": 0,
-    "increasedCount": 0,
-    "decreasedCount": 0,
-    "totalChangeCount": 0
+    "increasedCount": 5,
+    "decreasedCount": 5,
+    "totalChangeCount": 10
   }
 }

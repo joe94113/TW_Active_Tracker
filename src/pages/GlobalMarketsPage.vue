@@ -10,41 +10,42 @@ const { globalMarkets, manifest, isLoading, errorMessage, loadGlobalData } = use
 
 const hasData = computed(() => Boolean(globalMarkets.value?.sections?.some((section) => section.items?.length)));
 const sections = computed(() => globalMarkets.value?.sections ?? []);
+
 const heroCards = computed(() => [
   {
     title: '最強市場',
-    value: globalMarkets.value?.summary?.strongest?.shortLabel ?? '等待更新',
+    value: globalMarkets.value?.summary?.strongest?.shortLabel ?? '等待資料',
     note:
       globalMarkets.value?.summary?.strongest?.changePercent !== null &&
       globalMarkets.value?.summary?.strongest?.changePercent !== undefined
         ? `單日 ${formatPercent(globalMarkets.value.summary.strongest.changePercent)}`
-        : '先看國際股指誰最強',
+        : '先看今天最強的市場，方便判斷資金風向。',
   },
   {
     title: '最弱市場',
-    value: globalMarkets.value?.summary?.weakest?.shortLabel ?? '等待更新',
+    value: globalMarkets.value?.summary?.weakest?.shortLabel ?? '等待資料',
     note:
       globalMarkets.value?.summary?.weakest?.changePercent !== null &&
       globalMarkets.value?.summary?.weakest?.changePercent !== undefined
         ? `單日 ${formatPercent(globalMarkets.value.summary.weakest.changePercent)}`
-        : '先看風險資產是否同步轉弱',
+        : '先看今天最弱的市場，確認風險情緒是否擴散。',
   },
   {
     title: '波動最大',
-    value: globalMarkets.value?.summary?.mostVolatile?.shortLabel ?? '等待更新',
+    value: globalMarkets.value?.summary?.mostVolatile?.shortLabel ?? '等待資料',
     note:
       globalMarkets.value?.summary?.mostVolatile?.return5 !== null &&
       globalMarkets.value?.summary?.mostVolatile?.return5 !== undefined
         ? `5 日 ${formatPercent(globalMarkets.value.summary.mostVolatile.return5)}`
-        : '用來判斷明天風險偏好',
+        : '波動大的標的適合拿來看情緒是否快速切換。',
   },
 ]);
 
 const pageSeo = computed(() => ({
   title: '國際盤 / 原物料 / 外匯儀表板',
-  description: '把美股、亞洲股市、原油、黃金與外匯放在同一頁，盤前先看國際風險偏好與隔日台股節奏。',
+  description: '把美股指數、原物料、外匯與期貨整理成同一頁，方便盤前盤後快速比對全球市場強弱與風險偏好。',
   routePath: '/global-markets',
-  keywords: ['國際盤', '原物料', '外匯', '費半', '美元台幣', '隔日盤勢'],
+  keywords: ['國際盤', '原物料', '外匯', '全球股市', '市場儀表板', '盤前觀察'],
 }));
 
 useSeoMeta(pageSeo);
@@ -58,6 +59,12 @@ function getToneClass(item) {
   if ((item?.changePercent ?? 0) < 0) return 'text-down';
   return '';
 }
+
+function getToneCardClass(item) {
+  if ((item?.changePercent ?? 0) > 0) return 'is-up';
+  if ((item?.changePercent ?? 0) < 0) return 'is-down';
+  return 'is-flat';
+}
 </script>
 
 <template>
@@ -66,7 +73,7 @@ function getToneClass(item) {
       :is-loading="isLoading"
       :error-message="errorMessage"
       :has-data="hasData"
-      empty-message="國際市場資料尚未整理完成。"
+      empty-message="國際盤資料尚未整理完成。"
     />
 
     <template v-if="hasData">
@@ -74,7 +81,9 @@ function getToneClass(item) {
         <div class="hero-copy">
           <span class="hero-kicker">Global Markets Dashboard</span>
           <h1>國際盤 / 原物料 / 外匯儀表板</h1>
-          <p class="page-subtitle">每天先看國際股指、原油、黃金與匯率，判斷明天台股偏多、偏保守，還是該先避開高波動。</p>
+          <p class="page-subtitle">
+            把國際盤、原物料與外匯放在同一頁，先看哪個市場最強、哪個最弱，再看 5 日與 20 日方向，幫助你判讀隔日台股節奏。
+          </p>
           <div class="hero-summary-grid global-markets-summary-grid">
             <article
               v-for="card in heroCards"
@@ -90,9 +99,9 @@ function getToneClass(item) {
 
         <aside class="radar-hero-board global-markets-hero-board">
           <article class="theme-spotlight-card is-info">
-            <span class="theme-spotlight-label">資料節奏</span>
+            <span class="theme-spotlight-label">資料日期</span>
             <strong>{{ formatDate(globalMarkets?.marketDate) }}</strong>
-            <p>盤後會跟著每日資料包更新，適合盤前先看國際風向。</p>
+            <p>國際盤資料以最近一次更新為準，盤前可先用這裡確認全球風險偏好。</p>
             <DataFreshnessBadge
               :generated-at="globalMarkets?.generatedAt ?? manifest?.generatedAt"
               :market-date="globalMarkets?.marketDate"
@@ -111,7 +120,7 @@ function getToneClass(item) {
           <div class="panel-header">
             <div>
               <h2 class="panel-title">{{ section.title }}</h2>
-              <p class="panel-subtitle">先看單日強弱，再看 5 日與 20 日方向，幫你判斷資金目前偏風險追價還是防守。</p>
+              <p class="panel-subtitle">先比單日漲跌，再看 5 日與 20 日方向，判斷是短線反彈還是趨勢延續。</p>
             </div>
             <span class="meta-chip">{{ formatNumber(section.items.length, 0) }} 項</span>
           </div>
@@ -121,13 +130,14 @@ function getToneClass(item) {
               v-for="item in section.items"
               :key="item.symbol"
               class="sub-panel market-quote-card"
+              :class="getToneCardClass(item)"
             >
               <div class="market-quote-head">
                 <div>
                   <strong>{{ item.label }}</strong>
                   <p class="muted">{{ item.shortLabel }}</p>
                 </div>
-                <span class="status-badge" :class="`is-${item.status}`">{{ item.marketDate ? formatDate(item.marketDate) : '資料不足' }}</span>
+                <span class="status-badge" :class="`is-${item.status}`">{{ item.marketDate ? formatDate(item.marketDate) : '資料待補' }}</span>
               </div>
 
               <div class="market-quote-price">

@@ -68,6 +68,13 @@ const TOPIC_DEFINITIONS = [
     coreStocks: ['1519', '1503', '1513', '1514', '2371'],
   },
   {
+    slug: 'silicon-wafer',
+    title: '矽晶圓 / 再生晶圓',
+    aliases: ['矽晶圓', '半導體矽晶圓', '再生晶圓', '晶圓材料', 'SOI晶圓', '磊晶矽晶圓'],
+    searchQuery: '(矽晶圓 OR 半導體矽晶圓 OR 再生晶圓 OR 晶圓材料 OR SOI晶圓) 台股',
+    coreStocks: ['6488', '3532', '6182', '5483', '1560'],
+  },
+  {
     slug: 'memory',
     title: '記憶體 / DDR5',
     aliases: ['記憶體', 'DDR5', 'NAND', 'SSD', 'HBM'],

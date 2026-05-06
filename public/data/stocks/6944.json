@@ -3,7 +3,7 @@
   "name": "兆聯實業",
   "kind": "stock",
   "priceDate": "2026-05-06",
-  "generatedAt": "2026-05-06T02:31:37.603Z",
+  "generatedAt": "2026-05-06T08:33:54.801Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4794,7 +4794,7 @@
       "high": 998,
       "low": 940,
       "close": 953,
-      "volume": 870000,
+      "volume": 1225000,
       "turnover": null,
       "transactions": null,
       "change": 8,
@@ -4835,7 +4835,7 @@
     "close": 953,
     "change": 8,
     "changePercent": 0.8465608465608466,
-    "volume": 870000,
+    "volume": 1225000,
     "turnover": null,
     "return5": 4.495614035087719,
     "return20": 16.93251533742331,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 16.93%，可用來觀察波段資金是否持續留在主線。",
-    "最近 3 個交易日三大法人合計賣超 431,222 股。"
+    "最近 5 個交易日三大法人合計賣超 84,639 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4892,12 +4892,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-05-06",
-    "updatedAt": "2026-05-06T02:10:16.000Z",
+    "updatedAt": "2026-05-06T05:30:14.000Z",
     "previousClose": 945,
-    "latestPrice": 962,
+    "latestPrice": 953,
     "high": 998,
     "low": 940,
-    "volume": 872418,
+    "volume": 1293534,
     "points": [
       {
         "timestamp": 1778029200,
@@ -5054,15 +5054,433 @@
         "changePercent": 1.9047619047619049
       },
       {
-        "timestamp": 1778033416,
-        "dateTime": "2026-05-06T02:10:16.000Z",
+        "timestamp": 1778033400,
+        "dateTime": "2026-05-06T02:10:00.000Z",
         "time": "10:10",
+        "price": 964,
+        "high": 965,
+        "low": 962,
+        "volume": 896478,
+        "change": 19,
+        "changePercent": 2.0105820105820107
+      },
+      {
+        "timestamp": 1778033700,
+        "dateTime": "2026-05-06T02:15:00.000Z",
+        "time": "10:15",
+        "price": 956,
+        "high": 961,
+        "low": 951,
+        "volume": 920442,
+        "change": 11,
+        "changePercent": 1.164021164021164
+      },
+      {
+        "timestamp": 1778034000,
+        "dateTime": "2026-05-06T02:20:00.000Z",
+        "time": "10:20",
+        "price": 956,
+        "high": 956,
+        "low": 956,
+        "volume": 1818328,
+        "change": 11,
+        "changePercent": 1.164021164021164
+      },
+      {
+        "timestamp": 1778034300,
+        "dateTime": "2026-05-06T02:25:00.000Z",
+        "time": "10:25",
+        "price": 957,
+        "high": 957,
+        "low": 954,
+        "volume": 10522,
+        "change": 12,
+        "changePercent": 1.2698412698412698
+      },
+      {
+        "timestamp": 1778034600,
+        "dateTime": "2026-05-06T02:30:00.000Z",
+        "time": "10:30",
+        "price": 952,
+        "high": 963,
+        "low": 952,
+        "volume": 947720,
+        "change": 7,
+        "changePercent": 0.7407407407407408
+      },
+      {
+        "timestamp": 1778034900,
+        "dateTime": "2026-05-06T02:35:00.000Z",
+        "time": "10:35",
+        "price": 957,
+        "high": 959,
+        "low": 954,
+        "volume": 9519,
+        "change": 12,
+        "changePercent": 1.2698412698412698
+      },
+      {
+        "timestamp": 1778035200,
+        "dateTime": "2026-05-06T02:40:00.000Z",
+        "time": "10:40",
+        "price": 957,
+        "high": 960,
+        "low": 957,
+        "volume": 4065,
+        "change": 12,
+        "changePercent": 1.2698412698412698
+      },
+      {
+        "timestamp": 1778035500,
+        "dateTime": "2026-05-06T02:45:00.000Z",
+        "time": "10:45",
+        "price": 960,
+        "high": 960,
+        "low": 957,
+        "volume": 972436,
+        "change": 15,
+        "changePercent": 1.5873015873015872
+      },
+      {
+        "timestamp": 1778035800,
+        "dateTime": "2026-05-06T02:50:00.000Z",
+        "time": "10:50",
+        "price": 961,
+        "high": 961,
+        "low": 959,
+        "volume": 5776,
+        "change": 16,
+        "changePercent": 1.6931216931216932
+      },
+      {
+        "timestamp": 1778036100,
+        "dateTime": "2026-05-06T02:55:00.000Z",
+        "time": "10:55",
+        "price": 958,
+        "high": 960,
+        "low": 958,
+        "volume": 983384,
+        "change": 13,
+        "changePercent": 1.3756613756613756
+      },
+      {
+        "timestamp": 1778036400,
+        "dateTime": "2026-05-06T03:00:00.000Z",
+        "time": "11:00",
+        "price": 956,
+        "high": 958,
+        "low": 956,
+        "volume": 6320,
+        "change": 11,
+        "changePercent": 1.164021164021164
+      },
+      {
+        "timestamp": 1778036700,
+        "dateTime": "2026-05-06T03:05:00.000Z",
+        "time": "11:05",
+        "price": 962,
+        "high": 962,
+        "low": 956,
+        "volume": 1006547,
+        "change": 17,
+        "changePercent": 1.7989417989417988
+      },
+      {
+        "timestamp": 1778037000,
+        "dateTime": "2026-05-06T03:10:00.000Z",
+        "time": "11:10",
+        "price": 965,
+        "high": 966,
+        "low": 963,
+        "volume": 1014487,
+        "change": 20,
+        "changePercent": 2.1164021164021163
+      },
+      {
+        "timestamp": 1778037300,
+        "dateTime": "2026-05-06T03:15:00.000Z",
+        "time": "11:15",
+        "price": 964,
+        "high": 965,
+        "low": 963,
+        "volume": 1016616,
+        "change": 19,
+        "changePercent": 2.0105820105820107
+      },
+      {
+        "timestamp": 1778037600,
+        "dateTime": "2026-05-06T03:20:00.000Z",
+        "time": "11:20",
+        "price": 963,
+        "high": 964,
+        "low": 962,
+        "volume": 7765,
+        "change": 18,
+        "changePercent": 1.9047619047619049
+      },
+      {
+        "timestamp": 1778038200,
+        "dateTime": "2026-05-06T03:30:00.000Z",
+        "time": "11:30",
         "price": 962,
         "high": 962,
         "low": 962,
-        "volume": 0,
+        "volume": 2039,
         "change": 17,
         "changePercent": 1.7989417989417988
+      },
+      {
+        "timestamp": 1778038500,
+        "dateTime": "2026-05-06T03:35:00.000Z",
+        "time": "11:35",
+        "price": 960,
+        "high": 961,
+        "low": 960,
+        "volume": 1027584,
+        "change": 15,
+        "changePercent": 1.5873015873015872
+      },
+      {
+        "timestamp": 1778038800,
+        "dateTime": "2026-05-06T03:40:00.000Z",
+        "time": "11:40",
+        "price": 958,
+        "high": 958,
+        "low": 956,
+        "volume": 6055,
+        "change": 13,
+        "changePercent": 1.3756613756613756
+      },
+      {
+        "timestamp": 1778039100,
+        "dateTime": "2026-05-06T03:45:00.000Z",
+        "time": "11:45",
+        "price": 963,
+        "high": 963,
+        "low": 955,
+        "volume": 1055569,
+        "change": 18,
+        "changePercent": 1.9047619047619049
+      },
+      {
+        "timestamp": 1778039400,
+        "dateTime": "2026-05-06T03:50:00.000Z",
+        "time": "11:50",
+        "price": 959,
+        "high": 961,
+        "low": 959,
+        "volume": 1050318,
+        "change": 14,
+        "changePercent": 1.4814814814814816
+      },
+      {
+        "timestamp": 1778039700,
+        "dateTime": "2026-05-06T03:55:00.000Z",
+        "time": "11:55",
+        "price": 958,
+        "high": 958,
+        "low": 958,
+        "volume": 1197,
+        "change": 13,
+        "changePercent": 1.3756613756613756
+      },
+      {
+        "timestamp": 1778040000,
+        "dateTime": "2026-05-06T04:00:00.000Z",
+        "time": "12:00",
+        "price": 958,
+        "high": 958,
+        "low": 958,
+        "volume": 1000,
+        "change": 13,
+        "changePercent": 1.3756613756613756
+      },
+      {
+        "timestamp": 1778040300,
+        "dateTime": "2026-05-06T04:05:00.000Z",
+        "time": "12:05",
+        "price": 960,
+        "high": 962,
+        "low": 958,
+        "volume": 14206,
+        "change": 15,
+        "changePercent": 1.5873015873015872
+      },
+      {
+        "timestamp": 1778040600,
+        "dateTime": "2026-05-06T04:10:00.000Z",
+        "time": "12:10",
+        "price": 960,
+        "high": 960,
+        "low": 959,
+        "volume": 3025,
+        "change": 15,
+        "changePercent": 1.5873015873015872
+      },
+      {
+        "timestamp": 1778040900,
+        "dateTime": "2026-05-06T04:15:00.000Z",
+        "time": "12:15",
+        "price": 962,
+        "high": 962,
+        "low": 960,
+        "volume": 5103,
+        "change": 17,
+        "changePercent": 1.7989417989417988
+      },
+      {
+        "timestamp": 1778041200,
+        "dateTime": "2026-05-06T04:20:00.000Z",
+        "time": "12:20",
+        "price": 962,
+        "high": 962,
+        "low": 962,
+        "volume": 1551,
+        "change": 17,
+        "changePercent": 1.7989417989417988
+      },
+      {
+        "timestamp": 1778041500,
+        "dateTime": "2026-05-06T04:25:00.000Z",
+        "time": "12:25",
+        "price": 963,
+        "high": 963,
+        "low": 961,
+        "volume": 14642,
+        "change": 18,
+        "changePercent": 1.9047619047619049
+      },
+      {
+        "timestamp": 1778041800,
+        "dateTime": "2026-05-06T04:30:00.000Z",
+        "time": "12:30",
+        "price": 966,
+        "high": 969,
+        "low": 961,
+        "volume": 2229309,
+        "change": 21,
+        "changePercent": 2.2222222222222223
+      },
+      {
+        "timestamp": 1778042100,
+        "dateTime": "2026-05-06T04:35:00.000Z",
+        "time": "12:35",
+        "price": 966,
+        "high": 967,
+        "low": 966,
+        "volume": 8666,
+        "change": 21,
+        "changePercent": 2.2222222222222223
+      },
+      {
+        "timestamp": 1778042400,
+        "dateTime": "2026-05-06T04:40:00.000Z",
+        "time": "12:40",
+        "price": 964,
+        "high": 966,
+        "low": 964,
+        "volume": 2262190,
+        "change": 19,
+        "changePercent": 2.0105820105820107
+      },
+      {
+        "timestamp": 1778042700,
+        "dateTime": "2026-05-06T04:45:00.000Z",
+        "time": "12:45",
+        "price": 965,
+        "high": 965,
+        "low": 965,
+        "volume": 1133883,
+        "change": 20,
+        "changePercent": 2.1164021164021163
+      },
+      {
+        "timestamp": 1778043000,
+        "dateTime": "2026-05-06T04:50:00.000Z",
+        "time": "12:50",
+        "price": 966,
+        "high": 966,
+        "low": 965,
+        "volume": 7157,
+        "change": 21,
+        "changePercent": 2.2222222222222223
+      },
+      {
+        "timestamp": 1778043300,
+        "dateTime": "2026-05-06T04:55:00.000Z",
+        "time": "12:55",
+        "price": 963,
+        "high": 966,
+        "low": 963,
+        "volume": 3124,
+        "change": 18,
+        "changePercent": 1.9047619047619049
+      },
+      {
+        "timestamp": 1778043600,
+        "dateTime": "2026-05-06T05:00:00.000Z",
+        "time": "13:00",
+        "price": 965,
+        "high": 965,
+        "low": 965,
+        "volume": 1320,
+        "change": 20,
+        "changePercent": 2.1164021164021163
+      },
+      {
+        "timestamp": 1778043900,
+        "dateTime": "2026-05-06T05:05:00.000Z",
+        "time": "13:05",
+        "price": 954,
+        "high": 963,
+        "low": 952,
+        "volume": 44382,
+        "change": 9,
+        "changePercent": 0.9523809523809524
+      },
+      {
+        "timestamp": 1778044200,
+        "dateTime": "2026-05-06T05:10:00.000Z",
+        "time": "13:10",
+        "price": 955,
+        "high": 959,
+        "low": 954,
+        "volume": 21585,
+        "change": 10,
+        "changePercent": 1.0582010582010581
+      },
+      {
+        "timestamp": 1778044500,
+        "dateTime": "2026-05-06T05:15:00.000Z",
+        "time": "13:15",
+        "price": 959,
+        "high": 959,
+        "low": 957,
+        "volume": 5539,
+        "change": 14,
+        "changePercent": 1.4814814814814816
+      },
+      {
+        "timestamp": 1778044800,
+        "dateTime": "2026-05-06T05:20:00.000Z",
+        "time": "13:20",
+        "price": 952,
+        "high": 958,
+        "low": 951,
+        "volume": 43544,
+        "change": 7,
+        "changePercent": 0.7407407407407408
+      },
+      {
+        "timestamp": 1778045400,
+        "dateTime": "2026-05-06T05:30:00.000Z",
+        "time": "13:30",
+        "price": 953,
+        "high": 953,
+        "low": 953,
+        "volume": 0,
+        "change": 8,
+        "changePercent": 0.8465608465608466
       }
     ],
     "資料來源": [
@@ -5120,11 +5538,25 @@
   "法人買賣": {
     "days": [
       {
-        "date": "2026-04-30",
-        "foreign": -112265,
-        "investmentTrust": 5173,
-        "dealer": 11026,
-        "total": -96066
+        "date": "2026-05-06",
+        "foreign": 220352,
+        "investmentTrust": 0,
+        "dealer": -3524,
+        "total": 216828
+      },
+      {
+        "date": "2026-05-05",
+        "foreign": 179697,
+        "investmentTrust": -19413,
+        "dealer": 55338,
+        "total": 215622
+      },
+      {
+        "date": "2026-05-04",
+        "foreign": -137980,
+        "investmentTrust": -45000,
+        "dealer": 1047,
+        "total": -181933
       },
       {
         "date": "2026-04-29",
@@ -5142,10 +5574,10 @@
       }
     ],
     "summary": {
-      "foreign5Day": -433986,
-      "investmentTrust5Day": 4759,
-      "dealer5Day": -1995,
-      "total5Day": -431222
+      "foreign5Day": -59652,
+      "investmentTrust5Day": -64827,
+      "dealer5Day": 39840,
+      "total5Day": -84639
     }
   },
   "持股分散": {
@@ -5280,7 +5712,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-05-05",
+    "date": "2026-05-06",
     "marginBuy": 121,
     "marginSell": 67,
     "marginRepay": 1,
@@ -5305,7 +5737,7 @@
     ]
   },
   "交易提醒": {
-    "asOfDate": "2026-05-05",
+    "asOfDate": "2026-05-06",
     "alerts": [
       {
         "key": "short-sale-6944",
@@ -5313,7 +5745,7 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-05-05",
+        "date": "2026-05-06",
         "note": "今日可借券賣出股數約 344,437 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
         "footnote": "今日可借券賣出股數約 344,437 股，可作為券源與流動性參考。"
@@ -5366,91 +5798,12 @@
   },
   "同產業比較": {
     "industryName": "綠能環保",
-    "peerCount": 2,
-    "rank20Day": 2,
+    "peerCount": 1,
+    "rank20Day": 1,
     "rankDaily": 1,
-    "averageReturn20": 38.61066200084162,
-    "averageChangePercent": -3.897707231040564,
+    "averageReturn20": 16.93251533742331,
+    "averageChangePercent": 0.8465608465608466,
     "leaders": [
-      {
-        "code": "7610",
-        "name": "聯友金屬-創",
-        "industryName": "綠能環保",
-        "priceDate": "2026-05-06",
-        "close": 666,
-        "change": -63,
-        "changePercent": -8.641975308641975,
-        "return20": 60.28880866425993,
-        "return60": 245.97402597402595,
-        "volume": 1439000,
-        "turnover": null,
-        "ma5": 667.2,
-        "ma10": 643.8,
-        "ma20": 609.35,
-        "ma60": 402.21666666666664,
-        "ma240": null,
-        "maBullStack": false,
-        "maStackCrossedAbove240": false,
-        "foreign5Day": 146000,
-        "investmentTrust5Day": 0,
-        "total5Day": 146000,
-        "largeHolderRatio": 48.37,
-        "retailRatio": 19.05,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          443,
-          452.5,
-          497.5,
-          547,
-          601,
-          655,
-          647,
-          638,
-          640,
-          628,
-          670,
-          638,
-          587,
-          575,
-          632,
-          638,
-          640,
-          663,
-          729,
-          666
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "聯友金屬-創 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": null,
-        "selectionSignalTone": "normal",
-        "selectionSignalCount": 0,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null,
-        "monthlyRevenueDate": "2026-04-17",
-        "monthlyRevenueMoM": 71.68146185066439,
-        "monthlyRevenueYoY": 958.9816868241157,
-        "monthlyRevenueDualGrowth": true,
-        "foreignTargetPrice": null,
-        "foreignTargetPricePremium": null,
-        "foreignTargetBroker": null,
-        "foreignTargetCount": 0
-      },
       {
         "code": "6944",
         "name": "兆聯實業",
@@ -5461,7 +5814,7 @@
         "changePercent": 0.8465608465608466,
         "return20": 16.93251533742331,
         "return60": 32.361111111111114,
-        "volume": 870000,
+        "volume": 1225000,
         "turnover": null,
         "ma5": 923,
         "ma10": 936.4,
@@ -5470,9 +5823,9 @@
         "ma240": null,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": -433986,
-        "investmentTrust5Day": 4759,
-        "total5Day": -431222,
+        "foreign5Day": -59652,
+        "investmentTrust5Day": -64827,
+        "total5Day": -84639,
         "largeHolderRatio": 49.44,
         "retailRatio": 11.88,
         "shortToMarginRatio": null,
@@ -5542,7 +5895,7 @@
         "changePercent": 0.8465608465608466,
         "return20": 16.93251533742331,
         "return60": 32.361111111111114,
-        "volume": 870000,
+        "volume": 1225000,
         "turnover": null,
         "ma5": 923,
         "ma10": 936.4,
@@ -5551,9 +5904,9 @@
         "ma240": null,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": -433986,
-        "investmentTrust5Day": 4759,
-        "total5Day": -431222,
+        "foreign5Day": -59652,
+        "investmentTrust5Day": -64827,
+        "total5Day": -84639,
         "largeHolderRatio": 49.44,
         "retailRatio": 11.88,
         "shortToMarginRatio": null,
@@ -5610,90 +5963,10 @@
         "foreignTargetPricePremium": null,
         "foreignTargetBroker": null,
         "foreignTargetCount": 0
-      },
-      {
-        "code": "7610",
-        "name": "聯友金屬-創",
-        "industryName": "綠能環保",
-        "priceDate": "2026-05-06",
-        "close": 666,
-        "change": -63,
-        "changePercent": -8.641975308641975,
-        "return20": 60.28880866425993,
-        "return60": 245.97402597402595,
-        "volume": 1439000,
-        "turnover": null,
-        "ma5": 667.2,
-        "ma10": 643.8,
-        "ma20": 609.35,
-        "ma60": 402.21666666666664,
-        "ma240": null,
-        "maBullStack": false,
-        "maStackCrossedAbove240": false,
-        "foreign5Day": 146000,
-        "investmentTrust5Day": 0,
-        "total5Day": 146000,
-        "largeHolderRatio": 48.37,
-        "retailRatio": 19.05,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 0,
-        "sparkline20": [
-          443,
-          452.5,
-          497.5,
-          547,
-          601,
-          655,
-          647,
-          638,
-          640,
-          628,
-          670,
-          638,
-          587,
-          575,
-          632,
-          638,
-          640,
-          663,
-          729,
-          666
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "聯友金屬-創 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": null,
-        "selectionSignalTone": "normal",
-        "selectionSignalCount": 0,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null,
-        "monthlyRevenueDate": "2026-04-17",
-        "monthlyRevenueMoM": 71.68146185066439,
-        "monthlyRevenueYoY": 958.9816868241157,
-        "monthlyRevenueDualGrowth": true,
-        "foreignTargetPrice": null,
-        "foreignTargetPricePremium": null,
-        "foreignTargetBroker": null,
-        "foreignTargetCount": 0
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬低於同產業平均 38.61%，短線強度落後族群。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "目前追蹤池中同產業可比較標的有限，先以本身技術面與籌碼面為主。"
     ]
   }
 }

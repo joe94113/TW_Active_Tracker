@@ -1,26 +1,27 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HomePage from './pages/HomePage.vue';
-import EtfOverlapPage from './pages/EtfOverlapPage.vue';
-import EtfListPage from './pages/EtfListPage.vue';
-import EtfDetailPage from './pages/EtfDetailPage.vue';
-import StockDetailPage from './pages/StockDetailPage.vue';
-import ThemeRadarPage from './pages/ThemeRadarPage.vue';
-import FuturesPage from './pages/FuturesPage.vue';
-import StockRadarPage from './pages/StockRadarPage.vue';
-import StockClassroomPage from './pages/StockClassroomPage.vue';
-import EntryRadarPage from './pages/EntryRadarPage.vue';
-import HighDividendEtfFlowPage from './pages/HighDividendEtfFlowPage.vue';
-import TomorrowWatchlistPage from './pages/TomorrowWatchlistPage.vue';
-import FavoritesHealthPage from './pages/FavoritesHealthPage.vue';
-import StockScannerPage from './pages/StockScannerPage.vue';
-import EventStatsPage from './pages/EventStatsPage.vue';
-import OfficialRadarPage from './pages/OfficialRadarPage.vue';
-import BrokerBranchRadarPage from './pages/BrokerBranchRadarPage.vue';
-import WatchboardPage from './pages/WatchboardPage.vue';
-import IndustryPulsePage from './pages/IndustryPulsePage.vue';
-import GlobalMarketsPage from './pages/GlobalMarketsPage.vue';
-import MarketBuzzPage from './pages/MarketBuzzPage.vue';
 import { applySeoMeta } from './lib/seo';
+
+const HomePage = () => import('./pages/HomePage.vue');
+const EtfOverlapPage = () => import('./pages/EtfOverlapPage.vue');
+const EtfListPage = () => import('./pages/EtfListPage.vue');
+const EtfDetailPage = () => import('./pages/EtfDetailPage.vue');
+const StockDetailPage = () => import('./pages/StockDetailPage.vue');
+const ThemeRadarPage = () => import('./pages/ThemeRadarPage.vue');
+const FuturesPage = () => import('./pages/FuturesPage.vue');
+const StockRadarPage = () => import('./pages/StockRadarPage.vue');
+const StockClassroomPage = () => import('./pages/StockClassroomPage.vue');
+const EntryRadarPage = () => import('./pages/EntryRadarPage.vue');
+const HighDividendEtfFlowPage = () => import('./pages/HighDividendEtfFlowPage.vue');
+const TomorrowWatchlistPage = () => import('./pages/TomorrowWatchlistPage.vue');
+const FavoritesHealthPage = () => import('./pages/FavoritesHealthPage.vue');
+const StockScannerPage = () => import('./pages/StockScannerPage.vue');
+const EventStatsPage = () => import('./pages/EventStatsPage.vue');
+const OfficialRadarPage = () => import('./pages/OfficialRadarPage.vue');
+const BrokerBranchRadarPage = () => import('./pages/BrokerBranchRadarPage.vue');
+const WatchboardPage = () => import('./pages/WatchboardPage.vue');
+const IndustryPulsePage = () => import('./pages/IndustryPulsePage.vue');
+const GlobalMarketsPage = () => import('./pages/GlobalMarketsPage.vue');
+const MarketBuzzPage = () => import('./pages/MarketBuzzPage.vue');
 
 export const ROUTE_NAME = {
   HOME: 'home',

@@ -16,6 +16,7 @@ const { manifest, dashboard, stockList, stockSearchList, isLoading, errorMessage
 const replayHistory = ref(null);
 const isReplayLoading = ref(false);
 const replayError = ref('');
+const activeRadarTab = ref('technical');
 
 const themeRadar = computed(() => dashboard.value?.題材雷達 ?? null);
 const radarSourceList = computed(() => (stockList.value.length ? stockList.value : stockSearchList.value));
@@ -113,6 +114,9 @@ const stockSections = computed(() => [
     items: radar.value.riskAlerts,
   },
 ]);
+const activeStockSection = computed(
+  () => stockSections.value.find((section) => section.key === activeRadarTab.value) ?? stockSections.value[0] ?? null,
+);
 
 const pageSeo = computed(() => ({
   title: '選股雷達',
@@ -158,6 +162,10 @@ async function loadReplayHistory() {
 
 function getSectionAnchor(sectionKey) {
   return `radar-${sectionKey}`;
+}
+
+function setActiveRadarTab(sectionKey) {
+  activeRadarTab.value = sectionKey;
 }
 
 function getStockMetrics(sectionKey, item) {
@@ -282,40 +290,52 @@ function getReplayMetricClass(value) {
         </aside>
       </section>
 
-      <nav class="mobile-section-nav radar-section-nav" aria-label="選股雷達快速導覽">
-        <a
-          v-for="section in stockSections"
-          :key="section.key"
-          class="section-chip"
-          :href="`#${getSectionAnchor(section.key)}`"
-        >
-          {{ section.title }}
-        </a>
-        <a class="section-chip" href="#radar-replay">選股回放</a>
-        <a class="section-chip" href="#radar-themes">題材輪動</a>
-      </nav>
+      <section class="panel radar-tab-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">選股類別切換</h2>
+            <p class="panel-subtitle">先切到你今天想找的型態，再往下看明細，閱讀會比整頁往下翻輕鬆很多。</p>
+          </div>
+        </div>
+        <div class="radar-tabbar" role="tablist" aria-label="選股雷達類別">
+          <button
+            v-for="section in stockSections"
+            :key="section.key"
+            type="button"
+            class="radar-tab-button"
+            :class="{ 'is-active': activeRadarTab === section.key }"
+            :aria-selected="activeRadarTab === section.key"
+            @click="setActiveRadarTab(section.key)"
+          >
+            <span>{{ section.title }}</span>
+            <small>{{ formatNumber(section.items.length, 0) }} 檔</small>
+          </button>
+          <a class="section-chip" href="#radar-replay">選股回放</a>
+          <a class="section-chip" href="#radar-themes">題材輪動</a>
+        </div>
+      </section>
 
       <section class="radar-page-layout">
         <div class="radar-main-column">
           <section
-            v-for="section in stockSections"
-            :id="getSectionAnchor(section.key)"
-            :key="section.key"
+            v-if="activeStockSection"
+            :id="getSectionAnchor(activeStockSection.key)"
             class="panel radar-section-panel"
           >
             <div class="panel-header">
               <div>
-                <h2 class="panel-title">{{ section.title }}</h2>
-                <p class="panel-subtitle">{{ section.description }}</p>
+                <h2 class="panel-title">{{ activeStockSection.title }}</h2>
+                <p class="panel-subtitle">{{ activeStockSection.description }}</p>
               </div>
+              <span class="meta-chip">{{ formatNumber(activeStockSection.items.length, 0) }} 檔</span>
             </div>
 
-            <div v-if="section.items.length" class="radar-stock-grid">
+            <div v-if="activeStockSection.items.length" class="radar-stock-grid">
               <RouterLink
-                v-for="item in section.items"
-                :key="`${section.key}-${item.code}`"
+                v-for="item in activeStockSection.items"
+                :key="`${activeStockSection.key}-${item.code}`"
                 class="radar-stock-card"
-                :class="`is-${getStockCardTone(section.key, item)}`"
+                :class="`is-${getStockCardTone(activeStockSection.key, item)}`"
                 :to="createStockRoute(item.code)"
               >
                 <div class="radar-stock-head">
@@ -340,7 +360,7 @@ function getReplayMetricClass(value) {
                 </div>
 
                 <div class="radar-stock-metrics">
-                  <div v-for="metric in getStockMetrics(section.key, item)" :key="`${section.key}-${item.code}-${metric.label}`">
+                  <div v-for="metric in getStockMetrics(activeStockSection.key, item)" :key="`${activeStockSection.key}-${item.code}-${metric.label}`">
                     <span>{{ metric.label }}</span>
                     <strong>{{ metric.value }}</strong>
                   </div>
@@ -351,7 +371,7 @@ function getReplayMetricClass(value) {
                 </div>
 
                 <div v-if="item.tags?.length" class="tag-row">
-                  <span v-for="tag in item.tags.slice(0, 3)" :key="`${section.key}-${item.code}-${tag}`" class="keyword-pill">
+                  <span v-for="tag in item.tags.slice(0, 3)" :key="`${activeStockSection.key}-${item.code}-${tag}`" class="keyword-pill">
                     {{ tag }}
                   </span>
                 </div>
@@ -359,8 +379,8 @@ function getReplayMetricClass(value) {
             </div>
 
             <div v-else class="empty-state compact">
-              <strong>{{ section.title }}今天沒有明顯名單</strong>
-              <p>{{ section.emptyMessage }}</p>
+              <strong>{{ activeStockSection.title }}今天沒有明顯名單</strong>
+              <p>{{ activeStockSection.emptyMessage }}</p>
             </div>
           </section>
 

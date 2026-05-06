@@ -4287,6 +4287,8 @@ function 建立共同持股(successes) {
 
   for (const result of successes) {
     for (const holding of result.snapshot.holdings ?? []) {
+      if (!是否一般股票(holding.code)) continue;
+
       if (!map.has(holding.code)) {
         map.set(holding.code, {
           code: holding.code,
@@ -4467,6 +4469,8 @@ function 建立異動統計(successes, fieldName) {
 
   for (const result of successes) {
     for (const item of result.diff[fieldName] ?? []) {
+      if (!是否一般股票(item.code)) continue;
+
       if (!map.has(item.code)) {
         map.set(item.code, {
           code: item.code,

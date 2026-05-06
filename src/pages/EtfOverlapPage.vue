@@ -10,17 +10,34 @@ import { formatDate, formatLots, formatNumber, formatPercent } from '../lib/form
 const { overlap, isLoading, errorMessage, loadGlobalData } = useGlobalData();
 const boardMode = ref('shared');
 
+function isEquityLikeCode(code) {
+  return isStockCode(code);
+}
+
+function filterEquityRows(rows) {
+  return (rows ?? []).filter((item) => isEquityLikeCode(item?.code));
+}
+
 onMounted(() => {
   loadGlobalData();
 });
 
-const heavyHoldings = computed(() => (overlap.value?.['單股重壓'] ?? []).filter((item) => (item.maxWeight ?? 0) > 10));
-const sharedHoldings = computed(() => overlap.value?.['共同持股'] ?? []);
-const sharedAdds = computed(() => overlap.value?.['共同加碼'] ?? []);
-const sharedCuts = computed(() => overlap.value?.['共同減碼'] ?? []);
-const sharedNewPositions = computed(() => overlap.value?.['共同新增'] ?? []);
-const sharedRemovals = computed(() => overlap.value?.['共同剔除'] ?? []);
-const uniqueMoves = computed(() => overlap.value?.['不重複異動'] ?? {});
+const heavyHoldings = computed(() =>
+  filterEquityRows(overlap.value?.['單股重壓'] ?? []).filter((item) => (item.maxWeight ?? 0) > 10),
+);
+const sharedHoldings = computed(() => filterEquityRows(overlap.value?.['共同持股'] ?? []));
+const sharedAdds = computed(() => filterEquityRows(overlap.value?.['共同加碼'] ?? []));
+const sharedCuts = computed(() => filterEquityRows(overlap.value?.['共同減碼'] ?? []));
+const sharedNewPositions = computed(() => filterEquityRows(overlap.value?.['共同新增'] ?? []));
+const sharedRemovals = computed(() => filterEquityRows(overlap.value?.['共同剔除'] ?? []));
+const uniqueMoves = computed(() => {
+  const source = overlap.value?.['不重複異動'] ?? {};
+  return {
+    新增: filterEquityRows(source['新增'] ?? []),
+    加碼: filterEquityRows(source['加碼'] ?? []),
+    減碼: filterEquityRows(source['減碼'] ?? []),
+  };
+});
 const etfMoveSummaries = computed(() => overlap.value?.['各ETF異動摘要'] ?? []);
 const trackedEtfCount = computed(() => Number(overlap.value?.['已串接ETF數'] ?? 0));
 const disclosureDate = computed(() => overlap.value?.['最新揭露日期'] ?? null);
@@ -393,7 +410,7 @@ function getEtfMoveLabel(summary) {
         </div>
       </section>
 
-      <section class="dual-grid etf-overlap-detail-grid">
+      <section class="etf-overlap-detail-stack">
         <article class="panel">
           <div class="panel-header">
             <div>

@@ -1,67 +1,67 @@
 {
-  "updatedAt": "2026-05-06T02:30:33.623Z",
+  "updatedAt": "2026-05-06T08:32:42.260Z",
   "marketDate": "2026-05-06",
   "lookbackDays": 240,
   "note": "以近 240 個交易日內各技術訊號出現後的 20 日方向報酬估算，作為訊號可信度參考。",
   "signals": {
     "rsi-oversold": {
-      "samples": 768,
-      "winRate": 55.859375,
-      "avgReturn20": 2.7715074380624833,
+      "samples": 762,
+      "winRate": 54.85564304461942,
+      "avgReturn20": 2.5962453163320465,
       "tone": "up"
     },
     "kd-bullish": {
-      "samples": 1282,
-      "winRate": 57.176287051482056,
-      "avgReturn20": 4.92162011798861,
+      "samples": 1291,
+      "winRate": 56.62277304415182,
+      "avgReturn20": 5.151746035788069,
       "tone": "up"
     },
     "macd-bullish-cross": {
-      "samples": 1399,
-      "winRate": 59.54253037884203,
-      "avgReturn20": 7.347694203039475,
+      "samples": 1400,
+      "winRate": 58.857142857142854,
+      "avgReturn20": 7.286419645298762,
       "tone": "up"
     },
     "golden-cross": {
-      "samples": 1070,
-      "winRate": 58.971962616822424,
-      "avgReturn20": 5.974339617500065,
+      "samples": 1079,
+      "winRate": 59.128822984244664,
+      "avgReturn20": 6.058803743193039,
       "tone": "up"
     },
     "kd-bearish": {
-      "samples": 1026,
-      "winRate": 36.939571150097464,
-      "avgReturn20": -9.640148985935694,
+      "samples": 1025,
+      "winRate": 36.58536585365854,
+      "avgReturn20": -9.328834750737578,
       "tone": "down"
     },
     "death-cross": {
-      "samples": 1112,
-      "winRate": 37.14028776978417,
-      "avgReturn20": -7.492648075007333,
+      "samples": 1122,
+      "winRate": 36.27450980392157,
+      "avgReturn20": -7.816555480322301,
       "tone": "down"
     },
     "macd-bearish-cross": {
       "samples": 1422,
-      "winRate": 36.49789029535865,
-      "avgReturn20": -8.875886778705807,
+      "winRate": 37.0604781997187,
+      "avgReturn20": -8.686816282215336,
       "tone": "down"
     },
     "break-above-long-ma": {
-      "samples": 1129,
-      "winRate": 57.39592559787422,
-      "avgReturn20": 5.925064274241647,
+      "samples": 1122,
+      "winRate": 56.951871657754005,
+      "avgReturn20": 6.2657447229331815,
       "tone": "up"
     },
     "break-below-long-ma": {
-      "samples": 1135,
-      "winRate": 39.29515418502202,
-      "avgReturn20": -6.452457842713668,
+      "samples": 1126,
+      "winRate": 39.25399644760213,
+      "avgReturn20": -6.983336673784729,
       "tone": "down"
     },
     "rsi-overbought": {
-      "samples": 3033,
-      "winRate": 37.916254533465214,
-      "avgReturn20": -11.255340871556553,
+      "samples": 3013,
+      "winRate": 38.765350149352805,
+      "avgReturn20": -10.457019358933263,
       "tone": "down"
     }
   }

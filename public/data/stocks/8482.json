@@ -3,7 +3,7 @@
   "name": "商億-KY",
   "kind": "stock",
   "priceDate": "2026-05-06",
-  "generatedAt": "2026-05-06T02:31:41.709Z",
+  "generatedAt": "2026-05-06T08:33:58.973Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4792,83 +4792,83 @@
       "date": "2026-05-06",
       "open": 50.4,
       "high": 50.4,
-      "low": 50.4,
-      "close": 48.55,
-      "volume": 9000,
+      "low": 50,
+      "close": 49.6,
+      "volume": 15000,
       "turnover": null,
       "transactions": null,
-      "change": -0.6000015258789091,
-      "changePercent": -1.2207558641946141,
-      "maFast": 49.180000457763676,
-      "maShort": 49.384999923706054,
-      "maMedium": 49.47499984741211,
-      "maLong": 49.329999936421714,
-      "rsi": 46.21136696412319,
-      "stochasticK": 44.116391665894014,
-      "stochasticD": 49.26869299234414,
-      "macd": 0.032799455161146795,
-      "macdSignal": 0.12615943475337352,
-      "macdHist": -0.09335997959222672,
-      "ma5": 49.180000457763676,
-      "ma10": 49.384999923706054,
-      "ma20": 49.47499984741211,
-      "ma60": 49.329999936421714,
-      "ma240": 52.50958331743876,
-      "rsi14": 46.21136696412319,
-      "k9": 44.116391665894014,
-      "d9": 49.26869299234414
+      "change": 0.44999847412109517,
+      "changePercent": 0.9155614652100426,
+      "maFast": 49.39000045776367,
+      "maShort": 49.48999992370606,
+      "maMedium": 49.52749984741211,
+      "maLong": 49.34749993642171,
+      "rsi": 51.984160339855585,
+      "stochasticK": 55.783058332560735,
+      "stochasticD": 53.15758188123306,
+      "macd": 0.1165601389218267,
+      "macdSignal": 0.1429115715055095,
+      "macdHist": -0.026351432583682805,
+      "ma5": 49.39000045776367,
+      "ma10": 49.48999992370606,
+      "ma20": 49.52749984741211,
+      "ma60": 49.34749993642171,
+      "ma240": 52.513958317438764,
+      "rsi14": 51.984160339855585,
+      "k9": 55.783058332560735,
+      "d9": 53.15758188123306
     }
   ],
   "technicalSignals": [
     {
-      "key": "neutral",
-      "title": "技術面中性",
-      "tone": "normal",
-      "importance": 1,
-      "description": "商億-KY 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+      "key": "break-above-long-ma",
+      "title": "站回長均線",
+      "tone": "up",
+      "importance": 2,
+      "description": "商億-KY 收盤重新站上長均線，中期結構開始修復。"
     }
   ],
   "訊號摘要": [
-    "技術面中性"
+    "站回長均線"
   ],
   "最新摘要": {
-    "close": 48.55,
-    "change": -0.6000015258789091,
-    "changePercent": -1.2207558641946141,
-    "volume": 9000,
+    "close": 49.6,
+    "change": 0.44999847412109517,
+    "changePercent": 0.9155614652100426,
+    "volume": 15000,
     "turnover": null,
-    "return5": -1.6210709196690494,
-    "return20": 2.8601678288966004,
-    "return60": 0.000001571451003649946
+    "return5": 0.5065887205852849,
+    "return20": 5.084744064125063,
+    "return60": 2.162720451987028
   },
   "最新指標": {
-    "maFast": 49.180000457763676,
-    "maShort": 49.384999923706054,
-    "maMedium": 49.47499984741211,
-    "maLong": 49.329999936421714,
-    "ma5": 49.180000457763676,
-    "ma10": 49.384999923706054,
-    "ma20": 49.47499984741211,
-    "ma60": 49.329999936421714,
-    "ma240": 52.50958331743876,
-    "rsi": 46.21136696412319,
-    "rsi14": 46.21136696412319,
-    "stochasticK": 44.116391665894014,
-    "stochasticD": 49.26869299234414,
-    "k9": 44.116391665894014,
-    "d9": 49.26869299234414,
-    "macd": 0.032799455161146795,
-    "macdSignal": 0.12615943475337352,
-    "macdHist": -0.09335997959222672,
+    "maFast": 49.39000045776367,
+    "maShort": 49.48999992370606,
+    "maMedium": 49.52749984741211,
+    "maLong": 49.34749993642171,
+    "ma5": 49.39000045776367,
+    "ma10": 49.48999992370606,
+    "ma20": 49.52749984741211,
+    "ma60": 49.34749993642171,
+    "ma240": 52.513958317438764,
+    "rsi": 51.984160339855585,
+    "rsi14": 51.984160339855585,
+    "stochasticK": 55.783058332560735,
+    "stochasticD": 53.15758188123306,
+    "k9": 55.783058332560735,
+    "d9": 53.15758188123306,
+    "macd": 0.1165601389218267,
+    "macdSignal": 0.1429115715055095,
+    "macdHist": -0.026351432583682805,
     "maBullStack": false,
     "maStackCrossedAbove240": false
   },
   "觀察摘要": [
-    "商億-KY 目前位在均線交錯區，短線偏向震盪整理，宜觀察下一段量價方向。",
+    "商億-KY 目前站在 MA20 與 MA60 之上，短中期均線仍偏向多方排列。",
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
-    "近 20 個交易日報酬 2.86%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 95.49%，相較前次 增加 0.00 個百分點。"
+    "近 20 個交易日報酬 5.08%，可用來觀察波段資金是否持續留在主線。",
+    "最近 5 個交易日三大法人合計買超 14,000 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4892,12 +4892,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-05-06",
-    "updatedAt": "2026-05-06T01:43:04.000Z",
+    "updatedAt": "2026-05-06T04:11:54.000Z",
     "previousClose": 49.15,
-    "latestPrice": 50.4,
+    "latestPrice": 50.1,
     "high": 50.4,
-    "low": 50.4,
-    "volume": 9006,
+    "low": 50,
+    "volume": 15006,
     "points": [
       {
         "timestamp": 1778029200,
@@ -4955,15 +4955,48 @@
         "changePercent": 2.543238099448439
       },
       {
-        "timestamp": 1778031784,
-        "dateTime": "2026-05-06T01:43:04.000Z",
-        "time": "09:43",
-        "price": 50.400001525878906,
-        "high": 50.400001525878906,
-        "low": 50.400001525878906,
-        "volume": 0,
-        "change": 1.2500015258789077,
-        "changePercent": 2.543238099448439
+        "timestamp": 1778035800,
+        "dateTime": "2026-05-06T02:50:00.000Z",
+        "time": "10:50",
+        "price": 50,
+        "high": 50,
+        "low": 50,
+        "volume": 1000,
+        "change": 0.8500000000000014,
+        "changePercent": 1.7293997965412033
+      },
+      {
+        "timestamp": 1778036700,
+        "dateTime": "2026-05-06T03:05:00.000Z",
+        "time": "11:05",
+        "price": 50,
+        "high": 50,
+        "low": 50,
+        "volume": 1000,
+        "change": 0.8500000000000014,
+        "changePercent": 1.7293997965412033
+      },
+      {
+        "timestamp": 1778037300,
+        "dateTime": "2026-05-06T03:15:00.000Z",
+        "time": "11:15",
+        "price": 50.099998474121094,
+        "high": 50.099998474121094,
+        "low": 50.099998474121094,
+        "volume": 1000,
+        "change": 0.9499984741210952,
+        "changePercent": 1.9328554915993799
+      },
+      {
+        "timestamp": 1778040600,
+        "dateTime": "2026-05-06T04:10:00.000Z",
+        "time": "12:10",
+        "price": 50.099998474121094,
+        "high": 50.099998474121094,
+        "low": 50.099998474121094,
+        "volume": 3000,
+        "change": 0.9499984741210952,
+        "changePercent": 1.9328554915993799
       }
     ],
     "資料來源": [
@@ -5021,11 +5054,25 @@
   "法人買賣": {
     "days": [
       {
-        "date": "2026-04-30",
-        "foreign": -2000,
+        "date": "2026-05-06",
+        "foreign": 10000,
         "investmentTrust": 0,
         "dealer": 0,
-        "total": -2000
+        "total": 10000
+      },
+      {
+        "date": "2026-05-05",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 1000
+      },
+      {
+        "date": "2026-05-04",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 1000
       },
       {
         "date": "2026-04-29",
@@ -5043,10 +5090,10 @@
       }
     ],
     "summary": {
-      "foreign5Day": 0,
+      "foreign5Day": 14000,
       "investmentTrust5Day": 0,
       "dealer5Day": 0,
-      "total5Day": 0
+      "total5Day": 14000
     }
   },
   "持股分散": {
@@ -5181,7 +5228,7 @@
     "資料說明": "依 TDCC 持股分級，散戶定義為 10 張以下，大戶定義為 400 張以上。"
   },
   "融資融券": {
-    "date": "2026-05-05",
+    "date": "2026-05-06",
     "marginBuy": null,
     "marginSell": null,
     "marginRepay": null,
@@ -5204,7 +5251,7 @@
     "觀察摘要": []
   },
   "交易提醒": {
-    "asOfDate": "2026-05-05",
+    "asOfDate": "2026-05-06",
     "alerts": [
       {
         "key": "short-sale-8482",
@@ -5212,7 +5259,7 @@
         "tone": "info",
         "title": "可借券賣出餘量",
         "badgeLabel": "借券",
-        "date": "2026-05-05",
+        "date": "2026-05-06",
         "note": "今日可借券賣出股數約 2,220 股，可作為券源與流動性參考。",
         "detail": "券源多寡不代表方向，但有助於評估隔日券源與流動性。",
         "footnote": "今日可借券賣出股數約 2,220 股，可作為券源與流動性參考。"
@@ -5249,34 +5296,34 @@
   },
   "同產業比較": {
     "industryName": "居家生活",
-    "peerCount": 2,
+    "peerCount": 1,
     "rank20Day": 1,
-    "rankDaily": 2,
-    "averageReturn20": 1.3568774722813894,
-    "averageChangePercent": -1.1183605155515886,
+    "rankDaily": 1,
+    "averageReturn20": 5.084744064125063,
+    "averageChangePercent": 0.9155614652100426,
     "leaders": [
       {
         "code": "8482",
         "name": "商億-KY",
         "industryName": "居家生活",
         "priceDate": "2026-05-06",
-        "close": 48.55,
-        "change": -0.6000015258789091,
-        "changePercent": -1.2207558641946141,
-        "return20": 2.8601678288966004,
-        "return60": 0.000001571451003649946,
-        "volume": 9000,
+        "close": 49.6,
+        "change": 0.44999847412109517,
+        "changePercent": 0.9155614652100426,
+        "return20": 5.084744064125063,
+        "return60": 2.162720451987028,
+        "volume": 15000,
         "turnover": null,
-        "ma5": 49.180000457763676,
-        "ma10": 49.384999923706054,
-        "ma20": 49.47499984741211,
-        "ma60": 49.329999936421714,
-        "ma240": 52.50958331743876,
+        "ma5": 49.39000045776367,
+        "ma10": 49.48999992370606,
+        "ma20": 49.52749984741211,
+        "ma60": 49.34749993642171,
+        "ma240": 52.513958317438764,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
+        "foreign5Day": 14000,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 14000,
         "largeHolderRatio": 95.49000000000001,
         "retailRatio": 1.26,
         "shortToMarginRatio": null,
@@ -5301,22 +5348,22 @@
           49.45000076293945,
           49.25,
           49.150001525878906,
-          48.55
+          49.6
         ],
         "technicalSignals": [
           {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "商億-KY 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "key": "break-above-long-ma",
+            "title": "站回長均線",
+            "tone": "up",
+            "importance": 2,
+            "description": "商億-KY 收盤重新站上長均線，中期結構開始修復。"
           }
         ],
         "technicalSignalTitles": [
-          "技術面中性"
+          "站回長均線"
         ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
+        "topSignalTitle": "站回長均線",
+        "topSignalTone": "up",
         "signalCount": 1,
         "topSelectionSignalTitle": "可借券賣出餘量",
         "selectionSignalTone": "info",
@@ -5333,189 +5380,31 @@
         "foreignTargetPricePremium": null,
         "foreignTargetBroker": null,
         "foreignTargetCount": 0
-      },
-      {
-        "code": "8464",
-        "name": "億豐",
-        "industryName": "居家生活",
-        "priceDate": "2026-05-06",
-        "close": 341,
-        "change": -3.5,
-        "changePercent": -1.0159651669085632,
-        "return20": -0.14641288433382138,
-        "return60": -19.67020023557126,
-        "volume": 401000,
-        "turnover": null,
-        "ma5": 346.4,
-        "ma10": 353,
-        "ma20": 358.95,
-        "ma60": 377.05,
-        "ma240": 402.6958333333333,
-        "maBullStack": false,
-        "maStackCrossedAbove240": false,
-        "foreign5Day": 383747,
-        "investmentTrust5Day": -9494,
-        "total5Day": 369113,
-        "largeHolderRatio": 87.52,
-        "retailRatio": 1.23,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 1,
-        "sparkline20": [
-          350.5,
-          352,
-          356,
-          370,
-          377,
-          357,
-          370,
-          368.5,
-          369.5,
-          378.5,
-          372,
-          362.5,
-          356,
-          350.5,
-          357,
-          351.5,
-          351,
-          344,
-          344.5,
-          341
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "億豐 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null,
-        "monthlyRevenueDate": "2026-04-17",
-        "monthlyRevenueMoM": 40.284617704573535,
-        "monthlyRevenueYoY": 9.054197597764075,
-        "monthlyRevenueDualGrowth": true,
-        "foreignTargetPrice": null,
-        "foreignTargetPricePremium": null,
-        "foreignTargetBroker": null,
-        "foreignTargetCount": 0
       }
     ],
     "laggards": [
-      {
-        "code": "8464",
-        "name": "億豐",
-        "industryName": "居家生活",
-        "priceDate": "2026-05-06",
-        "close": 341,
-        "change": -3.5,
-        "changePercent": -1.0159651669085632,
-        "return20": -0.14641288433382138,
-        "return60": -19.67020023557126,
-        "volume": 401000,
-        "turnover": null,
-        "ma5": 346.4,
-        "ma10": 353,
-        "ma20": 358.95,
-        "ma60": 377.05,
-        "ma240": 402.6958333333333,
-        "maBullStack": false,
-        "maStackCrossedAbove240": false,
-        "foreign5Day": 383747,
-        "investmentTrust5Day": -9494,
-        "total5Day": 369113,
-        "largeHolderRatio": 87.52,
-        "retailRatio": 1.23,
-        "shortToMarginRatio": null,
-        "activeEtfCount": 1,
-        "sparkline20": [
-          350.5,
-          352,
-          356,
-          370,
-          377,
-          357,
-          370,
-          368.5,
-          369.5,
-          378.5,
-          372,
-          362.5,
-          356,
-          350.5,
-          357,
-          351.5,
-          351,
-          344,
-          344.5,
-          341
-        ],
-        "technicalSignals": [
-          {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "億豐 目前沒有明確的新訊號，偏向等待下一段量價表態。"
-          }
-        ],
-        "technicalSignalTitles": [
-          "技術面中性"
-        ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "signalCount": 1,
-        "topSelectionSignalTitle": "可借券賣出餘量",
-        "selectionSignalTone": "info",
-        "selectionSignalCount": 1,
-        "isUnderDisposition": false,
-        "hasAttentionWarning": false,
-        "hasChangedTrading": false,
-        "nextExDividendDate": null,
-        "monthlyRevenueDate": "2026-04-17",
-        "monthlyRevenueMoM": 40.284617704573535,
-        "monthlyRevenueYoY": 9.054197597764075,
-        "monthlyRevenueDualGrowth": true,
-        "foreignTargetPrice": null,
-        "foreignTargetPricePremium": null,
-        "foreignTargetBroker": null,
-        "foreignTargetCount": 0
-      },
       {
         "code": "8482",
         "name": "商億-KY",
         "industryName": "居家生活",
         "priceDate": "2026-05-06",
-        "close": 48.55,
-        "change": -0.6000015258789091,
-        "changePercent": -1.2207558641946141,
-        "return20": 2.8601678288966004,
-        "return60": 0.000001571451003649946,
-        "volume": 9000,
+        "close": 49.6,
+        "change": 0.44999847412109517,
+        "changePercent": 0.9155614652100426,
+        "return20": 5.084744064125063,
+        "return60": 2.162720451987028,
+        "volume": 15000,
         "turnover": null,
-        "ma5": 49.180000457763676,
-        "ma10": 49.384999923706054,
-        "ma20": 49.47499984741211,
-        "ma60": 49.329999936421714,
-        "ma240": 52.50958331743876,
+        "ma5": 49.39000045776367,
+        "ma10": 49.48999992370606,
+        "ma20": 49.52749984741211,
+        "ma60": 49.34749993642171,
+        "ma240": 52.513958317438764,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
+        "foreign5Day": 14000,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 14000,
         "largeHolderRatio": 95.49000000000001,
         "retailRatio": 1.26,
         "shortToMarginRatio": null,
@@ -5540,22 +5429,22 @@
           49.45000076293945,
           49.25,
           49.150001525878906,
-          48.55
+          49.6
         ],
         "technicalSignals": [
           {
-            "key": "neutral",
-            "title": "技術面中性",
-            "tone": "normal",
-            "importance": 1,
-            "description": "商億-KY 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+            "key": "break-above-long-ma",
+            "title": "站回長均線",
+            "tone": "up",
+            "importance": 2,
+            "description": "商億-KY 收盤重新站上長均線，中期結構開始修復。"
           }
         ],
         "technicalSignalTitles": [
-          "技術面中性"
+          "站回長均線"
         ],
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
+        "topSignalTitle": "站回長均線",
+        "topSignalTone": "up",
         "signalCount": 1,
         "topSelectionSignalTitle": "可借券賣出餘量",
         "selectionSignalTone": "info",
@@ -5575,8 +5464,7 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 1.36%，在同族群相對偏強。",
-      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
+      "目前追蹤池中同產業可比較標的有限，先以本身技術面與籌碼面為主。"
     ]
   }
 }

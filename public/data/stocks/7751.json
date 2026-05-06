@@ -3,7 +3,7 @@
   "name": "竑騰",
   "kind": "stock",
   "priceDate": "2026-05-06",
-  "generatedAt": "2026-05-06T02:31:38.176Z",
+  "generatedAt": "2026-05-06T08:33:55.231Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4794,7 +4794,7 @@
       "high": 2390,
       "low": 2390,
       "close": 2390,
-      "volume": 91000,
+      "volume": 107000,
       "turnover": null,
       "transactions": null,
       "change": -265,
@@ -4835,7 +4835,7 @@
     "close": 2390,
     "change": -265,
     "changePercent": -9.981167608286253,
-    "volume": 91000,
+    "volume": 107000,
     "turnover": null,
     "return5": -11.970534069981584,
     "return20": 30.601092896174865,
@@ -4892,12 +4892,12 @@
   "盤中走勢": {
     "interval": "5m",
     "marketDate": "2026-05-06",
-    "updatedAt": "2026-05-06T02:00:16.000Z",
+    "updatedAt": "2026-05-06T05:30:36.000Z",
     "previousClose": 2655,
     "latestPrice": 2390,
     "high": 2390,
     "low": 2390,
-    "volume": 111240,
+    "volume": 139213,
     "points": [
       {
         "timestamp": 1778029200,
@@ -4933,9 +4933,97 @@
         "changePercent": -9.981167608286253
       },
       {
-        "timestamp": 1778032816,
-        "dateTime": "2026-05-06T02:00:16.000Z",
+        "timestamp": 1778032800,
+        "dateTime": "2026-05-06T02:00:00.000Z",
         "time": "10:00",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 4222,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778034000,
+        "dateTime": "2026-05-06T02:20:00.000Z",
+        "time": "10:20",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 3157,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778035200,
+        "dateTime": "2026-05-06T02:40:00.000Z",
+        "time": "10:40",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 4168,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778036400,
+        "dateTime": "2026-05-06T03:00:00.000Z",
+        "time": "11:00",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 4304,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778040000,
+        "dateTime": "2026-05-06T04:00:00.000Z",
+        "time": "12:00",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 4436,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778042400,
+        "dateTime": "2026-05-06T04:40:00.000Z",
+        "time": "12:40",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 1713,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778043600,
+        "dateTime": "2026-05-06T05:00:00.000Z",
+        "time": "13:00",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 3379,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778044800,
+        "dateTime": "2026-05-06T05:20:00.000Z",
+        "time": "13:20",
+        "price": 2390,
+        "high": 2390,
+        "low": 2390,
+        "volume": 3000,
+        "change": -265,
+        "changePercent": -9.981167608286253
+      },
+      {
+        "timestamp": 1778045400,
+        "dateTime": "2026-05-06T05:30:00.000Z",
+        "time": "13:30",
         "price": 2390,
         "high": 2390,
         "low": 2390,
@@ -5093,7 +5181,7 @@
   },
   "融資融券": null,
   "交易提醒": {
-    "asOfDate": "2026-05-05",
+    "asOfDate": "2026-05-06",
     "alerts": [],
     "eventCalendar": [],
     "highlights": [],
@@ -5111,8 +5199,8 @@
   },
   "主動ETF曝光": {
     "count": 3,
-    "averageWeight": 1.5633333333333332,
-    "totalWeight": 4.6899999999999995,
+    "averageWeight": 1.5366666666666668,
+    "totalWeight": 4.61,
     "latestDisclosureDate": "2026-05-06",
     "items": [
       {
@@ -5137,8 +5225,8 @@
         "etfCode": "00995A",
         "etfName": "主動中信台灣卓越",
         "providerLabel": "中信投信",
-        "disclosureDate": "2026-05-05",
-        "weight": 0.73,
+        "disclosureDate": "2026-05-06",
+        "weight": 0.65,
         "shares": 15000,
         "rank": 33
       }
