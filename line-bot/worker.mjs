@@ -5,8 +5,9 @@ import {
   buildEntryFlex,
   buildEtfFlex,
   buildGlobalFlex,
+  buildHumorFallbackMessages,
+  buildInstitutionalFocusFlex,
   buildMarketFlex,
-  buildMenuHintFlex,
   buildStockFlex,
   buildThemeFlex,
   buildWelcomeFlex,
@@ -14,7 +15,7 @@ import {
 
 const encoder = new TextEncoder();
 const DEFAULT_SITE_URL = 'https://joe94113.github.io/TW_Active_Tracker';
-const WEBHOOK_VERSION = '2026-05-06-flex-pro-2';
+const WEBHOOK_VERSION = '2026-05-06-line-keyword-pro-3';
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -44,16 +45,43 @@ function parseKeywordRoute(rawText) {
     return { type: 'stock', query: text };
   }
 
+  if (
+    normalized.includes('雙法人連買') ||
+    normalized.includes('雙法人同買') ||
+    normalized.includes('雙法人') ||
+    normalized.includes('法人同買')
+  ) {
+    return { type: 'institutional-dual', query: text };
+  }
+
+  if (
+    normalized.includes('外資買超') ||
+    normalized.includes('外資連買') ||
+    normalized === '外資' ||
+    normalized.includes('外資')
+  ) {
+    return { type: 'institutional-foreign', query: text };
+  }
+
+  if (
+    normalized.includes('投信買超') ||
+    normalized.includes('投信連買') ||
+    normalized === '投信' ||
+    normalized.includes('投信')
+  ) {
+    return { type: 'institutional-trust', query: text };
+  }
+
   const keywordMap = [
-    { type: 'market', match: ['盤勢', '大盤', '今日盤勢', '收盤'] },
+    { type: 'market', match: ['盤勢', '大盤', '明日盤勢', '市場'] },
     { type: 'stock-radar', match: ['選股', '選股雷達', '雷達'] },
-    { type: 'entry', match: ['起漲', '卡位', '起漲卡位', '剛轉強', '待突破'] },
-    { type: 'theme', match: ['題材', '資金題材', '主線', '熱門題材'] },
-    { type: 'etf', match: ['etf', '高股息', '主動式etf', '主動etf'] },
-    { type: 'classroom', match: ['教學', '小教室', '新手', '怎麼看'] },
-    { type: 'branch', match: ['分點', '券商', '主力'] },
-    { type: 'global', match: ['國際盤', '美股', '原物料', '外匯', '全球'] },
-    { type: 'help', match: ['help', 'menu', '功能', '選單'] },
+    { type: 'entry', match: ['起漲', '起漲卡位', '卡位', '剛起'] },
+    { type: 'theme', match: ['題材', '資金題材', '題材雷達', '熱度'] },
+    { type: 'etf', match: ['etf', '主動式etf', '高股息etf', 'etf研究'] },
+    { type: 'classroom', match: ['教學', '股票小教室', '小教室', '新手'] },
+    { type: 'branch', match: ['分點', '券商分點', '分點雷達', '主力'] },
+    { type: 'global', match: ['國際盤', '國際', '原物料', '外匯', '美股'] },
+    { type: 'help', match: ['help', 'menu', '功能', '選單', '幫助'] },
   ];
 
   for (const entry of keywordMap) {
@@ -122,8 +150,7 @@ async function buildReplyForKeyword(route, client) {
       return [buildEntryFlex({ entryRadar, siteUrl })];
     }
     case 'etf': {
-      const manifest = await client.getManifest();
-      const highDividendFlow = await client.getHighDividendFlow();
+      const [manifest, highDividendFlow] = await Promise.all([client.getManifest(), client.getHighDividendFlow()]);
       return [buildEtfFlex({ manifest, highDividendFlow, siteUrl })];
     }
     case 'classroom': {
@@ -141,10 +168,22 @@ async function buildReplyForKeyword(route, client) {
       const [entryRadar, topicIndex] = await Promise.all([client.getEntryRadar(), client.getTopicIndex()]);
       return [buildEntryFlex({ entryRadar, siteUrl }), buildThemeFlex({ topicIndex, siteUrl })];
     }
+    case 'institutional-dual': {
+      const dashboard = await client.getDashboard();
+      return [buildInstitutionalFocusFlex({ dashboard, siteUrl, mode: 'dual' })];
+    }
+    case 'institutional-foreign': {
+      const dashboard = await client.getDashboard();
+      return [buildInstitutionalFocusFlex({ dashboard, siteUrl, mode: 'foreign' })];
+    }
+    case 'institutional-trust': {
+      const dashboard = await client.getDashboard();
+      return [buildInstitutionalFocusFlex({ dashboard, siteUrl, mode: 'trust' })];
+    }
     case 'stock': {
       const stock = await client.findStock(route.query);
       if (!stock) {
-        return [buildMenuHintFlex(siteUrl)];
+        return buildHumorFallbackMessages({ siteUrl, kind: 'unknown' });
       }
 
       const detail = await client.getStockDetail(stock.code);
@@ -162,7 +201,13 @@ async function handleEvent(event, env, client) {
     return;
   }
 
-  if (event.type !== 'message' || event.message?.type !== 'text') {
+  if (event.type !== 'message') {
+    return;
+  }
+
+  if (event.message?.type !== 'text') {
+    const messages = buildHumorFallbackMessages({ siteUrl: client.baseUrl, kind: 'non-text' });
+    await replyMessage(event.replyToken, messages.slice(0, 5), env);
     return;
   }
 

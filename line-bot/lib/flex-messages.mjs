@@ -10,6 +10,8 @@ const PALETTE = {
   bearishSoft: '#fff0eb',
   warning: '#c48b15',
   warningSoft: '#fff7e3',
+  purple: '#6b46c1',
+  purpleSoft: '#f2edff',
   neutral: '#5a6e82',
   neutralSoft: '#f3f6f9',
   text: '#10202d',
@@ -312,6 +314,9 @@ function createLinkButton(label, url, options = {}) {
 function createBubble({
   title,
   subtitle,
+  subtitleColor,
+  subtitleSize,
+  subtitleWeight,
   accentColor,
   accentSoft,
   badges = [],
@@ -367,8 +372,9 @@ function createBubble({
         },
         subtitle
           ? createText(subtitle, {
-              size: 'xs',
-              color: '#ecf5fb',
+              size: subtitleSize ?? 'xs',
+              color: subtitleColor ?? '#ecf5fb',
+              weight: subtitleWeight ?? 'regular',
               wrap: true,
             })
           : null,
@@ -409,6 +415,16 @@ function createFlexMessage(altText, contents) {
   };
 }
 
+function createTextMessage(text, siteUrl) {
+  return attachQuickReply(
+    {
+      type: 'text',
+      text: String(text ?? ''),
+    },
+    siteUrl,
+  );
+}
+
 function attachQuickReply(message, siteUrl) {
   if (!message) {
     return message;
@@ -423,9 +439,13 @@ function getQuickReplyPreset(siteUrl) {
     items: [
       { label: '盤勢', text: '盤勢' },
       { label: '選股', text: '選股' },
+      { label: '雙法人', text: '雙法人連買' },
+      { label: '外資', text: '外資買超' },
+      { label: '投信', text: '投信買超' },
       { label: '起漲', text: '起漲' },
       { label: '題材', text: '題材' },
       { label: 'ETF', text: 'ETF' },
+      { label: '分點', text: '分點' },
       { label: '教學', text: '教學' },
     ].map((item) => ({
       type: 'action',
@@ -571,36 +591,158 @@ function createStockCardBubble(stock, siteUrl, options = {}) {
 export function buildWelcomeFlex(siteUrl) {
   const bubble = createBubble({
     title: '功能導覽',
-    subtitle: '直接輸入關鍵字，快速取得市場摘要、題材與個股研究。',
+    subtitle: '點圖文選單，或直接傳關鍵字與股票代號，我就會回你對應的研究卡片。',
     accentColor: PALETTE.brand,
     accentSoft: PALETTE.brandSoft,
     footerUrl: siteUrl,
     footerLabel: '打開網站總覽',
     badges: [createPill('LINE 智能回覆', { tone: 'neutral' })],
     sections: [
-      createSection('常用指令', [
-        createText('盤勢｜選股｜起漲｜題材｜ETF｜分點｜國際盤｜教學', {
-          size: 'sm',
-          color: PALETTE.darkText,
-          weight: 'bold',
-        }),
-        createText('也可以直接輸入 2330、2455 這類股票代號，快速查個股。', {
-          size: 'xs',
-          color: PALETTE.muted,
-        }),
-      ]),
-      createSection('你會收到什麼', [
+      createSection('你可以這樣用', [
         ...createBulletList([
-          '明日盤勢預測與市場廣度',
-          '起漲卡位與雙法人焦點',
-          '資金題材雷達與國際盤脈動',
-          '個股快讀卡與事件提醒',
+          '盤勢：大盤、成交值、廣度與明日趨勢預測',
+          '選股 / 起漲：看剛轉強、待突破與追蹤名單',
+          '題材 / ETF / 分點：看主線、共識持股與強分點',
+          '直接輸入 2330、2455：快速回個股快讀卡',
+        ]),
+      ]),
+      createSection('法人籌碼查詢', [
+        ...createBulletList([
+          '雙法人連買：看外資與投信同時偏多的名單',
+          '外資買超：看外資連買焦點股',
+          '投信買超：看投信連買與中線偏多個股',
         ]),
       ]),
     ],
   });
 
   return attachQuickReply(createFlexMessage('台股主動通｜功能導覽', bubble), siteUrl);
+}
+
+export function buildInstitutionalFocusFlex({ dashboard, siteUrl, mode = 'dual' }) {
+  const tracking = dashboard?.['法人追蹤'] ?? {};
+  const configMap = {
+    dual: {
+      key: '雙法人同買超',
+      title: '雙法人連買',
+      alt: '台股主動通｜雙法人連買',
+      subtitle: '外資與投信同時偏多，先看隔日是否續強。',
+      accentColor: PALETTE.brand,
+      accentSoft: PALETTE.brandSoft,
+      badge: '雙法人',
+      totalLabel: '累計雙法人',
+      streakLabel: '同買焦點',
+    },
+    foreign: {
+      key: '外資連買',
+      title: '外資買超',
+      alt: '台股主動通｜外資買超',
+      subtitle: '外資連買股偏短中線資金，適合搭配技術面確認。',
+      accentColor: PALETTE.bullish,
+      accentSoft: PALETTE.bullishSoft,
+      badge: '外資偏多',
+      totalLabel: '累計外資',
+      streakLabel: '外資連買',
+    },
+    trust: {
+      key: '投信連買',
+      title: '投信買超',
+      alt: '台股主動通｜投信買超',
+      subtitle: '投信連買通常偏中線布局，適合留意趨勢延續。',
+      accentColor: PALETTE.warning,
+      accentSoft: PALETTE.warningSoft,
+      badge: '投信偏多',
+      totalLabel: '累計投信',
+      streakLabel: '投信連買',
+    },
+  };
+
+  const config = configMap[mode] ?? configMap.dual;
+  const list = Array.isArray(tracking?.[config.key]) ? tracking[config.key].slice(0, 5) : [];
+
+  if (!list.length) {
+    const empty = createBubble({
+      title: config.title,
+      subtitle: '今天這一類名單暫時沒有明顯焦點股，可以先改看題材或起漲卡位。',
+      accentColor: config.accentColor,
+      accentSoft: config.accentSoft,
+      footerUrl: `${siteUrl}/#/`,
+      footerLabel: '打開首頁儀表板',
+      badges: [createPill(config.badge, { tone: 'neutral' })],
+      sections: [
+        createSection('今日狀態', [
+          createText('目前沒有符合條件的名單，建議先看盤勢、題材或分點雷達。', {
+            size: 'sm',
+            color: PALETTE.darkText,
+          }),
+        ]),
+      ],
+    });
+    return attachQuickReply(createFlexMessage(config.alt, empty), siteUrl);
+  }
+
+  const bubbles = list.map((item) => {
+    const code = item?.['代號'];
+    const name = item?.['名稱'];
+    const foreignNet = item?.['外資買賣超'];
+    const trustNet = item?.['投信買賣超'];
+    const totalNet = item?.['累計雙法人買超股數'] ?? item?.['累計買超股數'];
+    const streak = item?.['連買天數'] ?? item?.['外資連買天數'] ?? item?.['投信連買天數'];
+
+    return createBubble({
+      title: `${code} ${name}`,
+      subtitle: item?.['觀察'] || config.subtitle,
+      accentColor: config.accentColor,
+      accentSoft: config.accentSoft,
+      footerUrl: `${siteUrl}/#/stocks/${code}`,
+      footerLabel: '打開個股快讀',
+      badges: [
+        createPill(config.badge, { tone: mode === 'foreign' ? 'up' : mode === 'trust' ? 'warning' : 'neutral' }),
+        streak ? createPill(`${config.streakLabel} ${formatNumber(streak, 0)} 天`, { backgroundColor: PALETTE.neutralSoft, color: PALETTE.neutral }) : null,
+      ],
+      sections: [
+        ...createMetricGrid([
+          { label: '收盤價', value: item?.['收盤價'] ? formatPrice(item['收盤價'], 1) : null, valueColor: config.accentColor },
+          {
+            label: '單日漲跌',
+            value: item?.['漲跌幅'] !== undefined ? formatPercent(item['漲跌幅'], 2) : null,
+            valueColor: asNumber(item?.['漲跌幅']) >= 0 ? PALETTE.bullish : PALETTE.bearish,
+          },
+          { label: '成交量', value: item?.['成交量'] !== undefined ? formatLots(item['成交量'], 0) : null },
+          { label: config.totalLabel, value: totalNet !== undefined ? formatLots(totalNet, 0) : null, valueColor: PALETTE.brand },
+          { label: '外資', value: foreignNet !== undefined ? formatLots(foreignNet, 0) : null, valueColor: asNumber(foreignNet) >= 0 ? PALETTE.bullish : PALETTE.bearish },
+          { label: '投信', value: trustNet !== undefined ? formatLots(trustNet, 0) : null, valueColor: asNumber(trustNet) >= 0 ? PALETTE.bullish : PALETTE.bearish },
+        ]),
+        createSection('觀察重點', [
+          createText(item?.['其他法人態度'] || config.subtitle, {
+            size: 'sm',
+            color: PALETTE.darkText,
+            weight: 'bold',
+          }),
+        ]),
+      ],
+    });
+  });
+
+  return attachQuickReply(createFlexMessage(config.alt, {
+    type: 'carousel',
+    contents: bubbles,
+  }), siteUrl);
+}
+
+export function buildHumorFallbackMessages({ siteUrl, kind = 'non-text' }) {
+  const pool = kind === 'unknown'
+    ? [
+        '這句話很有玄機，我先不亂解讀。改傳「盤勢」或股票代號，我就能直接回研究卡。',
+        '我感受到主力的暗號了，但目前只吃得懂關鍵字。試試看：盤勢、選股、題材、2330。',
+      ]
+    : [
+        '這是致富密碼嗎？我先裝懂一下。直接傳文字關鍵字，我才能回你完整研究卡。',
+        '我收到神祕訊號了，但目前只聽得懂文字。試試：盤勢、起漲、ETF、分點。',
+      ];
+
+  const text = pool[Math.floor(Math.random() * pool.length)];
+  return [createTextMessage(text, siteUrl), buildWelcomeFlex(siteUrl)];
 }
 
 export function buildMarketFlex({ dashboard, siteUrl }) {
@@ -686,6 +828,44 @@ export function buildMarketFlex({ dashboard, siteUrl }) {
   return attachQuickReply(createFlexMessage(`台股主動通｜${marketDate} 更新｜明日趨勢預測`, bubble), siteUrl);
 }
 
+function normalizeKeywordLabel(item) {
+  if (!item) {
+    return null;
+  }
+
+  if (typeof item === 'string') {
+    return item.trim() || null;
+  }
+
+  if (typeof item === 'object') {
+    return String(item.keyword || item.label || item.name || '').trim() || null;
+  }
+
+  return null;
+}
+
+function normalizeHeadlineLabel(item) {
+  if (!item) {
+    return null;
+  }
+
+  if (typeof item === 'string') {
+    return item.trim() || null;
+  }
+
+  if (typeof item === 'object') {
+    const title = String(item.title || item.headline || item.name || '').trim();
+    const source = String(item.source || '').trim();
+    if (!title) {
+      return null;
+    }
+
+    return source ? `${title}｜${source}` : title;
+  }
+
+  return null;
+}
+
 export function buildThemeFlex({ topicIndex, siteUrl }) {
   const topics = Array.isArray(topicIndex?.topics) ? topicIndex.topics.slice(0, 3) : [];
 
@@ -717,15 +897,26 @@ export function buildThemeFlex({ topicIndex, siteUrl }) {
           },
         ]),
         createSection('關鍵詞', [
-          createText((topic.keywords || []).slice(0, 5).join(' / ') || '近期新聞仍在整理中。', {
-            size: 'sm',
-            color: PALETTE.darkText,
-          }),
+          createText(
+            (topic.keywords || [])
+              .map(normalizeKeywordLabel)
+              .filter(Boolean)
+              .slice(0, 5)
+              .join(' / ') || '近期新聞仍在整理中。',
+            {
+              size: 'sm',
+              color: PALETTE.darkText,
+            },
+          ),
         ]),
         topic.headlines?.length
           ? createSection(
               '近期 headline',
-              topic.headlines.slice(0, 3).map((headline) =>
+              topic.headlines
+                .map(normalizeHeadlineLabel)
+                .filter(Boolean)
+                .slice(0, 3)
+                .map((headline) =>
                 createText(`• ${headline}`, {
                   size: 'xs',
                   color: '#425363',
@@ -821,11 +1012,14 @@ export function buildClassroomFlex({ siteUrl }) {
   const bubble = createBubble({
     title: '股票小教室',
     subtitle: '從看盤順序、技術面、籌碼面到事件風控，用白話方式快速上手。',
+    subtitleColor: '#efe6ff',
+    subtitleSize: 'sm',
+    subtitleWeight: 'bold',
     accentColor: PALETTE.purple,
-    accentSoft: '#f2edff',
+    accentSoft: PALETTE.purpleSoft,
     footerUrl: `${siteUrl}/#/classroom`,
     footerLabel: '打開股票小教室',
-    badges: [createPill('新手也能快速讀懂', { backgroundColor: '#f2edff', color: PALETTE.purple })],
+    badges: [createPill('新手也能快速讀懂', { backgroundColor: PALETTE.purpleSoft, color: PALETTE.purple })],
     sections: [
       createSection('你可以先學這些', [
         ...createBulletList([
