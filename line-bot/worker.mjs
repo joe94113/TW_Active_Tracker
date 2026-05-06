@@ -14,6 +14,7 @@ import {
 
 const encoder = new TextEncoder();
 const DEFAULT_SITE_URL = 'https://joe94113.github.io/TW_Active_Tracker';
+const WEBHOOK_VERSION = '2026-05-06-post-safe-2';
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -177,36 +178,68 @@ export default {
     const siteUrl = env.SITE_URL || DEFAULT_SITE_URL;
     const client = createSiteDataClient(siteUrl);
 
-    if (request.method === 'GET') {
+    try {
+      if (request.method === 'GET') {
+        return jsonResponse({
+          ok: true,
+          name: 'tw-active-tracker-line-webhook',
+          siteUrl: client.baseUrl,
+          version: WEBHOOK_VERSION,
+        });
+      }
+
+      if (request.method !== 'POST') {
+        return jsonResponse({ error: 'method_not_allowed' }, 405);
+      }
+
+      if (!env.LINE_CHANNEL_ACCESS_TOKEN || !env.LINE_CHANNEL_SECRET) {
+        return jsonResponse({ error: 'missing_line_env' }, 500);
+      }
+
+      const signature = request.headers.get('x-line-signature');
+      if (!signature) {
+        return jsonResponse({ error: 'missing_signature', version: WEBHOOK_VERSION }, 401);
+      }
+      const body = await request.text();
+      const verified = await verifySignature(body, signature, env.LINE_CHANNEL_SECRET);
+
+      if (!verified) {
+        return jsonResponse({ error: 'invalid_signature', version: WEBHOOK_VERSION }, 401);
+      }
+
+      let payload;
+      try {
+        payload = JSON.parse(body || '{}');
+      } catch {
+        return jsonResponse({ error: 'invalid_json' }, 400);
+      }
+
+      for (const event of payload.events ?? []) {
+        try {
+          await handleEvent(event, env, client);
+        } catch (error) {
+          console.error('line_event_error', {
+            type: event?.type,
+            message: error instanceof Error ? error.message : String(error),
+          });
+        }
+      }
+
       return jsonResponse({
         ok: true,
-        name: 'tw-active-tracker-line-webhook',
-        siteUrl: client.baseUrl,
+        path: url.pathname,
+        eventCount: (payload.events ?? []).length,
+        version: WEBHOOK_VERSION,
       });
+    } catch (error) {
+      return jsonResponse(
+        {
+          error: 'webhook_internal_error',
+          message: error instanceof Error ? error.message : String(error),
+          version: WEBHOOK_VERSION,
+        },
+        500,
+      );
     }
-
-    if (request.method !== 'POST') {
-      return jsonResponse({ error: 'method_not_allowed' }, 405);
-    }
-
-    if (!env.LINE_CHANNEL_ACCESS_TOKEN || !env.LINE_CHANNEL_SECRET) {
-      return jsonResponse({ error: 'missing_line_env' }, 500);
-    }
-
-    const signature = request.headers.get('x-line-signature');
-    const body = await request.text();
-    const verified = await verifySignature(body, signature, env.LINE_CHANNEL_SECRET);
-
-    if (!verified) {
-      return jsonResponse({ error: 'invalid_signature' }, 401);
-    }
-
-    const payload = JSON.parse(body);
-
-    for (const event of payload.events ?? []) {
-      await handleEvent(event, env, client);
-    }
-
-    return jsonResponse({ ok: true, path: url.pathname });
   },
 };

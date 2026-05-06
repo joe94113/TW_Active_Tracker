@@ -14,41 +14,50 @@ $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
 $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
 $graphics.TextRenderingHint = [System.Drawing.Text.TextRenderingHint]::ClearTypeGridFit
 
-$backgroundRect = New-Object System.Drawing.Rectangle(0, 0, $width, $height)
+$backgroundRect = [System.Drawing.Rectangle]::new(0, 0, $width, $height)
 $backgroundBrush = New-Object System.Drawing.Drawing2D.LinearGradientBrush(
   $backgroundRect,
-  [System.Drawing.Color]::FromArgb(10, 22, 36),
-  [System.Drawing.Color]::FromArgb(22, 49, 78),
+  [System.Drawing.Color]::FromArgb(8, 18, 32),
+  [System.Drawing.Color]::FromArgb(16, 36, 62),
   90
 )
 $graphics.FillRectangle($backgroundBrush, $backgroundRect)
 
-$overlayBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(28, 103, 201, 255))
-$graphics.FillEllipse($overlayBrush, -220, -160, 820, 820)
-$graphics.FillEllipse($overlayBrush, 1750, 980, 860, 860)
+$overlayBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(24, 59, 130, 212))
+$graphics.FillEllipse($overlayBrush, -260, -210, 880, 880)
+$graphics.FillEllipse($overlayBrush, 1710, 980, 940, 940)
+$overlayBrush2 = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(18, 18, 120, 200))
+$graphics.FillEllipse($overlayBrush2, 1320, 1180, 680, 680)
 
-$titleFont = New-Object System.Drawing.Font("Microsoft JhengHei", 72, [System.Drawing.FontStyle]::Bold)
-$subtitleFont = New-Object System.Drawing.Font("Microsoft JhengHei", 30, [System.Drawing.FontStyle]::Regular)
-$tileTitleFont = New-Object System.Drawing.Font("Microsoft JhengHei", 48, [System.Drawing.FontStyle]::Bold)
-$tileDescFont = New-Object System.Drawing.Font("Microsoft JhengHei", 24, [System.Drawing.FontStyle]::Regular)
+$titleFont = New-Object System.Drawing.Font("Microsoft JhengHei", 84, [System.Drawing.FontStyle]::Bold)
+$subtitleFont = New-Object System.Drawing.Font("Microsoft JhengHei", 28, [System.Drawing.FontStyle]::Regular)
+$tileTitleFont = New-Object System.Drawing.Font("Microsoft JhengHei", 72, [System.Drawing.FontStyle]::Bold)
+$tileDescFont = New-Object System.Drawing.Font("Microsoft JhengHei", 26, [System.Drawing.FontStyle]::Regular)
+$tileTagFont = New-Object System.Drawing.Font("Microsoft JhengHei", 23, [System.Drawing.FontStyle]::Bold)
 $whiteBrush = [System.Drawing.Brushes]::White
-$softBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(210, 227, 243))
-$hintBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(90, 112, 132))
-
-$graphics.DrawString("台股主動通", $titleFont, $whiteBrush, 110, 72)
-$graphics.DrawString("點一下直接查盤勢、選股、起漲、題材、ETF 與股票教學", $subtitleFont, $softBrush, 114, 166)
+$softBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(205, 221, 238))
+$hintBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(98, 117, 134))
+$cardBodyBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(46, 58, 72))
 
 $tiles = @(
-  @{ X = 110;  Y = 280; Width = 710; Height = 520; Accent = [System.Drawing.Color]::FromArgb(34, 197, 94);  Title = "今日盤勢"; Desc = "先看加權、廣度與明日重點"; Tag = "盤勢" },
-  @{ X = 895;  Y = 280; Width = 710; Height = 520; Accent = [System.Drawing.Color]::FromArgb(14, 165, 233); Title = "選股雷達"; Desc = "看穩健型、積極型與名單"; Tag = "選股" },
-  @{ X = 1680; Y = 280; Width = 710; Height = 520; Accent = [System.Drawing.Color]::FromArgb(249, 115, 22); Title = "起漲卡位"; Desc = "看剛轉強、待突破與卡位點"; Tag = "起漲" },
-  @{ X = 110;  Y = 910; Width = 710; Height = 520; Accent = [System.Drawing.Color]::FromArgb(168, 85, 247); Title = "題材熱度"; Desc = "看資金輪動、龍頭股與補漲股"; Tag = "題材" },
-  @{ X = 895;  Y = 910; Width = 710; Height = 520; Accent = [System.Drawing.Color]::FromArgb(245, 158, 11); Title = "ETF 研究"; Desc = "看主動式、高息 ETF 與重疊持股"; Tag = "ETF" },
-  @{ X = 1680; Y = 910; Width = 710; Height = 520; Accent = [System.Drawing.Color]::FromArgb(236, 72, 153); Title = "股票教學"; Desc = "用白話看懂技術面、風控與新手流程"; Tag = "教學" }
+  @{ X = 110;  Y = 120; Width = 710; Height = 620; Accent = [System.Drawing.Color]::FromArgb(34, 197, 94);  Title = "今日盤勢"; Desc = "加權 / 廣度 / 盤後"; Tag = "盤勢" },
+  @{ X = 895;  Y = 120; Width = 710; Height = 620; Accent = [System.Drawing.Color]::FromArgb(14, 165, 233); Title = "選股雷達"; Desc = "穩健型 / 積極型"; Tag = "選股" },
+  @{ X = 1680; Y = 120; Width = 710; Height = 620; Accent = [System.Drawing.Color]::FromArgb(249, 115, 22); Title = "起漲卡位"; Desc = "剛轉強 / 待突破"; Tag = "起漲" },
+  @{ X = 110;  Y = 900; Width = 710; Height = 620; Accent = [System.Drawing.Color]::FromArgb(168, 85, 247); Title = "題材熱度"; Desc = "資金輪動 / 主線"; Tag = "題材" },
+  @{ X = 895;  Y = 900; Width = 710; Height = 620; Accent = [System.Drawing.Color]::FromArgb(245, 158, 11); Title = "ETF 研究"; Desc = "主動式 / 高股息"; Tag = "ETF" },
+  @{ X = 1680; Y = 900; Width = 710; Height = 620; Accent = [System.Drawing.Color]::FromArgb(236, 72, 153); Title = "股票教學"; Desc = "技術面 / 風控"; Tag = "教學" }
 )
 
 foreach ($tile in $tiles) {
-  $rect = New-Object System.Drawing.Rectangle($tile.X, $tile.Y, $tile.Width, $tile.Height)
+  $tileX = [int]$tile['X']
+  $tileY = [int]$tile['Y']
+  $tileWidth = [int]$tile['Width']
+  $tileHeight = [int]$tile['Height']
+  $tileTag = [string]$tile['Tag']
+  $tileTitle = [string]$tile['Title']
+  $tileDesc = [string]$tile['Desc']
+  $tileAccent = $tile['Accent']
+  $rect = [System.Drawing.Rectangle]::new($tileX, $tileY, $tileWidth, $tileHeight)
   $path = New-Object System.Drawing.Drawing2D.GraphicsPath
   $radius = 46
   $diameter = $radius * 2
@@ -61,30 +70,39 @@ foreach ($tile in $tiles) {
 
   $fillBrush = New-Object System.Drawing.Drawing2D.LinearGradientBrush(
     $rect,
-    [System.Drawing.Color]::FromArgb(236, 248, 255, 255),
-    [System.Drawing.Color]::FromArgb(222, 242, 252, 255),
+    [System.Drawing.Color]::FromArgb(245, 249, 253, 255),
+    [System.Drawing.Color]::FromArgb(231, 240, 248, 255),
     90
   )
   $graphics.FillPath($fillBrush, $path)
 
-  $borderPen = New-Object System.Drawing.Pen([System.Drawing.Color]::FromArgb(80, 255, 255, 255), 2)
+  $borderPen = New-Object System.Drawing.Pen([System.Drawing.Color]::FromArgb(92, 255, 255, 255), 2)
   $graphics.DrawPath($borderPen, $path)
 
-  $accentBrush = New-Object System.Drawing.SolidBrush($tile.Accent)
-  $graphics.FillEllipse($accentBrush, $tile.X + 42, $tile.Y + 42, 92, 92)
-  $graphics.DrawString($tile.Tag, $tileDescFont, $whiteBrush, $tile.X + 56, $tile.Y + 70)
+  $accentBrush = New-Object System.Drawing.SolidBrush($tileAccent)
+  $chipRect = [System.Drawing.Rectangle]::new(($tileX + 48), ($tileY + 48), 148, 52)
+  $chipPath = New-Object System.Drawing.Drawing2D.GraphicsPath
+  $chipRadius = 18
+  $chipDiameter = $chipRadius * 2
+  $chipPath.AddArc($chipRect.X, $chipRect.Y, $chipDiameter, $chipDiameter, 180, 90)
+  $chipPath.AddArc($chipRect.Right - $chipDiameter, $chipRect.Y, $chipDiameter, $chipDiameter, 270, 90)
+  $chipPath.AddArc($chipRect.Right - $chipDiameter, $chipRect.Bottom - $chipDiameter, $chipDiameter, $chipDiameter, 0, 90)
+  $chipPath.AddArc($chipRect.X, $chipRect.Bottom - $chipDiameter, $chipDiameter, $chipDiameter, 90, 90)
+  $chipPath.CloseFigure()
+  $chipFill = New-Object System.Drawing.SolidBrush($tileAccent)
+  $graphics.FillPath($chipFill, $chipPath)
+  $graphics.DrawString($tileTag, $tileTagFont, $whiteBrush, $tileX + 79, $tileY + 61)
 
-  $graphics.DrawString($tile.Title, $tileTitleFont, [System.Drawing.Brushes]::Black, $tile.X + 44, $tile.Y + 162)
-  $graphics.DrawString($tile.Desc, $tileDescFont, $hintBrush, $tile.X + 48, $tile.Y + 248)
-  $graphics.DrawString("點一下直接送出關鍵字並回覆 Flex 訊息", $tileDescFont, $softBrush, $tile.X + 48, $tile.Y + 420)
+  $graphics.DrawString($tileTitle, $tileTitleFont, [System.Drawing.Brushes]::Black, $tileX + 52, $tileY + 228)
+  $graphics.DrawString($tileDesc, $tileDescFont, $hintBrush, $tileX + 58, $tileY + 376)
 
   $fillBrush.Dispose()
   $borderPen.Dispose()
   $accentBrush.Dispose()
+  $chipFill.Dispose()
+  $chipPath.Dispose()
   $path.Dispose()
 }
-
-$graphics.DrawString("也可以直接輸入 2330、2455 這類股票代號，快速查個股頁。", $subtitleFont, $softBrush, 118, 1550)
 
 $bitmap.Save($outputPath, [System.Drawing.Imaging.ImageFormat]::Png)
 
@@ -92,9 +110,12 @@ $titleFont.Dispose()
 $subtitleFont.Dispose()
 $tileTitleFont.Dispose()
 $tileDescFont.Dispose()
+$tileTagFont.Dispose()
 $softBrush.Dispose()
 $hintBrush.Dispose()
+$cardBodyBrush.Dispose()
 $overlayBrush.Dispose()
+$overlayBrush2.Dispose()
 $backgroundBrush.Dispose()
 $graphics.Dispose()
 $bitmap.Dispose()
