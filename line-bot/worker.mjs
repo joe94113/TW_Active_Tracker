@@ -14,7 +14,7 @@ import {
 
 const encoder = new TextEncoder();
 const DEFAULT_SITE_URL = 'https://joe94113.github.io/TW_Active_Tracker';
-const WEBHOOK_VERSION = '2026-05-06-post-safe-2';
+const WEBHOOK_VERSION = '2026-05-06-flex-pro-2';
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -45,15 +45,15 @@ function parseKeywordRoute(rawText) {
   }
 
   const keywordMap = [
-    { type: 'market', match: ['盤勢', '大盤', '趨勢', '盤後', '行情'] },
-    { type: 'stock-radar', match: ['選股', '雷達', '觀察股', '名單'] },
-    { type: 'entry', match: ['起漲', '卡位', '剛起', '突破'] },
-    { type: 'theme', match: ['題材', '資金', '主線', '熱門題材'] },
-    { type: 'etf', match: ['etf', '高息', '高股息', '主動etf', '主動式etf'] },
-    { type: 'classroom', match: ['教學', '新手', '小教室', '學習'] },
-    { type: 'branch', match: ['分點', '券商', '勝率分點'] },
-    { type: 'global', match: ['國際', '美股', '全球', '原物料', '外匯'] },
-    { type: 'help', match: ['menu', 'help', '功能', '選單'] },
+    { type: 'market', match: ['盤勢', '大盤', '今日盤勢', '收盤'] },
+    { type: 'stock-radar', match: ['選股', '選股雷達', '雷達'] },
+    { type: 'entry', match: ['起漲', '卡位', '起漲卡位', '剛轉強', '待突破'] },
+    { type: 'theme', match: ['題材', '資金題材', '主線', '熱門題材'] },
+    { type: 'etf', match: ['etf', '高股息', '主動式etf', '主動etf'] },
+    { type: 'classroom', match: ['教學', '小教室', '新手', '怎麼看'] },
+    { type: 'branch', match: ['分點', '券商', '主力'] },
+    { type: 'global', match: ['國際盤', '美股', '原物料', '外匯', '全球'] },
+    { type: 'help', match: ['help', 'menu', '功能', '選單'] },
   ];
 
   for (const entry of keywordMap) {
@@ -143,7 +143,6 @@ async function buildReplyForKeyword(route, client) {
     }
     case 'stock': {
       const stock = await client.findStock(route.query);
-
       if (!stock) {
         return [buildMenuHintFlex(siteUrl)];
       }
@@ -153,7 +152,7 @@ async function buildReplyForKeyword(route, client) {
     }
     case 'help':
     default:
-      return [buildMenuHintFlex(siteUrl)];
+      return [buildWelcomeFlex(siteUrl)];
   }
 }
 
@@ -174,7 +173,6 @@ async function handleEvent(event, env, client) {
 
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
     const siteUrl = env.SITE_URL || DEFAULT_SITE_URL;
     const client = createSiteDataClient(siteUrl);
 
@@ -200,6 +198,7 @@ export default {
       if (!signature) {
         return jsonResponse({ error: 'missing_signature', version: WEBHOOK_VERSION }, 401);
       }
+
       const body = await request.text();
       const verified = await verifySignature(body, signature, env.LINE_CHANNEL_SECRET);
 
@@ -218,24 +217,27 @@ export default {
         try {
           await handleEvent(event, env, client);
         } catch (error) {
-          console.error('line_event_error', {
+          console.error('handle_event_failed', {
             type: event?.type,
-            message: error instanceof Error ? error.message : String(error),
+            messageType: event?.message?.type,
+            error: error instanceof Error ? error.message : String(error),
           });
         }
       }
 
       return jsonResponse({
         ok: true,
-        path: url.pathname,
-        eventCount: (payload.events ?? []).length,
         version: WEBHOOK_VERSION,
+        eventCount: Array.isArray(payload.events) ? payload.events.length : 0,
       });
     } catch (error) {
+      console.error('webhook_internal_error', {
+        error: error instanceof Error ? error.message : String(error),
+      });
       return jsonResponse(
         {
           error: 'webhook_internal_error',
-          message: error instanceof Error ? error.message : String(error),
+          detail: error instanceof Error ? error.message : String(error),
           version: WEBHOOK_VERSION,
         },
         500,
