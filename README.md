@@ -103,6 +103,69 @@
 
 其中 LINE 會使用 `Flex Message`，Discord 會使用 `embed`，方便直接在訊息裡看重點。
 
+## LINE 官方帳號互動功能
+
+除了盤後廣播，專案也提供一套可部署的 LINE 關鍵字回覆 webhook，讓使用者在 LINE 官方帳號內直接查：
+
+- `盤勢`：回覆大盤、廣度與明日趨勢預測
+- `選股`：回覆選股雷達與起漲候選
+- `起漲`：回覆起漲卡位候選股
+- `題材`：回覆資金題材雷達
+- `ETF`：回覆主動式 / 高股息 ETF 研究
+- `分點`：回覆勝率分點雷達
+- `國際盤`：回覆國際股市 / 原物料 / 外匯儀表板
+- `教學`：回覆股票小教室入口
+- `2330` 這類 4 碼股票代號：直接回個股摘要與個股頁入口
+
+相關檔案：
+
+- `line-bot/worker.mjs`
+- `line-bot/lib/site-data.mjs`
+- `line-bot/lib/flex-messages.mjs`
+- `config/line-rich-menu.json`
+
+### 部署 webhook
+
+因為網站本體是 GitHub Pages 靜態站，所以 LINE webhook 需要部署在可接收 `POST` 的環境，例如：
+
+- Cloudflare Workers
+- Vercel Functions
+- Netlify Functions
+
+如果用 Cloudflare Workers，可參考 `line-bot/wrangler.example.toml`：
+
+1. 安裝 Wrangler
+2. 將 `line-bot/wrangler.example.toml` 複製成 `line-bot/wrangler.toml`
+3. 設定 Secrets
+   - `LINE_CHANNEL_ACCESS_TOKEN`
+   - `LINE_CHANNEL_SECRET`
+4. 部署 `line-bot/worker.mjs`
+5. 把部署後網址填到 LINE Developers Console 的 Webhook URL
+
+### 產生與設定圖文選單
+
+本專案已附上 rich menu 圖與設定檔：
+
+- 圖片產生腳本：`scripts/generate-line-rich-menu-image.ps1`
+- rich menu 結構：`config/line-rich-menu.json`
+- rich menu 建立腳本：`scripts/setup-line-rich-menu.mjs`
+
+可直接使用：
+
+```bash
+npm run line:richmenu:image
+npm run line:richmenu:setup
+```
+
+預設圖文選單會提供 6 個入口：
+
+- 盤勢
+- 選股
+- 起漲
+- 題材
+- ETF
+- 教學
+
 ## 資料更新頻率
 
 GitHub Actions 會自動跑資料更新，時區為 `Asia/Taipei`：
