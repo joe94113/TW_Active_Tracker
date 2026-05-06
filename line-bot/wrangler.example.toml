@@ -1,0 +1,10 @@
+name = "tw-active-tracker-line-webhook"
+main = "worker.mjs"
+compatibility_date = "2026-05-06"
+
+[vars]
+SITE_URL = "https://joe94113.github.io/TW_Active_Tracker"
+
+# Secrets should be set with:
+# wrangler secret put LINE_CHANNEL_ACCESS_TOKEN
+# wrangler secret put LINE_CHANNEL_SECRET

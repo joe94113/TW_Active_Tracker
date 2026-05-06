@@ -418,6 +418,14 @@ watch(
           >
             加入 Telegram 群組
           </a>
+          <a
+            class="footer-link footer-link-line"
+            href="https://lin.ee/Ule2sZA"
+            target="_blank"
+            rel="noreferrer"
+          >
+            加入 LINE 官方帳號
+          </a>
           <RouterLink
             v-for="item in allNavigationItems"
             :key="`footer-${item.path}`"

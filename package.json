@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "data:update": "node scripts/update-data.mjs"
+    "data:update": "node scripts/update-data.mjs",
+    "line:richmenu:image": "powershell -ExecutionPolicy Bypass -File scripts/generate-line-rich-menu-image.ps1",
+    "line:richmenu:setup": "node scripts/setup-line-rich-menu.mjs",
+    "line:webhook:check": "node --check line-bot/worker.mjs",
+    "line:webhook:deploy": "npx wrangler deploy"
   },
   "dependencies": {
     "lightweight-charts": "^5.1.0",
