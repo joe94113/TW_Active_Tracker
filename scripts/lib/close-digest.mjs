@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { buildSelectionRadar } from './selection-radar.mjs';
-import { buildRatingText, buildWatchGroups } from './watch-groups.mjs';
+import { buildRatingText, buildWatchGroups, EXPANDED_WATCH_GROUP_LIMITS } from './watch-groups.mjs';
 import { buildThemeMomentumTopics } from '../../src/lib/themeRadar.js';
 import { buildSummaryHealthScore, buildSummaryOverheatWarnings } from '../../src/lib/stockHealth.js';
 
@@ -358,6 +358,7 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
     stockMetaList: trackedStocks,
     stockDetailList,
   });
+  const themeRadarData = dashboard?.題材雷達;
 
   const summary = {
     appName: dashboard?.appName ?? '台股主動通',
@@ -375,10 +376,15 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
   };
 
   const rawWatchGroups = buildWatchGroups(summary);
+  const rawLineWatchGroups = buildWatchGroups(summary, EXPANDED_WATCH_GROUP_LIMITS);
 
   return {
       ...summary,
       tomorrowOutlook: buildTomorrowOutlook(summary),
+      lineWatchGroups: {
+      stable: enrichWatchGroupItems(rawLineWatchGroups.stable, trackedStocks, themeRadarData, stockDetailList),
+      aggressive: enrichWatchGroupItems(rawLineWatchGroups.aggressive, trackedStocks, themeRadarData, stockDetailList),
+      },
       watchGroups: {
       stable: enrichWatchGroupItems(rawWatchGroups.stable, trackedStocks, dashboard?.題材雷達, stockDetailList),
       aggressive: enrichWatchGroupItems(rawWatchGroups.aggressive, trackedStocks, dashboard?.題材雷達, stockDetailList),

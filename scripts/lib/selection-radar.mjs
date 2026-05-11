@@ -140,7 +140,7 @@ function pickVolumeSqueezeRisers(stockDetailList, stockMetaMap) {
     })
     .filter(Boolean)
     .sort((left, right) => (right.score ?? 0) - (left.score ?? 0))
-    .slice(0, 4);
+    .slice(0, 10);
 }
 
 function pickConsolidationWatch(stockDetailList, stockMetaMap) {
@@ -201,7 +201,7 @@ function pickConsolidationWatch(stockDetailList, stockMetaMap) {
     })
     .filter(Boolean)
     .sort((left, right) => (right.score ?? 0) - (left.score ?? 0))
-    .slice(0, 4);
+    .slice(0, 10);
 }
 
 function buildInstitutionalResonance(dashboard, stockMetaMap) {
@@ -254,7 +254,7 @@ function buildInstitutionalResonance(dashboard, stockMetaMap) {
     })
     .filter(Boolean)
     .sort((left, right) => (right.score ?? 0) - (left.score ?? 0))
-    .slice(0, 5);
+    .slice(0, 10);
 }
 
 export function buildSelectionRadar({ dashboard, stockMetaList = [], stockDetailList = [] }) {

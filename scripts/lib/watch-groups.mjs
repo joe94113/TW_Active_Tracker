@@ -45,6 +45,24 @@ function takeUniqueByCode(items, usedCodes, formatter, limit = 3) {
   return results;
 }
 
+const COMPACT_WATCH_GROUP_LIMITS = {
+  stableInstitutional: 3,
+  stableBullish: 2,
+  aggressiveVolume: 3,
+  aggressiveConsolidation: 3,
+  stableFinal: 5,
+  aggressiveFinal: 6,
+};
+
+const EXPANDED_WATCH_GROUP_LIMITS = {
+  stableInstitutional: 7,
+  stableBullish: 6,
+  aggressiveVolume: 7,
+  aggressiveConsolidation: 7,
+  stableFinal: 9,
+  aggressiveFinal: 9,
+};
+
 function clampRating(value) {
   return Math.max(1, Math.min(5, Math.round(value)));
 }
@@ -180,26 +198,58 @@ export function buildWatchGroups({
   bullishSignals = [],
   volumeSqueezeRisers = [],
   consolidationWatch = [],
-} = {}) {
+} = {}, limits = COMPACT_WATCH_GROUP_LIMITS) {
   const stableCodes = new Set();
   const aggressiveCodes = new Set();
   const stable = [];
   const aggressive = [];
 
-  stable.push(...takeUniqueByCode(institutionalResonance, stableCodes, createStableInstitutionalItem, 3));
-  stable.push(...takeUniqueByCode(bullishSignals, stableCodes, createStableBullishItem, 2));
-  aggressive.push(...takeUniqueByCode(volumeSqueezeRisers, aggressiveCodes, createAggressiveVolumeItem, 3));
-  aggressive.push(...takeUniqueByCode(consolidationWatch, aggressiveCodes, createAggressiveConsolidationItem, 3));
+  stable.push(
+    ...takeUniqueByCode(
+      institutionalResonance,
+      stableCodes,
+      createStableInstitutionalItem,
+      limits.stableInstitutional,
+    ),
+  );
+  stable.push(
+    ...takeUniqueByCode(
+      bullishSignals,
+      stableCodes,
+      createStableBullishItem,
+      limits.stableBullish,
+    ),
+  );
+  aggressive.push(
+    ...takeUniqueByCode(
+      volumeSqueezeRisers,
+      aggressiveCodes,
+      createAggressiveVolumeItem,
+      limits.aggressiveVolume,
+    ),
+  );
+  aggressive.push(
+    ...takeUniqueByCode(
+      consolidationWatch,
+      aggressiveCodes,
+      createAggressiveConsolidationItem,
+      limits.aggressiveConsolidation,
+    ),
+  );
 
-  const stableSorted = stable.sort((left, right) => (right.rating ?? 0) - (left.rating ?? 0)).slice(0, 5);
+  const stableSorted = stable
+    .sort((left, right) => (right.rating ?? 0) - (left.rating ?? 0))
+    .slice(0, limits.stableFinal);
   const stableCodeSet = new Set(stableSorted.map((item) => item.code));
   const aggressiveDeduped = aggressive
     .filter((item) => !stableCodeSet.has(item.code))
     .sort((left, right) => (right.rating ?? 0) - (left.rating ?? 0))
-    .slice(0, 6);
+    .slice(0, limits.aggressiveFinal);
 
   return {
     stable: stableSorted,
     aggressive: aggressiveDeduped,
   };
 }
+
+export { COMPACT_WATCH_GROUP_LIMITS, EXPANDED_WATCH_GROUP_LIMITS };
