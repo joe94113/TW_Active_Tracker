@@ -1,661 +1,667 @@
 {
   "code": "00989A",
   "name": "主動摩根美國科技",
-  "fromDisclosureDate": "2026-05-05",
-  "toDisclosureDate": "2026-05-06",
+  "fromDisclosureDate": "2026-05-06",
+  "toDisclosureDate": "2026-05-12",
   "comparisonReady": true,
-  "added": [],
-  "removed": [],
-  "increased": [
+  "added": [
     {
-      "code": "FIGR",
-      "name": "FIGURE TECHNOLOGY SOLUTIONS INC COM NPV",
-      "previousShares": 7638,
-      "currentShares": 7638,
-      "previousWeight": 0.6074,
-      "currentWeight": 0.6331,
-      "sharesDelta": 0,
-      "weightDelta": 0.025699999999999945
-    },
+      "code": "GLW",
+      "name": "CORNING INC",
+      "currentShares": 1158,
+      "currentWeight": 0.5191,
+      "sharesDelta": 1158,
+      "weightDelta": 0.5191
+    }
+  ],
+  "removed": [
     {
-      "code": "MXL",
-      "name": "MAXLINEAR INC COM NPV",
-      "previousShares": 2365,
-      "currentShares": 2365,
-      "previousWeight": 0.4077,
-      "currentWeight": 0.4293,
-      "sharesDelta": 0,
-      "weightDelta": 0.021600000000000008
-    },
-    {
-      "code": "TTMI",
-      "name": "TTM TECHNOLOGIES INC COM USD0.001",
-      "previousShares": 1916,
-      "currentShares": 1916,
-      "previousWeight": 0.6658,
-      "currentWeight": 0.6794,
-      "sharesDelta": 0,
-      "weightDelta": 0.013600000000000056
-    },
-    {
-      "code": "SYM",
-      "name": "SYMBOTIC INC COM USD.000100000",
-      "previousShares": 3346,
-      "currentShares": 3346,
-      "previousWeight": 0.4209,
-      "currentWeight": 0.4318,
-      "sharesDelta": 0,
-      "weightDelta": 0.01090000000000002
-    },
-    {
-      "code": "AMZN",
-      "name": "AMAZON COM INC COM USD0.01",
-      "previousShares": 1338,
-      "currentShares": 1338,
-      "previousWeight": 0.8032,
-      "currentWeight": 0.8133,
-      "sharesDelta": 0,
-      "weightDelta": 0.010099999999999998
+      "code": "AMT",
+      "name": "AMERICAN TOWER CORP CLASS A REIT USD0.01",
+      "previousShares": 2203,
+      "previousWeight": 0.872,
+      "sharesDelta": -2203,
+      "weightDelta": -0.872
     },
     {
       "code": "MELI",
       "name": "MERCADOLIBRE INC COM NPV",
       "previousShares": 203,
-      "currentShares": 203,
-      "previousWeight": 0.8124,
-      "currentWeight": 0.8198,
-      "sharesDelta": 0,
-      "weightDelta": 0.007399999999999962
+      "previousWeight": 0.8198,
+      "sharesDelta": -203,
+      "weightDelta": -0.8198
+    }
+  ],
+  "increased": [
+    {
+      "code": "AMD",
+      "name": "ADVANCED MICRO DEVICES INC",
+      "previousShares": 2675,
+      "currentShares": 3151,
+      "previousWeight": 2.1117,
+      "currentWeight": 3.1247,
+      "sharesDelta": 476,
+      "weightDelta": 1.013
     },
     {
       "code": "PANW",
       "name": "PALO ALTO NETWORKS INC COM USD0.0001",
       "previousShares": 3780,
-      "currentShares": 3780,
-      "previousWeight": 1.5394,
-      "currentWeight": 1.5454,
-      "sharesDelta": 0,
-      "weightDelta": 0.006000000000000005
-    }
-  ],
-  "decreased": [
-    {
-      "code": "INTC",
-      "name": "INTEL CORP",
-      "previousShares": 19813,
-      "currentShares": 19346,
-      "previousWeight": 4.1875,
-      "currentWeight": 4.6493,
-      "sharesDelta": -467,
-      "weightDelta": 0.4618000000000002
-    },
-    {
-      "code": "DOCN",
-      "name": "DIGITALOCEAN HOLDINGS INC COM USD.000025000",
-      "previousShares": 4609,
-      "currentShares": 4454,
-      "previousWeight": 1.1066,
-      "currentWeight": 1.512,
-      "sharesDelta": -155,
-      "weightDelta": 0.4054
-    },
-    {
-      "code": "SHOP",
-      "name": "SHOPIFY INC - CLASS A",
-      "previousShares": 6998,
-      "currentShares": 6893,
-      "previousWeight": 1.9696,
-      "currentWeight": 1.6486,
-      "sharesDelta": -105,
-      "weightDelta": -0.32099999999999995
-    },
-    {
-      "code": "LRCX",
-      "name": "LAM RESEARCH CORP COM USD.001000000",
-      "previousShares": 6109,
-      "currentShares": 5971,
-      "previousWeight": 3.4856,
-      "currentWeight": 3.6594,
-      "sharesDelta": -138,
-      "weightDelta": 0.1738000000000004
-    },
-    {
-      "code": "SNDK",
-      "name": "SANDISK CORP/DE COM USD 0.01",
-      "previousShares": 584,
-      "currentShares": 564,
-      "previousWeight": 1.6184,
-      "currentWeight": 1.7625,
-      "sharesDelta": -20,
-      "weightDelta": 0.1440999999999999
-    },
-    {
-      "code": "TSLA",
-      "name": "TESLA INC COM USD0.001",
-      "previousShares": 3856,
-      "currentShares": 3727,
-      "previousWeight": 3.3398,
-      "currentWeight": 3.2247,
-      "sharesDelta": -129,
-      "weightDelta": -0.11509999999999998
-    },
-    {
-      "code": "NET",
-      "name": "CLOUDFLARE INC - CLASS A COM USD.001000000",
-      "previousShares": 3755,
-      "currentShares": 3629,
-      "previousWeight": 1.8574,
-      "currentWeight": 1.9711,
-      "sharesDelta": -126,
-      "weightDelta": 0.11370000000000013
-    },
-    {
-      "code": "MU",
-      "name": "MICRON TECHNOLOGY",
-      "previousShares": 1062,
-      "currentShares": 1026,
-      "previousWeight": 1.3509,
-      "currentWeight": 1.4596,
-      "sharesDelta": -36,
-      "weightDelta": 0.10870000000000002
-    },
-    {
-      "code": "NVDA",
-      "name": "NVIDIA CORPORATION",
-      "previousShares": 7745,
-      "currentShares": 7520,
-      "previousWeight": 3.3921,
-      "currentWeight": 3.2836,
-      "sharesDelta": -225,
-      "weightDelta": -0.10850000000000026
-    },
-    {
-      "code": "FN",
-      "name": "FABRINET ORD USD0.01",
-      "previousShares": 641,
-      "currentShares": 619,
-      "previousWeight": 1.0153,
-      "currentWeight": 0.9083,
-      "sharesDelta": -22,
-      "weightDelta": -0.1070000000000001
-    },
-    {
-      "code": "TTWO",
-      "name": "TAKE-TWO INTERACTIVE SOFTWARE COM USD0.01",
-      "previousShares": 7290,
-      "currentShares": 7091,
-      "previousWeight": 3.6223,
-      "currentWeight": 3.5155,
-      "sharesDelta": -199,
-      "weightDelta": -0.10680000000000023
-    },
-    {
-      "code": "META",
-      "name": "META PLATFORMS INC COM USD.000006",
-      "previousShares": 2235,
-      "currentShares": 2160,
-      "previousWeight": 3.0104,
-      "currentWeight": 2.9037,
-      "sharesDelta": -75,
-      "weightDelta": -0.10670000000000002
-    },
-    {
-      "code": "SATS",
-      "name": "ECHOSTAR CORP-A COM USD.001000000",
-      "previousShares": 7058,
-      "currentShares": 6821,
-      "previousWeight": 1.8742,
-      "currentWeight": 1.7785,
-      "sharesDelta": -237,
-      "weightDelta": -0.09570000000000012
-    },
-    {
-      "code": "SNOW",
-      "name": "SNOWFLAKE INC-CLASS A COM 1.000000000",
-      "previousShares": 6236,
-      "currentShares": 6027,
-      "previousWeight": 1.9844,
-      "currentWeight": 1.8979,
-      "sharesDelta": -209,
-      "weightDelta": -0.08650000000000002
-    },
-    {
-      "code": "TSM",
-      "name": "TAIWAN SEMICONDUCTOR MFG LTD SPD ADR",
-      "previousShares": 2083,
-      "currentShares": 2013,
-      "previousWeight": 1.846,
-      "currentWeight": 1.7642,
-      "sharesDelta": -70,
-      "weightDelta": -0.0818000000000001
-    },
-    {
-      "code": "GOOG",
-      "name": "ALPHABET INC COM USD 0.001",
-      "previousShares": 6240,
-      "currentShares": 6031,
-      "previousWeight": 5.2274,
-      "currentWeight": 5.1498,
-      "sharesDelta": -209,
-      "weightDelta": -0.07760000000000034
-    },
-    {
-      "code": "NFLX",
-      "name": "NETFLIX INC COM USD0.001",
-      "previousShares": 6341,
-      "currentShares": 6128,
-      "previousWeight": 1.2736,
-      "currentWeight": 1.1968,
-      "sharesDelta": -213,
-      "weightDelta": -0.07679999999999998
-    },
-    {
-      "code": "ENTG",
-      "name": "ENTEGRIS INC COM USD0.01",
-      "previousShares": 5143,
-      "currentShares": 4970,
-      "previousWeight": 1.577,
-      "currentWeight": 1.6487,
-      "sharesDelta": -173,
-      "weightDelta": 0.0717000000000001
-    },
-    {
-      "code": "GFS",
-      "name": "GLOBALFOUNDRIES INC ORD USD.020000000",
-      "previousShares": 7429,
-      "currentShares": 7180,
-      "previousWeight": 1.1106,
-      "currentWeight": 1.1813,
-      "sharesDelta": -249,
-      "weightDelta": 0.07069999999999999
-    },
-    {
-      "code": "MSFT",
-      "name": "MICROSOFT CORP",
-      "previousShares": 2228,
-      "currentShares": 2153,
-      "previousWeight": 2.0335,
-      "currentWeight": 1.9681,
-      "sharesDelta": -75,
-      "weightDelta": -0.06540000000000012
-    },
-    {
-      "code": "AMKR",
-      "name": "AMKOR TECHNOLOGY INC COM USD0.001",
-      "previousShares": 7568,
-      "currentShares": 7314,
-      "previousWeight": 1.185,
-      "currentWeight": 1.2467,
-      "sharesDelta": -254,
-      "weightDelta": 0.061699999999999866
-    },
-    {
-      "code": "TEM",
-      "name": "TEMPUS AI INC COM USD.000100000",
-      "previousShares": 7614,
-      "currentShares": 7359,
-      "previousWeight": 0.9377,
-      "currentWeight": 0.8842,
-      "sharesDelta": -255,
-      "weightDelta": -0.05349999999999999
-    },
-    {
-      "code": "CIEN",
-      "name": "CIENA CORP COM USD0.01",
-      "previousShares": 2294,
-      "currentShares": 2217,
-      "previousWeight": 2.7259,
-      "currentWeight": 2.6837,
-      "sharesDelta": -77,
-      "weightDelta": -0.04220000000000024
-    },
-    {
-      "code": "BABA",
-      "name": "ALIBABA GROUP HOLDING-SP ADR (1 ADR REPS 1ORD SHRS)",
-      "previousShares": 4174,
-      "currentShares": 4034,
-      "previousWeight": 1.2275,
-      "currentWeight": 1.1856,
-      "sharesDelta": -140,
-      "weightDelta": -0.04190000000000005
-    },
-    {
-      "code": "TXN",
-      "name": "TEXAS INSTRUMENTS INC",
-      "previousShares": 2576,
-      "currentShares": 2490,
-      "previousWeight": 1.5966,
-      "currentWeight": 1.5548,
-      "sharesDelta": -86,
-      "weightDelta": -0.04180000000000006
-    },
-    {
-      "code": "ON",
-      "name": "ON SEMICONDUCTOR CORP COM USD0.01",
-      "previousShares": 8273,
-      "currentShares": 7995,
-      "previousWeight": 1.8628,
-      "currentWeight": 1.824,
-      "sharesDelta": -278,
-      "weightDelta": -0.038799999999999946
-    },
-    {
-      "code": "VICR",
-      "name": "VICOR CORP COM USD.010000000",
-      "previousShares": 2225,
-      "currentShares": 2150,
-      "previousWeight": 1.2324,
-      "currentWeight": 1.2709,
-      "sharesDelta": -75,
-      "weightDelta": 0.03849999999999998
-    },
-    {
-      "code": "ASML",
-      "name": "ASML HOLDING NV - NY REG SHS EUR0.09 (1 ADR REPS 1 ORD SHR)",
-      "previousShares": 841,
-      "currentShares": 813,
-      "previousWeight": 2.5725,
-      "currentWeight": 2.6068,
-      "sharesDelta": -28,
-      "weightDelta": 0.0343
-    },
-    {
-      "code": "PLTR",
-      "name": "PALANTIR TECHNOLOGIES INC COM USD0.001",
-      "previousShares": 1522,
-      "currentShares": 1522,
-      "previousWeight": 0.4904,
-      "currentWeight": 0.4597,
-      "sharesDelta": 0,
-      "weightDelta": -0.030700000000000005
-    },
-    {
-      "code": "DASH",
-      "name": "DOORDASH INC - A COM USD.000010000",
-      "previousShares": 2281,
-      "currentShares": 2281,
-      "previousWeight": 0.8686,
-      "currentWeight": 0.8421,
-      "sharesDelta": 0,
-      "weightDelta": -0.02650000000000008
-    },
-    {
-      "code": "AMD",
-      "name": "ADVANCED MICRO DEVICES INC",
-      "previousShares": 2768,
-      "currentShares": 2675,
-      "previousWeight": 2.0861,
-      "currentWeight": 2.1117,
-      "sharesDelta": -93,
-      "weightDelta": 0.025599999999999845
-    },
-    {
-      "code": "APP",
-      "name": "APPLOVIN CORP-CLASS A COM USD.000030000",
-      "previousShares": 1099,
-      "currentShares": 1062,
-      "previousWeight": 1.1519,
-      "currentWeight": 1.1283,
-      "sharesDelta": -37,
-      "weightDelta": -0.023599999999999843
-    },
-    {
-      "code": "RIVN",
-      "name": "RIVIAN AUTOMOTIVE INC-A COM USD.001000000",
-      "previousShares": 32642,
-      "currentShares": 31547,
-      "previousWeight": 1.0451,
-      "currentWeight": 1.0235,
-      "sharesDelta": -1095,
-      "weightDelta": -0.02159999999999984
-    },
-    {
-      "code": "ALGM",
-      "name": "ALLEGRO MICROSYSTEMS INC COM USD.010000000",
-      "previousShares": 8196,
-      "currentShares": 7921,
-      "previousWeight": 0.8949,
-      "currentWeight": 0.8744,
-      "sharesDelta": -275,
-      "weightDelta": -0.020500000000000074
-    },
-    {
-      "code": "ROK",
-      "name": "ROCKWELL AUTOMATION INC",
-      "previousShares": 625,
-      "currentShares": 591,
-      "previousWeight": 0.5521,
-      "currentWeight": 0.5725,
-      "sharesDelta": -34,
-      "weightDelta": 0.020399999999999974
-    },
-    {
-      "code": "NU",
-      "name": "NU HOLDINGS LTD/CAYMAN ISL-A ORD USD.000006667",
-      "previousShares": 30123,
-      "currentShares": 29112,
-      "previousWeight": 0.9412,
-      "currentWeight": 0.9218,
-      "sharesDelta": -1011,
-      "weightDelta": -0.019400000000000084
-    },
-    {
-      "code": "CDNS",
-      "name": "CADENCE DESIGN SYSTEMS INC COM USD0.01",
-      "previousShares": 1389,
-      "currentShares": 1342,
-      "previousWeight": 1.0712,
-      "currentWeight": 1.0546,
-      "sharesDelta": -47,
-      "weightDelta": -0.016599999999999948
-    },
-    {
-      "code": "SNPS",
-      "name": "SYNOPSYS INC COM USD0.01",
-      "previousShares": 853,
-      "currentShares": 824,
-      "previousWeight": 0.9364,
-      "currentWeight": 0.9201,
-      "sharesDelta": -29,
-      "weightDelta": -0.01629999999999998
-    },
-    {
-      "code": "LITE",
-      "name": "LUMENTUM HOLDINGS INC COM USD0.001",
-      "previousShares": 797,
-      "currentShares": 770,
-      "previousWeight": 1.7168,
-      "currentWeight": 1.7017,
-      "sharesDelta": -27,
-      "weightDelta": -0.015100000000000113
+      "currentShares": 4953,
+      "previousWeight": 1.5454,
+      "currentWeight": 2.2874,
+      "sharesDelta": 1173,
+      "weightDelta": 0.7419999999999998
     },
     {
       "code": "CRWD",
       "name": "CROWDSTRIKE HOLDINGS INC COM NPV",
-      "previousShares": 1252,
-      "currentShares": 1210,
-      "previousWeight": 1.2964,
-      "currentWeight": 1.2813,
-      "sharesDelta": -42,
-      "weightDelta": -0.015099999999999891
+      "previousShares": 1210,
+      "currentShares": 1672,
+      "previousWeight": 1.2813,
+      "currentWeight": 1.9597,
+      "sharesDelta": 462,
+      "weightDelta": 0.6783999999999999
     },
     {
-      "code": "MTSI",
-      "name": "M/A-COM TECHNOLOGY SOLUTIONS H COM USD0.001",
-      "previousShares": 1688,
-      "currentShares": 1631,
-      "previousWeight": 1.0866,
-      "currentWeight": 1.1002,
-      "sharesDelta": -57,
-      "weightDelta": 0.013600000000000056
+      "code": "GOOG",
+      "name": "ALPHABET INC COM USD 0.001",
+      "previousShares": 6031,
+      "currentShares": 6622,
+      "previousWeight": 5.1498,
+      "currentWeight": 5.536,
+      "sharesDelta": 591,
+      "weightDelta": 0.38619999999999965
     },
     {
-      "code": "BKNG",
-      "name": "BOOKING HOLDINGS INC COM USD0.008",
-      "previousShares": 2513,
-      "currentShares": 2429,
-      "previousWeight": 0.9182,
-      "currentWeight": 0.9048,
-      "sharesDelta": -84,
-      "weightDelta": -0.013399999999999967
-    },
-    {
-      "code": "RDDT",
-      "name": "REDDIT INC-CL A COM USD.000100000",
-      "previousShares": 2248,
-      "currentShares": 2169,
-      "previousWeight": 0.8387,
-      "currentWeight": 0.8272,
-      "sharesDelta": -79,
-      "weightDelta": -0.011499999999999955
+      "code": "ROK",
+      "name": "ROCKWELL AUTOMATION INC",
+      "previousShares": 591,
+      "currentShares": 896,
+      "previousWeight": 0.5725,
+      "currentWeight": 0.8844,
+      "sharesDelta": 305,
+      "weightDelta": 0.31189999999999996
     },
     {
       "code": "CRCL",
       "name": "CIRCLE INTERNET GROUP INC COM NPV",
       "previousShares": 1006,
-      "currentShares": 1006,
-      "previousWeight": 0.2653,
-      "currentWeight": 0.2553,
+      "currentShares": 1965,
+      "previousWeight": 0.2553,
+      "currentWeight": 0.5596,
+      "sharesDelta": 959,
+      "weightDelta": 0.30429999999999996
+    },
+    {
+      "code": "VICR",
+      "name": "VICOR CORP COM USD.010000000",
+      "previousShares": 2150,
+      "currentShares": 2150,
+      "previousWeight": 1.2709,
+      "currentWeight": 1.4544,
       "sharesDelta": 0,
-      "weightDelta": -0.009999999999999953
-    },
-    {
-      "code": "LMND",
-      "name": "LEMONADE INC COM USD 0.000010000",
-      "previousShares": 7561,
-      "currentShares": 7307,
-      "previousWeight": 0.9185,
-      "currentWeight": 0.9283,
-      "sharesDelta": -254,
-      "weightDelta": 0.009800000000000031
-    },
-    {
-      "code": "ADI",
-      "name": "ANALOG DEVICES INC COM USD0.167",
-      "previousShares": 1304,
-      "currentShares": 1260,
-      "previousWeight": 1.1424,
-      "currentWeight": 1.1333,
-      "sharesDelta": -44,
-      "weightDelta": -0.009100000000000108
-    },
-    {
-      "code": "ZM",
-      "name": "ZOOM COMMUNICATIONS INC",
-      "previousShares": 8425,
-      "currentShares": 8142,
-      "previousWeight": 1.9823,
-      "currentWeight": 1.9739,
-      "sharesDelta": -283,
-      "weightDelta": -0.008399999999999963
-    },
-    {
-      "code": "AMT",
-      "name": "AMERICAN TOWER CORP CLASS A REIT USD0.01",
-      "previousShares": 2203,
-      "currentShares": 2203,
-      "previousWeight": 0.8793,
-      "currentWeight": 0.872,
-      "sharesDelta": 0,
-      "weightDelta": -0.007299999999999973
-    },
-    {
-      "code": "TWLO",
-      "name": "TWILIO INC - A SHRS COM NPV",
-      "previousShares": 4788,
-      "currentShares": 4627,
-      "previousWeight": 2.0039,
-      "currentWeight": 2.0109,
-      "sharesDelta": -161,
-      "weightDelta": 0.007000000000000117
-    },
-    {
-      "code": "BE",
-      "name": "BLOOM ENERGY CORP- A",
-      "previousShares": 1938,
-      "currentShares": 1873,
-      "previousWeight": 1.2343,
-      "currentWeight": 1.2288,
-      "sharesDelta": -65,
-      "weightDelta": -0.00550000000000006
-    },
-    {
-      "code": "AVGO",
-      "name": "BROADCOM INC COM NPV",
-      "previousShares": 4336,
-      "currentShares": 4191,
-      "previousWeight": 3.985,
-      "currentWeight": 3.98,
-      "sharesDelta": -145,
-      "weightDelta": -0.004999999999999893
-    },
-    {
-      "code": "HOOD",
-      "name": "ROBINHOOD MARKETS INC - A COM USD.000100000",
-      "previousShares": 11195,
-      "currentShares": 11020,
-      "previousWeight": 1.891,
-      "currentWeight": 1.8863,
-      "sharesDelta": -175,
-      "weightDelta": -0.0046999999999999265
+      "weightDelta": 0.1835
     },
     {
       "code": "WRBY",
       "name": "WARBY PARKER INC-CLASS A COM USD.000100000",
       "previousShares": 10914,
       "currentShares": 10914,
-      "previousWeight": 0.5296,
-      "currentWeight": 0.5253,
+      "previousWeight": 0.5253,
+      "currentWeight": 0.6792,
       "sharesDelta": 0,
-      "weightDelta": -0.0042999999999999705
+      "weightDelta": 0.15390000000000004
+    },
+    {
+      "code": "SATS",
+      "name": "ECHOSTAR CORP-A COM USD.001000000",
+      "previousShares": 6821,
+      "currentShares": 6821,
+      "previousWeight": 1.7785,
+      "currentWeight": 1.904,
+      "sharesDelta": 0,
+      "weightDelta": 0.12549999999999994
+    },
+    {
+      "code": "MXL",
+      "name": "MAXLINEAR INC COM NPV",
+      "previousShares": 2365,
+      "currentShares": 2365,
+      "previousWeight": 0.4293,
+      "currentWeight": 0.5228,
+      "sharesDelta": 0,
+      "weightDelta": 0.09350000000000003
+    },
+    {
+      "code": "ADI",
+      "name": "ANALOG DEVICES INC COM USD0.167",
+      "previousShares": 1260,
+      "currentShares": 1260,
+      "previousWeight": 1.1333,
+      "currentWeight": 1.1513,
+      "sharesDelta": 0,
+      "weightDelta": 0.018000000000000016
+    },
+    {
+      "code": "BABA",
+      "name": "ALIBABA GROUP HOLDING-SP ADR (1 ADR REPS 1ORD SHRS)",
+      "previousShares": 4034,
+      "currentShares": 4034,
+      "previousWeight": 1.1856,
+      "currentWeight": 1.1972,
+      "sharesDelta": 0,
+      "weightDelta": 0.011600000000000055
+    },
+    {
+      "code": "FIGR",
+      "name": "FIGURE TECHNOLOGY SOLUTIONS INC COM NPV",
+      "previousShares": 7638,
+      "currentShares": 7638,
+      "previousWeight": 0.6331,
+      "currentWeight": 0.6434,
+      "sharesDelta": 0,
+      "weightDelta": 0.010299999999999976
+    },
+    {
+      "code": "CDNS",
+      "name": "CADENCE DESIGN SYSTEMS INC COM USD0.01",
+      "previousShares": 1342,
+      "currentShares": 1342,
+      "previousWeight": 1.0546,
+      "currentWeight": 1.0564,
+      "sharesDelta": 0,
+      "weightDelta": 0.0018000000000000238
+    }
+  ],
+  "decreased": [
+    {
+      "code": "SNOW",
+      "name": "SNOWFLAKE INC-CLASS A COM 1.000000000",
+      "previousShares": 6027,
+      "currentShares": 3710,
+      "previousWeight": 1.8979,
+      "currentWeight": 1.2149,
+      "sharesDelta": -2317,
+      "weightDelta": -0.6829999999999998
+    },
+    {
+      "code": "INTC",
+      "name": "INTEL CORP",
+      "previousShares": 19346,
+      "currentShares": 18873,
+      "previousWeight": 4.6493,
+      "currentWeight": 5.2803,
+      "sharesDelta": -473,
+      "weightDelta": 0.6310000000000002
+    },
+    {
+      "code": "SHOP",
+      "name": "SHOPIFY INC - CLASS A",
+      "previousShares": 6893,
+      "currentShares": 4677,
+      "previousWeight": 1.6486,
+      "currentWeight": 1.0366,
+      "sharesDelta": -2216,
+      "weightDelta": -0.6120000000000001
+    },
+    {
+      "code": "META",
+      "name": "META PLATFORMS INC COM USD.000006",
+      "previousShares": 2160,
+      "currentShares": 1773,
+      "previousWeight": 2.9037,
+      "currentWeight": 2.295,
+      "sharesDelta": -387,
+      "weightDelta": -0.6087000000000002
+    },
+    {
+      "code": "NET",
+      "name": "CLOUDFLARE INC - CLASS A COM USD.001000000",
+      "previousShares": 3629,
+      "currentShares": 3540,
+      "previousWeight": 1.9711,
+      "currentWeight": 1.4807,
+      "sharesDelta": -89,
+      "weightDelta": -0.49040000000000017
+    },
+    {
+      "code": "BKNG",
+      "name": "BOOKING HOLDINGS INC COM USD0.008",
+      "previousShares": 2429,
+      "currentShares": 1735,
+      "previousWeight": 0.9048,
+      "currentWeight": 0.5918,
+      "sharesDelta": -694,
+      "weightDelta": -0.31300000000000006
+    },
+    {
+      "code": "TSLA",
+      "name": "TESLA INC COM USD0.001",
+      "previousShares": 3727,
+      "currentShares": 3636,
+      "previousWeight": 3.2247,
+      "currentWeight": 3.4973,
+      "sharesDelta": -91,
+      "weightDelta": 0.2726000000000002
+    },
+    {
+      "code": "MU",
+      "name": "MICRON TECHNOLOGY",
+      "previousShares": 1026,
+      "currentShares": 1001,
+      "previousWeight": 1.4596,
+      "currentWeight": 1.7208,
+      "sharesDelta": -25,
+      "weightDelta": 0.2612000000000001
+    },
+    {
+      "code": "TTWO",
+      "name": "TAKE-TWO INTERACTIVE SOFTWARE COM USD0.01",
+      "previousShares": 7091,
+      "currentShares": 6917,
+      "previousWeight": 3.5155,
+      "currentWeight": 3.3112,
+      "sharesDelta": -174,
+      "weightDelta": -0.20429999999999993
+    },
+    {
+      "code": "NVDA",
+      "name": "NVIDIA CORPORATION",
+      "previousShares": 7520,
+      "currentShares": 7336,
+      "previousWeight": 3.2836,
+      "currentWeight": 3.4796,
+      "sharesDelta": -184,
+      "weightDelta": 0.19600000000000017
+    },
+    {
+      "code": "DASH",
+      "name": "DOORDASH INC - A COM USD.000010000",
+      "previousShares": 2281,
+      "currentShares": 1912,
+      "previousWeight": 0.8421,
+      "currentWeight": 0.6502,
+      "sharesDelta": -369,
+      "weightDelta": -0.19189999999999996
+    },
+    {
+      "code": "MTSI",
+      "name": "M/A-COM TECHNOLOGY SOLUTIONS H COM USD0.001",
+      "previousShares": 1631,
+      "currentShares": 1591,
+      "previousWeight": 1.1002,
+      "currentWeight": 1.2582,
+      "sharesDelta": -40,
+      "weightDelta": 0.15799999999999992
+    },
+    {
+      "code": "ZM",
+      "name": "ZOOM COMMUNICATIONS INC",
+      "previousShares": 8142,
+      "currentShares": 7943,
+      "previousWeight": 1.9739,
+      "currentWeight": 1.8391,
+      "sharesDelta": -199,
+      "weightDelta": -0.13480000000000003
+    },
+    {
+      "code": "TEM",
+      "name": "TEMPUS AI INC COM USD.000100000",
+      "previousShares": 7359,
+      "currentShares": 7359,
+      "previousWeight": 0.8842,
+      "currentWeight": 0.7708,
+      "sharesDelta": 0,
+      "weightDelta": -0.11339999999999995
     },
     {
       "code": "LUMN",
       "name": "LUMEN TECHNOLOGIES INC COM USD1.000000000",
       "previousShares": 28440,
-      "currentShares": 28440,
-      "previousWeight": 0.5855,
-      "currentWeight": 0.5833,
+      "currentShares": 26464,
+      "previousWeight": 0.5833,
+      "currentWeight": 0.4771,
+      "sharesDelta": -1976,
+      "weightDelta": -0.10620000000000002
+    },
+    {
+      "code": "AVGO",
+      "name": "BROADCOM INC COM NPV",
+      "previousShares": 4191,
+      "currentShares": 4191,
+      "previousWeight": 3.98,
+      "currentWeight": 3.8811,
       "sharesDelta": 0,
-      "weightDelta": -0.0021999999999999797
+      "weightDelta": -0.09889999999999999
+    },
+    {
+      "code": "MSFT",
+      "name": "MICROSOFT CORP",
+      "previousShares": 2153,
+      "currentShares": 2100,
+      "previousWeight": 1.9681,
+      "currentWeight": 1.8731,
+      "sharesDelta": -53,
+      "weightDelta": -0.09499999999999997
+    },
+    {
+      "code": "LMND",
+      "name": "LEMONADE INC COM USD 0.000010000",
+      "previousShares": 7307,
+      "currentShares": 7053,
+      "previousWeight": 0.9283,
+      "currentWeight": 0.8392,
+      "sharesDelta": -254,
+      "weightDelta": -0.08910000000000007
+    },
+    {
+      "code": "SNAP",
+      "name": "SNAP INC COM USD0.00001",
+      "previousShares": 34446,
+      "currentShares": 30619,
+      "previousWeight": 0.4677,
+      "currentWeight": 0.3805,
+      "sharesDelta": -3827,
+      "weightDelta": -0.0872
+    },
+    {
+      "code": "RDDT",
+      "name": "REDDIT INC-CL A COM USD.000100000",
+      "previousShares": 2169,
+      "currentShares": 2169,
+      "previousWeight": 0.8272,
+      "currentWeight": 0.7478,
+      "sharesDelta": 0,
+      "weightDelta": -0.07940000000000003
+    },
+    {
+      "code": "BE",
+      "name": "BLOOM ENERGY CORP- A",
+      "previousShares": 1873,
+      "currentShares": 1873,
+      "previousWeight": 1.2288,
+      "currentWeight": 1.1494,
+      "sharesDelta": 0,
+      "weightDelta": -0.07939999999999992
+    },
+    {
+      "code": "SNDK",
+      "name": "SANDISK CORP/DE COM USD 0.01",
+      "previousShares": 564,
+      "currentShares": 550,
+      "previousWeight": 1.7625,
+      "currentWeight": 1.8398,
+      "sharesDelta": -14,
+      "weightDelta": 0.07730000000000015
+    },
+    {
+      "code": "ASML",
+      "name": "ASML HOLDING NV - NY REG SHS EUR0.09 (1 ADR REPS 1 ORD SHR)",
+      "previousShares": 813,
+      "currentShares": 793,
+      "previousWeight": 2.6068,
+      "currentWeight": 2.6839,
+      "sharesDelta": -20,
+      "weightDelta": 0.07710000000000017
+    },
+    {
+      "code": "TWLO",
+      "name": "TWILIO INC - A SHRS COM NPV",
+      "previousShares": 4627,
+      "currentShares": 4514,
+      "previousWeight": 2.0109,
+      "currentWeight": 1.9376,
+      "sharesDelta": -113,
+      "weightDelta": -0.07329999999999992
+    },
+    {
+      "code": "NU",
+      "name": "NU HOLDINGS LTD/CAYMAN ISL-A ORD USD.000006667",
+      "previousShares": 29112,
+      "currentShares": 29112,
+      "previousWeight": 0.9218,
+      "currentWeight": 0.8495,
+      "sharesDelta": 0,
+      "weightDelta": -0.07229999999999992
+    },
+    {
+      "code": "LRCX",
+      "name": "LAM RESEARCH CORP COM USD.001000000",
+      "previousShares": 5971,
+      "currentShares": 5825,
+      "previousWeight": 3.6594,
+      "currentWeight": 3.7275,
+      "sharesDelta": -146,
+      "weightDelta": 0.06809999999999983
+    },
+    {
+      "code": "NFLX",
+      "name": "NETFLIX INC COM USD0.001",
+      "previousShares": 6128,
+      "currentShares": 6128,
+      "previousWeight": 1.1968,
+      "currentWeight": 1.1318,
+      "sharesDelta": 0,
+      "weightDelta": -0.06500000000000017
+    },
+    {
+      "code": "RIVN",
+      "name": "RIVIAN AUTOMOTIVE INC-A COM USD.001000000",
+      "previousShares": 31547,
+      "currentShares": 31547,
+      "previousWeight": 1.0235,
+      "currentWeight": 0.9601,
+      "sharesDelta": 0,
+      "weightDelta": -0.06340000000000012
+    },
+    {
+      "code": "SYM",
+      "name": "SYMBOTIC INC COM USD.000100000",
+      "previousShares": 3346,
+      "currentShares": 3346,
+      "previousWeight": 0.4318,
+      "currentWeight": 0.374,
+      "sharesDelta": 0,
+      "weightDelta": -0.05780000000000002
+    },
+    {
+      "code": "TSM",
+      "name": "TAIWAN SEMICONDUCTOR MFG LTD SPD ADR",
+      "previousShares": 2013,
+      "currentShares": 1964,
+      "previousWeight": 1.7642,
+      "currentWeight": 1.7173,
+      "sharesDelta": -49,
+      "weightDelta": -0.04689999999999994
+    },
+    {
+      "code": "ENTG",
+      "name": "ENTEGRIS INC COM USD0.01",
+      "previousShares": 4970,
+      "currentShares": 4970,
+      "previousWeight": 1.6487,
+      "currentWeight": 1.6023,
+      "sharesDelta": 0,
+      "weightDelta": -0.0464
+    },
+    {
+      "code": "ALGM",
+      "name": "ALLEGRO MICROSYSTEMS INC COM USD.010000000",
+      "previousShares": 7921,
+      "currentShares": 7921,
+      "previousWeight": 0.8744,
+      "currentWeight": 0.8285,
+      "sharesDelta": 0,
+      "weightDelta": -0.04589999999999994
+    },
+    {
+      "code": "FN",
+      "name": "FABRINET ORD USD0.01",
+      "previousShares": 619,
+      "currentShares": 619,
+      "previousWeight": 0.9083,
+      "currentWeight": 0.869,
+      "sharesDelta": 0,
+      "weightDelta": -0.0393
+    },
+    {
+      "code": "AMZN",
+      "name": "AMAZON COM INC COM USD0.01",
+      "previousShares": 1338,
+      "currentShares": 1338,
+      "previousWeight": 0.8133,
+      "currentWeight": 0.7779,
+      "sharesDelta": 0,
+      "weightDelta": -0.03539999999999999
+    },
+    {
+      "code": "CIEN",
+      "name": "CIENA CORP COM USD0.01",
+      "previousShares": 2217,
+      "currentShares": 2163,
+      "previousWeight": 2.6837,
+      "currentWeight": 2.7185,
+      "sharesDelta": -54,
+      "weightDelta": 0.034800000000000164
+    },
+    {
+      "code": "AMKR",
+      "name": "AMKOR TECHNOLOGY INC COM USD0.001",
+      "previousShares": 7314,
+      "currentShares": 7314,
+      "previousWeight": 1.2467,
+      "currentWeight": 1.2124,
+      "sharesDelta": 0,
+      "weightDelta": -0.0343
+    },
+    {
+      "code": "APP",
+      "name": "APPLOVIN CORP-CLASS A COM USD.000030000",
+      "previousShares": 1062,
+      "currentShares": 1062,
+      "previousWeight": 1.1283,
+      "currentWeight": 1.0982,
+      "sharesDelta": 0,
+      "weightDelta": -0.030100000000000016
+    },
+    {
+      "code": "GFS",
+      "name": "GLOBALFOUNDRIES INC ORD USD.020000000",
+      "previousShares": 7180,
+      "currentShares": 7180,
+      "previousWeight": 1.1813,
+      "currentWeight": 1.1638,
+      "sharesDelta": 0,
+      "weightDelta": -0.01750000000000007
+    },
+    {
+      "code": "ON",
+      "name": "ON SEMICONDUCTOR CORP COM USD0.01",
+      "previousShares": 7995,
+      "currentShares": 7799,
+      "previousWeight": 1.824,
+      "currentWeight": 1.8078,
+      "sharesDelta": -196,
+      "weightDelta": -0.016199999999999992
+    },
+    {
+      "code": "DOCN",
+      "name": "DIGITALOCEAN HOLDINGS INC COM USD.000025000",
+      "previousShares": 4454,
+      "currentShares": 4345,
+      "previousWeight": 1.512,
+      "currentWeight": 1.5282,
+      "sharesDelta": -109,
+      "weightDelta": 0.016199999999999992
+    },
+    {
+      "code": "ORCL",
+      "name": "ORACLE CORP",
+      "previousShares": 4856,
+      "currentShares": 4737,
+      "previousWeight": 2,
+      "currentWeight": 1.9847,
+      "sharesDelta": -119,
+      "weightDelta": -0.015300000000000091
+    },
+    {
+      "code": "PLTR",
+      "name": "PALANTIR TECHNOLOGIES INC COM USD0.001",
+      "previousShares": 1522,
+      "currentShares": 1522,
+      "previousWeight": 0.4597,
+      "currentWeight": 0.4503,
+      "sharesDelta": 0,
+      "weightDelta": -0.00940000000000002
+    },
+    {
+      "code": "HOOD",
+      "name": "ROBINHOOD MARKETS INC - A COM USD.000100000",
+      "previousShares": 11020,
+      "currentShares": 10750,
+      "previousWeight": 1.8863,
+      "currentWeight": 1.877,
+      "sharesDelta": -270,
+      "weightDelta": -0.009300000000000086
+    },
+    {
+      "code": "TXN",
+      "name": "TEXAS INSTRUMENTS INC",
+      "previousShares": 2490,
+      "currentShares": 2429,
+      "previousWeight": 1.5548,
+      "currentWeight": 1.5633,
+      "sharesDelta": -61,
+      "weightDelta": 0.008499999999999952
+    },
+    {
+      "code": "LITE",
+      "name": "LUMENTUM HOLDINGS INC COM USD0.001",
+      "previousShares": 770,
+      "currentShares": 751,
+      "previousWeight": 1.7017,
+      "currentWeight": 1.7095,
+      "sharesDelta": -19,
+      "weightDelta": 0.007800000000000029
+    },
+    {
+      "code": "TTMI",
+      "name": "TTM TECHNOLOGIES INC COM USD0.001",
+      "previousShares": 1916,
+      "currentShares": 1916,
+      "previousWeight": 0.6794,
+      "currentWeight": 0.675,
+      "sharesDelta": 0,
+      "weightDelta": -0.0043999999999999595
     },
     {
       "code": "XYZ",
       "name": "BLOCK INC COM USD.000000100",
       "previousShares": 4667,
       "currentShares": 4667,
-      "previousWeight": 0.7404,
-      "currentWeight": 0.7389,
+      "previousWeight": 0.7389,
+      "currentWeight": 0.7381,
       "sharesDelta": 0,
-      "weightDelta": -0.0014999999999999458
+      "weightDelta": -0.0008000000000000229
     },
     {
-      "code": "SNAP",
-      "name": "SNAP INC COM USD0.00001",
-      "previousShares": 34446,
-      "currentShares": 34446,
-      "previousWeight": 0.469,
-      "currentWeight": 0.4677,
+      "code": "SNPS",
+      "name": "SYNOPSYS INC COM USD0.01",
+      "previousShares": 824,
+      "currentShares": 824,
+      "previousWeight": 0.9201,
+      "currentWeight": 0.9194,
       "sharesDelta": 0,
-      "weightDelta": -0.0012999999999999678
-    },
-    {
-      "code": "ORCL",
-      "name": "ORACLE CORP",
-      "previousShares": 5025,
-      "currentShares": 4856,
-      "previousWeight": 1.9991,
-      "currentWeight": 2,
-      "sharesDelta": -169,
-      "weightDelta": 0.0008999999999999009
+      "weightDelta": -0.0007000000000000339
     }
   ],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 0,
-    "removedCount": 0,
-    "increasedCount": 7,
-    "decreasedCount": 57,
-    "totalChangeCount": 64
+    "addedCount": 1,
+    "removedCount": 2,
+    "increasedCount": 14,
+    "decreasedCount": 48,
+    "totalChangeCount": 65
   }
 }

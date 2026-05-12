@@ -126,6 +126,18 @@ const 追蹤ETF清單 = [
     },
   }),
   建立ETF項目({
+    code: '00403A',
+    fullName: '主動統一台股升級50主動式交易所交易基金',
+    provider: 'unity',
+    providerLabel: '統一投信',
+    sourceName: '統一投信 ETF 官方資料頁',
+    sourceUrl: 'https://www.ezmoney.com.tw/ETF/Fund/Info?FundCode=63YTW',
+    trackingStatus: '已串接',
+    providerConfig: {
+      fundCode: '63YTW',
+    },
+  }),
+  建立ETF項目({
     code: '00983A',
     fullName: '主動中信ARK創新主動式交易所交易基金',
     provider: 'ctbc',

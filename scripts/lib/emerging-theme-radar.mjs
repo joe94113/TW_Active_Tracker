@@ -3,6 +3,14 @@ import { stripHtml } from '../../src/lib/newsKeywords.js';
 const RECENT_NEWS_DAYS = 7;
 
 const GENERIC_KEYWORD_DENYLIST = new Set([
+  'TW',
+  'tw',
+  'TWSE',
+  'TPEX',
+  'TAIEX',
+  'OTC',
+  'tse',
+  'otc',
   'nbsp',
   '台股',
   '個股',
@@ -177,6 +185,11 @@ function hasUsefulKeyword(keyword, existingTopics, stockSummaryMap) {
 
   const looksLikeAcronym = /^[A-Z][A-Z0-9.+-]{1,9}$/i.test(normalized);
   const looksThemeLike = THEME_LIKE_PATTERNS.some((pattern) => pattern.test(normalized));
+  const isGenericShortAcronym = /^[A-Za-z]{2,3}$/.test(normalized);
+
+  if (isGenericShortAcronym && !looksThemeLike) {
+    return false;
+  }
 
   if (!looksLikeAcronym && !looksThemeLike) {
     return false;

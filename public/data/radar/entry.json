@@ -1,60 +1,144 @@
 {
-  "generatedAt": "2026-05-06T08:32:42.260Z",
-  "marketDate": "2026-05-06",
+  "generatedAt": "2026-05-12T10:13:55.230Z",
+  "marketDate": "2026-05-12",
   "spotlight": {
-    "freshStarterCount": 1,
-    "nearBreakoutCount": 4,
-    "institutionalTurnCount": 1,
-    "themeIgnitionCount": 4,
-    "catchUpCount": 4,
-    "topThemeTitle": "記憶體 / DDR5"
+    "freshStarterCount": 3,
+    "nearBreakoutCount": 6,
+    "institutionalTurnCount": 6,
+    "themeIgnitionCount": 3,
+    "catchUpCount": 6,
+    "topThemeTitle": "AI 伺服器 / ASIC"
   },
   "observations": [
-    "目前主線先看 記憶體 / DDR5",
-    "剛轉強可先看 3702 大聯大",
-    "法人轉向可留意 2408 南亞科",
-    "補漲候選先看 3163 波若威科技"
+    "目前主線先看 AI 伺服器 / ASIC",
+    "剛轉強可先看 4991 環宇-KY",
+    "法人轉向可留意 3481 群創",
+    "補漲候選先看 6284 6284"
   ],
   "sections": {
     "freshStarters": [
       {
-        "code": "3702",
-        "name": "大聯大",
+        "code": "4991",
+        "name": "環宇-KY",
         "industryName": null,
         "themeTitle": null,
         "label": "量縮轉強",
         "note": "量能還沒完全放大，但價格已重新墊高，適合盯下一段放量確認。",
-        "score": 287,
-        "close": 104,
-        "changePercent": 1.4634146341463417,
-        "return20": 16.722785388382,
+        "score": 277,
+        "close": 740,
+        "changePercent": 7.871720116618077,
+        "return20": 26.929674099485418,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "activeEtfCount": 2,
+        "activeEtfCount": 0,
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "技術面中性"
+        ],
+        "metrics": [
+          {
+            "label": "20 日",
+            "value": "+26.93%"
+          },
+          {
+            "label": "距前高",
+            "value": "+4.19%"
+          },
+          {
+            "label": "量比 20 日",
+            "value": "37%"
+          }
+        ],
+        "healthScore": 53,
+        "healthGrade": "D",
+        "healthTone": "normal",
+        "warningCount": 2,
+        "topWarningTitle": "單日急漲偏熱",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "6223",
+        "name": "旺矽科技",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "量縮轉強",
+        "note": "量能還沒完全放大，但價格已重新墊高，適合盯下一段放量確認。",
+        "score": 348,
+        "close": 5480,
+        "changePercent": 9.929789368104313,
+        "return20": 20.572057205720572,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "RSI 超買"
+        ],
+        "metrics": [
+          {
+            "label": "20 日",
+            "value": "+20.57%"
+          },
+          {
+            "label": "距前高",
+            "value": "0.00%"
+          },
+          {
+            "label": "量比 20 日",
+            "value": "67%"
+          }
+        ],
+        "healthScore": 48,
+        "healthGrade": "D",
+        "healthTone": "normal",
+        "warningCount": 3,
+        "topWarningTitle": "單日急漲偏熱",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2455",
+        "name": "全新",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "量縮轉強",
+        "note": "量能還沒完全放大，但價格已重新墊高，適合盯下一段放量確認。",
+        "score": 215,
+        "close": 375,
+        "changePercent": 4.166666666666666,
+        "return20": 27.986348122866893,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 5,
         "topSignalTitle": "技術面中性",
         "topSignalTone": "normal",
         "foreignTargetPrice": null,
         "premiumToTarget": null,
         "tags": [
           "技術面中性",
-          "可借券賣出餘量",
-          "2 檔 ETF"
+          "第二次處置",
+          "5 檔 ETF"
         ],
         "metrics": [
           {
             "label": "20 日",
-            "value": "+16.72%"
+            "value": "+27.99%"
           },
           {
             "label": "距前高",
-            "value": "+0.96%"
+            "value": "+4.13%"
           },
           {
             "label": "量比 20 日",
-            "value": "27%"
+            "value": "36%"
           }
         ],
-        "healthScore": 60,
+        "healthScore": 61,
         "healthGrade": "C",
         "healthTone": "normal",
         "warningCount": 1,
@@ -64,16 +148,59 @@
     ],
     "nearBreakouts": [
       {
-        "code": "2762",
-        "name": "世界健身-KY",
+        "code": "5876",
+        "name": "上海商銀",
         "industryName": null,
         "themeTitle": null,
         "label": "整理待突破",
         "note": "箱型壓縮與均線靠攏，距離前高不遠，適合盯盤中是否帶量突破。",
-        "score": 354,
-        "close": 73,
-        "changePercent": 0.4126589605930737,
-        "return20": 1.1080375146432602,
+        "score": 223,
+        "close": 40.1,
+        "changePercent": 0.6273564252236061,
+        "return20": 1.9059759973616097,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "MACD 翻正",
+        "topSignalTone": "up",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "MACD 翻正",
+          "可借券賣出餘量"
+        ],
+        "metrics": [
+          {
+            "label": "整理區間",
+            "value": "+6.28%"
+          },
+          {
+            "label": "距前高",
+            "value": "+1.25%"
+          },
+          {
+            "label": "RSI",
+            "value": "60.7"
+          }
+        ],
+        "healthScore": 63,
+        "healthGrade": "B",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2892",
+        "name": "第一金",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "整理待突破",
+        "note": "箱型壓縮與均線靠攏，距離前高不遠，適合盯盤中是否帶量突破。",
+        "score": 209,
+        "close": 29.4,
+        "changePercent": -0.5076116444443919,
+        "return20": 3.339188792915841,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
         "activeEtfCount": 0,
@@ -88,18 +215,18 @@
         "metrics": [
           {
             "label": "整理區間",
-            "value": "+3.63%"
+            "value": "+6.25%"
           },
           {
             "label": "距前高",
-            "value": "+1.64%"
+            "value": "+1.19%"
           },
           {
             "label": "RSI",
-            "value": "48.3"
+            "value": "59.8"
           }
         ],
-        "healthScore": 58,
+        "healthScore": 56,
         "healthGrade": "C",
         "healthTone": "normal",
         "warningCount": 1,
@@ -113,10 +240,10 @@
         "themeTitle": null,
         "label": "整理待突破",
         "note": "箱型壓縮與均線靠攏，距離前高不遠，適合盯盤中是否帶量突破。",
-        "score": 232,
-        "close": 136,
+        "score": 201,
+        "close": 135.5,
         "changePercent": 0,
-        "return20": 1.4925373134328357,
+        "return20": 0.7434944237918215,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
         "activeEtfCount": 3,
@@ -135,11 +262,11 @@
           },
           {
             "label": "距前高",
-            "value": "+1.47%"
+            "value": "+1.85%"
           },
           {
             "label": "RSI",
-            "value": "51.7"
+            "value": "48.3"
           }
         ],
         "healthScore": 61,
@@ -150,59 +277,59 @@
         "topWarningTone": "warning"
       },
       {
-        "code": "1612",
-        "name": "宏泰",
+        "code": "2820",
+        "name": "華票",
         "industryName": null,
         "themeTitle": null,
         "label": "整理待突破",
         "note": "箱型壓縮與均線靠攏，距離前高不遠，適合盯盤中是否帶量突破。",
-        "score": 223,
-        "close": 36.75,
-        "changePercent": 0.4098402517283393,
-        "return20": 6.676340162914698,
+        "score": 180,
+        "close": 16.9,
+        "changePercent": -1.1695928480004991,
+        "return20": -0.29498973857735367,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "activeEtfCount": 0,
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
+        "activeEtfCount": 1,
+        "topSignalTitle": "跌破長均線",
+        "topSignalTone": "down",
         "foreignTargetPrice": null,
         "premiumToTarget": null,
         "tags": [
-          "技術面中性",
+          "跌破長均線",
           "可借券賣出餘量"
         ],
         "metrics": [
           {
             "label": "整理區間",
-            "value": "+8.21%"
+            "value": "+4.20%"
           },
           {
             "label": "距前高",
-            "value": "+0.41%"
+            "value": "+2.66%"
           },
           {
             "label": "RSI",
-            "value": "66.4"
+            "value": "49.1"
           }
         ],
-        "healthScore": 58,
-        "healthGrade": "C",
+        "healthScore": 50,
+        "healthGrade": "D",
         "healthTone": "normal",
         "warningCount": 1,
         "topWarningTitle": "目標價空間有限",
         "topWarningTone": "warning"
       },
       {
-        "code": "1341",
-        "name": "富林-KY",
+        "code": "8415",
+        "name": "大國鋼",
         "industryName": null,
         "themeTitle": null,
         "label": "整理待突破",
         "note": "箱型壓縮與均線靠攏，距離前高不遠，適合盯盤中是否帶量突破。",
-        "score": 206,
-        "close": 61.1,
-        "changePercent": 0.49342231365784217,
-        "return20": 2.8619502196148154,
+        "score": 184,
+        "close": 34.6,
+        "changePercent": 0.14472001170356183,
+        "return20": 1.317711431960218,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
         "activeEtfCount": 0,
@@ -216,19 +343,62 @@
         "metrics": [
           {
             "label": "整理區間",
-            "value": "+7.65%"
+            "value": "+5.86%"
           },
           {
             "label": "距前高",
-            "value": "+1.31%"
+            "value": "+1.73%"
           },
           {
             "label": "RSI",
-            "value": "58"
+            "value": "64.3"
           }
         ],
         "healthScore": 58,
         "healthGrade": "C",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "1402",
+        "name": "遠東新",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "整理待突破",
+        "note": "箱型壓縮與均線靠攏，距離前高不遠，適合盯盤中是否帶量突破。",
+        "score": 143,
+        "close": 26.65,
+        "changePercent": 1.138518459913354,
+        "return20": 0.7561407610270293,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 1,
+        "topSignalTitle": "黃金交叉",
+        "topSignalTone": "up",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "黃金交叉",
+          "可借券賣出餘量"
+        ],
+        "metrics": [
+          {
+            "label": "整理區間",
+            "value": "+7.48%"
+          },
+          {
+            "label": "距前高",
+            "value": "+2.44%"
+          },
+          {
+            "label": "RSI",
+            "value": "56.5"
+          }
+        ],
+        "healthScore": 64,
+        "healthGrade": "B",
         "healthTone": "normal",
         "warningCount": 1,
         "topWarningTitle": "目標價空間有限",
@@ -237,16 +407,453 @@
     ],
     "institutionalTurns": [
       {
-        "code": "2408",
-        "name": "南亞科",
+        "code": "3481",
+        "name": "群創",
         "industryName": null,
         "themeTitle": null,
-        "label": "雙法人剛轉買",
-        "note": "雙法人剛從賣方轉為偏多，通常是明日優先觀察的第一批名單。",
-        "score": 200,
-        "close": 282,
-        "changePercent": 9.941520467836257,
-        "return20": 36.89320388349515,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 950,
+        "close": 35.5,
+        "changePercent": 9.907123339086086,
+        "return20": 34.98099250883364,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "RSI 超買"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "44.72 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "+34.98%"
+          }
+        ],
+        "healthScore": 45,
+        "healthGrade": "D",
+        "healthTone": "down",
+        "warningCount": 3,
+        "topWarningTitle": "單日急漲偏熱",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2317",
+        "name": "鴻海",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 444,
+        "close": 250,
+        "changePercent": -0.7936507936507936,
+        "return20": 25,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 6,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "RSI 超買"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "19.40 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "+25.00%"
+          }
+        ],
+        "healthScore": 57,
+        "healthGrade": "C",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2887",
+        "name": "台新新光金",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 431,
+        "close": 23,
+        "changePercent": -1.9189797368818748,
+        "return20": -4.761903257538273,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 2,
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "技術面中性"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "18.76 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "-4.76%"
+          }
+        ],
+        "healthScore": 55,
+        "healthGrade": "C",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2892",
+        "name": "第一金",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 253,
+        "close": 29.4,
+        "changePercent": -0.5076116444443919,
+        "return20": 3.339188792915841,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "技術面中性"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "9.86 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "+3.34%"
+          }
+        ],
+        "healthScore": 56,
+        "healthGrade": "C",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2301",
+        "name": "光寶科",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 246,
+        "close": 234.5,
+        "changePercent": 4.6875,
+        "return20": 52.76872964169381,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "外資 5 天",
+          "RSI 超買"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "9.51 萬張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "20 日",
+            "value": "+52.77%"
+          }
+        ],
+        "healthScore": 45,
+        "healthGrade": "D",
+        "healthTone": "down",
+        "warningCount": 3,
+        "topWarningTitle": "20 日漲幅偏大",
+        "topWarningTone": "risk"
+      },
+      {
+        "code": "2303",
+        "name": "聯電",
+        "industryName": null,
+        "themeTitle": null,
+        "label": "單法人剛轉向",
+        "note": "雖然不是雙法人共振，但主力之一剛轉為連買，適合先放入追蹤名單。",
+        "score": 243,
+        "close": 104.5,
+        "changePercent": 10,
+        "return20": 73.8768762947597,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 6,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "投信 5 天",
+          "RSI 超買"
+        ],
+        "metrics": [
+          {
+            "label": "外資 5 日",
+            "value": "0 張"
+          },
+          {
+            "label": "投信 5 日",
+            "value": "3.73 萬張"
+          },
+          {
+            "label": "20 日",
+            "value": "+73.88%"
+          }
+        ],
+        "healthScore": 46,
+        "healthGrade": "D",
+        "healthTone": "normal",
+        "warningCount": 3,
+        "topWarningTitle": "20 日漲幅偏大",
+        "topWarningTone": "risk"
+      }
+    ],
+    "themeIgnition": [
+      {
+        "code": "3443",
+        "name": "創意",
+        "industryName": null,
+        "themeTitle": "AI 伺服器 / ASIC",
+        "label": "題材剛升溫",
+        "note": "AI 伺服器 / ASIC 目前位居主線前排，即使歷史樣本尚少，也適合先看代表股。",
+        "score": 376,
+        "close": 5570,
+        "changePercent": -2.7923211169284468,
+        "return20": 100.72072072072072,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 9,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "AI 伺服器 / ASIC",
+          "RSI 超買",
+          "9 檔 ETF"
+        ],
+        "metrics": [
+          {
+            "label": "5 日升溫",
+            "value": "—"
+          },
+          {
+            "label": "10 日升溫",
+            "value": "—"
+          },
+          {
+            "label": "20 日",
+            "value": "+100.72%"
+          }
+        ],
+        "healthScore": 50,
+        "healthGrade": "D",
+        "healthTone": "normal",
+        "warningCount": 2,
+        "topWarningTitle": "20 日漲幅偏大",
+        "topWarningTone": "risk"
+      },
+      {
+        "code": "2303",
+        "name": "聯電",
+        "industryName": null,
+        "themeTitle": "記憶體 / DDR5",
+        "label": "題材剛升溫",
+        "note": "記憶體 / DDR5 目前位居主線前排，即使歷史樣本尚少，也適合先看代表股。",
+        "score": 345,
+        "close": 104.5,
+        "changePercent": 10,
+        "return20": 73.8768762947597,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 6,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "記憶體 / DDR5",
+          "RSI 超買",
+          "6 檔 ETF"
+        ],
+        "metrics": [
+          {
+            "label": "5 日升溫",
+            "value": "—"
+          },
+          {
+            "label": "10 日升溫",
+            "value": "—"
+          },
+          {
+            "label": "20 日",
+            "value": "+73.88%"
+          }
+        ],
+        "healthScore": 46,
+        "healthGrade": "D",
+        "healthTone": "normal",
+        "warningCount": 3,
+        "topWarningTitle": "20 日漲幅偏大",
+        "topWarningTone": "risk"
+      },
+      {
+        "code": "3711",
+        "name": "日月光投控",
+        "industryName": null,
+        "themeTitle": "CoWoS / 先進封裝",
+        "label": "題材剛升溫",
+        "note": "CoWoS / 先進封裝 目前位居主線前排，即使歷史樣本尚少，也適合先看代表股。",
+        "score": 283,
+        "close": 555,
+        "changePercent": 3.35195530726257,
+        "return20": 32.93413173652694,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 10,
+        "topSignalTitle": "RSI 超買",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "CoWoS / 先進封裝",
+          "RSI 超買",
+          "10 檔 ETF"
+        ],
+        "metrics": [
+          {
+            "label": "5 日升溫",
+            "value": "—"
+          },
+          {
+            "label": "10 日升溫",
+            "value": "—"
+          },
+          {
+            "label": "20 日",
+            "value": "+32.93%"
+          }
+        ],
+        "healthScore": 56,
+        "healthGrade": "C",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      }
+    ],
+    "catchUpCandidates": [
+      {
+        "code": "6284",
+        "name": "6284",
+        "industryName": null,
+        "themeTitle": "被動元件 / MLCC",
+        "label": "補漲候選",
+        "note": "被動元件 / MLCC 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
+        "score": 322,
+        "close": 83.2,
+        "changePercent": 1.4634146341463448,
+        "return20": -2.461902668964247,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 0,
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "被動元件 / MLCC",
+          "技術面中性"
+        ],
+        "metrics": [
+          {
+            "label": "20 日",
+            "value": "-2.46%"
+          },
+          {
+            "label": "龍頭漲幅",
+            "value": "+104.74%"
+          },
+          {
+            "label": "外資 5 日",
+            "value": "0 張"
+          }
+        ],
+        "healthScore": 53,
+        "healthGrade": "D",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2382",
+        "name": "廣達",
+        "industryName": null,
+        "themeTitle": "AI 伺服器 / ASIC",
+        "label": "補漲候選",
+        "note": "AI 伺服器 / ASIC 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
+        "score": 318,
+        "close": 340,
+        "changePercent": -1.0189228529839884,
+        "return20": 6.583072100313479,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
         "activeEtfCount": 6,
@@ -255,68 +862,22 @@
         "foreignTargetPrice": null,
         "premiumToTarget": null,
         "tags": [
-          "外資 5 天",
-          "投信 5 天",
-          "技術面中性"
+          "AI 伺服器 / ASIC",
+          "技術面中性",
+          "可借券賣出餘量"
         ],
         "metrics": [
+          {
+            "label": "20 日",
+            "value": "+6.58%"
+          },
+          {
+            "label": "龍頭漲幅",
+            "value": "+100.72%"
+          },
           {
             "label": "外資 5 日",
-            "value": "7.52 萬張"
-          },
-          {
-            "label": "投信 5 日",
-            "value": "2.05 萬張"
-          },
-          {
-            "label": "20 日",
-            "value": "+36.89%"
-          }
-        ],
-        "healthScore": 54,
-        "healthGrade": "D",
-        "healthTone": "normal",
-        "warningCount": 3,
-        "topWarningTitle": "20 日漲幅偏大",
-        "topWarningTone": "warning"
-      }
-    ],
-    "themeIgnition": [
-      {
-        "code": "2330",
-        "name": "台積電",
-        "industryName": null,
-        "themeTitle": "ETF 題材",
-        "label": "題材剛升溫",
-        "note": "ETF 題材 在近 5 / 10 日熱度與資金面明顯抬升，適合先看主線代表股。",
-        "score": 412,
-        "close": 2250,
-        "changePercent": 0,
-        "return20": 20.967741935483872,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 17,
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "ETF 題材",
-          "技術面中性",
-          "17 檔 ETF"
-        ],
-        "metrics": [
-          {
-            "label": "5 日升溫",
-            "value": "24"
-          },
-          {
-            "label": "10 日升溫",
-            "value": "—"
-          },
-          {
-            "label": "20 日",
-            "value": "+20.97%"
+            "value": "0 張"
           }
         ],
         "healthScore": 61,
@@ -327,150 +888,16 @@
         "topWarningTone": "warning"
       },
       {
-        "code": "2383",
-        "name": "台光電",
+        "code": "5356",
+        "name": "5356",
         "industryName": null,
-        "themeTitle": "玻纖布 / Low Dk",
-        "label": "題材剛升溫",
-        "note": "玻纖布 / Low Dk 在近 5 / 10 日熱度與資金面明顯抬升，適合先看主線代表股。",
-        "score": 317,
-        "close": 4950,
-        "changePercent": 4.651162790697675,
-        "return20": 71.57712305025996,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 16,
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "玻纖布 / Low Dk",
-          "RSI 超買",
-          "16 檔 ETF"
-        ],
-        "metrics": [
-          {
-            "label": "5 日升溫",
-            "value": "—"
-          },
-          {
-            "label": "10 日升溫",
-            "value": "14"
-          },
-          {
-            "label": "20 日",
-            "value": "+71.58%"
-          }
-        ],
-        "healthScore": 52,
-        "healthGrade": "D",
-        "healthTone": "normal",
-        "warningCount": 2,
-        "topWarningTitle": "20 日漲幅偏大",
-        "topWarningTone": "risk"
-      },
-      {
-        "code": "2408",
-        "name": "南亞科",
-        "industryName": null,
-        "themeTitle": "記憶體 / DDR5",
-        "label": "題材剛升溫",
-        "note": "記憶體 / DDR5 在近 5 / 10 日熱度與資金面明顯抬升，適合先看主線代表股。",
-        "score": 617,
-        "close": 282,
-        "changePercent": 9.941520467836257,
-        "return20": 36.89320388349515,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 6,
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "記憶體 / DDR5",
-          "技術面中性",
-          "6 檔 ETF"
-        ],
-        "metrics": [
-          {
-            "label": "5 日升溫",
-            "value": "-17"
-          },
-          {
-            "label": "10 日升溫",
-            "value": "67"
-          },
-          {
-            "label": "20 日",
-            "value": "+36.89%"
-          }
-        ],
-        "healthScore": 54,
-        "healthGrade": "D",
-        "healthTone": "normal",
-        "warningCount": 3,
-        "topWarningTitle": "20 日漲幅偏大",
-        "topWarningTone": "warning"
-      },
-      {
-        "code": "3443",
-        "name": "創意",
-        "industryName": null,
-        "themeTitle": "AI 伺服器 / ASIC",
-        "label": "題材剛升溫",
-        "note": "AI 伺服器 / ASIC 在近 5 / 10 日熱度與資金面明顯抬升，適合先看主線代表股。",
-        "score": 497,
-        "close": 4955,
-        "changePercent": 2.481902792140641,
-        "return20": 109.51374207188161,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 7,
-        "topSignalTitle": "RSI 超買",
-        "topSignalTone": "down",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "AI 伺服器 / ASIC",
-          "RSI 超買",
-          "7 檔 ETF"
-        ],
-        "metrics": [
-          {
-            "label": "5 日升溫",
-            "value": "-74"
-          },
-          {
-            "label": "10 日升溫",
-            "value": "17"
-          },
-          {
-            "label": "20 日",
-            "value": "+109.51%"
-          }
-        ],
-        "healthScore": 52,
-        "healthGrade": "D",
-        "healthTone": "normal",
-        "warningCount": 2,
-        "topWarningTitle": "20 日漲幅偏大",
-        "topWarningTone": "risk"
-      }
-    ],
-    "catchUpCandidates": [
-      {
-        "code": "3163",
-        "name": "波若威科技",
-        "industryName": null,
-        "themeTitle": "CPO / 矽光子",
+        "themeTitle": "被動元件 / MLCC",
         "label": "補漲候選",
-        "note": "CPO / 矽光子 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
-        "score": 303,
-        "close": 1135,
-        "changePercent": -6.967213114754098,
-        "return20": 8.61244019138756,
+        "note": "被動元件 / MLCC 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
+        "score": 300,
+        "close": 26.75,
+        "changePercent": -0.7421178377645393,
+        "return20": 4.901960784313726,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
         "activeEtfCount": 0,
@@ -479,17 +906,17 @@
         "foreignTargetPrice": null,
         "premiumToTarget": null,
         "tags": [
-          "CPO / 矽光子",
+          "被動元件 / MLCC",
           "技術面中性"
         ],
         "metrics": [
           {
             "label": "20 日",
-            "value": "+8.61%"
+            "value": "+4.90%"
           },
           {
             "label": "龍頭漲幅",
-            "value": "+109.51%"
+            "value": "+104.74%"
           },
           {
             "label": "外資 5 日",
@@ -504,103 +931,60 @@
         "topWarningTone": "warning"
       },
       {
-        "code": "3131",
-        "name": "弘塑科技",
+        "code": "3231",
+        "name": "緯創",
         "industryName": null,
-        "themeTitle": "CoWoS / 先進封裝",
+        "themeTitle": "AI 伺服器 / ASIC",
         "label": "補漲候選",
-        "note": "CoWoS / 先進封裝 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
-        "score": 170,
-        "close": 3200,
-        "changePercent": 9.965635738831615,
-        "return20": 1.5873015873015872,
+        "note": "AI 伺服器 / ASIC 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
+        "score": 299,
+        "close": 141.5,
+        "changePercent": 1.7985611510791366,
+        "return20": 5.204460966542751,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
-        "activeEtfCount": 0,
-        "topSignalTitle": "技術面中性",
-        "topSignalTone": "normal",
+        "activeEtfCount": 2,
+        "topSignalTitle": "MACD 轉弱",
+        "topSignalTone": "down",
         "foreignTargetPrice": null,
         "premiumToTarget": null,
         "tags": [
-          "CoWoS / 先進封裝",
-          "技術面中性"
-        ],
-        "metrics": [
-          {
-            "label": "20 日",
-            "value": "+1.59%"
-          },
-          {
-            "label": "龍頭漲幅",
-            "value": "+58.38%"
-          },
-          {
-            "label": "外資 5 日",
-            "value": "0 張"
-          }
-        ],
-        "healthScore": 54,
-        "healthGrade": "D",
-        "healthTone": "normal",
-        "warningCount": 2,
-        "topWarningTitle": "單日急漲偏熱",
-        "topWarningTone": "warning"
-      },
-      {
-        "code": "6770",
-        "name": "力積電",
-        "industryName": null,
-        "themeTitle": "記憶體 / DDR5",
-        "label": "補漲候選",
-        "note": "記憶體 / DDR5 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
-        "score": 137,
-        "close": 58.1,
-        "changePercent": 4.873643320857761,
-        "return20": 7.592592592592595,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "activeEtfCount": 1,
-        "topSignalTitle": "黃金交叉",
-        "topSignalTone": "up",
-        "foreignTargetPrice": null,
-        "premiumToTarget": null,
-        "tags": [
-          "記憶體 / DDR5",
-          "黃金交叉",
+          "AI 伺服器 / ASIC",
+          "MACD 轉弱",
           "可借券賣出餘量"
         ],
         "metrics": [
           {
             "label": "20 日",
-            "value": "+7.59%"
+            "value": "+5.20%"
           },
           {
             "label": "龍頭漲幅",
-            "value": "+48.09%"
+            "value": "+100.72%"
           },
           {
             "label": "外資 5 日",
             "value": "0 張"
           }
         ],
-        "healthScore": 64,
-        "healthGrade": "B",
+        "healthScore": 56,
+        "healthGrade": "C",
         "healthTone": "normal",
         "warningCount": 1,
         "topWarningTitle": "目標價空間有限",
         "topWarningTone": "warning"
       },
       {
-        "code": "3706",
-        "name": "神達",
+        "code": "2356",
+        "name": "英業達",
         "industryName": null,
-        "themeTitle": "ETF 題材",
+        "themeTitle": "AI 伺服器 / ASIC",
         "label": "補漲候選",
-        "note": "ETF 題材 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
-        "score": 65,
-        "close": 87.8,
-        "changePercent": 4.399526269929069,
-        "return20": 17.222961563844528,
+        "note": "AI 伺服器 / ASIC 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
+        "score": 280,
+        "close": 48.7,
+        "changePercent": -2.988049283152278,
+        "return20": 9.315377854119301,
         "foreign5Day": 0,
         "investmentTrust5Day": 0,
         "activeEtfCount": 1,
@@ -609,25 +993,69 @@
         "foreignTargetPrice": null,
         "premiumToTarget": null,
         "tags": [
-          "ETF 題材",
+          "AI 伺服器 / ASIC",
           "技術面中性",
           "可借券賣出餘量"
         ],
         "metrics": [
           {
             "label": "20 日",
-            "value": "+17.22%"
+            "value": "+9.32%"
           },
           {
             "label": "龍頭漲幅",
-            "value": "+36.89%"
+            "value": "+100.72%"
           },
           {
             "label": "外資 5 日",
             "value": "0 張"
           }
         ],
-        "healthScore": 59,
+        "healthScore": 58,
+        "healthGrade": "C",
+        "healthTone": "normal",
+        "warningCount": 1,
+        "topWarningTitle": "目標價空間有限",
+        "topWarningTone": "warning"
+      },
+      {
+        "code": "2337",
+        "name": "旺宏",
+        "industryName": null,
+        "themeTitle": "記憶體 / DDR5",
+        "label": "補漲候選",
+        "note": "記憶體 / DDR5 主線已先動，但這檔相對仍落後，適合觀察是否接棒。",
+        "score": 234,
+        "close": 153,
+        "changePercent": -4.075235109717868,
+        "return20": 3.728813559322034,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "activeEtfCount": 4,
+        "topSignalTitle": "MACD 轉弱",
+        "topSignalTone": "down",
+        "foreignTargetPrice": null,
+        "premiumToTarget": null,
+        "tags": [
+          "記憶體 / DDR5",
+          "MACD 轉弱",
+          "可借券賣出餘量"
+        ],
+        "metrics": [
+          {
+            "label": "20 日",
+            "value": "+3.73%"
+          },
+          {
+            "label": "龍頭漲幅",
+            "value": "+73.88%"
+          },
+          {
+            "label": "外資 5 日",
+            "value": "0 張"
+          }
+        ],
+        "healthScore": 57,
         "healthGrade": "C",
         "healthTone": "normal",
         "warningCount": 1,
@@ -637,49 +1065,34 @@
     ]
   },
   "themeHistory": {
-    "snapshotCount": 12,
+    "snapshotCount": 14,
     "warming5": [
       {
-        "slug": "emerging-etf",
-        "title": "ETF 題材",
-        "delta": 24,
-        "leaderCode": "2330",
-        "leaderName": "台積電"
-      },
-      {
-        "slug": "glass-fiber",
-        "title": "玻纖布 / Low Dk",
+        "slug": "ai-server",
+        "title": "AI 伺服器 / ASIC",
         "delta": null,
-        "leaderCode": "2383",
-        "leaderName": "台光電"
+        "leaderCode": "3443",
+        "leaderName": "創意"
       },
       {
         "slug": "memory",
         "title": "記憶體 / DDR5",
-        "delta": -17,
-        "leaderCode": "2408",
-        "leaderName": "南亞科"
-      }
-    ],
-    "warming10": [
-      {
-        "slug": "glass-fiber",
-        "title": "玻纖布 / Low Dk",
-        "delta": 14,
-        "leaderCode": "2383",
-        "leaderName": "台光電"
+        "delta": null,
+        "leaderCode": "2303",
+        "leaderName": "聯電"
       },
       {
-        "slug": "memory",
-        "title": "記憶體 / DDR5",
-        "delta": 67,
-        "leaderCode": "2408",
-        "leaderName": "南亞科"
+        "slug": "cowos",
+        "title": "CoWoS / 先進封裝",
+        "delta": null,
+        "leaderCode": "3711",
+        "leaderName": "日月光投控"
       }
     ],
+    "warming10": [],
     "currentLeader": {
-      "slug": "memory",
-      "title": "記憶體 / DDR5"
+      "slug": "ai-server",
+      "title": "AI 伺服器 / ASIC"
     },
     "previousLeader": {
       "slug": "ai-server",

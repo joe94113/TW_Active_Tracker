@@ -81,6 +81,41 @@ const TOPIC_DEFINITIONS = [
     searchQuery: '(記憶體 OR DDR5 OR NAND OR SSD OR HBM) 台股',
     coreStocks: ['2408', '2344', '2337', '8299'],
   },
+  {
+    slug: 'passive-components',
+    title: '被動元件 / MLCC',
+    aliases: ['被動元件', 'MLCC', '電阻', '電容', '高容值 MLCC', '晶片電阻'],
+    searchQuery: '(被動元件 OR MLCC OR 電阻 OR 電容 OR 高容值MLCC OR 晶片電阻) 台股',
+    coreStocks: ['2327', '2492', '3026', '6173', '6284', '5356'],
+  },
+  {
+    slug: 'copos',
+    title: 'CoPoS / 面板級封裝',
+    aliases: ['CoPoS', '面板級封裝', '面板級先進封裝', '玻璃載板封裝', 'panel-level packaging'],
+    searchQuery: '(CoPoS OR 面板級封裝 OR 面板級先進封裝 OR 玻璃載板封裝 OR panel-level packaging) 台股',
+    coreStocks: ['2409', '3481', '3711', '6147', '6187', '3583'],
+  },
+  {
+    slug: 'semi-equipment',
+    title: '半導體設備',
+    aliases: ['半導體設備', '設備股', '製程設備', '先進製程設備', '真空設備', '濕製程設備'],
+    searchQuery: '(半導體設備 OR 設備股 OR 製程設備 OR 先進製程設備 OR 真空設備 OR 濕製程設備) 台股',
+    coreStocks: ['3131', '3583', '3680', '6640', '2467', '5443'],
+  },
+  {
+    slug: 'fab-facility',
+    title: '廠務工程 / 無塵室',
+    aliases: ['廠務', '廠務工程', '無塵室', '機電工程', '廠房工程', '半導體廠務'],
+    searchQuery: '(廠務 OR 廠務工程 OR 無塵室 OR 機電工程 OR 廠房工程 OR 半導體廠務) 台股',
+    coreStocks: ['2404', '6139', '5536', '6196', '6691'],
+  },
+  {
+    slug: 'bbu',
+    title: 'BBU / 備援電池',
+    aliases: ['BBU', 'BUU', '備援電池', '電池備援模組', 'Battery Backup Unit', 'Backup Battery Unit'],
+    searchQuery: '(BBU OR 備援電池 OR 電池備援模組 OR Battery Backup Unit OR Backup Battery Unit) 台股',
+    coreStocks: ['6781', '3211', '4931', '3625'],
+  },
 ];
 
 const THEME_NOISE_KEYWORDS = new Set([
@@ -558,7 +593,7 @@ export function buildThemeRadar({
           close: summary.close ?? null,
           changePercent: summary.changePercent ?? null,
           return20: summary.return20 ?? null,
-          turnover: summary.turnover ?? null,
+          turnover: summary.turnover ?? summary.dailyTradeValue ?? summary.avgTradeValue ?? null,
           foreign5Day: summary.foreign5Day ?? null,
           investmentTrust5Day: summary.investmentTrust5Day ?? null,
           total5Day: summary.total5Day ?? null,
@@ -637,7 +672,7 @@ export function buildThemeRadar({
 
   const topics = [...curatedTopics, ...emergingTopics]
     .sort((left, right) => right.score - left.score || left.title.localeCompare(right.title, 'zh-Hant'))
-    .slice(0, 8);
+    .slice(0, 16);
 
   return {
     generatedAt,
