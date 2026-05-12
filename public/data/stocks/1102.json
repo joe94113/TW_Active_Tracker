@@ -3,7 +3,7 @@
   "name": "亞泥",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:26.013Z",
+  "generatedAt": "2026-05-12T13:02:45.966Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -2.67%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 82.30%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 7,797,881 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5533,12 +5533,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -695595,
+        "investmentTrust": -841137,
+        "dealer": -465000,
+        "total": -2001732
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -3958149,
+        "investmentTrust": -39991,
+        "dealer": -365713,
+        "total": -4363853
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 111198,
+        "investmentTrust": -779651,
+        "dealer": -127000,
+        "total": -795453
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -1013977,
+        "investmentTrust": -299669,
+        "dealer": -42079,
+        "total": -1355725
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 2440238,
+        "investmentTrust": -1505357,
+        "dealer": -215999,
+        "total": 718882
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -3116285,
+      "investmentTrust5Day": -3465805,
+      "dealer5Day": -1215791,
+      "total5Day": -7797881
     }
   },
   "持股分散": {

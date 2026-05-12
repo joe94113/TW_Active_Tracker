@@ -3,7 +3,7 @@
   "name": "三陽工業",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:31.483Z",
+  "generatedAt": "2026-05-12T13:02:51.510Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 -1.17%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 82.81%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 1,184,523 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5445,12 +5445,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -458970,
+        "investmentTrust": -51000,
+        "dealer": -15000,
+        "total": -524970
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 63134,
+        "investmentTrust": 6698,
+        "dealer": -6000,
+        "total": 63832
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -272895,
+        "investmentTrust": -130304,
+        "dealer": 0,
+        "total": -403199
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -342954,
+        "investmentTrust": -78302,
+        "dealer": -26000,
+        "total": -447256
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 233070,
+        "investmentTrust": -90000,
+        "dealer": -16000,
+        "total": 127070
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -778615,
+      "investmentTrust5Day": -342908,
+      "dealer5Day": -63000,
+      "total5Day": -1184523
     }
   },
   "持股分散": {
@@ -5642,8 +5678,8 @@
   },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 0.1,
-    "totalWeight": 0.1,
+    "averageWeight": 0.11,
+    "totalWeight": 0.11,
     "latestDisclosureDate": "2026-05-12",
     "items": [
       {
@@ -5651,9 +5687,9 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-12",
-        "weight": 0.1,
-        "shares": 119000,
-        "rank": 109
+        "weight": 0.11,
+        "shares": 131000,
+        "rank": 101
       }
     ]
   },

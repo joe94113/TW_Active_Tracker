@@ -3,7 +3,7 @@
   "name": "統一超",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:44.722Z",
+  "generatedAt": "2026-05-12T13:03:04.139Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 0.44%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 84.60%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 1,235,435 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5561,12 +5561,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 86299,
+        "investmentTrust": -38000,
+        "dealer": -16208,
+        "total": 32091
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -327861,
+        "investmentTrust": -53153,
+        "dealer": -1770,
+        "total": -382784
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 686185,
+        "investmentTrust": -83951,
+        "dealer": -2003,
+        "total": 600231
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 776110,
+        "investmentTrust": -171951,
+        "dealer": -27189,
+        "total": 576970
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 410621,
+        "investmentTrust": 0,
+        "dealer": -1694,
+        "total": 408927
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 1631354,
+      "investmentTrust5Day": -347055,
+      "dealer5Day": -48864,
+      "total5Day": 1235435
     }
   },
   "持股分散": {

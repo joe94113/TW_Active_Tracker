@@ -3,7 +3,7 @@
   "name": "鈊象電子",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:51.709Z",
+  "generatedAt": "2026-05-12T13:03:10.505Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5498,9 +5498,49 @@
       "Yahoo Finance Chart API"
     ]
   },
-  "公司概況": null,
+  "公司概況": {
+    "公司名稱": "鈊象電子股份有限公司",
+    "公司簡稱": "鈊象",
+    "產業名稱": "文化創意業",
+    "產業代碼": "32",
+    "董事長": "李柯柱",
+    "總經理": "江順成",
+    "發言人": "江順成",
+    "成立日期": "1989-11-10",
+    "上市日期": "2006-07-12",
+    "實收資本額": 2818015600,
+    "已發行股數": 281801560,
+    "面額": "新台幣 10.0000元",
+    "住址": "No.130, Wugong Rd., Wugu Dist.,New Taipei City 248, Taiwan (R.O.C.)",
+    "網址": "www.igs.com.tw",
+    "更新日期": "2026-05-12"
+  },
   "評價面": null,
-  "財務資料": null,
+  "財務資料": {
+    "月營收": {
+      "出表日期": "2026-05-12",
+      "資料年月": "2026-04",
+      "產業名稱": "文化創意業",
+      "當月營收": 2123253,
+      "上月營收": 2193286,
+      "去年同月營收": 1850564,
+      "月增率": -3.193062829015459,
+      "年增率": 14.735453623868183,
+      "累計營收": 8387923,
+      "去年累計營收": 7209806,
+      "累計年增率": 16.340481283407627,
+      "備註": "-"
+    },
+    "綜合損益表": null,
+    "資產負債表": null,
+    "觀察摘要": [
+      "最新月營收年增 14.74%，營收仍維持溫和成長。"
+    ],
+    "資料說明": [
+      "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
+      "估值欄位來源：TWSE OpenAPI BWIBBU_ALL。"
+    ]
+  },
   "法人買賣": {
     "days": [],
     "summary": {
@@ -5706,5 +5746,177 @@
     "note": null,
     "items": []
   },
-  "同產業比較": null
+  "同產業比較": {
+    "industryName": "文化創意業",
+    "peerCount": 1,
+    "rank20Day": 1,
+    "rankDaily": 1,
+    "averageReturn20": -3.6553524804177546,
+    "averageChangePercent": 0.957592339261286,
+    "leaders": [
+      {
+        "code": "3293",
+        "name": "鈊象電子",
+        "industryName": "文化創意業",
+        "priceDate": "2026-05-12",
+        "close": 738,
+        "change": 7,
+        "changePercent": 0.957592339261286,
+        "return20": -3.6553524804177546,
+        "return60": 4.978662873399715,
+        "volume": 1831000,
+        "turnover": null,
+        "ma5": 731,
+        "ma10": 739.4,
+        "ma20": 752.95,
+        "ma60": 733.4,
+        "ma240": 770.4208333333333,
+        "maBullStack": false,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 50.660000000000004,
+        "retailRatio": 24.38,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 3,
+        "sparkline20": [
+          759,
+          747,
+          768,
+          775,
+          785,
+          779,
+          790,
+          761,
+          753,
+          748,
+          755,
+          756,
+          748,
+          743,
+          737,
+          731,
+          720,
+          735,
+          731,
+          738
+        ],
+        "technicalSignals": [
+          {
+            "key": "break-above-long-ma",
+            "title": "站回長均線",
+            "tone": "up",
+            "importance": 2,
+            "description": "鈊象電子 收盤重新站上長均線，中期結構開始修復。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "站回長均線"
+        ],
+        "topSignalTitle": "站回長均線",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": -3.193062829015459,
+        "monthlyRevenueYoY": 14.735453623868183,
+        "monthlyRevenueDualGrowth": false,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      }
+    ],
+    "laggards": [
+      {
+        "code": "3293",
+        "name": "鈊象電子",
+        "industryName": "文化創意業",
+        "priceDate": "2026-05-12",
+        "close": 738,
+        "change": 7,
+        "changePercent": 0.957592339261286,
+        "return20": -3.6553524804177546,
+        "return60": 4.978662873399715,
+        "volume": 1831000,
+        "turnover": null,
+        "ma5": 731,
+        "ma10": 739.4,
+        "ma20": 752.95,
+        "ma60": 733.4,
+        "ma240": 770.4208333333333,
+        "maBullStack": false,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 50.660000000000004,
+        "retailRatio": 24.38,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 3,
+        "sparkline20": [
+          759,
+          747,
+          768,
+          775,
+          785,
+          779,
+          790,
+          761,
+          753,
+          748,
+          755,
+          756,
+          748,
+          743,
+          737,
+          731,
+          720,
+          735,
+          731,
+          738
+        ],
+        "technicalSignals": [
+          {
+            "key": "break-above-long-ma",
+            "title": "站回長均線",
+            "tone": "up",
+            "importance": 2,
+            "description": "鈊象電子 收盤重新站上長均線，中期結構開始修復。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "站回長均線"
+        ],
+        "topSignalTitle": "站回長均線",
+        "topSignalTone": "up",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": -3.193062829015459,
+        "monthlyRevenueYoY": 14.735453623868183,
+        "monthlyRevenueDualGrowth": false,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      }
+    ],
+    "觀察摘要": [
+      "目前追蹤池中同產業可比較標的有限，先以本身技術面與籌碼面為主。"
+    ]
+  }
 }

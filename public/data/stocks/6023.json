@@ -3,7 +3,7 @@
   "name": "元大期貨",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:15:04.819Z",
+  "generatedAt": "2026-05-12T13:03:23.307Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5289,9 +5289,49 @@
       "Yahoo Finance Chart API"
     ]
   },
-  "公司概況": null,
+  "公司概況": {
+    "公司名稱": "元大期貨股份有限公司",
+    "公司簡稱": "元大期貨",
+    "產業名稱": "金融業",
+    "產業代碼": "17",
+    "董事長": "林添富",
+    "總經理": "高毅瑞",
+    "發言人": "袁良慧",
+    "成立日期": "1997-04-09",
+    "上市日期": "2007-11-28",
+    "實收資本額": 3199762880,
+    "已發行股數": 319976288,
+    "面額": "新台幣 10.0000元",
+    "住址": "Part of 2F, and 3F & 4F& 5F., No.77, Sec. 2, Nanjing E. Rd., Zhongshan DistTaipei 104, Taiwan R.O.C.",
+    "網址": "http://www.yuantafutures.com.tw/",
+    "更新日期": "2026-05-12"
+  },
   "評價面": null,
-  "財務資料": null,
+  "財務資料": {
+    "月營收": {
+      "出表日期": "2026-05-12",
+      "資料年月": "2026-04",
+      "產業名稱": "金融業",
+      "當月營收": 328317,
+      "上月營收": 522959,
+      "去年同月營收": 390133,
+      "月增率": -37.21936136484887,
+      "年增率": -15.844852909136115,
+      "累計營收": 1532205,
+      "去年累計營收": 1283506,
+      "累計年增率": 19.376535832321782,
+      "備註": "-"
+    },
+    "綜合損益表": null,
+    "資產負債表": null,
+    "觀察摘要": [
+      "最新月營收年減 15.84%，短線要留意營運動能是否放緩。"
+    ],
+    "資料說明": [
+      "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
+      "估值欄位來源：TWSE OpenAPI BWIBBU_ALL。"
+    ]
+  },
   "法人買賣": {
     "days": [],
     "summary": {
@@ -5463,7 +5503,7 @@
         "disclosureDate": "2026-05-12",
         "weight": 0.17,
         "shares": 115000,
-        "rank": 98
+        "rank": 96
       }
     ]
   },
@@ -5479,5 +5519,177 @@
     "note": null,
     "items": []
   },
-  "同產業比較": null
+  "同產業比較": {
+    "industryName": "金融業",
+    "peerCount": 1,
+    "rank20Day": 1,
+    "rankDaily": 1,
+    "averageReturn20": 0.8080808080808052,
+    "averageChangePercent": 0.30150753768843935,
+    "leaders": [
+      {
+        "code": "6023",
+        "name": "元大期貨",
+        "industryName": "金融業",
+        "priceDate": "2026-05-12",
+        "close": 99.8,
+        "change": 0.29999999999999716,
+        "changePercent": 0.30150753768843935,
+        "return20": 0.8080808080808052,
+        "return60": 5.72033727419033,
+        "volume": 330000,
+        "turnover": null,
+        "ma5": 100.36,
+        "ma10": 99.8899998474121,
+        "ma20": 99.51500038146972,
+        "ma60": 96.83666681925456,
+        "ma240": 90.25958333333332,
+        "maBullStack": true,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 86.86,
+        "retailRatio": 4.26,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          98.80000305175781,
+          99.30000305175781,
+          100,
+          99.5,
+          99.30000305175781,
+          99.69999694824219,
+          98.5,
+          98.9000015258789,
+          98.9000015258789,
+          98.5,
+          98.5,
+          99.0999984741211,
+          99.5,
+          100,
+          100,
+          100.5,
+          102,
+          100,
+          99.5,
+          99.8
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "元大期貨 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": -37.21936136484887,
+        "monthlyRevenueYoY": -15.844852909136115,
+        "monthlyRevenueDualGrowth": false,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      }
+    ],
+    "laggards": [
+      {
+        "code": "6023",
+        "name": "元大期貨",
+        "industryName": "金融業",
+        "priceDate": "2026-05-12",
+        "close": 99.8,
+        "change": 0.29999999999999716,
+        "changePercent": 0.30150753768843935,
+        "return20": 0.8080808080808052,
+        "return60": 5.72033727419033,
+        "volume": 330000,
+        "turnover": null,
+        "ma5": 100.36,
+        "ma10": 99.8899998474121,
+        "ma20": 99.51500038146972,
+        "ma60": 96.83666681925456,
+        "ma240": 90.25958333333332,
+        "maBullStack": true,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 86.86,
+        "retailRatio": 4.26,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          98.80000305175781,
+          99.30000305175781,
+          100,
+          99.5,
+          99.30000305175781,
+          99.69999694824219,
+          98.5,
+          98.9000015258789,
+          98.9000015258789,
+          98.5,
+          98.5,
+          99.0999984741211,
+          99.5,
+          100,
+          100,
+          100.5,
+          102,
+          100,
+          99.5,
+          99.8
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "元大期貨 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": -37.21936136484887,
+        "monthlyRevenueYoY": -15.844852909136115,
+        "monthlyRevenueDualGrowth": false,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      }
+    ],
+    "觀察摘要": [
+      "目前追蹤池中同產業可比較標的有限，先以本身技術面與籌碼面為主。"
+    ]
+  }
 }

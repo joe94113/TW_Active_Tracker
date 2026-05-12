@@ -3,7 +3,7 @@
   "name": "商億-KY",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:15:19.732Z",
+  "generatedAt": "2026-05-12T13:03:36.617Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -0.41%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 95.49%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 11,700 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -4983,12 +4983,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -3000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": -3000
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 1000
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 2700,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 2700
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 1000
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 10000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 10000
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
+      "foreign5Day": 11700,
       "investmentTrust5Day": 0,
       "dealer5Day": 0,
-      "total5Day": 0
+      "total5Day": 11700
     }
   },
   "持股分散": {

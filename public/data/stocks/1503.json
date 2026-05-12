@@ -3,7 +3,7 @@
   "name": "士電",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:28.280Z",
+  "generatedAt": "2026-05-12T13:02:48.108Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 6.23%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 75.24%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 109,964 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5533,12 +5533,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -161559,
+        "investmentTrust": -1000,
+        "dealer": 97982,
+        "total": -64577
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -94481,
+        "investmentTrust": -155,
+        "dealer": 158773,
+        "total": 64137
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -170331,
+        "investmentTrust": 0,
+        "dealer": 152733,
+        "total": -17598
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 90314,
+        "investmentTrust": 75000,
+        "dealer": 2563,
+        "total": 167877
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": -295942,
+        "investmentTrust": 33000,
+        "dealer": 3139,
+        "total": -259803
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -631999,
+      "investmentTrust5Day": 106845,
+      "dealer5Day": 415190,
+      "total5Day": -109964
     }
   },
   "持股分散": {

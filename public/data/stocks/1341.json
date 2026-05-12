@@ -3,7 +3,7 @@
   "name": "富林-KY",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:27.479Z",
+  "generatedAt": "2026-05-12T13:02:47.312Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 1.67%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 85.00%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 12,150 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5080,12 +5080,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 1000
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 1000
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 4400,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 4400
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 2917,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 2917
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 2833,
+        "investmentTrust": 0,
+        "dealer": 0,
+        "total": 2833
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
+      "foreign5Day": 12150,
       "investmentTrust5Day": 0,
       "dealer5Day": 0,
-      "total5Day": 0
+      "total5Day": 12150
     }
   },
   "持股分散": {
@@ -5277,9 +5313,9 @@
         "ma240": 54.19375006198883,
         "maBullStack": true,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -29407353,
+        "investmentTrust5Day": -470908,
+        "total5Day": -36196111,
         "largeHolderRatio": 84.73,
         "retailRatio": 5.47,
         "shortToMarginRatio": 6.224479633502639,
@@ -5356,9 +5392,9 @@
         "ma240": 61.25125003178914,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
+        "foreign5Day": 12150,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 12150,
         "largeHolderRatio": 85,
         "retailRatio": 2.65,
         "shortToMarginRatio": null,
@@ -5435,9 +5471,9 @@
         "ma240": 33.49229167620341,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
+        "foreign5Day": -4709182,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -5880022,
         "largeHolderRatio": 82.26,
         "retailRatio": 5.92,
         "shortToMarginRatio": 0.5750545310331152,
@@ -5514,9 +5550,9 @@
         "ma240": 41.33041676839193,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -22664784,
+        "investmentTrust5Day": -58000,
+        "total5Day": -23452014,
         "largeHolderRatio": 73.75,
         "retailRatio": 9.62,
         "shortToMarginRatio": 1.5683163483248916,
@@ -5595,9 +5631,9 @@
         "ma240": 41.33041676839193,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -22664784,
+        "investmentTrust5Day": -58000,
+        "total5Day": -23452014,
         "largeHolderRatio": 73.75,
         "retailRatio": 9.62,
         "shortToMarginRatio": 1.5683163483248916,
@@ -5674,9 +5710,9 @@
         "ma240": 33.49229167620341,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
+        "foreign5Day": -4709182,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -5880022,
         "largeHolderRatio": 82.26,
         "retailRatio": 5.92,
         "shortToMarginRatio": 0.5750545310331152,
@@ -5753,9 +5789,9 @@
         "ma240": 61.25125003178914,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
+        "foreign5Day": 12150,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": 12150,
         "largeHolderRatio": 85,
         "retailRatio": 2.65,
         "shortToMarginRatio": null,
@@ -5815,7 +5851,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 -1.87%，在同族群相對偏強。"
+      "近 20 日報酬優於同產業平均 -1.87%，在同族群相對偏強。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

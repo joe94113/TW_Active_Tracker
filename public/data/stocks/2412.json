@@ -3,7 +3,7 @@
   "name": "中華電",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:37.166Z",
+  "generatedAt": "2026-05-12T13:02:56.986Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 0.74%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 79.20%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 10,071,677 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5561,12 +5561,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -1807829,
+        "investmentTrust": -68307,
+        "dealer": -100899,
+        "total": -1977035
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -2542523,
+        "investmentTrust": -11752,
+        "dealer": 75008,
+        "total": -2479267
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -1034714,
+        "investmentTrust": -2000,
+        "dealer": 60032,
+        "total": -976682
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -3422534,
+        "investmentTrust": 344217,
+        "dealer": 118072,
+        "total": -2960245
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": -1971061,
+        "investmentTrust": 203557,
+        "dealer": 89056,
+        "total": -1678448
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -10778661,
+      "investmentTrust5Day": 465715,
+      "dealer5Day": 241269,
+      "total5Day": -10071677
     }
   },
   "持股分散": {

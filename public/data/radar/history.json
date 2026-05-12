@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T10:13:55.230Z",
+  "generatedAt": "2026-05-12T13:02:27.295Z",
   "marketDate": "2026-05-12",
   "horizons": [
     3,
@@ -3220,8 +3220,22 @@
     },
     {
       "marketDate": "2026-05-12",
-      "generatedAt": "2026-05-12T10:13:55.230Z",
+      "generatedAt": "2026-05-12T13:02:27.295Z",
       "stable": [
+        {
+          "code": "1216",
+          "name": "統一",
+          "label": "偏多焦點",
+          "rating": 4,
+          "detail": "黃金交叉｜20 日 +1.53%｜五日籌碼 1.84 萬張",
+          "entryClose": 73.1,
+          "marketDate": "2026-05-12",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
         {
           "code": "6510",
           "name": "精測",
@@ -3235,26 +3249,12 @@
             "5": null,
             "10": null
           }
-        },
-        {
-          "code": "1216",
-          "name": "統一",
-          "label": "偏多焦點",
-          "rating": 3,
-          "detail": "黃金交叉｜20 日 +1.53%｜五日籌碼 0 張",
-          "entryClose": 73.1,
-          "marketDate": "2026-05-12",
-          "horizons": {
-            "3": null,
-            "5": null,
-            "10": null
-          }
         }
       ],
       "aggressive": [
         {
           "code": "6173",
-          "name": "6173",
+          "name": "信昌電",
           "label": "量縮價揚",
           "rating": 4,
           "detail": "單日 +9.70%｜量能比 5 日 38%｜距 20 日高 0%",

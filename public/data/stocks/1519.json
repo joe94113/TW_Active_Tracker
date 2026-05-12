@@ -3,7 +3,7 @@
   "name": "華城",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:28.847Z",
+  "generatedAt": "2026-05-12T13:02:48.731Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 11.87%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 75.76%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 188,221 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5533,12 +5533,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 82204,
+        "investmentTrust": -1000,
+        "dealer": 95653,
+        "total": 176857
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -93925,
+        "investmentTrust": -1436,
+        "dealer": 32250,
+        "total": -63111
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -28243,
+        "investmentTrust": 24674,
+        "dealer": 108240,
+        "total": 104671
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -52150,
+        "investmentTrust": -326,
+        "dealer": 28770,
+        "total": -23706
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": -371029,
+        "investmentTrust": 3000,
+        "dealer": -14903,
+        "total": -382932
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -463143,
+      "investmentTrust5Day": 24912,
+      "dealer5Day": 250010,
+      "total5Day": -188221
     }
   },
   "持股分散": {

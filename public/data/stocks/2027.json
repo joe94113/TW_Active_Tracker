@@ -3,7 +3,7 @@
   "name": "大成鋼",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:30.951Z",
+  "generatedAt": "2026-05-12T13:02:50.875Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 3.66%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 69.10%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 60,217,727 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5547,12 +5547,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 8865566,
+        "investmentTrust": -5216000,
+        "dealer": -480928,
+        "total": 3168638
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 9966271,
+        "investmentTrust": -920000,
+        "dealer": -263396,
+        "total": 8782875
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 12942158,
+        "investmentTrust": -716000,
+        "dealer": 1380744,
+        "total": 13606902
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 18040240,
+        "investmentTrust": 251000,
+        "dealer": -551134,
+        "total": 17740106
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 16596820,
+        "investmentTrust": -642000,
+        "dealer": 964386,
+        "total": 16919206
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 66411055,
+      "investmentTrust5Day": -7243000,
+      "dealer5Day": 1049672,
+      "total5Day": 60217727
     }
   },
   "持股分散": {
@@ -5744,23 +5780,7 @@
       "topTone": "info"
     }
   },
-  "主動ETF曝光": {
-    "count": 1,
-    "averageWeight": 1.07,
-    "totalWeight": 1.07,
-    "latestDisclosureDate": "2026-05-12",
-    "items": [
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-12",
-        "weight": 1.07,
-        "shares": 3305000,
-        "rank": 30
-      }
-    ]
-  },
+  "主動ETF曝光": null,
   "foreignTargetPrice": {
     "recentDays": 7,
     "itemCount": 0,
@@ -5775,11 +5795,11 @@
   },
   "同產業比較": {
     "industryName": "鋼鐵工業",
-    "peerCount": 2,
+    "peerCount": 3,
     "rank20Day": 1,
-    "rankDaily": 1,
-    "averageReturn20": -1.6835566898446332,
-    "averageChangePercent": -1.4207185146744712,
+    "rankDaily": 2,
+    "averageReturn20": -0.6831339825763495,
+    "averageChangePercent": -0.8989056725484602,
     "leaders": [
       {
         "code": "2027",
@@ -5800,13 +5820,13 @@
         "ma240": 37.189583266576136,
         "maBullStack": true,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 66411055,
+        "investmentTrust5Day": -7243000,
+        "total5Day": 60217727,
         "largeHolderRatio": 69.10000000000001,
         "retailRatio": 10.6,
         "shortToMarginRatio": 0.2850816495986715,
-        "activeEtfCount": 1,
+        "activeEtfCount": 0,
         "sparkline20": [
           38.45000076293945,
           37.45000076293945,
@@ -5861,6 +5881,85 @@
         "foreignTargetCount": 0
       },
       {
+        "code": "8415",
+        "name": "大國鋼",
+        "industryName": "鋼鐵工業",
+        "priceDate": "2026-05-12",
+        "close": 34.6,
+        "change": 0.050000762939454546,
+        "changePercent": 0.14472001170356183,
+        "return20": 1.317711431960218,
+        "return60": 1.9145779748261489,
+        "volume": 547000,
+        "turnover": null,
+        "ma5": 34.249999542236324,
+        "ma10": 34.06999946594239,
+        "ma20": 33.91499984741211,
+        "ma60": 33.94249994913737,
+        "ma240": 34.01624999682109,
+        "maBullStack": false,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 92.49,
+        "retailRatio": 2.19,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          34.04999923706055,
+          33.70000076293945,
+          33.70000076293945,
+          33.70000076293945,
+          33.70000076293945,
+          33.75,
+          33.70000076293945,
+          33.75,
+          33.849998474121094,
+          33.70000076293945,
+          33.849998474121094,
+          34.04999923706055,
+          33.70000076293945,
+          34,
+          33.849998474121094,
+          33.849998474121094,
+          33.900001525878906,
+          34.349998474121094,
+          34.54999923706055,
+          34.6
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "大國鋼 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": 4.1500268367511035,
+        "monthlyRevenueYoY": 18.574806965184067,
+        "monthlyRevenueDualGrowth": true,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      },
+      {
         "code": "2006",
         "name": "東和鋼鐵",
         "industryName": "鋼鐵工業",
@@ -5879,9 +5978,9 @@
         "ma240": 66.46625003496806,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -1530668,
+        "investmentTrust5Day": -762311,
+        "total5Day": -2638952,
         "largeHolderRatio": 79.76,
         "retailRatio": 8.98,
         "shortToMarginRatio": 1.154249737670514,
@@ -5960,9 +6059,9 @@
         "ma240": 66.46625003496806,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -1530668,
+        "investmentTrust5Day": -762311,
+        "total5Day": -2638952,
         "largeHolderRatio": 79.76,
         "retailRatio": 8.98,
         "shortToMarginRatio": 1.154249737670514,
@@ -6021,6 +6120,85 @@
         "foreignTargetCount": 0
       },
       {
+        "code": "8415",
+        "name": "大國鋼",
+        "industryName": "鋼鐵工業",
+        "priceDate": "2026-05-12",
+        "close": 34.6,
+        "change": 0.050000762939454546,
+        "changePercent": 0.14472001170356183,
+        "return20": 1.317711431960218,
+        "return60": 1.9145779748261489,
+        "volume": 547000,
+        "turnover": null,
+        "ma5": 34.249999542236324,
+        "ma10": 34.06999946594239,
+        "ma20": 33.91499984741211,
+        "ma60": 33.94249994913737,
+        "ma240": 34.01624999682109,
+        "maBullStack": false,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 92.49,
+        "retailRatio": 2.19,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 1,
+        "sparkline20": [
+          34.04999923706055,
+          33.70000076293945,
+          33.70000076293945,
+          33.70000076293945,
+          33.70000076293945,
+          33.75,
+          33.70000076293945,
+          33.75,
+          33.849998474121094,
+          33.70000076293945,
+          33.849998474121094,
+          34.04999923706055,
+          33.70000076293945,
+          34,
+          33.849998474121094,
+          33.849998474121094,
+          33.900001525878906,
+          34.349998474121094,
+          34.54999923706055,
+          34.6
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "大國鋼 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": 4.1500268367511035,
+        "monthlyRevenueYoY": 18.574806965184067,
+        "monthlyRevenueDualGrowth": true,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      },
+      {
         "code": "2027",
         "name": "大成鋼",
         "industryName": "鋼鐵工業",
@@ -6039,13 +6217,13 @@
         "ma240": 37.189583266576136,
         "maBullStack": true,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 66411055,
+        "investmentTrust5Day": -7243000,
+        "total5Day": 60217727,
         "largeHolderRatio": 69.10000000000001,
         "retailRatio": 10.6,
         "shortToMarginRatio": 0.2850816495986715,
-        "activeEtfCount": 1,
+        "activeEtfCount": 0,
         "sparkline20": [
           38.45000076293945,
           37.45000076293945,
@@ -6101,7 +6279,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 -1.68%，在同族群相對偏強。"
+      "近 20 日報酬優於同產業平均 -0.68%，在同族群相對偏強。",
+      "最近五日法人買盤強於同產業平均，可留意是否持續吸金。"
     ]
   }
 }

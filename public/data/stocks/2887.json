@@ -3,7 +3,7 @@
   "name": "台新新光金",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:43.645Z",
+  "generatedAt": "2026-05-12T13:03:03.115Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -4.76%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 73.10%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 79,461,700 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5547,12 +5547,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 43324909,
+        "investmentTrust": -76326320,
+        "dealer": 553474,
+        "total": -32447937
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 13441991,
+        "investmentTrust": -47653033,
+        "dealer": 700003,
+        "total": -33511039
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 36299325,
+        "investmentTrust": -55368700,
+        "dealer": 196371,
+        "total": -18873004
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 39886364,
+        "investmentTrust": -43131407,
+        "dealer": -200706,
+        "total": -3445749
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 54603336,
+        "investmentTrust": -43877000,
+        "dealer": -1910307,
+        "total": 8816029
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 187555925,
+      "investmentTrust5Day": -266356460,
+      "dealer5Day": -661165,
+      "total5Day": -79461700
     }
   },
   "持股分散": {
@@ -5746,8 +5782,8 @@
   },
   "主動ETF曝光": {
     "count": 2,
-    "averageWeight": 1.6056,
-    "totalWeight": 3.2112,
+    "averageWeight": 1.5906,
+    "totalWeight": 3.1812,
     "latestDisclosureDate": "2026-05-12",
     "items": [
       {
@@ -5755,8 +5791,8 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-12",
-        "weight": 2.36,
-        "shares": 6878000,
+        "weight": 2.33,
+        "shares": 6940000,
         "rank": 10
       },
       {

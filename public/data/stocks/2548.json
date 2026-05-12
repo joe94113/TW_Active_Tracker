@@ -3,7 +3,7 @@
   "name": "華固",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:39.630Z",
+  "generatedAt": "2026-05-12T13:02:59.488Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -1.98%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 58.37%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 511,237 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5553,12 +5553,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -1772525,
+        "investmentTrust": 36000,
+        "dealer": 34732,
+        "total": -1701793
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 774887,
+        "investmentTrust": 128000,
+        "dealer": -13519,
+        "total": 889368
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -109279,
+        "investmentTrust": 414000,
+        "dealer": 38837,
+        "total": 343558
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -208203,
+        "investmentTrust": 232000,
+        "dealer": 2132,
+        "total": 25929
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 576616,
+        "investmentTrust": 361000,
+        "dealer": 16559,
+        "total": 954175
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -738504,
+      "investmentTrust5Day": 1171000,
+      "dealer5Day": 78741,
+      "total5Day": 511237
     }
   },
   "持股分散": {
@@ -5805,9 +5841,9 @@
         "ma240": 107.85400784810385,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -738504,
+        "investmentTrust5Day": 1171000,
+        "total5Day": 511237,
         "largeHolderRatio": 58.37,
         "retailRatio": 15.24,
         "shortToMarginRatio": 2.586206896551724,
@@ -5884,9 +5920,9 @@
         "ma240": 21.964999939600624,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 880000,
+        "investmentTrust5Day": 16000,
+        "total5Day": 813143,
         "largeHolderRatio": 77.18,
         "retailRatio": 7.6899999999999995,
         "shortToMarginRatio": 0.21834061135371177,
@@ -5965,9 +6001,9 @@
         "ma240": 21.964999939600624,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": 880000,
+        "investmentTrust5Day": 16000,
+        "total5Day": 813143,
         "largeHolderRatio": 77.18,
         "retailRatio": 7.6899999999999995,
         "shortToMarginRatio": 0.21834061135371177,
@@ -6044,9 +6080,9 @@
         "ma240": 107.85400784810385,
         "maBullStack": false,
         "maStackCrossedAbove240": false,
-        "foreign5Day": 0,
-        "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "foreign5Day": -738504,
+        "investmentTrust5Day": 1171000,
+        "total5Day": 511237,
         "largeHolderRatio": 58.37,
         "retailRatio": 15.24,
         "shortToMarginRatio": 2.586206896551724,
@@ -6106,7 +6142,8 @@
       }
     ],
     "觀察摘要": [
-      "近 20 日報酬優於同產業平均 -4.42%，在同族群相對偏強。"
+      "近 20 日報酬優於同產業平均 -4.42%，在同族群相對偏強。",
+      "最近五日法人力道弱於同產業平均，需留意資金是否轉往同族群其他標的。"
     ]
   }
 }

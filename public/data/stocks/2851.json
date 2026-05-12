@@ -3,7 +3,7 @@
   "name": "中再保",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:41.827Z",
+  "generatedAt": "2026-05-12T13:03:01.299Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 8.08%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 71.58%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 5,447,845 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5561,12 +5561,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 4281000,
+        "investmentTrust": 10000,
+        "dealer": -13675,
+        "total": 4277325
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 992000,
+        "investmentTrust": 7000,
+        "dealer": 35774,
+        "total": 1034774
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -278000,
+        "investmentTrust": 0,
+        "dealer": 3000,
+        "total": -275000
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -296000,
+        "investmentTrust": 0,
+        "dealer": -7000,
+        "total": -303000
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 679746,
+        "investmentTrust": 0,
+        "dealer": 34000,
+        "total": 713746
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 5378746,
+      "investmentTrust5Day": 17000,
+      "dealer5Day": 52099,
+      "total5Day": 5447845
     }
   },
   "持股分散": {
@@ -5758,8 +5794,8 @@
   },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 0.3,
-    "totalWeight": 0.3,
+    "averageWeight": 0.32,
+    "totalWeight": 0.32,
     "latestDisclosureDate": "2026-05-12",
     "items": [
       {
@@ -5767,9 +5803,9 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-12",
-        "weight": 0.3,
-        "shares": 640000,
-        "rank": 80
+        "weight": 0.32,
+        "shares": 650000,
+        "rank": 77
       }
     ]
   },

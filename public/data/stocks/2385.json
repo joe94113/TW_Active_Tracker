@@ -3,7 +3,7 @@
   "name": "群光",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:36.168Z",
+  "generatedAt": "2026-05-12T13:02:55.963Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 8.00%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 78.06%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 2,667,234 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5561,12 +5561,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -1698024,
+        "investmentTrust": -15725,
+        "dealer": -84325,
+        "total": -1798074
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -28151,
+        "investmentTrust": -145524,
+        "dealer": 211288,
+        "total": 37613
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -274516,
+        "investmentTrust": 729311,
+        "dealer": -47659,
+        "total": 407136
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -20748,
+        "investmentTrust": 253759,
+        "dealer": 28946,
+        "total": 261957
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": -1501775,
+        "investmentTrust": -19776,
+        "dealer": -54315,
+        "total": -1575866
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -3523214,
+      "investmentTrust5Day": 802045,
+      "dealer5Day": 53935,
+      "total5Day": -2667234
     }
   },
   "持股分散": {
@@ -5780,8 +5816,8 @@
   },
   "主動ETF曝光": {
     "count": 2,
-    "averageWeight": 0.315,
-    "totalWeight": 0.63,
+    "averageWeight": 0.31,
+    "totalWeight": 0.62,
     "latestDisclosureDate": "2026-05-12",
     "items": [
       {
@@ -5789,9 +5825,9 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-12",
-        "weight": 0.42,
+        "weight": 0.41,
         "shares": 210000,
-        "rank": 60
+        "rank": 61
       },
       {
         "etfCode": "00400A",

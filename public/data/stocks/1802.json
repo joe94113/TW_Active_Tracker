@@ -3,7 +3,7 @@
   "name": "台玻",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:30.078Z",
+  "generatedAt": "2026-05-12T13:02:49.936Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 12.15%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 78.73%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 4,612,808 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5546,12 +5546,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 12479904,
+        "investmentTrust": 0,
+        "dealer": -11607,
+        "total": 12468297
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -9803780,
+        "investmentTrust": 0,
+        "dealer": 57330,
+        "total": -9746450
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -10238829,
+        "investmentTrust": 0,
+        "dealer": -1476764,
+        "total": -11715593
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 4847802,
+        "investmentTrust": 0,
+        "dealer": 818969,
+        "total": 5666771
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 3800224,
+        "investmentTrust": 0,
+        "dealer": -5086057,
+        "total": -1285833
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
+      "foreign5Day": 1085321,
       "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "dealer5Day": -5698129,
+      "total5Day": -4612808
     }
   },
   "持股分散": {
@@ -5799,9 +5835,9 @@
         "ma240": 36.060624959468846,
         "maBullStack": true,
         "maStackCrossedAbove240": true,
-        "foreign5Day": 0,
+        "foreign5Day": 1085321,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -4612808,
         "largeHolderRatio": 78.73,
         "retailRatio": 11.37,
         "shortToMarginRatio": 4.138053325595641,
@@ -5880,9 +5916,9 @@
         "ma240": 36.060624959468846,
         "maBullStack": true,
         "maStackCrossedAbove240": true,
-        "foreign5Day": 0,
+        "foreign5Day": 1085321,
         "investmentTrust5Day": 0,
-        "total5Day": 0,
+        "total5Day": -4612808,
         "largeHolderRatio": 78.73,
         "retailRatio": 11.37,
         "shortToMarginRatio": 4.138053325595641,

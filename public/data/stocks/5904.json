@@ -3,7 +3,7 @@
   "name": "寶雅國際",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:15:04.347Z",
+  "generatedAt": "2026-05-12T13:03:22.731Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5421,9 +5421,49 @@
       "Yahoo Finance Chart API"
     ]
   },
-  "公司概況": null,
+  "公司概況": {
+    "公司名稱": "寶雅國際股份有限公司",
+    "公司簡稱": "寶雅",
+    "產業名稱": "居家生活",
+    "產業代碼": "38",
+    "董事長": "陳建造",
+    "總經理": "陳宗成",
+    "發言人": "沈鴻猷",
+    "成立日期": "1997-03-12",
+    "上市日期": "2002-09-06",
+    "實收資本額": 1064438260,
+    "已發行股數": 106443826,
+    "面額": "新台幣 10.0000元",
+    "住址": "No. 74, Sec. 3, Minzu Rd. West Central Dist. Tainan,Taiwan R.O.C",
+    "網址": "www.poya.com.tw",
+    "更新日期": "2026-05-12"
+  },
   "評價面": null,
-  "財務資料": null,
+  "財務資料": {
+    "月營收": {
+      "出表日期": "2026-05-12",
+      "資料年月": "2026-04",
+      "產業名稱": "居家生活",
+      "當月營收": 2247875,
+      "上月營收": 2306230,
+      "去年同月營收": 1926559,
+      "月增率": -2.5303200461359014,
+      "年增率": 16.67823305696841,
+      "累計營收": 9342532,
+      "去年累計營收": 8222487,
+      "累計年增率": 13.621730262388983,
+      "備註": "-"
+    },
+    "綜合損益表": null,
+    "資產負債表": null,
+    "觀察摘要": [
+      "最新月營收年增 16.68%，營收動能明顯轉強。"
+    ],
+    "資料說明": [
+      "財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。",
+      "估值欄位來源：TWSE OpenAPI BWIBBU_ALL。"
+    ]
+  },
   "法人買賣": {
     "days": [],
     "summary": {
@@ -5584,8 +5624,8 @@
   },
   "主動ETF曝光": {
     "count": 2,
-    "averageWeight": 0.33499999999999996,
-    "totalWeight": 0.6699999999999999,
+    "averageWeight": 0.35,
+    "totalWeight": 0.7,
     "latestDisclosureDate": "2026-05-12",
     "items": [
       {
@@ -5593,9 +5633,9 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-12",
-        "weight": 0.37,
-        "shares": 44000,
-        "rank": 72
+        "weight": 0.4,
+        "shares": 49000,
+        "rank": 67
       },
       {
         "etfCode": "00980A",
@@ -5620,5 +5660,177 @@
     "note": null,
     "items": []
   },
-  "同產業比較": null
+  "同產業比較": {
+    "industryName": "居家生活",
+    "peerCount": 1,
+    "rank20Day": 1,
+    "rankDaily": 1,
+    "averageReturn20": 11.08910891089109,
+    "averageChangePercent": -2.772963604852686,
+    "leaders": [
+      {
+        "code": "5904",
+        "name": "寶雅國際",
+        "industryName": "居家生活",
+        "priceDate": "2026-05-12",
+        "close": 561,
+        "change": -16,
+        "changePercent": -2.772963604852686,
+        "return20": 11.08910891089109,
+        "return60": 40.42553191489361,
+        "volume": 248000,
+        "turnover": null,
+        "ma5": 582.4,
+        "ma10": 573.2,
+        "ma20": 547.55,
+        "ma60": 509.10833333333335,
+        "ma240": 473.11351051330564,
+        "maBullStack": true,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 70.3,
+        "retailRatio": 8.43,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 2,
+        "sparkline20": [
+          503,
+          502,
+          501,
+          510,
+          519,
+          543,
+          549,
+          530,
+          540,
+          522,
+          544,
+          557,
+          575,
+          574,
+          570,
+          598,
+          587,
+          589,
+          577,
+          561
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "寶雅國際 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": -2.5303200461359014,
+        "monthlyRevenueYoY": 16.67823305696841,
+        "monthlyRevenueDualGrowth": false,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      }
+    ],
+    "laggards": [
+      {
+        "code": "5904",
+        "name": "寶雅國際",
+        "industryName": "居家生活",
+        "priceDate": "2026-05-12",
+        "close": 561,
+        "change": -16,
+        "changePercent": -2.772963604852686,
+        "return20": 11.08910891089109,
+        "return60": 40.42553191489361,
+        "volume": 248000,
+        "turnover": null,
+        "ma5": 582.4,
+        "ma10": 573.2,
+        "ma20": 547.55,
+        "ma60": 509.10833333333335,
+        "ma240": 473.11351051330564,
+        "maBullStack": true,
+        "maStackCrossedAbove240": false,
+        "foreign5Day": 0,
+        "investmentTrust5Day": 0,
+        "total5Day": 0,
+        "largeHolderRatio": 70.3,
+        "retailRatio": 8.43,
+        "shortToMarginRatio": null,
+        "activeEtfCount": 2,
+        "sparkline20": [
+          503,
+          502,
+          501,
+          510,
+          519,
+          543,
+          549,
+          530,
+          540,
+          522,
+          544,
+          557,
+          575,
+          574,
+          570,
+          598,
+          587,
+          589,
+          577,
+          561
+        ],
+        "technicalSignals": [
+          {
+            "key": "neutral",
+            "title": "技術面中性",
+            "tone": "normal",
+            "importance": 1,
+            "description": "寶雅國際 目前沒有明確的新訊號，偏向等待下一段量價表態。"
+          }
+        ],
+        "technicalSignalTitles": [
+          "技術面中性"
+        ],
+        "topSignalTitle": "技術面中性",
+        "topSignalTone": "normal",
+        "signalCount": 1,
+        "topSelectionSignalTitle": null,
+        "selectionSignalTone": "normal",
+        "selectionSignalCount": 0,
+        "isUnderDisposition": false,
+        "hasAttentionWarning": false,
+        "hasChangedTrading": false,
+        "nextExDividendDate": null,
+        "monthlyRevenueDate": "2026-05-12",
+        "monthlyRevenueMoM": -2.5303200461359014,
+        "monthlyRevenueYoY": 16.67823305696841,
+        "monthlyRevenueDualGrowth": false,
+        "foreignTargetPrice": null,
+        "foreignTargetPricePremium": null,
+        "foreignTargetBroker": null,
+        "foreignTargetCount": 0
+      }
+    ],
+    "觀察摘要": [
+      "目前追蹤池中同產業可比較標的有限，先以本身技術面與籌碼面為主。"
+    ]
+  }
 }

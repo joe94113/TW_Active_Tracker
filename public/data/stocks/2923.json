@@ -3,7 +3,7 @@
   "name": "鼎固-KY",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:44.891Z",
+  "generatedAt": "2026-05-12T13:03:04.304Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 23.73%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 99.45%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 267,075 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5476,12 +5476,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -23000,
+        "investmentTrust": 0,
+        "dealer": -2000,
+        "total": -25000
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 1000,
+        "investmentTrust": 0,
+        "dealer": 13000,
+        "total": 14000
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 156000,
+        "investmentTrust": 0,
+        "dealer": 3000,
+        "total": 159000
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 69075,
+        "investmentTrust": 0,
+        "dealer": -1000,
+        "total": 68075
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 65000,
+        "investmentTrust": 0,
+        "dealer": -14000,
+        "total": 51000
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
+      "foreign5Day": 268075,
       "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "dealer5Day": -1000,
+      "total5Day": 267075
     }
   },
   "持股分散": {

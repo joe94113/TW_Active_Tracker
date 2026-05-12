@@ -181,12 +181,47 @@ async function buildReplyForKeyword(route, client) {
       return [buildInstitutionalFocusFlex({ dashboard, siteUrl, mode: 'trust' })];
     }
     case 'stock': {
-      const stock = await client.findStock(route.query);
+      let stock = await client.findStock(route.query);
+      let detail = stock ? await client.getStockDetail(stock.code) : null;
+      const hydrateStockName = (candidate, detailData) => {
+        if (!candidate) return candidate;
+        const companyProfile = detailData?.['公司概況'] ?? detailData?.companyProfile ?? null;
+        const displayName =
+          candidate.name ??
+          candidate.名稱 ??
+          companyProfile?.公司簡稱 ??
+          companyProfile?.公司名稱 ??
+          detailData?.name ??
+          candidate.code ??
+          route.query;
+        const industryName = candidate.industryName ?? companyProfile?.產業名稱 ?? null;
+        return {
+          ...candidate,
+          name: displayName,
+          industryName,
+        };
+      };
+
+      if (stock && detail) {
+        stock = hydrateStockName(stock, detail);
+      }
+
+      if (!stock && /^\d{4}$/.test(route.query)) {
+        detail = await client.getStockDetail(route.query);
+        if (detail) {
+          stock = hydrateStockName(
+            {
+            code: route.query,
+            },
+            detail,
+          );
+        }
+      }
+
       if (!stock) {
         return buildHumorFallbackMessages({ siteUrl, kind: 'unknown' });
       }
 
-      const detail = await client.getStockDetail(stock.code);
       return [buildStockFlex({ stock, detail, siteUrl })];
     }
     case 'help':

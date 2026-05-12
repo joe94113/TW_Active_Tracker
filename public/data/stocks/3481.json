@@ -3,7 +3,7 @@
   "name": "群創",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:53.660Z",
+  "generatedAt": "2026-05-12T13:03:12.309Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 已進入偏熱區，若後續量能沒有跟上，容易出現高檔震盪。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 34.98%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 47.25%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 493,431,950 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5533,12 +5533,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 81994802,
+        "investmentTrust": -74905,
+        "dealer": 849391,
+        "total": 82769288
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 3574958,
+        "investmentTrust": -32320,
+        "dealer": 5972310,
+        "total": 9514948
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 96566203,
+        "investmentTrust": 3706000,
+        "dealer": 604009,
+        "total": 100876212
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 186758969,
+        "investmentTrust": 156916,
+        "dealer": 22004327,
+        "total": 208920212
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 78310834,
+        "investmentTrust": 46900,
+        "dealer": 12993556,
+        "total": 91351290
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 447205766,
+      "investmentTrust5Day": 3802591,
+      "dealer5Day": 42423593,
+      "total5Day": 493431950
     }
   },
   "持股分散": {

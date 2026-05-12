@@ -45,6 +45,11 @@ export function createSiteDataClient(siteUrl = DEFAULT_SITE_URL) {
     return fetchJson(manifest.stockSearchPath);
   }
 
+  async function getStockIndex() {
+    const manifest = await getManifest();
+    return fetchJson(manifest.stockIndexPath);
+  }
+
   async function getTopicIndex() {
     const manifest = await getManifest();
     return fetchJson(manifest.topicRadarPath);
@@ -102,9 +107,29 @@ export function createSiteDataClient(siteUrl = DEFAULT_SITE_URL) {
       return exact;
     }
 
-    return (
+    const fuzzy =
       stockSearch.find((item) => String(item?.name ?? '').toLowerCase().includes(normalizedKeyword)) ??
       stockSearch.find((item) => String(item?.code ?? '').toLowerCase().includes(normalizedKeyword)) ??
+      null;
+
+    if (fuzzy) {
+      return fuzzy;
+    }
+
+    // Fall back to the stock index because some candidates may have detail JSON
+    // even when they are not yet included in search.json.
+    const stockIndex = await getStockIndex();
+    const indexExact =
+      stockIndex.find((item) => String(item?.code ?? '').trim() === keyword) ??
+      stockIndex.find((item) => String(item?.name ?? '').trim() === keyword);
+
+    if (indexExact) {
+      return indexExact;
+    }
+
+    return (
+      stockIndex.find((item) => String(item?.name ?? '').toLowerCase().includes(normalizedKeyword)) ??
+      stockIndex.find((item) => String(item?.code ?? '').toLowerCase().includes(normalizedKeyword)) ??
       null
     );
   }
@@ -115,6 +140,7 @@ export function createSiteDataClient(siteUrl = DEFAULT_SITE_URL) {
     getManifest,
     getDashboard,
     getStockSearch,
+    getStockIndex,
     getTopicIndex,
     getEntryRadar,
     getBrokerRadar,

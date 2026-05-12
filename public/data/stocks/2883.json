@@ -3,7 +3,7 @@
   "name": "凱基金",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:42.822Z",
+  "generatedAt": "2026-05-12T13:03:02.409Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 2.61%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 66.58%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 46,917,003 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5547,12 +5547,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -21932494,
+        "investmentTrust": -6866482,
+        "dealer": -2233783,
+        "total": -31032759
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 3674431,
+        "investmentTrust": -317967,
+        "dealer": -1279710,
+        "total": 2076754
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": 17894986,
+        "investmentTrust": 358000,
+        "dealer": -133596,
+        "total": 18119390
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 24265745,
+        "investmentTrust": 353807,
+        "dealer": 41855,
+        "total": 24661407
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 40519802,
+        "investmentTrust": -7207000,
+        "dealer": -220591,
+        "total": 33092211
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 64422470,
+      "investmentTrust5Day": -13679642,
+      "dealer5Day": -3825825,
+      "total5Day": 46917003
     }
   },
   "持股分散": {
@@ -5746,8 +5782,8 @@
   },
   "主動ETF曝光": {
     "count": 3,
-    "averageWeight": 1.4985,
-    "totalWeight": 4.4955,
+    "averageWeight": 1.3651666666666664,
+    "totalWeight": 4.0954999999999995,
     "latestDisclosureDate": "2026-05-12",
     "items": [
       {
@@ -5755,18 +5791,9 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-12",
-        "weight": 2.06,
-        "shares": 6172000,
+        "weight": 1.96,
+        "shares": 6211000,
         "rank": 12
-      },
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-12",
-        "weight": 1.24,
-        "shares": 6687000,
-        "rank": 15
       },
       {
         "etfCode": "00401A",
@@ -5776,6 +5803,15 @@
         "weight": 1.1955,
         "shares": 1862000,
         "rank": 30
+      },
+      {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-12",
+        "weight": 0.94,
+        "shares": 5244000,
+        "rank": 33
       }
     ]
   },

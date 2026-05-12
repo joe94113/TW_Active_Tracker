@@ -3,7 +3,7 @@
   "name": "中鋼",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:30.575Z",
+  "generatedAt": "2026-05-12T13:02:50.410Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體位於負值區，代表短線修正力道仍在。",
     "近 20 個交易日報酬 -8.42%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 53.50%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計賣超 57,142,770 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5560,12 +5560,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": -21342531,
+        "investmentTrust": -122000,
+        "dealer": -496709,
+        "total": -21961240
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": -19747236,
+        "investmentTrust": 67000,
+        "dealer": -207279,
+        "total": -19887515
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -13107973,
+        "investmentTrust": 21000,
+        "dealer": 203123,
+        "total": -12883850
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": 2637800,
+        "investmentTrust": 8000,
+        "dealer": 218636,
+        "total": 2864436
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": -5519874,
+        "investmentTrust": -7000,
+        "dealer": 252273,
+        "total": -5274601
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": -57079814,
+      "investmentTrust5Day": -33000,
+      "dealer5Day": -29956,
+      "total5Day": -57142770
     }
   },
   "持股分散": {

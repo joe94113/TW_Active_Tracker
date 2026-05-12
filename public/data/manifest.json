@@ -1,8 +1,8 @@
 {
   "appName": "台股主動通",
-  "generatedAt": "2026-05-12T10:13:55.230Z",
+  "generatedAt": "2026-05-12T13:02:27.295Z",
   "generatedAtLocalDate": "2026-05-12",
-  "generatedAtLocalTime": "18:13:55",
+  "generatedAtLocalTime": "21:02:27",
   "dashboardPath": "data/dashboard.json",
   "overlapPath": "data/etf-overlap.json",
   "stockIndexPath": "data/stocks/index.json",
@@ -440,16 +440,16 @@
       "detailAvailability": "full",
       "disclosureDate": "2026-05-12",
       "nav": 15,
-      "aum": 6821417292,
-      "holdingsCount": 113,
+      "aum": 6846883172,
+      "holdingsCount": 110,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
         "addedCount": 0,
-        "removedCount": 2,
-        "increasedCount": 71,
-        "decreasedCount": 34,
-        "totalChangeCount": 107
+        "removedCount": 5,
+        "increasedCount": 77,
+        "decreasedCount": 26,
+        "totalChangeCount": 108
       }
     },
     {
@@ -752,16 +752,16 @@
       "detailAvailability": "full",
       "disclosureDate": "2026-05-12",
       "nav": 13.28,
-      "aum": 12293550672,
-      "holdingsCount": 51,
+      "aum": 11998316125,
+      "holdingsCount": 52,
       "trackingMessage": "官方來源每日同步",
       "changeSummary": {
         "comparisonReady": true,
-        "addedCount": 0,
-        "removedCount": 0,
-        "increasedCount": 2,
-        "decreasedCount": 48,
-        "totalChangeCount": 50
+        "addedCount": 10,
+        "removedCount": 9,
+        "increasedCount": 14,
+        "decreasedCount": 27,
+        "totalChangeCount": 60
       }
     },
     {
@@ -887,7 +887,7 @@
   ],
   "latestDisclosureDate": "2026-05-12",
   "connectedCount": 24,
-  "stockDetailCount": 253,
+  "stockDetailCount": 249,
   "pendingEtfs": [],
   "failedEtfs": [],
   "sources": [

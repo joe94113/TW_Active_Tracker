@@ -3476,20 +3476,20 @@ function 建立公司概況資料(row) {
   if (!row) return null;
 
   return {
-    公司名稱: 取第一個文字(row, ['公司名稱']),
-    公司簡稱: 取第一個文字(row, ['公司簡稱']),
-    產業代碼: 取第一個文字(row, ['產業別']),
-    董事長: 取第一個文字(row, ['董事長']),
-    總經理: 取第一個文字(row, ['總經理']),
-    發言人: 取第一個文字(row, ['發言人']),
-    成立日期: 民國日期轉西元(row['成立日期']),
-    上市日期: 民國日期轉西元(row['上市日期']),
-    實收資本額: 取數字(row['實收資本額']),
-    已發行股數: 取數字(row['已發行普通股數或TDR原股發行股數']),
-    面額: 取第一個文字(row, ['普通股每股面額']),
-    住址: 取第一個文字(row, ['住址']),
-    網址: 取第一個文字(row, ['網址']),
-    更新日期: 民國日期轉西元(row['出表日期']),
+    公司名稱: 取第一個文字(row, ['公司名稱', 'CompanyName']),
+    公司簡稱: 取第一個文字(row, ['公司簡稱', 'CompanyAbbreviation']),
+    產業代碼: 取第一個文字(row, ['產業別', 'SecuritiesIndustryCode']),
+    董事長: 取第一個文字(row, ['董事長', 'Chairman']),
+    總經理: 取第一個文字(row, ['總經理', 'GeneralManager']),
+    發言人: 取第一個文字(row, ['發言人', 'Spokesman']),
+    成立日期: 民國日期轉西元(row['成立日期'] ?? row['DateOfIncorporation']),
+    上市日期: 民國日期轉西元(row['上市日期'] ?? row['DateOfListing']),
+    實收資本額: 取第一個數字(row, ['實收資本額', 'Paidin.Capital.NTDollars']),
+    已發行股數: 取第一個數字(row, ['已發行普通股數或TDR原股發行股數', 'IssueShares']),
+    面額: 取第一個文字(row, ['普通股每股面額', 'ParValueOfCommonStock']),
+    住址: 取第一個文字(row, ['住址', 'Address']),
+    網址: 取第一個文字(row, ['網址', 'WebAddress']),
+    更新日期: 民國日期轉西元(row['出表日期'] ?? row['Date']),
   };
 }
 
@@ -3656,23 +3656,27 @@ async function 抓取選股輔助資料集(asOfDate = null) {
 }
 
 async function 抓取個股財務索引() {
-  const [公司基本資料列, 月營收列, 綜合損益資料組, 資產負債資料組] = await Promise.all([
+  const [上市公司基本資料列, 上櫃公司基本資料列, 上市月營收列, 上櫃月營收列, 綜合損益資料組, 資產負債資料組] = await Promise.all([
     抓取單一財務資料('https://openapi.twse.com.tw/v1/opendata/t187ap03_L', '上市公司基本資料'),
+    抓取單一財務資料('https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O', '上櫃公司基本資料'),
     抓取單一財務資料('https://openapi.twse.com.tw/v1/opendata/t187ap05_L', '上市公司月營收'),
+    抓取單一財務資料('https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O', '上櫃公司月營收'),
     抓取多組財務資料(上市公司綜合損益端點),
     抓取多組財務資料(上市公司資產負債端點),
   ]);
+  const 公司基本資料列 = [...上市公司基本資料列, ...上櫃公司基本資料列];
+  const 月營收列 = [...上市月營收列, ...上櫃月營收列];
 
   const 公司概況索引 = new Map(
     公司基本資料列
-      .filter((row) => 是否一般股票(row['公司代號']))
-      .map((row) => [壓縮文字(row['公司代號']), 建立公司概況資料(row)]),
+      .map((row) => [壓縮文字(row['公司代號'] ?? row['SecuritiesCompanyCode']), 建立公司概況資料(row)])
+      .filter(([code]) => 是否一般股票(code)),
   );
 
   const 月營收索引 = new Map(
     月營收列
-      .filter((row) => 是否一般股票(row['公司代號']))
-      .map((row) => [壓縮文字(row['公司代號']), 建立月營收資料(row)]),
+      .map((row) => [壓縮文字(row['公司代號'] ?? row['SecuritiesCompanyCode']), 建立月營收資料(row)])
+      .filter(([code]) => 是否一般股票(code)),
   );
 
   const 綜合損益索引 = new Map();
@@ -4713,9 +4717,10 @@ function 建立個股摘要資料({
 }) {
   const 月營收 = 財務資料?.月營收 ?? null;
   const 最新指標 = 技術資料?.最新指標 ?? {};
+  const 顯示名稱 = name ?? 公司概況?.公司簡稱 ?? 公司概況?.公司名稱 ?? code;
   return {
     code,
-    name,
+    name: 顯示名稱,
     industryName: 公司概況?.產業名稱 ?? null,
     priceDate: 技術資料?.priceDate ?? null,
     close: 技術資料?.最新摘要?.close ?? null,
@@ -4858,6 +4863,7 @@ function 補強個股摘要清單({
   return 摘要清單.map((summary) => {
     const detail = 明細索引.get(summary.code) ?? null;
     const 評價面 = 評價索引.get(summary.code) ?? null;
+    const 公司概況 = detail?.公司概況 ?? null;
     const 歷史資料 = detail?.歷史資料 ?? [];
     const 成交量序列 = 歷史資料
       .map((item) => Number(item?.volume ?? 0))
@@ -4905,6 +4911,8 @@ function 補強個股摘要清單({
 
     return {
       ...summary,
+      name: summary.name ?? 公司概況?.公司簡稱 ?? 公司概況?.公司名稱 ?? summary.code,
+      industryName: summary.industryName ?? 公司概況?.產業名稱 ?? null,
       peRatio: 評價面?.本益比 ?? null,
       pbRatio: 評價面?.股價淨值比 ?? null,
       dividendYield: 評價面?.殖利率 ?? null,
@@ -4949,11 +4957,12 @@ function 建立股票搜尋索引({
     const 公司概況 = 公司概況索引.get(item.代號);
     const 評價面 = 評價索引.get(item.代號);
     const 交易提醒 = buildStockSelectionSignals(選股輔助資料集, item.代號);
+    const 顯示名稱 = item.名稱 ?? 明細摘要?.name ?? 公司概況?.公司簡稱 ?? 公司概況?.公司名稱 ?? item.代號;
 
     return {
       code: item.代號,
-      name: item.名稱,
-      industryName: 公司概況?.產業名稱 ?? null,
+      name: 顯示名稱,
+      industryName: 明細摘要?.industryName ?? 公司概況?.產業名稱 ?? null,
       priceDate: 明細摘要?.priceDate ?? 市場資料日期 ?? null,
       generatedAt: 產生時間,
       close: item.收盤價 ?? null,
@@ -5319,9 +5328,10 @@ async function 寫入個股明細資料(候選清單, 日資料清單, tdcc索�
               ],
             }
           : null;
+      const 顯示名稱 = item.name ?? 公司概況?.公司簡稱 ?? 公司概況?.公司名稱 ?? item.code;
       const 技術資料 = 建立技術分析資料({
         code: item.code,
-        name: item.name,
+        name: 顯示名稱,
         kind: 'stock',
         歷史資料,
       });
@@ -5371,7 +5381,7 @@ async function 寫入個股明細資料(候選清單, 日資料清單, tdcc索�
       const 個股資料 = {
         ...技術資料,
         盤中走勢,
-        name: item.name,
+        name: 顯示名稱,
         priceDate: 技術資料.priceDate,
         公司概況,
         評價面,
@@ -5406,12 +5416,12 @@ async function 寫入個股明細資料(候選清單, 日資料清單, tdcc索�
 
       待寫入資料.push({
         code: item.code,
-        name: item.name,
+        name: 顯示名稱,
         filePath: path.join(股票資料目錄, `${item.code}.json`),
         data: 個股資料,
         summary: 建立個股摘要資料({
           code: item.code,
-          name: item.name,
+          name: 顯示名稱,
           公司概況,
           財務資料,
           技術資料,

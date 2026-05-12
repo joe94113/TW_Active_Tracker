@@ -3,7 +3,7 @@
   "name": "遠東新",
   "kind": "stock",
   "priceDate": "2026-05-12",
-  "generatedAt": "2026-05-12T10:14:27.660Z",
+  "generatedAt": "2026-05-12T13:02:47.481Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -4868,7 +4868,7 @@
     "RSI14 仍在中性帶，代表價格慣性延續，但還沒有極端過熱或過冷。",
     "MACD 柱體維持正值，短線動能仍偏向多方。",
     "近 20 個交易日報酬 0.76%，可用來觀察波段資金是否持續留在主線。",
-    "大戶持股比 87.78%，相較前次 增加 0.00 個百分點。"
+    "最近 5 個交易日三大法人合計買超 13,472,225 股。"
   ],
   "資料來源": [
     "Yahoo Finance Chart API",
@@ -5533,12 +5533,48 @@
     ]
   },
   "法人買賣": {
-    "days": [],
+    "days": [
+      {
+        "date": "2026-05-12",
+        "foreign": 13866273,
+        "investmentTrust": -3397,
+        "dealer": -128045,
+        "total": 13734831
+      },
+      {
+        "date": "2026-05-11",
+        "foreign": 4237881,
+        "investmentTrust": 43612,
+        "dealer": -38436,
+        "total": 4243057
+      },
+      {
+        "date": "2026-05-08",
+        "foreign": -2963032,
+        "investmentTrust": -98000,
+        "dealer": -63200,
+        "total": -3124232
+      },
+      {
+        "date": "2026-05-07",
+        "foreign": -3386466,
+        "investmentTrust": -96078,
+        "dealer": -553088,
+        "total": -4035632
+      },
+      {
+        "date": "2026-05-06",
+        "foreign": 2775656,
+        "investmentTrust": -159000,
+        "dealer": 37545,
+        "total": 2654201
+      }
+    ],
     "summary": {
-      "foreign5Day": 0,
-      "investmentTrust5Day": 0,
-      "dealer5Day": 0,
-      "total5Day": 0
+      "foreign5Day": 14530312,
+      "investmentTrust5Day": -312863,
+      "dealer5Day": -745224,
+      "total5Day": 13472225
     }
   },
   "持股分散": {
@@ -5732,8 +5768,8 @@
   },
   "主動ETF曝光": {
     "count": 1,
-    "averageWeight": 1.44,
-    "totalWeight": 1.44,
+    "averageWeight": 1.47,
+    "totalWeight": 1.47,
     "latestDisclosureDate": "2026-05-12",
     "items": [
       {
@@ -5741,9 +5777,9 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-12",
-        "weight": 1.44,
-        "shares": 3726000,
-        "rank": 20
+        "weight": 1.47,
+        "shares": 3775000,
+        "rank": 21
       }
     ]
   },
