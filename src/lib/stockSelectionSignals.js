@@ -244,6 +244,7 @@ export function buildStockSelectionSignals(dataset, code) {
 
   const disposition = dispositions[0] ?? null;
   if (disposition) {
+    const startDate = disposition.startDate ?? disposition.announcementDate;
     const endDate = disposition.endDate ?? disposition.startDate ?? disposition.announcementDate;
     const detailText = normalizeText(disposition.row?.Detail);
 
@@ -253,11 +254,21 @@ export function buildStockSelectionSignals(dataset, code) {
       tone: 'risk',
       title: normalizeText(disposition.row?.DispositionMeasures) || '列入處置股票',
       badgeLabel: '處置',
-      date: disposition.announcementDate ?? endDate,
+      date: startDate ?? endDate,
       note: buildDispositionHighlight(disposition.row, endDate),
       detail: detailText ? `${detailText.slice(0, 110)}${detailText.length > 110 ? '…' : ''}` : null,
       footnote: endDate ? `處置期間至 ${endDate}` : null,
     });
+
+    if (startDate) {
+      eventCalendar.push({
+        key: `disposition-start-${normalizedCode}-${startDate}`,
+        label: '處置交易開始',
+        date: startDate,
+        status: startDate >= (dataset.asOfDate ?? startDate) ? 'upcoming' : 'recent',
+        note: buildDispositionHighlight(disposition.row, endDate),
+      });
+    }
 
     if (endDate) {
       eventCalendar.push({

@@ -567,7 +567,7 @@ const comparisonOverlays = computed(() => {
         color: comparisonColors[index % comparisonColors.length],
         data: rows.map((row) => ({
           time: row.time,
-          value: firstRow.close * (row.close / baseClose),
+          value: ((row.close - baseClose) / baseClose) * 100,
         })),
         returnPercent: ((latestClose - baseClose) / baseClose) * 100,
       };
@@ -613,6 +613,7 @@ function addBandBoundarySeries(chart, rows, value, color) {
     return;
   }
 
+  // Guide lines should annotate the chart without stretching the candle price scale.
   const series = chart.addSeries(
     LineSeries,
     {
@@ -622,6 +623,7 @@ function addBandBoundarySeries(chart, rows, value, color) {
       priceLineVisible: false,
       lastValueVisible: false,
       crosshairMarkerVisible: false,
+      autoscaleInfoProvider: () => null,
     },
     0,
   );
@@ -814,7 +816,11 @@ const chartEventEntries = computed(() => {
     .filter(Boolean);
 });
 
-const chartEventMarkers = computed(() => chartEventEntries.value.map((item) => item.marker));
+const chartEventMarkers = computed(() =>
+  chartEventEntries.value
+    .filter((item) => rowMap.value.has(String(item.time)))
+    .map((item) => item.marker),
+);
 const chartEventTimelineItems = computed(() =>
   chartEventEntries.value.map((item) => ({
     key: item.key,
@@ -838,36 +844,15 @@ const chartEventLookup = computed(() => {
   return lookup;
 });
 
-const chartTimelineRows = computed(() => {
-  const rows = chartRows.value.map((row) => ({
+const chartTimelineRows = computed(() =>
+  chartRows.value.map((row) => ({
     time: row.time,
     open: row.open,
     high: row.high,
     low: row.low,
     close: row.close,
-  }));
-
-  const existingTimes = new Set(rows.map((row) => row.time));
-
-  if (!overlayState.events) {
-    return rows;
-  }
-
-  chartEventEntries.value.forEach((entry) => {
-    const markerTime = String(entry.time ?? '').trim();
-
-    if (!markerTime || existingTimes.has(markerTime)) {
-      return;
-    }
-
-    rows.push({ time: markerTime });
-    existingTimes.add(markerTime);
-  });
-
-  rows.sort((left, right) => String(left.time).localeCompare(String(right.time)));
-
-  return rows;
-});
+  })),
+);
 
 const activeEventEntries = computed(() => {
   if (!overlayState.events) {
@@ -917,17 +902,33 @@ function renderChart() {
 
   destroyChart();
 
+  const baseChartOptions = createBaseChartOptions({
+    rightOffset: chartRows.value.length <= 12 ? 1 : 0,
+    timeVisible: false,
+    interactive: isInteractive.value,
+  });
+
   const chart = createChart(chartHost.value, {
-    ...createBaseChartOptions({
-      rightOffset: chartRows.value.length <= 12 ? 1 : 0,
-      timeVisible: false,
-      interactive: isInteractive.value,
-    }),
+    ...baseChartOptions,
+    rightPriceScale: {
+      ...baseChartOptions.rightPriceScale,
+      autoScale: true,
+      scaleMargins: {
+        top: 0.05,
+        bottom: 0.08,
+      },
+    },
+    handleScale: {
+      ...baseChartOptions.handleScale,
+      axisPressedMouseMove: {
+        time: isInteractive.value,
+        price: false,
+      },
+      mouseWheel: isInteractive.value,
+      pinch: isInteractive.value,
+    },
     timeScale: {
-      ...createBaseChartOptions({
-        timeVisible: false,
-        interactive: isInteractive.value,
-      }).timeScale,
+      ...baseChartOptions.timeScale,
       rightOffset: chartRows.value.length <= 12 ? 1 : 0,
       barSpacing: chartRows.value.length <= 12 ? 24 : chartRows.value.length <= 30 ? 14 : 9,
       minBarSpacing: chartRows.value.length <= 12 ? 18 : 6,
@@ -957,6 +958,7 @@ function renderChart() {
         priceLineVisible: false,
         lastValueVisible: false,
         crosshairMarkerVisible: false,
+        autoscaleInfoProvider: () => null,
       },
       0,
     );
@@ -981,6 +983,21 @@ function renderChart() {
       priceLineVisible: true,
       priceLineSource: chartEnums.PriceLineSource.LastBar,
       lastPriceAnimation: chartEnums.LastPriceAnimationMode.Disabled,
+      autoscaleInfoProvider: (baseImplementation) => {
+        const autoscaleInfo = baseImplementation();
+
+        if (!autoscaleInfo) {
+          return null;
+        }
+
+        return {
+          ...autoscaleInfo,
+          margins: {
+            above: 16,
+            below: 14,
+          },
+        };
+      },
     },
     0,
   );
@@ -1074,6 +1091,7 @@ function renderChart() {
         lineWidth: 2,
         priceLineVisible: false,
         lastValueVisible: false,
+        autoscaleInfoProvider: () => null,
       },
       true,
     );
@@ -1083,16 +1101,39 @@ function renderChart() {
     const series = chart.addSeries(
       LineSeries,
       {
+        priceScaleId: 'comparison',
         color: item.color,
         lineWidth: 2,
         lineStyle: chartEnums.LineStyle.SparseDotted,
         priceLineVisible: false,
         lastValueVisible: false,
         crosshairMarkerVisible: false,
+        priceFormat: {
+          type: 'custom',
+          minMove: 0.1,
+          formatter: (value) => `${value > 0 ? '+' : ''}${Number(value).toFixed(1)}%`,
+        },
       },
       0,
     );
     series.setData(item.data);
+    series.priceScale().applyOptions({
+      scaleMargins: {
+        top: 0.12,
+        bottom: 0.12,
+      },
+    });
+
+    if (item === comparisonOverlays.value[0]) {
+      series.createPriceLine({
+        price: 0,
+        title: '比較基準 0%',
+        color: chartPalette.reference,
+        lineWidth: 1,
+        lineStyle: chartEnums.LineStyle.Dotted,
+        axisLabelVisible: false,
+      });
+    }
   });
 
   const volumePaneIndex = 1;
@@ -1251,18 +1292,21 @@ function renderChart() {
   }
 
   if (chart.panes()[0]) {
-    chart.panes()[0].setStretchFactor(volumeVisible.value ? 0.62 : 0.74);
+    chart.panes()[0].setStretchFactor(volumeVisible.value ? 0.68 : 0.76);
   }
 
   if (volumeVisible.value && chart.panes()[volumePaneIndex]) {
-    chart.panes()[volumePaneIndex].setStretchFactor(0.16);
+    chart.panes()[volumePaneIndex].setStretchFactor(0.14);
   }
 
   if (chart.panes()[indicatorPaneIndex]) {
-    chart.panes()[indicatorPaneIndex].setStretchFactor(volumeVisible.value ? 0.22 : 0.26);
+    chart.panes()[indicatorPaneIndex].setStretchFactor(volumeVisible.value ? 0.18 : 0.24);
   }
 
   chart.subscribeCrosshairMove(handleCrosshairMove);
+  chart.timeScale().subscribeVisibleLogicalRangeChange(() => {
+    candleSeries.priceScale().setAutoScale(true);
+  });
   chart.timeScale().fitContent();
 }
 
@@ -1435,7 +1479,7 @@ onBeforeUnmount(() => {
         <div class="chart-compare-head">
           <div>
             <p class="comparison-stat-label">比較標的</p>
-            <p class="comparison-stat-note">可加入最多 3 檔股票，同區間一起看相對漲跌與強弱。</p>
+            <p class="comparison-stat-note">可加入最多 3 檔股票，全部以首日 0% 正規化，比較相對漲跌與強弱。</p>
           </div>
           <span v-if="comparisonLoading" class="meta-chip">比較資料載入中</span>
         </div>

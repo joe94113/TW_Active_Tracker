@@ -1036,6 +1036,53 @@ html[data-theme="dark"] .chart-event-pill.is-reference .chart-event-pill-marker 
   color: #c0cfdd;
 }
 
+html[data-theme="dark"] .chart-event-callout {
+  border-color: rgba(103, 201, 255, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(103, 201, 255, 0.12), transparent 52%),
+    linear-gradient(180deg, rgba(12, 20, 31, 0.96), rgba(8, 15, 25, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 20px 40px rgba(2, 6, 23, 0.28);
+}
+
+html[data-theme="dark"] .chart-event-callout-head strong,
+html[data-theme="dark"] .chart-event-item-head strong {
+  color: #f4f8fb;
+}
+
+html[data-theme="dark"] .chart-event-item {
+  border-color: rgba(148, 163, 184, 0.16);
+  background: rgba(15, 23, 42, 0.72);
+}
+
+html[data-theme="dark"] .chart-event-item.is-recent {
+  border-color: rgba(255, 120, 92, 0.28);
+  background:
+    linear-gradient(180deg, rgba(127, 29, 29, 0.22), rgba(15, 23, 42, 0.82)),
+    rgba(15, 23, 42, 0.76);
+}
+
+html[data-theme="dark"] .chart-event-item.is-upcoming {
+  border-color: rgba(103, 201, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(14, 116, 144, 0.2), rgba(15, 23, 42, 0.82)),
+    rgba(15, 23, 42, 0.76);
+}
+
+html[data-theme="dark"] .chart-event-item.is-reference {
+  border-color: rgba(148, 163, 184, 0.18);
+  background:
+    linear-gradient(180deg, rgba(71, 85, 105, 0.18), rgba(15, 23, 42, 0.8)),
+    rgba(15, 23, 42, 0.72);
+}
+
+html[data-theme="dark"] .chart-event-item p,
+html[data-theme="dark"] .chart-event-item-foot,
+html[data-theme="dark"] .chart-event-pill-date {
+  color: #aebdca;
+}
+
 .stock-detail-page .stock-tabbar {
   margin-bottom: 1.15rem;
 }
@@ -2093,21 +2140,39 @@ html[data-theme="dark"] .theme-toggle {
   display: grid;
   gap: 16px;
   min-width: 0;
+  overflow: visible;
   padding: 20px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 252, 255, 0.94)),
     linear-gradient(135deg, rgba(11, 105, 155, 0.04), rgba(19, 136, 94, 0.03));
 }
 
+.chip-flow-card .chart-card-head {
+  align-items: stretch;
+  margin-bottom: 0;
+}
+
+.chip-flow-card .chart-card-head span {
+  min-width: 0;
+}
+
+.chip-flow-card .chart-card-head span:last-child {
+  flex: 1 1 22ch;
+  max-width: 34ch;
+  line-height: 1.5;
+}
+
 .chip-flow-card-summary {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
   gap: 12px;
 }
 
 .chip-flow-card-summary > div {
   display: grid;
   gap: 6px;
+  min-width: 0;
+  min-height: 80px;
   padding: 14px 16px;
   border-radius: 18px;
   border: 1px solid rgba(11, 105, 155, 0.1);
@@ -2119,27 +2184,101 @@ html[data-theme="dark"] .theme-toggle {
   font-size: 0.82rem;
 }
 
+.chip-flow-buy-text {
+  color: #d14b32;
+}
+
+.chip-flow-sell-text {
+  color: #16a34a;
+}
+
 .chip-flow-card-summary strong {
-  font-size: 1.25rem;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  font-size: clamp(1rem, 1.55vw, 1.22rem);
+  line-height: 1.15;
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
 
 .chip-flow-hover-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 14px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+  gap: 8px;
+  align-items: stretch;
+  min-height: 50px;
   padding: 12px 14px;
   border-radius: 16px;
   border: 1px solid rgba(11, 105, 155, 0.08);
   background: rgba(255, 255, 255, 0.78);
   color: var(--text-soft);
   font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.chip-flow-hover-strip > span {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 28px;
+  line-height: 1.35;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: keep-all;
 }
 
 .chip-flow-hover-time {
   color: var(--text-main);
   font-weight: 700;
+}
+
+html[data-theme="dark"] .chip-flow-buy-text {
+  color: #ff8f7c;
+}
+
+html[data-theme="dark"] .chip-flow-sell-text {
+  color: #4ade80;
+}
+
+@media (max-width: 900px) {
+  .chip-flow-card .chart-card-head {
+    flex-direction: column;
+  }
+
+  .chip-flow-card .chart-card-head span:last-child {
+    max-width: none;
+  }
+
+  .chip-flow-card-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chip-flow-hover-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .chip-flow-hover-time {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .chip-flow-card-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chip-flow-card-summary strong {
+    white-space: normal;
+  }
+
+  .chip-flow-hover-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .chip-flow-lightweight-wrap {
@@ -2252,6 +2391,55 @@ html[data-theme="dark"] .theme-toggle {
 
 .data-table tbody tr:last-child td {
   border-bottom: none;
+}
+
+.institutional-coverage-note {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 14px;
+  padding: 13px 15px;
+  border-radius: 18px;
+  border: 1px solid rgba(11, 105, 155, 0.16);
+  background: linear-gradient(135deg, rgba(239, 248, 252, 0.94), rgba(255, 255, 255, 0.82));
+  color: var(--text-main);
+}
+
+.institutional-coverage-note strong {
+  color: var(--brand-deep);
+  font-size: 0.95rem;
+}
+
+.institutional-coverage-note p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.institutional-coverage-note.is-empty,
+.institutional-coverage-note.is-partial {
+  border-color: rgba(245, 158, 11, 0.28);
+  background: linear-gradient(135deg, rgba(255, 248, 224, 0.92), rgba(255, 255, 255, 0.84));
+}
+
+html[data-theme="dark"] .institutional-coverage-note {
+  border-color: rgba(103, 201, 255, 0.18);
+  background: linear-gradient(135deg, rgba(13, 24, 39, 0.96), rgba(20, 34, 51, 0.86));
+  color: #e2edf6;
+}
+
+html[data-theme="dark"] .institutional-coverage-note strong {
+  color: #8fd8ff;
+}
+
+html[data-theme="dark"] .institutional-coverage-note p {
+  color: #a9bbcc;
+}
+
+html[data-theme="dark"] .institutional-coverage-note.is-empty,
+html[data-theme="dark"] .institutional-coverage-note.is-partial {
+  border-color: rgba(251, 191, 36, 0.28);
+  background: linear-gradient(135deg, rgba(42, 34, 16, 0.82), rgba(17, 24, 39, 0.9));
 }
 
 .code-link,
@@ -5508,6 +5696,14 @@ html[data-theme="dark"] .holder-cost-item small {
 @media (max-width: 640px) {
   .page-shell {
     gap: 14px;
+  }
+
+  .chip-flow-card-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chip-flow-card-summary strong {
+    white-space: normal;
   }
 
   .app-shell {

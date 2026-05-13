@@ -66,6 +66,10 @@ export function estimateIntradayChipFlow(data) {
 
   let largeCumulativeLots = 0;
   let retailCumulativeLots = 0;
+  let largeBuyLotsTotal = 0;
+  let largeSellLotsTotal = 0;
+  let retailBuyLotsTotal = 0;
+  let retailSellLotsTotal = 0;
 
   const rows = points.map((point, index) => {
     const previousPrice = index > 0 ? points[index - 1].price : Number(data?.previousClose ?? points[0].price);
@@ -88,9 +92,17 @@ export function estimateIntradayChipFlow(data) {
 
     const largeNetLots = volumeLots * directionalStrength * largeShare;
     const retailNetLots = -volumeLots * directionalStrength * retailShare;
+    const largeBuyLots = Math.max(largeNetLots, 0);
+    const largeSellLots = Math.max(-largeNetLots, 0);
+    const retailBuyLots = Math.max(retailNetLots, 0);
+    const retailSellLots = Math.max(-retailNetLots, 0);
 
     largeCumulativeLots += largeNetLots;
     retailCumulativeLots += retailNetLots;
+    largeBuyLotsTotal += largeBuyLots;
+    largeSellLotsTotal += largeSellLots;
+    retailBuyLotsTotal += retailBuyLots;
+    retailSellLotsTotal += retailSellLots;
 
     return {
       ...point,
@@ -101,6 +113,10 @@ export function estimateIntradayChipFlow(data) {
       volumeLots,
       largeNetLots,
       retailNetLots,
+      largeBuyLots,
+      largeSellLots,
+      retailBuyLots,
+      retailSellLots,
       largeCumulativeLots,
       retailCumulativeLots,
     };
@@ -113,14 +129,22 @@ export function estimateIntradayChipFlow(data) {
     updatedAt: data?.updatedAt ?? latest?.dateTime ?? null,
     previousClose: data?.previousClose ?? null,
     methodology:
-      '使用每 5 分鐘價量變化、價格位移與相對量能，估算盤中大戶與散戶的買賣節奏；適合搭配分時圖輔助觀察，非交易所原始分點資料。',
+      '使用每 5 分鐘價量變化、價格位移與相對量能，估算盤中大戶與散戶的偏買、偏賣與淨買賣節奏；適合搭配分時圖輔助觀察，非交易所原始分點資料。',
     dominantSide: describeDominance(largeCumulativeLots, retailCumulativeLots),
     rows,
     summary: {
       largeCumulativeLots,
       retailCumulativeLots,
+      largeBuyLotsTotal,
+      largeSellLotsTotal,
+      retailBuyLotsTotal,
+      retailSellLotsTotal,
       largeLatestLots: latest?.largeNetLots ?? 0,
       retailLatestLots: latest?.retailNetLots ?? 0,
+      largeLatestBuyLots: latest?.largeBuyLots ?? 0,
+      largeLatestSellLots: latest?.largeSellLots ?? 0,
+      retailLatestBuyLots: latest?.retailBuyLots ?? 0,
+      retailLatestSellLots: latest?.retailSellLots ?? 0,
       averageTurnoverRatio: rows.reduce((sum, row) => sum + row.turnoverRatio, 0) / rows.length,
       pointCount: rows.length,
     },

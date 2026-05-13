@@ -615,6 +615,22 @@ async function 寫入JSON(filePath, value) {
       const code = String(error?.code ?? '').toUpperCase();
       const isRetryable = ['EBUSY', 'EPERM', 'UNKNOWN'].includes(code);
 
+      if (isRetryable) {
+        try {
+          await rm(filePath, { force: true });
+          await rename(tempPath, filePath);
+          return;
+        } catch {
+          // Windows can briefly lock files opened by dev servers or indexers.
+        }
+      }
+
+      if (isRetryable && attempt === 8) {
+        await writeFile(filePath, payload, 'utf8');
+        await unlink(tempPath).catch(() => {});
+        return;
+      }
+
       if (!isRetryable || attempt === 8) {
         throw error;
       }
@@ -1929,6 +1945,15 @@ function 民國日期轉西元(value) {
 
   if (!text) return null;
 
+  const slashMatch = text.match(/^(\d{2,4})[/-](\d{1,2})[/-](\d{1,2})$/);
+  if (slashMatch) {
+    const rawYear = Number(slashMatch[1]);
+    const year = rawYear < 1911 ? rawYear + 1911 : rawYear;
+    const month = slashMatch[2].padStart(2, '0');
+    const day = slashMatch[3].padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   if (/^\d{7}$/.test(text)) {
     return `${Number(text.slice(0, 3)) + 1911}-${text.slice(3, 5)}-${text.slice(5, 7)}`;
   }
@@ -1942,6 +1967,10 @@ function 民國日期轉西元(value) {
 
 function 轉日期查詢字串(date) {
   return `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
+}
+
+function formatRocDateQuery(date) {
+  return `${date.getFullYear() - 1911}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 }
 
 function 轉期交所日期字串(dateText) {
@@ -3705,7 +3734,7 @@ async function 抓取個股財務索引() {
   };
 }
 
-async function 抓取法人日資料(date) {
+async function fetchTwseInstitutionalDaily(date) {
   const response = await fetch(
     `https://www.twse.com.tw/rwd/zh/fund/T86?date=${轉日期查詢字串(date)}&selectType=ALLBUT0999&response=json`,
     {
@@ -3729,7 +3758,27 @@ async function 抓取法人日資料(date) {
   return payload;
 }
 
-function 建立法人排行資料(row, 個股索引) {
+async function fetchTpexInstitutionalDaily(date) {
+  const payload = await 抓取JSON資料(
+    `https://www.tpex.org.tw/www/zh-tw/insti/dailyTrade?date=${encodeURIComponent(formatRocDateQuery(date))}&type=Daily&response=json`,
+  );
+  const table = Array.isArray(payload?.tables)
+    ? payload.tables.find((item) => Array.isArray(item?.data))
+    : null;
+
+  if (!table) {
+    return null;
+  }
+
+  return {
+    ...payload,
+    date: table.date ?? payload.date ?? null,
+    data: table.data,
+    fields: table.fields ?? [],
+  };
+}
+
+function buildTwseInstitutionalItem(row, 個股索引) {
   const 代號 = 壓縮文字(row[0]);
   const 補充資料 = 個股索引.get(代號) ?? {};
 
@@ -3744,10 +3793,32 @@ function 建立法人排行資料(row, 個股索引) {
     漲跌幅: 補充資料.漲跌幅 ?? null,
     成交值: 補充資料.成交值 ?? null,
     成交量: 補充資料.成交量 ?? null,
+    來源: 'TWSE',
+    市場: '上市',
   };
 }
 
-function 建立連買資料(日資料清單, key) {
+function buildTpexInstitutionalItem(row, 個股索引) {
+  const 代號 = 壓縮文字(row[0]);
+  const 補充資料 = 個股索引.get(代號) ?? {};
+
+  return {
+    代號,
+    名稱: 壓縮文字(row[1]),
+    外資買賣超: 取數字(row[10]),
+    投信買賣超: 取數字(row[13]),
+    自營商買賣超: 取數字(row[22]),
+    三大法人買賣超: 取數字(row[23]),
+    收盤價: 補充資料.收盤價 ?? null,
+    漲跌幅: 補充資料.漲跌幅 ?? null,
+    成交值: 補充資料.成交值 ?? null,
+    成交量: 補充資料.成交量 ?? null,
+    來源: 'TPEx',
+    市場: '上櫃',
+  };
+}
+
+function buildConsecutiveInstitutionalBuys(日資料清單, key) {
   const 最新資料 = 日資料清單[0]?.資料 ?? [];
   const 其他日資料 = 日資料清單.slice(1);
 
@@ -3781,7 +3852,7 @@ function 建立連買資料(日資料清單, key) {
     .slice(0, 12);
 }
 
-function 建立雙法人同買超資料(日資料清單, 外資連買 = [], 投信連買 = []) {
+function buildDualInstitutionalBuys(日資料清單, 外資連買 = [], 投信連買 = []) {
   const 最新資料 = 日資料清單[0]?.資料 ?? [];
   const 外資連買索引 = new Map(外資連買.map((item) => [item.代號, item]));
   const 投信連買索引 = new Map(投信連買.map((item) => [item.代號, item]));
@@ -3806,7 +3877,7 @@ function 建立雙法人同買超資料(日資料清單, 外資連買 = [], 投�
     .slice(0, 12);
 }
 
-function 建立土洋對作資料(日資料清單) {
+function buildInstitutionalDivergence(日資料清單) {
   const 最新資料 = 日資料清單[0]?.資料 ?? [];
 
   return 最新資料
@@ -3821,40 +3892,70 @@ function 建立土洋對作資料(日資料清單) {
     .slice(0, 12);
 }
 
-async function 抓取近期法人資料(個股索引, 目標交易日數 = 5) {
+async function fetchRecentInstitutionalTrading(個股索引, 目標交易日數 = 5) {
   const 日資料清單 = [];
   const 起始日 = new Date();
 
   for (let offset = 0; offset <= 12 && 日資料清單.length < 目標交易日數; offset += 1) {
     const candidate = new Date(起始日);
     candidate.setDate(candidate.getDate() - offset);
-    const payload = await 抓取法人日資料(candidate);
+    const [上市結果, 上櫃結果] = await Promise.allSettled([
+      fetchTwseInstitutionalDaily(candidate),
+      fetchTpexInstitutionalDaily(candidate),
+    ]);
 
-    if (!payload) continue;
+    if (上市結果.status === 'rejected') {
+      console.warn(`[法人資料略過] TWSE ${轉日期查詢字串(candidate)}：${取得錯誤摘要(上市結果.reason)}`);
+    }
 
-    const 資料 = payload.data
-      .map((row) => 建立法人排行資料(row, 個股索引))
+    if (上櫃結果.status === 'rejected') {
+      console.warn(`[法人資料略過] TPEx ${formatRocDateQuery(candidate)}：${取得錯誤摘要(上櫃結果.reason)}`);
+    }
+
+    const 上市Payload = 上市結果.status === 'fulfilled' ? 上市結果.value : null;
+    const 上櫃Payload = 上櫃結果.status === 'fulfilled' ? 上櫃結果.value : null;
+
+    if (!上市Payload && !上櫃Payload) continue;
+
+    const 上市資料 = (上市Payload?.data ?? [])
+      .map((row) => buildTwseInstitutionalItem(row, 個股索引))
       .filter((item) => 是否一般股票(item.代號));
+    const 上櫃資料 = (上櫃Payload?.data ?? [])
+      .map((row) => buildTpexInstitutionalItem(row, 個股索引))
+      .filter((item) => 是否一般股票(item.代號));
+    const 資料索引 = new Map();
+
+    for (const item of [...上市資料, ...上櫃資料]) {
+      資料索引.set(item.代號, item);
+    }
+
+    const 資料 = [...資料索引.values()];
+
+    if (!資料.length) continue;
 
     日資料清單.push({
-      日期: 民國日期轉西元(payload.date),
+      日期: 民國日期轉西元(上市Payload?.date ?? 上櫃Payload?.date) ?? 正規化日期(candidate.toISOString()),
       資料,
-      索引: new Map(資料.map((item) => [item.代號, item])),
+      索引: 資料索引,
+      來源統計: {
+        上市: 上市資料.length,
+        上櫃: 上櫃資料.length,
+      },
     });
   }
 
   return 日資料清單;
 }
 
-function 抓取法人追蹤(日資料清單) {
+function buildInstitutionalTracker(日資料清單) {
   if (!日資料清單.length) {
     throw new Error('三大法人資料暫時無法取得');
   }
 
-  const 外資連買 = 建立連買資料(日資料清單, '外資買賣超');
-  const 投信連買 = 建立連買資料(日資料清單, '投信買賣超');
-  const 雙法人同買超 = 建立雙法人同買超資料(日資料清單, 外資連買, 投信連買);
-  const 土洋對作 = 建立土洋對作資料(日資料清單);
+  const 外資連買 = buildConsecutiveInstitutionalBuys(日資料清單, '外資買賣超');
+  const 投信連買 = buildConsecutiveInstitutionalBuys(日資料清單, '投信買賣超');
+  const 雙法人同買超 = buildDualInstitutionalBuys(日資料清單, 外資連買, 投信連買);
+  const 土洋對作 = buildInstitutionalDivergence(日資料清單);
   const 觀察摘要 = [];
 
   if (外資連買.length) {
@@ -3874,6 +3975,11 @@ function 抓取法人追蹤(日資料清單) {
   return {
     資料日期: 日資料清單[0].日期,
     回溯交易日: 日資料清單.map((item) => item.日期),
+    資料來源統計: 日資料清單.map((item) => ({
+      日期: item.日期,
+      上市: item.來源統計?.上市 ?? 0,
+      上櫃: item.來源統計?.上櫃 ?? 0,
+    })),
     外資連買,
     投信連買,
     雙法人同買超,
@@ -3881,7 +3987,7 @@ function 抓取法人追蹤(日資料清單) {
     觀察摘要,
     資料說明: [
       `以最近 ${日資料清單.length} 個有資料的交易日計算連買名單。`,
-      '資料來源：TWSE 三大法人買賣超日報（T86），僅納入上市一般股票。',
+      '資料來源：TWSE 三大法人買賣超日報（T86）與 TPEx 三大法人買賣明細日報，納入上市與上櫃一般股票。',
     ],
   };
 }
@@ -5195,7 +5301,8 @@ function 建立證券候選清單({ 市場總覽, 法人追蹤, ETF結果, 全�
   return [...map.values()].sort((left, right) => left.code.localeCompare(right.code));
 }
 
-function 建立個股法人明細(code, 日資料清單) {
+function buildStockInstitutionalDetail(code, 日資料清單) {
+  const expectedDates = 日資料清單.map((day) => day.日期).filter(Boolean);
   const days = 日資料清單
     .map((day) => ({
       date: day.日期,
@@ -5203,11 +5310,23 @@ function 建立個股法人明細(code, 日資料清單) {
       investmentTrust: day.索引.get(code)?.投信買賣超 ?? null,
       dealer: day.索引.get(code)?.自營商買賣超 ?? null,
       total: day.索引.get(code)?.三大法人買賣超 ?? null,
+      source: day.索引.get(code)?.來源 ?? null,
+      market: day.索引.get(code)?.市場 ?? null,
     }))
     .filter((item) => item.foreign !== null || item.investmentTrust !== null || item.dealer !== null || item.total !== null);
+  const actualDates = new Set(days.map((item) => item.date).filter(Boolean));
+  const missingDates = expectedDates.filter((date) => !actualDates.has(date));
 
   return {
     days,
+    coverage: {
+      expectedDays: expectedDates.length,
+      actualDays: days.length,
+      missingDates,
+      isComplete: expectedDates.length > 0 && days.length >= expectedDates.length,
+      source: days[0]?.source ?? null,
+      market: days[0]?.market ?? null,
+    },
     summary: {
       foreign5Day: days.reduce((total, item) => total + (item.foreign ?? 0), 0),
       investmentTrust5Day: days.reduce((total, item) => total + (item.investmentTrust ?? 0), 0),
@@ -5284,7 +5403,7 @@ async function 寫入個股明細資料(候選清單, 日資料清單, tdcc索�
         console.warn(`[股票分時沿用快取] ${item.code} ${error instanceof Error ? error.message : String(error)}`);
       }
 
-      const 法人買賣 = 建立個股法人明細(item.code, 日資料清單);
+      const 法人買賣 = buildStockInstitutionalDetail(item.code, 日資料清單);
       const 持股分散 = 建立持股分散摘要(tdcc索引.get(item.code), 舊資料?.持股分散 ?? null);
       const 融資融券 = 其他索引.融資融券索引.get(item.code) ?? null;
       const 主動ETF曝光 = 其他索引.主動ETF曝光索引.get(item.code) ?? null;
@@ -5504,8 +5623,8 @@ async function main() {
   let 法人追蹤;
 
   try {
-    日資料清單 = await 抓取近期法人資料(個股索引, 5);
-    法人追蹤 = 抓取法人追蹤(日資料清單);
+    日資料清單 = await fetchRecentInstitutionalTrading(個股索引, 5);
+    法人追蹤 = buildInstitutionalTracker(日資料清單);
   } catch (error) {
     法人追蹤 = 既有儀表板?.法人追蹤 ?? {
       資料日期: null,
@@ -5518,7 +5637,7 @@ async function main() {
     };
     法人追蹤.資料說明 = [
       ...(法人追蹤.資料說明 ?? []),
-      `本次更新未能重新抓取 T86：${error instanceof Error ? error.message : String(error)}`,
+      `本次更新未能重新抓取 TWSE / TPEx 法人日報：${error instanceof Error ? error.message : String(error)}`,
     ];
   }
   const 期貨籌碼 = await 抓取期貨籌碼(市場總覽.即時狀態?.marketDate ?? 市場總覽.資料日期);

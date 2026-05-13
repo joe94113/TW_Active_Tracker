@@ -95,6 +95,36 @@ const { pushRecentStock } = useRecentStocks();
 const companyProfile = computed(() => detail.value?.公司概況 ?? null);
 const holderDistribution = computed(() => detail.value?.持股分散 ?? null);
 const institutionalFlows = computed(() => detail.value?.法人買賣 ?? null);
+const institutionalFlowDays = computed(() => institutionalFlows.value?.days ?? []);
+const institutionalFlowCoverage = computed(() => {
+  const coverage = institutionalFlows.value?.coverage ?? {};
+  const expectedDays = coverage.expectedDays ?? 5;
+  const actualDays = coverage.actualDays ?? institutionalFlowDays.value.length;
+  const marketLabel = coverage.market ?? '上市櫃';
+
+  if (actualDays >= expectedDays && actualDays >= 5) {
+    return {
+      tone: 'ok',
+      title: '法人序列完整',
+      message: `已取得${marketLabel}近 ${actualDays} 個交易日法人買賣超。`,
+    };
+  }
+
+  if (actualDays > 0) {
+    const missingText = (coverage.missingDates ?? []).slice(0, 3).map(formatDate).join('、');
+    return {
+      tone: 'partial',
+      title: '法人資料部分取得',
+      message: `目前取得 ${actualDays}/${expectedDays} 個交易日。${missingText ? `缺少 ${missingText}，` : ''}更新排程會再從 TWSE / TPEx 補齊。`,
+    };
+  }
+
+  return {
+    tone: 'empty',
+    title: '法人資料尚未取得',
+    message: '這檔可能是上櫃、特殊標的，或官方當日資料尚未公布；每日更新會從 TWSE / TPEx 重新補資料。',
+  };
+});
 const marginSnapshot = computed(() => detail.value?.融資融券 ?? null);
 const activeEtfExposure = computed(() => detail.value?.主動ETF曝光 ?? null);
 const industryComparison = computed(() => detail.value?.同產業比較 ?? null);
@@ -1659,6 +1689,14 @@ watch(
               <h2 class="panel-title">近五日法人序列</h2>
               <p class="panel-subtitle">外資、投信、自營商</p>
             </div>
+          </div>
+          <div
+            v-if="institutionalFlowCoverage.tone !== 'ok'"
+            class="institutional-coverage-note"
+            :class="`is-${institutionalFlowCoverage.tone}`"
+          >
+            <strong>{{ institutionalFlowCoverage.title }}</strong>
+            <p>{{ institutionalFlowCoverage.message }}</p>
           </div>
           <div class="table-wrap">
             <table class="data-table">

@@ -94,13 +94,13 @@ function formatLotsValue(value, digits = 0) {
   const prefix = lots > 0 ? '+' : '';
 
   if (absoluteLots >= 10000) {
-    return `${prefix}${(lots / 10000).toFixed(2)} 萬張`;
+    return `${prefix}${(lots / 10000).toFixed(2)}萬張`;
   }
 
   return `${prefix}${new Intl.NumberFormat('zh-TW', {
     minimumFractionDigits: digits,
     maximumFractionDigits: digits,
-  }).format(lots)} 張`;
+  }).format(lots)}張`;
 }
 
 function formatRatio(value) {
@@ -150,6 +150,8 @@ function buildPanel(flowData, hovered, latest, type) {
   const rows = flowData.rows;
   const netKey = isLarge ? 'largeNetLots' : 'retailNetLots';
   const cumulativeKey = isLarge ? 'largeCumulativeLots' : 'retailCumulativeLots';
+  const buyKey = isLarge ? 'largeBuyLots' : 'retailBuyLots';
+  const sellKey = isLarge ? 'largeSellLots' : 'retailSellLots';
   const shareKey = isLarge ? 'largeShare' : 'retailShare';
   const current = hovered ?? latest;
 
@@ -157,16 +159,22 @@ function buildPanel(flowData, hovered, latest, type) {
     type,
     title: isLarge ? '大戶估算' : '散戶估算',
     subtitle: isLarge
-      ? '用價量節奏估算盤中偏向主力吸收或主力調節的換手區。'
-      : '用價量節奏估算盤中散戶追價或減碼的參與強弱。',
+      ? '把每 5 分鐘價量換算成大戶偏買、偏賣與淨買賣張數。'
+      : '把每 5 分鐘價量換算成散戶偏買、偏賣與淨買賣張數。',
     total: latest?.[cumulativeKey] ?? 0,
     latest: latest?.[netKey] ?? 0,
+    buyTotal: rows.reduce((sum, row) => sum + Number(row[buyKey] ?? 0), 0),
+    sellTotal: rows.reduce((sum, row) => sum + Number(row[sellKey] ?? 0), 0),
+    latestBuy: latest?.[buyKey] ?? 0,
+    latestSell: latest?.[sellKey] ?? 0,
     averageShare:
       rows.reduce((sum, row) => sum + Number(row[shareKey] ?? 0), 0) / Math.max(rows.length, 1),
     display: current
       ? {
           time: current.time,
           net: current[netKey] ?? 0,
+          buy: current[buyKey] ?? 0,
+          sell: current[sellKey] ?? 0,
           cumulative: current[cumulativeKey] ?? 0,
           share: current[shareKey] ?? 0,
           turnoverRatio: current.turnoverRatio ?? 0,
@@ -185,7 +193,7 @@ function createPanelSeries(type) {
   const histogramData = rows.map((row) => ({
     time: toUtcTimestamp(row.timestamp),
     value: Number((row[netKey] ?? 0).toFixed(2)),
-    color: (row[netKey] ?? 0) >= 0 ? 'rgba(22, 163, 74, 0.8)' : 'rgba(209, 75, 50, 0.82)',
+    color: (row[netKey] ?? 0) >= 0 ? 'rgba(209, 75, 50, 0.82)' : 'rgba(22, 163, 74, 0.8)',
   }));
 
   const lineData = rows.map((row) => ({
@@ -331,7 +339,7 @@ onBeforeUnmount(() => {
       <div>
         <h2 class="panel-title">{{ displayTitle }}</h2>
         <p class="panel-subtitle">
-          以 5 分鐘價量變化估算大戶與散戶的當日買賣節奏，適合搭配分時圖一起看盤中換手。
+          以 5 分鐘價量變化估算大戶與散戶的偏買、偏賣與淨買賣張數，適合搭配分時圖一起看盤中換手。
         </p>
       </div>
       <div class="indicator-group">
@@ -366,12 +374,18 @@ onBeforeUnmount(() => {
 
         <div class="chip-flow-card-summary">
           <div>
-            <span class="chip-flow-stat-label">累積估算</span>
-            <strong :class="`text-${getTone(panel.total)}`">{{ formatLotsValue(panel.total) }}</strong>
+            <span class="chip-flow-stat-label">累積偏買</span>
+            <strong class="chip-flow-buy-text">{{ formatLotsValue(panel.buyTotal) }}</strong>
           </div>
           <div>
-            <span class="chip-flow-stat-label">最近 5 分鐘</span>
-            <strong :class="`text-${getTone(panel.latest)}`">{{ formatLotsValue(panel.latest) }}</strong>
+            <span class="chip-flow-stat-label">累積偏賣</span>
+            <strong class="chip-flow-sell-text">{{ formatLotsValue(panel.sellTotal) }}</strong>
+          </div>
+          <div>
+            <span class="chip-flow-stat-label">累積淨額</span>
+            <strong :class="panel.total >= 0 ? 'chip-flow-buy-text' : 'chip-flow-sell-text'">
+              {{ formatLotsValue(panel.total) }}
+            </strong>
           </div>
           <div>
             <span class="chip-flow-stat-label">參與占比均值</span>
@@ -383,10 +397,16 @@ onBeforeUnmount(() => {
           <span class="chip-flow-hover-time">
             {{ panel.display.isHovered ? `游標 ${panel.display.time}` : `最新 ${panel.display.time}` }}
           </span>
-          <span :class="`text-${getTone(panel.display.net)}`">
-            5 分鐘 {{ formatLotsValue(panel.display.net, 1) }}
+          <span class="chip-flow-buy-text">
+            偏買 {{ formatLotsValue(panel.display.buy, 1) }}
           </span>
-          <span :class="`text-${getTone(panel.display.cumulative)}`">
+          <span class="chip-flow-sell-text">
+            偏賣 {{ formatLotsValue(panel.display.sell, 1) }}
+          </span>
+          <span :class="panel.display.net >= 0 ? 'chip-flow-buy-text' : 'chip-flow-sell-text'">
+            淨額 {{ formatLotsValue(panel.display.net, 1) }}
+          </span>
+          <span :class="panel.display.cumulative >= 0 ? 'chip-flow-buy-text' : 'chip-flow-sell-text'">
             累積 {{ formatLotsValue(panel.display.cumulative, 1) }}
           </span>
           <span>占比 {{ formatRatio(panel.display.share) }}</span>
