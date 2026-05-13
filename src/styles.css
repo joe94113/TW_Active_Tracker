@@ -1045,14 +1045,17 @@ html[data-theme="dark"] .chart-parameter-panel,
 html[data-theme="dark"] .chart-compare-panel,
 html[data-theme="dark"] .market-chart-host,
 html[data-theme="dark"] .chip-flow-summary-card,
+html[data-theme="dark"] .chip-flow-card,
 html[data-theme="dark"] .chip-flow-card-summary > div,
 html[data-theme="dark"] .chip-flow-hover-strip,
+html[data-theme="dark"] .chip-flow-lightweight-wrap,
 html[data-theme="dark"] .stock-freshness-panel,
 html[data-theme="dark"] .stock-freshness-item,
 html[data-theme="dark"] .stock-health-hero,
 html[data-theme="dark"] .stock-health-item,
 html[data-theme="dark"] .radar-stock-card,
 html[data-theme="dark"] .selection-alert-card,
+html[data-theme="dark"] .news-card,
 html[data-theme="dark"] .home-freshness-summary-card {
   border-color: rgba(71, 85, 105, 0.52);
   background:
@@ -1104,16 +1107,25 @@ html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-label) {
 
 html[data-theme="dark"] .chart-info-label,
 html[data-theme="dark"] .chart-footnote,
+html[data-theme="dark"] .chip-flow-footnote,
+html[data-theme="dark"] .chip-flow-stat-label,
 html[data-theme="dark"] .stock-freshness-item span,
 html[data-theme="dark"] .stock-health-label,
 html[data-theme="dark"] .stock-health-total span,
 html[data-theme="dark"] .stock-health-summary,
 html[data-theme="dark"] .stock-health-note,
 html[data-theme="dark"] .radar-stock-note,
+html[data-theme="dark"] .news-card p,
+html[data-theme="dark"] .news-card-foot,
 html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-inline-meta),
 html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-detail),
 html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-next) {
   color: #98aabd;
+}
+
+html[data-theme="dark"] .chip-flow-hover-time,
+html[data-theme="dark"] .news-card-head strong {
+  color: #f2f7fb;
 }
 
 html[data-theme="dark"] .ghost-button,
@@ -4396,6 +4408,24 @@ html[data-theme="dark"] .entry-stock-card:hover {
   padding: 16px;
 }
 
+html[data-theme="dark"] .empty-state {
+  border-color: rgba(103, 201, 255, 0.18);
+  background:
+    linear-gradient(145deg, rgba(11, 18, 32, 0.94), rgba(15, 23, 42, 0.88));
+  box-shadow:
+    inset 0 1px 0 rgba(148, 163, 184, 0.05),
+    0 16px 34px rgba(2, 8, 23, 0.2);
+  color: #dbe7f2;
+}
+
+html[data-theme="dark"] .empty-state strong {
+  color: #8fd8ff;
+}
+
+html[data-theme="dark"] .empty-state p {
+  color: #9db0c4;
+}
+
 .search-row-actions {
   display: flex;
   align-items: center;
@@ -4929,6 +4959,94 @@ html[data-theme="dark"] .entry-stock-card:hover {
   overflow: hidden;
 }
 
+.holder-cost-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.holder-cost-hero {
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(16, 32, 45, 0.08);
+  background: linear-gradient(135deg, rgba(244, 249, 253, 0.96), rgba(255, 255, 255, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.holder-cost-hero.is-up {
+  border-color: rgba(19, 136, 94, 0.16);
+  background: linear-gradient(135deg, rgba(240, 252, 247, 0.96), rgba(255, 255, 255, 0.98));
+}
+
+.holder-cost-hero.is-warning {
+  border-color: rgba(245, 158, 11, 0.18);
+  background: linear-gradient(135deg, rgba(255, 249, 235, 0.96), rgba(255, 255, 255, 0.98));
+}
+
+.holder-cost-hero.is-down {
+  border-color: rgba(209, 75, 50, 0.16);
+  background: linear-gradient(135deg, rgba(255, 246, 244, 0.96), rgba(255, 255, 255, 0.98));
+}
+
+.holder-cost-label,
+.holder-cost-summary {
+  margin: 0;
+}
+
+.holder-cost-label {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.holder-cost-hero strong {
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+  line-height: 1.05;
+  color: var(--text-main);
+}
+
+.holder-cost-summary {
+  color: var(--text-main);
+  line-height: 1.65;
+}
+
+.holder-cost-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.holder-cost-item {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 32, 45, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.holder-cost-item span,
+.holder-cost-item small {
+  color: var(--text-soft);
+}
+
+.holder-cost-item span {
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
+}
+
+.holder-cost-item strong {
+  font-size: 1.08rem;
+  line-height: 1.35;
+  color: var(--text-main);
+}
+
+.holder-cost-item small {
+  line-height: 1.55;
+}
+
 .holder-stacked-bar {
   display: flex;
   min-height: 76px;
@@ -5040,6 +5158,78 @@ html[data-theme="dark"] .entry-stock-card:hover {
   font-size: 0.88rem;
 }
 
+html[data-theme="dark"] .chart-card,
+html[data-theme="dark"] .holder-summary-card {
+  border-color: rgba(71, 85, 105, 0.52);
+  background:
+    linear-gradient(180deg, rgba(10, 17, 30, 0.96), rgba(14, 23, 39, 0.92)),
+    linear-gradient(135deg, rgba(56, 189, 248, 0.06), rgba(34, 197, 94, 0.04));
+  box-shadow:
+    inset 0 1px 0 rgba(148, 163, 184, 0.06),
+    0 18px 36px rgba(2, 6, 23, 0.24);
+}
+
+html[data-theme="dark"] .chart-card::before {
+  background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.24), transparent);
+}
+
+html[data-theme="dark"] .chart-card-head span:first-child,
+html[data-theme="dark"] .holder-band-head strong {
+  color: #eef5fb;
+}
+
+html[data-theme="dark"] .chart-card-head span:last-child,
+html[data-theme="dark"] .intraday-time-row,
+html[data-theme="dark"] .chart-axis-row,
+html[data-theme="dark"] .holder-band-head span,
+html[data-theme="dark"] .holder-band-meta {
+  color: #aebfd1;
+}
+
+html[data-theme="dark"] .holder-stacked-bar,
+html[data-theme="dark"] .holder-band-track {
+  background: rgba(148, 163, 184, 0.12);
+}
+
+html[data-theme="dark"] .holder-segment-label {
+  color: #f8fbff;
+  text-shadow: 0 1px 2px rgba(2, 8, 23, 0.36);
+}
+
+html[data-theme="dark"] .holder-cost-hero,
+html[data-theme="dark"] .holder-cost-item {
+  border-color: rgba(71, 85, 105, 0.52);
+  background: linear-gradient(145deg, rgba(11, 18, 32, 0.94), rgba(15, 23, 42, 0.9));
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.06);
+}
+
+html[data-theme="dark"] .holder-cost-hero.is-up {
+  border-color: rgba(45, 212, 191, 0.24);
+  background: linear-gradient(145deg, rgba(6, 36, 34, 0.96), rgba(9, 24, 29, 0.92));
+}
+
+html[data-theme="dark"] .holder-cost-hero.is-warning {
+  border-color: rgba(251, 191, 36, 0.24);
+  background: linear-gradient(145deg, rgba(54, 36, 10, 0.96), rgba(32, 22, 7, 0.92));
+}
+
+html[data-theme="dark"] .holder-cost-hero.is-down {
+  border-color: rgba(248, 113, 113, 0.24);
+  background: linear-gradient(145deg, rgba(55, 18, 20, 0.96), rgba(31, 13, 18, 0.92));
+}
+
+html[data-theme="dark"] .holder-cost-hero strong,
+html[data-theme="dark"] .holder-cost-summary,
+html[data-theme="dark"] .holder-cost-item strong {
+  color: #f2f7fb;
+}
+
+html[data-theme="dark"] .holder-cost-label,
+html[data-theme="dark"] .holder-cost-item span,
+html[data-theme="dark"] .holder-cost-item small {
+  color: #a9bacb;
+}
+
 @media (max-width: 1200px) {
   .card-grid,
   .quad-grid,
@@ -5055,6 +5245,10 @@ html[data-theme="dark"] .entry-stock-card:hover {
   }
 
   .theme-page-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .holder-cost-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 

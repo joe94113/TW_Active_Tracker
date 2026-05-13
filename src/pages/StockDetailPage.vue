@@ -18,7 +18,7 @@ import IntradayChipFlowChart from '../components/IntradayChipFlowChart.vue';
 import EventCalendarLinks from '../components/EventCalendarLinks.vue';
 import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
-import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
+import { buildKeyPriceZones, buildLargeHolderCostZone, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
 import { buildStockEventPerformance } from '../lib/stockEventPerformance';
 import { buildOverheatWarnings, buildStockHealthScore } from '../lib/stockHealth';
 import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
@@ -135,6 +135,24 @@ const stockSearchSummary = computed(() =>
   (stockSearchList.value ?? []).find((item) => String(item?.code ?? '') === stockCode.value) ?? null,
 );
 
+const holderDistributionSnapshot = computed(() => {
+  if (holderDistribution.value) {
+    return holderDistribution.value;
+  }
+
+  if (!stockSearchSummary.value) {
+    return null;
+  }
+
+  return {
+    date: stockSearchSummary.value.priceDate ?? detail.value?.priceDate ?? null,
+    largeHolderRatio: stockSearchSummary.value.largeHolderRatio ?? null,
+    retailRatio: stockSearchSummary.value.retailRatio ?? null,
+    largeHolderRatioDelta: null,
+    retailRatioDelta: null,
+  };
+});
+
 const latestMarketDate = computed(() => dashboard.value?.市場總覽?.即時狀態?.marketDate ?? dashboard.value?.市場總覽?.資料日期 ?? null);
 
 const detailFreshness = computed(() => {
@@ -219,6 +237,7 @@ const liveSnapshotCards = computed(() => [
 
 const keyPriceZones = computed(() => buildKeyPriceZones(detail.value));
 const supportResistance = computed(() => buildSupportResistance(detail.value));
+const largeHolderCostZone = computed(() => buildLargeHolderCostZone(detail.value, holderDistributionSnapshot.value));
 const stockEventCalendar = computed(() => buildStockEventCalendar(detail.value));
 const stockEventPerformance = computed(() => buildStockEventPerformance(detail.value));
 const stockHealthScore = computed(() => buildStockHealthScore(detail.value, {
@@ -311,6 +330,12 @@ onMounted(() => {
   void loadGlobalData();
 });
 
+function formatHolderDeltaSummary(value) {
+  if (value === null || value === undefined) return '暫無前次比較';
+  if (Math.abs(value) < 0.005) return '較前次持平';
+  return `較前次 ${formatPercent(value)}`;
+}
+
 const summaryCards = computed(() => {
   const latestSummary = displayQuote.value;
   const holderSummary = holderDistribution.value ?? {};
@@ -330,12 +355,12 @@ const summaryCards = computed(() => {
     {
       title: '大戶持股比',
       value: formatPercent(holderSummary.largeHolderRatio),
-      description: `400 張以上，較前次 ${formatPercent(holderSummary.largeHolderRatioDelta)}`,
+      description: `400 張以上，${formatHolderDeltaSummary(holderSummary.largeHolderRatioDelta)}`,
     },
     {
       title: '散戶持股比',
       value: formatPercent(holderSummary.retailRatio),
-      description: `10 張以下，較前次 ${formatPercent(holderSummary.retailRatioDelta)}`,
+      description: `10 張以下，${formatHolderDeltaSummary(holderSummary.retailRatioDelta)}`,
     },
   ];
 });
@@ -550,6 +575,18 @@ function getHealthTone(score) {
   if (score >= 75) return 'up';
   if (score <= 45) return 'down';
   return 'normal';
+}
+
+function getCostZoneTone(status) {
+  if (status === 'below') return 'down';
+  if (status === 'above') return 'warning';
+  return 'up';
+}
+
+function getCostZoneStatusLabel(status) {
+  if (status === 'above') return '股價在成本帶上方';
+  if (status === 'below') return '股價跌回成本帶下方';
+  return '股價正在成本帶附近';
 }
 
 function formatEventDistance(dateText) {
@@ -1481,6 +1518,7 @@ watch(
 
         <TechnicalChart
           :data="detail"
+          :holder-cost-zone="largeHolderCostZone"
           :comparison-series="comparisonSeries"
           :comparison-loading="isComparisonSeriesLoading"
           title="個股技術分析圖表"
@@ -1563,15 +1601,53 @@ watch(
         <article class="panel">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">持股分散摘要</h2>
-              <p class="panel-subtitle">TDCC 最新週資料 {{ formatDate(detail?.持股分散?.date) }}</p>
+              <h2 class="panel-title">大戶主要成本區間</h2>
+              <p class="panel-subtitle">
+                {{ largeHolderCostZone ? `近 ${largeHolderCostZone.lookbackDays} 個交易日價量推估` : '資料不足時會以下一輪 TWSE / TDCC 更新後補強' }}
+              </p>
             </div>
           </div>
-          <ul class="bullet-list compact">
-            <li>大戶定義：400 張以上，持股比 {{ formatPercent(detail?.持股分散?.largeHolderRatio) }}</li>
-            <li>散戶定義：10 張以下，持股比 {{ formatPercent(detail?.持股分散?.retailRatio) }}</li>
-            <li>級距合計人數：{{ formatAmount(detail?.持股分散?.totalHolders) }}</li>
-            <li>集保庫存比：{{ formatPercent(detail?.持股分散?.totalRatio) }}</li>
+          <div v-if="largeHolderCostZone" class="holder-cost-panel">
+            <div class="holder-cost-hero" :class="`is-${getCostZoneTone(largeHolderCostZone.status)}`">
+              <p class="holder-cost-label">推估成本帶</p>
+              <strong>{{ formatNumber(largeHolderCostZone.low) }} - {{ formatNumber(largeHolderCostZone.high) }}</strong>
+              <p class="holder-cost-summary">{{ largeHolderCostZone.summary }}</p>
+            </div>
+
+            <div class="holder-cost-grid">
+              <article class="holder-cost-item">
+                <span>目前位置</span>
+                <strong>{{ getCostZoneStatusLabel(largeHolderCostZone.status) }}</strong>
+                <small>
+                  與成本中樞 {{ formatPriceDelta(largeHolderCostZone.distancePercent) }}%
+                </small>
+              </article>
+              <article class="holder-cost-item">
+                <span>大戶持股比</span>
+                <strong>{{ formatPercent(largeHolderCostZone.largeHolderRatio) }}</strong>
+                <small>400 張以上大戶</small>
+              </article>
+              <article class="holder-cost-item">
+                <span>散戶持股比</span>
+                <strong>{{ formatPercent(largeHolderCostZone.retailRatio) }}</strong>
+                <small>10 張以下散戶</small>
+              </article>
+              <article class="holder-cost-item">
+                <span>推估可信度</span>
+                <strong>{{ formatNumber(largeHolderCostZone.confidence) }} / 100</strong>
+                <small>資料日 {{ formatDate(largeHolderCostZone.asOfDate) }}</small>
+              </article>
+            </div>
+
+            <ul class="bullet-list compact">
+              <li>{{ largeHolderCostZone.note }}</li>
+              <li>股價站在成本帶上方時，大戶優勢較強；跌回帶下方時先觀察是否重新站回。</li>
+              <li>若靜態資料不足，排程會優先用 TWSE 日線與下一輪 TDCC 週資料補齊。</li>
+            </ul>
+          </div>
+          <ul v-else class="bullet-list compact">
+            <li>目前這檔股票的歷史日線或持股分散資料還不夠，暫時無法估大戶成本帶。</li>
+            <li>排程會優先補抓 TWSE 日線與 TDCC 週資料，更新後這裡會自動帶出區間。</li>
           </ul>
         </article>
       </section>

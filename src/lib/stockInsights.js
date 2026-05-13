@@ -25,6 +25,37 @@ function getWindowExtremes(rows, size) {
   };
 }
 
+function getPriceRows(detail) {
+  const rows = detail?.歷史資料;
+
+  return Array.isArray(rows)
+    ? rows.filter((row) => row && typeof row === 'object' && (toNumber(row.close) ?? toNumber(row.high) ?? toNumber(row.low)) !== null)
+    : [];
+}
+
+function calculateWindowVwap(rows) {
+  let weightedClose = 0;
+  let totalVolume = 0;
+
+  rows.forEach((row) => {
+    const close = toNumber(row.close);
+    const volume = toNumber(row.volume);
+
+    if (close === null || volume === null || volume <= 0) {
+      return;
+    }
+
+    weightedClose += close * volume;
+    totalVolume += volume;
+  });
+
+  if (totalVolume <= 0) {
+    return null;
+  }
+
+  return weightedClose / totalVolume;
+}
+
 function toUtcStamp(dateText) {
   if (!dateText) return null;
   const stamp = Date.parse(`${dateText}T00:00:00Z`);
@@ -225,4 +256,113 @@ export function buildStockEventCalendar(detail) {
         ) === index,
     )
     .sort((left, right) => String(left.date).localeCompare(String(right.date)));
+}
+
+export function buildLargeHolderCostZone(detail, holderSnapshot = null) {
+  const rows = getPriceRows(detail);
+  const latestSummary = detail?.最新摘要 ?? {};
+  const currentPrice = toNumber(latestSummary.close) ?? toNumber(rows.at(-1)?.close);
+  const holder = holderSnapshot ?? detail?.持股分散 ?? null;
+  const largeHolderRatio = toNumber(holder?.largeHolderRatio);
+  const largeHolderRatioDelta = toNumber(holder?.largeHolderRatioDelta);
+  const retailRatio = toNumber(holder?.retailRatio);
+  const retailRatioDelta = toNumber(holder?.retailRatioDelta);
+
+  if (!rows.length || currentPrice === null || largeHolderRatio === null) {
+    return null;
+  }
+
+  let lookbackDays = 30;
+  if (largeHolderRatioDelta !== null) {
+    if (largeHolderRatioDelta >= 1.5) {
+      lookbackDays = 5;
+    } else if (largeHolderRatioDelta >= 0.8) {
+      lookbackDays = 10;
+    } else if (largeHolderRatioDelta >= 0.2) {
+      lookbackDays = 20;
+    } else if (largeHolderRatioDelta <= -1) {
+      lookbackDays = 60;
+    }
+  }
+
+  const windowRows = rows.slice(-Math.min(Math.max(lookbackDays, 5), rows.length));
+  if (!windowRows.length) {
+    return null;
+  }
+
+  const closes = windowRows.map((row) => toNumber(row.close)).filter((value) => value !== null);
+  const highs = windowRows.map((row) => toNumber(row.high) ?? toNumber(row.close)).filter((value) => value !== null);
+  const lows = windowRows.map((row) => toNumber(row.low) ?? toNumber(row.close)).filter((value) => value !== null);
+  const vwap = calculateWindowVwap(windowRows) ?? closes.at(-1) ?? currentPrice;
+
+  if (vwap === null) {
+    return null;
+  }
+
+  const observedHigh = highs.length ? Math.max(...highs) : vwap;
+  const observedLow = lows.length ? Math.min(...lows) : vwap;
+  const observedSpan = Math.max(observedHigh - observedLow, vwap * 0.02);
+  const deltaFactor = Math.min(Math.max(Math.abs(largeHolderRatioDelta ?? 0), 0), 5);
+  let halfBand = Math.max(vwap * (0.03 + deltaFactor * 0.004), observedSpan * 0.18);
+
+  if (largeHolderRatio >= 70) {
+    halfBand *= 0.92;
+  } else if (largeHolderRatio <= 45) {
+    halfBand *= 1.08;
+  }
+
+  const low = Math.max(0, vwap - halfBand);
+  const high = vwap + halfBand;
+  const distancePercent = currentPrice ? ((currentPrice - vwap) / vwap) * 100 : null;
+  const status = currentPrice > high ? 'above' : currentPrice < low ? 'below' : 'inside';
+  const confidence = Math.round(
+    Math.min(
+      92,
+      46
+        + Math.min(windowRows.length, 60) * 0.45
+        + (largeHolderRatioDelta !== null ? 10 : 0)
+        + (retailRatio !== null ? 6 : 0),
+    ),
+  );
+
+  let summary = '股價仍在推估的大戶成本帶附近，可觀察區間內換手是否穩定。';
+  if (status === 'above') {
+    summary = '股價站在推估大戶成本帶之上，代表優勢仍在，但若離帶過遠就要留意追價風險。';
+  } else if (status === 'below') {
+    summary = '股價跌回推估大戶成本帶下方，大戶優勢可能轉弱，先看能否重新站回帶內。';
+  }
+
+  let note = `以近 ${windowRows.length} 個交易日價量與最新持股分散推估，當作大戶主要換手區。`;
+  if (largeHolderRatioDelta !== null) {
+    if (Math.abs(largeHolderRatioDelta) < 0.005) {
+      note += ' 大戶持股比本期大致持平。';
+    } else {
+      note += ` 大戶持股比本期${largeHolderRatioDelta >= 0 ? '增加' : '減少'} ${Math.abs(largeHolderRatioDelta).toFixed(2)} 個百分點。`;
+    }
+  }
+  if (retailRatioDelta !== null) {
+    if (Math.abs(retailRatioDelta) < 0.005) {
+      note += ' 散戶持股比本期大致持平。';
+    } else {
+      note += ` 散戶持股比本期${retailRatioDelta >= 0 ? '增加' : '減少'} ${Math.abs(retailRatioDelta).toFixed(2)} 個百分點。`;
+    }
+  }
+
+  return {
+    low,
+    high,
+    mid: vwap,
+    lookbackDays: windowRows.length,
+    currentPrice,
+    distancePercent,
+    status,
+    confidence,
+    largeHolderRatio,
+    largeHolderRatioDelta,
+    retailRatio,
+    retailRatioDelta,
+    asOfDate: holder?.date ?? detail?.priceDate ?? null,
+    summary,
+    note,
+  };
 }

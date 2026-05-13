@@ -28,7 +28,7 @@ import {
   serializeChartTime,
   toBusinessDay,
 } from '../lib/charting';
-import { buildKeyPriceZones, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
+import { buildKeyPriceZones, buildLargeHolderCostZone, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
 
 const props = defineProps({
   data: {
@@ -46,6 +46,10 @@ const props = defineProps({
   comparisonLoading: {
     type: Boolean,
     default: false,
+  },
+  holderCostZone: {
+    type: Object,
+    default: null,
   },
 });
 
@@ -372,6 +376,7 @@ const priceZones = computed(() =>
 );
 
 const supportResistance = computed(() => buildSupportResistance(props.data));
+const largeHolderCostZone = computed(() => props.holderCostZone ?? buildLargeHolderCostZone(props.data));
 const stockEvents = computed(() => buildStockEventCalendar(props.data));
 const nearestResistance = computed(() => supportResistance.value.resistances[0] ?? null);
 const nearestSupport = computed(() => supportResistance.value.supports[0] ?? null);
@@ -452,6 +457,18 @@ const uiChartLevelStats = computed(() => [
       ? `${formatNumber(nearestSupport.value.low)} - ${formatNumber(nearestSupport.value.high)}`
       : '-',
     tone: 'up',
+  },
+  {
+    label: '大戶成本帶',
+    value: largeHolderCostZone.value
+      ? `${formatNumber(largeHolderCostZone.value.low)} - ${formatNumber(largeHolderCostZone.value.high)}`
+      : '-',
+    tone:
+      largeHolderCostZone.value?.status === 'below'
+        ? 'down'
+        : largeHolderCostZone.value?.status === 'above'
+          ? undefined
+          : 'up',
   },
   {
     label: '下一事件',
@@ -1018,6 +1035,17 @@ function renderChart() {
         lineStyle: chartEnums.LineStyle.SparseDotted,
       });
     });
+
+    if (largeHolderCostZone.value) {
+      addBandBoundarySeries(chart, chartRows.value, largeHolderCostZone.value.low, chartPalette.costZoneSoft);
+      addBandBoundarySeries(chart, chartRows.value, largeHolderCostZone.value.high, chartPalette.costZoneSoft);
+      addChartPriceLine(candleSeries, {
+        value: largeHolderCostZone.value.mid,
+        title: '大戶成本',
+        color: chartPalette.costZone,
+        lineStyle: chartEnums.LineStyle.Dashed,
+      });
+    }
   }
 
   if (overlayState.events && chartEventMarkers.value.length) {
