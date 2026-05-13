@@ -3,7 +3,7 @@
   "name": "信驊科技",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:22:12.983Z",
+  "generatedAt": "2026-05-13T09:54:20.103Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5733,10 +5733,19 @@
   },
   "主動ETF曝光": {
     "count": 12,
-    "averageWeight": 2.44995,
-    "totalWeight": 29.3994,
+    "averageWeight": 2.628108333333333,
+    "totalWeight": 31.537299999999995,
     "latestDisclosureDate": "2026-05-13",
     "items": [
+      {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 5.6,
+        "shares": 37000,
+        "rank": 5
+      },
       {
         "etfCode": "00991A",
         "etfName": "主動復華未來50",
@@ -5763,15 +5772,6 @@
         "weight": 3.82,
         "shares": null,
         "rank": 7
-      },
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 3.45,
-        "shares": 23000,
-        "rank": 6
       },
       {
         "etfCode": "00981A",
@@ -5823,9 +5823,9 @@
         "etfName": "主動摩根台灣鑫收",
         "providerLabel": "摩根投信",
         "disclosureDate": "2026-05-13",
-        "weight": 1.0704,
+        "weight": 1.0683,
         "shares": 2000,
-        "rank": 36
+        "rank": 35
       },
       {
         "etfCode": "00990A",
@@ -5841,9 +5841,9 @@
         "etfName": "主動安聯台灣高息",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-13",
-        "weight": 0.53,
+        "weight": 0.52,
         "shares": 2000,
-        "rank": 50
+        "rank": 49
       }
     ]
   },

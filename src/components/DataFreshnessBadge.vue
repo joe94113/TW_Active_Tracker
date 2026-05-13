@@ -285,4 +285,44 @@ onBeforeUnmount(() => {
 .is-info {
   color: #0b699b;
 }
+
+:global(html[data-theme="dark"]) .data-freshness-badge {
+  border-color: rgba(103, 201, 255, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 44%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(8, 15, 27, 0.88));
+  color: #dceaf7;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 16px 30px rgba(2, 6, 23, 0.24);
+}
+
+:global(html[data-theme="dark"]) .data-freshness-badge.is-panel {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 18px 34px rgba(2, 6, 23, 0.28);
+}
+
+:global(html[data-theme="dark"]) .badge-detail,
+:global(html[data-theme="dark"]) .badge-next,
+:global(html[data-theme="dark"]) .badge-inline-meta {
+  color: #a7bad0;
+}
+
+:global(html[data-theme="dark"]) .is-up {
+  color: #65e6b6;
+}
+
+:global(html[data-theme="dark"]) .is-warning {
+  color: #ffd076;
+}
+
+:global(html[data-theme="dark"]) .is-down {
+  color: #ff9a82;
+}
+
+:global(html[data-theme="dark"]) .is-normal,
+:global(html[data-theme="dark"]) .is-info {
+  color: #7dd3fc;
+}
 </style>

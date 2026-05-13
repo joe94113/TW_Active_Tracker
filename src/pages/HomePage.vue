@@ -516,12 +516,6 @@ function formatViewedAt(dateText) {
         </article>
       </section>
 
-      <nav class="mobile-section-nav home-mobile-nav" aria-label="首頁快速導覽">
-        <a class="mobile-section-link" href="#close-focus">盤後重點</a>
-        <a class="mobile-section-link" href="#favorites">自選股</a>
-        <a class="mobile-section-link" href="#market-ranking">排行</a>
-      </nav>
-
       <section id="close-focus" class="panel home-panel rounded-[2rem] border border-slate-200/70 bg-white/90 shadow-[0_28px_88px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/76 dark:ring-slate-800/70">
         <div class="panel-header">
           <div>

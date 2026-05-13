@@ -3,7 +3,7 @@
   "name": "健策",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:22:06.740Z",
+  "generatedAt": "2026-05-13T09:54:14.477Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5426,8 +5426,8 @@
   },
   "主動ETF曝光": {
     "count": 11,
-    "averageWeight": 1.502827272727273,
-    "totalWeight": 16.531100000000002,
+    "averageWeight": 1.4719181818181821,
+    "totalWeight": 16.191100000000002,
     "latestDisclosureDate": "2026-05-13",
     "items": [
       {
@@ -5440,15 +5440,6 @@
         "rank": 15
       },
       {
-        "etfCode": "00987A",
-        "etfName": "主動台新優勢成長",
-        "providerLabel": "台新投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 1.9724,
-        "shares": 18000,
-        "rank": 22
-      },
-      {
         "etfCode": "00995A",
         "etfName": "主動中信台灣卓越",
         "providerLabel": "中信投信",
@@ -5456,6 +5447,15 @@
         "weight": 1.9,
         "shares": 30000,
         "rank": 17
+      },
+      {
+        "etfCode": "00987A",
+        "etfName": "主動台新優勢成長",
+        "providerLabel": "台新投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 1.8088,
+        "shares": 18000,
+        "rank": 22
       },
       {
         "etfCode": "00994A",
@@ -5503,15 +5503,6 @@
         "rank": 31
       },
       {
-        "etfCode": "00401A",
-        "etfName": "主動摩根台灣鑫收",
-        "providerLabel": "摩根投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 1.0487,
-        "shares": 9000,
-        "rank": 37
-      },
-      {
         "etfCode": "00996A",
         "etfName": "主動兆豐台灣豐收",
         "providerLabel": "兆豐投信",
@@ -5521,13 +5512,22 @@
         "rank": 33
       },
       {
+        "etfCode": "00401A",
+        "etfName": "主動摩根台灣鑫收",
+        "providerLabel": "摩根投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 0.9523,
+        "shares": 9000,
+        "rank": 37
+      },
+      {
         "etfCode": "00993A",
         "etfName": "主動安聯台灣",
         "providerLabel": "安聯投信",
         "disclosureDate": "2026-05-13",
-        "weight": 1.01,
+        "weight": 0.93,
         "shares": 31000,
-        "rank": 31
+        "rank": 23
       }
     ]
   },

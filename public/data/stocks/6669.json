@@ -3,7 +3,7 @@
   "name": "緯穎",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:22:25.278Z",
+  "generatedAt": "2026-05-13T09:54:31.765Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5836,8 +5836,8 @@
   },
   "主動ETF曝光": {
     "count": 12,
-    "averageWeight": 3.466725,
-    "totalWeight": 41.600699999999996,
+    "averageWeight": 3.539483333333333,
+    "totalWeight": 42.4738,
     "latestDisclosureDate": "2026-05-13",
     "items": [
       {
@@ -5899,9 +5899,18 @@
         "etfName": "主動摩根台灣鑫收",
         "providerLabel": "摩根投信",
         "disclosureDate": "2026-05-13",
-        "weight": 3.4422,
+        "weight": 3.3453,
         "shares": 20000,
         "rank": 6
+      },
+      {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 3.17,
+        "shares": 67000,
+        "rank": 11
       },
       {
         "etfCode": "00980A",
@@ -5922,15 +5931,6 @@
         "rank": 10
       },
       {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 2.17,
-        "shares": 45000,
-        "rank": 15
-      },
-      {
         "etfCode": "00985A",
         "etfName": "主動野村台灣50",
         "providerLabel": "野村投信",
@@ -5944,7 +5944,7 @@
         "etfName": "主動台新優勢成長",
         "providerLabel": "台新投信",
         "disclosureDate": "2026-05-13",
-        "weight": 1.6185,
+        "weight": 1.5885,
         "shares": 10000,
         "rank": 25
       }

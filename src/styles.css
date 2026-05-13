@@ -1148,7 +1148,7 @@ html[data-theme="dark"] .stock-health-total strong,
 html[data-theme="dark"] .stock-health-item strong,
 html[data-theme="dark"] .radar-stock-card strong,
 html[data-theme="dark"] .selection-alert-card strong,
-html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-label) {
+html[data-theme="dark"] .home-freshness-summary-card .badge-label {
   color: #f2f7fb;
 }
 
@@ -1164,9 +1164,9 @@ html[data-theme="dark"] .stock-health-note,
 html[data-theme="dark"] .radar-stock-note,
 html[data-theme="dark"] .news-card p,
 html[data-theme="dark"] .news-card-foot,
-html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-inline-meta),
-html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-detail),
-html[data-theme="dark"] .home-freshness-summary-card :deep(.badge-next) {
+html[data-theme="dark"] .home-freshness-summary-card .badge-inline-meta,
+html[data-theme="dark"] .home-freshness-summary-card .badge-detail,
+html[data-theme="dark"] .home-freshness-summary-card .badge-next {
   color: #98aabd;
 }
 
@@ -1231,20 +1231,26 @@ html[data-theme="dark"] .chart-parameter-reset.ghost-button.compact-button {
   border-color: rgba(71, 85, 105, 0.5);
 }
 
-html[data-theme="dark"] .home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-up .badge-label),
-html[data-theme="dark"] .home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-normal .badge-label) {
+html[data-theme="dark"] .home-freshness-summary-card .data-freshness-badge.is-panel {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .home-freshness-summary-card .data-freshness-badge.is-panel.is-up .badge-label,
+html[data-theme="dark"] .home-freshness-summary-card .data-freshness-badge.is-panel.is-normal .badge-label {
   color: #67c9ff;
 }
 
-html[data-theme="dark"] .home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-warning .badge-label) {
+html[data-theme="dark"] .home-freshness-summary-card .data-freshness-badge.is-panel.is-warning .badge-label {
   color: #ffbd6f;
 }
 
-html[data-theme="dark"] .home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-down .badge-label) {
+html[data-theme="dark"] .home-freshness-summary-card .data-freshness-badge.is-panel.is-down .badge-label {
   color: #ff9c8a;
 }
 
-html[data-theme="dark"] .home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-info .badge-label) {
+html[data-theme="dark"] .home-freshness-summary-card .data-freshness-badge.is-panel.is-info .badge-label {
   color: #8fdbff;
 }
 
@@ -8045,7 +8051,7 @@ html[data-theme="dark"] .theme-spotlight-card.is-up {
     radial-gradient(circle at top right, rgba(11, 105, 155, 0.08), transparent 38%);
 }
 
-.home-freshness-summary-card :deep(.data-freshness-badge.is-panel) {
+.home-freshness-summary-card .data-freshness-badge.is-panel {
   height: 100%;
   padding: 0;
   border: none;
@@ -8055,55 +8061,55 @@ html[data-theme="dark"] .theme-spotlight-card.is-up {
   gap: 0;
 }
 
-.home-freshness-summary-card :deep(.badge-dot) {
+.home-freshness-summary-card .badge-dot {
   display: none;
 }
 
-.home-freshness-summary-card :deep(.badge-panel-copy) {
+.home-freshness-summary-card .badge-panel-copy {
   gap: 6px;
 }
 
-.home-freshness-summary-card :deep(.badge-panel-head) {
+.home-freshness-summary-card .badge-panel-head {
   display: grid;
   gap: 4px;
   align-items: start;
 }
 
-.home-freshness-summary-card :deep(.badge-label) {
+.home-freshness-summary-card .badge-label {
   font-size: 1.28rem;
   line-height: 1.15;
   letter-spacing: -0.03em;
   color: #163650;
 }
 
-.home-freshness-summary-card :deep(.badge-inline-meta) {
+.home-freshness-summary-card .badge-inline-meta {
   color: var(--text-soft);
   font-size: 0.78rem;
   font-weight: 600;
 }
 
-.home-freshness-summary-card :deep(.badge-detail),
-.home-freshness-summary-card :deep(.badge-next) {
+.home-freshness-summary-card .badge-detail,
+.home-freshness-summary-card .badge-next {
   margin: 0;
   color: #456178;
   font-size: 0.82rem;
   line-height: 1.62;
 }
 
-.home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-up .badge-label),
-.home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-normal .badge-label) {
+.home-freshness-summary-card .data-freshness-badge.is-panel.is-up .badge-label,
+.home-freshness-summary-card .data-freshness-badge.is-panel.is-normal .badge-label {
   color: #0b699b;
 }
 
-.home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-warning .badge-label) {
+.home-freshness-summary-card .data-freshness-badge.is-panel.is-warning .badge-label {
   color: #8a5b00;
 }
 
-.home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-down .badge-label) {
+.home-freshness-summary-card .data-freshness-badge.is-panel.is-down .badge-label {
   color: #a33a26;
 }
 
-.home-freshness-summary-card :deep(.data-freshness-badge.is-panel.is-info .badge-label) {
+.home-freshness-summary-card .data-freshness-badge.is-panel.is-info .badge-label {
   color: var(--brand-deep);
 }
 

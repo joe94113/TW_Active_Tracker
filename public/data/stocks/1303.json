@@ -3,7 +3,7 @@
   "name": "南亞",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:21:40.087Z",
+  "generatedAt": "2026-05-13T09:53:47.780Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5828,19 +5828,10 @@
   },
   "主動ETF曝光": {
     "count": 3,
-    "averageWeight": 0.58,
-    "totalWeight": 1.74,
+    "averageWeight": 0.4266666666666667,
+    "totalWeight": 1.28,
     "latestDisclosureDate": "2026-05-13",
     "items": [
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 0.75,
-        "shares": 1015000,
-        "rank": 43
-      },
       {
         "etfCode": "00400A",
         "etfName": "主動國泰動能高息",
@@ -5849,6 +5840,15 @@
         "weight": 0.74,
         "shares": null,
         "rank": 31
+      },
+      {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 0.29,
+        "shares": 397000,
+        "rank": 50
       },
       {
         "etfCode": "00996A",

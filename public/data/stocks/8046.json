@@ -3,7 +3,7 @@
   "name": "南電",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:22:28.583Z",
+  "generatedAt": "2026-05-13T09:54:35.328Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5828,8 +5828,8 @@
   },
   "主動ETF曝光": {
     "count": 8,
-    "averageWeight": 2.09875,
-    "totalWeight": 16.79,
+    "averageWeight": 2.14875,
+    "totalWeight": 17.19,
     "latestDisclosureDate": "2026-05-13",
     "items": [
       {
@@ -5869,6 +5869,15 @@
         "rank": 18
       },
       {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 1.98,
+        "shares": 265000,
+        "rank": 18
+      },
+      {
         "etfCode": "00403A",
         "etfName": "主動統一台股升級50",
         "providerLabel": "統一投信",
@@ -5876,15 +5885,6 @@
         "weight": 1.59,
         "shares": 2590000,
         "rank": 15
-      },
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 1.58,
-        "shares": 210000,
-        "rank": 19
       },
       {
         "etfCode": "00985A",
@@ -5902,7 +5902,7 @@
         "disclosureDate": "2026-05-13",
         "weight": 0.39,
         "shares": 30000,
-        "rank": 70
+        "rank": 68
       }
     ]
   },

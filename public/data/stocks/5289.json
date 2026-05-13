@@ -3,7 +3,7 @@
   "name": "宜鼎國際",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:22:13.280Z",
+  "generatedAt": "2026-05-13T09:54:20.388Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5763,19 +5763,10 @@
   },
   "主動ETF曝光": {
     "count": 2,
-    "averageWeight": 0.955,
-    "totalWeight": 1.91,
+    "averageWeight": 0.685,
+    "totalWeight": 1.37,
     "latestDisclosureDate": "2026-05-13",
     "items": [
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 1.21,
-        "shares": 81000,
-        "rank": 23
-      },
       {
         "etfCode": "00995A",
         "etfName": "主動中信台灣卓越",
@@ -5784,6 +5775,15 @@
         "weight": 0.7,
         "shares": 22000,
         "rank": 32
+      },
+      {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 0.67,
+        "shares": 45000,
+        "rank": 26
       }
     ]
   },

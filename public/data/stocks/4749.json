@@ -3,7 +3,7 @@
   "name": "新應材",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:22:10.009Z",
+  "generatedAt": "2026-05-13T09:54:17.349Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5755,19 +5755,10 @@
   },
   "主動ETF曝光": {
     "count": 5,
-    "averageWeight": 0.5359999999999999,
-    "totalWeight": 2.6799999999999997,
+    "averageWeight": 0.45999999999999996,
+    "totalWeight": 2.3,
     "latestDisclosureDate": "2026-05-13",
     "items": [
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 0.94,
-        "shares": 96000,
-        "rank": 34
-      },
       {
         "etfCode": "00985A",
         "etfName": "主動野村台灣50",
@@ -5785,6 +5776,15 @@
         "weight": 0.57,
         "shares": 28000,
         "rank": 38
+      },
+      {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 0.56,
+        "shares": 58000,
+        "rank": 32
       },
       {
         "etfCode": "00400A",

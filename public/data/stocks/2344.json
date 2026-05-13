@@ -3,7 +3,7 @@
   "name": "華邦電",
   "kind": "stock",
   "priceDate": "2026-05-13",
-  "generatedAt": "2026-05-13T09:21:46.223Z",
+  "generatedAt": "2026-05-13T09:53:54.165Z",
   "indicatorSettings": {
     "maFastPeriod": 5,
     "maShortPeriod": 10,
@@ -5828,10 +5828,19 @@
   },
   "主動ETF曝光": {
     "count": 6,
-    "averageWeight": 1.265,
-    "totalWeight": 7.59,
+    "averageWeight": 1.4366666666666665,
+    "totalWeight": 8.62,
     "latestDisclosureDate": "2026-05-13",
     "items": [
+      {
+        "etfCode": "00993A",
+        "etfName": "主動安聯台灣",
+        "providerLabel": "安聯投信",
+        "disclosureDate": "2026-05-13",
+        "weight": 2.17,
+        "shares": 2098000,
+        "rank": 15
+      },
       {
         "etfCode": "00980A",
         "etfName": "主動野村臺灣優選",
@@ -5858,15 +5867,6 @@
         "weight": 1.47,
         "shares": 1336000,
         "rank": 23
-      },
-      {
-        "etfCode": "00993A",
-        "etfName": "主動安聯台灣",
-        "providerLabel": "安聯投信",
-        "disclosureDate": "2026-05-13",
-        "weight": 1.14,
-        "shares": 1124000,
-        "rank": 25
       },
       {
         "etfCode": "00403A",
