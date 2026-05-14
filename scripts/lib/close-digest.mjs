@@ -222,6 +222,16 @@ function buildThemeTopicMap(themeRadar) {
   return topicMap;
 }
 
+function isUsableStockName(name, code) {
+  const normalizedName = String(name ?? '').trim();
+  const normalizedCode = String(code ?? '').trim();
+  return Boolean(normalizedName && normalizedName !== normalizedCode);
+}
+
+function pickStockDisplayName(code, ...candidates) {
+  return candidates.find((name) => isUsableStockName(name, code)) ?? String(code ?? '').trim();
+}
+
 function enrichWatchGroupItems(items, trackedStocks, themeRadar, stockDetailList = []) {
   const trackedMap = new Map((trackedStocks ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
   const detailMap = new Map((stockDetailList ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
@@ -242,6 +252,14 @@ function enrichWatchGroupItems(items, trackedStocks, themeRadar, stockDetailList
 
     const enrichedItem = {
       ...item,
+      name: pickStockDisplayName(
+        code,
+        detail?.name,
+        detail?.公司概況?.公司簡稱,
+        detail?.公司概況?.公司名稱,
+        tracked?.name,
+        item?.name,
+      ),
       industryName: tracked?.industryName ?? null,
       topicTag: topicMap.get(code) ?? tracked?.industryName ?? null,
       foreignTargetPrice: targetPrice ?? null,

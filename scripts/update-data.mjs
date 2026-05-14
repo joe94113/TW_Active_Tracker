@@ -5057,25 +5057,33 @@ function buildStockSearchIndex({
   產生時間 = null,
 }) {
   const 明細索引 = new Map(個股摘要清單.map((item) => [item.code, item]));
+  const 市場索引 = new Map((全部個股 ?? []).map((item) => [String(item?.代號 ?? '').trim(), item]).filter(([code]) => code));
+  const 全部代號 = new Set([...市場索引.keys(), ...明細索引.keys()]);
+  const resolveDisplayName = (code, ...candidates) =>
+    candidates.find((name) => {
+      const normalizedName = String(name ?? '').trim();
+      return normalizedName && normalizedName !== code;
+    }) ?? code;
 
-  return 全部個股.map((item) => {
-    const 明細摘要 = 明細索引.get(item.代號);
-    const 公司概況 = 公司概況索引.get(item.代號);
-    const 評價面 = 評價索引.get(item.代號);
-    const 交易提醒 = buildStockSelectionSignals(選股輔助資料集, item.代號);
-    const 顯示名稱 = item.名稱 ?? 明細摘要?.name ?? 公司概況?.公司簡稱 ?? 公司概況?.公司名稱 ?? item.代號;
+  return [...全部代號].sort((left, right) => left.localeCompare(right)).map((code) => {
+    const item = 市場索引.get(code) ?? {};
+    const 明細摘要 = 明細索引.get(code);
+    const 公司概況 = 公司概況索引.get(code);
+    const 評價面 = 評價索引.get(code);
+    const 交易提醒 = buildStockSelectionSignals(選股輔助資料集, code);
+    const 顯示名稱 = resolveDisplayName(code, 明細摘要?.name, item.名稱, 公司概況?.公司簡稱, 公司概況?.公司名稱);
 
     return {
-      code: item.代號,
+      code,
       name: 顯示名稱,
       industryName: 明細摘要?.industryName ?? 公司概況?.產業名稱 ?? null,
       priceDate: 明細摘要?.priceDate ?? 市場資料日期 ?? null,
       generatedAt: 產生時間,
-      close: item.收盤價 ?? null,
-      change: item.漲跌值 ?? null,
-      changePercent: item.漲跌幅 ?? null,
-      volume: item.成交量 ?? null,
-      turnover: item.成交值 ?? null,
+      close: item.收盤價 ?? 明細摘要?.close ?? null,
+      change: item.漲跌值 ?? 明細摘要?.change ?? null,
+      changePercent: item.漲跌幅 ?? 明細摘要?.changePercent ?? null,
+      volume: item.成交量 ?? 明細摘要?.volume ?? null,
+      turnover: item.成交值 ?? 明細摘要?.turnover ?? null,
       peRatio: 評價面?.本益比 ?? null,
       dividendYield: 評價面?.殖利率 ?? null,
       pbRatio: 評價面?.股價淨值比 ?? null,

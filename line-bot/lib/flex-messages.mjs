@@ -484,11 +484,21 @@ function summarizeTargetPrice(targetPrice) {
   return upsideText ? `${provider}｜${targetText}｜空間 ${upsideText}` : `${provider}｜${targetText}`;
 }
 
+function isUsableStockName(name, code) {
+  const normalizedName = String(name ?? '').trim();
+  const normalizedCode = String(code ?? '').trim();
+  return Boolean(normalizedName && normalizedName !== normalizedCode);
+}
+
+function pickStockDisplayName(code, ...candidates) {
+  return candidates.find((name) => isUsableStockName(name, code)) ?? String(code ?? '').trim();
+}
+
 function createStockCardBubble(stock, siteUrl, options = {}) {
   const accentColor = options.accentColor ?? PALETTE.brand;
   const accentSoft = options.accentSoft ?? PALETTE.brandSoft;
   const code = stock.code || stock.代號;
-  const name = stock.name || stock.名稱;
+  const name = pickStockDisplayName(code, stock.name, stock.名稱);
   const signal = stock.label || stock.標籤 || stock.reasonType || '觀察名單';
   const theme = stock.themeTitle || stock.theme || stock.topic || stock.industryName || stock.industry || null;
   const note =
@@ -1152,7 +1162,14 @@ export function buildStockFlex({ stock, detail, siteUrl }) {
 
   const merged = {
     code: stock?.code,
-    name: stock?.name,
+    name: pickStockDisplayName(
+      stock?.code,
+      detail?.name,
+      detail?.['公司概況']?.公司簡稱,
+      detail?.['公司概況']?.公司名稱,
+      stock?.name,
+      stock?.名稱,
+    ),
     close: summary?.收盤價 ?? stock?.close,
     changePercent: summary?.漲跌幅 ?? stock?.changePercent,
     return20: stock?.return20,

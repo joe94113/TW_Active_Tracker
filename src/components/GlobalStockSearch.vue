@@ -8,7 +8,7 @@ import { formatNumber, formatPercent } from '../lib/formatters';
 
 const router = useRouter();
 const route = useRoute();
-const { stockSearchList, loadGlobalData } = useGlobalData();
+const { stockList, stockSearchList, loadGlobalData } = useGlobalData();
 
 const hostRef = ref(null);
 const query = ref('');
@@ -41,12 +41,50 @@ watch(
 
 const normalizedQuery = computed(() => query.value.trim().toLowerCase());
 
+function normalizeCode(value) {
+  return String(value ?? '').trim();
+}
+
+function isUsableName(name, code) {
+  const normalizedName = String(name ?? '').trim();
+  return Boolean(normalizedName && normalizedName !== normalizeCode(code));
+}
+
+const localSearchUniverse = computed(() => {
+  const map = new Map();
+
+  for (const item of stockSearchList.value ?? []) {
+    const code = normalizeCode(item?.code);
+    if (!code) continue;
+    map.set(code, {
+      ...item,
+      code,
+      name: isUsableName(item?.name, code) ? item.name : code,
+    });
+  }
+
+  for (const item of stockList.value ?? []) {
+    const code = normalizeCode(item?.code);
+    if (!code) continue;
+    const existing = map.get(code) ?? {};
+    map.set(code, {
+      ...existing,
+      ...item,
+      code,
+      name: isUsableName(existing?.name, code) ? existing.name : isUsableName(item?.name, code) ? item.name : code,
+      hasLocalDetail: Boolean(existing?.hasLocalDetail ?? item?.hasLocalDetail ?? true),
+    });
+  }
+
+  return [...map.values()];
+});
+
 const localMatches = computed(() => {
   if (!normalizedQuery.value) {
     return [];
   }
 
-  return stockSearchList.value
+  return localSearchUniverse.value
     .filter((item) => [item.code, item.name].some((field) => String(field ?? '').toLowerCase().includes(normalizedQuery.value)))
     .slice(0, 6)
     .map((item) => ({
@@ -93,7 +131,7 @@ watch(normalizedQuery, (keyword) => {
     return;
   }
 
-  if (stockSearchList.value.length) {
+  if (localSearchUniverse.value.length) {
     remoteMatches.value = [];
     isRemoteLoading.value = false;
     return;

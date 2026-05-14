@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import StatusCard from '../components/StatusCard.vue';
 import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
@@ -11,6 +11,7 @@ import { createStockRoute } from '../lib/stockRouting';
 
 const { dashboard, stockSearchList, manifest, isLoading, errorMessage, loadGlobalData } = useGlobalData();
 
+const activePulseTab = ref('industries');
 const pulse = computed(() => buildIndustryPulse(stockSearchList.value, dashboard.value?.題材雷達));
 const hasData = computed(() => Boolean(pulse.value.topIndustries.length || pulse.value.suddenMoves.length));
 const strongestIndustry = computed(() => pulse.value.summary?.strongestIndustry ?? null);
@@ -56,6 +57,10 @@ function getToneClass(value) {
   if ((value ?? 0) > 0) return 'text-up';
   if ((value ?? 0) < 0) return 'text-down';
   return '';
+}
+
+function setPulseTab(tab) {
+  activePulseTab.value = tab;
 }
 </script>
 
@@ -103,8 +108,37 @@ function getToneClass(value) {
         </aside>
       </section>
 
-      <section class="dual-grid industry-pulse-main-grid">
-        <article class="panel">
+      <section class="panel market-tabs-panel industry-pulse-main-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">盤後動向切換</h2>
+            <p class="panel-subtitle">先看資金集中到哪個產業，再切到瞬間波動股檢查個股異動。</p>
+          </div>
+        </div>
+        <div class="radar-tabbar market-section-tabbar" role="tablist" aria-label="產業即時動向切換">
+          <button
+            type="button"
+            class="radar-tab-button"
+            :class="{ 'is-active': activePulseTab === 'industries' }"
+            :aria-selected="activePulseTab === 'industries'"
+            @click="setPulseTab('industries')"
+          >
+            <span>產業升溫排行</span>
+            <small>{{ formatNumber(pulse.topIndustries.length, 0) }} 個</small>
+          </button>
+          <button
+            type="button"
+            class="radar-tab-button"
+            :class="{ 'is-active': activePulseTab === 'moves' }"
+            :aria-selected="activePulseTab === 'moves'"
+            @click="setPulseTab('moves')"
+          >
+            <span>瞬間波動股</span>
+            <small>{{ formatNumber(pulse.suddenMoves.length, 0) }} 檔</small>
+          </button>
+        </div>
+
+        <article v-if="activePulseTab === 'industries'" class="market-tab-content">
           <div class="panel-header">
             <div>
               <h2 class="panel-title">產業升溫排行</h2>
@@ -166,7 +200,7 @@ function getToneClass(value) {
           </div>
         </article>
 
-        <article class="panel">
+        <article v-else class="market-tab-content">
           <div class="panel-header">
             <div>
               <h2 class="panel-title">瞬間波動股</h2>

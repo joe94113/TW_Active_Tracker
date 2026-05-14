@@ -93,6 +93,16 @@ function parseKeywordRoute(rawText) {
   return { type: 'stock', query: text };
 }
 
+function isUsableStockName(name, code) {
+  const normalizedName = String(name ?? '').trim();
+  const normalizedCode = String(code ?? '').trim();
+  return Boolean(normalizedName && normalizedName !== normalizedCode);
+}
+
+function pickStockDisplayName(code, ...candidates) {
+  return candidates.find((name) => isUsableStockName(name, code)) ?? String(code ?? '').trim();
+}
+
 async function verifySignature(body, signature, channelSecret) {
   if (!signature || !channelSecret) {
     return false;
@@ -186,14 +196,15 @@ async function buildReplyForKeyword(route, client) {
       const hydrateStockName = (candidate, detailData) => {
         if (!candidate) return candidate;
         const companyProfile = detailData?.['公司概況'] ?? detailData?.companyProfile ?? null;
-        const displayName =
-          candidate.name ??
-          candidate.名稱 ??
-          companyProfile?.公司簡稱 ??
-          companyProfile?.公司名稱 ??
-          detailData?.name ??
-          candidate.code ??
-          route.query;
+        const code = candidate.code ?? route.query;
+        const displayName = pickStockDisplayName(
+          code,
+          detailData?.name,
+          companyProfile?.公司簡稱,
+          companyProfile?.公司名稱,
+          candidate.name,
+          candidate.名稱,
+        );
         const industryName = candidate.industryName ?? companyProfile?.產業名稱 ?? null;
         return {
           ...candidate,

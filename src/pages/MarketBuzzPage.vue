@@ -15,6 +15,7 @@ const { dashboard, manifest, isLoading, errorMessage, loadGlobalData } = useGlob
 const themeHistory = ref(null);
 const isHistoryLoading = ref(false);
 const historyError = ref('');
+const activeBuzzTab = ref('keywords');
 
 const buzz = computed(() => buildMarketBuzz(dashboard.value?.題材雷達, themeHistory.value));
 const hasData = computed(() => Boolean(buzz.value.hotKeywords.length || buzz.value.hotTopics.length));
@@ -88,6 +89,10 @@ function getToneClass(value) {
   if ((value ?? 0) < 0) return 'text-down';
   return '';
 }
+
+function setBuzzTab(tab) {
+  activeBuzzTab.value = tab;
+}
 </script>
 
 <template>
@@ -132,8 +137,37 @@ function getToneClass(value) {
         </aside>
       </section>
 
-      <section class="dual-grid market-buzz-main-grid">
-        <article class="panel">
+      <section class="panel market-tabs-panel market-buzz-main-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">新聞熱度切換</h2>
+            <p class="panel-subtitle">先看市場正在反覆提到的關鍵詞，再切到題材熱度排行確認資金主線。</p>
+          </div>
+        </div>
+        <div class="radar-tabbar market-section-tabbar" role="tablist" aria-label="市場熱度切換">
+          <button
+            type="button"
+            class="radar-tab-button"
+            :class="{ 'is-active': activeBuzzTab === 'keywords' }"
+            :aria-selected="activeBuzzTab === 'keywords'"
+            @click="setBuzzTab('keywords')"
+          >
+            <span>熱門關鍵詞</span>
+            <small>{{ formatNumber(buzz.hotKeywords.length, 0) }} 組</small>
+          </button>
+          <button
+            type="button"
+            class="radar-tab-button"
+            :class="{ 'is-active': activeBuzzTab === 'topics' }"
+            :aria-selected="activeBuzzTab === 'topics'"
+            @click="setBuzzTab('topics')"
+          >
+            <span>市場熱度排行</span>
+            <small>{{ formatNumber(buzz.hotTopics.length, 0) }} 個</small>
+          </button>
+        </div>
+
+        <article v-if="activeBuzzTab === 'keywords'" class="market-tab-content">
           <div class="panel-header">
             <div>
               <h2 class="panel-title">熱門關鍵詞</h2>
@@ -169,7 +203,7 @@ function getToneClass(value) {
           </div>
         </article>
 
-        <article class="panel">
+        <article v-else class="market-tab-content">
           <div class="panel-header">
             <div>
               <h2 class="panel-title">市場熱度排行</h2>

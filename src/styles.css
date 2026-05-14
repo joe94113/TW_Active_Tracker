@@ -3202,6 +3202,25 @@ html[data-theme="dark"] .focus-card-item div span {
   font-size: 0.82rem;
 }
 
+html[data-theme="dark"] .futures-page-hero .hero-stat-card {
+  border-color: rgba(103, 201, 255, 0.16);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 48%),
+    linear-gradient(180deg, rgba(15, 24, 37, 0.94), rgba(9, 16, 27, 0.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 14px 30px rgba(2, 6, 23, 0.24);
+}
+
+html[data-theme="dark"] .futures-page-hero .hero-stat-label {
+  color: #a8bed2;
+}
+
+html[data-theme="dark"] .futures-page-hero .hero-stat-card strong {
+  color: #f4fbff;
+  text-shadow: 0 1px 0 rgba(2, 6, 23, 0.28);
+}
+
 .theme-page-layout {
   display: grid;
   grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
@@ -6945,6 +6964,83 @@ html[data-theme="dark"] .replay-detail-panel h3 {
   text-align: right;
 }
 
+html[data-theme="dark"] .high-dividend-universe-card,
+html[data-theme="dark"] .high-dividend-stock-card,
+html[data-theme="dark"] .high-dividend-etf-card {
+  border-color: rgba(71, 85, 105, 0.52);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 48%),
+    linear-gradient(180deg, rgba(15, 24, 37, 0.94), rgba(9, 16, 27, 0.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 36px rgba(2, 6, 23, 0.26);
+}
+
+html[data-theme="dark"] .high-dividend-stock-card:hover {
+  border-color: rgba(103, 201, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 22px 44px rgba(2, 6, 23, 0.32);
+}
+
+html[data-theme="dark"] .high-dividend-stock-card.is-up {
+  border-color: rgba(101, 230, 182, 0.28);
+}
+
+html[data-theme="dark"] .high-dividend-stock-card.is-down {
+  border-color: rgba(255, 154, 130, 0.28);
+}
+
+html[data-theme="dark"] .high-dividend-universe-head strong,
+html[data-theme="dark"] .high-dividend-stock-head strong,
+html[data-theme="dark"] .high-dividend-etf-head strong,
+html[data-theme="dark"] .high-dividend-mini-list strong {
+  color: #f4fbff;
+}
+
+html[data-theme="dark"] .high-dividend-universe-metrics div,
+html[data-theme="dark"] .high-dividend-stock-metrics div,
+html[data-theme="dark"] .high-dividend-callout,
+html[data-theme="dark"] .high-dividend-etf-column {
+  border-color: rgba(71, 85, 105, 0.46);
+  background:
+    linear-gradient(180deg, rgba(17, 29, 45, 0.84), rgba(10, 18, 29, 0.78));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+html[data-theme="dark"] .high-dividend-universe-metrics span,
+html[data-theme="dark"] .high-dividend-stock-metrics span,
+html[data-theme="dark"] .high-dividend-callout-title,
+html[data-theme="dark"] .high-dividend-mini-list span {
+  color: #a8bacb;
+}
+
+html[data-theme="dark"] .high-dividend-universe-metrics strong,
+html[data-theme="dark"] .high-dividend-stock-metrics strong {
+  color: #edf7ff;
+}
+
+html[data-theme="dark"] .high-dividend-stock-note,
+html[data-theme="dark"] .high-dividend-universe-note,
+html[data-theme="dark"] .high-dividend-callout p {
+  color: #b7c8d9;
+}
+
+html[data-theme="dark"] .high-dividend-etf-column h3 {
+  color: #dff2ff;
+}
+
+html[data-theme="dark"] .high-dividend-mini-list li {
+  border-bottom-color: rgba(148, 163, 184, 0.16);
+}
+
+html[data-theme="dark"] .high-dividend-etf-chip-row .theme-observation-chip,
+html[data-theme="dark"] .high-dividend-etf-summary .theme-observation-chip {
+  border-color: rgba(103, 201, 255, 0.18);
+  background: rgba(56, 189, 248, 0.08);
+  color: #c8e8f8;
+}
+
 @media (max-width: 1080px) {
   .high-dividend-universe-grid,
   .high-dividend-etf-grid {
@@ -9069,6 +9165,188 @@ html[data-theme="dark"] .advanced-metric-cell .small {
   white-space: nowrap;
 }
 
+html[data-theme="dark"] .broker-radar-page .theme-observation-chip {
+  border-color: rgba(103, 201, 255, 0.22);
+  background: rgba(56, 189, 248, 0.1);
+  color: #c8edff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+html[data-theme="dark"] .broker-radar-page .theme-spotlight-label,
+html[data-theme="dark"] .broker-branch-filter-select span,
+html[data-theme="dark"] .broker-stock-metrics > div span,
+html[data-theme="dark"] .broker-branch-metrics > div span,
+html[data-theme="dark"] .broker-radar-page .theme-playbook-list {
+  color: #9fb2c5;
+}
+
+html[data-theme="dark"] .broker-branch-filter-select select {
+  color: #eff8ff;
+  color-scheme: dark;
+  border-color: rgba(71, 85, 105, 0.52);
+  background:
+    linear-gradient(180deg, rgba(13, 22, 35, 0.96), rgba(9, 17, 29, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 14px 28px rgba(2, 6, 23, 0.22);
+}
+
+html[data-theme="dark"] .broker-branch-chip {
+  color: #c6d7e8;
+  border-color: rgba(71, 85, 105, 0.46);
+  background: rgba(13, 22, 35, 0.86);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+html[data-theme="dark"] .broker-branch-chip:hover,
+html[data-theme="dark"] .broker-branch-chip:focus-visible {
+  color: #e8f7ff;
+  border-color: rgba(103, 201, 255, 0.32);
+  background: rgba(18, 32, 50, 0.96);
+  box-shadow: 0 14px 28px rgba(2, 6, 23, 0.24);
+}
+
+html[data-theme="dark"] .broker-branch-chip.is-active {
+  color: #07121c;
+  background: linear-gradient(135deg, #8fdbff, #4fb6ff 58%, #5eead4);
+  box-shadow: 0 16px 30px rgba(56, 189, 248, 0.2);
+}
+
+html[data-theme="dark"] .broker-stock-card {
+  border-color: rgba(71, 85, 105, 0.54);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 48%),
+    linear-gradient(180deg, rgba(13, 22, 35, 0.98), rgba(10, 18, 30, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 22px 42px rgba(2, 6, 23, 0.36);
+}
+
+html[data-theme="dark"] .broker-stock-card:hover,
+html[data-theme="dark"] .broker-stock-card:focus-visible {
+  border-color: rgba(103, 201, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 26px 52px rgba(2, 6, 23, 0.44);
+}
+
+html[data-theme="dark"] .broker-stock-card.is-up {
+  background:
+    radial-gradient(circle at top right, rgba(45, 212, 191, 0.14), transparent 48%),
+    linear-gradient(180deg, rgba(11, 28, 31, 0.98), rgba(10, 18, 30, 0.94));
+}
+
+html[data-theme="dark"] .broker-stock-card.is-risk {
+  background:
+    radial-gradient(circle at top right, rgba(248, 113, 113, 0.14), transparent 48%),
+    linear-gradient(180deg, rgba(35, 17, 20, 0.98), rgba(10, 18, 30, 0.94));
+}
+
+html[data-theme="dark"] .broker-stock-card.is-info {
+  background:
+    radial-gradient(circle at top right, rgba(103, 201, 255, 0.12), transparent 48%),
+    linear-gradient(180deg, rgba(12, 22, 38, 0.98), rgba(10, 18, 30, 0.94));
+}
+
+html[data-theme="dark"] .broker-stock-head strong,
+html[data-theme="dark"] .broker-stock-price strong,
+html[data-theme="dark"] .broker-branch-head strong,
+html[data-theme="dark"] .broker-mini-item strong {
+  color: #f2f8ff;
+}
+
+html[data-theme="dark"] .broker-stock-note {
+  color: #d4e3f2;
+}
+
+html[data-theme="dark"] .broker-stock-note.is-muted,
+html[data-theme="dark"] .broker-radar-page .muted {
+  color: #94a9bd;
+}
+
+html[data-theme="dark"] .broker-stock-metrics > div,
+html[data-theme="dark"] .broker-branch-metrics > div {
+  border-color: rgba(71, 85, 105, 0.4);
+  background: rgba(7, 14, 25, 0.68);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+html[data-theme="dark"] .broker-branch-card {
+  border-color: rgba(71, 85, 105, 0.54);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 54%),
+    linear-gradient(180deg, rgba(13, 22, 35, 0.98), rgba(10, 18, 30, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 22px 42px rgba(2, 6, 23, 0.34);
+}
+
+html[data-theme="dark"] .broker-branch-column {
+  border-color: rgba(71, 85, 105, 0.42);
+  background: rgba(7, 14, 25, 0.54);
+}
+
+html[data-theme="dark"] .broker-branch-column h3 {
+  color: #e8f4ff;
+}
+
+html[data-theme="dark"] .broker-mini-item {
+  border-color: rgba(71, 85, 105, 0.4);
+  background: rgba(12, 22, 35, 0.82);
+  color: #dbe9f6;
+}
+
+html[data-theme="dark"] .broker-mini-item:hover,
+html[data-theme="dark"] .broker-mini-item:focus-visible {
+  border-color: rgba(103, 201, 255, 0.28);
+  background: rgba(18, 32, 50, 0.94);
+}
+
+html[data-theme="dark"] .broker-radar-page .table-wrap {
+  border-color: rgba(71, 85, 105, 0.42);
+  background:
+    linear-gradient(180deg, rgba(13, 22, 35, 0.94), rgba(8, 15, 27, 0.88));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 34px rgba(2, 6, 23, 0.22);
+}
+
+html[data-theme="dark"] .broker-radar-page .code-link {
+  color: #8fdbff;
+}
+
+html[data-theme="dark"] .broker-radar-page .keyword-pill,
+html[data-theme="dark"] .broker-radar-page .status-badge {
+  border-color: rgba(103, 201, 255, 0.22);
+  background: rgba(56, 189, 248, 0.1);
+  color: #c8edff;
+}
+
+html[data-theme="dark"] .broker-radar-page .status-badge.is-risk,
+html[data-theme="dark"] .broker-radar-page .status-badge.is-warning {
+  border-color: rgba(251, 146, 60, 0.26);
+  background: rgba(251, 146, 60, 0.12);
+  color: #ffd29a;
+}
+
+html[data-theme="dark"] .broker-radar-page .footer-stat-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+html[data-theme="dark"] .broker-radar-page .footer-stat {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.82rem 0.9rem;
+  border-radius: 16px;
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  background: rgba(7, 14, 25, 0.58);
+}
+
+html[data-theme="dark"] .broker-radar-page .footer-stat span {
+  color: #9fb2c5;
+}
+
 @media (max-width: 1180px) {
   .broker-radar-hero,
   .broker-radar-layout,
@@ -9357,6 +9635,43 @@ html[data-theme="dark"] .event-calendar-actions .ghost-button:focus-visible {
 .industry-pulse-main-grid,
 .market-buzz-main-grid {
   align-items: start;
+}
+
+.market-tabs-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.market-section-tabbar {
+  align-self: stretch;
+}
+
+.market-tab-content {
+  display: grid;
+  gap: 16px;
+}
+
+.market-tab-content > .panel-header {
+  padding-bottom: 0;
+}
+
+html[data-theme="dark"] .industry-pulse-hero-board .data-freshness-badge.is-warning.is-inline.is-compact,
+html[data-theme="dark"] .market-buzz-hero-board .data-freshness-badge.is-warning.is-inline.is-compact {
+  border-color: rgba(255, 208, 118, 0.38);
+  background:
+    radial-gradient(circle at top left, rgba(255, 208, 118, 0.16), transparent 44%),
+    linear-gradient(180deg, rgba(31, 25, 14, 0.96), rgba(12, 20, 32, 0.9));
+  color: #ffd781;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 16px 30px rgba(2, 6, 23, 0.28);
+}
+
+html[data-theme="dark"] .industry-pulse-hero-board .data-freshness-badge.is-warning .badge-detail,
+html[data-theme="dark"] .industry-pulse-hero-board .data-freshness-badge.is-warning .badge-next,
+html[data-theme="dark"] .market-buzz-hero-board .data-freshness-badge.is-warning .badge-detail,
+html[data-theme="dark"] .market-buzz-hero-board .data-freshness-badge.is-warning .badge-next {
+  color: #e4d0a3;
 }
 
 html[data-theme="dark"] .chart-signal-card {
