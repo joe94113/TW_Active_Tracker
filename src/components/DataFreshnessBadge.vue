@@ -303,10 +303,31 @@ onBeforeUnmount(() => {
     0 18px 34px rgba(2, 6, 23, 0.28);
 }
 
+:global(html[data-theme="dark"]) .data-freshness-badge.is-inline.is-compact {
+  border-color: rgba(148, 163, 184, 0.24);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 46%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(8, 15, 27, 0.86));
+}
+
+:global(html[data-theme="dark"]) .data-freshness-badge.is-warning.is-inline {
+  border-color: rgba(255, 208, 118, 0.34);
+  background:
+    radial-gradient(circle at top left, rgba(255, 208, 118, 0.14), transparent 42%),
+    linear-gradient(180deg, rgba(28, 23, 13, 0.92), rgba(13, 19, 30, 0.88));
+  color: #ffd076;
+}
+
 :global(html[data-theme="dark"]) .badge-detail,
 :global(html[data-theme="dark"]) .badge-next,
 :global(html[data-theme="dark"]) .badge-inline-meta {
   color: #a7bad0;
+}
+
+:global(html[data-theme="dark"]) .data-freshness-badge.is-warning .badge-detail,
+:global(html[data-theme="dark"]) .data-freshness-badge.is-warning .badge-next,
+:global(html[data-theme="dark"]) .data-freshness-badge.is-warning .badge-inline-meta {
+  color: #dcc99f;
 }
 
 :global(html[data-theme="dark"]) .is-up {

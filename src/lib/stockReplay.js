@@ -39,6 +39,7 @@ export function buildReplayOverview(history) {
 
   return {
     snapshotCount: snapshots.length,
+    allSnapshots: snapshots,
     snapshots: snapshots.slice(0, 12),
     groups: {
       stable: Object.fromEntries(HORIZONS.map((horizon) => [horizon, summarizeReturns(collectReturns(snapshots, 'stable', horizon))])),

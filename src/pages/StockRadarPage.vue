@@ -17,6 +17,7 @@ const replayHistory = ref(null);
 const isReplayLoading = ref(false);
 const replayError = ref('');
 const activeRadarTab = ref('technical');
+const activeReplayDetail = ref({ groupKey: 'stable', horizon: 5 });
 
 const themeRadar = computed(() => dashboard.value?.題材雷達 ?? null);
 const radarSourceList = computed(() => (stockList.value.length ? stockList.value : stockSearchList.value));
@@ -31,6 +32,26 @@ const radar = computed(() =>
 );
 const replayOverview = computed(() => buildReplayOverview(replayHistory.value));
 const replaySnapshots = computed(() => replayOverview.value.snapshots.slice(0, 8));
+const replayDetailRows = computed(() => {
+  const { groupKey, horizon } = activeReplayDetail.value;
+
+  return (replayOverview.value.allSnapshots ?? replayOverview.value.snapshots)
+    .flatMap((snapshot) =>
+      (snapshot?.[groupKey] ?? [])
+        .map((item) => ({
+          ...item,
+          marketDate: snapshot.marketDate,
+          result: item?.horizons?.[horizon] ?? null,
+        }))
+        .filter((item) => Number.isFinite(Number(item.result?.returnPercent))),
+    )
+    .sort((left, right) => {
+      const dateCompare = String(right.marketDate).localeCompare(String(left.marketDate));
+      if (dateCompare !== 0) return dateCompare;
+      return Number(right.result?.returnPercent ?? 0) - Number(left.result?.returnPercent ?? 0);
+    });
+});
+const replayDetailLabel = computed(() => `${getReplayGroupLabel(activeReplayDetail.value.groupKey)} ${activeReplayDetail.value.horizon} 日樣本`);
 
 const spotlightCards = computed(() => [
   {
@@ -168,6 +189,17 @@ function setActiveRadarTab(sectionKey) {
   activeRadarTab.value = sectionKey;
 }
 
+function setReplayDetail(groupKey, horizon) {
+  activeReplayDetail.value = { groupKey, horizon };
+}
+
+function scrollToRadarPanel(panelId) {
+  document.getElementById(panelId)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  });
+}
+
 function getStockMetrics(sectionKey, item) {
   switch (sectionKey) {
     case 'technical':
@@ -236,6 +268,18 @@ function formatReplayPreview(items) {
     .slice(0, 3)
     .map((item) => `${item.code} ${item.name}`)
     .join('、');
+}
+
+function getReplayGroupLabel(groupKey) {
+  return groupKey === 'stable' ? '穩健型' : '積極型';
+}
+
+function getReplayGroupIcon(groupKey) {
+  return groupKey === 'stable' ? '🛡' : '🔥';
+}
+
+function isReplayDetailActive(groupKey, horizon) {
+  return activeReplayDetail.value.groupKey === groupKey && activeReplayDetail.value.horizon === horizon;
 }
 
 function getReplayMetricClass(value) {
@@ -310,8 +354,8 @@ function getReplayMetricClass(value) {
             <span>{{ section.title }}</span>
             <small>{{ formatNumber(section.items.length, 0) }} 檔</small>
           </button>
-          <a class="section-chip" href="#radar-replay">選股回放</a>
-          <a class="section-chip" href="#radar-themes">題材輪動</a>
+          <button type="button" class="section-chip" @click="scrollToRadarPanel('radar-replay')">選股回放</button>
+          <button type="button" class="section-chip" @click="scrollToRadarPanel('radar-themes')">題材輪動</button>
         </div>
       </section>
 
@@ -394,7 +438,14 @@ function getReplayMetricClass(value) {
             </div>
 
             <div v-if="replayOverview.snapshotCount" class="replay-overview-grid">
-              <article v-for="horizon in [3, 5, 10]" :key="`stable-${horizon}`" class="sub-panel replay-summary-card">
+              <button
+                v-for="horizon in [3, 5, 10]"
+                :key="`stable-${horizon}`"
+                type="button"
+                class="sub-panel replay-summary-card replay-summary-button"
+                :class="{ 'is-active': isReplayDetailActive('stable', horizon) }"
+                @click="setReplayDetail('stable', horizon)"
+              >
                 <p class="theme-brief-kicker">🛡 穩健型 {{ horizon }} 日</p>
                 <strong :class="getReplayMetricClass(replayOverview.groups.stable[horizon].averageReturn)">
                   {{ formatPercent(replayOverview.groups.stable[horizon].averageReturn) }}
@@ -402,8 +453,16 @@ function getReplayMetricClass(value) {
                 <p class="muted">
                   勝率 {{ formatPercent(replayOverview.groups.stable[horizon].winRate) }} / 樣本 {{ formatNumber(replayOverview.groups.stable[horizon].sampleCount, 0) }}
                 </p>
-              </article>
-              <article v-for="horizon in [3, 5, 10]" :key="`aggressive-${horizon}`" class="sub-panel replay-summary-card">
+                <span class="replay-card-cta">查看樣本</span>
+              </button>
+              <button
+                v-for="horizon in [3, 5, 10]"
+                :key="`aggressive-${horizon}`"
+                type="button"
+                class="sub-panel replay-summary-card replay-summary-button"
+                :class="{ 'is-active': isReplayDetailActive('aggressive', horizon) }"
+                @click="setReplayDetail('aggressive', horizon)"
+              >
                 <p class="theme-brief-kicker">🔥 積極型 {{ horizon }} 日</p>
                 <strong :class="getReplayMetricClass(replayOverview.groups.aggressive[horizon].averageReturn)">
                   {{ formatPercent(replayOverview.groups.aggressive[horizon].averageReturn) }}
@@ -411,8 +470,54 @@ function getReplayMetricClass(value) {
                 <p class="muted">
                   勝率 {{ formatPercent(replayOverview.groups.aggressive[horizon].winRate) }} / 樣本 {{ formatNumber(replayOverview.groups.aggressive[horizon].sampleCount, 0) }}
                 </p>
-              </article>
+                <span class="replay-card-cta">查看樣本</span>
+              </button>
             </div>
+
+            <section v-if="replayOverview.snapshotCount" class="sub-panel replay-detail-panel">
+              <div class="inline-panel-header">
+                <div>
+                  <p class="theme-brief-kicker">{{ getReplayGroupIcon(activeReplayDetail.groupKey) }} 回放明細</p>
+                  <h3>{{ replayDetailLabel }}</h3>
+                  <p class="muted">依進場日期由近到遠排列，方便檢查每一筆樣本是否真的符合你的交易直覺。</p>
+                </div>
+                <span class="meta-chip">{{ formatNumber(replayDetailRows.length, 0) }} 筆</span>
+              </div>
+              <div v-if="replayDetailRows.length" class="table-wrap replay-detail-wrap">
+                <table class="data-table replay-detail-table">
+                  <thead>
+                    <tr>
+                      <th>進場日</th>
+                      <th>股票</th>
+                      <th>進場價</th>
+                      <th>出場日</th>
+                      <th>出場價</th>
+                      <th>報酬</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in replayDetailRows" :key="`${activeReplayDetail.groupKey}-${activeReplayDetail.horizon}-${item.marketDate}-${item.code}`">
+                      <td>{{ formatDate(item.marketDate) }}</td>
+                      <td>
+                        <RouterLink class="table-link" :to="createStockRoute(item.code)">
+                          {{ item.code }} {{ item.name }}
+                        </RouterLink>
+                      </td>
+                      <td>{{ formatNumber(item.entryClose, 2) }}</td>
+                      <td>{{ formatDate(item.result?.exitDate) }}</td>
+                      <td>{{ formatNumber(item.result?.exitClose, 2) }}</td>
+                      <td :class="getReplayMetricClass(item.result?.returnPercent)">
+                        {{ formatPercent(item.result?.returnPercent) }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div v-else class="empty-state compact">
+                <strong>這個區間還沒有可回看的樣本</strong>
+                <p>等資料累積到足夠交易日後，這裡會自動顯示個股明細。</p>
+              </div>
+            </section>
 
             <div v-if="replaySnapshots.length" class="table-wrap">
               <table class="data-table replay-table">
