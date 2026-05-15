@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-13T09:53:33.317Z",
-  "marketDate": "2026-05-13",
+  "generatedAt": "2026-05-15T03:00:27.522Z",
+  "marketDate": "2026-05-15",
   "horizons": [
     3,
     5,
@@ -37,7 +37,12 @@
                   "exitClose": 70.80000305175781,
                   "returnPercent": 6.948645093289742
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 66.9000015258789,
+                  "returnPercent": 1.057404117641848
+                }
               }
             },
             {
@@ -61,7 +66,12 @@
                   "exitClose": 28.549999237060547,
                   "returnPercent": -0.17482784244564525
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 28.25,
+                  "returnPercent": -1.2237762237762286
+                }
               }
             },
             {
@@ -85,7 +95,12 @@
                   "exitClose": 96.5,
                   "returnPercent": 29.53020134228188
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 44.966442953020135
+                }
               }
             },
             {
@@ -109,7 +124,12 @@
                   "exitClose": 164.5,
                   "returnPercent": -1.4970059880239521
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 1.1976047904191618
+                }
               }
             },
             {
@@ -133,7 +153,12 @@
                   "exitClose": 287,
                   "returnPercent": 22.127659574468083
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 341,
+                  "returnPercent": 45.1063829787234
+                }
               }
             }
           ],
@@ -151,9 +176,9 @@
                 "winRate": 60
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 18.220811723205664,
+                "winRate": 80
               }
             }
           }
@@ -184,7 +209,12 @@
                   "exitClose": 24,
                   "returnPercent": -0.4149377593361055
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 23.100000381469727,
+                  "returnPercent": -4.149376010499065
+                }
               }
             },
             {
@@ -208,7 +238,12 @@
                   "exitClose": 56.20000076293945,
                   "returnPercent": 5.838042868059231
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 54.79999923706055,
+                  "returnPercent": 3.2015051545396336
+                }
               }
             },
             {
@@ -232,7 +267,12 @@
                   "exitClose": 164.5,
                   "returnPercent": -1.4970059880239521
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 1.1976047904191618
+                }
               }
             },
             {
@@ -256,7 +296,12 @@
                   "exitClose": 39.650001525878906,
                   "returnPercent": -1.1221907085314093
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.29999923706055,
+                  "returnPercent": -1.995014371420086
+                }
               }
             },
             {
@@ -288,9 +333,9 @@
                 "winRate": 25
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 4,
+                "averageReturn": -0.4363201092400889,
+                "winRate": 50
               }
             }
           }
@@ -321,7 +366,12 @@
                   "exitClose": 22.450000762939453,
                   "returnPercent": 3.4562247140066997
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 22.100000381469727,
+                  "returnPercent": 1.8433197302752409
+                }
               }
             },
             {
@@ -345,7 +395,12 @@
                   "exitClose": 24,
                   "returnPercent": -0.4149377593361055
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 23.100000381469727,
+                  "returnPercent": -4.149376010499065
+                }
               }
             },
             {
@@ -369,7 +424,12 @@
                   "exitClose": 96.5,
                   "returnPercent": 29.53020134228188
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 44.966442953020135
+                }
               }
             },
             {
@@ -393,7 +453,12 @@
                   "exitClose": 56.20000076293945,
                   "returnPercent": 5.838042868059231
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 54.79999923706055,
+                  "returnPercent": 3.2015051545396336
+                }
               }
             },
             {
@@ -417,7 +482,12 @@
                   "exitClose": 39.099998474121094,
                   "returnPercent": 1.558437595119724
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.79999923706055,
+                  "returnPercent": 3.3766213949624597
+                }
               }
             }
           ],
@@ -435,9 +505,9 @@
                 "winRate": 80
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 9.847702644459682,
+                "winRate": 80
               }
             }
           }
@@ -468,7 +538,12 @@
                   "exitClose": 110,
                   "returnPercent": -0.4524886877828055
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 106.5,
+                  "returnPercent": -3.619909502262444
+                }
               }
             },
             {
@@ -494,9 +569,24 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-04-29",
               "horizons": {
-                "3": null,
-                "5": null,
-                "10": null
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-05",
+                  "exitClose": 202,
+                  "returnPercent": 14.772727272727273
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-07",
+                  "exitClose": 204,
+                  "returnPercent": 15.909090909090908
+                },
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 264,
+                  "returnPercent": 50
+                }
               }
             },
             {
@@ -520,7 +610,12 @@
                   "exitClose": 925,
                   "returnPercent": 12.804878048780488
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 1050,
+                  "returnPercent": 28.04878048780488
+                }
               }
             },
             {
@@ -544,7 +639,12 @@
                   "exitClose": 206,
                   "returnPercent": -4.849884526558892
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 190.5,
+                  "returnPercent": -12.009237875288683
+                }
               }
             }
           ],
@@ -552,19 +652,19 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 3,
-                "averageReturn": 5.718063583925527,
-                "winRate": 66.66666666666666
+                "sampleCount": 4,
+                "averageReturn": 7.981729506125964,
+                "winRate": 75
               },
               "5": {
-                "sampleCount": 3,
-                "averageReturn": 2.50083494481293,
-                "winRate": 33.33333333333333
+                "sampleCount": 4,
+                "averageReturn": 5.852898935882425,
+                "winRate": 50
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 4,
+                "averageReturn": 15.604908277563437,
+                "winRate": 50
               }
             }
           }
@@ -595,7 +695,12 @@
                   "exitClose": 164.5,
                   "returnPercent": -1.4970059880239521
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 1.1976047904191618
+                }
               }
             },
             {
@@ -619,7 +724,12 @@
                   "exitClose": 29.75,
                   "returnPercent": 23.958333333333336
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 35.400001525878906,
+                  "returnPercent": 47.50000635782878
+                }
               }
             },
             {
@@ -643,7 +753,12 @@
                   "exitClose": 287,
                   "returnPercent": 22.127659574468083
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 341,
+                  "returnPercent": 45.1063829787234
+                }
               }
             },
             {
@@ -667,7 +782,12 @@
                   "exitClose": 39.650001525878906,
                   "returnPercent": -1.1221907085314093
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.29999923706055,
+                  "returnPercent": -1.995014371420086
+                }
               }
             },
             {
@@ -691,7 +811,12 @@
                   "exitClose": 427,
                   "returnPercent": 11.488250652741515
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 436.5,
+                  "returnPercent": 13.968668407310705
+                }
               }
             }
           ],
@@ -709,9 +834,9 @@
                 "winRate": 60
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 21.155529632572392,
+                "winRate": 80
               }
             }
           }
@@ -742,7 +867,12 @@
                   "exitClose": 28.549999237060547,
                   "returnPercent": -0.17482784244564525
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 28.25,
+                  "returnPercent": -1.2237762237762286
+                }
               }
             },
             {
@@ -766,7 +896,12 @@
                   "exitClose": 164.5,
                   "returnPercent": -1.4970059880239521
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 1.1976047904191618
+                }
               }
             },
             {
@@ -790,7 +925,12 @@
                   "exitClose": 253.5,
                   "returnPercent": 12.666666666666668
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 244.5,
+                  "returnPercent": 8.666666666666668
+                }
               }
             },
             {
@@ -814,7 +954,12 @@
                   "exitClose": 427,
                   "returnPercent": 11.488250652741515
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 436.5,
+                  "returnPercent": 13.968668407310705
+                }
               }
             },
             {
@@ -832,8 +977,18 @@
                   "exitClose": 46.20000076293945,
                   "returnPercent": 10.000001816522508
                 },
-                "5": null,
-                "10": null
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-07",
+                  "exitClose": 44.25,
+                  "returnPercent": 5.357142857142857
+                },
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 40.54999923706055,
+                  "returnPercent": -3.45238276890346
+                }
               }
             }
           ],
@@ -846,14 +1001,14 @@
                 "winRate": 60
               },
               "5": {
-                "sampleCount": 4,
-                "averageReturn": 5.620770872234646,
-                "winRate": 50
+                "sampleCount": 5,
+                "averageReturn": 5.568045269216288,
+                "winRate": 60
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 3.8313561743433695,
+                "winRate": 60
               }
             }
           }
@@ -884,7 +1039,12 @@
                   "exitClose": 22.450000762939453,
                   "returnPercent": 3.4562247140066997
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 22.100000381469727,
+                  "returnPercent": 1.8433197302752409
+                }
               }
             },
             {
@@ -908,7 +1068,12 @@
                   "exitClose": 96.5,
                   "returnPercent": 29.53020134228188
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 44.966442953020135
+                }
               }
             },
             {
@@ -932,7 +1097,12 @@
                   "exitClose": 196.5,
                   "returnPercent": 12.285714285714286
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 238,
+                  "returnPercent": 36
+                }
               }
             },
             {
@@ -970,7 +1140,12 @@
                   "exitClose": 39.099998474121094,
                   "returnPercent": 1.558437595119724
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.79999923706055,
+                  "returnPercent": 3.3766213949624597
+                }
               }
             }
           ],
@@ -988,9 +1163,9 @@
                 "winRate": 100
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 4,
+                "averageReturn": 21.546596019564458,
+                "winRate": 100
               }
             }
           }
@@ -1021,7 +1196,12 @@
                   "exitClose": 164.5,
                   "returnPercent": -1.4970059880239521
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 1.1976047904191618
+                }
               }
             },
             {
@@ -1045,7 +1225,12 @@
                   "exitClose": 28.549999237060547,
                   "returnPercent": -0.17482784244564525
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 28.25,
+                  "returnPercent": -1.2237762237762286
+                }
               }
             },
             {
@@ -1069,7 +1254,12 @@
                   "exitClose": 253.5,
                   "returnPercent": 12.666666666666668
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 244.5,
+                  "returnPercent": 8.666666666666668
+                }
               }
             },
             {
@@ -1093,7 +1283,12 @@
                   "exitClose": 18.350000381469727,
                   "returnPercent": 6.069366366877028
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 19.549999237060547,
+                  "returnPercent": 13.005775936766161
+                }
               }
             },
             {
@@ -1117,7 +1312,12 @@
                   "exitClose": 427,
                   "returnPercent": 11.488250652741515
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 436.5,
+                  "returnPercent": 13.968668407310705
+                }
               }
             }
           ],
@@ -1135,9 +1335,9 @@
                 "winRate": 60
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 7.122987915477293,
+                "winRate": 80
               }
             }
           }
@@ -1168,7 +1368,12 @@
                   "exitClose": 96.5,
                   "returnPercent": 29.53020134228188
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 44.966442953020135
+                }
               }
             },
             {
@@ -1192,7 +1397,12 @@
                   "exitClose": 49.54999923706055,
                   "returnPercent": -2.8431387508616726
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 46.099998474121094,
+                  "returnPercent": -9.607846129174327
+                }
               }
             },
             {
@@ -1216,7 +1426,12 @@
                   "exitClose": 63.900001525878906,
                   "returnPercent": 19.439255188558704
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 62.20000076293945,
+                  "returnPercent": 16.261683669045706
+                }
               }
             },
             {
@@ -1240,7 +1455,12 @@
                   "exitClose": 24,
                   "returnPercent": -0.4149377593361055
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 23.100000381469727,
+                  "returnPercent": -4.149376010499065
+                }
               }
             },
             {
@@ -1264,7 +1484,12 @@
                   "exitClose": 49.45000076293945,
                   "returnPercent": -5.809522356305804
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 44.95000076293945,
+                  "returnPercent": -14.380950927734377
+                }
               }
             }
           ],
@@ -1282,9 +1507,9 @@
                 "winRate": 40
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 6.617990710931613,
+                "winRate": 40
               }
             }
           }
@@ -1315,7 +1540,12 @@
                   "exitClose": 70.80000305175781,
                   "returnPercent": 6.948645093289742
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 66.9000015258789,
+                  "returnPercent": 1.057404117641848
+                }
               }
             },
             {
@@ -1339,7 +1569,12 @@
                   "exitClose": 71.4000015258789,
                   "returnPercent": -3.120757766785748
                 },
-                "10": null
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 68.19999694824219,
+                  "returnPercent": -7.462690707948188
+                }
               }
             },
             {
@@ -1384,9 +1619,24 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-04-29",
               "horizons": {
-                "3": null,
-                "5": null,
-                "10": null
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-05",
+                  "exitClose": 38.45000076293945,
+                  "returnPercent": -2.162847931451766
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-07",
+                  "exitClose": 37.099998474121094,
+                  "returnPercent": -5.597968259233851
+                },
+                "10": {
+                  "tradingDays": 10,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 41.54999923706055,
+                  "returnPercent": 5.7251888983729
+                }
               }
             }
           ],
@@ -1394,19 +1644,19 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 3,
-                "averageReturn": 9.22051710541968,
-                "winRate": 100
+                "sampleCount": 4,
+                "averageReturn": 6.374675846201819,
+                "winRate": 75
               },
               "5": {
-                "sampleCount": 2,
-                "averageReturn": 1.913943663251997,
-                "winRate": 50
+                "sampleCount": 3,
+                "averageReturn": -0.590026977576619,
+                "winRate": 33.33333333333333
               },
               "10": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 3,
+                "averageReturn": -0.22669923064448008,
+                "winRate": 66.66666666666666
               }
             }
           }
@@ -1773,8 +2023,18 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-04",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-07",
+                  "exitClose": 25.5,
+                  "returnPercent": 4.081632653061225
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 25.399999618530273,
+                  "returnPercent": 3.6734678307358095
+                },
                 "10": null
               }
             },
@@ -1831,14 +2091,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 4,
-                "averageReturn": 4.106362704232886,
-                "winRate": 50
+                "sampleCount": 5,
+                "averageReturn": 4.101416693998553,
+                "winRate": 60
               },
               "5": {
-                "sampleCount": 4,
-                "averageReturn": 1.831520406571116,
-                "winRate": 25
+                "sampleCount": 5,
+                "averageReturn": 2.1999098914040545,
+                "winRate": 40
               },
               "10": {
                 "sampleCount": 0,
@@ -2621,8 +2881,18 @@
               "sourceType": null,
               "marketDate": "2026-05-04",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-07",
+                  "exitClose": 20.899999618530273,
+                  "returnPercent": 0.48076739678015734
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 20.899999618530273,
+                  "returnPercent": 0.48076739678015734
+                },
                 "10": null
               }
             },
@@ -2703,14 +2973,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 4,
-                "averageReturn": 2.8052012713279546,
-                "winRate": 75
+                "sampleCount": 5,
+                "averageReturn": 2.3403144964183955,
+                "winRate": 80
               },
               "5": {
-                "sampleCount": 4,
-                "averageReturn": 8.24575986642874,
-                "winRate": 75
+                "sampleCount": 5,
+                "averageReturn": 6.692761372499024,
+                "winRate": 80
               },
               "10": {
                 "sampleCount": 0,
@@ -3749,8 +4019,18 @@
               "sourceType": null,
               "marketDate": "2026-05-05",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-08",
+                  "exitClose": 41.599998474121094,
+                  "returnPercent": -9.956713259478157
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-12",
+                  "exitClose": 41.79999923706055,
+                  "returnPercent": -9.523811175193627
+                },
                 "10": null
               }
             },
@@ -3855,14 +4135,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 4,
-                "averageReturn": 6.0189136640087195,
-                "winRate": 75
+                "sampleCount": 5,
+                "averageReturn": 2.823788279311344,
+                "winRate": 60
               },
               "5": {
-                "sampleCount": 4,
-                "averageReturn": 10.226467191006938,
-                "winRate": 75
+                "sampleCount": 5,
+                "averageReturn": 6.2764115177668245,
+                "winRate": 60
               },
               "10": {
                 "sampleCount": 0,
@@ -3958,8 +4238,18 @@
               "sourceType": null,
               "marketDate": "2026-05-05",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-08",
+                  "exitClose": 180.5,
+                  "returnPercent": -8.142493638676845
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-12",
+                  "exitClose": 180.5,
+                  "returnPercent": -8.142493638676845
+                },
                 "10": null
               }
             },
@@ -3992,14 +4282,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 4,
-                "averageReturn": 6.009722480131604,
-                "winRate": 75
+                "sampleCount": 5,
+                "averageReturn": 3.179279256369914,
+                "winRate": 60
               },
               "5": {
-                "sampleCount": 4,
-                "averageReturn": 12.042017342725451,
-                "winRate": 75
+                "sampleCount": 5,
+                "averageReturn": 8.005115146444993,
+                "winRate": 60
               },
               "10": {
                 "sampleCount": 0,
@@ -4194,8 +4484,18 @@
               "sourceType": null,
               "marketDate": "2026-05-05",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-08",
+                  "exitClose": 41.599998474121094,
+                  "returnPercent": -9.956713259478157
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-12",
+                  "exitClose": 41.79999923706055,
+                  "returnPercent": -9.523811175193627
+                },
                 "10": null
               }
             },
@@ -4246,8 +4546,18 @@
               "sourceType": null,
               "marketDate": "2026-05-05",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-08",
+                  "exitClose": 54.400001525878906,
+                  "returnPercent": -7.325380705487388
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-12",
+                  "exitClose": 52.79999923706055,
+                  "returnPercent": -10.051108625109805
+                },
                 "10": null
               }
             }
@@ -4256,14 +4566,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 2,
-                "averageReturn": 8.779969664794482,
-                "winRate": 100
+                "sampleCount": 4,
+                "averageReturn": 0.0694613411558549,
+                "winRate": 50
               },
               "5": {
-                "sampleCount": 2,
-                "averageReturn": 27.894367966570137,
-                "winRate": 100
+                "sampleCount": 4,
+                "averageReturn": 9.05345403320921,
+                "winRate": 50
               },
               "10": {
                 "sampleCount": 0,
@@ -4365,8 +4675,18 @@
               "sourceType": null,
               "marketDate": "2026-05-06",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 181.5,
+                  "returnPercent": -2.680965147453083
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-13",
+                  "exitClose": 176.5,
+                  "returnPercent": -5.361930294906166
+                },
                 "10": null
               }
             },
@@ -4388,8 +4708,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 55.3,
-                  "returnPercent": 9.288537549407106
+                  "exitClose": 55.29999923706055,
+                  "returnPercent": 9.288536041621631
                 },
                 "10": null
               }
@@ -4399,14 +4719,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 4,
-                "averageReturn": 7.232762403181222,
-                "winRate": 50
+                "sampleCount": 5,
+                "averageReturn": 5.250016893054361,
+                "winRate": 40
               },
               "5": {
-                "sampleCount": 4,
-                "averageReturn": 9.462321856370863,
-                "winRate": 50
+                "sampleCount": 5,
+                "averageReturn": 6.497471124558364,
+                "winRate": 40
               },
               "10": {
                 "sampleCount": 0,
@@ -4463,8 +4783,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 21.95,
-                  "returnPercent": -1.1261261261261262
+                  "exitClose": 21.950000762939453,
+                  "returnPercent": -1.1261226894619196
                 },
                 "10": null
               }
@@ -4487,8 +4807,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 23.15,
-                  "returnPercent": -3.5416666666666727
+                  "exitClose": 23.149999618530273,
+                  "returnPercent": -3.541668256123861
                 },
                 "10": null
               }
@@ -4511,8 +4831,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 54.9,
-                  "returnPercent": 0.3656307129798825
+                  "exitClose": 54.900001525878906,
+                  "returnPercent": 0.3656335025208472
                 },
                 "10": null
               }
@@ -4552,7 +4872,7 @@
               },
               "5": {
                 "sampleCount": 5,
-                "averageReturn": -2.4963006936219054,
+                "averageReturn": -2.4962997662723088,
                 "winRate": 20
               },
               "10": {
@@ -4757,8 +5077,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 23.15,
-                  "returnPercent": -3.5416666666666727
+                  "exitClose": 23.149999618530273,
+                  "returnPercent": -3.541668256123861
                 },
                 "10": null
               }
@@ -4829,8 +5149,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 21.95,
-                  "returnPercent": -1.1261261261261262
+                  "exitClose": 21.950000762939453,
+                  "returnPercent": -1.1261226894619196
                 },
                 "10": null
               }
@@ -4846,7 +5166,7 @@
               },
               "5": {
                 "sampleCount": 5,
-                "averageReturn": 5.152248876225925,
+                "averageReturn": 5.1522492456673294,
                 "winRate": 40
               },
               "10": {
@@ -4928,8 +5248,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 98.4,
-                  "returnPercent": 7.658643326039387
+                  "exitClose": 98.4000015258789,
+                  "returnPercent": 7.658644995491137
                 },
                 "10": null
               }
@@ -4993,7 +5313,7 @@
               },
               "5": {
                 "sampleCount": 5,
-                "averageReturn": 9.624084887526971,
+                "averageReturn": 9.624085221417321,
                 "winRate": 60
               },
               "10": {
@@ -5099,8 +5419,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 21.95,
-                  "returnPercent": -1.1261261261261262
+                  "exitClose": 21.950000762939453,
+                  "returnPercent": -1.1261226894619196
                 },
                 "10": null
               }
@@ -5140,7 +5460,7 @@
               },
               "5": {
                 "sampleCount": 5,
-                "averageReturn": 6.2618316888355725,
+                "averageReturn": 6.261832376168413,
                 "winRate": 40
               },
               "10": {
@@ -5165,8 +5485,18 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-06",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 43,
+                  "returnPercent": -3.1531531531531503
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-13",
+                  "exitClose": 41.29999923706055,
+                  "returnPercent": -6.98198370031408
+                },
                 "10": null
               }
             },
@@ -5271,14 +5601,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 4,
-                "averageReturn": 4.3175654007712705,
-                "winRate": 75
+                "sampleCount": 5,
+                "averageReturn": 2.823421689986386,
+                "winRate": 60
               },
               "5": {
-                "sampleCount": 4,
-                "averageReturn": 7.7773006968326515,
-                "winRate": 50
+                "sampleCount": 5,
+                "averageReturn": 4.825443817403306,
+                "winRate": 40
               },
               "10": {
                 "sampleCount": 0,
@@ -5335,8 +5665,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 23.15,
-                  "returnPercent": -3.5416666666666727
+                  "exitClose": 23.149999618530273,
+                  "returnPercent": -3.541668256123861
                 },
                 "10": null
               }
@@ -5424,7 +5754,7 @@
               },
               "5": {
                 "sampleCount": 5,
-                "averageReturn": 9.198260853999235,
+                "averageReturn": 9.1982605361078,
                 "winRate": 40
               },
               "10": {
@@ -5497,8 +5827,18 @@
               "sourceType": null,
               "marketDate": "2026-05-06",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 38.29999923706055,
+                  "returnPercent": 0.7894716764751234
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-13",
+                  "exitClose": 38.29999923706055,
+                  "returnPercent": 0.7894716764751234
+                },
                 "10": null
               }
             },
@@ -5511,8 +5851,18 @@
               "sourceType": null,
               "marketDate": "2026-05-06",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 92.5,
+                  "returnPercent": 0.5434782608695652
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-13",
+                  "exitClose": 96,
+                  "returnPercent": 4.3478260869565215
+                },
                 "10": null
               }
             },
@@ -5545,13 +5895,13 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 3,
-                "averageReturn": 13.578818297067563,
+                "sampleCount": 5,
+                "averageReturn": 8.413880965709478,
                 "winRate": 100
               },
               "5": {
-                "sampleCount": 3,
-                "averageReturn": 13.022727340203494,
+                "sampleCount": 5,
+                "averageReturn": 8.841095956808426,
                 "winRate": 100
               },
               "10": {
@@ -5600,8 +5950,18 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-06",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 43,
+                  "returnPercent": -3.1531531531531503
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-13",
+                  "exitClose": 41.29999923706055,
+                  "returnPercent": -6.98198370031408
+                },
                 "10": null
               }
             },
@@ -5614,8 +5974,18 @@
               "sourceType": null,
               "marketDate": "2026-05-06",
               "horizons": {
-                "3": null,
-                "5": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-11",
+                  "exitClose": 54.900001525878906,
+                  "returnPercent": -4.188479012427733
+                },
+                "5": {
+                  "tradingDays": 5,
+                  "exitDate": "2026-05-13",
+                  "exitClose": 50.79999923706055,
+                  "returnPercent": -11.343805869004276
+                },
                 "10": null
               }
             },
@@ -5651,8 +6021,8 @@
                 "5": {
                   "tradingDays": 5,
                   "exitDate": "2026-05-13",
-                  "exitClose": 20.2,
-                  "returnPercent": 11.602209944751369
+                  "exitClose": 20.200000762939453,
+                  "returnPercent": 11.602214159886474
                 },
                 "10": null
               }
@@ -5662,14 +6032,14 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 2,
-                "averageReturn": 9.545132509201071,
-                "winRate": 100
+                "sampleCount": 4,
+                "averageReturn": 2.937158213205315,
+                "winRate": 50
               },
               "5": {
-                "sampleCount": 2,
-                "averageReturn": 22.527083620062513,
-                "winRate": 100
+                "sampleCount": 4,
+                "averageReturn": 6.682095471485444,
+                "winRate": 50
               },
               "10": {
                 "sampleCount": 0,
@@ -5699,7 +6069,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 244.5,
+                  "returnPercent": -2.976190476190476
+                },
                 "5": null,
                 "10": null
               }
@@ -5713,7 +6088,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 13.684210526315791
+                },
                 "5": null,
                 "10": null
               }
@@ -5727,7 +6107,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.29999923706055,
+                  "returnPercent": -1.995014371420086
+                },
                 "5": null,
                 "10": null
               }
@@ -5741,7 +6126,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 462,
+                  "returnPercent": 18.007662835249043
+                },
                 "5": null,
                 "10": null
               }
@@ -5755,7 +6145,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 211.5,
+                  "returnPercent": -1.1682242990654206
+                },
                 "5": null,
                 "10": null
               }
@@ -5765,9 +6160,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 5.11048884297777,
+                "winRate": 40
               },
               "5": {
                 "sampleCount": 0,
@@ -5796,7 +6191,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 244.5,
+                  "returnPercent": -2.976190476190476
+                },
                 "5": null,
                 "10": null
               }
@@ -5810,7 +6210,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 13.684210526315791
+                },
                 "5": null,
                 "10": null
               }
@@ -5824,7 +6229,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.29999923706055,
+                  "returnPercent": -1.995014371420086
+                },
                 "5": null,
                 "10": null
               }
@@ -5838,7 +6248,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 5.956112852664576
+                },
                 "5": null,
                 "10": null
               }
@@ -5852,7 +6267,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 28,
+                  "returnPercent": -2.77777777777778
+                },
                 "5": null,
                 "10": null
               }
@@ -5862,9 +6282,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 2.378268150718405,
+                "winRate": 40
               },
               "5": {
                 "sampleCount": 0,
@@ -5893,7 +6313,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 134,
+                  "returnPercent": 14.042553191489363
+                },
                 "5": null,
                 "10": null
               }
@@ -5907,7 +6332,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 244.5,
+                  "returnPercent": -2.976190476190476
+                },
                 "5": null,
                 "10": null
               }
@@ -5921,7 +6351,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 62.20000076293945,
+                  "returnPercent": -0.479998779296875
+                },
                 "5": null,
                 "10": null
               }
@@ -5935,7 +6370,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 13.684210526315791
+                },
                 "5": null,
                 "10": null
               }
@@ -5949,7 +6389,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 29.5,
+                  "returnPercent": -0.3378378378378426
+                },
                 "5": null,
                 "10": null
               }
@@ -5959,9 +6404,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 4.786547324895992,
+                "winRate": 40
               },
               "5": {
                 "sampleCount": 0,
@@ -5990,7 +6435,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 13.684210526315791
+                },
                 "5": null,
                 "10": null
               }
@@ -6004,7 +6454,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 35.400001525878906,
+                  "returnPercent": 9.597527943897552
+                },
                 "5": null,
                 "10": null
               }
@@ -6018,7 +6473,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 134,
+                  "returnPercent": 14.042553191489363
+                },
                 "5": null,
                 "10": null
               }
@@ -6032,7 +6492,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.29999923706055,
+                  "returnPercent": -1.995014371420086
+                },
                 "5": null,
                 "10": null
               }
@@ -6046,7 +6511,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 2270,
+                  "returnPercent": 1.5659955257270695
+                },
                 "5": null,
                 "10": null
               }
@@ -6056,9 +6526,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 7.3790545632019375,
+                "winRate": 80
               },
               "5": {
                 "sampleCount": 0,
@@ -6087,7 +6557,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 134,
+                  "returnPercent": 14.042553191489363
+                },
                 "5": null,
                 "10": null
               }
@@ -6101,7 +6576,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 13.684210526315791
+                },
                 "5": null,
                 "10": null
               }
@@ -6115,7 +6595,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 5.956112852664576
+                },
                 "5": null,
                 "10": null
               }
@@ -6129,7 +6614,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 244.5,
+                  "returnPercent": -2.976190476190476
+                },
                 "5": null,
                 "10": null
               }
@@ -6143,7 +6633,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 2270,
+                  "returnPercent": 1.5659955257270695
+                },
                 "5": null,
                 "10": null
               }
@@ -6153,9 +6648,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 6.454536324001265,
+                "winRate": 80
               },
               "5": {
                 "sampleCount": 0,
@@ -6184,7 +6679,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 244.5,
+                  "returnPercent": -2.976190476190476
+                },
                 "5": null,
                 "10": null
               }
@@ -6198,7 +6698,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 39.29999923706055,
+                  "returnPercent": -1.995014371420086
+                },
                 "5": null,
                 "10": null
               }
@@ -6212,7 +6717,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 50.400001525878906,
+                  "returnPercent": -9.025268003828685
+                },
                 "5": null,
                 "10": null
               }
@@ -6226,7 +6736,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 169,
+                  "returnPercent": 5.956112852664576
+                },
                 "5": null,
                 "10": null
               }
@@ -6240,7 +6755,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 186.5,
+                  "returnPercent": -5.089058524173027
+                },
                 "5": null,
                 "10": null
               }
@@ -6250,9 +6770,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": -2.6258837045895396,
+                "winRate": 20
               },
               "5": {
                 "sampleCount": 0,
@@ -6281,7 +6801,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 35.400001525878906,
+                  "returnPercent": 9.597527943897552
+                },
                 "5": null,
                 "10": null
               }
@@ -6295,7 +6820,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 13.684210526315791
+                },
                 "5": null,
                 "10": null
               }
@@ -6309,7 +6839,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 134,
+                  "returnPercent": 14.042553191489363
+                },
                 "5": null,
                 "10": null
               }
@@ -6323,7 +6858,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 115.5,
+                  "returnPercent": 5.963302752293578
+                },
                 "5": null,
                 "10": null
               }
@@ -6337,7 +6877,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 341,
+                  "returnPercent": 13.2890365448505
+                },
                 "5": null,
                 "10": null
               }
@@ -6347,9 +6892,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 11.315326191769355,
+                "winRate": 100
               },
               "5": {
                 "sampleCount": 0,
@@ -6378,7 +6923,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 35.400001525878906,
+                  "returnPercent": 9.597527943897552
+                },
                 "5": null,
                 "10": null
               }
@@ -6392,7 +6942,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 186.5,
+                  "returnPercent": -5.089058524173027
+                },
                 "5": null,
                 "10": null
               }
@@ -6406,7 +6961,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 134,
+                  "returnPercent": 14.042553191489363
+                },
                 "5": null,
                 "10": null
               }
@@ -6420,7 +6980,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 341,
+                  "returnPercent": 13.2890365448505
+                },
                 "5": null,
                 "10": null
               }
@@ -6434,7 +6999,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 2270,
+                  "returnPercent": 1.5659955257270695
+                },
                 "5": null,
                 "10": null
               }
@@ -6444,9 +7014,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 6.681210936358292,
+                "winRate": 80
               },
               "5": {
                 "sampleCount": 0,
@@ -6475,7 +7045,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 138,
+                  "returnPercent": -0.7194244604316548
+                },
                 "5": null,
                 "10": null
               }
@@ -6489,7 +7064,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 2270,
+                  "returnPercent": 1.5659955257270695
+                },
                 "5": null,
                 "10": null
               }
@@ -6503,7 +7083,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 23.100000381469727,
+                  "returnPercent": -1.702126036299036
+                },
                 "5": null,
                 "10": null
               }
@@ -6517,7 +7102,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 66.9000015258789,
+                  "returnPercent": -4.291843310616737
+                },
                 "5": null,
                 "10": null
               }
@@ -6531,7 +7121,12 @@
               "sourceType": "stock-branch-daily",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 708,
+                  "returnPercent": 3.206997084548105
+                },
                 "5": null,
                 "10": null
               }
@@ -6541,9 +7136,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": -0.38808023941445063,
+                "winRate": 40
               },
               "5": {
                 "sampleCount": 0,
@@ -6572,7 +7167,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 35.400001525878906,
+                  "returnPercent": 9.597527943897552
+                },
                 "5": null,
                 "10": null
               }
@@ -6586,7 +7186,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 341,
+                  "returnPercent": 13.2890365448505
+                },
                 "5": null,
                 "10": null
               }
@@ -6600,7 +7205,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 108,
+                  "returnPercent": 13.684210526315791
+                },
                 "5": null,
                 "10": null
               }
@@ -6614,7 +7224,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 19.549999237060547,
+                  "returnPercent": 3.4391494024367635
+                },
                 "5": null,
                 "10": null
               }
@@ -6628,7 +7243,12 @@
               "sourceType": null,
               "marketDate": "2026-05-11",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-14",
+                  "exitClose": 138,
+                  "returnPercent": -0.7194244604316548
+                },
                 "5": null,
                 "10": null
               }
@@ -6638,9 +7258,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 7.85809999141379,
+                "winRate": 80
               },
               "5": {
                 "sampleCount": 0,
@@ -6675,7 +7295,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 23.8,
+                  "returnPercent": 3.4782608695652204
+                },
                 "5": null,
                 "10": null
               }
@@ -6689,7 +7314,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -6703,7 +7333,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 208,
+                  "returnPercent": -11.300639658848615
+                },
                 "5": null,
                 "10": null
               }
@@ -6717,7 +7352,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 139.5,
+                  "returnPercent": -1.4134275618374559
+                },
                 "5": null,
                 "10": null
               }
@@ -6731,7 +7371,12 @@
               "sourceType": "stock-branch-cmoney",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 36.95,
+                  "returnPercent": 4.084507042253529
+                },
                 "5": null,
                 "10": null
               }
@@ -6741,9 +7386,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": -2.189680151628536,
+                "winRate": 40
               },
               "5": {
                 "sampleCount": 0,
@@ -6772,7 +7417,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 36.95,
+                  "returnPercent": 4.084507042253529
+                },
                 "5": null,
                 "10": null
               }
@@ -6786,7 +7436,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -6800,7 +7455,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 23.8,
+                  "returnPercent": 3.4782608695652204
+                },
                 "5": null,
                 "10": null
               }
@@ -6814,7 +7474,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 29.65,
+                  "returnPercent": 0.8503401360544218
+                },
                 "5": null,
                 "10": null
               }
@@ -6828,7 +7493,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 134,
+                  "returnPercent": 10.2880658436214
+                },
                 "5": null,
                 "10": null
               }
@@ -6838,9 +7508,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 2.580814488443843,
+                "winRate": 80
               },
               "5": {
                 "sampleCount": 0,
@@ -6869,7 +7539,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -6883,7 +7558,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 36.95,
+                  "returnPercent": 4.084507042253529
+                },
                 "5": null,
                 "10": null
               }
@@ -6897,7 +7577,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 240,
+                  "returnPercent": -7.6923076923076925
+                },
                 "5": null,
                 "10": null
               }
@@ -6911,7 +7596,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 253,
+                  "returnPercent": 1.2
+                },
                 "5": null,
                 "10": null
               }
@@ -6925,7 +7615,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 29.65,
+                  "returnPercent": 0.8503401360544218
+                },
                 "5": null,
                 "10": null
               }
@@ -6935,9 +7630,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": -1.4709123926550203,
+                "winRate": 60
               },
               "5": {
                 "sampleCount": 0,
@@ -6966,7 +7661,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 208,
+                  "returnPercent": -11.300639658848615
+                },
                 "5": null,
                 "10": null
               }
@@ -6980,7 +7680,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 324.5,
+                  "returnPercent": 1.0903426791277258
+                },
                 "5": null,
                 "10": null
               }
@@ -6994,7 +7699,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 134,
+                  "returnPercent": 10.2880658436214
+                },
                 "5": null,
                 "10": null
               }
@@ -7008,7 +7718,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -7022,7 +7737,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 64,
+                  "returnPercent": 3.0595813204508833
+                },
                 "5": null,
                 "10": null
               }
@@ -7032,9 +7752,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": -0.5319502529847929,
+                "winRate": 60
               },
               "5": {
                 "sampleCount": 0,
@@ -7063,7 +7783,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 36.95,
+                  "returnPercent": 4.084507042253529
+                },
                 "5": null,
                 "10": null
               }
@@ -7077,7 +7802,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -7091,7 +7821,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 114,
+                  "returnPercent": 9.090909090909092
+                },
                 "5": null,
                 "10": null
               }
@@ -7105,7 +7840,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 23.8,
+                  "returnPercent": 3.4782608695652204
+                },
                 "5": null,
                 "10": null
               }
@@ -7119,7 +7859,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 30.55,
+                  "returnPercent": -0.16339869281045985
+                },
                 "5": null,
                 "10": null
               }
@@ -7129,9 +7874,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 2.1386353721284044,
+                "winRate": 60
               },
               "5": {
                 "sampleCount": 0,
@@ -7160,7 +7905,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 114,
+                  "returnPercent": 9.090909090909092
+                },
                 "5": null,
                 "10": null
               }
@@ -7174,7 +7924,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 10.5,
+                  "returnPercent": -1.8691588785046664
+                },
                 "5": null,
                 "10": null
               }
@@ -7188,7 +7943,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -7202,7 +7962,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 134,
+                  "returnPercent": 10.2880658436214
+                },
                 "5": null,
                 "10": null
               }
@@ -7216,7 +7981,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 270.5,
+                  "returnPercent": -1.8148820326678767
+                },
                 "5": null,
                 "10": null
               }
@@ -7226,9 +7996,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 1.979566514816518,
+                "winRate": 40
               },
               "5": {
                 "sampleCount": 0,
@@ -7257,7 +8027,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 36.95,
+                  "returnPercent": 4.084507042253529
+                },
                 "5": null,
                 "10": null
               }
@@ -7271,7 +8046,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -7285,7 +8065,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 114,
+                  "returnPercent": 9.090909090909092
+                },
                 "5": null,
                 "10": null
               }
@@ -7299,7 +8084,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 10.5,
+                  "returnPercent": -1.8691588785046664
+                },
                 "5": null,
                 "10": null
               }
@@ -7313,7 +8103,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 79,
+                  "returnPercent": 3.403141361256537
+                },
                 "5": null,
                 "10": null
               }
@@ -7323,9 +8118,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 1.7824594333278267,
+                "winRate": 60
               },
               "5": {
                 "sampleCount": 0,
@@ -7354,7 +8149,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 19.5,
+                  "returnPercent": -5.797101449275359
+                },
                 "5": null,
                 "10": null
               }
@@ -7368,7 +8168,12 @@
               "sourceType": "stock-branch-cmoney",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 36.95,
+                  "returnPercent": 4.084507042253529
+                },
                 "5": null,
                 "10": null
               }
@@ -7382,7 +8187,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 55.4,
+                  "returnPercent": 3.551401869158876
+                },
                 "5": null,
                 "10": null
               }
@@ -7396,7 +8206,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 114,
+                  "returnPercent": 9.090909090909092
+                },
                 "5": null,
                 "10": null
               }
@@ -7410,7 +8225,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 10.5,
+                  "returnPercent": -1.8691588785046664
+                },
                 "5": null,
                 "10": null
               }
@@ -7420,9 +8240,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 5,
+                "averageReturn": 1.8121115349082941,
+                "winRate": 60
               },
               "5": {
                 "sampleCount": 0,
@@ -7465,7 +8285,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 20.4,
+                  "returnPercent": -0.9708737864077808
+                },
                 "5": null,
                 "10": null
               }
@@ -7479,7 +8304,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 18.6,
+                  "returnPercent": -1.5873015873015723
+                },
                 "5": null,
                 "10": null
               }
@@ -7493,7 +8323,12 @@
               "sourceType": "stock-branch-fubon-dj",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 285,
+                  "returnPercent": 11.545988258317024
+                },
                 "5": null,
                 "10": null
               }
@@ -7507,7 +8342,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 18.2,
+                  "returnPercent": -1.6216216216216255
+                },
                 "5": null,
                 "10": null
               }
@@ -7517,9 +8357,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 4,
+                "averageReturn": 1.8415478157465113,
+                "winRate": 25
               },
               "5": {
                 "sampleCount": 0,
@@ -7548,7 +8388,12 @@
               "sourceType": "stock-branch-cmoney",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 36.95,
+                  "returnPercent": 4.084507042253529
+                },
                 "5": null,
                 "10": null
               }
@@ -7562,7 +8407,12 @@
               "sourceType": "stock-branch-cmoney",
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 114,
+                  "returnPercent": 9.090909090909092
+                },
                 "5": null,
                 "10": null
               }
@@ -7576,7 +8426,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 20.4,
+                  "returnPercent": -0.9708737864077808
+                },
                 "5": null,
                 "10": null
               }
@@ -7604,7 +8459,12 @@
               "sourceType": null,
               "marketDate": "2026-05-12",
               "horizons": {
-                "3": null,
+                "3": {
+                  "tradingDays": 3,
+                  "exitDate": "2026-05-15",
+                  "exitClose": 18.2,
+                  "returnPercent": -1.6216216216216255
+                },
                 "5": null,
                 "10": null
               }
@@ -7614,9 +8474,9 @@
             "count": 5,
             "horizons": {
               "3": {
-                "sampleCount": 0,
-                "averageReturn": null,
-                "winRate": null
+                "sampleCount": 4,
+                "averageReturn": 2.6457301812833034,
+                "winRate": 50
               },
               "5": {
                 "sampleCount": 0,
@@ -8608,156 +9468,1976 @@
           }
         }
       ]
+    },
+    {
+      "marketDate": "2026-05-14",
+      "generatedAt": "2026-05-14T12:12:13.545Z",
+      "branches": [
+        {
+          "bno": "1440",
+          "name": "美林",
+          "score": 950,
+          "picks": [
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 41077000,
+              "performance": -0.29,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 134,
+              "netLots": 10491000,
+              "performance": -0.39,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.1,
+              "netLots": 7763000,
+              "performance": -0.33,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2408",
+              "name": "南亞科",
+              "entryClose": 341,
+              "netLots": 7462000,
+              "performance": -0.9,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "8069",
+              "name": "元太",
+              "entryClose": 226,
+              "netLots": 5425000,
+              "performance": 0,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "1470",
+          "name": "台灣摩根士丹利",
+          "score": 933.13,
+          "picks": [
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 150223000,
+              "performance": 2.25,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2892",
+              "name": "第一金",
+              "entryClose": 29.5,
+              "netLots": 58962000,
+              "performance": 0.02,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 134,
+              "netLots": 53455000,
+              "performance": -0.54,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 108,
+              "netLots": 30972000,
+              "performance": -0.43,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.1,
+              "netLots": 16856000,
+              "performance": -0.23,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "8440",
+          "name": "摩根大通",
+          "score": 916.11,
+          "picks": [
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 77617000,
+              "performance": 2.72,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2892",
+              "name": "第一金",
+              "entryClose": 29.5,
+              "netLots": 51561000,
+              "performance": -0.02,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 108,
+              "netLots": 40850000,
+              "performance": 1.91,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.1,
+              "netLots": 11794000,
+              "performance": -0.07,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2409",
+              "name": "友達",
+              "entryClose": 19.6,
+              "netLots": 7401000,
+              "performance": -0.18,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "1480",
+          "name": "美商高盛",
+          "score": 892,
+          "picks": [
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 135075000,
+              "performance": 2.57,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2892",
+              "name": "第一金",
+              "entryClose": 29.5,
+              "netLots": 41179000,
+              "performance": -0.04,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2027",
+              "name": "大成鋼",
+              "entryClose": 39.8,
+              "netLots": 7828000,
+              "performance": -0.13,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2891",
+              "name": "中信金",
+              "entryClose": 54.8,
+              "netLots": 6421000,
+              "performance": -0.41,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2881",
+              "name": "富邦金",
+              "entryClose": 94.6,
+              "netLots": 6065000,
+              "performance": -0.32,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "5850",
+          "name": "統一",
+          "score": 892,
+          "picks": [
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 108,
+              "netLots": 30159000,
+              "performance": 1.14,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 134,
+              "netLots": 21577000,
+              "performance": 1.34,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 14745000,
+              "performance": 1.04,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2330",
+              "name": "台積電",
+              "entryClose": 2270,
+              "netLots": 6855000,
+              "performance": 0.25,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2892",
+              "name": "第一金",
+              "entryClose": 29.5,
+              "netLots": 6445000,
+              "performance": 0.11,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9800",
+          "name": "元大",
+          "score": 851.77,
+          "picks": [
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 134,
+              "netLots": 40702000,
+              "performance": -0.39,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 108,
+              "netLots": 29147000,
+              "performance": 0.31,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 25945000,
+              "performance": 1.04,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2408",
+              "name": "南亞科",
+              "entryClose": 341,
+              "netLots": 20803000,
+              "performance": 0.07,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2327",
+              "name": "國巨*",
+              "entryClose": 462,
+              "netLots": 13878000,
+              "performance": 0,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9268",
+          "name": "凱基-台北",
+          "score": 842.94,
+          "picks": [
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 54783000,
+              "performance": 2.08,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2892",
+              "name": "第一金",
+              "entryClose": 29.5,
+              "netLots": 17106000,
+              "performance": -0.09,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 134,
+              "netLots": 13811000,
+              "performance": -1.08,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 108,
+              "netLots": 13541000,
+              "performance": -0.55,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.1,
+              "netLots": 10855000,
+              "performance": -0.07,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9600",
+          "name": "富邦",
+          "score": 812,
+          "picks": [
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 134,
+              "netLots": 18382000,
+              "performance": 0.07,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 108,
+              "netLots": 15562000,
+              "performance": 0.11,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3481",
+              "name": "群創",
+              "entryClose": 35.4,
+              "netLots": 15212000,
+              "performance": 5.84,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2327",
+              "name": "國巨*",
+              "entryClose": 462,
+              "netLots": 5289000,
+              "performance": 0,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2408",
+              "name": "南亞科",
+              "entryClose": 341,
+              "netLots": 4944000,
+              "performance": -0.92,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9676",
+          "name": "富邦-仁愛",
+          "score": 579.24,
+          "picks": [
+            {
+              "code": "3189",
+              "name": "景碩",
+              "entryClose": 522,
+              "netLots": 377000,
+              "performance": 0.22,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2330",
+              "name": "台積電",
+              "entryClose": 2270,
+              "netLots": 365000,
+              "performance": 0.15,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2481",
+              "name": "強茂",
+              "entryClose": 115.5,
+              "netLots": 326000,
+              "performance": -4.43,
+              "sourceType": null,
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3026",
+              "name": "禾伸堂",
+              "entryClose": 357.5,
+              "netLots": 241000,
+              "performance": 0,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3105",
+              "name": "穩懋",
+              "entryClose": 483.5,
+              "netLots": 235000,
+              "performance": 0,
+              "sourceType": "stock-branch-daily",
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9207",
+          "name": "凱基-永和",
+          "score": 452.65,
+          "picks": [
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 108,
+              "netLots": 1904000,
+              "performance": 1.81,
+              "sourceType": null,
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2492",
+              "name": "華新科",
+              "entryClose": 220,
+              "netLots": 185000,
+              "performance": 0,
+              "sourceType": null,
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "9945",
+              "name": "潤泰新",
+              "entryClose": 23.2,
+              "netLots": 70000,
+              "performance": -1.35,
+              "sourceType": null,
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2103",
+              "name": "台橡",
+              "entryClose": 22,
+              "netLots": 44000,
+              "performance": 0.49,
+              "sourceType": null,
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2356",
+              "name": "英業達",
+              "entryClose": 53.2,
+              "netLots": 42000,
+              "performance": -0.34,
+              "sourceType": null,
+              "marketDate": "2026-05-14",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "marketDate": "2026-05-15",
+      "generatedAt": "2026-05-15T03:00:27.522Z",
+      "branches": [
+        {
+          "bno": "1470",
+          "name": "台灣摩根士丹利",
+          "score": 902,
+          "picks": [
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 17353000,
+              "performance": 2.68,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.9,
+              "netLots": 16856000,
+              "performance": 2.42,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2027",
+              "name": "大成鋼",
+              "entryClose": 40,
+              "netLots": 10789000,
+              "performance": 0.19,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2367",
+              "name": "燿華",
+              "entryClose": 62.4,
+              "netLots": 8683000,
+              "performance": -4.52,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "8069",
+              "name": "元太",
+              "entryClose": 217,
+              "netLots": 6020000,
+              "performance": -0.55,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "8440",
+          "name": "摩根大通",
+          "score": 871.29,
+          "picks": [
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.9,
+              "netLots": 11794000,
+              "performance": 2.59,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2409",
+              "name": "友達",
+              "entryClose": 19.5,
+              "netLots": 7401000,
+              "performance": -0.37,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 6915000,
+              "performance": 5.33,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2027",
+              "name": "大成鋼",
+              "entryClose": 40,
+              "netLots": 5457000,
+              "performance": 0.35,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2356",
+              "name": "英業達",
+              "entryClose": 53.5,
+              "netLots": 4898000,
+              "performance": 0.98,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "5850",
+          "name": "統一",
+          "score": 860,
+          "picks": [
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 132.5,
+              "netLots": 13731000,
+              "performance": 0.32,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 12971000,
+              "performance": 5.42,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "1101",
+              "name": "台泥",
+              "entryClose": 24.3,
+              "netLots": 3056000,
+              "performance": -1.01,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2330",
+              "name": "台積電",
+              "entryClose": 2280,
+              "netLots": 2143000,
+              "performance": 0.65,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "8069",
+              "name": "元太",
+              "entryClose": 217,
+              "netLots": 1554000,
+              "performance": -4.03,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9800",
+          "name": "元大",
+          "score": 827.86,
+          "picks": [
+            {
+              "code": "2327",
+              "name": "國巨*",
+              "entryClose": 470,
+              "netLots": 5221000,
+              "performance": 1.63,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 4808000,
+              "performance": 1.03,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "6770",
+              "name": "力積電",
+              "entryClose": 64,
+              "netLots": 4390000,
+              "performance": 0.09,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2498",
+              "name": "宏達電",
+              "entryClose": 45.7,
+              "netLots": 3179000,
+              "performance": 2.7,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 132.5,
+              "netLots": 2527000,
+              "performance": -0.47,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "1480",
+          "name": "美商高盛",
+          "score": 804,
+          "picks": [
+            {
+              "code": "2027",
+              "name": "大成鋼",
+              "entryClose": 40,
+              "netLots": 7828000,
+              "performance": 0.34,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2891",
+              "name": "中信金",
+              "entryClose": 55.5,
+              "netLots": 6420000,
+              "performance": 0.79,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2881",
+              "name": "富邦金",
+              "entryClose": 98,
+              "netLots": 6065000,
+              "performance": 2.89,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2313",
+              "name": "華通",
+              "entryClose": 239.5,
+              "netLots": 5725000,
+              "performance": -3.01,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "6116",
+              "name": "彩晶",
+              "entryClose": 10.5,
+              "netLots": 5421000,
+              "performance": -0.38,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9676",
+          "name": "富邦-仁愛",
+          "score": 803.99,
+          "picks": [
+            {
+              "code": "3189",
+              "name": "景碩",
+              "entryClose": 493.5,
+              "netLots": 377000,
+              "performance": -4.4,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2481",
+              "name": "強茂",
+              "entryClose": 121,
+              "netLots": 326000,
+              "performance": -2.75,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "3026",
+              "name": "禾伸堂",
+              "entryClose": 363,
+              "netLots": 241000,
+              "performance": 1.38,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2409",
+              "name": "友達",
+              "entryClose": 19.5,
+              "netLots": 202000,
+              "performance": -0.74,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "4938",
+              "name": "和碩",
+              "entryClose": 78.2,
+              "netLots": 179000,
+              "performance": 1.03,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9268",
+          "name": "凱基-台北",
+          "score": 776,
+          "picks": [
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.9,
+              "netLots": 10855000,
+              "performance": 2.57,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 6799000,
+              "performance": 1.26,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 132.5,
+              "netLots": 5522000,
+              "performance": -1.36,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2356",
+              "name": "英業達",
+              "entryClose": 53.5,
+              "netLots": 3856000,
+              "performance": 0.56,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2367",
+              "name": "燿華",
+              "entryClose": 62.4,
+              "netLots": 3777000,
+              "performance": -3.5,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "1440",
+          "name": "美林",
+          "score": 774,
+          "picks": [
+            {
+              "code": "2887",
+              "name": "台新新光金",
+              "entryClose": 23.9,
+              "netLots": 7763000,
+              "performance": 2.75,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "6770",
+              "name": "力積電",
+              "entryClose": 64,
+              "netLots": 5369000,
+              "performance": 2.19,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 2906000,
+              "performance": 6.07,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2313",
+              "name": "華通",
+              "entryClose": 239.5,
+              "netLots": 2853000,
+              "performance": -3.65,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2882",
+              "name": "國泰金",
+              "entryClose": 79.1,
+              "netLots": 2732000,
+              "performance": 2.33,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9600",
+          "name": "富邦",
+          "score": 752,
+          "picks": [
+            {
+              "code": "2344",
+              "name": "華邦電",
+              "entryClose": 132.5,
+              "netLots": 15241000,
+              "performance": -0.8,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 14488000,
+              "performance": 3.72,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2883",
+              "name": "凱基金",
+              "entryClose": 22.3,
+              "netLots": 4572000,
+              "performance": -0.34,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2409",
+              "name": "友達",
+              "entryClose": 19.5,
+              "netLots": 4559000,
+              "performance": -0.5,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "8028",
+              "name": "昇陽半導體",
+              "entryClose": 279.5,
+              "netLots": 3431000,
+              "performance": 5.56,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        },
+        {
+          "bno": "9207",
+          "name": "凱基-永和",
+          "score": 566.78,
+          "picks": [
+            {
+              "code": "2303",
+              "name": "聯電",
+              "entryClose": 113.5,
+              "netLots": 1904000,
+              "performance": 5.74,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2492",
+              "name": "華新科",
+              "entryClose": 219.5,
+              "netLots": 185000,
+              "performance": -0.23,
+              "sourceType": "stock-branch-fubon-dj",
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "9945",
+              "name": "潤泰新",
+              "entryClose": 23.5,
+              "netLots": 70000,
+              "performance": -0.07,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2103",
+              "name": "台橡",
+              "entryClose": 21,
+              "netLots": 44000,
+              "performance": -3.97,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            },
+            {
+              "code": "2356",
+              "name": "英業達",
+              "entryClose": 53.5,
+              "netLots": 42000,
+              "performance": 0.1,
+              "sourceType": null,
+              "marketDate": "2026-05-15",
+              "horizons": {
+                "3": null,
+                "5": null,
+                "10": null
+              }
+            }
+          ],
+          "summary": {
+            "count": 5,
+            "horizons": {
+              "3": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "5": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              },
+              "10": {
+                "sampleCount": 0,
+                "averageReturn": null,
+                "winRate": null
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "branchSummaries": [
     {
-      "bno": "9676",
-      "name": "富邦-仁愛",
-      "snapshotCount": 7,
-      "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
-      "horizon3": {
-        "sampleCount": 3,
-        "averageReturn": 13.578818297067563,
-        "winRate": 100
-      },
-      "horizon5": {
-        "sampleCount": 3,
-        "averageReturn": 13.022727340203494,
-        "winRate": 100
-      },
-      "horizon10": {
-        "sampleCount": 0,
-        "averageReturn": null,
-        "winRate": null
-      }
-    },
-    {
-      "bno": "9207",
-      "name": "凱基-永和",
-      "snapshotCount": 7,
-      "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
-      "horizon3": {
-        "sampleCount": 2,
-        "averageReturn": 9.545132509201071,
-        "winRate": 100
-      },
-      "horizon5": {
-        "sampleCount": 2,
-        "averageReturn": 22.527083620062513,
-        "winRate": 100
-      },
-      "horizon10": {
-        "sampleCount": 0,
-        "averageReturn": null,
-        "winRate": null
-      }
-    },
-    {
-      "bno": "5850",
-      "name": "統一",
-      "snapshotCount": 7,
-      "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
-      "horizon3": {
-        "sampleCount": 5,
-        "averageReturn": 3.305930718772557,
-        "winRate": 60
-      },
-      "horizon5": {
-        "sampleCount": 5,
-        "averageReturn": 9.624084887526971,
-        "winRate": 60
-      },
-      "horizon10": {
-        "sampleCount": 0,
-        "averageReturn": null,
-        "winRate": null
-      }
-    },
-    {
-      "bno": "9268",
-      "name": "凱基-台北",
-      "snapshotCount": 7,
-      "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
-      "horizon3": {
-        "sampleCount": 5,
-        "averageReturn": 4.995897751281344,
-        "winRate": 60
-      },
-      "horizon5": {
-        "sampleCount": 5,
-        "averageReturn": 7.827131093111829,
-        "winRate": 60
-      },
-      "horizon10": {
-        "sampleCount": 0,
-        "averageReturn": null,
-        "winRate": null
-      }
-    },
-    {
-      "bno": "9600",
-      "name": "富邦",
-      "snapshotCount": 7,
-      "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
-      "horizon3": {
-        "sampleCount": 4,
-        "averageReturn": 7.232762403181222,
-        "winRate": 50
-      },
-      "horizon5": {
-        "sampleCount": 4,
-        "averageReturn": 9.462321856370863,
-        "winRate": 50
-      },
-      "horizon10": {
-        "sampleCount": 0,
-        "averageReturn": null,
-        "winRate": null
-      }
-    },
-    {
-      "bno": "9800",
-      "name": "元大",
-      "snapshotCount": 7,
-      "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
-      "horizon3": {
-        "sampleCount": 4,
-        "averageReturn": 4.3175654007712705,
-        "winRate": 75
-      },
-      "horizon5": {
-        "sampleCount": 4,
-        "averageReturn": 7.777300696832651,
-        "winRate": 50
-      },
-      "horizon10": {
-        "sampleCount": 0,
-        "averageReturn": null,
-        "winRate": null
-      }
-    },
-    {
       "bno": "1440",
       "name": "美林",
-      "snapshotCount": 7,
+      "snapshotCount": 9,
       "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
+      "latestMarketDate": "2026-05-15",
       "horizon3": {
         "sampleCount": 5,
-        "averageReturn": 5.206265958950501,
-        "winRate": 40
+        "averageReturn": -0.531950252984793,
+        "winRate": 60
       },
       "horizon5": {
-        "sampleCount": 5,
-        "averageReturn": 9.198260853999235,
-        "winRate": 40
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
       },
       "horizon10": {
         "sampleCount": 0,
@@ -8768,40 +11448,18 @@
     {
       "bno": "1470",
       "name": "台灣摩根士丹利",
-      "snapshotCount": 7,
+      "snapshotCount": 9,
       "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
+      "latestMarketDate": "2026-05-15",
       "horizon3": {
         "sampleCount": 5,
-        "averageReturn": 2.8205591867650845,
-        "winRate": 60
-      },
-      "horizon5": {
-        "sampleCount": 5,
-        "averageReturn": 5.152248876225926,
+        "averageReturn": -2.1896801516285356,
         "winRate": 40
       },
-      "horizon10": {
+      "horizon5": {
         "sampleCount": 0,
         "averageReturn": null,
         "winRate": null
-      }
-    },
-    {
-      "bno": "8440",
-      "name": "摩根大通",
-      "snapshotCount": 7,
-      "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
-      "horizon3": {
-        "sampleCount": 5,
-        "averageReturn": 3.386046359713535,
-        "winRate": 60
-      },
-      "horizon5": {
-        "sampleCount": 5,
-        "averageReturn": 6.2618316888355725,
-        "winRate": 40
       },
       "horizon10": {
         "sampleCount": 0,
@@ -8812,18 +11470,172 @@
     {
       "bno": "1480",
       "name": "美商高盛",
-      "snapshotCount": 7,
+      "snapshotCount": 9,
       "recentPickCount": 20,
-      "latestMarketDate": "2026-05-13",
+      "latestMarketDate": "2026-05-15",
       "horizon3": {
         "sampleCount": 5,
-        "averageReturn": -0.18881981277970644,
+        "averageReturn": -1.4709123926550198,
+        "winRate": 60
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "5850",
+      "name": "統一",
+      "snapshotCount": 9,
+      "recentPickCount": 20,
+      "latestMarketDate": "2026-05-15",
+      "horizon3": {
+        "sampleCount": 5,
+        "averageReturn": 1.8121115349082941,
+        "winRate": 60
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "8440",
+      "name": "摩根大通",
+      "snapshotCount": 9,
+      "recentPickCount": 20,
+      "latestMarketDate": "2026-05-15",
+      "horizon3": {
+        "sampleCount": 5,
+        "averageReturn": 2.5808144884438424,
+        "winRate": 80
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9207",
+      "name": "凱基-永和",
+      "snapshotCount": 9,
+      "recentPickCount": 20,
+      "latestMarketDate": "2026-05-15",
+      "horizon3": {
+        "sampleCount": 4,
+        "averageReturn": 2.6457301812833034,
+        "winRate": 50
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9268",
+      "name": "凱基-台北",
+      "snapshotCount": 9,
+      "recentPickCount": 20,
+      "latestMarketDate": "2026-05-15",
+      "horizon3": {
+        "sampleCount": 5,
+        "averageReturn": 2.1386353721284044,
+        "winRate": 60
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9600",
+      "name": "富邦",
+      "snapshotCount": 9,
+      "recentPickCount": 20,
+      "latestMarketDate": "2026-05-15",
+      "horizon3": {
+        "sampleCount": 5,
+        "averageReturn": 1.7824594333278263,
+        "winRate": 60
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9676",
+      "name": "富邦-仁愛",
+      "snapshotCount": 9,
+      "recentPickCount": 20,
+      "latestMarketDate": "2026-05-15",
+      "horizon3": {
+        "sampleCount": 4,
+        "averageReturn": 1.8415478157465115,
+        "winRate": 25
+      },
+      "horizon5": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      },
+      "horizon10": {
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
+      }
+    },
+    {
+      "bno": "9800",
+      "name": "元大",
+      "snapshotCount": 9,
+      "recentPickCount": 20,
+      "latestMarketDate": "2026-05-15",
+      "horizon3": {
+        "sampleCount": 5,
+        "averageReturn": 1.9795665148165174,
         "winRate": 40
       },
       "horizon5": {
-        "sampleCount": 5,
-        "averageReturn": -2.4963006936219054,
-        "winRate": 20
+        "sampleCount": 0,
+        "averageReturn": null,
+        "winRate": null
       },
       "horizon10": {
         "sampleCount": 0,

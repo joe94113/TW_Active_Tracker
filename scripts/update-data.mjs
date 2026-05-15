@@ -3014,6 +3014,7 @@ function buildListedStockMarketData(item) {
   return {
     代號: compactText(item.Code),
     名稱: compactText(item.Name),
+    日期: normalizeDate(item.Date),
     開盤價: toNumber(item.OpeningPrice),
     最高價: toNumber(item.HighestPrice),
     最低價: toNumber(item.LowestPrice),
@@ -3024,6 +3025,60 @@ function buildListedStockMarketData(item) {
     成交值: toNumber(item.TradeValue),
     成交筆數: toNumber(item.Transaction),
   };
+}
+
+function parseTpexSignedChange(value) {
+  const text = compactText(value);
+  if (!text) return null;
+  const numeric = toNumber(text);
+  if (numeric === null) return null;
+  return text.startsWith('-') ? -Math.abs(numeric) : Math.abs(numeric);
+}
+
+function buildTpexStockMarketData(item) {
+  const 收盤價 = toNumber(item.Close);
+  const 漲跌值 = parseTpexSignedChange(item.Change);
+
+  return {
+    代號: compactText(item.SecuritiesCompanyCode),
+    名稱: compactText(item.CompanyName),
+    日期: convertRocDateToIso(item.Date),
+    開盤價: toNumber(item.Open),
+    最高價: toNumber(item.High),
+    最低價: toNumber(item.Low),
+    收盤價,
+    漲跌值,
+    漲跌幅: calculateChangePercent(收盤價, 漲跌值),
+    成交量: toNumber(item.TradingShares),
+    成交值: toNumber(item.TransactionAmount),
+    成交筆數: toNumber(item.TransactionNumber),
+    市場: '上櫃',
+  };
+}
+
+function buildTpexValuationRow(item) {
+  return {
+    Code: compactText(item.SecuritiesCompanyCode),
+    Name: compactText(item.CompanyName),
+    PEratio: item.PriceEarningRatio,
+    DividendYield: item.YieldRatio,
+    PBratio: item.PriceBookRatio,
+    Date: convertRocDateToIso(item.Date),
+  };
+}
+
+function mergeMarketStockRows(...rowGroups) {
+  const map = new Map();
+
+  for (const rows of rowGroups) {
+    for (const item of rows ?? []) {
+      const code = compactText(item?.代號);
+      if (!code || map.has(code)) continue;
+      map.set(code, item);
+    }
+  }
+
+  return [...map.values()];
 }
 
 function buildPopularStockData(item) {
@@ -3268,7 +3323,22 @@ function buildMarketObservationSummary({ 大盤摘要, 近五日節奏, 熱門�
 
 async function fetchMarketOverview() {
   const 今日查詢字串 = formatDateQuery(new Date());
-  const [盤後總覽結果, 盤後熱門股結果, 盤後估值結果, indexRowsOpenApi, hotRowsOpenApi, intradayRows, trendRows, stockRowsOpenApi, valuationRowsOpenApi, breadthRowsOpenApi, foreignIndustryRows, foreignTopRows] = await Promise.all([
+  const [
+    盤後總覽結果,
+    盤後熱門股結果,
+    盤後估值結果,
+    indexRowsOpenApi,
+    hotRowsOpenApi,
+    intradayRows,
+    trendRows,
+    stockRowsOpenApi,
+    valuationRowsOpenApi,
+    tpexDailyRows,
+    tpexValuationRows,
+    breadthRowsOpenApi,
+    foreignIndustryRows,
+    foreignTopRows,
+  ] = await Promise.all([
     fetchTwseAfterTradingOverview(今日查詢字串).catch(() => null),
     fetchTwseAfterTradingPopularStocks(今日查詢字串).catch(() => null),
     fetchTwseAfterTradingValuation(今日查詢字串).catch(() => null),
@@ -3278,6 +3348,8 @@ async function fetchMarketOverview() {
     fetchJsonOrFallback('https://openapi.twse.com.tw/v1/exchangeReport/FMTQIK', [], 'TWSE OpenAPI FMTQIK'),
     fetchJsonOrFallback('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL', [], 'TWSE OpenAPI STOCK_DAY_ALL'),
     fetchJsonOrFallback('https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL', [], 'TWSE OpenAPI BWIBBU_ALL'),
+    fetchJsonOrFallback('https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes', [], 'TPEx OpenAPI daily close quotes'),
+    fetchJsonOrFallback('https://www.tpex.org.tw/openapi/v1/tpex_mainboard_peratio_analysis', [], 'TPEx OpenAPI peratio analysis'),
     fetchJsonOrFallback('https://openapi.twse.com.tw/v1/opendata/twtazu_od', [], 'TWSE OpenAPI twtazu_od'),
     fetchJsonOrFallback('https://openapi.twse.com.tw/v1/fund/MI_QFIIS_cat', [], 'TWSE OpenAPI MI_QFIIS_cat'),
     fetchJsonOrFallback('https://openapi.twse.com.tw/v1/fund/MI_QFIIS_sort_20', [], 'TWSE OpenAPI MI_QFIIS_sort_20'),
@@ -3285,7 +3357,10 @@ async function fetchMarketOverview() {
   const indexRows = 盤後總覽結果?.indexRows?.length ? 盤後總覽結果.indexRows : indexRowsOpenApi;
   const hotRows = 盤後熱門股結果?.length ? 盤後熱門股結果 : hotRowsOpenApi;
   const stockRows = 盤後總覽結果?.stockRows?.length ? 盤後總覽結果.stockRows : stockRowsOpenApi;
-  const valuationRows = 盤後估值結果?.length ? 盤後估值結果 : valuationRowsOpenApi;
+  const valuationRows = [
+    ...(盤後估值結果?.length ? 盤後估值結果 : valuationRowsOpenApi),
+    ...(tpexValuationRows ?? []).filter((item) => isCommonStockCode(item.SecuritiesCompanyCode)).map(buildTpexValuationRow),
+  ];
   const breadthRows = 盤後總覽結果?.breadthRows?.length ? 盤後總覽結果.breadthRows : breadthRowsOpenApi;
 
   const 指數卡片 = buildIndexCardData(indexRows);
@@ -3319,9 +3394,13 @@ async function fetchMarketOverview() {
 
   const 最新大盤 = 近五日節奏.at(-1) ?? {};
   const 盤中原始資料 = [...intradayRows].reverse().find((item) => item.AccTradeValue) ?? intradayRows.at(-1) ?? {};
-  const 全部個股 = stockRows
+  const 上市個股 = stockRows
     .filter((item) => isCommonStockCode(item.Code))
     .map(buildListedStockMarketData);
+  const 上櫃個股 = (tpexDailyRows ?? [])
+    .filter((item) => isCommonStockCode(item.SecuritiesCompanyCode))
+    .map(buildTpexStockMarketData);
+  const 全部個股 = mergeMarketStockRows(上市個股, 上櫃個股);
   const 個股索引 = new Map(全部個股.map((item) => [item.代號, item]));
   const 評價索引 = new Map(
     valuationRows
@@ -3491,8 +3570,9 @@ async function fetchMarketOverview() {
       觀察摘要,
       資料說明: [
         'TWSE OpenAPI：MI_INDEX、MI_5MINS、FMTQIK、MI_INDEX20、STOCK_DAY_ALL、twtazu_od、MI_QFIIS_cat、MI_QFIIS_sort_20',
+        'TPEx OpenAPI：tpex_mainboard_daily_close_quotes、tpex_mainboard_peratio_analysis',
         '盤中大盤與個股即時覆蓋：TWSE MIS 即時指數與即時行情。',
-        '熱門股以成交量與成交值為主，並排除 ETF 與受益證券，聚焦上市一般股票。',
+        '熱門股以成交量與成交值為主，並排除 ETF 與受益證券，聚焦上市與上櫃一般股票。',
       ],
     },
     全部個股,
@@ -5077,13 +5157,13 @@ function buildStockSearchIndex({
       code,
       name: 顯示名稱,
       industryName: 明細摘要?.industryName ?? 公司概況?.產業名稱 ?? null,
-      priceDate: 明細摘要?.priceDate ?? 市場資料日期 ?? null,
+      priceDate: 明細摘要?.priceDate ?? item.日期 ?? 市場資料日期 ?? null,
       generatedAt: 產生時間,
-      close: item.收盤價 ?? 明細摘要?.close ?? null,
-      change: item.漲跌值 ?? 明細摘要?.change ?? null,
-      changePercent: item.漲跌幅 ?? 明細摘要?.changePercent ?? null,
-      volume: item.成交量 ?? 明細摘要?.volume ?? null,
-      turnover: item.成交值 ?? 明細摘要?.turnover ?? null,
+      close: 明細摘要?.close ?? item.收盤價 ?? null,
+      change: 明細摘要?.change ?? item.漲跌值 ?? null,
+      changePercent: 明細摘要?.changePercent ?? item.漲跌幅 ?? null,
+      volume: 明細摘要?.volume ?? item.成交量 ?? null,
+      turnover: 明細摘要?.turnover ?? item.成交值 ?? null,
       peRatio: 評價面?.本益比 ?? null,
       dividendYield: 評價面?.殖利率 ?? null,
       pbRatio: 評價面?.股價淨值比 ?? null,
@@ -5294,6 +5374,22 @@ function buildSecurityCandidateList({ 市場總覽, 法人追蹤, ETF結果, 全
     收納(item.代號, item.名稱);
   }
 
+  const 活躍成交股 = [...全部個股]
+    .filter((item) => (item.成交值 ?? 0) >= 300000000)
+    .sort((left, right) => (right.成交值 ?? 0) - (left.成交值 ?? 0))
+    .slice(0, 400);
+  for (const item of 活躍成交股) {
+    收納(item.代號, item.名稱);
+  }
+
+  const 波動焦點股 = [...全部個股]
+    .filter((item) => (item.成交值 ?? 0) >= 100000000 && Math.abs(item.漲跌幅 ?? 0) >= 2.5)
+    .sort((left, right) => Math.abs(right.漲跌幅 ?? 0) - Math.abs(left.漲跌幅 ?? 0))
+    .slice(0, 260);
+  for (const item of 波動焦點股) {
+    收納(item.代號, item.名稱);
+  }
+
   for (const result of ETF結果) {
     for (const holding of result.snapshot?.holdings ?? []) {
       收納(holding.code, holding.name);
@@ -5400,7 +5496,7 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
       const 市場個股資料 = 其他索引.市場個股索引?.get(item.code) ?? null;
       const 歷史資料 = await fetchSecurityDailyBars(item.code, 12, {
         市場個股資料,
-        市場資料日期: 其他索引.市場資料日期 ?? null,
+        市場資料日期: 市場個股資料?.日期 ?? 其他索引.市場資料日期 ?? null,
         舊歷史資料: 舊資料?.歷史資料 ?? [],
       });
       let 盤中走勢 = 舊資料?.盤中走勢 ?? null;
@@ -5450,8 +5546,8 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
               資產負債表,
               觀察摘要: buildFinancialObservationSummary({ 月營收, 綜合損益表, 資產負債表, 評價面 }),
               資料說明: [
-                '財務與公司基本資料來源：TWSE OpenAPI（上市公司基本資料、月營收、綜合損益表、資產負債表）。',
-                '估值欄位來源：TWSE OpenAPI BWIBBU_ALL。',
+                '財務與公司基本資料來源：TWSE / TPEx OpenAPI（上市櫃公司基本資料、月營收、綜合損益表、資產負債表）。',
+                '估值欄位來源：TWSE BWIBBU_ALL 與 TPEx tpex_mainboard_peratio_analysis。',
               ],
             }
           : null;
@@ -5524,6 +5620,7 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
           'Yahoo Finance Chart API',
           'TWSE MIS 即時行情',
           'TWSE STOCK_DAY',
+          'TPEx daily close quotes',
           'TWSE T86',
           'TDCC 1-5',
           'TWSE OpenAPI MI_MARGN',
@@ -5667,6 +5764,7 @@ async function main() {
       {
         代號: item.代號,
         名稱: item.名稱,
+        日期: item.日期 ?? null,
         開盤價: item.開盤價,
         最高價: item.最高價,
         最低價: item.最低價,
@@ -5689,6 +5787,7 @@ async function main() {
         {
           代號: code,
           名稱: item.name,
+          日期: item.marketDate ?? null,
           開盤價: item.open,
           最高價: item.high,
           最低價: item.low,
