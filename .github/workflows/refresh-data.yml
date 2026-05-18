@@ -87,7 +87,7 @@ jobs:
     needs:
       - refresh
       - deploy
-    if: needs.refresh.outputs.data_changed == 'true' && (github.event_name == 'workflow_dispatch' || github.event.schedule == '35 10 * * 1-5')
+    if: needs.refresh.outputs.data_changed == 'true' && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
