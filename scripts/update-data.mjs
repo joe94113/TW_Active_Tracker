@@ -1969,6 +1969,29 @@ function formatDateQuery(date) {
   return `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
 }
 
+function resolveConfiguredMarketDate() {
+  const rawValue =
+    process.env.MARKET_DATA_DATE ??
+    process.env.DIGEST_TARGET_DATE ??
+    process.env.DATA_TARGET_DATE ??
+    '';
+  const normalized = normalizeDate(rawValue);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(normalized)) {
+    return normalized;
+  }
+
+  if (rawValue) {
+    console.warn(`[警告] MARKET_DATA_DATE 格式不正確，改用執行當下日期：${rawValue}`);
+  }
+
+  return null;
+}
+
+function createTaipeiNoonDate(dateText) {
+  return dateText ? new Date(`${dateText}T12:00:00+08:00`) : new Date();
+}
+
 function formatRocDateQuery(date) {
   return `${date.getFullYear() - 1911}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 }
@@ -3321,8 +3344,9 @@ function buildMarketObservationSummary({ 大盤摘要, 近五日節奏, 熱門�
   return 摘要.slice(0, 5);
 }
 
-async function fetchMarketOverview() {
-  const 今日查詢字串 = formatDateQuery(new Date());
+async function fetchMarketOverview(優先日期 = null) {
+  const 查詢日期物件 = createTaipeiNoonDate(優先日期);
+  const 今日查詢字串 = formatDateQuery(查詢日期物件);
   const [
     盤後總覽結果,
     盤後熱門股結果,
@@ -3972,9 +3996,9 @@ function buildInstitutionalDivergence(日資料清單) {
     .slice(0, 12);
 }
 
-async function fetchRecentInstitutionalTrading(個股索引, 目標交易日數 = 5) {
+async function fetchRecentInstitutionalTrading(個股索引, 目標交易日數 = 5, 優先日期 = null) {
   const 日資料清單 = [];
-  const 起始日 = new Date();
+  const 起始日 = createTaipeiNoonDate(優先日期);
 
   for (let offset = 0; offset <= 12 && 日資料清單.length < 目標交易日數; offset += 1) {
     const candidate = new Date(起始日);
@@ -5720,15 +5744,16 @@ async function main() {
   }
 
   const 現在 = new Date();
+  const 指定市場查詢日期 = resolveConfiguredMarketDate();
   const 既有儀表板 = await readJsonIfExists(path.join(資料目錄, 'dashboard.json'));
-  const { 市場總覽, 全部個股, 個股索引, 評價索引 } = await fetchMarketOverview();
+  const { 市場總覽, 全部個股, 個股索引, 評價索引 } = await fetchMarketOverview(指定市場查詢日期);
   const { 公司概況索引, 月營收索引, 綜合損益索引, 資產負債索引 } = await fetchStockFinancialIndex();
   const 選股輔助資料集 = await fetchStockSelectionSupportData(市場總覽.資料日期);
   let 日資料清單 = [];
   let 法人追蹤;
 
   try {
-    日資料清單 = await fetchRecentInstitutionalTrading(個股索引, 5);
+    日資料清單 = await fetchRecentInstitutionalTrading(個股索引, 5, 市場總覽.資料日期 ?? 指定市場查詢日期);
     法人追蹤 = buildInstitutionalTracker(日資料清單);
   } catch (error) {
     法人追蹤 = 既有儀表板?.法人追蹤 ?? {

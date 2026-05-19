@@ -1,7 +1,7 @@
 import {
   buildCloseDigestSummary,
   buildTelegramMessage,
-  formatTaipeiDate,
+  getDigestTargetDate,
   loadCloseDigestData,
 } from './lib/close-digest.mjs';
 
@@ -36,23 +36,23 @@ async function sendTelegramMessage(message) {
 }
 
 async function main() {
-  const today = formatTaipeiDate();
+  const targetDate = process.env.DIGEST_TARGET_DATE || getDigestTargetDate();
   const data = await loadCloseDigestData();
   const summary = buildCloseDigestSummary({
     ...data,
-    today,
+    today: targetDate,
   });
   const message = buildTelegramMessage(summary);
 
   if (!message) {
-    console.log(`Skip Telegram push: market date does not match today (${today}).`);
+    console.log(`Skip Telegram push: market date does not match digest target date (${targetDate}).`);
     return;
   }
 
   const sent = await sendTelegramMessage(message);
 
   if (sent) {
-    console.log(`Telegram push sent for ${today}.`);
+    console.log(`Telegram push sent for ${targetDate}.`);
   }
 }
 

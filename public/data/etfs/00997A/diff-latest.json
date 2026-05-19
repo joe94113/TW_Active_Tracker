@@ -1,119 +1,121 @@
 {
   "code": "00997A",
   "name": "主動群益美國增長",
-  "fromDisclosureDate": "2026-05-15",
-  "toDisclosureDate": "2026-05-18",
+  "fromDisclosureDate": "2026-05-18",
+  "toDisclosureDate": "2026-05-20",
   "comparisonReady": true,
-  "added": [
-    {
-      "code": "NVDA US",
-      "name": "輝達公司",
-      "currentShares": 51763,
-      "currentWeight": 2.99,
-      "sharesDelta": 51763,
-      "weightDelta": 2.99
-    }
-  ],
-  "removed": [
-    {
-      "code": "TER US",
-      "name": "泰瑞達公司",
-      "previousShares": 33557,
-      "previousWeight": 3,
-      "sharesDelta": -33557,
-      "weightDelta": -3
-    }
-  ],
+  "added": [],
+  "removed": [],
   "increased": [
     {
       "code": "GOOGL US",
       "name": "ALPHABET INC-CL A",
       "previousShares": 47024,
       "currentShares": 47024,
-      "previousWeight": 4.66,
-      "currentWeight": 4.78,
+      "previousWeight": 4.78,
+      "currentWeight": 4.97,
       "sharesDelta": 0,
-      "weightDelta": 0.1200000000000001
-    },
-    {
-      "code": "WDC US",
-      "name": "威騰電子公司",
-      "previousShares": 46940,
-      "currentShares": 46940,
-      "previousWeight": 5.71,
-      "currentWeight": 5.8,
-      "sharesDelta": 0,
-      "weightDelta": 0.08999999999999986
-    },
-    {
-      "code": "STX US",
-      "name": "希捷科技控股公開有限公司",
-      "previousShares": 29967,
-      "currentShares": 29967,
-      "previousWeight": 6.03,
-      "currentWeight": 6.11,
-      "sharesDelta": 0,
-      "weightDelta": 0.08000000000000007
-    }
-  ],
-  "decreased": [
-    {
-      "code": "MU US",
-      "name": "美光科技公司",
-      "previousShares": 33731,
-      "currentShares": 30231,
-      "previousWeight": 6.68,
-      "currentWeight": 5.61,
-      "sharesDelta": -3500,
-      "weightDelta": -1.0699999999999994
-    },
-    {
-      "code": "SNDK US",
-      "name": "晟碟公司（德拉瓦州）",
-      "previousShares": 14302,
-      "currentShares": 11652,
-      "previousWeight": 5.1,
-      "currentWeight": 4.2,
-      "sharesDelta": -2650,
-      "weightDelta": -0.8999999999999995
-    },
-    {
-      "code": "LITE US",
-      "name": "魯門特姆控股公司",
-      "previousShares": 22255,
-      "currentShares": 20155,
-      "previousWeight": 5.65,
-      "currentWeight": 5.01,
-      "sharesDelta": -2100,
-      "weightDelta": -0.6400000000000006
-    },
-    {
-      "code": "4062 JP",
-      "name": "揖斐電有限公司",
-      "previousShares": 135868,
-      "currentShares": 135868,
-      "previousWeight": 3.62,
-      "currentWeight": 3.44,
-      "sharesDelta": 0,
-      "weightDelta": -0.18000000000000016
+      "weightDelta": 0.1899999999999995
     },
     {
       "code": "AMD US",
       "name": "超微半導體公司",
       "previousShares": 29807,
       "currentShares": 29807,
-      "previousWeight": 3.27,
-      "currentWeight": 3.24,
+      "previousWeight": 3.24,
+      "currentWeight": 3.34,
       "sharesDelta": 0,
-      "weightDelta": -0.029999999999999805
+      "weightDelta": 0.09999999999999964
+    },
+    {
+      "code": "NVDA US",
+      "name": "輝達公司",
+      "previousShares": 51763,
+      "currentShares": 51763,
+      "previousWeight": 2.99,
+      "currentWeight": 3.07,
+      "sharesDelta": 0,
+      "weightDelta": 0.07999999999999963
+    }
+  ],
+  "decreased": [
+    {
+      "code": "LITE US",
+      "name": "魯門特姆控股公司",
+      "previousShares": 20155,
+      "currentShares": 20155,
+      "previousWeight": 5.01,
+      "currentWeight": 4.75,
+      "sharesDelta": 0,
+      "weightDelta": -0.2599999999999998
+    },
+    {
+      "code": "STX US",
+      "name": "希捷科技控股公開有限公司",
+      "previousShares": 29967,
+      "currentShares": 29967,
+      "previousWeight": 6.11,
+      "currentWeight": 5.91,
+      "sharesDelta": 0,
+      "weightDelta": -0.20000000000000018
+    },
+    {
+      "code": "MU US",
+      "name": "美光科技公司",
+      "previousShares": 30231,
+      "currentShares": 30231,
+      "previousWeight": 5.61,
+      "currentWeight": 5.49,
+      "sharesDelta": 0,
+      "weightDelta": -0.1200000000000001
+    },
+    {
+      "code": "SNDK US",
+      "name": "晟碟公司（德拉瓦州）",
+      "previousShares": 11652,
+      "currentShares": 11652,
+      "previousWeight": 4.2,
+      "currentWeight": 4.14,
+      "sharesDelta": 0,
+      "weightDelta": -0.0600000000000005
+    },
+    {
+      "code": "WDC US",
+      "name": "威騰電子公司",
+      "previousShares": 46940,
+      "currentShares": 46940,
+      "previousWeight": 5.8,
+      "currentWeight": 5.74,
+      "sharesDelta": 0,
+      "weightDelta": -0.05999999999999961
+    },
+    {
+      "code": "CIEN US",
+      "name": "喜雅納公司",
+      "previousShares": 21093,
+      "currentShares": 21093,
+      "previousWeight": 3,
+      "currentWeight": 2.95,
+      "sharesDelta": 0,
+      "weightDelta": -0.04999999999999982
+    },
+    {
+      "code": "4062 JP",
+      "name": "揖斐電有限公司",
+      "previousShares": 135868,
+      "currentShares": 130868,
+      "previousWeight": 3.44,
+      "currentWeight": 3.43,
+      "sharesDelta": -5000,
+      "weightDelta": -0.009999999999999787
     }
   ],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 1,
-    "removedCount": 1,
+    "addedCount": 0,
+    "removedCount": 0,
     "increasedCount": 3,
-    "decreasedCount": 5,
+    "decreasedCount": 7,
     "totalChangeCount": 10
   }
 }

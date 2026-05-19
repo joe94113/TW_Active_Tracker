@@ -16,7 +16,7 @@ concurrency:
 jobs:
   send-digest:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     env:
       TZ: Asia/Taipei
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -37,8 +37,58 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Resolve digest target date
+        run: |
+          TARGET_DATE="$(node --input-type=module - <<'NODE'
+          import { getDigestTargetDate } from './scripts/lib/close-digest.mjs';
+          console.log(getDigestTargetDate());
+          NODE
+          )"
+          echo "MARKET_DATA_DATE=${TARGET_DATE}" >> "$GITHUB_ENV"
+          echo "DIGEST_TARGET_DATE=${TARGET_DATE}" >> "$GITHUB_ENV"
+          echo "Digest target date: ${TARGET_DATE}"
+
       - name: Refresh digest data snapshot
-        run: npm run data:update || echo "data:update completed with partial upstream failures"
+        run: |
+          for attempt in 1 2; do
+            echo "data:update attempt ${attempt} for ${MARKET_DATA_DATE}"
+            if npm run data:update; then
+              exit 0
+            fi
+            if [ "${attempt}" -eq 2 ]; then
+              echo "data:update failed after ${attempt} attempts"
+              exit 1
+            fi
+            sleep 120
+          done
+
+      - name: Report digest freshness
+        run: |
+          node --input-type=module - <<'NODE'
+          const fs = require('node:fs');
+          import { formatTaipeiDate, getDigestTargetDate } from './scripts/lib/close-digest.mjs';
+          function collectIsoDates(text) {
+            return [...new Set(String(text).match(/\d{4}-\d{2}-\d{2}/g) ?? [])].sort();
+          }
+          const today = formatTaipeiDate();
+          const targetDate = process.env.DIGEST_TARGET_DATE || getDigestTargetDate();
+          const dashboardText = fs.readFileSync('public/data/dashboard.json', 'utf8');
+          const history = JSON.parse(fs.readFileSync('public/data/radar/history.json', 'utf8'));
+          const manifest = JSON.parse(fs.readFileSync('public/data/manifest.json', 'utf8'));
+          const dashboardDates = collectIsoDates(dashboardText);
+          const marketDate = history?.marketDate ?? history?.snapshots?.at(-1)?.marketDate ?? dashboardDates.at(-1) ?? 'unknown';
+          const lastSnapshot = history?.snapshots?.at(-1);
+          console.log(`today: ${today}`);
+          console.log(`target digest date: ${targetDate}`);
+          console.log(`digest market date: ${marketDate}`);
+          console.log(`dashboard latest date seen: ${dashboardDates.at(-1) ?? 'unknown'}`);
+          console.log(`manifest generated: ${manifest.generatedAtLocalDate} ${manifest.generatedAtLocalTime}`);
+          console.log(`radar stable picks: ${lastSnapshot?.stable?.length ?? 0}`);
+          console.log(`radar aggressive picks: ${lastSnapshot?.aggressive?.length ?? 0}`);
+          if (marketDate !== targetDate) {
+            console.log(`Digest will skip push because market date ${marketDate} does not match target digest date ${targetDate}.`);
+          }
+          NODE
 
       - name: Send Telegram digest
         run: node scripts/send-telegram-brief.mjs

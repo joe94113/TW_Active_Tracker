@@ -14,9 +14,28 @@ const taipeiDateFormatter = new Intl.DateTimeFormat('en-CA', {
   month: '2-digit',
   day: '2-digit',
 });
+const taipeiHourFormatter = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Taipei',
+  hour: '2-digit',
+  hour12: false,
+  hourCycle: 'h23',
+});
 
 export function formatTaipeiDate(date = new Date()) {
   return taipeiDateFormatter.format(date);
+}
+
+export function getDigestTargetDate(date = new Date()) {
+  const taipeiDate = formatTaipeiDate(date);
+  const taipeiHour = Number(taipeiHourFormatter.format(date));
+
+  // GitHub scheduled jobs can be delayed. If the 20:30 digest runs after
+  // midnight, it should still publish the previous market day's digest.
+  if (Number.isFinite(taipeiHour) && taipeiHour < 6) {
+    return formatTaipeiDate(new Date(new Date(`${taipeiDate}T00:00:00+08:00`).getTime() - 24 * 60 * 60 * 1000));
+  }
+
+  return taipeiDate;
 }
 
 export function formatNumber(value, digits = 2) {

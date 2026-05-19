@@ -1,7 +1,7 @@
 import {
   buildCloseDigestSummary,
   buildDiscordPayload,
-  formatTaipeiDate,
+  getDigestTargetDate,
   loadCloseDigestData,
 } from './lib/close-digest.mjs';
 
@@ -51,23 +51,23 @@ async function sendDiscordMessages(payload) {
 }
 
 async function main() {
-  const today = formatTaipeiDate();
+  const targetDate = process.env.DIGEST_TARGET_DATE || getDigestTargetDate();
   const data = await loadCloseDigestData();
   const summary = buildCloseDigestSummary({
     ...data,
-    today,
+    today: targetDate,
   });
   const payload = buildDiscordPayload(summary);
 
   if (!payload) {
-    console.log(`Skip Discord push: market date does not match today (${today}).`);
+    console.log(`Skip Discord push: market date does not match digest target date (${targetDate}).`);
     return;
   }
 
   const sent = await sendDiscordMessages(payload);
 
   if (sent) {
-    console.log(`Discord push sent for ${today}.`);
+    console.log(`Discord push sent for ${targetDate}.`);
   }
 }
 

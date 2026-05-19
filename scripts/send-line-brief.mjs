@@ -1,6 +1,6 @@
 import {
   buildCloseDigestSummary,
-  formatTaipeiDate,
+  getDigestTargetDate,
   loadCloseDigestData,
 } from './lib/close-digest.mjs';
 import { buildLineBroadcastMessages } from './lib/line-flex.mjs';
@@ -39,23 +39,23 @@ async function sendLineMessage(messages) {
 }
 
 async function main() {
-  const today = formatTaipeiDate();
+  const targetDate = process.env.DIGEST_TARGET_DATE || getDigestTargetDate();
   const data = await loadCloseDigestData();
   const summary = buildCloseDigestSummary({
     ...data,
-    today,
+    today: targetDate,
   });
   const payload = buildLineBroadcastMessages(summary);
 
   if (!payload?.messages?.length) {
-    console.log(`Skip LINE push: market date does not match today (${today}).`);
+    console.log(`Skip LINE push: market date does not match digest target date (${targetDate}).`);
     return;
   }
 
   const sent = await sendLineMessage(payload.messages);
 
   if (sent) {
-    console.log(`LINE push sent for ${today}.`);
+    console.log(`LINE push sent for ${targetDate}.`);
   }
 }
 
