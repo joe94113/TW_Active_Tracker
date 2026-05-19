@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-15T03:00:27.522Z",
-  "marketDate": "2026-05-15",
+  "generatedAt": "2026-05-18T15:33:16.796Z",
+  "marketDate": "2026-05-18",
   "horizons": [
     3,
     5,
@@ -2497,7 +2497,12 @@
               "exitClose": 2360,
               "returnPercent": 2.1645021645021645
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 2185,
+              "returnPercent": -5.411255411255411
+            }
           }
         },
         {
@@ -2521,7 +2526,12 @@
               "exitClose": 1455,
               "returnPercent": 31.08108108108108
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 1260,
+              "returnPercent": 13.513513513513514
+            }
           }
         }
       ],
@@ -2547,7 +2557,12 @@
               "exitClose": 3880,
               "returnPercent": 35.19163763066202
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 3400,
+              "returnPercent": 18.466898954703833
+            }
           }
         },
         {
@@ -2571,7 +2586,12 @@
               "exitClose": 2270,
               "returnPercent": -2.7837259100642395
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 1800,
+              "returnPercent": -22.91220556745182
+            }
           }
         },
         {
@@ -2595,7 +2615,12 @@
               "exitClose": 962,
               "returnPercent": 4.112554112554113
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 1135,
+              "returnPercent": 22.835497835497836
+            }
           }
         },
         {
@@ -2619,7 +2644,12 @@
               "exitClose": 32.25,
               "returnPercent": 11.206896551724139
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 30.55,
+              "returnPercent": 5.344827586206899
+            }
           }
         },
         {
@@ -2643,7 +2673,12 @@
               "exitClose": 135.5,
               "returnPercent": 0
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 137,
+              "returnPercent": 1.107011070110701
+            }
           }
         },
         {
@@ -2667,7 +2702,12 @@
               "exitClose": 17.100000381469727,
               "returnPercent": 1.1834342098800474
             },
-            "10": null
+            "10": {
+              "tradingDays": 10,
+              "exitDate": "2026-05-18",
+              "exitClose": 16.7,
+              "returnPercent": -1.1834319526627177
+            }
           }
         }
       ],
@@ -2686,9 +2726,9 @@
               "winRate": 100
             },
             "10": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 2,
+              "averageReturn": 4.051129051129052,
+              "winRate": 50
             }
           }
         },
@@ -2706,9 +2746,9 @@
               "winRate": 66.66666666666666
             },
             "10": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 6,
+              "averageReturn": 3.943099654400788,
+              "winRate": 66.66666666666666
             }
           }
         }
@@ -2777,8 +2817,18 @@
           "entryClose": 69.3,
           "marketDate": "2026-05-05",
           "horizons": {
-            "3": null,
-            "5": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-08",
+              "exitClose": 67.5,
+              "returnPercent": -2.5974025974025934
+            },
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-12",
+              "exitClose": 69.9000015258789,
+              "returnPercent": 0.8658030676463335
+            },
             "10": null
           }
         },
@@ -2923,14 +2973,14 @@
           "count": 6,
           "horizons": {
             "3": {
-              "sampleCount": 5,
-              "averageReturn": 2.41935823319882,
-              "winRate": 80
+              "sampleCount": 6,
+              "averageReturn": 1.5832314280985844,
+              "winRate": 66.66666666666666
             },
             "5": {
-              "sampleCount": 4,
-              "averageReturn": 2.2868749636546006,
-              "winRate": 50
+              "sampleCount": 5,
+              "averageReturn": 2.002660584452947,
+              "winRate": 60
             },
             "10": {
               "sampleCount": 0,
@@ -3221,7 +3271,12 @@
               "exitClose": 341,
               "returnPercent": 13.2890365448505
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 305,
+              "returnPercent": 1.3289036544850499
+            },
             "10": null
           }
         },
@@ -3240,7 +3295,12 @@
               "exitClose": 98.0999984741211,
               "returnPercent": 1.9750503888992628
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 96.8,
+              "returnPercent": 0.6237006237006177
+            },
             "10": null
           }
         },
@@ -3259,7 +3319,12 @@
               "exitClose": 1625,
               "returnPercent": -10.714285714285714
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 1855,
+              "returnPercent": 1.9230769230769231
+            },
             "10": null
           }
         }
@@ -3280,7 +3345,12 @@
               "exitClose": 2880,
               "returnPercent": 7.865168539325842
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 2735,
+              "returnPercent": 2.4344569288389515
+            },
             "10": null
           }
         },
@@ -3299,7 +3369,12 @@
               "exitClose": 2745,
               "returnPercent": -1.7889087656529516
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 2540,
+              "returnPercent": -9.123434704830053
+            },
             "10": null
           }
         },
@@ -3318,7 +3393,12 @@
               "exitClose": 4830,
               "returnPercent": -10.13953488372093
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 4590,
+              "returnPercent": -14.604651162790697
+            },
             "10": null
           }
         },
@@ -3337,7 +3417,12 @@
               "exitClose": 34.79999923706055,
               "returnPercent": 0.7235867932287982
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 35.45,
+              "returnPercent": 2.6049204052098576
+            },
             "10": null
           }
         },
@@ -3356,7 +3441,12 @@
               "exitClose": 16.75,
               "returnPercent": -2.0467836257310026
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 16.7,
+              "returnPercent": -2.33918128654972
+            },
             "10": null
           }
         },
@@ -3375,7 +3465,12 @@
               "exitClose": 10.050000190734863,
               "returnPercent": -1.9512176513671875
             },
-            "5": null,
+            "5": {
+              "tradingDays": 5,
+              "exitDate": "2026-05-18",
+              "exitClose": 9.95,
+              "returnPercent": -2.9268292682926895
+            },
             "10": null
           }
         }
@@ -3390,9 +3485,9 @@
               "winRate": 66.66666666666666
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 3,
+              "averageReturn": 1.291893733754197,
+              "winRate": 100
             },
             "10": {
               "sampleCount": 0,
@@ -3410,9 +3505,9 @@
               "winRate": 33.33333333333333
             },
             "5": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 6,
+              "averageReturn": -3.9924531814023925,
+              "winRate": 33.33333333333333
             },
             "10": {
               "sampleCount": 0,
@@ -3439,8 +3534,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 76.2,
-              "returnPercent": 4.240766073871421
+              "exitClose": 75.69999694824219,
+              "returnPercent": 3.5567673710563517
             },
             "5": null,
             "10": null
@@ -3458,8 +3553,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 3805,
-              "returnPercent": -1.4248704663212435
+              "exitClose": 3735,
+              "returnPercent": -3.2383419689119166
             },
             "5": null,
             "10": null
@@ -3479,8 +3574,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 165.5,
-              "returnPercent": 12.585034013605442
+              "exitClose": 155,
+              "returnPercent": 5.442176870748299
             },
             "5": null,
             "10": null
@@ -3498,8 +3593,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 669,
-              "returnPercent": -9.594594594594595
+              "exitClose": 642,
+              "returnPercent": -13.243243243243244
             },
             "5": null,
             "10": null
@@ -3517,8 +3612,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 6140,
-              "returnPercent": 12.043795620437956
+              "exitClose": 5895,
+              "returnPercent": 7.572992700729928
             },
             "5": null,
             "10": null
@@ -3536,8 +3631,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 40.45,
-              "returnPercent": 0.872817955112223
+              "exitClose": 40.099998474121094,
+              "returnPercent": -0.0000038051843084066968
             },
             "5": null,
             "10": null
@@ -3555,8 +3650,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 29.65,
-              "returnPercent": 0.8503401360544218
+              "exitClose": 29.299999237060547,
+              "returnPercent": -0.34013864945391736
             },
             "5": null,
             "10": null
@@ -3574,8 +3669,8 @@
             "3": {
               "tradingDays": 3,
               "exitDate": "2026-05-15",
-              "exitClose": 137.5,
-              "returnPercent": 1.4760147601476015
+              "exitClose": 138,
+              "returnPercent": 1.8450184501845017
             },
             "5": null,
             "10": null
@@ -3588,7 +3683,7 @@
           "horizons": {
             "3": {
               "sampleCount": 2,
-              "averageReturn": 1.4079478037750888,
+              "averageReturn": 0.15921270107221752,
               "winRate": 50
             },
             "5": {
@@ -3608,8 +3703,8 @@
           "horizons": {
             "3": {
               "sampleCount": 6,
-              "averageReturn": 3.038901315127175,
-              "winRate": 83.33333333333334
+              "averageReturn": 0.21280038729687645,
+              "winRate": 50
             },
             "5": {
               "sampleCount": 0,
@@ -3638,7 +3733,12 @@
           "entryClose": 442.5,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 388.5,
+              "returnPercent": -12.203389830508476
+            },
             "5": null,
             "10": null
           }
@@ -3652,7 +3752,12 @@
           "entryClose": 5720,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 6135,
+              "returnPercent": 7.255244755244755
+            },
             "5": null,
             "10": null
           }
@@ -3668,7 +3773,12 @@
           "entryClose": 159,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 166,
+              "returnPercent": 4.40251572327044
+            },
             "5": null,
             "10": null
           }
@@ -3682,7 +3792,12 @@
           "entryClose": 137.5,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 137,
+              "returnPercent": -0.36363636363636365
+            },
             "5": null,
             "10": null
           }
@@ -3696,7 +3811,12 @@
           "entryClose": 232,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 250,
+              "returnPercent": 7.758620689655173
+            },
             "5": null,
             "10": null
           }
@@ -3710,7 +3830,12 @@
           "entryClose": 73.9,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 72.8,
+              "returnPercent": -1.488497970230052
+            },
             "5": null,
             "10": null
           }
@@ -3724,7 +3849,12 @@
           "entryClose": 29.5,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 28.75,
+              "returnPercent": -2.5423728813559325
+            },
             "5": null,
             "10": null
           }
@@ -3738,7 +3868,12 @@
           "entryClose": 75.2,
           "marketDate": "2026-05-13",
           "horizons": {
-            "3": null,
+            "3": {
+              "tradingDays": 3,
+              "exitDate": "2026-05-18",
+              "exitClose": 74.7,
+              "returnPercent": -0.6648936170212766
+            },
             "5": null,
             "10": null
           }
@@ -3749,9 +3884,9 @@
           "count": 2,
           "horizons": {
             "3": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 2,
+              "averageReturn": -2.4740725376318604,
+              "winRate": 50
             },
             "5": {
               "sampleCount": 0,
@@ -3769,9 +3904,9 @@
           "count": 6,
           "horizons": {
             "3": {
-              "sampleCount": 0,
-              "averageReturn": null,
-              "winRate": null
+              "sampleCount": 6,
+              "averageReturn": 1.1836225967803313,
+              "winRate": 33.33333333333333
             },
             "5": {
               "sampleCount": 0,
@@ -4061,6 +4196,168 @@
           "detail": "30 日區間 6.2%｜離前高 0.5%｜RSI 63.2",
           "entryClose": 29.65,
           "marketDate": "2026-05-15",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "summary": {
+        "stable": {
+          "count": 2,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        },
+        "aggressive": {
+          "count": 6,
+          "horizons": {
+            "3": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "5": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            },
+            "10": {
+              "sampleCount": 0,
+              "averageReturn": null,
+              "winRate": null
+            }
+          }
+        }
+      }
+    },
+    {
+      "marketDate": "2026-05-18",
+      "generatedAt": "2026-05-18T15:33:16.796Z",
+      "stable": [
+        {
+          "code": "2313",
+          "name": "華通",
+          "label": "偏多焦點",
+          "rating": 4,
+          "detail": "黃金交叉｜20 日 -0.96%｜五日籌碼 8,478 張",
+          "entryClose": 259,
+          "marketDate": "2026-05-18",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "3491",
+          "name": "昇達科",
+          "label": "偏多焦點",
+          "rating": 3,
+          "detail": "MACD 翻正｜20 日 +11.08%｜五日籌碼 -553 張",
+          "entryClose": 1855,
+          "marketDate": "2026-05-18",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        }
+      ],
+      "aggressive": [
+        {
+          "code": "8358",
+          "name": "金居",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +9.88%｜量能比 5 日 14%｜距 20 日高 16.8%",
+          "entryClose": 428,
+          "marketDate": "2026-05-18",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "3026",
+          "name": "禾伸堂",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +9.94%｜量能比 5 日 23%｜距 20 日高 6.5%",
+          "entryClose": 359.5,
+          "marketDate": "2026-05-18",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "6173",
+          "name": "信昌電",
+          "label": "量縮價揚",
+          "rating": 4,
+          "detail": "單日 +7.10%｜量能比 5 日 19%｜距 20 日高 5.4%",
+          "entryClose": 166,
+          "marketDate": "2026-05-18",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2412",
+          "name": "中華電",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 3.8%｜離前高 0.7%｜RSI 54.9",
+          "entryClose": 137,
+          "marketDate": "2026-05-18",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "5876",
+          "name": "上海商銀",
+          "label": "盤整待發",
+          "rating": 3,
+          "detail": "30 日區間 6.3%｜離前高 2%｜RSI 54.2",
+          "entryClose": 39.8,
+          "marketDate": "2026-05-18",
+          "horizons": {
+            "3": null,
+            "5": null,
+            "10": null
+          }
+        },
+        {
+          "code": "2886",
+          "name": "兆豐金",
+          "label": "盤整待發",
+          "rating": 2,
+          "detail": "30 日區間 4.7%｜離前高 2.4%｜RSI 50.4",
+          "entryClose": 39.55,
+          "marketDate": "2026-05-18",
           "horizons": {
             "3": null,
             "5": null,

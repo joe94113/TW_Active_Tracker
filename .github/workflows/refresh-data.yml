@@ -7,8 +7,14 @@ on:
     - cron: '50 6 * * 1-5'
     - cron: '20 7 * * 1-5'
     - cron: '35 10 * * 1-5'
+    # Late official endpoints can lag after close. Recheck in the evening so
+    # the production site catches the final market package before/after digest.
+    - cron: '30 11 * * 1-5'
+    - cron: '10 12 * * 1-5'
+    - cron: '0 13 * * 1-5'
 
 permissions:
+  contents: read
   pages: write
   id-token: write
 
@@ -43,6 +49,19 @@ jobs:
 
       - name: Update static market data
         run: npm run data:update
+
+      - name: Report data freshness
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync('public/data/manifest.json', 'utf8'));
+          const history = JSON.parse(fs.readFileSync('public/data/radar/history.json', 'utf8'));
+          const lastSnapshot = history.snapshots?.at(-1);
+          console.log(`manifest generated: ${manifest.generatedAtLocalDate} ${manifest.generatedAtLocalTime}`);
+          console.log(`radar market date: ${history.marketDate ?? lastSnapshot?.marketDate ?? 'unknown'}`);
+          console.log(`stable picks: ${lastSnapshot?.stable?.length ?? 0}`);
+          console.log(`aggressive picks: ${lastSnapshot?.aggressive?.length ?? 0}`);
+          NODE
 
       - name: Detect refreshed data changes
         id: detect

@@ -274,6 +274,31 @@ function getBubblePalette(variant) {
   };
 }
 
+function isUsableStockName(name, code) {
+  const normalizedName = String(name ?? '').trim();
+  const normalizedCode = String(code ?? '').trim();
+  return Boolean(normalizedName && normalizedName !== normalizedCode);
+}
+
+function getStockDisplayName(item) {
+  const code = String(item?.code ?? '').trim();
+  const candidates = [
+    item?.displayName,
+    item?.name,
+    item?.stockName,
+    item?.companyName,
+    item?.shortName,
+  ];
+
+  return candidates.find((name) => isUsableStockName(name, code)) ?? '';
+}
+
+function getStockTitle(item) {
+  const code = String(item?.code ?? '').trim();
+  const name = getStockDisplayName(item);
+  return name ? `${code} ${name}` : code;
+}
+
 function createStockCard(item, options = {}) {
   const accentColor = options.accentColor ?? '#0b699b';
   const setupStyle = getSetupTagStyle(item.setupTag, accentColor);
@@ -324,7 +349,7 @@ function createStockCard(item, options = {}) {
         justifyContent: 'space-between',
         alignItems: 'center',
         contents: [
-          createText(`${item.code} ${item.name}`, {
+          createText(getStockTitle(item), {
             size: 'sm',
             weight: 'bold',
             color: '#10202d',
@@ -458,7 +483,7 @@ function createStockBubble(item, options = {}) {
   }
 
   return createBubble({
-    title: `${item.code} ${item.name}`,
+    title: getStockTitle(item),
     accentColor,
     bodyBackgroundColor: palette.bodyBackgroundColor,
     linkUrl: `${siteUrl}#/stocks/${item.code}`,

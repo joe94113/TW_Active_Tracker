@@ -232,14 +232,16 @@ function pickStockDisplayName(code, ...candidates) {
   return candidates.find((name) => isUsableStockName(name, code)) ?? String(code ?? '').trim();
 }
 
-function enrichWatchGroupItems(items, trackedStocks, themeRadar, stockDetailList = []) {
+function enrichWatchGroupItems(items, trackedStocks, themeRadar, stockDetailList = [], stockSearchList = []) {
   const trackedMap = new Map((trackedStocks ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
+  const searchMap = new Map((stockSearchList ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
   const detailMap = new Map((stockDetailList ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
   const topicMap = buildThemeTopicMap(themeRadar);
 
   return (items ?? []).map((item) => {
     const code = String(item?.code ?? '').trim();
     const tracked = trackedMap.get(code) ?? {};
+    const search = searchMap.get(code) ?? {};
     const detail = detailMap.get(code) ?? {};
     const rawTargetPrice = Number(tracked?.foreignTargetPrice);
     const rawTargetPremium = Number(tracked?.foreignTargetPricePremium);
@@ -257,6 +259,10 @@ function enrichWatchGroupItems(items, trackedStocks, themeRadar, stockDetailList
         detail?.name,
         detail?.公司概況?.公司簡稱,
         detail?.公司概況?.公司名稱,
+        search?.name,
+        search?.stockName,
+        search?.companyName,
+        search?.shortName,
         tracked?.name,
         item?.name,
       ),
@@ -400,12 +406,12 @@ export function buildCloseDigestSummary({ dashboard, trackedStocks, stockSearchL
       ...summary,
       tomorrowOutlook: buildTomorrowOutlook(summary),
       lineWatchGroups: {
-      stable: enrichWatchGroupItems(rawLineWatchGroups.stable, trackedStocks, themeRadarData, stockDetailList),
-      aggressive: enrichWatchGroupItems(rawLineWatchGroups.aggressive, trackedStocks, themeRadarData, stockDetailList),
+      stable: enrichWatchGroupItems(rawLineWatchGroups.stable, trackedStocks, themeRadarData, stockDetailList, stockSearchList),
+      aggressive: enrichWatchGroupItems(rawLineWatchGroups.aggressive, trackedStocks, themeRadarData, stockDetailList, stockSearchList),
       },
       watchGroups: {
-      stable: enrichWatchGroupItems(rawWatchGroups.stable, trackedStocks, dashboard?.題材雷達, stockDetailList),
-      aggressive: enrichWatchGroupItems(rawWatchGroups.aggressive, trackedStocks, dashboard?.題材雷達, stockDetailList),
+      stable: enrichWatchGroupItems(rawWatchGroups.stable, trackedStocks, dashboard?.題材雷達, stockDetailList, stockSearchList),
+      aggressive: enrichWatchGroupItems(rawWatchGroups.aggressive, trackedStocks, dashboard?.題材雷達, stockDetailList, stockSearchList),
       },
   };
 }
