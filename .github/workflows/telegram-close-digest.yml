@@ -4,7 +4,12 @@ on:
   workflow_dispatch:
   schedule:
     # 20:30 Asia/Taipei. GitHub Actions schedules use UTC.
+    # Fallback windows reduce the chance of missing a weekday digest when
+    # GitHub's best-effort scheduler delays or drops the first run.
     - cron: '30 12 * * 1-5'
+    - cron: '10 13 * * 1-5'
+    - cron: '10 14 * * 1-5'
+    - cron: '10 15 * * 1-5'
 
 permissions:
   contents: read
@@ -38,6 +43,7 @@ jobs:
         run: npm ci
 
       - name: Resolve digest target date
+        id: target
         run: |
           TARGET_DATE="$(node --input-type=module - <<'NODE'
           import { getDigestTargetDate } from './scripts/lib/close-digest.mjs';
@@ -46,9 +52,23 @@ jobs:
           )"
           echo "MARKET_DATA_DATE=${TARGET_DATE}" >> "$GITHUB_ENV"
           echo "DIGEST_TARGET_DATE=${TARGET_DATE}" >> "$GITHUB_ENV"
+          echo "target_date=${TARGET_DATE}" >> "$GITHUB_OUTPUT"
           echo "Digest target date: ${TARGET_DATE}"
 
+      - name: Restore scheduled digest send lock
+        id: digest-lock
+        if: github.event_name == 'schedule'
+        uses: actions/cache/restore@v4
+        with:
+          path: .digest-send-lock
+          key: close-digest-${{ steps.target.outputs.target_date }}
+
+      - name: Skip duplicate scheduled digest
+        if: github.event_name == 'schedule' && steps.digest-lock.outputs.cache-hit == 'true'
+        run: echo "Close digest already sent for $DIGEST_TARGET_DATE. Skip fallback run."
+
       - name: Refresh digest data snapshot
+        if: github.event_name != 'schedule' || steps.digest-lock.outputs.cache-hit != 'true'
         run: |
           for attempt in 1 2; do
             echo "data:update attempt ${attempt} for ${MARKET_DATA_DATE}"
@@ -63,6 +83,7 @@ jobs:
           done
 
       - name: Report digest freshness
+        if: github.event_name != 'schedule' || steps.digest-lock.outputs.cache-hit != 'true'
         run: |
           node --input-type=module - <<'NODE'
           const fs = require('node:fs');
@@ -90,11 +111,48 @@ jobs:
           }
           NODE
 
+      - name: Validate digest payload
+        id: digest-ready
+        if: github.event_name != 'schedule' || steps.digest-lock.outputs.cache-hit != 'true'
+        run: |
+          node --input-type=module - <<'NODE'
+          import { appendFileSync } from 'node:fs';
+          import { buildCloseDigestSummary, loadCloseDigestData } from './scripts/lib/close-digest.mjs';
+
+          const targetDate = process.env.DIGEST_TARGET_DATE;
+          const data = await loadCloseDigestData();
+          const summary = buildCloseDigestSummary({
+            ...data,
+            today: targetDate,
+          });
+          const canSend = Boolean(summary);
+          appendFileSync(process.env.GITHUB_OUTPUT, `can_send=${canSend}\n`);
+          console.log(canSend
+            ? `Digest payload is ready for ${targetDate}.`
+            : `Digest payload is not ready for ${targetDate}; fallback schedule may try again later.`);
+          NODE
+
       - name: Send Telegram digest
+        if: steps.digest-ready.outputs.can_send == 'true'
         run: node scripts/send-telegram-brief.mjs
 
       - name: Send Discord digest
+        if: steps.digest-ready.outputs.can_send == 'true'
         run: node scripts/send-discord-brief.mjs
 
       - name: Send LINE digest
+        if: steps.digest-ready.outputs.can_send == 'true'
         run: node scripts/send-line-brief.mjs
+
+      - name: Write scheduled digest send lock
+        if: github.event_name == 'schedule' && steps.digest-ready.outputs.can_send == 'true'
+        run: |
+          mkdir -p .digest-send-lock
+          echo "sent_at=$(date -Iseconds)" > ".digest-send-lock/${DIGEST_TARGET_DATE}.txt"
+
+      - name: Save scheduled digest send lock
+        if: github.event_name == 'schedule' && steps.digest-ready.outputs.can_send == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .digest-send-lock
+          key: close-digest-${{ steps.target.outputs.target_date }}
