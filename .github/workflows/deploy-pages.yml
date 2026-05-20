@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Refresh static market data
+        run: npm run data:update
+
       - name: Build site
         run: npm run build
 
