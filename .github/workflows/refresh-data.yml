@@ -3,7 +3,10 @@ name: Refresh Market Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/15 1-6 * * 1-5'
+    # GitHub scheduled workflows are best-effort. Avoid the busy :00/:15/:30/:45
+    # slots so intraday refreshes are less likely to be delayed or dropped.
+    - cron: '7,22,37,52 1-5 * * 1-5'
+    - cron: '7,22,37 6 * * 1-5'
     - cron: '50 6 * * 1-5'
     - cron: '20 7 * * 1-5'
     - cron: '35 10 * * 1-5'
