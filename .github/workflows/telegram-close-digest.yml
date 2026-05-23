@@ -84,18 +84,19 @@ jobs:
 
       - name: Report digest freshness
         if: github.event_name != 'schedule' || steps.digest-lock.outputs.cache-hit != 'true'
+        continue-on-error: true
         run: |
           node --input-type=module - <<'NODE'
-          const fs = require('node:fs');
+          import { readFileSync } from 'node:fs';
           import { formatTaipeiDate, getDigestTargetDate } from './scripts/lib/close-digest.mjs';
           function collectIsoDates(text) {
             return [...new Set(String(text).match(/\d{4}-\d{2}-\d{2}/g) ?? [])].sort();
           }
           const today = formatTaipeiDate();
           const targetDate = process.env.DIGEST_TARGET_DATE || getDigestTargetDate();
-          const dashboardText = fs.readFileSync('public/data/dashboard.json', 'utf8');
-          const history = JSON.parse(fs.readFileSync('public/data/radar/history.json', 'utf8'));
-          const manifest = JSON.parse(fs.readFileSync('public/data/manifest.json', 'utf8'));
+          const dashboardText = readFileSync('public/data/dashboard.json', 'utf8');
+          const history = JSON.parse(readFileSync('public/data/radar/history.json', 'utf8'));
+          const manifest = JSON.parse(readFileSync('public/data/manifest.json', 'utf8'));
           const dashboardDates = collectIsoDates(dashboardText);
           const marketDate = history?.marketDate ?? history?.snapshots?.at(-1)?.marketDate ?? dashboardDates.at(-1) ?? 'unknown';
           const lastSnapshot = history?.snapshots?.at(-1);
