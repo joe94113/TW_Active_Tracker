@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: telegram-close-digest-${{ github.ref }}
+  group: close-digest-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
