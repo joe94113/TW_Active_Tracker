@@ -110,7 +110,7 @@ jobs:
   notify-close:
     needs:
       - refresh
-    if: needs.refresh.result == 'success' && (github.event_name == 'workflow_dispatch' || github.event.schedule == '30 11 * * 1-5' || github.event.schedule == '10 12 * * 1-5' || github.event.schedule == '40 12 * * 1-5' || github.event.schedule == '0 13 * * 1-5')
+    if: needs.refresh.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     concurrency:
@@ -125,44 +125,63 @@ jobs:
       LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
       - name: Resolve digest target date
         id: target
         run: |
-          TARGET_DATE="$(node --input-type=module - <<'NODE'
-          import { getDigestTargetDate } from './scripts/lib/close-digest.mjs';
-          console.log(getDigestTargetDate());
-          NODE
-          )"
+          TAIPEI_DATE="$(TZ=Asia/Taipei date +%F)"
+          TAIPEI_HOUR="$(TZ=Asia/Taipei date +%H)"
+          TAIPEI_HOUR_NUM=$((10#${TAIPEI_HOUR}))
+          if [ "${TAIPEI_HOUR_NUM}" -lt 6 ]; then
+            TARGET_DATE="$(TZ=Asia/Taipei date -d "${TAIPEI_DATE} -1 day" +%F)"
+          else
+            TARGET_DATE="${TAIPEI_DATE}"
+          fi
+
+          SHOULD_ATTEMPT=false
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${TAIPEI_HOUR_NUM}" -ge 19 ] || [ "${TAIPEI_HOUR_NUM}" -lt 6 ]; then
+            SHOULD_ATTEMPT=true
+          fi
+
           echo "MARKET_DATA_DATE=${TARGET_DATE}" >> "$GITHUB_ENV"
           echo "DIGEST_TARGET_DATE=${TARGET_DATE}" >> "$GITHUB_ENV"
           echo "target_date=${TARGET_DATE}" >> "$GITHUB_OUTPUT"
+          echo "should_attempt=${SHOULD_ATTEMPT}" >> "$GITHUB_OUTPUT"
           echo "Digest target date: ${TARGET_DATE}"
+          echo "Taipei hour: ${TAIPEI_HOUR}; should attempt digest: ${SHOULD_ATTEMPT}"
+
+      - name: Skip outside digest window
+        if: steps.target.outputs.should_attempt != 'true'
+        run: echo "Not in the evening digest window. Skip refresh backup send."
 
       - name: Restore digest send lock
         id: digest-lock
+        if: steps.target.outputs.should_attempt == 'true'
         uses: actions/cache/restore@v4
         with:
           path: .digest-send-lock
           key: close-digest-${{ steps.target.outputs.target_date }}
 
       - name: Skip duplicate digest
-        if: steps.digest-lock.outputs.cache-hit == 'true'
+        if: steps.target.outputs.should_attempt == 'true' && steps.digest-lock.outputs.cache-hit == 'true'
         run: echo "Close digest already sent for $DIGEST_TARGET_DATE. Skip refresh backup send."
 
+      - name: Checkout
+        if: steps.target.outputs.should_attempt == 'true' && steps.digest-lock.outputs.cache-hit != 'true'
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        if: steps.target.outputs.should_attempt == 'true' && steps.digest-lock.outputs.cache-hit != 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.target.outputs.should_attempt == 'true' && steps.digest-lock.outputs.cache-hit != 'true'
+        run: npm ci
+
       - name: Refresh digest data snapshot
-        if: steps.digest-lock.outputs.cache-hit != 'true'
+        if: steps.target.outputs.should_attempt == 'true' && steps.digest-lock.outputs.cache-hit != 'true'
         run: |
           for attempt in 1 2; do
             echo "data:update attempt ${attempt} for ${MARKET_DATA_DATE}"
@@ -178,7 +197,7 @@ jobs:
 
       - name: Validate digest payload
         id: digest-ready
-        if: steps.digest-lock.outputs.cache-hit != 'true'
+        if: steps.target.outputs.should_attempt == 'true' && steps.digest-lock.outputs.cache-hit != 'true'
         run: |
           node --input-type=module - <<'NODE'
           import { appendFileSync } from 'node:fs';
