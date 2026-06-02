@@ -43,6 +43,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Report workflow trigger
+        env:
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          echo "Event name: ${GITHUB_EVENT_NAME}"
+          echo "Original cron schedule: ${EVENT_SCHEDULE:-manual dispatch}"
+          echo "UTC now: $(date -u '+%F %T %Z')"
+          echo "Taipei now: $(TZ=Asia/Taipei date '+%F %T %Z')"
+          echo "Run URL: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
