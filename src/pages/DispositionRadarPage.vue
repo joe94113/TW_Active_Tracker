@@ -1,6 +1,8 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
+import { fetchJson } from '../lib/api';
 import { formatNumber } from '../lib/formatters';
 
 const mockDispositionStocks = [
@@ -62,22 +64,77 @@ const mockDispositionStocks = [
   },
 ];
 
+const { manifest, loadGlobalData } = useGlobalData();
+const dispositionRadar = ref(null);
+const radarError = ref('');
+const isRadarLoading = ref(false);
 const selectedStock = ref(null);
+const activeView = ref('accumulation');
 const CHART_BASELINE_Y = 112;
 const CHART_POSITIVE_HEIGHT = 74;
 const CHART_NEGATIVE_HEIGHT = 58;
 
+const sourceStocks = computed(() => {
+  const items = dispositionRadar.value?.items ?? [];
+  return items.length ? items : mockDispositionStocks;
+});
+
+const isUsingMockData = computed(() => !(dispositionRadar.value?.items ?? []).length);
+
 const accumulationStocks = computed(() =>
-  mockDispositionStocks
-    .filter((item) => item.duringDispositionNetLots > 0)
+  sourceStocks.value
+    .filter((item) => item.duringDispositionNetLots >= 0)
     .sort((left, right) => right.duringDispositionNetLots - left.duringDispositionNetLots),
 );
 
 const distributionStocks = computed(() =>
-  mockDispositionStocks
+  sourceStocks.value
     .filter((item) => item.duringDispositionNetLots < 0)
     .sort((left, right) => Math.abs(right.duringDispositionNetLots) - Math.abs(left.duringDispositionNetLots)),
 );
+
+const radarViews = computed(() => [
+  {
+    key: 'accumulation',
+    tone: 'up',
+    eyebrow: 'Accumulation',
+    label: '主力吃貨區',
+    title: '主力吃貨區',
+    sortLabel: '買超由高到低',
+    count: accumulationStocks.value.length,
+    stocks: accumulationStocks.value,
+  },
+  {
+    key: 'distribution',
+    tone: 'down',
+    eyebrow: 'Distribution',
+    label: '主力倒貨區',
+    title: '主力倒貨區',
+    sortLabel: '賣超由高到低',
+    count: distributionStocks.value.length,
+    stocks: distributionStocks.value,
+  },
+]);
+
+const activeRadarView = computed(() =>
+  radarViews.value.find((view) => view.key === activeView.value) ?? radarViews.value[0],
+);
+
+const activeStocks = computed(() => activeRadarView.value?.stocks ?? []);
+
+const dataStatusLabel = computed(() => {
+  if (isRadarLoading.value) return '載入中';
+  if (!isUsingMockData.value) return '即時處置';
+  return 'Mock';
+});
+
+const dataStatusNote = computed(() => {
+  if (!isUsingMockData.value) {
+    return `官方處置 ${formatNumber(dispositionRadar.value?.summary?.activeCount ?? sourceStocks.value.length)} 檔`;
+  }
+
+  return radarError.value ? '真實資料讀取失敗' : '介面範例';
+});
 
 const pageSeo = computed(() => ({
   title: '處置股雷達',
@@ -107,12 +164,50 @@ const modalMaxAbsValue = computed(() =>
 
 useSeoMeta(pageSeo);
 
+onMounted(async () => {
+  await loadGlobalData();
+  await loadDispositionRadar();
+});
+
+watch(
+  () => manifest.value?.dispositionRadarPath,
+  async () => {
+    await loadDispositionRadar();
+  },
+);
+
+async function loadDispositionRadar() {
+  const dataPath = manifest.value?.dispositionRadarPath ?? 'data/radar/disposition.json';
+  isRadarLoading.value = true;
+  radarError.value = '';
+
+  try {
+    dispositionRadar.value = await fetchJson(dataPath);
+  } catch (error) {
+    dispositionRadar.value = null;
+    radarError.value = error instanceof Error ? error.message : '處置股雷達資料載入失敗';
+  } finally {
+    isRadarLoading.value = false;
+  }
+}
+
 function openDetail(stock) {
   selectedStock.value = stock;
 }
 
 function closeDetail() {
   selectedStock.value = null;
+}
+
+function setActiveView(key) {
+  activeView.value = key;
+}
+
+function shiftActiveView(direction) {
+  const views = radarViews.value;
+  const currentIndex = views.findIndex((view) => view.key === activeView.value);
+  const nextIndex = (currentIndex + direction + views.length) % views.length;
+  activeView.value = views[nextIndex].key;
 }
 
 function getTone(value) {
@@ -125,9 +220,14 @@ function getSignedLots(value) {
   return `${number > 0 ? '+' : ''}${formatNumber(number)} 張`;
 }
 
-function getAbsLots(value) {
-  const number = Math.abs(Number(value));
-  return Number.isFinite(number) ? `${formatNumber(number)} 張` : '-';
+function formatStatusMinutes(value) {
+  const minutes = Number(value);
+  return Number.isFinite(minutes) && minutes > 0 ? `${minutes} 分鐘` : '分盤';
+}
+
+function formatDaysToExit(value) {
+  const days = Number(value);
+  return Number.isFinite(days) ? `距出關 ${formatNumber(days)} 天` : '出關日待確認';
 }
 
 function getSparklinePath(values) {
@@ -213,24 +313,67 @@ function getBarValueY(value) {
         </div>
         <div class="hero-metric">
           <span>資料型態</span>
-          <strong>Mock</strong>
+          <strong>{{ dataStatusLabel }}</strong>
+          <small>{{ dataStatusNote }}</small>
         </div>
       </div>
     </section>
 
-    <section class="disposition-columns" aria-label="處置期間主力買賣超對比">
-      <article class="disposition-column is-accumulation">
+    <section
+      class="radar-board"
+      aria-label="處置期間主力買賣超對比"
+      @keydown.left.prevent="shiftActiveView(-1)"
+      @keydown.right.prevent="shiftActiveView(1)"
+    >
+      <div class="radar-switchbar">
+        <button type="button" class="switch-arrow" aria-label="切換到上一區" @click="shiftActiveView(-1)">
+          ‹
+        </button>
+
+        <div class="radar-segmented" role="tablist" aria-label="處置股分類">
+          <button
+            v-for="view in radarViews"
+            :id="`disposition-tab-${view.key}`"
+            :key="view.key"
+            type="button"
+            role="tab"
+            class="view-tab"
+            :class="[`is-${view.tone}`, { 'is-active': activeView === view.key }]"
+            :aria-selected="activeView === view.key"
+            :aria-controls="`disposition-panel-${view.key}`"
+            @click="setActiveView(view.key)"
+          >
+            <span>{{ view.label }}</span>
+            <strong>{{ view.count }} 檔</strong>
+          </button>
+        </div>
+
+        <button type="button" class="switch-arrow" aria-label="切換到下一區" @click="shiftActiveView(1)">
+          ›
+        </button>
+      </div>
+
+      <article
+        :id="`disposition-panel-${activeRadarView.key}`"
+        class="disposition-column"
+        :class="`is-${activeRadarView.key}`"
+        role="tabpanel"
+        :aria-labelledby="`disposition-tab-${activeRadarView.key}`"
+      >
         <header class="column-header">
           <div>
-            <p class="eyebrow">Accumulation</p>
-            <h2>主力吃貨區</h2>
+            <p class="eyebrow">{{ activeRadarView.eyebrow }}</p>
+            <h2>{{ activeRadarView.title }}</h2>
           </div>
-          <span class="column-count">{{ accumulationStocks.length }} 檔</span>
+          <div class="column-meta">
+            <span class="column-count">{{ activeRadarView.count }} 檔</span>
+            <span class="sort-pill">{{ activeRadarView.sortLabel }}</span>
+          </div>
         </header>
 
-        <div class="stock-card-list">
+        <div v-if="activeStocks.length" class="stock-card-list">
           <button
-            v-for="stock in accumulationStocks"
+            v-for="(stock, index) in activeStocks"
             :key="stock.code"
             type="button"
             class="disposition-card"
@@ -238,12 +381,13 @@ function getBarValueY(value) {
             @click="openDetail(stock)"
           >
             <span class="case-ribbon">{{ stock.caseCode }}</span>
+            <span class="rank-pill">#{{ index + 1 }}</span>
             <div class="card-topline">
               <div>
                 <strong>{{ stock.code }} {{ stock.name }}</strong>
                 <span>{{ stock.caseTitle }}</span>
               </div>
-              <span class="status-pill">{{ stock.statusMinutes }} 分鐘</span>
+              <span class="status-pill">{{ formatStatusMinutes(stock.statusMinutes) }}</span>
             </div>
 
             <div class="primary-flow" :class="`is-${getTone(stock.duringDispositionNetLots)}`">
@@ -251,8 +395,8 @@ function getBarValueY(value) {
             </div>
 
             <div class="status-row">
-              <span>處置 {{ stock.statusMinutes }} 分鐘撮合</span>
-              <span>距出關 {{ stock.daysToExit }} 天</span>
+              <span>處置 {{ formatStatusMinutes(stock.statusMinutes) }}撮合</span>
+              <span>{{ formatDaysToExit(stock.daysToExit) }}</span>
             </div>
 
             <div class="chip-timeline">
@@ -286,75 +430,8 @@ function getBarValueY(value) {
             </div>
           </button>
         </div>
-      </article>
 
-      <article class="disposition-column is-distribution">
-        <header class="column-header">
-          <div>
-            <p class="eyebrow">Distribution</p>
-            <h2>主力倒貨區</h2>
-          </div>
-          <span class="column-count">{{ distributionStocks.length }} 檔</span>
-        </header>
-
-        <div class="stock-card-list">
-          <button
-            v-for="stock in distributionStocks"
-            :key="stock.code"
-            type="button"
-            class="disposition-card"
-            :class="`is-${getTone(stock.duringDispositionNetLots)}`"
-            @click="openDetail(stock)"
-          >
-            <span class="case-ribbon">{{ stock.caseCode }}</span>
-            <div class="card-topline">
-              <div>
-                <strong>{{ stock.code }} {{ stock.name }}</strong>
-                <span>{{ stock.caseTitle }}</span>
-              </div>
-              <span class="status-pill">{{ stock.statusMinutes }} 分鐘</span>
-            </div>
-
-            <div class="primary-flow" :class="`is-${getTone(stock.duringDispositionNetLots)}`">
-              -{{ getAbsLots(stock.duringDispositionNetLots) }}
-            </div>
-
-            <div class="status-row">
-              <span>處置 {{ stock.statusMinutes }} 分鐘撮合</span>
-              <span>距出關 {{ stock.daysToExit }} 天</span>
-            </div>
-
-            <div class="chip-timeline">
-              <div class="timeline-item" :class="`is-${getTone(stock.preDispositionNetLots)}`">
-                <span>進處置前 10 天</span>
-                <strong>{{ getSignedLots(stock.preDispositionNetLots) }}</strong>
-              </div>
-              <div class="timeline-item" :class="`is-${getTone(stock.duringDispositionNetLots)}`">
-                <span>處置期間</span>
-                <strong>{{ getSignedLots(stock.duringDispositionNetLots) }}</strong>
-              </div>
-            </div>
-
-            <div class="sparkline-row">
-              <span>{{ stock.priceNote }}</span>
-              <svg class="sparkline" viewBox="0 0 168 52" aria-hidden="true">
-                <path class="sparkline-grid" d="M5 26H163"></path>
-                <path
-                  class="sparkline-path"
-                  :class="`is-${getPriceTrendTone(stock)}`"
-                  :d="getSparklinePath(stock.priceTrend)"
-                ></path>
-                <circle
-                  class="sparkline-dot"
-                  :class="`is-${getPriceTrendTone(stock)}`"
-                  :cx="getSparklineEndPoint(stock.priceTrend).x"
-                  :cy="getSparklineEndPoint(stock.priceTrend).y"
-                  r="3.2"
-                ></circle>
-              </svg>
-            </div>
-          </button>
-        </div>
+        <p v-else class="empty-state">目前沒有符合條件的處置股</p>
       </article>
     </section>
 
@@ -458,7 +535,7 @@ function getBarValueY(value) {
 .disposition-hero h1 {
   margin: 0;
   color: var(--page-text);
-  font-size: clamp(2rem, 4vw, 4.4rem);
+  font-size: 4rem;
   line-height: 1;
   letter-spacing: 0;
 }
@@ -499,6 +576,12 @@ function getBarValueY(value) {
   line-height: 1;
 }
 
+.hero-metric small {
+  color: var(--text-soft);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
 .hero-metric.is-up strong {
   color: var(--up);
 }
@@ -507,30 +590,126 @@ function getBarValueY(value) {
   color: var(--down);
 }
 
-.disposition-columns {
+.radar-board {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
+  gap: 16px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.36)),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.radar-switchbar {
+  position: sticky;
+  top: 10px;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  border-radius: 8px 8px 0 0;
+  background: color-mix(in srgb, var(--surface-strong) 94%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.switch-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--page-text);
+  background: var(--surface-elevated);
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform var(--ease-standard),
+    border-color var(--ease-standard),
+    box-shadow var(--ease-standard);
+}
+
+.switch-arrow:hover,
+.switch-arrow:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(11, 105, 155, 0.32);
+  box-shadow: var(--surface-hover-shadow);
+  outline: none;
+}
+
+.radar-segmented {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-muted);
+}
+
+.view-tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition:
+    background var(--ease-standard),
+    border-color var(--ease-standard),
+    color var(--ease-standard),
+    box-shadow var(--ease-standard);
+}
+
+.view-tab span {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.view-tab strong {
+  flex: 0 0 auto;
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.view-tab.is-active {
+  border-color: color-mix(in srgb, currentColor 34%, transparent);
+  background: var(--surface-strong);
+  box-shadow: 0 10px 24px rgba(19, 37, 55, 0.1);
 }
 
 .disposition-column {
   display: grid;
-  gap: 14px;
+  gap: 16px;
   min-width: 0;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  padding: 18px;
+  border-top: 4px solid var(--border);
 }
 
 .disposition-column.is-accumulation {
-  border-top: 4px solid var(--up);
+  border-top-color: var(--up);
 }
 
 .disposition-column.is-distribution {
-  border-top: 4px solid var(--down);
+  border-top-color: var(--down);
 }
 
 .column-header {
@@ -538,6 +717,7 @@ function getBarValueY(value) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
 }
 
 .column-header h2 {
@@ -548,7 +728,15 @@ function getBarValueY(value) {
   letter-spacing: 0;
 }
 
+.column-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .column-count,
+.sort-pill,
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -566,24 +754,29 @@ function getBarValueY(value) {
 
 .stock-card-list {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
   gap: 12px;
+  align-items: stretch;
 }
 
 .disposition-card {
   position: relative;
   display: grid;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
   min-width: 0;
-  padding: 16px;
+  min-height: 264px;
+  padding: 15px;
   border: 1px solid var(--border);
   border-left-width: 4px;
   border-radius: 8px;
-  background: var(--surface-strong);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 54%),
+    var(--surface-strong);
   color: inherit;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 16px 34px rgba(20, 41, 61, 0.07);
+  box-shadow: 0 14px 28px rgba(20, 41, 61, 0.06);
   transition:
     transform var(--ease-standard),
     border-color var(--ease-standard),
@@ -622,12 +815,28 @@ function getBarValueY(value) {
   font-size: 0.78rem;
 }
 
+.rank-pill {
+  position: absolute;
+  top: 12px;
+  right: 46px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-soft);
+  background: var(--surface-muted);
+  font-size: 0.74rem;
+  font-weight: 950;
+}
+
 .card-topline {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding-right: 32px;
+  padding-right: 76px;
 }
 
 .card-topline > div {
@@ -649,7 +858,7 @@ function getBarValueY(value) {
 }
 
 .primary-flow {
-  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-size: 2.45rem;
   font-weight: 950;
   line-height: 0.95;
   letter-spacing: 0;
@@ -906,9 +1115,19 @@ function getBarValueY(value) {
   font-weight: 700;
 }
 
+.empty-state {
+  margin: 0;
+  padding: 24px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  color: var(--text-soft);
+  background: var(--surface-muted);
+  font-weight: 900;
+  text-align: center;
+}
+
 @media (max-width: 980px) {
-  .disposition-hero,
-  .disposition-columns {
+  .disposition-hero {
     grid-template-columns: 1fr;
   }
 }
@@ -920,6 +1139,10 @@ function getBarValueY(value) {
 
   .disposition-hero {
     padding: 20px;
+  }
+
+  .disposition-hero h1 {
+    font-size: 2.55rem;
   }
 
   .modal-summary-grid {
@@ -938,16 +1161,62 @@ function getBarValueY(value) {
     font-size: 1.35rem;
   }
 
+  .radar-switchbar {
+    top: 8px;
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    gap: 7px;
+    padding: 9px;
+  }
+
+  .switch-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .radar-segmented {
+    gap: 4px;
+    border-radius: 20px;
+  }
+
+  .view-tab {
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+
+  .view-tab span {
+    font-size: 0.78rem;
+  }
+
+  .view-tab strong {
+    font-size: 0.76rem;
+  }
+
   .disposition-column {
     padding: 12px;
   }
 
+  .column-header {
+    display: grid;
+  }
+
+  .column-meta {
+    justify-content: flex-start;
+  }
+
+  .stock-card-list {
+    grid-template-columns: 1fr;
+  }
+
   .disposition-card {
+    min-height: 248px;
     padding: 14px;
   }
 
   .primary-flow {
-    font-size: 2.1rem;
+    font-size: 2.05rem;
   }
 
   .modal-header {
@@ -957,5 +1226,92 @@ function getBarValueY(value) {
   .modal-close-button {
     justify-self: start;
   }
+}
+</style>
+
+<style>
+html[data-theme="dark"] .disposition-radar-page .disposition-hero {
+  border-color: rgba(125, 211, 252, 0.12);
+  background:
+    linear-gradient(135deg, rgba(255, 141, 116, 0.08), transparent 38%),
+    linear-gradient(315deg, rgba(79, 209, 165, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(17, 28, 43, 0.98), rgba(11, 20, 32, 0.96));
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .disposition-radar-page .hero-metric {
+  border-color: rgba(148, 163, 184, 0.15);
+  background: rgba(10, 18, 30, 0.78);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+html[data-theme="dark"] .disposition-radar-page .radar-board {
+  border-color: rgba(125, 211, 252, 0.14);
+  background: linear-gradient(180deg, rgba(12, 23, 36, 0.98), rgba(8, 16, 27, 0.96));
+  box-shadow: 0 28px 74px rgba(0, 0, 0, 0.34);
+}
+
+html[data-theme="dark"] .disposition-radar-page .radar-switchbar {
+  border-bottom-color: rgba(148, 163, 184, 0.12);
+  background: rgba(10, 18, 30, 0.9);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+
+html[data-theme="dark"] .disposition-radar-page .switch-arrow,
+html[data-theme="dark"] .disposition-radar-page .radar-segmented,
+html[data-theme="dark"] .disposition-radar-page .column-count,
+html[data-theme="dark"] .disposition-radar-page .sort-pill,
+html[data-theme="dark"] .disposition-radar-page .status-pill,
+html[data-theme="dark"] .disposition-radar-page .rank-pill,
+html[data-theme="dark"] .disposition-radar-page .status-row span {
+  border-color: rgba(148, 163, 184, 0.14);
+  background: rgba(8, 17, 29, 0.82);
+  color: #adc2d6;
+}
+
+html[data-theme="dark"] .disposition-radar-page .view-tab.is-active {
+  background: rgba(17, 29, 44, 0.98);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .disposition-radar-page .disposition-column {
+  background: linear-gradient(180deg, rgba(14, 25, 39, 0.92), rgba(9, 18, 30, 0.88));
+}
+
+html[data-theme="dark"] .disposition-radar-page .disposition-card {
+  border-color: rgba(148, 163, 184, 0.13);
+  background: linear-gradient(180deg, rgba(24, 36, 52, 0.98), rgba(13, 24, 38, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 16px 36px rgba(0, 0, 0, 0.24);
+}
+
+html[data-theme="dark"] .disposition-radar-page .disposition-card:hover,
+html[data-theme="dark"] .disposition-radar-page .disposition-card:focus-visible {
+  border-color: rgba(125, 211, 252, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 22px 46px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .disposition-radar-page .case-ribbon {
+  color: #07111c;
+  background: #c8d8e8;
+}
+
+html[data-theme="dark"] .disposition-radar-page .timeline-item {
+  background: color-mix(in srgb, currentColor 12%, rgba(6, 14, 24, 0.8));
+}
+
+html[data-theme="dark"] .disposition-radar-page .sparkline-row {
+  border-top-color: rgba(148, 163, 184, 0.12);
+}
+
+html[data-theme="dark"] .disposition-radar-page .modal-chart-wrap,
+html[data-theme="dark"] .disposition-radar-page .empty-state {
+  border-color: rgba(148, 163, 184, 0.14);
+  background: rgba(9, 18, 30, 0.82);
 }
 </style>

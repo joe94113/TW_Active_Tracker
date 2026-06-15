@@ -1,221 +1,197 @@
 {
   "code": "00986A",
   "name": "主動台新龍頭成長",
-  "fromDisclosureDate": "2026-05-18",
-  "toDisclosureDate": "2026-05-20",
+  "fromDisclosureDate": "2026-05-20",
+  "toDisclosureDate": "2026-06-15",
   "comparisonReady": true,
-  "added": [],
-  "removed": [],
-  "increased": [
+  "added": [
     {
-      "code": "CRWD US",
-      "name": "Crowdstrike控股公司",
-      "previousShares": 938,
-      "currentShares": 938,
-      "previousWeight": 2.7841,
-      "currentWeight": 2.9514,
-      "sharesDelta": 0,
-      "weightDelta": 0.1673
+      "code": "LLY US",
+      "name": "禮來公司",
+      "currentShares": 300,
+      "currentWeight": 1.7264,
+      "sharesDelta": 300,
+      "weightDelta": 1.7264
     },
     {
-      "code": "GOOGL US",
-      "name": "Alphabet 公司",
-      "previousShares": 4500,
-      "currentShares": 4500,
-      "previousWeight": 8.9207,
-      "currentWeight": 9.0821,
+      "code": "6981 JT",
+      "name": "村田製作所有限公司",
+      "currentShares": 3800,
+      "currentWeight": 1.052,
+      "sharesDelta": 3800,
+      "weightDelta": 1.052
+    },
+    {
+      "code": "TSLA US",
+      "name": "特斯拉公司",
+      "currentShares": 500,
+      "currentWeight": 0.9893,
+      "sharesDelta": 500,
+      "weightDelta": 0.9893
+    },
+    {
+      "code": "6506 JT",
+      "name": "安川電機公司",
+      "currentShares": 4000,
+      "currentWeight": 0.7429,
+      "sharesDelta": 4000,
+      "weightDelta": 0.7429
+    },
+    {
+      "code": "SNOW US",
+      "name": "Snowflake公司",
+      "currentShares": 400,
+      "currentWeight": 0.4766,
+      "sharesDelta": 400,
+      "weightDelta": 0.4766
+    }
+  ],
+  "removed": [
+    {
+      "code": "TER US",
+      "name": "泰瑞達公司",
+      "previousShares": 1500,
+      "previousWeight": 2.4486,
+      "sharesDelta": -1500,
+      "weightDelta": -2.4486
+    },
+    {
+      "code": "6501 JT",
+      "name": "日立製作所有限公司",
+      "previousShares": 7000,
+      "previousWeight": 1.077,
+      "sharesDelta": -7000,
+      "weightDelta": -1.077
+    },
+    {
+      "code": "VRTX US",
+      "name": "福泰製藥公司",
+      "previousShares": 450,
+      "previousWeight": 0.9989,
+      "sharesDelta": -450,
+      "weightDelta": -0.9989
+    }
+  ],
+  "increased": [
+    {
+      "code": "GS US",
+      "name": "高盛集團",
+      "previousShares": 200,
+      "currentShares": 530,
+      "previousWeight": 0.9624,
+      "currentWeight": 2.7208,
+      "sharesDelta": 330,
+      "weightDelta": 1.7584
+    },
+    {
+      "code": "SNDK US",
+      "name": "晟碟公司（德拉瓦州）",
+      "previousShares": 70,
+      "currentShares": 220,
+      "previousWeight": 0.4744,
+      "currentWeight": 2.0518,
+      "sharesDelta": 150,
+      "weightDelta": 1.5774000000000001
+    },
+    {
+      "code": "AMD US",
+      "name": "超微半導體公司",
+      "previousShares": 400,
+      "currentShares": 850,
+      "previousWeight": 0.8562,
+      "currentWeight": 2.058,
+      "sharesDelta": 450,
+      "weightDelta": 1.2018
+    },
+    {
+      "code": "LRCX US",
+      "name": "科林研發股份有限公司",
+      "previousShares": 2021,
+      "currentShares": 2021,
+      "previousWeight": 2.8563,
+      "currentWeight": 3.6317,
       "sharesDelta": 0,
-      "weightDelta": 0.16140000000000043
+      "weightDelta": 0.7753999999999999
+    },
+    {
+      "code": "4062 JT",
+      "name": "Ibiden Co Ltd",
+      "previousShares": 2000,
+      "currentShares": 3000,
+      "previousWeight": 1.0006,
+      "currentWeight": 1.6866,
+      "sharesDelta": 1000,
+      "weightDelta": 0.6860000000000002
     },
     {
       "code": "IFX GY",
       "name": "英飛凌科技股份有限公司",
       "previousShares": 8000,
       "currentShares": 8000,
-      "previousWeight": 3.0315,
-      "currentWeight": 3.1394,
+      "previousWeight": 3.1394,
+      "currentWeight": 3.5271,
       "sharesDelta": 0,
-      "weightDelta": 0.10790000000000033
+      "weightDelta": 0.3876999999999997
     },
     {
-      "code": "AMZN US",
-      "name": "AMAZON. COM INC",
-      "previousShares": 3000,
-      "currentShares": 3000,
-      "previousWeight": 3.959,
-      "currentWeight": 4.04,
+      "code": "CRWD US",
+      "name": "Crowdstrike控股公司",
+      "previousShares": 938,
+      "currentShares": 938,
+      "previousWeight": 2.9514,
+      "currentWeight": 3.2153,
       "sharesDelta": 0,
-      "weightDelta": 0.08099999999999996
-    },
-    {
-      "code": "WMT UN",
-      "name": "沃爾瑪公司",
-      "previousShares": 3400,
-      "currentShares": 3400,
-      "previousWeight": 2.233,
-      "currentWeight": 2.306,
-      "sharesDelta": 0,
-      "weightDelta": 0.07299999999999995
-    },
-    {
-      "code": "AVGO US",
-      "name": "博通公司",
-      "previousShares": 3900,
-      "currentShares": 3900,
-      "previousWeight": 8.2848,
-      "currentWeight": 8.3425,
-      "sharesDelta": 0,
-      "weightDelta": 0.05769999999999875
+      "weightDelta": 0.2639
     },
     {
       "code": "NET US",
       "name": "Cloudflare公司",
       "previousShares": 1200,
       "currentShares": 1200,
-      "previousWeight": 1.1844,
-      "currentWeight": 1.231,
+      "previousWeight": 1.231,
+      "currentWeight": 1.3529,
       "sharesDelta": 0,
-      "weightDelta": 0.0466000000000002
+      "weightDelta": 0.1218999999999999
     },
     {
-      "code": "MSFT US",
-      "name": "Microsoft Corp",
-      "previousShares": 1000,
-      "currentShares": 1000,
-      "previousWeight": 2.108,
-      "currentWeight": 2.1535,
+      "code": "CAT US",
+      "name": "Caterpillar Inc",
+      "previousShares": 350,
+      "currentShares": 350,
+      "previousWeight": 1.5375,
+      "currentWeight": 1.5573,
       "sharesDelta": 0,
-      "weightDelta": 0.045500000000000096
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "previousShares": 22000,
-      "currentShares": 22000,
-      "previousWeight": 7.8936,
-      "currentWeight": 7.9388,
-      "sharesDelta": 0,
-      "weightDelta": 0.04519999999999946
-    },
-    {
-      "code": "ENR GY",
-      "name": "Siemens Energy AG",
-      "previousShares": 2200,
-      "currentShares": 2200,
-      "previousWeight": 2.1681,
-      "currentWeight": 2.2114,
-      "sharesDelta": 0,
-      "weightDelta": 0.043299999999999894
+      "weightDelta": 0.019799999999999818
     },
     {
       "code": "8306 JT",
       "name": "三菱UFJ金融集團公司",
       "previousShares": 12000,
       "currentShares": 12000,
-      "previousWeight": 1.1084,
-      "currentWeight": 1.1501,
+      "previousWeight": 1.1501,
+      "currentWeight": 1.1637,
       "sharesDelta": 0,
-      "weightDelta": 0.04169999999999985
+      "weightDelta": 0.013600000000000056
     },
     {
-      "code": "NVDA US",
-      "name": "輝達",
-      "previousShares": 7000,
-      "currentShares": 7000,
-      "previousWeight": 7.8801,
-      "currentWeight": 7.9127,
+      "code": "ETN US",
+      "name": "伊頓公開有限公司",
+      "previousShares": 1000,
+      "currentShares": 1000,
+      "previousWeight": 1.9416,
+      "currentWeight": 1.9512,
       "sharesDelta": 0,
-      "weightDelta": 0.032600000000000406
-    },
-    {
-      "code": "GLEN LN",
-      "name": "嘉能可公司",
-      "previousShares": 40000,
-      "currentShares": 40000,
-      "previousWeight": 1.5323,
-      "currentWeight": 1.5582,
-      "sharesDelta": 0,
-      "weightDelta": 0.025900000000000034
-    },
-    {
-      "code": "VRTX US",
-      "name": "福泰製藥公司",
-      "previousShares": 450,
-      "currentShares": 450,
-      "previousWeight": 0.9824,
-      "currentWeight": 0.9989,
-      "sharesDelta": 0,
-      "weightDelta": 0.01649999999999996
-    },
-    {
-      "code": "6501 JT",
-      "name": "日立製作所有限公司",
-      "previousShares": 7000,
-      "currentShares": 7000,
-      "previousWeight": 1.0622,
-      "currentWeight": 1.077,
-      "sharesDelta": 0,
-      "weightDelta": 0.014799999999999924
-    },
-    {
-      "code": "GS US",
-      "name": "高盛集團",
-      "previousShares": 200,
-      "currentShares": 200,
-      "previousWeight": 0.9477,
-      "currentWeight": 0.9624,
-      "sharesDelta": 0,
-      "weightDelta": 0.014700000000000046
-    },
-    {
-      "code": "4062 JT",
-      "name": "Ibiden Co Ltd",
-      "previousShares": 2000,
-      "currentShares": 2000,
-      "previousWeight": 0.9877,
-      "currentWeight": 1.0006,
-      "sharesDelta": 0,
-      "weightDelta": 0.012899999999999912
-    },
-    {
-      "code": "SU FP",
-      "name": "施奈德電機公司",
-      "previousShares": 950,
-      "currentShares": 950,
-      "previousWeight": 1.4565,
-      "currentWeight": 1.4667,
-      "sharesDelta": 0,
-      "weightDelta": 0.010199999999999987
+      "weightDelta": 0.009600000000000053
     },
     {
       "code": "HWM US",
       "name": "Howmet航太公司",
       "previousShares": 1700,
       "currentShares": 1700,
-      "previousWeight": 2.2113,
-      "currentWeight": 2.2213,
+      "previousWeight": 2.2213,
+      "currentWeight": 2.2297,
       "sharesDelta": 0,
-      "weightDelta": 0.009999999999999787
-    },
-    {
-      "code": "AMD US",
-      "name": "超微半導體公司",
-      "previousShares": 400,
-      "currentShares": 400,
-      "previousWeight": 0.8475,
-      "currentWeight": 0.8562,
-      "sharesDelta": 0,
-      "weightDelta": 0.00869999999999993
-    },
-    {
-      "code": "BWXT US",
-      "name": "BWX科技股份有限公司",
-      "previousShares": 1100,
-      "currentShares": 1100,
-      "previousWeight": 1.1251,
-      "currentWeight": 1.1294,
-      "sharesDelta": 0,
-      "weightDelta": 0.0042999999999999705
+      "weightDelta": 0.008399999999999963
     }
   ],
   "decreased": [
@@ -223,99 +199,159 @@
       "code": "LITE US",
       "name": "魯門特姆控股公司",
       "previousShares": 1300,
-      "currentShares": 1300,
-      "previousWeight": 6.3047,
-      "currentWeight": 5.8496,
+      "currentShares": 900,
+      "previousWeight": 5.8496,
+      "currentWeight": 3.9687,
+      "sharesDelta": -400,
+      "weightDelta": -1.8808999999999996
+    },
+    {
+      "code": "NVDA US",
+      "name": "輝達",
+      "previousShares": 7000,
+      "currentShares": 6500,
+      "previousWeight": 7.9127,
+      "currentWeight": 6.6009,
+      "sharesDelta": -500,
+      "weightDelta": -1.3117999999999999
+    },
+    {
+      "code": "GOOGL US",
+      "name": "Alphabet 公司",
+      "previousShares": 4500,
+      "currentShares": 4500,
+      "previousWeight": 9.0821,
+      "currentWeight": 7.9805,
       "sharesDelta": 0,
-      "weightDelta": -0.4551000000000007
+      "weightDelta": -1.1016000000000004
+    },
+    {
+      "code": "GEV US",
+      "name": "奇異維諾瓦公司",
+      "previousShares": 750,
+      "currentShares": 650,
+      "previousWeight": 3.8601,
+      "currentWeight": 2.9217,
+      "sharesDelta": -100,
+      "weightDelta": -0.9384000000000001
+    },
+    {
+      "code": "AVGO US",
+      "name": "博通公司",
+      "previousShares": 3900,
+      "currentShares": 3900,
+      "previousWeight": 8.3425,
+      "currentWeight": 7.4538,
+      "sharesDelta": 0,
+      "weightDelta": -0.8886999999999992
+    },
+    {
+      "code": "AMZN US",
+      "name": "AMAZON. COM INC",
+      "previousShares": 3000,
+      "currentShares": 3000,
+      "previousWeight": 4.04,
+      "currentWeight": 3.5914,
+      "sharesDelta": 0,
+      "weightDelta": -0.4485999999999999
+    },
+    {
+      "code": "ENR GY",
+      "name": "Siemens Energy AG",
+      "previousShares": 2200,
+      "currentShares": 2200,
+      "previousWeight": 2.2114,
+      "currentWeight": 1.8503,
+      "sharesDelta": 0,
+      "weightDelta": -0.36109999999999975
+    },
+    {
+      "code": "WMT UN",
+      "name": "沃爾瑪公司",
+      "previousShares": 3400,
+      "currentShares": 3400,
+      "previousWeight": 2.306,
+      "currentWeight": 2.0307,
+      "sharesDelta": 0,
+      "weightDelta": -0.2753000000000001
     },
     {
       "code": "MU US",
       "name": "美光科技公司",
       "previousShares": 2200,
-      "currentShares": 2200,
-      "previousWeight": 7.9651,
-      "currentWeight": 7.6236,
+      "currentShares": 1600,
+      "previousWeight": 7.6236,
+      "currentWeight": 7.8983,
+      "sharesDelta": -600,
+      "weightDelta": 0.27470000000000017
+    },
+    {
+      "code": "MSFT US",
+      "name": "Microsoft Corp",
+      "previousShares": 1000,
+      "currentShares": 1000,
+      "previousWeight": 2.1535,
+      "currentWeight": 1.9349,
       "sharesDelta": 0,
-      "weightDelta": -0.3414999999999999
+      "weightDelta": -0.21860000000000013
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "previousShares": 22000,
+      "currentShares": 22000,
+      "previousWeight": 7.9388,
+      "currentWeight": 7.7491,
+      "sharesDelta": 0,
+      "weightDelta": -0.1896999999999993
+    },
+    {
+      "code": "BWXT US",
+      "name": "BWX科技股份有限公司",
+      "previousShares": 1100,
+      "currentShares": 1100,
+      "previousWeight": 1.1294,
+      "currentWeight": 1.0615,
+      "sharesDelta": 0,
+      "weightDelta": -0.06789999999999985
     },
     {
       "code": "COHR US",
       "name": "連貫公司",
       "previousShares": 1300,
       "currentShares": 1300,
-      "previousWeight": 2.484,
-      "currentWeight": 2.3983,
+      "previousWeight": 2.3983,
+      "currentWeight": 2.3429,
       "sharesDelta": 0,
-      "weightDelta": -0.08570000000000011
+      "weightDelta": -0.05539999999999967
     },
     {
-      "code": "TER US",
-      "name": "泰瑞達公司",
-      "previousShares": 1500,
-      "currentShares": 1500,
-      "previousWeight": 2.5321,
-      "currentWeight": 2.4486,
+      "code": "GLEN LN",
+      "name": "嘉能可公司",
+      "previousShares": 40000,
+      "currentShares": 40000,
+      "previousWeight": 1.5582,
+      "currentWeight": 1.5231,
       "sharesDelta": 0,
-      "weightDelta": -0.08349999999999991
+      "weightDelta": -0.03510000000000013
     },
     {
-      "code": "GEV US",
-      "name": "奇異維諾瓦公司",
-      "previousShares": 750,
-      "currentShares": 750,
-      "previousWeight": 3.9316,
-      "currentWeight": 3.8601,
+      "code": "SU FP",
+      "name": "施奈德電機公司",
+      "previousShares": 950,
+      "currentShares": 950,
+      "previousWeight": 1.4667,
+      "currentWeight": 1.4365,
       "sharesDelta": 0,
-      "weightDelta": -0.0714999999999999
-    },
-    {
-      "code": "ETN US",
-      "name": "伊頓公開有限公司",
-      "previousShares": 1000,
-      "currentShares": 1000,
-      "previousWeight": 1.9957,
-      "currentWeight": 1.9416,
-      "sharesDelta": 0,
-      "weightDelta": -0.05410000000000004
-    },
-    {
-      "code": "LRCX US",
-      "name": "科林研發股份有限公司",
-      "previousShares": 2021,
-      "currentShares": 2021,
-      "previousWeight": 2.8749,
-      "currentWeight": 2.8563,
-      "sharesDelta": 0,
-      "weightDelta": -0.018599999999999728
-    },
-    {
-      "code": "SNDK US",
-      "name": "晟碟公司（德拉瓦州）",
-      "previousShares": 70,
-      "currentShares": 70,
-      "previousWeight": 0.4923,
-      "currentWeight": 0.4744,
-      "sharesDelta": 0,
-      "weightDelta": -0.017900000000000027
-    },
-    {
-      "code": "CAT US",
-      "name": "Caterpillar Inc",
-      "previousShares": 350,
-      "currentShares": 350,
-      "previousWeight": 1.5533,
-      "currentWeight": 1.5375,
-      "sharesDelta": 0,
-      "weightDelta": -0.015799999999999814
+      "weightDelta": -0.030199999999999783
     }
   ],
   "summary": {
     "comparisonReady": true,
-    "addedCount": 0,
-    "removedCount": 0,
-    "increasedCount": 21,
-    "decreasedCount": 9,
-    "totalChangeCount": 30
+    "addedCount": 5,
+    "removedCount": 3,
+    "increasedCount": 12,
+    "decreasedCount": 15,
+    "totalChangeCount": 35
   }
 }

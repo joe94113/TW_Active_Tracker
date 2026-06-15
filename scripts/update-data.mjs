@@ -3763,22 +3763,76 @@ async function fetchSingleFinancialDataset(url, 錯誤標籤) {
   }
 }
 
+function formatCompactRocDispositionDate(value) {
+  const text = compactText(value);
+  if (/^\d{7}$/.test(text)) {
+    return `${text.slice(0, 3)}/${text.slice(3, 5)}/${text.slice(5, 7)}`;
+  }
+
+  if (/^\d{8}$/.test(text)) {
+    return `${text.slice(0, 4)}/${text.slice(4, 6)}/${text.slice(6, 8)}`;
+  }
+
+  return text;
+}
+
+function normalizeTpexDispositionPeriod(value) {
+  const [start, end] = compactText(value).split(/[~～-]/).map(formatCompactRocDispositionDate).filter(Boolean);
+  return [start, end].filter(Boolean).join('～');
+}
+
+function inferTpexDispositionMeasures(row) {
+  const detail = compactText(row?.DisposalCondition);
+  if (/20|二十/.test(detail)) return '第二次處置';
+  if (/5|五/.test(detail)) return '第一次處置';
+  return '處置交易';
+}
+
+function normalizeTpexDispositionRows(rows = []) {
+  return (rows ?? [])
+    .map((row, index) => ({
+      Number: String(index + 1),
+      Date: row?.Date ?? null,
+      Code: compactText(row?.SecuritiesCompanyCode),
+      Name: compactText(row?.CompanyName),
+      NumberOfAnnouncement: null,
+      ReasonsOfDisposition: compactText(row?.DispositionReasons),
+      DispositionPeriod: normalizeTpexDispositionPeriod(row?.DispositionPeriod),
+      DispositionMeasures: inferTpexDispositionMeasures(row),
+      Detail: compactText(row?.DisposalCondition),
+      LinkInformation: '',
+      Source: 'TPEx OpenAPI tpex_disposal_information',
+      Market: '上櫃',
+    }))
+    .filter((row) => row.Code);
+}
+
 async function fetchStockSelectionSupportData(asOfDate = null) {
   const [
-    處置股票列,
+    上市處置股票列,
+    上櫃處置股票列,
     注意累計列,
     變更交易列,
     除權息列,
     借券賣出列,
   ] = await Promise.all([
     fetchSingleFinancialDataset('https://openapi.twse.com.tw/v1/announcement/punish', '處置股票'),
+    fetchSingleFinancialDataset('https://www.tpex.org.tw/openapi/v1/tpex_disposal_information', '上櫃處置股票'),
     fetchSingleFinancialDataset('https://openapi.twse.com.tw/v1/announcement/notetrans', '注意股累計次數異常'),
     fetchSingleFinancialDataset('https://openapi.twse.com.tw/v1/exchangeReport/TWT85U', '變更交易'),
     fetchSingleFinancialDataset('https://openapi.twse.com.tw/v1/exchangeReport/TWT48U_ALL', '除權除息預告'),
     fetchSingleFinancialDataset('https://openapi.twse.com.tw/v1/SBL/TWT96U', '可借券賣出股數'),
   ]);
+  const 處置股票列 = [
+    ...上市處置股票列.map((row) => ({
+      ...row,
+      Source: row?.Source ?? 'TWSE OpenAPI announcement/punish',
+      Market: row?.Market ?? '上市',
+    })),
+    ...normalizeTpexDispositionRows(上櫃處置股票列),
+  ];
 
-  return createStockSelectionSignalDataset({
+  const dataset = createStockSelectionSignalDataset({
     asOfDate,
     dispositionRows: 處置股票列,
     attentionRows: 注意累計列,
@@ -3786,6 +3840,16 @@ async function fetchStockSelectionSupportData(asOfDate = null) {
     exDividendRows: 除權息列,
     shortSaleRows: 借券賣出列,
   });
+
+  return {
+    ...dataset,
+    dispositionRows: 處置股票列,
+    sourceCoverage: {
+      twseDispositionCount: 上市處置股票列.length,
+      tpexDispositionCount: 上櫃處置股票列.length,
+      dispositionCount: 處置股票列.length,
+    },
+  };
 }
 
 async function fetchStockFinancialIndex() {
@@ -3999,8 +4063,9 @@ function buildInstitutionalDivergence(日資料清單) {
 async function fetchRecentInstitutionalTrading(個股索引, 目標交易日數 = 5, 優先日期 = null) {
   const 日資料清單 = [];
   const 起始日 = createTaipeiNoonDate(優先日期);
+  const 最大回看自然日 = Math.max(12, 目標交易日數 * 2 + 10);
 
-  for (let offset = 0; offset <= 12 && 日資料清單.length < 目標交易日數; offset += 1) {
+  for (let offset = 0; offset <= 最大回看自然日 && 日資料清單.length < 目標交易日數; offset += 1) {
     const candidate = new Date(起始日);
     candidate.setDate(candidate.getDate() - offset);
     const [上市結果, 上櫃結果] = await Promise.allSettled([
@@ -5367,7 +5432,7 @@ function fixEtfDiffText(diff, 個股索引) {
   };
 }
 
-function buildSecurityCandidateList({ 市場總覽, 法人追蹤, ETF結果, 全部個股 = [] }) {
+function buildSecurityCandidateList({ 市場總覽, 法人追蹤, ETF結果, 全部個股 = [], 選股輔助資料集 = null }) {
   const map = new Map();
   const 股票名稱索引 = new Map(
     全部個股
@@ -5396,6 +5461,11 @@ function buildSecurityCandidateList({ 市場總覽, 法人追蹤, ETF結果, 全
 
   for (const item of 市場總覽.外資持股焦點 ?? []) {
     收納(item.代號, item.名稱);
+  }
+
+  for (const [code, rows] of 選股輔助資料集?.dispositionByCode ?? []) {
+    const row = rows?.[0] ?? {};
+    收納(code, 股票名稱索引.get(code) ?? row.Name ?? row.CompanyName ?? null);
   }
 
   const 活躍成交股 = [...全部個股]
@@ -5444,6 +5514,7 @@ function buildStockInstitutionalDetail(code, 日資料清單) {
     .filter((item) => item.foreign !== null || item.investmentTrust !== null || item.dealer !== null || item.total !== null);
   const actualDates = new Set(days.map((item) => item.date).filter(Boolean));
   const missingDates = expectedDates.filter((date) => !actualDates.has(date));
+  const recentFiveDays = days.slice(0, 5);
 
   return {
     days,
@@ -5456,11 +5527,212 @@ function buildStockInstitutionalDetail(code, 日資料清單) {
       market: days[0]?.market ?? null,
     },
     summary: {
-      foreign5Day: days.reduce((total, item) => total + (item.foreign ?? 0), 0),
-      investmentTrust5Day: days.reduce((total, item) => total + (item.investmentTrust ?? 0), 0),
-      dealer5Day: days.reduce((total, item) => total + (item.dealer ?? 0), 0),
-      total5Day: days.reduce((total, item) => total + (item.total ?? 0), 0),
+      foreign5Day: recentFiveDays.reduce((total, item) => total + (item.foreign ?? 0), 0),
+      investmentTrust5Day: recentFiveDays.reduce((total, item) => total + (item.investmentTrust ?? 0), 0),
+      dealer5Day: recentFiveDays.reduce((total, item) => total + (item.dealer ?? 0), 0),
+      total5Day: recentFiveDays.reduce((total, item) => total + (item.total ?? 0), 0),
     },
+  };
+}
+
+function parseDispositionPeriodRange(periodText) {
+  const matches = [...compactText(periodText).matchAll(/(\d{2,4})[/-](\d{1,2})[/-](\d{1,2})/g)].map((match) =>
+    convertRocDateToIso(`${match[1]}/${match[2]}/${match[3]}`),
+  );
+
+  return {
+    startDate: matches[0] ?? null,
+    endDate: matches.at(-1) ?? null,
+  };
+}
+
+function parseIsoDate(dateText) {
+  const normalized = normalizeDate(dateText);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized)) return null;
+  const parsed = new Date(`${normalized}T00:00:00+08:00`);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function getCalendarDayDiff(fromDateText, toDateText) {
+  const fromDate = parseIsoDate(fromDateText);
+  const toDate = parseIsoDate(toDateText);
+  if (!fromDate || !toDate) return null;
+  return Math.round((toDate.getTime() - fromDate.getTime()) / 86400000);
+}
+
+function extractDispositionMinutes(row) {
+  const text = compactText([row?.DispositionMeasures, row?.Detail].filter(Boolean).join(' '));
+  if (/20|二十/.test(text)) return 20;
+  if (/5|五/.test(text)) return 5;
+  if (/1|一/.test(text)) return 1;
+  return null;
+}
+
+function sumInstitutionalLots(rows = []) {
+  const shares = rows.reduce((total, item) => total + (item?.total ?? 0), 0);
+  return Math.round(shares / 1000);
+}
+
+function getPriceTrendFromDisposition(detail, startDate, referenceDate) {
+  const history = Array.isArray(detail?.歷史資料) ? detail.歷史資料 : [];
+  const rows = history
+    .filter((item) => {
+      const date = normalizeDate(item?.date);
+      return date && (!startDate || date >= startDate) && (!referenceDate || date <= referenceDate);
+    })
+    .map((item) => Number(item.close))
+    .filter((value) => Number.isFinite(value) && value > 0);
+
+  if (rows.length >= 2) return rows.slice(-12);
+
+  return history
+    .slice(-8)
+    .map((item) => Number(item.close))
+    .filter((value) => Number.isFinite(value) && value > 0);
+}
+
+function getPriceTrendChange(priceTrend = []) {
+  if (!Array.isArray(priceTrend) || priceTrend.length < 2) return 0;
+  const first = Number(priceTrend[0]);
+  const last = Number(priceTrend.at(-1));
+  if (!Number.isFinite(first) || !Number.isFinite(last) || first <= 0) return 0;
+  return ((last - first) / first) * 100;
+}
+
+function classifyDispositionCase({ preLots, duringLots, priceTrend }) {
+  const trendChange = getPriceTrendChange(priceTrend);
+
+  if (preLots > 0 && duringLots > 0 && trendChange >= -3) {
+    return {
+      caseCode: 'A',
+      caseTitle: '真．主力鎖籌碼',
+      priceNote: '高檔震盪',
+      thesis: '處置前先卡位，處置中仍續買，籌碼沒有鬆掉。',
+    };
+  }
+
+  if (preLots > 0 && duringLots > 0) {
+    return {
+      caseCode: 'B',
+      caseTitle: '主力護盤套牢',
+      priceNote: '處置中走弱',
+      thesis: '處置前大買，處置中只維持承接，價格卻往下走。',
+    };
+  }
+
+  if (preLots > 0 && duringLots < 0) {
+    return {
+      caseCode: 'C',
+      caseTitle: '倒貨主力',
+      priceNote: trendChange < 0 ? '高檔轉弱' : '邊拉邊賣',
+      thesis: '處置前大買拉抬，進處置後主力反手賣出。',
+    };
+  }
+
+  if (preLots < 0 && duringLots < 0) {
+    return {
+      caseCode: 'D',
+      caseTitle: '避開不碰',
+      priceNote: '題材退潮',
+      thesis: '處置前已經賣，處置中繼續賣，主力沒有留下來接。',
+    };
+  }
+
+  return {
+    caseCode: 'O',
+    caseTitle: '處置籌碼觀察',
+    priceNote: trendChange >= 0 ? '買盤支撐' : '仍需觀察',
+    thesis: '籌碼方向尚未形成典型型態，先看處置期間買賣超是否延續。',
+  };
+}
+
+function buildDispositionRadarData({ 選股輔助資料集, stockDetailList, stockSummaries, generatedAt, marketDate, referenceDate }) {
+  const detailMap = new Map((stockDetailList ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
+  const summaryMap = new Map((stockSummaries ?? []).map((item) => [String(item?.code ?? '').trim(), item]));
+  const rows = [];
+
+  for (const [code, dispositionRows] of 選股輔助資料集?.dispositionByCode ?? []) {
+    if (!isCommonStockCode(code)) continue;
+
+    const detail = detailMap.get(code);
+    if (!detail) continue;
+
+    const row = dispositionRows?.[0] ?? {};
+    const { startDate, endDate } = parseDispositionPeriodRange(row?.DispositionPeriod);
+    const activeReferenceDate = referenceDate ?? marketDate;
+    const isActive =
+      !startDate || !endDate || !activeReferenceDate || (startDate <= activeReferenceDate && activeReferenceDate <= endDate);
+
+    if (!isActive) continue;
+
+    const institutionalRows = [...(detail?.法人買賣?.days ?? [])]
+      .filter((item) => item?.date)
+      .sort((left, right) => String(left.date).localeCompare(String(right.date)));
+    const preRows = institutionalRows.filter((item) => !startDate || item.date < startDate).slice(-10);
+    const duringRows = institutionalRows.filter(
+      (item) => (!startDate || item.date >= startDate) && (!activeReferenceDate || item.date <= activeReferenceDate),
+    );
+    const preDispositionNetLots = sumInstitutionalLots(preRows);
+    const duringDispositionNetLots = sumInstitutionalLots(duringRows);
+    const priceTrend = getPriceTrendFromDisposition(detail, startDate, activeReferenceDate);
+    const classification = classifyDispositionCase({
+      preLots: preDispositionNetLots,
+      duringLots: duringDispositionNetLots,
+      priceTrend,
+    });
+    const summary = summaryMap.get(code) ?? {};
+    const daysToExit = endDate && activeReferenceDate ? Math.max(getCalendarDayDiff(activeReferenceDate, endDate) ?? 0, 0) : null;
+
+    rows.push({
+      code,
+      name: detail.name ?? summary.name ?? row?.Name ?? code,
+      market: row?.Market ?? detail?.法人買賣?.coverage?.market ?? null,
+      source: row?.Source ?? null,
+      announcementDate: convertRocDateToIso(row?.Date),
+      dispositionStartDate: startDate,
+      dispositionEndDate: endDate,
+      statusMinutes: extractDispositionMinutes(row),
+      daysToExit,
+      preDispositionNetLots,
+      duringDispositionNetLots,
+      preDispositionTradingDays: preRows.length,
+      duringDispositionTradingDays: duringRows.length,
+      priceTrend,
+      reason: row?.ReasonsOfDisposition ?? null,
+      measure: row?.DispositionMeasures ?? null,
+      group: duringDispositionNetLots >= 0 ? '主力吃貨區' : '主力倒貨區',
+      ...classification,
+    });
+  }
+
+  const items = rows.sort((left, right) => {
+    const leftSign = left.duringDispositionNetLots >= 0 ? 0 : 1;
+    const rightSign = right.duringDispositionNetLots >= 0 ? 0 : 1;
+    return leftSign - rightSign || Math.abs(right.duringDispositionNetLots) - Math.abs(left.duringDispositionNetLots);
+  });
+
+  return {
+    generatedAt,
+    marketDate,
+    referenceDate,
+    sourceCoverage: 選股輔助資料集?.sourceCoverage ?? null,
+    sources: [
+      {
+        name: 'TWSE 公布處置有價證券資訊',
+        url: 'https://openapi.twse.com.tw/v1/announcement/punish',
+      },
+      {
+        name: 'TPEx 上櫃處置有價證券資訊',
+        url: 'https://www.tpex.org.tw/openapi/v1/tpex_disposal_information',
+      },
+    ],
+    summary: {
+      activeCount: items.length,
+      accumulationCount: items.filter((item) => item.duringDispositionNetLots >= 0).length,
+      distributionCount: items.filter((item) => item.duringDispositionNetLots < 0).length,
+      mockFallbackCount: 0,
+    },
+    items,
   };
 }
 
@@ -5588,10 +5860,11 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
       });
       const 觀察摘要 = [...技術資料.觀察摘要];
 
-      if (法人買賣.days.length && 法人買賣.summary.total5Day > 0) {
-        觀察摘要.push(`最近 ${法人買賣.days.length} 個交易日三大法人合計買超 ${法人買賣.summary.total5Day.toLocaleString('zh-TW')} 股。`);
-      } else if (法人買賣.days.length && 法人買賣.summary.total5Day < 0) {
-        觀察摘要.push(`最近 ${法人買賣.days.length} 個交易日三大法人合計賣超 ${Math.abs(法人買賣.summary.total5Day).toLocaleString('zh-TW')} 股。`);
+      const 法人摘要天數 = Math.min(法人買賣.days.length, 5);
+      if (法人摘要天數 && 法人買賣.summary.total5Day > 0) {
+        觀察摘要.push(`最近 ${法人摘要天數} 個交易日三大法人合計買超 ${法人買賣.summary.total5Day.toLocaleString('zh-TW')} 股。`);
+      } else if (法人摘要天數 && 法人買賣.summary.total5Day < 0) {
+        觀察摘要.push(`最近 ${法人摘要天數} 個交易日三大法人合計賣超 ${Math.abs(法人買賣.summary.total5Day).toLocaleString('zh-TW')} 股。`);
       }
 
       if (持股分散?.largeHolderRatioDelta !== null) {
@@ -5750,12 +6023,15 @@ async function main() {
   const { 公司概況索引, 月營收索引, 綜合損益索引, 資產負債索引 } = await fetchStockFinancialIndex();
   const 選股輔助資料集 = await fetchStockSelectionSupportData(市場總覽.資料日期);
   let 日資料清單 = [];
+  let 明細法人日資料清單 = [];
   let 法人追蹤;
 
   try {
-    日資料清單 = await fetchRecentInstitutionalTrading(個股索引, 5, 市場總覽.資料日期 ?? 指定市場查詢日期);
+    明細法人日資料清單 = await fetchRecentInstitutionalTrading(個股索引, 20, 市場總覽.資料日期 ?? 指定市場查詢日期);
+    日資料清單 = 明細法人日資料清單.slice(0, 5);
     法人追蹤 = buildInstitutionalTracker(日資料清單);
   } catch (error) {
+    明細法人日資料清單 = [];
     法人追蹤 = 既有儀表板?.法人追蹤 ?? {
       資料日期: null,
       回溯交易日: [],
@@ -5782,7 +6058,7 @@ async function main() {
   }
 
   await writeEtfMarketData(追蹤ETF清單, tdcc索引);
-  const 個股候選清單 = buildSecurityCandidateList({ 市場總覽, 法人追蹤, ETF結果: successes, 全部個股 });
+  const 個股候選清單 = buildSecurityCandidateList({ 市場總覽, 法人追蹤, ETF結果: successes, 全部個股, 選股輔助資料集 });
   let 市場個股索引 = new Map(
     [...個股索引.entries()].map(([code, item]) => [
       code,
@@ -5848,7 +6124,7 @@ async function main() {
   });
   const 資料市場日 = 市場總覽?.即時狀態?.marketDate ?? 市場總覽?.資料日期 ?? null;
   const 產生時間 = getCurrentIso(現在);
-  const { summaries: 個股摘要清單, details: 個股明細清單 } = await writeStockDetailData(個股候選清單, 日資料清單, tdcc索引, {
+  const { summaries: 個股摘要清單, details: 個股明細清單 } = await writeStockDetailData(個股候選清單, 明細法人日資料清單.length ? 明細法人日資料清單 : 日資料清單, tdcc索引, {
     評價索引,
     公司概況索引,
     月營收索引,
@@ -5901,6 +6177,14 @@ async function main() {
     選股輔助資料集,
     市場資料日期: 資料市場日,
     產生時間,
+  });
+  const 處置股雷達 = buildDispositionRadarData({
+    選股輔助資料集,
+    stockDetailList: 個股明細清單,
+    stockSummaries: 強化個股摘要清單,
+    generatedAt: 產生時間,
+    marketDate: 資料市場日,
+    referenceDate: formatTaipeiDate(現在),
   });
   const 主動ETF總覽 = buildActiveEtfOverview(successes, pending);
   const ETF重疊分析 = buildEtfOverlapAnalysis(successes, {
@@ -6016,6 +6300,7 @@ async function main() {
     topicHistoryPath: 'data/topics/history.json',
     stockRadarHistoryPath: 'data/radar/history.json',
     entryRadarPath: 'data/radar/entry.json',
+    dispositionRadarPath: 'data/radar/disposition.json',
     brokerBranchRadarPath: 'data/radar/broker-branches.json',
     brokerBranchHistoryPath: 'data/radar/broker-branches-history.json',
     highDividendEtfFlowPath: 'data/etfs/high-dividend-flow.json',
@@ -6069,6 +6354,7 @@ async function main() {
         sourceUrl: etf.sourceUrl,
       })),
       { code: 'TWSE', sourceName: 'TWSE OpenAPI', sourceUrl: 'https://openapi.twse.com.tw/' },
+      { code: 'TPEx', sourceName: 'TPEx OpenAPI', sourceUrl: 'https://www.tpex.org.tw/openapi/' },
     ],
     storagePolicy: '每檔 ETF 僅保留 latest.json、previous.json、diff-latest.json，方便和前一日比較。',
   };
@@ -6081,6 +6367,7 @@ async function main() {
   await writeJson(path.join(題材資料目錄, 'history.json'), 題材輪動歷史);
   await writeJson(path.join(選股雷達資料目錄, 'history.json'), 選股回放歷史);
   await writeJson(path.join(選股雷達資料目錄, 'entry.json'), 起漲卡位雷達);
+  await writeJson(path.join(選股雷達資料目錄, 'disposition.json'), 處置股雷達);
   await writeJson(path.join(選股雷達資料目錄, 'broker-branches.json'), 分點勝率雷達資料);
   await writeJson(path.join(選股雷達資料目錄, 'broker-branches-history.json'), 分點回放歷史);
   await writeJson(path.join(選股雷達資料目錄, 'signal-confidence.json'), 訊號可信度資料);
