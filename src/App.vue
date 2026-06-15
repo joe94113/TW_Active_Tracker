@@ -115,6 +115,13 @@ secondaryNavigationItems.push(
 );
 
 secondaryNavigationItems.push({
+  label: '處置股雷達',
+  path: '/disposition-radar',
+  tag: '處置',
+  description: '對比進處置前 10 天與處置期間的主力買賣超，辨識真吃貨、護盤套牢與倒貨股。',
+});
+
+secondaryNavigationItems.push({
   label: '官方交易雷達',
   path: '/official-radar',
   tag: '風險',

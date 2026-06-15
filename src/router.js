@@ -17,6 +17,7 @@ const FavoritesHealthPage = () => import('./pages/FavoritesHealthPage.vue');
 const StockScannerPage = () => import('./pages/StockScannerPage.vue');
 const EventStatsPage = () => import('./pages/EventStatsPage.vue');
 const OfficialRadarPage = () => import('./pages/OfficialRadarPage.vue');
+const DispositionRadarPage = () => import('./pages/DispositionRadarPage.vue');
 const BrokerBranchRadarPage = () => import('./pages/BrokerBranchRadarPage.vue');
 const WatchboardPage = () => import('./pages/WatchboardPage.vue');
 const IndustryPulsePage = () => import('./pages/IndustryPulsePage.vue');
@@ -40,6 +41,7 @@ export const ROUTE_NAME = {
   STOCK_SCANNER: 'stock-scanner',
   EVENT_STATS: 'event-stats',
   OFFICIAL_RADAR: 'official-radar',
+  DISPOSITION_RADAR: 'disposition-radar',
   BROKER_BRANCH_RADAR: 'broker-branch-radar',
   WATCHBOARD: 'watchboard',
   INDUSTRY_PULSE: 'industry-pulse',
@@ -139,6 +141,15 @@ const router = createRouter({
       meta: {
         title: '事件後表現統計',
         description: '整理月營收、法說、財報與除息後的歷史反應，幫助判斷事件交易節奏。',
+      },
+    },
+    {
+      path: '/disposition-radar',
+      name: ROUTE_NAME.DISPOSITION_RADAR,
+      component: DispositionRadarPage,
+      meta: {
+        title: '處置股雷達',
+        description: '用進處置前 10 天與處置期間的主力籌碼變化，分辨主力鎖籌碼、護盤套牢、倒貨與避開不碰的處置股型態。',
       },
     },
     {
