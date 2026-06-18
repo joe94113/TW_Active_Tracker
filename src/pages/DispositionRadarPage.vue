@@ -1,9 +1,11 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import { fetchJson } from '../lib/api';
 import { formatNumber } from '../lib/formatters';
+import { createStockRoute } from '../lib/stockRouting';
 
 const mockDispositionStocks = [
   {
@@ -65,6 +67,7 @@ const mockDispositionStocks = [
 ];
 
 const { manifest, loadGlobalData } = useGlobalData();
+const router = useRouter();
 const dispositionRadar = ref(null);
 const radarError = ref('');
 const isRadarLoading = ref(false);
@@ -197,6 +200,14 @@ function openDetail(stock) {
 
 function closeDetail() {
   selectedStock.value = null;
+}
+
+function openSelectedStockPage() {
+  if (!selectedStock.value?.code || typeof window === 'undefined') return;
+
+  const stockHref = router.resolve(createStockRoute(selectedStock.value.code)).href;
+  const absoluteHref = new URL(stockHref, window.location.href).toString();
+  window.open(absoluteHref, '_blank', 'noopener,noreferrer');
 }
 
 function setActiveView(key) {
@@ -437,14 +448,24 @@ function getBarValueY(value) {
 
     <Teleport to="body">
       <div v-if="selectedStock" class="disposition-modal-backdrop" @click.self="closeDetail">
-        <section class="disposition-modal" role="dialog" aria-modal="true" :aria-labelledby="`disposition-modal-${selectedStock.code}`">
+        <section
+          class="disposition-modal is-clickable"
+          role="dialog"
+          aria-modal="true"
+          tabindex="0"
+          :aria-labelledby="`disposition-modal-${selectedStock.code}`"
+          :aria-describedby="`disposition-modal-hint-${selectedStock.code}`"
+          @click="openSelectedStockPage"
+          @keydown.enter.prevent.self="openSelectedStockPage"
+          @keydown.space.prevent.self="openSelectedStockPage"
+        >
           <header class="modal-header">
             <div>
               <p class="eyebrow">Chip Flow Detail</p>
               <h2 :id="`disposition-modal-${selectedStock.code}`">{{ selectedStock.code }} {{ selectedStock.name }}</h2>
               <span>{{ selectedStock.caseCode }}｜{{ selectedStock.caseTitle }}</span>
             </div>
-            <button type="button" class="modal-close-button" aria-label="關閉處置股明細" @click="closeDetail">關閉</button>
+            <button type="button" class="modal-close-button" aria-label="關閉處置股明細" @click.stop="closeDetail">關閉</button>
           </header>
 
           <div class="modal-chart-wrap">
@@ -488,6 +509,7 @@ function getBarValueY(value) {
           </div>
 
           <p class="modal-thesis">{{ selectedStock.thesis }}</p>
+          <p :id="`disposition-modal-hint-${selectedStock.code}`" class="modal-open-hint">點擊彈窗開啟個股頁面</p>
         </section>
       </div>
     </Teleport>
@@ -996,6 +1018,21 @@ function getBarValueY(value) {
   box-shadow: 0 32px 88px rgba(0, 0, 0, 0.34);
 }
 
+.disposition-modal.is-clickable {
+  cursor: pointer;
+  transition:
+    border-color var(--ease-standard),
+    box-shadow var(--ease-standard),
+    transform var(--ease-standard);
+}
+
+.disposition-modal.is-clickable:hover,
+.disposition-modal.is-clickable:focus-visible {
+  border-color: rgba(11, 105, 155, 0.3);
+  box-shadow: 0 36px 96px rgba(0, 0, 0, 0.38);
+  outline: none;
+}
+
 .modal-header {
   display: flex;
   align-items: flex-start;
@@ -1113,6 +1150,13 @@ function getBarValueY(value) {
   color: var(--text-soft);
   font-size: 0.96rem;
   font-weight: 700;
+}
+
+.modal-open-hint {
+  margin: -6px 0 0;
+  color: var(--brand);
+  font-size: 0.82rem;
+  font-weight: 900;
 }
 
 .empty-state {
