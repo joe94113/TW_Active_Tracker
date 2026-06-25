@@ -138,6 +138,18 @@ const 追蹤ETF清單 = [
     },
   }),
   createEtfConfig({
+    code: '00407A',
+    fullName: '主動凱基台灣主動式交易所交易基金',
+    provider: 'kgi',
+    providerLabel: '凱基投信',
+    sourceName: '凱基投信 ETF 官方申購買回清單',
+    sourceUrl: 'https://www.kgifund.com.tw/Fund/RedemptionList?fundNo=J024',
+    trackingStatus: '已串接',
+    providerConfig: {
+      fundId: 'J024',
+    },
+  }),
+  createEtfConfig({
     code: '00983A',
     fullName: '主動中信ARK創新主動式交易所交易基金',
     provider: 'ctbc',
@@ -1147,6 +1159,16 @@ function decodeHtmlEntitiesDeep(value, times = 4) {
   return decoded;
 }
 
+function decodeNumericHtmlEntities(value) {
+  return decodeHtmlEntitiesDeep(value)
+    .replace(/&#x([\da-f]+);/gi, (_, codePoint) => String.fromCodePoint(Number.parseInt(codePoint, 16)))
+    .replace(/&#(\d+);/g, (_, codePoint) => String.fromCodePoint(Number(codePoint)));
+}
+
+function stripDecodedHtmlTags(value) {
+  return compactText(decodeNumericHtmlEntities(String(value ?? '').replace(/<[^>]+>/g, ' ')));
+}
+
 async function createAllianzApiSession(referer) {
   const response = await fetch('https://etf.allianzgi.com.tw/webapi/api/AntiForgery/GetAntiForgeryToken', {
     headers: {
@@ -1787,6 +1809,100 @@ async function fetchCathaySnapshot(etf) {
   });
 }
 
+async function fetchKgiRedemptionHtml(etf, fundId) {
+  const response = await requestWithRetry('https://www.kgifund.com.tw/Fund/RedemptionVC', {
+    method: 'POST',
+    headers: {
+      'user-agent': 使用者代理,
+      'accept-language': 'zh-TW,zh;q=0.9',
+      accept: 'text/html, */*;q=0.01',
+      'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      origin: 'https://www.kgifund.com.tw',
+      referer: etf.sourceUrl,
+      'x-requested-with': 'XMLHttpRequest',
+    },
+    body: new URLSearchParams({
+      fundID: fundId,
+      queryDate: '',
+    }),
+  }, {
+    標籤: `凱基 ETF ${fundId} 申購買回清單`,
+  });
+
+  return response.text();
+}
+
+function extractHtmlInputValue(html, id) {
+  const escapedId = String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = html.match(new RegExp(`<input[^>]*id=["']${escapedId}["'][^>]*value=["']([^"']*)`, 'i'));
+  return decodeNumericHtmlEntities(match?.[1] ?? '');
+}
+
+function parseKgiSummaryRows(html) {
+  return new Map(
+    Array.from(
+      html.matchAll(/<li[^>]*>\s*<span[^>]*>([\s\S]*?)<\/span>\s*<span[^>]*>([\s\S]*?)<\/span>\s*<\/li>/gi),
+      (match) => [stripDecodedHtmlTags(match[1]), stripDecodedHtmlTags(match[2])],
+    ),
+  );
+}
+
+function findSummaryValue(summaryRows, keyword) {
+  const key = [...summaryRows.keys()].find((item) => item.includes(keyword));
+  return key ? summaryRows.get(key) : null;
+}
+
+function parseKgiHoldingTable(html) {
+  const stockSection =
+    html.match(/<h4[^>]*>\s*(?:&#x80A1;&#x7968;|股票)\s*<\/h4>([\s\S]*?)(?:<h4|<div class="textA-C|$)/i)?.[1] ?? html;
+  const tableHtml = stockSection.match(/<table[\s\S]*?<\/table>/i)?.[0] ?? '';
+  const holdings = Array.from(tableHtml.matchAll(/<tr[^>]*>[\s\S]*?<\/tr>/gi))
+    .map((match) => {
+      const cells = Array.from(match[0].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi), (cell) =>
+        stripDecodedHtmlTags(cell[1]),
+      );
+
+      if (cells.length < 4) {
+        return null;
+      }
+
+      return {
+        code: compactText(cells[0]).replace(/\s+/g, ''),
+        name: cells[1],
+        shares: toNumber(cells[2]),
+        weight: toNumber(cells[3]),
+      };
+    })
+    .filter((item) => item?.code && item.name && item.weight !== null && isEtfHoldingCode(item.code));
+
+  return sortHoldings(holdings);
+}
+
+async function fetchKgiSnapshot(etf) {
+  const fundId = etf.providerConfig?.fundId;
+
+  if (!fundId) {
+    throw new Error('凱基 ETF 缺少 fundId 設定');
+  }
+
+  const html = await fetchKgiRedemptionHtml(etf, fundId);
+  const summaryRows = parseKgiSummaryRows(html);
+  const holdings = parseKgiHoldingTable(html);
+  const disclosureDate = extractHtmlInputValue(html, 'DataDate');
+
+  if (!disclosureDate || !holdings.length) {
+    throw new Error('凱基 ETF 申購買回清單解析失敗');
+  }
+
+  return buildEtfSnapshot(etf, {
+    disclosureDate,
+    aum: toNumber(findSummaryValue(summaryRows, '基金淨資產價值')),
+    nav: toNumber(findSummaryValue(summaryRows, '每受益權單位淨資產價值')),
+    units: toNumber(findSummaryValue(summaryRows, '已發行受益權單位總數')),
+    holdings,
+  });
+}
+
 async function fetchJpmorganSnapshot(etf) {
   const xlsxUrl = etf.providerConfig?.xlsxUrl;
 
@@ -1868,6 +1984,7 @@ async function fetchEtfSnapshot(etf) {
   if (etf.provider === 'first') return fetchFirstGoldSnapshot(etf);
   if (etf.provider === 'mega') return fetchMegaSnapshot(etf);
   if (etf.provider === 'cathay') return fetchCathaySnapshot(etf);
+  if (etf.provider === 'kgi') return fetchKgiSnapshot(etf);
   if (etf.provider === 'jpm') return fetchJpmorganSnapshot(etf);
   throw new Error('官方持股來源尚未串接');
 }
