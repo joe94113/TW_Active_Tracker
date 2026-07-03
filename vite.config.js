@@ -5,6 +5,11 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   base: './',
   plugins: [vue(), tailwindcss()],
+  server: {
+    watch: {
+      ignored: ['**/.tmp-chrome*/**', '**/tmp-header*.png'],
+    },
+  },
   build: {
     rollupOptions: {
       output: {

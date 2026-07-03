@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { useGlobalData } from './composables/useGlobalData';
 import GlobalStockSearch from './components/GlobalStockSearch.vue';
@@ -9,10 +9,14 @@ const { manifest, loadGlobalData } = useGlobalData();
 
 const isCompactHeader = ref(false);
 const isMoreMenuOpen = ref(false);
+const moreMenuQuery = ref('');
 const desktopMoreMenuRef = ref(null);
+const desktopMoreTriggerRef = ref(null);
+const desktopMoreSearchRef = ref(null);
 const mobileMoreMenuRef = ref(null);
 const themePreference = ref('system');
 const resolvedTheme = ref('light');
+const moreMenuPanelTop = ref(84);
 
 let mediaQuery = null;
 let mediaQueryHandler = null;
@@ -21,6 +25,7 @@ let colorSchemeQuery = null;
 let colorSchemeHandler = null;
 
 const THEME_STORAGE_KEY = 'tw-active-tracker-theme';
+const HEADER_COMPACT_QUERY = '(max-width: 900px)';
 
 const primaryNavigationItems = [
   { label: '首頁', path: '/' },
@@ -144,6 +149,33 @@ secondaryNavigationItems.push({
 
 const allNavigationItems = [...primaryNavigationItems, ...secondaryNavigationItems];
 
+const featuredMorePaths = ['/radar', '/disposition-radar', '/watchboard', '/favorites-health'];
+
+const moreMenuSections = [
+  {
+    title: '市場總覽',
+    subtitle: '盤前盤後先看風向',
+    paths: ['/global-markets', '/futures', '/industry-pulse', '/market-buzz', '/official-radar'],
+  },
+  {
+    title: '個股工具',
+    subtitle: '選股、掃描與籌碼追蹤',
+    paths: ['/radar', '/scanner', '/disposition-radar', '/broker-branches', '/watchboard', '/favorites-health', '/watchlist'],
+  },
+  {
+    title: 'ETF 工具',
+    subtitle: '成分、重疊與換股方向',
+    paths: ['/etf-overlap', '/high-dividend-etfs'],
+  },
+  {
+    title: '研究與紀錄',
+    subtitle: '事件、教學與海外觀點',
+    paths: ['/event-stats', '/classroom', '/serenity-radar'],
+  },
+];
+
+const secondaryNavigationByPath = new Map(secondaryNavigationItems.map((item) => [item.path, item]));
+
 function formatGeneratedAt(value) {
   if (!value) {
     return '資料整理中';
@@ -177,10 +209,32 @@ function isActiveRoute(path) {
 
 function closeMoreMenu() {
   isMoreMenuOpen.value = false;
+  moreMenuQuery.value = '';
+}
+
+function updateMoreMenuPanelPosition() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  const rect = desktopMoreTriggerRef.value?.getBoundingClientRect();
+  moreMenuPanelTop.value = Math.round((rect?.bottom ?? 74) + 10);
 }
 
 function toggleMoreMenu() {
-  isMoreMenuOpen.value = !isMoreMenuOpen.value;
+  if (isMoreMenuOpen.value) {
+    closeMoreMenu();
+    return;
+  }
+
+  isMoreMenuOpen.value = true;
+
+  if (!isCompactHeader.value) {
+    nextTick(() => {
+      updateMoreMenuPanelPosition();
+      desktopMoreSearchRef.value?.focus();
+    });
+  }
 }
 
 function resolveSystemTheme() {
@@ -215,6 +269,60 @@ const siteIconHref = `${import.meta.env.BASE_URL}favicon.svg`;
 const isMoreActive = computed(() => secondaryNavigationItems.some((item) => isActiveRoute(item.path)));
 const themeToggleLabel = computed(() => (resolvedTheme.value === 'dark' ? '日間' : '夜間'));
 const themeToggleHint = computed(() => (resolvedTheme.value === 'dark' ? '切換為淺色模式' : '切換為深色模式'));
+const normalizedMoreMenuQuery = computed(() => moreMenuQuery.value.trim().toLowerCase());
+const filteredSecondaryNavigationItems = computed(() => {
+  const query = normalizedMoreMenuQuery.value;
+
+  if (!query) {
+    return secondaryNavigationItems;
+  }
+
+  return secondaryNavigationItems.filter((item) =>
+    [item.label, item.tag, item.description]
+      .filter(Boolean)
+      .some((value) => String(value).toLowerCase().includes(query)),
+  );
+});
+const filteredSecondaryNavigationPaths = computed(
+  () => new Set(filteredSecondaryNavigationItems.value.map((item) => item.path)),
+);
+const featuredMoreItems = computed(() =>
+  featuredMorePaths
+    .map((path) => secondaryNavigationByPath.get(path))
+    .filter((item) => item && filteredSecondaryNavigationPaths.value.has(item.path)),
+);
+const moreMenuGroups = computed(() => {
+  const assignedPaths = new Set();
+  const groups = moreMenuSections
+    .map((section) => {
+      const items = section.paths
+        .map((path) => secondaryNavigationByPath.get(path))
+        .filter((item) => item && filteredSecondaryNavigationPaths.value.has(item.path));
+
+      items.forEach((item) => assignedPaths.add(item.path));
+
+      return {
+        ...section,
+        items,
+      };
+    })
+    .filter((section) => section.items.length);
+
+  const uncategorizedItems = filteredSecondaryNavigationItems.value.filter((item) => !assignedPaths.has(item.path));
+
+  if (uncategorizedItems.length) {
+    groups.push({
+      title: '其他工具',
+      subtitle: '近期新增入口',
+      items: uncategorizedItems,
+    });
+  }
+
+  return groups;
+});
+const moreMenuPanelStyle = computed(() => ({
+  '--more-menu-top': `${moreMenuPanelTop.value}px`,
+}));
 
 const footerStats = computed(() => [
   {
@@ -243,11 +351,11 @@ onMounted(() => {
   applyTheme();
 
   if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
-    mediaQuery = window.matchMedia('(max-width: 900px)');
+    mediaQuery = window.matchMedia(HEADER_COMPACT_QUERY);
     isCompactHeader.value = mediaQuery.matches;
     mediaQueryHandler = (event) => {
       isCompactHeader.value = event.matches;
-      isMoreMenuOpen.value = false;
+      closeMoreMenu();
     };
 
     if (typeof mediaQuery.addEventListener === 'function') {
@@ -281,7 +389,7 @@ onMounted(() => {
       const insideMobile = mobileMoreMenuRef.value?.contains(target);
 
       if (!insideDesktop && !insideMobile) {
-        isMoreMenuOpen.value = false;
+        closeMoreMenu();
       }
     };
 
@@ -314,7 +422,7 @@ onBeforeUnmount(() => {
 watch(
   () => route.path,
   () => {
-    isMoreMenuOpen.value = false;
+    closeMoreMenu();
   },
 );
 </script>
@@ -345,28 +453,90 @@ watch(
 
           <div ref="desktopMoreMenuRef" class="more-menu">
             <button
+              ref="desktopMoreTriggerRef"
               type="button"
               class="nav-link more-trigger"
               :class="{ 'is-active': isMoreActive || isMoreMenuOpen }"
+              aria-haspopup="menu"
               :aria-expanded="String(isMoreMenuOpen)"
               @click="toggleMoreMenu"
             >
               更多
             </button>
 
-            <div v-if="isMoreMenuOpen" class="more-menu-panel more-menu-panel-desktop">
-              <RouterLink
-                v-for="item in secondaryNavigationItems"
-                :key="`desktop-more-${item.path}`"
-                :to="item.path"
-                class="more-menu-card"
-                :class="{ 'is-active': isActiveRoute(item.path) }"
-                @click="closeMoreMenu"
-              >
-                <span class="more-menu-card-tag">{{ item.tag }}</span>
-                <strong>{{ item.label }}</strong>
-                <span>{{ item.description }}</span>
-              </RouterLink>
+            <div
+              v-if="isMoreMenuOpen"
+              class="more-menu-panel more-menu-panel-desktop"
+              :style="moreMenuPanelStyle"
+            >
+              <div class="more-menu-panel-head">
+                <div>
+                  <strong>工具總覽</strong>
+                  <span>快速切換盤勢、選股、ETF 與研究頁面</span>
+                </div>
+                <span class="more-menu-count">{{ filteredSecondaryNavigationItems.length }} 個入口</span>
+              </div>
+
+              <label class="more-menu-search">
+                <span>搜尋</span>
+                <input
+                  ref="desktopMoreSearchRef"
+                  v-model="moreMenuQuery"
+                  type="search"
+                  autocomplete="off"
+                  aria-label="搜尋更多導覽"
+                  placeholder="輸入 ETF、處置、分點、Serenity..."
+                  @keydown.stop
+                />
+              </label>
+
+              <div class="more-menu-scroll">
+                <section v-if="featuredMoreItems.length" class="more-menu-featured" aria-label="常用入口">
+                  <RouterLink
+                    v-for="item in featuredMoreItems"
+                    :key="`desktop-more-featured-${item.path}`"
+                    :to="item.path"
+                    class="more-menu-featured-card"
+                    :class="{ 'is-active': isActiveRoute(item.path) }"
+                    @click="closeMoreMenu"
+                  >
+                    <span class="more-menu-card-tag">{{ item.tag }}</span>
+                    <strong>{{ item.label }}</strong>
+                  </RouterLink>
+                </section>
+
+                <div v-if="moreMenuGroups.length" class="more-menu-section-grid">
+                  <section
+                    v-for="group in moreMenuGroups"
+                    :key="group.title"
+                    class="more-menu-section"
+                  >
+                    <div class="more-menu-section-head">
+                      <strong>{{ group.title }}</strong>
+                      <span>{{ group.subtitle }}</span>
+                    </div>
+
+                    <div class="more-menu-section-links">
+                      <RouterLink
+                        v-for="item in group.items"
+                        :key="`desktop-more-${group.title}-${item.path}`"
+                        :to="item.path"
+                        class="more-menu-card"
+                        :class="{ 'is-active': isActiveRoute(item.path) }"
+                        @click="closeMoreMenu"
+                      >
+                        <span class="more-menu-card-tag">{{ item.tag }}</span>
+                        <span class="more-menu-card-copy">
+                          <strong>{{ item.label }}</strong>
+                          <span>{{ item.description }}</span>
+                        </span>
+                      </RouterLink>
+                    </div>
+                  </section>
+                </div>
+
+                <p v-else class="more-menu-empty">沒有找到符合的入口</p>
+              </div>
             </div>
           </div>
         </nav>
@@ -481,6 +651,7 @@ watch(
           type="button"
           class="mobile-dock-link mobile-more-trigger"
           :class="{ 'is-active': isMoreActive || isMoreMenuOpen }"
+          aria-haspopup="menu"
           :aria-expanded="String(isMoreMenuOpen)"
           @click="toggleMoreMenu"
         >

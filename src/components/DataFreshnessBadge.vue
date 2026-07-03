@@ -346,4 +346,25 @@ onBeforeUnmount(() => {
 :global(html[data-theme="dark"]) .is-info {
   color: #7dd3fc;
 }
+
+:global(html[data-theme="dark"] .data-freshness-badge.is-down.is-inline.is-compact) {
+  border-color: rgba(248, 113, 113, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(248, 113, 113, 0.07), transparent 46%),
+    linear-gradient(180deg, rgba(28, 22, 27, 0.9), rgba(11, 18, 30, 0.88));
+  color: #dd8a7a;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 12px 24px rgba(2, 6, 23, 0.2);
+}
+
+:global(html[data-theme="dark"] .data-freshness-badge.is-down.is-inline.is-compact .badge-detail),
+:global(html[data-theme="dark"] .data-freshness-badge.is-down.is-inline.is-compact .badge-next),
+:global(html[data-theme="dark"] .data-freshness-badge.is-down.is-inline.is-compact .badge-inline-meta) {
+  color: #b7a7a8;
+}
+
+:global(html[data-theme="dark"] .data-freshness-badge.is-down.is-inline.is-compact .badge-dot) {
+  opacity: 0.78;
+}
 </style>
