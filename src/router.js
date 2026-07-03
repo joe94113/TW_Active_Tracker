@@ -23,6 +23,7 @@ const WatchboardPage = () => import('./pages/WatchboardPage.vue');
 const IndustryPulsePage = () => import('./pages/IndustryPulsePage.vue');
 const GlobalMarketsPage = () => import('./pages/GlobalMarketsPage.vue');
 const MarketBuzzPage = () => import('./pages/MarketBuzzPage.vue');
+const SerenityRadarPage = () => import('./pages/SerenityRadarPage.vue');
 
 export const ROUTE_NAME = {
   HOME: 'home',
@@ -47,6 +48,7 @@ export const ROUTE_NAME = {
   INDUSTRY_PULSE: 'industry-pulse',
   GLOBAL_MARKETS: 'global-markets',
   MARKET_BUZZ: 'market-buzz',
+  SERENITY_RADAR: 'serenity-radar',
 };
 
 const router = createRouter({
@@ -204,6 +206,15 @@ const router = createRouter({
       meta: {
         title: '熱門新聞關鍵詞 + 市場熱度',
         description: '整理近期熱門新聞關鍵詞、題材熱度與話題股，快速判斷市場最近在關注什麼。',
+      },
+    },
+    {
+      path: '/serenity-radar',
+      name: ROUTE_NAME.SERENITY_RADAR,
+      component: SerenityRadarPage,
+      meta: {
+        title: 'Serenity 觀點雷達',
+        description: '整理 Serenity 公開 X 貼文提及的美股 AI 與半導體供應鏈股票，追蹤多頭、空頭與中立觀點變化。',
       },
     },
     {

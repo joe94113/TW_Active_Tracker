@@ -1,0 +1,5346 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-03T03:04:17.240Z",
+  "source": {
+    "type": "trackserenity-public-feed",
+    "status": "ready",
+    "username": "aleabitoreddit",
+    "profileUrl": "https://x.com/aleabitoreddit",
+    "notes": [
+      "Fallback source: TrackSerenity public feed and performance page.",
+      "Crawler checks robots.txt and uses a low-volume request pattern.",
+      "Stored output keeps derived summaries, ticker labels, stance labels, post IDs, and source links instead of republishing full post text."
+    ],
+    "sourceUrl": "https://www.trackserenity.com/data/signals.json",
+    "performanceUrl": "https://www.trackserenity.com/performance",
+    "quoteUrl": "https://www.trackserenity.com/api/stocks",
+    "upstreamUpdatedAt": "2026-07-02T22:07:09.797574Z",
+    "trackedPerformanceRows": 26,
+    "quotedPerformanceRows": 26,
+    "userId": null,
+    "fetchedPosts": 80,
+    "lookbackDays": 92,
+    "maxPages": 4
+  },
+  "influencer": {
+    "name": "Serenity",
+    "handle": "aleabitoreddit",
+    "profileUrl": "https://x.com/aleabitoreddit",
+    "focus": "AI and semiconductor supply-chain commentary",
+    "publicMetrics": null,
+    "verified": null,
+    "verifiedType": null
+  },
+  "timeframes": {
+    "day": {
+      "label": "日",
+      "startDate": "2026-07-02",
+      "endDate": "2026-07-03",
+      "stats": {
+        "mentionedStocks": 17,
+        "bullish": 0,
+        "bearish": 1,
+        "neutral": 16,
+        "posts": 9
+      },
+      "stocks": [
+        {
+          "symbol": "META",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 1,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "bearish",
+              "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072574465763111166",
+              "postId": "2072574465763111166",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "CCXI",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:33:06 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072765527764971642",
+              "postId": "2072765527764971642",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "MRVL",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 20:37:26 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 MRVL；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072781715916169660",
+              "postId": "2072781715916169660",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AAOI",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AEHR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AXTI",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "COHR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GLW",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "INTC",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 06:38:51 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 INTC；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072570681586553112",
+              "postId": "2072570681586553112",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "IREN",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 09:16:50 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 IREN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072610437817078056",
+              "postId": "2072610437817078056",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "LITE",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "NVDA",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "POET",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SIVEF",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SNDK",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TER",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSLA",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 17:57:47 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        }
+      ]
+    },
+    "week": {
+      "label": "週",
+      "startDate": "2026-06-26",
+      "endDate": "2026-07-03",
+      "stats": {
+        "mentionedStocks": 30,
+        "bullish": 0,
+        "bearish": 6,
+        "neutral": 24,
+        "posts": 32
+      },
+      "stocks": [
+        {
+          "symbol": "META",
+          "mentionCount": 6,
+          "bullishCount": 0,
+          "bearishCount": 3,
+          "neutralCount": 3,
+          "stanceScore": -3,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "bearish",
+              "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072574465763111166",
+              "postId": "2072574465763111166",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072314906729455876",
+              "postId": "2072314906729455876",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072301677211009426",
+              "postId": "2072301677211009426",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071903552608362500",
+              "postId": "2071903552608362500",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "CCXI",
+          "mentionCount": 5,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 5,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:33:06 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072765527764971642",
+              "postId": "2072765527764971642",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072367082248040621",
+              "postId": "2072367082248040621",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071995924172394695",
+              "postId": "2071995924172394695",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SIVE",
+          "mentionCount": 5,
+          "bullishCount": 1,
+          "bearishCount": 1,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jul 01 07:22:39 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 SIVE；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072219315760488615",
+              "postId": "2072219315760488615",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bullish",
+              "summary": "提到 SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072152226169331776",
+              "postId": "2072152226169331776",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072007692684837039",
+              "postId": "2072007692684837039",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 SIVE, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070691462354993543",
+              "postId": "2070691462354993543",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070444675337503166",
+              "postId": "2070444675337503166",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GOOGL",
+          "mentionCount": 4,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 3,
+          "stanceScore": -1,
+          "lastMentionAt": "Wed Jul 01 13:42:30 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072314906729455876",
+              "postId": "2072314906729455876",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071903552608362500",
+              "postId": "2071903552608362500",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "NVDA",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 2,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 GM, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071532870859149617",
+              "postId": "2071532870859149617",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "SPCX",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 29 10:43:13 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 ASTS, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071545016007467486",
+              "postId": "2071545016007467486",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071465314794233905",
+              "postId": "2071465314794233905",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 SIVE, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070691462354993543",
+              "postId": "2070691462354993543",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "LITE",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 1,
+          "stanceScore": -2,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 LITE, POET；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071488272245944399",
+              "postId": "2071488272245944399",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "POET",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 1,
+          "stanceScore": -2,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 LITE, POET；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071488272245944399",
+              "postId": "2071488272245944399",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "CBRS",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 30 14:17:18 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CBRS, RDDT；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071961279380791729",
+              "postId": "2071961279380791729",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 CBRS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070754658868687086",
+              "postId": "2070754658868687086",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "MRVL",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 20:37:26 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 MRVL；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072781715916169660",
+              "postId": "2072781715916169660",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "NBIS",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jul 01 13:14:42 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072307910223532245",
+              "postId": "2072307910223532245",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "RKLB",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 29 05:26:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071465314794233905",
+              "postId": "2071465314794233905",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070354308965728519",
+              "postId": "2070354308965728519",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSLA",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 17:57:47 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071977219002613768",
+              "postId": "2071977219002613768",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GM",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Mon Jun 29 09:54:58 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 GM, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071532870859149617",
+              "postId": "2071532870859149617",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "AAOI",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AEHR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AMZN",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jul 01 11:07:07 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "ASTS",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 29 10:43:13 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 ASTS, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071545016007467486",
+              "postId": "2071545016007467486",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AXTI",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "COHR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GLW",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "INTC",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 06:38:51 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 INTC；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072570681586553112",
+              "postId": "2072570681586553112",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "IREN",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 09:16:50 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 IREN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072610437817078056",
+              "postId": "2072610437817078056",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "MU",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Fri Jun 26 07:47:43 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 MU；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070413682996347069",
+              "postId": "2070413682996347069",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "RDDT",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 30 14:17:18 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CBRS, RDDT；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071961279380791729",
+              "postId": "2071961279380791729",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SHA0",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Sun Jun 28 09:32:04 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 SHA0；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071164721299112316",
+              "postId": "2071164721299112316",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SIVEF",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SNDK",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SOI",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Fri Jun 26 03:51:47 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070354308965728519",
+              "postId": "2070354308965728519",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TER",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        }
+      ]
+    },
+    "month": {
+      "label": "月",
+      "startDate": "2026-06-02",
+      "endDate": "2026-07-03",
+      "stats": {
+        "mentionedStocks": 53,
+        "bullish": 10,
+        "bearish": 12,
+        "neutral": 31,
+        "posts": 63
+      },
+      "stocks": [
+        {
+          "symbol": "SIVE",
+          "mentionCount": 13,
+          "bullishCount": 2,
+          "bearishCount": 1,
+          "neutralCount": 10,
+          "stanceScore": 1,
+          "lastMentionAt": "Wed Jul 01 07:22:39 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 SIVE；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072219315760488615",
+              "postId": "2072219315760488615",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bullish",
+              "summary": "提到 SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072152226169331776",
+              "postId": "2072152226169331776",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072007692684837039",
+              "postId": "2072007692684837039",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 SIVE, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070691462354993543",
+              "postId": "2070691462354993543",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070444675337503166",
+              "postId": "2070444675337503166",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 POET, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069775271562289299",
+              "postId": "2069775271562289299",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069388279355756826",
+              "postId": "2069388279355756826",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068880324202008964",
+              "postId": "2068880324202008964",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 JBL, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068651355422814294",
+              "postId": "2068651355422814294",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "MU",
+          "mentionCount": 7,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 6,
+          "stanceScore": 1,
+          "lastMentionAt": "Fri Jun 26 07:47:43 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 MU；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070413682996347069",
+              "postId": "2070413682996347069",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU, SNDK, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070189253573890167",
+              "postId": "2070189253573890167",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069990311296975133",
+              "postId": "2069990311296975133",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "bullish",
+              "summary": "提到 MU；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069892511406100716",
+              "postId": "2069892511406100716",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 INTC, MU, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069422448345518346",
+              "postId": "2069422448345518346",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "META",
+          "mentionCount": 6,
+          "bullishCount": 0,
+          "bearishCount": 3,
+          "neutralCount": 3,
+          "stanceScore": -3,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "bearish",
+              "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072574465763111166",
+              "postId": "2072574465763111166",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072314906729455876",
+              "postId": "2072314906729455876",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072301677211009426",
+              "postId": "2072301677211009426",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071903552608362500",
+              "postId": "2071903552608362500",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "NVDA",
+          "mentionCount": 6,
+          "bullishCount": 1,
+          "bearishCount": 2,
+          "neutralCount": 3,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 GM, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071532870859149617",
+              "postId": "2071532870859149617",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 NVDA, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069399639154213281",
+              "postId": "2069399639154213281",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 LITE, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069258326505140653",
+              "postId": "2069258326505140653",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "LITE",
+          "mentionCount": 5,
+          "bullishCount": 0,
+          "bearishCount": 2,
+          "neutralCount": 3,
+          "stanceScore": -3,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 LITE, POET；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071488272245944399",
+              "postId": "2071488272245944399",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 LITE, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069258326505140653",
+              "postId": "2069258326505140653",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 AAOI, COHR, LITE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068603148311404902",
+              "postId": "2068603148311404902",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "MRVL",
+          "mentionCount": 5,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 4,
+          "stanceScore": 1,
+          "lastMentionAt": "Thu Jul 02 20:37:26 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 MRVL；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072781715916169660",
+              "postId": "2072781715916169660",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bullish",
+              "summary": "提到 ALAB, MRVL；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069246038935065076",
+              "postId": "2069246038935065076",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "AAOI",
+          "mentionCount": 5,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 5,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069967746377662587",
+              "postId": "2069967746377662587",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 AAOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069062745308254434",
+              "postId": "2069062745308254434",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 AAOI, COHR, LITE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068603148311404902",
+              "postId": "2068603148311404902",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "CCXI",
+          "mentionCount": 5,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 5,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:33:06 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072765527764971642",
+              "postId": "2072765527764971642",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072367082248040621",
+              "postId": "2072367082248040621",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071995924172394695",
+              "postId": "2071995924172394695",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SPCX",
+          "mentionCount": 4,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 2,
+          "lastMentionAt": "Mon Jun 29 10:43:13 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 ASTS, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071545016007467486",
+              "postId": "2071545016007467486",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071465314794233905",
+              "postId": "2071465314794233905",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 SIVE, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070691462354993543",
+              "postId": "2070691462354993543",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "bullish",
+              "summary": "提到 SPCX；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069068801329774691",
+              "postId": "2069068801329774691",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "GOOGL",
+          "mentionCount": 4,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 3,
+          "stanceScore": -1,
+          "lastMentionAt": "Wed Jul 01 13:42:30 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072314906729455876",
+              "postId": "2072314906729455876",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071903552608362500",
+              "postId": "2071903552608362500",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "INTC",
+          "mentionCount": 4,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 3,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 06:38:51 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 INTC；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072570681586553112",
+              "postId": "2072570681586553112",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "bearish",
+              "summary": "提到 INTC, UBER；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069780882018459851",
+              "postId": "2069780882018459851",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 INTC, MU, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069422448345518346",
+              "postId": "2069422448345518346",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 GFS, INTC, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069188398825566318",
+              "postId": "2069188398825566318",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "POET",
+          "mentionCount": 4,
+          "bullishCount": 1,
+          "bearishCount": 1,
+          "neutralCount": 2,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 LITE, POET；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071488272245944399",
+              "postId": "2071488272245944399",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 POET, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069775271562289299",
+              "postId": "2069775271562289299",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "AXTI",
+          "mentionCount": 4,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 4,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069967746377662587",
+              "postId": "2069967746377662587",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "JBL",
+          "mentionCount": 3,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 1,
+          "lastMentionAt": "Thu Jun 25 16:15:27 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 JBL, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068651355422814294",
+              "postId": "2068651355422814294",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "NBIS",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 2,
+          "stanceScore": -1,
+          "lastMentionAt": "Wed Jul 01 13:14:42 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072307910223532245",
+              "postId": "2072307910223532245",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 IREN, NBIS；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069214132415652048",
+              "postId": "2069214132415652048",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "RDDT",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 30 14:17:18 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CBRS, RDDT；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071961279380791729",
+              "postId": "2071961279380791729",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070020727441621026",
+              "postId": "2070020727441621026",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069633445903675865",
+              "postId": "2069633445903675865",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "RKLB",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 29 05:26:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071465314794233905",
+              "postId": "2071465314794233905",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070354308965728519",
+              "postId": "2070354308965728519",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SNDK",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU, SNDK, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070189253573890167",
+              "postId": "2070189253573890167",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSEM",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jun 24 06:52:41 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 GFS, INTC, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069188398825566318",
+              "postId": "2069188398825566318",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "WEN",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 16:55:54 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU, SNDK, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070189253573890167",
+              "postId": "2070189253573890167",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070020727441621026",
+              "postId": "2070020727441621026",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069633445903675865",
+              "postId": "2069633445903675865",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GFS",
+          "mentionCount": 2,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 1,
+          "lastMentionAt": "Thu Jun 25 16:15:27 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 GFS, INTC, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069188398825566318",
+              "postId": "2069188398825566318",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "IREN",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 1,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 09:16:50 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 IREN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072610437817078056",
+              "postId": "2072610437817078056",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 IREN, NBIS；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069214132415652048",
+              "postId": "2069214132415652048",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "XFAB",
+          "mentionCount": 2,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 1,
+          "lastMentionAt": "Tue Jun 23 14:39:35 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 XFAB；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069430169300070612",
+              "postId": "2069430169300070612",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bullish",
+              "summary": "提到 XFAB；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069373894398743000",
+              "postId": "2069373894398743000",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "AMZN",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jul 01 11:07:07 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 AMZN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069655980456149142",
+              "postId": "2069655980456149142",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "ASTS",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 29 10:43:13 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 ASTS, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071545016007467486",
+              "postId": "2071545016007467486",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "CBRS",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 30 14:17:18 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CBRS, RDDT；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071961279380791729",
+              "postId": "2071961279380791729",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 CBRS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070754658868687086",
+              "postId": "2070754658868687086",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "COHR",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 AAOI, COHR, LITE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068603148311404902",
+              "postId": "2068603148311404902",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SOI",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Fri Jun 26 03:51:47 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070354308965728519",
+              "postId": "2070354308965728519",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069967746377662587",
+              "postId": "2069967746377662587",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSLA",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 17:57:47 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071977219002613768",
+              "postId": "2071977219002613768",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSM",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 14:08:54 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 INTC, MU, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069422448345518346",
+              "postId": "2069422448345518346",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 NVDA, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069399639154213281",
+              "postId": "2069399639154213281",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "ALAB",
+          "mentionCount": 1,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 0,
+          "stanceScore": 1,
+          "lastMentionAt": "Tue Jun 23 02:27:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "bullish",
+              "summary": "提到 ALAB, MRVL；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069246038935065076",
+              "postId": "2069246038935065076",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "AOSL",
+          "mentionCount": 1,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 0,
+          "stanceScore": 1,
+          "lastMentionAt": "Fri Jun 26 00:34:45 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "bullish",
+              "summary": "提到 AOSL, POWI；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070304723262210194",
+              "postId": "2070304723262210194",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "EWY",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Tue Jun 23 04:10:58 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 EWY, KOSPI；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069271973402931511",
+              "postId": "2069271973402931511",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "GM",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Mon Jun 29 09:54:58 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 GM, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071532870859149617",
+              "postId": "2071532870859149617",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "KOSPI",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Tue Jun 23 04:10:58 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 EWY, KOSPI；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069271973402931511",
+              "postId": "2069271973402931511",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "POWI",
+          "mentionCount": 1,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 0,
+          "stanceScore": 1,
+          "lastMentionAt": "Fri Jun 26 00:34:45 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "bullish",
+              "summary": "提到 AOSL, POWI；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070304723262210194",
+              "postId": "2070304723262210194",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "UBER",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Wed Jun 24 13:53:11 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "bearish",
+              "summary": "提到 INTC, UBER；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069780882018459851",
+              "postId": "2069780882018459851",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "300394",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jun 24 06:52:41 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AEHR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "BABA",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 00:20:02 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 BABA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069938631817699588",
+              "postId": "2069938631817699588",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "CRM",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 14:51:04 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "DRAM",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "FLNC",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GLW",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "IQE",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "KORU",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "LPK",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 22 10:33:46 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 LPK；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069005921318281566",
+              "postId": "2069005921318281566",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "MXL",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jun 24 06:52:41 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "PLTR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 14:51:04 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SHA0",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Sun Jun 28 09:32:04 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 SHA0；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071164721299112316",
+              "postId": "2071164721299112316",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SIVEF",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SOXL",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TER",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        }
+      ]
+    },
+    "quarter": {
+      "label": "季",
+      "startDate": "2026-04-02",
+      "endDate": "2026-07-03",
+      "stats": {
+        "mentionedStocks": 53,
+        "bullish": 10,
+        "bearish": 12,
+        "neutral": 31,
+        "posts": 63
+      },
+      "stocks": [
+        {
+          "symbol": "SIVE",
+          "mentionCount": 13,
+          "bullishCount": 2,
+          "bearishCount": 1,
+          "neutralCount": 10,
+          "stanceScore": 1,
+          "lastMentionAt": "Wed Jul 01 07:22:39 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 SIVE；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072219315760488615",
+              "postId": "2072219315760488615",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bullish",
+              "summary": "提到 SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072152226169331776",
+              "postId": "2072152226169331776",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072007692684837039",
+              "postId": "2072007692684837039",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 SIVE, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070691462354993543",
+              "postId": "2070691462354993543",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070444675337503166",
+              "postId": "2070444675337503166",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 POET, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069775271562289299",
+              "postId": "2069775271562289299",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069388279355756826",
+              "postId": "2069388279355756826",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068880324202008964",
+              "postId": "2068880324202008964",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 JBL, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068651355422814294",
+              "postId": "2068651355422814294",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "MU",
+          "mentionCount": 7,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 6,
+          "stanceScore": 1,
+          "lastMentionAt": "Fri Jun 26 07:47:43 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 MU；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070413682996347069",
+              "postId": "2070413682996347069",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU, SNDK, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070189253573890167",
+              "postId": "2070189253573890167",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069990311296975133",
+              "postId": "2069990311296975133",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "bullish",
+              "summary": "提到 MU；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069892511406100716",
+              "postId": "2069892511406100716",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 INTC, MU, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069422448345518346",
+              "postId": "2069422448345518346",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "META",
+          "mentionCount": 6,
+          "bullishCount": 0,
+          "bearishCount": 3,
+          "neutralCount": 3,
+          "stanceScore": -3,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "bearish",
+              "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072574465763111166",
+              "postId": "2072574465763111166",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072314906729455876",
+              "postId": "2072314906729455876",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072301677211009426",
+              "postId": "2072301677211009426",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071903552608362500",
+              "postId": "2071903552608362500",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "NVDA",
+          "mentionCount": 6,
+          "bullishCount": 1,
+          "bearishCount": 2,
+          "neutralCount": 3,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 GM, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071532870859149617",
+              "postId": "2071532870859149617",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 NVDA, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069399639154213281",
+              "postId": "2069399639154213281",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 LITE, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069258326505140653",
+              "postId": "2069258326505140653",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "LITE",
+          "mentionCount": 5,
+          "bullishCount": 0,
+          "bearishCount": 2,
+          "neutralCount": 3,
+          "stanceScore": -3,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 LITE, POET；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071488272245944399",
+              "postId": "2071488272245944399",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 LITE, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069258326505140653",
+              "postId": "2069258326505140653",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 AAOI, COHR, LITE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068603148311404902",
+              "postId": "2068603148311404902",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "MRVL",
+          "mentionCount": 5,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 4,
+          "stanceScore": 1,
+          "lastMentionAt": "Thu Jul 02 20:37:26 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 MRVL；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072781715916169660",
+              "postId": "2072781715916169660",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bullish",
+              "summary": "提到 ALAB, MRVL；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069246038935065076",
+              "postId": "2069246038935065076",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "AAOI",
+          "mentionCount": 5,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 5,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069967746377662587",
+              "postId": "2069967746377662587",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 AAOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069062745308254434",
+              "postId": "2069062745308254434",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 AAOI, COHR, LITE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068603148311404902",
+              "postId": "2068603148311404902",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "CCXI",
+          "mentionCount": 5,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 5,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:33:06 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072765527764971642",
+              "postId": "2072765527764971642",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072367082248040621",
+              "postId": "2072367082248040621",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071995924172394695",
+              "postId": "2071995924172394695",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SPCX",
+          "mentionCount": 4,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 2,
+          "lastMentionAt": "Mon Jun 29 10:43:13 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 ASTS, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071545016007467486",
+              "postId": "2071545016007467486",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071465314794233905",
+              "postId": "2071465314794233905",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 SIVE, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070691462354993543",
+              "postId": "2070691462354993543",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "bullish",
+              "summary": "提到 SPCX；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069068801329774691",
+              "postId": "2069068801329774691",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "GOOGL",
+          "mentionCount": 4,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 3,
+          "stanceScore": -1,
+          "lastMentionAt": "Wed Jul 01 13:42:30 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "bearish",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072314906729455876",
+              "postId": "2072314906729455876",
+              "metrics": null
+            },
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071903552608362500",
+              "postId": "2071903552608362500",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "INTC",
+          "mentionCount": 4,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 3,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 06:38:51 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 INTC；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072570681586553112",
+              "postId": "2072570681586553112",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "bearish",
+              "summary": "提到 INTC, UBER；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069780882018459851",
+              "postId": "2069780882018459851",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 INTC, MU, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069422448345518346",
+              "postId": "2069422448345518346",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 GFS, INTC, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069188398825566318",
+              "postId": "2069188398825566318",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "POET",
+          "mentionCount": 4,
+          "bullishCount": 1,
+          "bearishCount": 1,
+          "neutralCount": 2,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 16:56:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+              "postId": "2072726120706007465",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 LITE, POET；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071488272245944399",
+              "postId": "2071488272245944399",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 POET, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069775271562289299",
+              "postId": "2069775271562289299",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "AXTI",
+          "mentionCount": 4,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 4,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069967746377662587",
+              "postId": "2069967746377662587",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "JBL",
+          "mentionCount": 3,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 1,
+          "lastMentionAt": "Thu Jun 25 16:15:27 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 JBL, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068651355422814294",
+              "postId": "2068651355422814294",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "NBIS",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 2,
+          "stanceScore": -1,
+          "lastMentionAt": "Wed Jul 01 13:14:42 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072307910223532245",
+              "postId": "2072307910223532245",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 GOOGL, META, NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071135874100990438",
+              "postId": "2071135874100990438",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 IREN, NBIS；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069214132415652048",
+              "postId": "2069214132415652048",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "RDDT",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 30 14:17:18 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CBRS, RDDT；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071961279380791729",
+              "postId": "2071961279380791729",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070020727441621026",
+              "postId": "2070020727441621026",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069633445903675865",
+              "postId": "2069633445903675865",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "RKLB",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 29 05:26:31 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071465314794233905",
+              "postId": "2071465314794233905",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070354308965728519",
+              "postId": "2070354308965728519",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SNDK",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU, SNDK, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070189253573890167",
+              "postId": "2070189253573890167",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSEM",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jun 24 06:52:41 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 GFS, INTC, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069188398825566318",
+              "postId": "2069188398825566318",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "WEN",
+          "mentionCount": 3,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 3,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 16:55:54 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 MU, SNDK, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070189253573890167",
+              "postId": "2070189253573890167",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070020727441621026",
+              "postId": "2070020727441621026",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 RDDT, WEN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069633445903675865",
+              "postId": "2069633445903675865",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GFS",
+          "mentionCount": 2,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 1,
+          "lastMentionAt": "Thu Jun 25 16:15:27 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "bullish",
+              "summary": "提到 GFS, JBL, NVDA, POET, SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070179074048409662",
+              "postId": "2070179074048409662",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 GFS, INTC, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069188398825566318",
+              "postId": "2069188398825566318",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "IREN",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 1,
+          "stanceScore": -1,
+          "lastMentionAt": "Thu Jul 02 09:16:50 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 IREN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072610437817078056",
+              "postId": "2072610437817078056",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 IREN, NBIS；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069214132415652048",
+              "postId": "2069214132415652048",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "XFAB",
+          "mentionCount": 2,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 1,
+          "lastMentionAt": "Tue Jun 23 14:39:35 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 XFAB；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069430169300070612",
+              "postId": "2069430169300070612",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "bullish",
+              "summary": "提到 XFAB；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069373894398743000",
+              "postId": "2069373894398743000",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "AMZN",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jul 01 11:07:07 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-01",
+              "stance": "neutral",
+              "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+              "postId": "2072275805330362648",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 AMZN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069655980456149142",
+              "postId": "2069655980456149142",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "ASTS",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 29 10:43:13 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "neutral",
+              "summary": "提到 ASTS, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071545016007467486",
+              "postId": "2071545016007467486",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "CBRS",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 30 14:17:18 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 CBRS, RDDT；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071961279380791729",
+              "postId": "2071961279380791729",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-27",
+              "stance": "neutral",
+              "summary": "提到 CBRS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070754658868687086",
+              "postId": "2070754658868687086",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "COHR",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 21:30:57 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+              "postId": "2072795186263187831",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-21",
+              "stance": "neutral",
+              "summary": "提到 AAOI, COHR, LITE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2068603148311404902",
+              "postId": "2068603148311404902",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SOI",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Fri Jun 26 03:51:47 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "neutral",
+              "summary": "提到 RKLB, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070354308965728519",
+              "postId": "2070354308965728519",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, SOI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069967746377662587",
+              "postId": "2069967746377662587",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSLA",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 17:57:47 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+              "postId": "2072741541404406008",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-30",
+              "stance": "neutral",
+              "summary": "提到 TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071977219002613768",
+              "postId": "2071977219002613768",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TSM",
+          "mentionCount": 2,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 2,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 14:08:54 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 INTC, MU, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069422448345518346",
+              "postId": "2069422448345518346",
+              "metrics": null
+            },
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 NVDA, TSM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069399639154213281",
+              "postId": "2069399639154213281",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "ALAB",
+          "mentionCount": 1,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 0,
+          "stanceScore": 1,
+          "lastMentionAt": "Tue Jun 23 02:27:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "bullish",
+              "summary": "提到 ALAB, MRVL；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069246038935065076",
+              "postId": "2069246038935065076",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "AOSL",
+          "mentionCount": 1,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 0,
+          "stanceScore": 1,
+          "lastMentionAt": "Fri Jun 26 00:34:45 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "bullish",
+              "summary": "提到 AOSL, POWI；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070304723262210194",
+              "postId": "2070304723262210194",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "EWY",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Tue Jun 23 04:10:58 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 EWY, KOSPI；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069271973402931511",
+              "postId": "2069271973402931511",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "GM",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Mon Jun 29 09:54:58 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-29",
+              "stance": "bearish",
+              "summary": "提到 GM, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071532870859149617",
+              "postId": "2071532870859149617",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "KOSPI",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Tue Jun 23 04:10:58 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "bearish",
+              "summary": "提到 EWY, KOSPI；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069271973402931511",
+              "postId": "2069271973402931511",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "POWI",
+          "mentionCount": 1,
+          "bullishCount": 1,
+          "bearishCount": 0,
+          "neutralCount": 0,
+          "stanceScore": 1,
+          "lastMentionAt": "Fri Jun 26 00:34:45 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-26",
+              "stance": "bullish",
+              "summary": "提到 AOSL, POWI；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070304723262210194",
+              "postId": "2070304723262210194",
+              "metrics": null
+            }
+          ],
+          "stance": "bullish"
+        },
+        {
+          "symbol": "UBER",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 1,
+          "neutralCount": 0,
+          "stanceScore": -1,
+          "lastMentionAt": "Wed Jun 24 13:53:11 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "bearish",
+              "summary": "提到 INTC, UBER；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069780882018459851",
+              "postId": "2069780882018459851",
+              "metrics": null
+            }
+          ],
+          "stance": "bearish"
+        },
+        {
+          "symbol": "300394",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jun 24 06:52:41 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "AEHR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "BABA",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 00:20:02 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 BABA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069938631817699588",
+              "postId": "2069938631817699588",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "CRM",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 14:51:04 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "DRAM",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "FLNC",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "GLW",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "IQE",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "KORU",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "LPK",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Mon Jun 22 10:33:46 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-22",
+              "stance": "neutral",
+              "summary": "提到 LPK；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069005921318281566",
+              "postId": "2069005921318281566",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "MXL",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Wed Jun 24 06:52:41 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-24",
+              "stance": "neutral",
+              "summary": "提到 300394, JBL, MRVL, MXL, SIVE, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069675057300082728",
+              "postId": "2069675057300082728",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "PLTR",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jun 25 14:51:04 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-25",
+              "stance": "neutral",
+              "summary": "提到 ASTS, AXTI, CRM, MU, PLTR, RKLB, SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2070157835137434015",
+              "postId": "2070157835137434015",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SHA0",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Sun Jun 28 09:32:04 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-28",
+              "stance": "neutral",
+              "summary": "提到 SHA0；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2071164721299112316",
+              "postId": "2071164721299112316",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SIVEF",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "SOXL",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Tue Jun 23 15:42:09 +0000 2026",
+          "history": [
+            {
+              "date": "2026-06-23",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AXTI, DRAM, FLNC, IQE, KORU, LITE, MRVL, MU, SIVE, SNDK, SOXL, TSEM；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2069445918114697463",
+              "postId": "2069445918114697463",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        },
+        {
+          "symbol": "TER",
+          "mentionCount": 1,
+          "bullishCount": 0,
+          "bearishCount": 0,
+          "neutralCount": 1,
+          "stanceScore": 0,
+          "lastMentionAt": "Thu Jul 02 19:12:55 +0000 2026",
+          "history": [
+            {
+              "date": "2026-07-02",
+              "stance": "neutral",
+              "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。",
+              "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+              "postId": "2072760446617280650",
+              "metrics": null
+            }
+          ],
+          "stance": "neutral"
+        }
+      ]
+    }
+  },
+  "recentPosts": [
+    {
+      "id": "2072795186263187831",
+      "createdAt": "Thu Jul 02 21:30:57 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072795186263187831",
+      "symbols": [
+        "AXTI",
+        "COHR"
+      ],
+      "stance": "neutral",
+      "summary": "提到 AXTI, COHR；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072781715916169660",
+      "createdAt": "Thu Jul 02 20:37:26 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072781715916169660",
+      "symbols": [
+        "MRVL"
+      ],
+      "stance": "neutral",
+      "summary": "提到 MRVL；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072765527764971642",
+      "createdAt": "Thu Jul 02 19:33:06 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072765527764971642",
+      "symbols": [
+        "CCXI"
+      ],
+      "stance": "neutral",
+      "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072760446617280650",
+      "createdAt": "Thu Jul 02 19:12:55 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072760446617280650",
+      "symbols": [
+        "AAOI",
+        "AEHR",
+        "GLW",
+        "META",
+        "MRVL",
+        "SIVEF",
+        "SNDK",
+        "TER"
+      ],
+      "stance": "neutral",
+      "summary": "提到 AAOI, AEHR, GLW, META, MRVL, SIVEF, SNDK, TER；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072741541404406008",
+      "createdAt": "Thu Jul 02 17:57:47 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072741541404406008",
+      "symbols": [
+        "CCXI",
+        "TSLA"
+      ],
+      "stance": "neutral",
+      "summary": "提到 CCXI, TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072726120706007465",
+      "createdAt": "Thu Jul 02 16:56:31 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072726120706007465",
+      "symbols": [
+        "LITE",
+        "NVDA",
+        "POET"
+      ],
+      "stance": "neutral",
+      "summary": "提到 LITE, NVDA, POET；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072610437817078056",
+      "createdAt": "Thu Jul 02 09:16:50 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072610437817078056",
+      "symbols": [
+        "IREN"
+      ],
+      "stance": "neutral",
+      "summary": "提到 IREN；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072574465763111166",
+      "createdAt": "Thu Jul 02 06:53:53 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072574465763111166",
+      "symbols": [
+        "META"
+      ],
+      "stance": "bearish",
+      "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072570681586553112",
+      "createdAt": "Thu Jul 02 06:38:51 +0000 2026",
+      "date": "2026-07-02",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072570681586553112",
+      "symbols": [
+        "INTC"
+      ],
+      "stance": "neutral",
+      "summary": "提到 INTC；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072367082248040621",
+      "createdAt": "Wed Jul 01 17:09:49 +0000 2026",
+      "date": "2026-07-01",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072367082248040621",
+      "symbols": [
+        "CCXI"
+      ],
+      "stance": "neutral",
+      "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072314906729455876",
+      "createdAt": "Wed Jul 01 13:42:30 +0000 2026",
+      "date": "2026-07-01",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072314906729455876",
+      "symbols": [
+        "GOOGL",
+        "META"
+      ],
+      "stance": "bearish",
+      "summary": "提到 GOOGL, META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072307910223532245",
+      "createdAt": "Wed Jul 01 13:14:42 +0000 2026",
+      "date": "2026-07-01",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072307910223532245",
+      "symbols": [
+        "NBIS"
+      ],
+      "stance": "neutral",
+      "summary": "提到 NBIS；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072301677211009426",
+      "createdAt": "Wed Jul 01 12:49:56 +0000 2026",
+      "date": "2026-07-01",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072301677211009426",
+      "symbols": [
+        "META"
+      ],
+      "stance": "bearish",
+      "summary": "提到 META；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072275805330362648",
+      "createdAt": "Wed Jul 01 11:07:07 +0000 2026",
+      "date": "2026-07-01",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072275805330362648",
+      "symbols": [
+        "AMZN",
+        "CCXI",
+        "GOOGL",
+        "NVDA"
+      ],
+      "stance": "neutral",
+      "summary": "提到 AMZN, CCXI, GOOGL, NVDA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072219315760488615",
+      "createdAt": "Wed Jul 01 07:22:39 +0000 2026",
+      "date": "2026-07-01",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072219315760488615",
+      "symbols": [
+        "SIVE"
+      ],
+      "stance": "bearish",
+      "summary": "提到 SIVE；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072152226169331776",
+      "createdAt": "Wed Jul 01 02:56:04 +0000 2026",
+      "date": "2026-07-01",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072152226169331776",
+      "symbols": [
+        "SIVE"
+      ],
+      "stance": "bullish",
+      "summary": "提到 SIVE；系統依關鍵字暫判為多頭，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2072007692684837039",
+      "createdAt": "Tue Jun 30 17:21:44 +0000 2026",
+      "date": "2026-06-30",
+      "postUrl": "https://x.com/aleabitoreddit/status/2072007692684837039",
+      "symbols": [
+        "SIVE"
+      ],
+      "stance": "neutral",
+      "summary": "提到 SIVE；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2071995924172394695",
+      "createdAt": "Tue Jun 30 16:34:58 +0000 2026",
+      "date": "2026-06-30",
+      "postUrl": "https://x.com/aleabitoreddit/status/2071995924172394695",
+      "symbols": [
+        "CCXI"
+      ],
+      "stance": "neutral",
+      "summary": "提到 CCXI；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2071977219002613768",
+      "createdAt": "Tue Jun 30 15:20:39 +0000 2026",
+      "date": "2026-06-30",
+      "postUrl": "https://x.com/aleabitoreddit/status/2071977219002613768",
+      "symbols": [
+        "TSLA"
+      ],
+      "stance": "neutral",
+      "summary": "提到 TSLA；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2071961279380791729",
+      "createdAt": "Tue Jun 30 14:17:18 +0000 2026",
+      "date": "2026-06-30",
+      "postUrl": "https://x.com/aleabitoreddit/status/2071961279380791729",
+      "symbols": [
+        "CBRS",
+        "RDDT"
+      ],
+      "stance": "neutral",
+      "summary": "提到 CBRS, RDDT；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2071903552608362500",
+      "createdAt": "Tue Jun 30 10:27:55 +0000 2026",
+      "date": "2026-06-30",
+      "postUrl": "https://x.com/aleabitoreddit/status/2071903552608362500",
+      "symbols": [
+        "GOOGL",
+        "META"
+      ],
+      "stance": "neutral",
+      "summary": "提到 GOOGL, META；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2071545016007467486",
+      "createdAt": "Mon Jun 29 10:43:13 +0000 2026",
+      "date": "2026-06-29",
+      "postUrl": "https://x.com/aleabitoreddit/status/2071545016007467486",
+      "symbols": [
+        "ASTS",
+        "SPCX"
+      ],
+      "stance": "neutral",
+      "summary": "提到 ASTS, SPCX；系統依關鍵字暫判為中立，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2071532870859149617",
+      "createdAt": "Mon Jun 29 09:54:58 +0000 2026",
+      "date": "2026-06-29",
+      "postUrl": "https://x.com/aleabitoreddit/status/2071532870859149617",
+      "symbols": [
+        "GM",
+        "NVDA"
+      ],
+      "stance": "bearish",
+      "summary": "提到 GM, NVDA；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。"
+    },
+    {
+      "id": "2071488272245944399",
+      "createdAt": "Mon Jun 29 06:57:45 +0000 2026",
+      "date": "2026-06-29",
+      "postUrl": "https://x.com/aleabitoreddit/status/2071488272245944399",
+      "symbols": [
+        "LITE",
+        "POET"
+      ],
+      "stance": "bearish",
+      "summary": "提到 LITE, POET；系統依關鍵字暫判為空頭，請點原文核對完整脈絡。"
+    }
+  ],
+  "performanceRows": [
+    {
+      "symbol": "009150",
+      "company": "Samsung Electromechanics",
+      "exchange": "KRX",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 329000,
+      "currency": "KRW",
+      "currentPrice": 1900000,
+      "currentCurrency": "KRW",
+      "returnSinceMention": 477.50759878419456,
+      "quoteSource": "Yahoo Finance",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "011790",
+      "company": "SKC",
+      "exchange": "KRX",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 142300,
+      "currency": "KRW",
+      "currentPrice": 98000,
+      "currentCurrency": "KRW",
+      "returnSinceMention": -31.131412508784255,
+      "quoteSource": "Yahoo Finance",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "688017",
+      "company": "LeaderDrive",
+      "exchange": "SSE",
+      "mentionDate": "2026-06-05",
+      "mentionPrice": 362.43,
+      "currency": "CNY",
+      "currentPrice": 465.37,
+      "currentCurrency": "CNY",
+      "returnSinceMention": 28.402726043649807,
+      "quoteSource": "Yahoo Finance",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "AAOI",
+      "company": "Applied Optoelectronics",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-05",
+      "mentionPrice": 177,
+      "currency": "USD",
+      "currentPrice": 120.95,
+      "currentCurrency": "USD",
+      "returnSinceMention": -31.666666666666664,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "ALAB",
+      "company": "Astera Labs",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-12",
+      "mentionPrice": 372,
+      "currency": "USD",
+      "currentPrice": 406.42,
+      "currentCurrency": "USD",
+      "returnSinceMention": 9.252688172043015,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "AMAT",
+      "company": "Applied Materials",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 453.01,
+      "currency": "USD",
+      "currentPrice": 603.04,
+      "currentCurrency": "USD",
+      "returnSinceMention": 33.118474205867415,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "AMD",
+      "company": "Advanced Micro Devices",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 466.38,
+      "currency": "USD",
+      "currentPrice": 517.82,
+      "currentCurrency": "USD",
+      "returnSinceMention": 11.029632488528678,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "ASX",
+      "company": "ASE Technology",
+      "exchange": "NYSE",
+      "mentionDate": "2026-06-06",
+      "mentionPrice": 34.03,
+      "currency": "USD",
+      "currentPrice": 41.87,
+      "currentCurrency": "USD",
+      "returnSinceMention": 23.0384954451954,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "AVGO",
+      "company": "Broadcom",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 385.73,
+      "currency": "USD",
+      "currentPrice": 360.45,
+      "currentCurrency": "USD",
+      "returnSinceMention": -6.553807067119495,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "AXTI",
+      "company": "AXT Inc",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 89.04,
+      "currency": "USD",
+      "currentPrice": 56.62,
+      "currentCurrency": "USD",
+      "returnSinceMention": -36.41060197663972,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "INTC",
+      "company": "Intel",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 99.17,
+      "currency": "USD",
+      "currentPrice": 120.35,
+      "currentCurrency": "USD",
+      "returnSinceMention": 21.35726530200665,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "IQE",
+      "company": "IQE plc",
+      "exchange": "LSE",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 45,
+      "currency": "GBp",
+      "currentPrice": 42,
+      "currentCurrency": "GBp",
+      "returnSinceMention": -6.666666666666667,
+      "quoteSource": "Yahoo Finance",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "LITE",
+      "company": "Lumentum",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-09",
+      "mentionPrice": 821.76,
+      "currency": "USD",
+      "currentPrice": 728.32,
+      "currentCurrency": "USD",
+      "returnSinceMention": -11.370716510903419,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "MRVL",
+      "company": "Marvell Technology",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-06",
+      "mentionPrice": 263.47,
+      "currency": "USD",
+      "currentPrice": 245.29,
+      "currentCurrency": "USD",
+      "returnSinceMention": -6.900216343416721,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "MU",
+      "company": "Micron Technology",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-05",
+      "mentionPrice": 864.01,
+      "currency": "USD",
+      "currentPrice": 975.56,
+      "currentCurrency": "USD",
+      "returnSinceMention": 12.91073019988194,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "NBIS",
+      "company": "Nebius Group",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-07",
+      "mentionPrice": 227.81,
+      "currency": "USD",
+      "currentPrice": 215.62,
+      "currentCurrency": "USD",
+      "returnSinceMention": -5.350950353364644,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "NVDA",
+      "company": "NVIDIA",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-05",
+      "mentionPrice": 205.1,
+      "currency": "USD",
+      "currentPrice": 194.83,
+      "currentCurrency": "USD",
+      "returnSinceMention": -5.007313505607012,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "PL",
+      "company": "Planet Labs",
+      "exchange": "NYSE",
+      "mentionDate": "2026-06-05",
+      "mentionPrice": 32.22,
+      "currency": "USD",
+      "currentPrice": 31.38,
+      "currentCurrency": "USD",
+      "returnSinceMention": -2.6070763500931093,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "RDDT",
+      "company": "Reddit",
+      "exchange": "NYSE",
+      "mentionDate": "2026-06-04",
+      "mentionPrice": 183.91,
+      "currency": "USD",
+      "currentPrice": 194.67,
+      "currentCurrency": "USD",
+      "returnSinceMention": 5.8506878364417325,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "RKLB",
+      "company": "Rocket Lab USA",
+      "exchange": "NYSE",
+      "mentionDate": "2026-06-12",
+      "mentionPrice": 110.08,
+      "currency": "USD",
+      "currentPrice": 100.46,
+      "currentCurrency": "USD",
+      "returnSinceMention": -8.739098837209307,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "RPI",
+      "company": "Raspberry Pi Holdings",
+      "exchange": "LSE",
+      "mentionDate": "2026-06-05",
+      "mentionPrice": 283,
+      "currency": "GBp",
+      "currentPrice": 865,
+      "currentCurrency": "GBp",
+      "returnSinceMention": 205.6537102473498,
+      "quoteSource": "Yahoo Finance",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "SIVE",
+      "company": "Sivers Semiconductors",
+      "exchange": "OMX Stockholm",
+      "mentionDate": "2026-06-04",
+      "mentionPrice": 86.75,
+      "currency": "SEK",
+      "currentPrice": 49,
+      "currentCurrency": "SEK",
+      "returnSinceMention": -43.51585014409222,
+      "quoteSource": "Yahoo Finance",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "SNDK",
+      "company": "SanDisk",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-10",
+      "mentionPrice": 1643.23,
+      "currency": "USD",
+      "currentPrice": 1745,
+      "currentCurrency": "USD",
+      "returnSinceMention": 6.1932900446072665,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "TSEM",
+      "company": "Tower Semiconductor",
+      "exchange": "NASDAQ",
+      "mentionDate": "2026-06-06",
+      "mentionPrice": 235.48,
+      "currency": "USD",
+      "currentPrice": 219.05,
+      "currentCurrency": "USD",
+      "returnSinceMention": -6.977237981994215,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "TSM",
+      "company": "TSMC",
+      "exchange": "NYSE",
+      "mentionDate": "2026-06-05",
+      "mentionPrice": 415.17,
+      "currency": "USD",
+      "currentPrice": 434.16,
+      "currentCurrency": "USD",
+      "returnSinceMention": 4.574029915456322,
+      "quoteSource": "Finnhub",
+      "quoteUpdatedAt": null
+    },
+    {
+      "symbol": "XFAB",
+      "company": "X-FAB Silicon Foundries",
+      "exchange": "Euronext Paris",
+      "mentionDate": "2026-06-06",
+      "mentionPrice": 10.26,
+      "currency": "EUR",
+      "currentPrice": 7.215,
+      "currentCurrency": "EUR",
+      "returnSinceMention": -29.678362573099413,
+      "quoteSource": "Yahoo Finance",
+      "quoteUpdatedAt": null
+    }
+  ]
+}

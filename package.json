@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "data:update": "node scripts/update-data.mjs",
+    "serenity:update": "node scripts/fetch-serenity-radar.mjs",
     "line:richmenu:image": "powershell -ExecutionPolicy Bypass -File scripts/generate-line-rich-menu-image.ps1",
     "line:richmenu:setup": "node scripts/setup-line-rich-menu.mjs",
     "line:webhook:check": "node --check line-bot/worker.mjs",

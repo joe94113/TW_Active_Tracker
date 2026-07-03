@@ -135,6 +135,13 @@ secondaryNavigationItems.push({
   description: '整理勝率高的券商分點最近偏多、偏空與推薦台股，直接看分點資金最近卡位了哪些股票。',
 });
 
+secondaryNavigationItems.push({
+  label: 'Serenity 觀點雷達',
+  path: '/serenity-radar',
+  tag: '美股 AI',
+  description: '追蹤 Serenity 公開貼文提及的 AI 與半導體供應鏈美股，整理多頭、空頭與中立觀點變化。',
+});
+
 const allNavigationItems = [...primaryNavigationItems, ...secondaryNavigationItems];
 
 function formatGeneratedAt(value) {
