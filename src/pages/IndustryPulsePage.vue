@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import StatusCard from '../components/StatusCard.vue';
 import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
+import IndustryTreemapChart from '../components/IndustryTreemapChart.vue';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import { buildIndustryPulse } from '../lib/industryPulse';
@@ -40,6 +41,60 @@ const heroCards = computed(() => [
   },
 ]);
 
+const heatmapTiles = computed(() => {
+  const maxTradeValue = Math.max(...pulse.value.topIndustries.map((industry) => Number(industry.totalTradeValue ?? 0)), 1);
+
+  return pulse.value.topIndustries.slice(0, 12).map((industry, index) => {
+    const tradeWeight = Number(industry.totalTradeValue ?? 0) / maxTradeValue;
+    const span =
+      index <= 1 || tradeWeight >= 0.72
+        ? 'is-large'
+        : index <= 5 || tradeWeight >= 0.38
+          ? 'is-medium'
+          : 'is-small';
+    const breadthPercent = industry.stockCount
+      ? ((industry.advancingCount ?? 0) / industry.stockCount) * 100
+      : 0;
+
+    return {
+      ...industry,
+      rank: index + 1,
+      span,
+      breadthPercent,
+      tone: getHeatmapTone(industry.avgChangePercent, industry.heatScore),
+    };
+  });
+});
+
+const heatmapSummaryCards = computed(() => {
+  const strongest = heatmapTiles.value[0] ?? null;
+  const broadest =
+    [...heatmapTiles.value].sort((left, right) => (right.breadthPercent ?? 0) - (left.breadthPercent ?? 0))[0] ?? null;
+  const moneyLeader =
+    [...heatmapTiles.value].sort((left, right) => (right.totalTradeValue ?? 0) - (left.totalTradeValue ?? 0))[0] ?? null;
+
+  return [
+    {
+      label: '強度主線',
+      value: strongest?.industryName ?? '等待資料',
+      note: strongest ? `平均漲跌 ${formatPercent(strongest.avgChangePercent)} / 強度 ${formatHeatScore(strongest.heatScore)}` : '產業強度整理中',
+      tone: strongest?.tone ?? 'info',
+    },
+    {
+      label: '廣度最佳',
+      value: broadest?.industryName ?? '等待資料',
+      note: broadest ? `上漲占比 ${formatPercent(broadest.breadthPercent, 0)}` : '產業廣度整理中',
+      tone: broadest?.tone ?? 'info',
+    },
+    {
+      label: '成交聚焦',
+      value: moneyLeader?.industryName ?? '等待資料',
+      note: moneyLeader ? `成交值 ${formatAmount(moneyLeader.totalTradeValue)}` : '成交值整理中',
+      tone: moneyLeader?.tone ?? 'info',
+    },
+  ];
+});
+
 const pageSeo = computed(() => ({
   title: '產業即時動向 / 瞬間波動',
   description: '快速看今天哪些產業升溫、哪些股票突然放量波動，幫你找隔日優先觀察方向。',
@@ -57,6 +112,17 @@ function getToneClass(value) {
   if ((value ?? 0) > 0) return 'text-up';
   if ((value ?? 0) < 0) return 'text-down';
   return '';
+}
+
+function getHeatmapTone(changePercent, heatScore) {
+  if ((changePercent ?? 0) > 0.35 || (heatScore ?? 0) >= 38) return 'up';
+  if ((changePercent ?? 0) < -0.35 || (heatScore ?? 0) <= 12) return 'down';
+  return 'info';
+}
+
+function formatHeatScore(value) {
+  const score = Number(value);
+  return Number.isFinite(score) ? formatNumber(Math.round(score)) : '-';
 }
 
 function setPulseTab(tab) {
@@ -77,7 +143,7 @@ function setPulseTab(tab) {
       <section class="page-hero compact radar-page-hero industry-pulse-hero">
         <div class="hero-copy">
           <span class="hero-kicker">Industry Pulse</span>
-          <h1>產業即時動向 / 瞬間波動</h1>
+          <h1><span>產業即時動向 /</span><span> 瞬間波動</span></h1>
           <p class="page-subtitle">
             先看今天資金集中在哪些產業，再看哪些股票突然放量或波動加大，幫你把隔日優先觀察方向先排出來。
           </p>
@@ -106,6 +172,31 @@ function setPulseTab(tab) {
             />
           </article>
         </aside>
+      </section>
+
+      <section class="panel industry-heatmap-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">市場產業熱力圖</h2>
+            <p class="panel-subtitle">用平均漲跌、上漲家數占比與成交值權重，把今天資金最集中的產業放大呈現。</p>
+          </div>
+          <span class="meta-chip">{{ formatNumber(heatmapTiles.length, 0) }} 個產業</span>
+        </div>
+
+        <div class="industry-heatmap-summary">
+          <article
+            v-for="card in heatmapSummaryCards"
+            :key="card.label"
+            class="industry-heatmap-summary-card"
+            :class="`is-${card.tone}`"
+          >
+            <span>{{ card.label }}</span>
+            <strong>{{ card.value }}</strong>
+            <p>{{ card.note }}</p>
+          </article>
+        </div>
+
+        <IndustryTreemapChart :industries="heatmapTiles" />
       </section>
 
       <section class="panel market-tabs-panel industry-pulse-main-panel">

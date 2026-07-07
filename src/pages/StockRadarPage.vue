@@ -139,6 +139,32 @@ const activeStockSection = computed(
   () => stockSections.value.find((section) => section.key === activeRadarTab.value) ?? stockSections.value[0] ?? null,
 );
 
+const radarDecisionCards = computed(() =>
+  stockSections.value
+    .filter((section) => ['technical', 'institutional', 'squeeze', 'risk'].includes(section.key))
+    .map((section) => {
+      const firstStock = section.items[0] ?? null;
+      const primaryMetric =
+        section.key === 'institutional'
+          ? `法人 ${formatLots(firstStock?.total5Day ?? firstStock?.foreign5Day)}`
+          : section.key === 'risk'
+            ? (firstStock ? getRiskBadge(firstStock) ?? '風險提醒' : '暫無風險')
+            : formatPercent(firstStock?.return20);
+
+      return {
+        key: section.key,
+        label: section.title,
+        count: `${formatNumber(section.items.length, 0)} 檔`,
+        title: firstStock ? `${firstStock.code} ${firstStock.name}` : section.emptyMessage,
+        metric: firstStock ? primaryMetric : '暫無名單',
+        note: firstStock?.note ?? section.description,
+        tone: section.key === 'risk' ? 'risk' : getStockCardTone(section.key, firstStock ?? {}),
+        route: firstStock ? createStockRoute(firstStock.code) : null,
+        anchor: `#${getSectionAnchor(section.key)}`,
+      };
+    }),
+);
+
 const pageSeo = computed(() => ({
   title: '選股雷達',
   description: '把技術突破、籌碼偏多、整理待發、估值支撐與題材輪動整理成同一頁，並加入每日選股回放，方便檢驗哪套規則最有效。',
@@ -332,6 +358,26 @@ function getReplayMetricClass(value) {
             </article>
           </div>
         </aside>
+      </section>
+
+      <section class="radar-decision-strip" aria-label="選股雷達決策摘要">
+        <component
+          :is="card.route ? RouterLink : 'a'"
+          v-for="card in radarDecisionCards"
+          :key="card.key"
+          class="decision-card"
+          :class="`is-${card.tone}`"
+          :to="card.route ?? undefined"
+          :href="card.route ? undefined : card.anchor"
+        >
+          <div class="decision-card-head">
+            <span>{{ card.label }}</span>
+            <small>{{ card.count }}</small>
+          </div>
+          <strong>{{ card.title }}</strong>
+          <p class="decision-card-metric">{{ card.metric }}</p>
+          <p>{{ card.note }}</p>
+        </component>
       </section>
 
       <section class="panel radar-tab-panel">

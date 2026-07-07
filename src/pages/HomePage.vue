@@ -65,6 +65,7 @@ onBeforeUnmount(() => {
 
 const institutionalHighlights = computed(() => dashboard.value?.法人追蹤 ?? null);
 const activeEtfOverview = computed(() => dashboard.value?.主動ETF總覽 ?? null);
+const themeRadar = computed(() => dashboard.value?.題材雷達 ?? null);
 const marketSummary = computed(() => marketOverview.value?.大盤摘要 ?? {});
 const intradayPulse = computed(() => marketOverview.value?.盤中脈動 ?? {});
 const marketBreadth = computed(() => marketOverview.value?.市場廣度 ?? null);
@@ -379,6 +380,88 @@ const closeFocusCards = computed(() => [
   },
 ]);
 
+function getEtfChangeCount(item) {
+  return (
+    item?.changeSummary?.totalChangeCount ??
+    (item?.changeSummary?.addedCount ?? 0) +
+      (item?.changeSummary?.removedCount ?? 0) +
+      (item?.changeSummary?.increasedCount ?? 0) +
+      (item?.changeSummary?.decreasedCount ?? 0)
+  );
+}
+
+const topThemeCards = computed(() =>
+  (themeRadar.value?.topics ?? [])
+    .slice()
+    .sort((left, right) => (right.score ?? 0) - (left.score ?? 0))
+    .slice(0, 4)
+    .map((topic, index) => {
+      const leader = topic.leaderStocks?.[0] ?? null;
+
+      return {
+        ...topic,
+        rank: index + 1,
+        leader,
+        route: '/themes',
+        metric: `${formatNumber(topic.score, 0)} 分`,
+        meta: `新聞 ${formatNumber(topic.newsCount, 0)} / 法人 ${formatNumber(topic.institutionalCount, 0)} / ETF ${formatNumber(topic.etfCount, 0)}`,
+      };
+    }),
+);
+
+const highlightedEtf = computed(() =>
+  etfOverviewList.value
+    .filter((item) => item.detailAvailability === 'full')
+    .slice()
+    .sort((left, right) => getEtfChangeCount(right) - getEtfChangeCount(left))
+    .at(0) ?? null,
+);
+
+const taskEntryCards = computed(() => [
+  {
+    title: '選股雷達',
+    subtitle: '量價、籌碼與事件訊號一起看',
+    metric: `${formatNumber(strongStocks.value.length, 0)} 檔強勢股`,
+    route: '/radar',
+    tone: 'up',
+  },
+  {
+    title: '題材資金',
+    subtitle: '找正在被新聞與法人推動的族群',
+    metric: `${formatNumber(topThemeCards.value.length, 0)} 個熱題材`,
+    route: '/themes',
+    tone: 'info',
+  },
+  {
+    title: '處置股雷達',
+    subtitle: '看主力在處置前後是吃貨還是倒貨',
+    metric: '籌碼對照',
+    route: '/disposition-radar',
+    tone: 'warning',
+  },
+  {
+    title: '主動式 ETF',
+    subtitle: '追蹤新掛牌與每日成分股變動',
+    metric: `${manifest.value?.connectedCount ?? 0} / ${manifest.value?.trackedEtfs?.length ?? 0} 檔`,
+    route: '/etfs',
+    tone: 'neutral',
+  },
+  {
+    title: 'Serenity 觀點',
+    subtitle: '美股 AI / 半導體供應鏈脈絡',
+    metric: '外部觀點',
+    route: '/serenity-radar',
+    tone: 'purple',
+  },
+  {
+    title: '條件篩選器',
+    subtitle: '用自訂條件掃出候選清單',
+    metric: '進階篩選',
+    route: '/scanner',
+    tone: 'neutral',
+  },
+]);
+
 const dualInstitutionalBuys = computed(() => {
   const sameDayBuys = institutionalHighlights.value?.['雙法人同買超'] ?? [];
   if (sameDayBuys.length) {
@@ -435,6 +518,74 @@ const dualInstitutionalBuys = computed(() => {
     .slice(0, 8);
 });
 
+const leadingStrongStock = computed(() => liveStrongStocks.value[0] ?? liveHotStocks.value[0] ?? null);
+const leadingInstitutionalStock = computed(
+  () =>
+    dualInstitutionalBuys.value[0] ??
+    (institutionalHighlights.value?.外資連買 ?? [])[0] ??
+    (institutionalHighlights.value?.投信連買 ?? [])[0] ??
+    null,
+);
+
+const todayFocusCards = computed(() => {
+  const indexChange = Number(marketSummary.value.漲跌幅 ?? 0);
+  const topStock = leadingStrongStock.value;
+  const topTheme = topThemeCards.value[0];
+  const topEtf = highlightedEtf.value;
+  const institutionalStock = leadingInstitutionalStock.value;
+
+  return [
+    {
+      key: 'market',
+      label: '盤勢方向',
+      title: indexChange > 0 ? '多方掌握節奏' : indexChange < 0 ? '先控風險節奏' : '盤勢等待表態',
+      value: formatPercent(indexChange),
+      meta: `加權 ${formatNumber(marketSummary.value.加權指數)}`,
+      note: marketOverview.value?.觀察摘要?.[0] ?? '大盤摘要同步中',
+      tone: indexChange > 0 ? 'up' : indexChange < 0 ? 'down' : 'neutral',
+      href: '#market-context',
+      actionLabel: '看大盤',
+    },
+    {
+      key: 'stock',
+      label: '個股火線',
+      title: topStock ? `${topStock.代號} ${topStock.名稱}` : '強勢股整理中',
+      value: formatPercent(topStock?.漲跌幅),
+      meta: topStock ? `成交值 ${formatAmount(topStock.成交值)}` : '等待行情同步',
+      note: topStock ? '先看量價是否延續，再回個股頁補籌碼與技術面。' : '尚未取得強勢股榜單',
+      tone: (topStock?.漲跌幅 ?? 0) > 0 ? 'up' : (topStock?.漲跌幅 ?? 0) < 0 ? 'down' : 'neutral',
+      route: topStock?.代號 ? createStockRoute(topStock.代號) : '/radar',
+      actionLabel: '看個股',
+    },
+    {
+      key: 'theme',
+      label: '題材火線',
+      title: topTheme?.title ?? '題材資料整理中',
+      value: topTheme?.metric ?? '等待同步',
+      meta: topTheme?.meta ?? '新聞 / 法人 / ETF',
+      note: topTheme?.observation ?? '用題材雷達確認資金是否集中在同一條產業鏈。',
+      tone: topTheme?.tone ?? 'info',
+      route: '/themes',
+      actionLabel: '看題材',
+    },
+    {
+      key: 'flow',
+      label: '資金換手',
+      title: topEtf ? `${topEtf.code} ${topEtf.name}` : institutionalStock ? `${institutionalStock.code ?? institutionalStock.代號} ${institutionalStock.name ?? institutionalStock.名稱}` : 'ETF / 法人整理中',
+      value: topEtf ? `變動 ${formatNumber(getEtfChangeCount(topEtf), 0)} 檔` : institutionalStock ? `連買 ${formatNumber(institutionalStock.foreignDays ?? institutionalStock.連買天數, 0)} 天` : '等待同步',
+      meta: topEtf ? `揭露 ${formatDate(topEtf.latestDate ?? manifest.value?.latestDisclosureDate)}` : '法人連買焦點',
+      note: topEtf ? '主動式 ETF 換股可以當作中期資金偏好的參考。' : '法人連買用來確認籌碼是否延續。',
+      tone: 'warning',
+      route: topEtf ? `/etfs/${topEtf.code}` : '/etfs',
+      actionLabel: topEtf ? '看 ETF' : '看法人',
+    },
+  ];
+});
+
+const primaryFocusCards = computed(() =>
+  todayFocusCards.value.filter((card) => ['market', 'stock', 'theme'].includes(card.key)),
+);
+
 function openStockDetail(code) {
   if (!isStockCode(code)) return;
   router.push(createStockRoute(code));
@@ -485,6 +636,58 @@ function formatViewedAt(dateText) {
     />
 
     <template v-if="dashboard">
+      <section class="home-command-center">
+        <div class="home-command-copy">
+          <p class="section-eyebrow">今日市場焦點</p>
+          <h1>先看資金在哪裡聚焦</h1>
+          <p>{{ marketObservationSubtitle }}</p>
+          <div class="home-command-meta">
+            <span>資料日 {{ formatDate(liveMarketDate ?? dashboard?.marketDate) }}</span>
+            <span v-if="marketLiveTimeLabel">即時更新 {{ marketLiveTimeLabel }}</span>
+          </div>
+          <div class="home-command-actions">
+            <RouterLink class="primary-action-button" to="/radar">打開選股雷達</RouterLink>
+            <RouterLink class="secondary-action-button" to="/industry-pulse">看產業熱力圖</RouterLink>
+          </div>
+        </div>
+
+        <div class="home-focus-board" aria-label="今日市場焦點卡">
+          <component
+            :is="card.route ? RouterLink : 'a'"
+            v-for="card in primaryFocusCards"
+            :key="card.key"
+            :to="card.route ?? undefined"
+            :href="card.href ?? undefined"
+            class="home-focus-card"
+            :class="`is-${card.tone}`"
+          >
+            <div class="home-focus-card-head">
+              <span>{{ card.label }}</span>
+              <small>{{ card.actionLabel }}</small>
+            </div>
+            <strong>{{ card.title }}</strong>
+            <div class="home-focus-value" :class="{ 'text-up': card.tone === 'up', 'text-down': card.tone === 'down' }">
+              {{ card.value }}
+            </div>
+            <p>{{ card.meta }}</p>
+          </component>
+        </div>
+      </section>
+
+      <section class="home-task-strip" aria-label="常用入口">
+        <span class="home-task-strip-label">常用入口</span>
+        <RouterLink
+          v-for="item in taskEntryCards"
+          :key="item.title"
+          class="home-task-chip"
+          :class="`is-${item.tone}`"
+          :to="item.route"
+        >
+          <strong>{{ item.title }}</strong>
+          <small>{{ item.metric }}</small>
+        </RouterLink>
+      </section>
+
       <section class="card-grid compact-summary-grid home-summary-grid items-stretch [grid-auto-rows:1fr]">
         <InfoCard
           v-for="item in primarySummaryCards"
@@ -514,6 +717,34 @@ function formatViewedAt(dateText) {
             />
           </div>
         </article>
+      </section>
+
+      <section v-if="topThemeCards.length" class="home-topic-radar-strip">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">今日題材雷達</h2>
+            <p class="panel-subtitle">只列前三個資金主線，細節留到題材頁看。</p>
+          </div>
+          <RouterLink class="action-link" to="/themes">查看題材頁</RouterLink>
+        </div>
+        <div class="home-topic-card-grid">
+          <RouterLink
+            v-for="topic in topThemeCards.slice(0, 3)"
+            :key="topic.slug"
+            class="home-topic-card"
+            :class="`is-${topic.tone}`"
+            to="/themes"
+          >
+            <div class="home-topic-card-head">
+              <span>#{{ topic.rank }}</span>
+              <strong>{{ topic.metric }}</strong>
+            </div>
+            <h3>{{ topic.title }}</h3>
+            <div class="home-topic-card-foot">
+              <span v-if="topic.leader">領頭 {{ topic.leader.code }} {{ topic.leader.name }}</span>
+            </div>
+          </RouterLink>
+        </div>
       </section>
 
       <section id="close-focus" class="panel home-panel rounded-[2rem] border border-slate-200/70 bg-white/90 shadow-[0_28px_88px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/76 dark:ring-slate-800/70">
@@ -687,7 +918,7 @@ function formatViewedAt(dateText) {
         title="加權指數盤勢圖表"
       />
 
-      <section class="triple-grid">
+      <section id="market-context" class="triple-grid">
         <article class="panel">
           <div class="panel-header">
             <div>

@@ -91,6 +91,61 @@ const scannerRows = computed(() =>
 const filteredRows = computed(() => filterScannerRows(scannerRows.value, filters).slice(0, 80));
 const hasUniverse = computed(() => universe.value.length > 0);
 
+const factorRankRows = computed(() =>
+  scannerRows.value.map((row) => ({
+    row,
+    profile: buildFactorProfile(row),
+  })),
+);
+
+const topFactorRows = computed(() =>
+  [...factorRankRows.value]
+    .filter((item) => item.profile.risk >= 45 && item.profile.liquidityOk)
+    .sort((left, right) => right.profile.total - left.profile.total)
+    .slice(0, 6),
+);
+
+const riskFactorRows = computed(() =>
+  [...factorRankRows.value]
+    .filter((item) => item.profile.risk < 58 || item.profile.warningLevel >= 2)
+    .sort((left, right) => right.profile.warningLevel - left.profile.warningLevel || right.profile.total - left.profile.total)
+    .slice(0, 4),
+);
+
+const weakFactorRows = computed(() =>
+  [...factorRankRows.value]
+    .filter((item) => item.profile.total < 58 || item.profile.trend < 45 || item.profile.flow < 42)
+    .sort((left, right) => left.profile.total - right.profile.total)
+    .slice(0, 4),
+);
+
+const factorSummaryCards = computed(() => [
+  {
+    label: '多因子高分',
+    value: formatNumber(topFactorRows.value.length),
+    note: topFactorRows.value[0] ? `${topFactorRows.value[0].row.code} ${topFactorRows.value[0].row.name}` : '等待候選',
+    tone: 'up',
+  },
+  {
+    label: '風險降權',
+    value: formatNumber(riskFactorRows.value.length),
+    note: riskFactorRows.value[0] ? `${riskFactorRows.value[0].row.code} ${riskFactorRows.value[0].row.name}` : '暫無明顯風險',
+    tone: 'warning',
+  },
+  {
+    label: '弱勢避開',
+    value: formatNumber(weakFactorRows.value.length),
+    note: weakFactorRows.value[0] ? `${weakFactorRows.value[0].row.code} ${weakFactorRows.value[0].row.name}` : '暫無弱勢名單',
+    tone: 'down',
+  },
+  {
+    label: '納入評分',
+    value: formatNumber(factorRankRows.value.length),
+    note: '趨勢 / 籌碼 / 品質 / 風控',
+    tone: 'info',
+  },
+]);
+
 const overviewCards = computed(() => [
   {
     title: '可掃描股票',
@@ -224,6 +279,162 @@ function getLiquidityLabel(row) {
   return '流動性不足';
 }
 
+function toFiniteNumber(value, fallback = 0) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : fallback;
+}
+
+function clampFactorScore(value) {
+  return Math.max(0, Math.min(100, Math.round(value)));
+}
+
+function scoreTradeValue(value) {
+  const tradeValue = toFiniteNumber(value, 0);
+  if (tradeValue >= 500000000) return 14;
+  if (tradeValue >= 100000000) return 10;
+  if (tradeValue >= 30000000) return 6;
+  if (tradeValue >= 10000000) return 2;
+  if (tradeValue >= 5000000) return -2;
+  return -8;
+}
+
+function scoreInstitutionalFlow(value) {
+  const lots = toFiniteNumber(value, 0) / 1000;
+  if (lots === 0) return 0;
+  const direction = lots > 0 ? 1 : -1;
+  const magnitude = Math.min(22, Math.log10(Math.abs(lots) + 1) * 6);
+  return direction * magnitude;
+}
+
+function buildFactorProfile(row) {
+  const return20 = toFiniteNumber(row.return20, 0);
+  const changePercent = toFiniteNumber(row.changePercent, 0);
+  const foreign5Day = toFiniteNumber(row.foreign5Day, 0);
+  const trust5Day = toFiniteNumber(row.investmentTrust5Day, 0);
+  const activeEtfCount = toFiniteNumber(row.activeEtfCount, 0);
+  const healthScore = toFiniteNumber(row.healthScore, 50);
+  const signalConfidence = toFiniteNumber(row.signalConfidence, 0);
+  const volumeQuality = toFiniteNumber(row.volumeQualityScore, 50);
+  const pePercentile = Number(row.pePercentile);
+  const industryRankPct = Number(row.industryRankPct);
+  const tradeValue = toFiniteNumber(row.avgTradeValue ?? row.dailyTradeValue, 0);
+  const warningCount = row.warnings?.length ?? 0;
+  const topSignalTone = row.topSignalTone ?? row.topPattern?.tone ?? 'normal';
+  const topWarningTone = row.warningTone ?? 'info';
+
+  const trend = clampFactorScore(
+    46 +
+      Math.max(Math.min(return20, 32), -28) * 0.72 +
+      Math.max(Math.min(changePercent, 9), -9) * 1.45 +
+      (row.maStackCrossedAbove240 ? 11 : row.maBullStack ? 7 : 0) +
+      (topSignalTone === 'up' ? 8 : topSignalTone === 'down' ? -8 : 0) +
+      (volumeQuality - 50) * 0.18,
+  );
+
+  const flow = clampFactorScore(
+    48 +
+      scoreInstitutionalFlow(foreign5Day + trust5Day) +
+      ((foreign5Day > 0 && trust5Day > 0) ? 9 : 0) +
+      activeEtfCount * 5 +
+      (row.isNextDayWatch ? 5 : 0) -
+      ((foreign5Day < 0 && trust5Day < 0) ? 8 : 0),
+  );
+
+  const valuationBonus = Number.isFinite(pePercentile)
+    ? pePercentile <= 30
+      ? 8
+      : pePercentile <= 45
+        ? 4
+        : pePercentile >= 85
+          ? -10
+          : 0
+    : -2;
+
+  const industryBonus = Number.isFinite(industryRankPct)
+    ? industryRankPct <= 25
+      ? 8
+      : industryRankPct <= 45
+        ? 4
+        : industryRankPct >= 80
+          ? -7
+          : 0
+    : 0;
+
+  const quality = clampFactorScore(
+    healthScore * 0.56 +
+      24 +
+      (row.monthlyRevenueDualGrowth ? 9 : 0) +
+      signalConfidence * 14 +
+      scoreTradeValue(tradeValue) +
+      valuationBonus +
+      industryBonus,
+  );
+
+  const overheatPenalty =
+    Math.max(return20 - 34, 0) * 0.45 +
+    Math.max(changePercent - 7, 0) * 1.2 +
+    (row.hasMarginSurge ? 13 : 0);
+
+  const risk = clampFactorScore(
+    92 -
+      warningCount * 10 -
+      (row.isRisk ? 28 : 0) -
+      (topWarningTone === 'risk' ? 12 : topWarningTone === 'warning' ? 7 : 0) -
+      overheatPenalty +
+      Math.min(scoreTradeValue(tradeValue), 8),
+  );
+
+  const total = clampFactorScore(trend * 0.32 + flow * 0.26 + quality * 0.24 + risk * 0.18);
+  const warningLevel = (row.isRisk ? 2 : 0) + warningCount + (row.hasMarginSurge ? 1 : 0) + (risk < 45 ? 2 : risk < 58 ? 1 : 0);
+  const liquidityOk = tradeValue >= 10000000;
+
+  const reasons = [
+    row.maStackCrossedAbove240 ? '剛站上 MA240' : row.maBullStack ? '均線多頭' : null,
+    foreign5Day > 0 && trust5Day > 0 ? '雙法人買超' : foreign5Day > 0 ? '外資買超' : trust5Day > 0 ? '投信買超' : null,
+    row.monthlyRevenueDualGrowth ? '月營收雙增' : null,
+    activeEtfCount > 0 ? `ETF ${formatNumber(activeEtfCount)} 檔持有` : null,
+    signalConfidence >= 0.6 ? '訊號可信度高' : null,
+    Number.isFinite(industryRankPct) && industryRankPct <= 35 ? '產業相對強勢' : null,
+  ].filter(Boolean);
+
+  const cautions = [
+    row.isRisk ? '注意 / 處置 / 變更交易' : null,
+    row.hasMarginSurge ? '融資偏熱' : null,
+    warningCount >= 2 ? '過熱警示偏多' : null,
+    tradeValue < 10000000 ? '流動性不足' : null,
+    return20 < -8 ? '20 日轉弱' : null,
+    flow < 42 ? '籌碼偏弱' : null,
+  ].filter(Boolean);
+
+  return {
+    total,
+    trend,
+    flow,
+    quality,
+    risk,
+    warningLevel,
+    liquidityOk,
+    reasons: reasons.slice(0, 3),
+    cautions: cautions.slice(0, 3),
+  };
+}
+
+function getFactorTone(profile) {
+  if (profile.risk < 45 || profile.warningLevel >= 3) return 'warning';
+  if (profile.total >= 72) return 'up';
+  if (profile.total >= 62) return 'normal';
+  return 'down';
+}
+
+function getFactorBars(profile) {
+  return [
+    { label: '趨勢', value: profile.trend },
+    { label: '籌碼', value: profile.flow },
+    { label: '品質', value: profile.quality },
+    { label: '風控', value: profile.risk },
+  ];
+}
+
 function buildReasonChips(row) {
   const chips = [];
 
@@ -282,6 +493,121 @@ function buildReasonChips(row) {
             variant="inline"
           />
         </aside>
+      </section>
+
+      <section class="panel scanner-factor-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">多因子強弱排行榜</h2>
+            <p class="panel-subtitle">把趨勢、籌碼、品質與風控合併排序，先看全市場最值得打開個股頁的候選，以及需要降權的弱勢名單。</p>
+          </div>
+          <span class="meta-chip">{{ formatNumber(factorRankRows.length) }} 檔</span>
+        </div>
+
+        <div class="scanner-factor-summary-grid">
+          <article
+            v-for="card in factorSummaryCards"
+            :key="card.label"
+            class="scanner-factor-summary-card"
+            :class="`is-${card.tone}`"
+          >
+            <span>{{ card.label }}</span>
+            <strong>{{ card.value }}</strong>
+            <p>{{ card.note }}</p>
+          </article>
+        </div>
+
+        <div class="scanner-factor-board">
+          <div class="scanner-factor-main">
+            <div class="scanner-factor-section-head">
+              <div>
+                <h3>高分候選</h3>
+                <p>分數同時看動能、法人、基本品質與風險扣分。</p>
+              </div>
+            </div>
+
+            <div class="scanner-factor-main-list">
+              <RouterLink
+                v-for="(item, index) in topFactorRows"
+                :key="`factor-top-${item.row.code}`"
+                class="scanner-factor-card"
+                :class="`is-${getFactorTone(item.profile)}`"
+                :to="createStockRoute(item.row.code)"
+              >
+                <div class="scanner-factor-card-head">
+                  <span class="scanner-factor-rank">#{{ index + 1 }}</span>
+                  <span class="scanner-factor-score">{{ formatNumber(item.profile.total) }}</span>
+                </div>
+                <strong>{{ item.row.code }} {{ item.row.name }}</strong>
+                <p>{{ item.row.industryName || item.row.themeTitle || '未分類產業' }}</p>
+                <div class="scanner-factor-bars">
+                  <div
+                    v-for="bar in getFactorBars(item.profile)"
+                    :key="`${item.row.code}-${bar.label}`"
+                    class="scanner-factor-bar"
+                  >
+                    <span>{{ bar.label }}</span>
+                    <div class="scanner-factor-bar-track">
+                      <i :style="{ width: `${bar.value}%` }"></i>
+                    </div>
+                    <strong>{{ formatNumber(bar.value) }}</strong>
+                  </div>
+                </div>
+                <div class="scanner-factor-chip-row">
+                  <span v-for="reason in item.profile.reasons" :key="`${item.row.code}-${reason}`" class="meta-chip">{{ reason }}</span>
+                </div>
+              </RouterLink>
+            </div>
+          </div>
+
+          <div class="scanner-factor-side">
+            <section class="scanner-factor-mini-section">
+              <div class="scanner-factor-section-head">
+                <div>
+                  <h3>風險降權</h3>
+                  <p>分數不一定差，但風控分或警示扣分較重。</p>
+                </div>
+              </div>
+              <div class="scanner-factor-mini-list">
+                <RouterLink
+                  v-for="item in riskFactorRows"
+                  :key="`factor-risk-${item.row.code}`"
+                  class="scanner-factor-mini-card is-warning"
+                  :to="createStockRoute(item.row.code)"
+                >
+                  <div>
+                    <strong>{{ item.row.code }} {{ item.row.name }}</strong>
+                    <span>{{ item.profile.cautions[0] || item.row.topWarningTitle || '風險分偏低' }}</span>
+                  </div>
+                  <b>{{ formatNumber(item.profile.risk) }}</b>
+                </RouterLink>
+              </div>
+            </section>
+
+            <section class="scanner-factor-mini-section">
+              <div class="scanner-factor-section-head">
+                <div>
+                  <h3>弱勢避開</h3>
+                  <p>趨勢或籌碼分數偏弱，先放到觀察名單後段。</p>
+                </div>
+              </div>
+              <div class="scanner-factor-mini-list">
+                <RouterLink
+                  v-for="item in weakFactorRows"
+                  :key="`factor-weak-${item.row.code}`"
+                  class="scanner-factor-mini-card is-down"
+                  :to="createStockRoute(item.row.code)"
+                >
+                  <div>
+                    <strong>{{ item.row.code }} {{ item.row.name }}</strong>
+                    <span>{{ item.profile.cautions[0] || '多因子分數偏弱' }}</span>
+                  </div>
+                  <b>{{ formatNumber(item.profile.total) }}</b>
+                </RouterLink>
+              </div>
+            </section>
+          </div>
+        </div>
       </section>
 
       <section class="scanner-layout">

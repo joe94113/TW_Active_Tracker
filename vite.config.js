@@ -22,6 +22,10 @@ export default defineConfig({
             return 'charts';
           }
 
+          if (id.includes('echarts') || id.includes('zrender')) {
+            return 'echarts';
+          }
+
           if (id.includes('xlsx')) {
             return 'spreadsheet';
           }

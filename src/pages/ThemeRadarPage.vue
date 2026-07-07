@@ -151,6 +151,57 @@ const spotlightCards = computed(() => {
   ];
 });
 
+const themeDecisionCards = computed(() => {
+  const warmingTopic = selectedHistoryTrend.value.warming[0] ?? null;
+  const coolingTopic = selectedHistoryTrend.value.cooling[0] ?? null;
+  const capitalTopic =
+    [...topics.value].sort(
+      (left, right) =>
+        ((right.institutionalCount ?? 0) + (right.etfCount ?? 0)) -
+          ((left.institutionalCount ?? 0) + (left.etfCount ?? 0)) ||
+        (right.score ?? 0) - (left.score ?? 0),
+    )[0] ?? null;
+
+  return [
+    {
+      key: 'leader',
+      label: '今日主線',
+      title: topTopic.value?.title ?? '等待主線集中',
+      metric: topTopic.value ? `${formatNumber(topTopic.value.score, 0)} 分` : '整理中',
+      note: topTopic.value?.observation ?? '先等新聞、法人與 ETF 集中後再追蹤。',
+      tone: topTopic.value?.tone ?? 'info',
+      href: topTopic.value?.slug ? `#${getTopicAnchor(topTopic.value.slug)}` : '#',
+    },
+    {
+      key: 'warming',
+      label: `${selectedWindow.value} 日升溫`,
+      title: warmingTopic?.title ?? '暫無明顯升溫',
+      metric: warmingTopic ? `+${formatNumber(warmingTopic.deltas?.[selectedWindow.value] ?? warmingTopic.scoreChange, 0)}` : '等待樣本',
+      note: warmingTopic ? '升溫題材適合先看龍頭是否續強，再看補漲股。' : '目前題材輪動還沒有新的加速方向。',
+      tone: 'up',
+      href: warmingTopic?.slug ? `#${getTopicAnchor(warmingTopic.slug)}` : '#',
+    },
+    {
+      key: 'cooling',
+      label: `${selectedWindow.value} 日降溫`,
+      title: coolingTopic?.title ?? '暫無明顯降溫',
+      metric: coolingTopic ? formatNumber(coolingTopic.deltas?.[selectedWindow.value] ?? coolingTopic.scoreChange, 0) : '等待樣本',
+      note: coolingTopic ? '降溫題材先降權重，避免追在資金輪出段。' : '目前沒有需要特別降權的題材。',
+      tone: 'down',
+      href: coolingTopic?.slug ? `#${getTopicAnchor(coolingTopic.slug)}` : '#',
+    },
+    {
+      key: 'capital',
+      label: '資金集中',
+      title: capitalTopic?.title ?? '等待資金聚焦',
+      metric: capitalTopic ? `法人 ${formatNumber(capitalTopic.institutionalCount, 0)} / ETF ${formatNumber(capitalTopic.etfCount, 0)}` : '整理中',
+      note: capitalTopic?.observation ?? '法人與 ETF 同向時，題材續航力通常更值得觀察。',
+      tone: capitalTopic?.tone ?? 'info',
+      href: capitalTopic?.slug ? `#${getTopicAnchor(capitalTopic.slug)}` : '#',
+    },
+  ];
+});
+
 const pageSeo = computed(() => ({
   title: '資金題材雷達',
   description: '用題材強度排行、題材輪動歷史、龍頭股與補漲股比較表快速判斷台股近期資金主線。',
@@ -322,6 +373,23 @@ function formatChangeTone(value) {
             </article>
           </div>
         </aside>
+      </section>
+
+      <section class="theme-decision-strip" aria-label="題材雷達決策摘要">
+        <a
+          v-for="card in themeDecisionCards"
+          :key="card.key"
+          class="decision-card"
+          :class="`is-${card.tone}`"
+          :href="card.href"
+        >
+          <div class="decision-card-head">
+            <span>{{ card.label }}</span>
+            <small>{{ card.metric }}</small>
+          </div>
+          <strong>{{ card.title }}</strong>
+          <p>{{ card.note }}</p>
+        </a>
       </section>
 
       <section class="panel theme-history-panel">
