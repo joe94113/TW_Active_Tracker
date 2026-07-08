@@ -12066,6 +12066,7 @@ html[data-theme="dark"] .event-calendar-actions .ghost-button:focus-visible {
 .industry-pulse-card,
 .market-buzz-keyword-card {
   display: grid;
+  align-content: start;
   gap: 0.85rem;
   padding: 1rem 1.05rem;
   border-radius: 24px;
@@ -12074,6 +12075,64 @@ html[data-theme="dark"] .event-calendar-actions .ghost-button:focus-visible {
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 251, 255, 0.94)),
     rgba(255, 255, 255, 0.96);
   box-shadow: 0 18px 36px rgba(16, 32, 45, 0.08);
+}
+
+.industry-pulse-card {
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  min-height: 100%;
+}
+
+.industry-pulse-leader-list {
+  align-self: stretch;
+  grid-template-rows: repeat(2, minmax(86px, auto)) auto;
+  gap: 10px;
+}
+
+.industry-pulse-leader-list .focus-card-item {
+  min-height: 86px;
+  padding: 13px 15px;
+}
+
+.industry-pulse-leader-list .focus-card-item strong,
+.industry-pulse-leader-list .focus-card-item p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.industry-pulse-leader-list .focus-card-item strong {
+  -webkit-line-clamp: 1;
+}
+
+.industry-pulse-leader-list .focus-card-item p {
+  -webkit-line-clamp: 1;
+}
+
+.industry-pulse-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid rgba(11, 105, 155, 0.1);
+  border-radius: 999px;
+  background: rgba(11, 105, 155, 0.06);
+  color: var(--text-soft);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.industry-pulse-card-foot strong,
+.industry-pulse-card-foot span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.industry-pulse-card-foot strong {
+  color: var(--text-strong);
 }
 
 .market-quote-card {
@@ -12562,6 +12621,16 @@ html[data-theme="dark"] .industry-heatmap-head b,
 html[data-theme="dark"] .industry-heatmap-leaders a {
   border-color: rgba(71, 85, 105, 0.44);
   background: rgba(15, 23, 42, 0.68);
+}
+
+html[data-theme="dark"] .industry-pulse-card-foot {
+  border-color: rgba(71, 85, 105, 0.44);
+  background: rgba(15, 23, 42, 0.58);
+  color: #9fb2c5;
+}
+
+html[data-theme="dark"] .industry-pulse-card-foot strong {
+  color: #f2f7fb;
 }
 
 html[data-theme="dark"] .industry-heatmap-breadth {

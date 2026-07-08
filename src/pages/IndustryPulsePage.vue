@@ -376,9 +376,9 @@ function setPulseTab(tab) {
                 <span class="meta-chip is-info">雙增 {{ industry.dualGrowthCount }}</span>
               </div>
 
-              <div class="focus-card-list compact">
+              <div class="focus-card-list compact industry-pulse-leader-list">
                 <RouterLink
-                  v-for="stock in industry.leaders"
+                  v-for="stock in industry.leaders.slice(0, 2)"
                   :key="`${industry.industryName}-${stock.code}`"
                   :to="createStockRoute(stock.code)"
                   class="focus-card-item is-clickable"
@@ -389,6 +389,10 @@ function setPulseTab(tab) {
                   </div>
                   <span :class="getToneClass(stock.changePercent)">{{ formatPercent(stock.changePercent) }}</span>
                 </RouterLink>
+                <div class="industry-pulse-card-foot">
+                  <span>產業共 {{ formatNumber(industry.stockCount, 0) }} 檔</span>
+                  <strong>先列成交值前 {{ formatNumber(Math.min(industry.leaders.length, 2), 0) }} 檔</strong>
+                </div>
               </div>
             </article>
           </div>
