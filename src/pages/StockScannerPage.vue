@@ -37,6 +37,8 @@ const isReplayLoading = ref(false);
 const replayError = ref('');
 
 const filters = reactive({ ...DEFAULT_SCANNER_FILTERS });
+const scannerViewMode = ref('compact');
+const isScannerFiltersCollapsed = ref(false);
 
 const liquidityOptions = LIQUIDITY_MIN_OPTIONS.map((option) => ({
   ...option,
@@ -89,6 +91,7 @@ const scannerRows = computed(() =>
 );
 
 const filteredRows = computed(() => filterScannerRows(scannerRows.value, filters).slice(0, 80));
+const topFilteredRows = computed(() => filteredRows.value.slice(0, 10));
 const hasUniverse = computed(() => universe.value.length > 0);
 
 const factorRankRows = computed(() =>
@@ -480,7 +483,7 @@ function buildReasonChips(row) {
 
         <aside class="scanner-hero-board">
           <div class="scanner-overview-grid">
-            <article v-for="card in overviewCards" :key="card.title" class="scanner-overview-card">
+            <article v-for="card in overviewCards.slice(0, 2)" :key="card.title" class="scanner-overview-card">
               <span class="scanner-overview-label">{{ card.title }}</span>
               <strong>{{ card.value }}</strong>
               <p>{{ card.note }}</p>
@@ -493,6 +496,62 @@ function buildReasonChips(row) {
             variant="inline"
           />
         </aside>
+      </section>
+
+      <section class="panel scanner-priority-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">今日符合條件 Top 10</h2>
+            <p class="panel-subtitle">先看目前條件篩出的前段名單，再決定要不要加嚴籌碼、趨勢或風險條件。</p>
+          </div>
+          <span class="meta-chip">前 {{ formatNumber(topFilteredRows.length) }} / {{ formatNumber(filteredRows.length) }} 檔</span>
+        </div>
+
+        <div class="scanner-priority-filter-row">
+          <label class="scanner-filter-field">
+            <span>股票 / 題材快搜</span>
+            <input v-model="filters.query" type="text" placeholder="例如 2454、CPO、PCB" />
+          </label>
+          <label class="scanner-filter-field">
+            <span>產業或題材</span>
+            <input v-model="filters.themeOnly" type="text" placeholder="例如 矽光子、重電" />
+          </label>
+          <button type="button" class="ghost-button" @click="resetFilters">回復預設</button>
+        </div>
+
+        <div v-if="topFilteredRows.length" class="scanner-priority-list">
+          <RouterLink
+            v-for="(row, index) in topFilteredRows"
+            :key="`priority-${row.code}`"
+            class="scanner-priority-card"
+            :to="createStockRoute(row.code)"
+          >
+            <span class="scanner-priority-rank">#{{ index + 1 }}</span>
+            <div class="scanner-priority-main">
+              <strong>{{ row.code }} {{ row.name }}</strong>
+              <span>{{ row.industryName || row.themeTitle || '未分類產業' }}</span>
+            </div>
+            <div class="scanner-priority-signal">
+              <b :class="row.changePercent > 0 ? 'text-up' : row.changePercent < 0 ? 'text-down' : ''">
+                {{ formatPercent(row.changePercent) }}
+              </b>
+              <small>體檢 {{ formatNumber(row.healthScore) }}</small>
+            </div>
+            <div class="scanner-priority-chips">
+              <span v-for="chip in buildReasonChips(row).slice(0, 3)" :key="`priority-${row.code}-${chip}`" class="meta-chip">
+                {{ chip }}
+              </span>
+              <span class="meta-chip" :class="`is-${getConfidenceLabel(row.signalConfidence).tone}`">
+                {{ getConfidenceLabel(row.signalConfidence).text }}
+              </span>
+            </div>
+          </RouterLink>
+        </div>
+
+        <div v-else class="empty-state compact">
+          <strong>目前沒有符合條件的股票</strong>
+          <p>先放寬快搜或題材條件，再用下方進階篩選逐步加嚴。</p>
+        </div>
       </section>
 
       <section class="panel scanner-factor-panel">
@@ -612,16 +671,26 @@ function buildReasonChips(row) {
 
       <section class="scanner-layout">
         <aside class="scanner-filter-sidebar">
-          <section class="panel scanner-filter-panel">
+          <section class="panel scanner-filter-panel" :class="{ 'is-collapsed': isScannerFiltersCollapsed }">
             <div class="panel-header">
               <div>
                 <h2 class="panel-title">篩選條件</h2>
                 <p class="panel-subtitle">先用條件把股票池縮小，再看每檔卡片是不是同時具備趨勢、成交值和籌碼支持。</p>
               </div>
-              <button type="button" class="ghost-button" @click="resetFilters">回復預設</button>
+              <div class="scanner-filter-actions">
+                <button
+                  type="button"
+                  class="ghost-button"
+                  :aria-expanded="String(!isScannerFiltersCollapsed)"
+                  @click="isScannerFiltersCollapsed = !isScannerFiltersCollapsed"
+                >
+                  {{ isScannerFiltersCollapsed ? '展開條件' : '收合條件' }}
+                </button>
+                <button type="button" class="ghost-button" @click="resetFilters">回復預設</button>
+              </div>
             </div>
 
-            <div class="scanner-filter-stack">
+            <div v-show="!isScannerFiltersCollapsed" class="scanner-filter-stack">
               <section class="scanner-filter-section">
                 <div class="scanner-filter-section-head">
                   <strong>快速定位</strong>
@@ -701,7 +770,27 @@ function buildReasonChips(row) {
               <h2 class="panel-title">符合條件的股票</h2>
               <p class="panel-subtitle">排序會先考慮體檢分數、訊號可信度、產業相對估值與量能品質，目的不是找最熱門，而是找比較可交易的名單。</p>
             </div>
-            <span class="meta-chip">{{ formatNumber(filteredRows.length) }} 檔</span>
+            <div class="scanner-result-actions">
+              <div class="scanner-view-switch" role="tablist" aria-label="切換結果顯示密度">
+                <button
+                  type="button"
+                  :class="{ 'is-active': scannerViewMode === 'compact' }"
+                  :aria-selected="scannerViewMode === 'compact'"
+                  @click="scannerViewMode = 'compact'"
+                >
+                  精簡
+                </button>
+                <button
+                  type="button"
+                  :class="{ 'is-active': scannerViewMode === 'detail' }"
+                  :aria-selected="scannerViewMode === 'detail'"
+                  @click="scannerViewMode = 'detail'"
+                >
+                  詳細
+                </button>
+              </div>
+              <span class="meta-chip">{{ formatNumber(filteredRows.length) }} 檔</span>
+            </div>
           </div>
 
           <div v-if="filteredRows.length" class="scanner-result-list">
@@ -709,6 +798,7 @@ function buildReasonChips(row) {
               v-for="row in filteredRows"
               :key="row.code"
               class="scanner-result-card"
+              :class="{ 'is-compact': scannerViewMode === 'compact' }"
               :to="createStockRoute(row.code)"
             >
               <div class="scanner-result-head">
@@ -738,7 +828,7 @@ function buildReasonChips(row) {
                 <span v-if="row.topWarningTitle" class="meta-chip" :class="`is-${getWarningTone(row)}`">{{ row.topWarningTitle }}</span>
               </div>
 
-              <div class="radar-stock-metrics scanner-result-metrics">
+              <div v-if="scannerViewMode === 'detail'" class="radar-stock-metrics scanner-result-metrics">
                 <div>
                   <span>收盤價</span>
                   <strong>{{ formatNumber(row.close) }}</strong>
@@ -775,6 +865,9 @@ function buildReasonChips(row) {
                     {{ row.maStackCrossedAbove240 ? '剛站上長期均線' : row.maBullStack ? '均線在 MA240 上方' : '尚未確認' }}
                   </strong>
                 </div>
+              </div>
+              <div v-else class="scanner-result-note">
+                收盤 {{ formatNumber(row.close) }}｜20 日 {{ formatPercent(row.return20) }}｜外資 {{ formatLots(row.foreign5Day) }}｜投信 {{ formatLots(row.investmentTrust5Day) }}
               </div>
             </RouterLink>
           </div>

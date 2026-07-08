@@ -18,6 +18,7 @@ import IntradayChipFlowChart from '../components/IntradayChipFlowChart.vue';
 import EventCalendarLinks from '../components/EventCalendarLinks.vue';
 import StockNewsPanel from '../components/StockNewsPanel.vue';
 import { createStockRoute } from '../lib/stockRouting';
+import { getDataFreshnessStatus } from '../lib/dataFreshness';
 import { buildKeyPriceZones, buildLargeHolderCostZone, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
 import { buildStockEventPerformance } from '../lib/stockEventPerformance';
 import { buildOverheatWarnings, buildStockHealthScore } from '../lib/stockHealth';
@@ -185,6 +186,13 @@ const holderDistributionSnapshot = computed(() => {
 
 const latestMarketDate = computed(() => dashboard.value?.市場總覽?.即時狀態?.marketDate ?? dashboard.value?.市場總覽?.資料日期 ?? null);
 
+const stockGlobalFreshness = computed(() =>
+  getDataFreshnessStatus({
+    generatedAt: dashboard.value?.generatedAt ?? globalManifest.value?.generatedAt,
+    marketDate: latestMarketDate.value ?? globalManifest.value?.generatedAtLocalDate,
+  }),
+);
+
 const detailFreshness = computed(() => {
   const detailDate = detail.value?.priceDate ?? null;
   const summaryDate = stockSearchSummary.value?.priceDate ?? null;
@@ -209,7 +217,7 @@ const detailFreshness = computed(() => {
   const staleDays = Number.isFinite(marketTimestamp) && Number.isFinite(detailTimestamp)
     ? Math.max(0, Math.round((marketTimestamp - detailTimestamp) / 86400000))
     : 0;
-  const isStale = staleDays > 0;
+  const isStale = staleDays > 0 || stockGlobalFreshness.value.isStale;
 
   return {
     marketDate,
@@ -218,9 +226,11 @@ const detailFreshness = computed(() => {
     referenceDate,
     isCurrent: !isStale,
     isStale,
-    staleDays,
+    staleDays: Math.max(staleDays, stockGlobalFreshness.value.daysOld ?? 0),
     warningMessage: isStale
-      ? `完整技術明細目前停在 ${formatDate(referenceDate)}，最新盤後摘要已用 ${formatDate(marketDate)} 覆蓋；關鍵價位、技術圖與支撐壓力請保守看待。`
+      ? stockGlobalFreshness.value.isStale
+        ? `全站資料日停在 ${formatDate(stockGlobalFreshness.value.marketDate ?? marketDate)}，已超過今日交易日；這頁先當歷史回看，關鍵價位、技術圖與支撐壓力請保守看待。`
+        : `完整技術明細目前停在 ${formatDate(referenceDate)}，最新盤後摘要已用 ${formatDate(marketDate)} 覆蓋；關鍵價位、技術圖與支撐壓力請保守看待。`
       : `個股明細已更新到 ${formatDate(marketDate)}。`,
   };
 });
@@ -544,29 +554,118 @@ const technicalNarrative = computed(() => {
   return narratives.slice(0, 3);
 });
 
-const priorityInsightCards = computed(() => {
+const stockDecisionBrief = computed(() => {
+  const score = stockHealthScore.value.totalScore ?? 0;
   const heatWarning = overheatWarnings.value[0] ?? null;
-  const firstSignal = technicalSignals.value[0] ?? null;
-  const firstNarrative = technicalNarrative.value[0] ?? null;
+  const hasRisk = Boolean(heatWarning) || detailFreshness.value.isStale;
+  const tone =
+    detailFreshness.value.isStale
+      ? 'warning'
+      : score >= 75 && !hasRisk
+        ? 'up'
+        : score <= 45 || heatWarning?.tone === 'risk'
+          ? 'down'
+          : 'normal';
+  const title =
+    tone === 'warning'
+      ? '先當歷史資料回看'
+      : tone === 'up'
+        ? '偏多觀察，等量價確認'
+        : tone === 'down'
+          ? '先避開追價'
+          : '等待訊號更明確';
+  const summary =
+    tone === 'warning'
+      ? '完整明細或市場資料不是最新交易日，先用來回顧結構，不建議當作今日追價依據。'
+      : stockHealthScore.value.summary ?? '先看價格、籌碼與風險是否同向，再決定要不要往下研究。';
+  const strongSections = (stockHealthScore.value.sections ?? [])
+    .slice()
+    .sort((left, right) => (right.score ?? 0) - (left.score ?? 0))
+    .slice(0, 2)
+    .map((item) => `${item.label}：${item.note}`);
+  const reasons = [
+    ...strongSections,
+    technicalNarrative.value[0],
+    signalConfidence.value?.aggregate ? `訊號可信度：${describeConfidence(signalConfidence.value.aggregate).label}` : null,
+  ]
+    .filter(Boolean)
+    .slice(0, 3);
+  const risks = [
+    detailFreshness.value.isStale ? detailFreshness.value.warningMessage : null,
+    heatWarning ? heatWarning.note : null,
+    liquidityTier.value?.label ? `流動性：${liquidityTier.value.label}，日均成交值 ${formatTradeValue(dailyTradeValue.value)}` : null,
+    largeHolderCostZone.value?.status === 'below' ? '股價目前跌回大戶成本帶下方，需等重新站回再提高信心。' : null,
+  ]
+    .filter(Boolean)
+    .slice(0, 3);
+
+  return {
+    tone,
+    title,
+    summary,
+    scoreLabel: `${stockHealthScore.value.grade} / ${score}`,
+    reasons: reasons.length ? reasons : ['資料仍在整理，先從技術快讀與籌碼頁確認結構。'],
+    risks: risks.length ? risks : ['目前沒有明顯過熱警訊，但仍要等量價與籌碼同步確認。'],
+  };
+});
+
+const stockScoreWeights = {
+  technical: 28,
+  chip: 24,
+  fundamental: 20,
+  theme: 14,
+  risk: 14,
+};
+
+const stockScoreBreakdown = computed(() =>
+  (stockHealthScore.value.sections ?? []).map((item) => {
+    const score = Number(item.score ?? 0);
+    const weight = stockScoreWeights[item.key] ?? 0;
+
+    return {
+      ...item,
+      score,
+      weight,
+      width: `${Math.max(4, Math.min(100, score))}%`,
+      contribution: Math.round((score * weight) / 100),
+    };
+  }),
+);
+
+const stockSignalTraceItems = computed(() => {
+  const confidence = signalConfidence.value?.aggregate ?? null;
+  const confidenceDescription = confidence !== null ? describeConfidence(confidence) : null;
+  const topSignal = technicalSignals.value[0] ?? null;
+  const heatWarning = overheatWarnings.value[0] ?? null;
 
   return [
     {
-      title: '體檢總分',
-      value: `${stockHealthScore.value.grade} / ${stockHealthScore.value.totalScore}`,
-      description: stockHealthScore.value.summary,
-      status: getHealthTone(stockHealthScore.value.totalScore),
+      key: 'freshness',
+      label: '資料基準',
+      value: detailFreshness.value.isStale ? `延遲 ${detailFreshness.value.staleDays} 天` : '最新',
+      note: detailFreshness.value.warningMessage,
+      tone: detailFreshness.value.isStale ? 'warning' : 'info',
     },
     {
-      title: '追價風險',
-      value: heatWarning ? heatWarning.badgeLabel : '目前可控',
-      description: heatWarning ? heatWarning.note : '目前沒有明顯過熱訊號，仍要留意量價配合。',
-      status: getSelectionAlertTone(heatWarning?.tone ?? 'normal'),
+      key: 'confidence',
+      label: '訊號可信度',
+      value: confidence !== null ? `${Math.round(confidence * 100)}%` : '等待統計',
+      note: confidenceDescription?.label ?? '目前沒有足夠訊號可建立可信度。',
+      tone: confidenceDescription?.tone ?? 'normal',
     },
     {
-      title: '技術快讀',
-      value: firstSignal?.title ?? '結構整理中',
-      description: firstNarrative ?? '先看價格和月線的相對位置，再決定追強或等拉回。',
-      status: firstSignal?.tone ?? 'normal',
+      key: 'technical',
+      label: '主要技術訊號',
+      value: topSignal?.title ?? '未出現明確訊號',
+      note: technicalNarrative.value[0] ?? '先看均線、量能與支撐壓力是否同步。',
+      tone: topSignal?.tone ?? 'normal',
+    },
+    {
+      key: 'risk',
+      label: '風險追蹤',
+      value: heatWarning?.badgeLabel ?? (detailFreshness.value.isStale ? '資料風險' : '尚可'),
+      note: heatWarning?.note ?? (detailFreshness.value.isStale ? detailFreshness.value.warningMessage : '目前沒有明顯過熱警訊。'),
+      tone: heatWarning ? getSelectionAlertTone(heatWarning.tone) : detailFreshness.value.isStale ? 'warning' : 'info',
     },
   ];
 });
@@ -730,6 +829,97 @@ watch(
     />
 
     <template v-if="detail">
+      <section class="stock-decision-panel" :class="`is-${stockDecisionBrief.tone}`">
+        <div class="stock-decision-main">
+          <span>今日結論</span>
+          <strong>{{ stockDecisionBrief.title }}</strong>
+          <p>{{ stockDecisionBrief.summary }}</p>
+          <small>體檢 {{ stockDecisionBrief.scoreLabel }}</small>
+        </div>
+
+        <div class="stock-decision-lanes">
+          <article class="stock-decision-lane">
+            <span>主要理由</span>
+            <ul>
+              <li v-for="item in stockDecisionBrief.reasons" :key="`reason-${item}`">{{ item }}</li>
+            </ul>
+          </article>
+
+          <article class="stock-decision-lane">
+            <span>風險條件</span>
+            <ul>
+              <li v-for="item in stockDecisionBrief.risks" :key="`risk-${item}`">{{ item }}</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="stock-decision-actions">
+          <button type="button" class="secondary-action-button" @click="focusStockTab('charts')">看圖表</button>
+          <button type="button" class="secondary-action-button" @click="focusStockTab('chips')">看籌碼</button>
+          <a class="secondary-action-button" href="#score-explain">查看分數拆解</a>
+          <button
+            type="button"
+            class="primary-action-button"
+            :class="{ 'is-active': isTracked }"
+            @click="toggleFavorite(stockCode)"
+          >
+            {{ isTracked ? '已加入自選' : '加入自選' }}
+          </button>
+        </div>
+      </section>
+
+      <section id="score-explain" class="panel stock-explain-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">分數拆解與訊號追蹤</h2>
+            <p class="panel-subtitle">把總分拆回技術、籌碼、基本面、題材與風險，並留下目前決策依據。</p>
+          </div>
+          <span class="meta-chip">可追溯</span>
+        </div>
+
+        <div class="stock-explain-grid">
+          <article class="stock-score-breakdown">
+            <div class="stock-explain-section-head">
+              <strong>分數權重</strong>
+              <span>總分 {{ stockHealthScore.totalScore }} / 100</span>
+            </div>
+
+            <div class="stock-score-row" v-for="item in stockScoreBreakdown" :key="`score-${item.key}`">
+              <div class="stock-score-row-head">
+                <span>{{ item.label }}</span>
+                <strong>{{ item.score }}</strong>
+              </div>
+              <div class="stock-score-track" :class="`is-${item.tone}`">
+                <i :style="{ width: item.width }"></i>
+              </div>
+              <div class="stock-score-row-foot">
+                <small>權重 {{ item.weight }}%</small>
+                <small>貢獻約 {{ item.contribution }} 分</small>
+              </div>
+              <p>{{ item.note }}</p>
+            </div>
+          </article>
+
+          <article class="stock-trace-list">
+            <div class="stock-explain-section-head">
+              <strong>決策追蹤</strong>
+              <span>{{ formatDate(detailFreshness.referenceDate ?? detailFreshness.marketDate) }}</span>
+            </div>
+
+            <div
+              v-for="item in stockSignalTraceItems"
+              :key="`trace-${item.key}`"
+              class="stock-trace-item"
+              :class="`is-${item.tone}`"
+            >
+              <span>{{ item.label }}</span>
+              <strong>{{ item.value }}</strong>
+              <p>{{ item.note }}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="panel stock-freshness-panel" :class="{ 'is-warning': detailFreshness.isStale }">
         <div class="panel-header">
           <div>
@@ -757,25 +947,6 @@ watch(
         </div>
       </section>
 
-      <section class="panel stock-priority-panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">操作快讀</h2>
-            <p class="panel-subtitle">先看體檢分數、追價風險和技術快讀，再決定要不要往下研究圖表與籌碼。</p>
-          </div>
-        </div>
-
-        <section class="card-grid compact-summary-grid stock-priority-grid">
-          <InfoCard
-            v-for="item in priorityInsightCards"
-            :key="`priority-${item.title}`"
-            :title="item.title"
-            :value="item.value"
-            :description="item.description"
-            :status="item.status"
-          />
-        </section>
-      </section>
       <nav class="mobile-section-nav stock-mobile-nav" aria-label="個股研究捷徑">
         <a class="mobile-section-link" href="#quote">報價</a>
         <a class="mobile-section-link" href="#signals">技術</a>

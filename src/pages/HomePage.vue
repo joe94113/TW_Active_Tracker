@@ -8,11 +8,11 @@ import { useLiveStockSnapshots } from '../composables/useLiveStockSnapshots';
 import { useRecentStocks } from '../composables/useRecentStocks';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import StatusCard from '../components/StatusCard.vue';
-import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
 import InfoCard from '../components/InfoCard.vue';
 import IntradayChart from '../components/IntradayChart.vue';
 import TechnicalChart from '../components/TechnicalChart.vue';
 import { createStockRoute, isStockCode } from '../lib/stockRouting';
+import { getDataFreshnessStatus } from '../lib/dataFreshness';
 import {
   formatAmount,
   formatDate,
@@ -28,6 +28,33 @@ const { dashboard, manifest, stockList, stockSearchList, etfOverviewList, isLoad
 const { favoriteCodes, isFavorite, toggleFavorite, clearFavorites } = useFavoriteStocks();
 const { recentItems, clearRecentStocks } = useRecentStocks();
 const rankingView = ref('live');
+const HOME_MODE_STORAGE_KEY = 'tw-active-tracker-home-mode';
+const activeHomeMode = ref('quick');
+const homeModeOptions = [
+  {
+    key: 'quick',
+    label: '快速',
+    title: '快速模式',
+    description: '只保留今日最該先看的三件事：盤勢方向、個股火線與自選警示。',
+  },
+  {
+    key: 'research',
+    label: '研究',
+    title: '研究模式',
+    description: '展開選股雷達、題材資金、產業熱力圖與條件篩選，適合盤後做功課。',
+  },
+  {
+    key: 'monitor',
+    label: '監控',
+    title: '監控模式',
+    description: '聚焦自選清單、推播保險、官方公告與資料新鮮度，確認系統是否正常工作。',
+  },
+];
+const homeModeEntryRoutes = {
+  quick: ['/favorites-health', '/radar', '/scanner', '/disposition-radar'],
+  research: ['/radar', '/themes', '/industry-pulse', '/scanner'],
+  monitor: ['/favorites-health', '/watchboard', '/official-radar', '/event-stats'],
+};
 const staticMarketOverview = computed(() => dashboard.value?.市場總覽 ?? null);
 const {
   marketOverview,
@@ -51,6 +78,13 @@ const {
 } = useLiveStockSnapshots(watchedLiveCodes);
 
 onMounted(() => {
+  if (typeof window !== 'undefined') {
+    const savedMode = window.localStorage.getItem(HOME_MODE_STORAGE_KEY);
+    if (homeModeOptions.some((item) => item.key === savedMode)) {
+      activeHomeMode.value = savedMode;
+    }
+  }
+
   loadGlobalData();
   refreshLiveMarketData();
   startAutoRefresh();
@@ -62,6 +96,16 @@ onBeforeUnmount(() => {
   stopAutoRefresh();
   stopLiveSnapshotAutoRefresh();
 });
+
+function setHomeMode(mode) {
+  if (!homeModeOptions.some((item) => item.key === mode)) return;
+
+  activeHomeMode.value = mode;
+
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(HOME_MODE_STORAGE_KEY, mode);
+  }
+}
 
 const institutionalHighlights = computed(() => dashboard.value?.法人追蹤 ?? null);
 const activeEtfOverview = computed(() => dashboard.value?.主動ETF總覽 ?? null);
@@ -111,6 +155,37 @@ const marketObservationSubtitle = computed(() => {
 
   return closeMarketDate.value ? `盤後資料日期 ${formatDate(closeMarketDate.value)}` : '資料整理中';
 });
+const homeDataFreshness = computed(() =>
+  getDataFreshnessStatus({
+    generatedAt: dashboard.value?.generatedAt ?? manifest.value?.generatedAt,
+    marketDate: liveMarketDate.value ?? closeMarketDate.value ?? dashboard.value?.marketDate,
+  }),
+);
+const isHomeDataStale = computed(() => homeDataFreshness.value.isStale);
+const homeHeroCopy = computed(() =>
+  isHomeDataStale.value
+    ? {
+        eyebrow: '歷史資料回看',
+        title: '先確認資料日，再做研究',
+        description: `目前資料日停在 ${formatDate(homeDataFreshness.value.marketDate ?? closeMarketDate.value)}，首頁已降級為歷史回看模式；選股與推播訊號請等更新恢復後再當作今日判斷。`,
+        primaryLabel: '查看資料狀態',
+        primaryRoute: '#market-context',
+        secondaryLabel: '打開自選健檢',
+        secondaryRoute: '/favorites-health',
+      }
+    : {
+        eyebrow: '今日市場焦點',
+        title: '先看資金在哪裡聚焦',
+        description: marketObservationSubtitle.value,
+        primaryLabel: '打開選股雷達',
+        primaryRoute: '/radar',
+        secondaryLabel: '看產業熱力圖',
+        secondaryRoute: '/industry-pulse',
+      },
+);
+const activeHomeModeOption = computed(
+  () => homeModeOptions.find((item) => item.key === activeHomeMode.value) ?? homeModeOptions[0],
+);
 const rankingLiveBadge = computed(() => {
   if (rankingView.value !== 'live') {
     return closeMarketDate.value ? `盤後 ${formatDate(closeMarketDate.value)}` : '盤後整理';
@@ -221,8 +296,7 @@ const summaryCards = computed(() => [
     description: `最新揭露 ${formatDate(manifest.value?.latestDisclosureDate)}`,
   },
 ]);
-const primarySummaryCards = computed(() => summaryCards.value.slice(0, 3));
-const etfSummaryCard = computed(() => summaryCards.value[3] ?? null);
+const compactHomeSummaryCards = computed(() => summaryCards.value.slice(0, 2));
 
 const marketBreadthCards = computed(() => [
   {
@@ -419,6 +493,20 @@ const highlightedEtf = computed(() =>
 
 const taskEntryCards = computed(() => [
   {
+    title: '自選健檢',
+    subtitle: '先看追蹤清單是否有異常或資料落後',
+    metric: `${formatNumber(favoriteCodes.value.length, 0)} 檔追蹤`,
+    route: '/favorites-health',
+    tone: isHomeDataStale.value ? 'warning' : 'info',
+  },
+  {
+    title: '自選看盤',
+    subtitle: '集中看自選股即時價格與波動',
+    metric: '監控清單',
+    route: '/watchboard',
+    tone: 'neutral',
+  },
+  {
     title: '選股雷達',
     subtitle: '量價、籌碼與事件訊號一起看',
     metric: `${formatNumber(strongStocks.value.length, 0)} 檔強勢股`,
@@ -431,6 +519,13 @@ const taskEntryCards = computed(() => [
     metric: `${formatNumber(topThemeCards.value.length, 0)} 個熱題材`,
     route: '/themes',
     tone: 'info',
+  },
+  {
+    title: '產業熱力圖',
+    subtitle: '用產業維度確認資金熱區',
+    metric: '市場熱度',
+    route: '/industry-pulse',
+    tone: 'up',
   },
   {
     title: '處置股雷達',
@@ -460,7 +555,31 @@ const taskEntryCards = computed(() => [
     route: '/scanner',
     tone: 'neutral',
   },
+  {
+    title: '官方雷達',
+    subtitle: '處置、注意與制度公告集中看',
+    metric: '公告追蹤',
+    route: '/official-radar',
+    tone: 'warning',
+  },
+  {
+    title: '事件統計',
+    subtitle: '檢查資料更新與事件紀錄',
+    metric: homeDataFreshness.value.label,
+    route: '/event-stats',
+    tone: homeDataFreshness.value.tone,
+  },
 ]);
+const primaryTaskEntryCards = computed(() => {
+  const routes = isHomeDataStale.value
+    ? ['/favorites-health', '/scanner', '/disposition-radar', '/etfs']
+    : homeModeEntryRoutes[activeHomeMode.value] ?? homeModeEntryRoutes.quick;
+
+  return routes
+    .map((routePath) => taskEntryCards.value.find((item) => item.route === routePath))
+    .filter(Boolean)
+    .slice(0, 4);
+});
 
 const dualInstitutionalBuys = computed(() => {
   const sameDayBuys = institutionalHighlights.value?.['雙法人同買超'] ?? [];
@@ -583,8 +702,156 @@ const todayFocusCards = computed(() => {
 });
 
 const primaryFocusCards = computed(() =>
-  todayFocusCards.value.filter((card) => ['market', 'stock', 'theme'].includes(card.key)),
+  todayFocusCards.value
+    .filter((card) => ['market', 'stock', 'theme'].includes(card.key))
+    .map((card) =>
+      isHomeDataStale.value
+        ? {
+            ...card,
+            label: card.key === 'market' ? '歷史盤勢' : card.label,
+            actionLabel: card.key === 'stock' ? '回看個股' : card.actionLabel,
+            note: `歷史資料：${card.note}`,
+            tone: card.key === 'market' ? 'warning' : card.tone,
+          }
+        : card,
+    ),
 );
+const visibleFocusCards = computed(() => {
+  if (activeHomeMode.value === 'research') {
+    return primaryFocusCards.value.filter((card) => ['stock', 'theme'].includes(card.key));
+  }
+
+  if (activeHomeMode.value === 'monitor') {
+    return [];
+  }
+
+  return primaryFocusCards.value.slice(0, 1);
+});
+
+const homeModeCards = computed(() => {
+  const dataStatus = homeDataFreshness.value;
+  const dataDateLabel = formatDate(dataStatus.marketDate ?? liveMarketDate.value ?? closeMarketDate.value);
+  const dataStatusTitle = dataStatus.isStale
+    ? '資料已切到歷史回看'
+    : dataStatus.isWarning
+      ? '資料更新需要確認'
+      : '資料狀態正常';
+  const dataStatusNote = dataStatus.isStale
+    ? `目前資料日 ${dataDateLabel}，今日判斷先暫停。`
+    : dataStatus.isWarning
+      ? `目前資料日 ${dataDateLabel}，可到事件統計確認更新與推播紀錄。`
+      : `目前資料日 ${dataDateLabel}，可作為今日觀察基準。`;
+  const marketFocus = primaryFocusCards.value[0];
+  const stockFocus = primaryFocusCards.value[1];
+  const themeFocus = primaryFocusCards.value[2];
+  const favoriteAlertCount = favoriteStocks.value.filter((item) => {
+    const changePercent = Math.abs(Number(item.changePercent ?? 0));
+    const signalTone = String(item.displaySignalTone ?? '');
+    return changePercent >= 3 || ['risk', 'warning', 'down'].includes(signalTone);
+  }).length;
+
+  if (activeHomeMode.value === 'research') {
+    return [
+      {
+        label: '選股雷達',
+        title: stockFocus?.title ?? '強勢股整理中',
+        value: stockFocus?.value ?? `${formatNumber(strongStocks.value.length, 0)} 檔`,
+        note: '先用量價與籌碼收斂候選清單。',
+        route: '/radar',
+        tone: stockFocus?.tone ?? 'up',
+      },
+      {
+        label: '題材資金',
+        title: themeFocus?.title ?? '題材資料整理中',
+        value: themeFocus?.value ?? `${formatNumber(topThemeCards.value.length, 0)} 個`,
+        note: '確認資金是否集中在同一條產業鏈。',
+        route: '/themes',
+        tone: themeFocus?.tone ?? 'info',
+      },
+      {
+        label: '產業熱力圖',
+        title: '看市場熱區',
+        value: marketBreadthBadge.value,
+        note: '用產業維度看強弱，不只看單檔漲跌。',
+        route: '/industry-pulse',
+        tone: 'warning',
+      },
+      {
+        label: '條件篩選',
+        title: '自訂策略掃描',
+        value: '進階',
+        note: '把已知條件轉成可重複使用的篩選流程。',
+        route: '/scanner',
+        tone: 'neutral',
+      },
+    ];
+  }
+
+  if (activeHomeMode.value === 'monitor') {
+    return [
+      {
+        label: '自選警示',
+        title: favoriteAlertCount ? `${formatNumber(favoriteAlertCount, 0)} 檔需要看` : '自選暫無急訊',
+        value: `${formatNumber(favoriteCodes.value.length, 0)} 檔`,
+        note: favoriteAlertCount ? '有明顯波動或風險訊號，先進健檢頁確認。' : '追蹤清單目前沒有明顯異常。',
+        route: '/favorites-health',
+        tone: favoriteAlertCount ? 'warning' : 'info',
+      },
+      {
+        label: '看盤工作台',
+        title: '自選即時監控',
+        value: 'Live',
+        note: '集中看價格、漲跌與成交量變化。',
+        route: '/watchboard',
+        tone: 'up',
+      },
+      {
+        label: '官方雷達',
+        title: '公告與制度狀態',
+        value: '公告',
+        note: '處置、注意、變更交易與官方事件集中確認。',
+        route: '/official-radar',
+        tone: 'warning',
+      },
+      {
+        label: '系統狀態',
+        title: dataStatusTitle,
+        value: dataDateLabel,
+        note: dataStatusNote,
+        route: '/event-stats',
+        tone: dataStatus.tone,
+      },
+    ];
+  }
+
+  return [
+    {
+      label: '盤勢方向',
+      title: marketFocus?.title ?? '盤勢整理中',
+      value: marketFocus?.value ?? '--',
+      note: marketFocus?.note ?? '先判斷今天要偏進攻或控風險。',
+      route: marketFocus?.route ?? '/radar',
+      href: marketFocus?.href,
+      tone: marketFocus?.tone ?? 'neutral',
+    },
+    {
+      label: '個股火線',
+      title: stockFocus?.title ?? '強勢股整理中',
+      value: stockFocus?.value ?? `${formatNumber(strongStocks.value.length, 0)} 檔`,
+      note: stockFocus?.note ?? '只挑一檔最值得先看的標的。',
+      route: stockFocus?.route ?? '/radar',
+      tone: stockFocus?.tone ?? 'up',
+    },
+    {
+      label: '自選警示',
+      title: favoriteAlertCount ? `${formatNumber(favoriteAlertCount, 0)} 檔需要看` : '自選暫無急訊',
+      value: `${formatNumber(favoriteCodes.value.length, 0)} 檔`,
+      note: favoriteAlertCount ? '先看波動與風險是否影響持股。' : '沒有急迫警示時，再進研究模式找新標的。',
+      route: '/favorites-health',
+      tone: favoriteAlertCount ? 'warning' : 'info',
+    },
+  ];
+});
 
 function openStockDetail(code) {
   if (!isStockCode(code)) return;
@@ -636,25 +903,41 @@ function formatViewedAt(dateText) {
     />
 
     <template v-if="dashboard">
-      <section class="home-command-center">
+      <section
+        class="home-command-center"
+        :class="{
+          'is-stale': isHomeDataStale,
+          'has-single-focus': visibleFocusCards.length <= 1,
+          'has-no-focus': !visibleFocusCards.length,
+        }"
+      >
         <div class="home-command-copy">
-          <p class="section-eyebrow">今日市場焦點</p>
-          <h1>先看資金在哪裡聚焦</h1>
-          <p>{{ marketObservationSubtitle }}</p>
+          <p class="section-eyebrow">{{ homeHeroCopy.eyebrow }}</p>
+          <h1>{{ homeHeroCopy.title }}</h1>
+          <p>{{ homeHeroCopy.description }}</p>
           <div class="home-command-meta">
             <span>資料日 {{ formatDate(liveMarketDate ?? dashboard?.marketDate) }}</span>
             <span v-if="marketLiveTimeLabel">即時更新 {{ marketLiveTimeLabel }}</span>
           </div>
           <div class="home-command-actions">
-            <RouterLink class="primary-action-button" to="/radar">打開選股雷達</RouterLink>
-            <RouterLink class="secondary-action-button" to="/industry-pulse">看產業熱力圖</RouterLink>
+            <component
+              :is="homeHeroCopy.primaryRoute.startsWith('#') ? 'a' : RouterLink"
+              class="primary-action-button"
+              :to="homeHeroCopy.primaryRoute.startsWith('#') ? undefined : homeHeroCopy.primaryRoute"
+              :href="homeHeroCopy.primaryRoute.startsWith('#') ? homeHeroCopy.primaryRoute : undefined"
+            >
+              {{ homeHeroCopy.primaryLabel }}
+            </component>
+            <RouterLink class="secondary-action-button" :to="homeHeroCopy.secondaryRoute">
+              {{ homeHeroCopy.secondaryLabel }}
+            </RouterLink>
           </div>
         </div>
 
-        <div class="home-focus-board" aria-label="今日市場焦點卡">
+        <div v-if="visibleFocusCards.length" class="home-focus-board" aria-label="今日市場焦點卡">
           <component
             :is="card.route ? RouterLink : 'a'"
-            v-for="card in primaryFocusCards"
+            v-for="card in visibleFocusCards"
             :key="card.key"
             :to="card.route ?? undefined"
             :href="card.href ?? undefined"
@@ -674,10 +957,50 @@ function formatViewedAt(dateText) {
         </div>
       </section>
 
+      <section class="home-mode-panel" aria-label="首頁使用模式">
+        <div class="home-mode-panel-head">
+          <div>
+            <p class="section-eyebrow">使用模式</p>
+            <h2>{{ activeHomeModeOption.title }}</h2>
+            <p>{{ activeHomeModeOption.description }}</p>
+          </div>
+          <div class="home-mode-switch" role="tablist" aria-label="切換首頁模式">
+            <button
+              v-for="mode in homeModeOptions"
+              :key="mode.key"
+              type="button"
+              :class="{ 'is-active': activeHomeMode === mode.key }"
+              :aria-selected="activeHomeMode === mode.key"
+              role="tab"
+              @click="setHomeMode(mode.key)"
+            >
+              {{ mode.label }}
+            </button>
+          </div>
+        </div>
+
+        <div class="home-mode-card-grid" :class="`is-${activeHomeMode}`">
+          <component
+            :is="card.href ? 'a' : RouterLink"
+            v-for="card in homeModeCards"
+            :key="`${activeHomeMode}-${card.label}`"
+            class="home-mode-card"
+            :class="`is-${card.tone}`"
+            :to="card.href ? undefined : card.route"
+            :href="card.href ?? undefined"
+          >
+            <span>{{ card.label }}</span>
+            <strong>{{ card.title }}</strong>
+            <b>{{ card.value }}</b>
+            <p>{{ card.note }}</p>
+          </component>
+        </div>
+      </section>
+
       <section class="home-task-strip" aria-label="常用入口">
         <span class="home-task-strip-label">常用入口</span>
         <RouterLink
-          v-for="item in taskEntryCards"
+          v-for="item in primaryTaskEntryCards"
           :key="item.title"
           class="home-task-chip"
           :class="`is-${item.tone}`"
@@ -690,33 +1013,13 @@ function formatViewedAt(dateText) {
 
       <section class="card-grid compact-summary-grid home-summary-grid items-stretch [grid-auto-rows:1fr]">
         <InfoCard
-          v-for="item in primarySummaryCards"
+          v-for="item in compactHomeSummaryCards"
           :key="item.title"
           :title="item.title"
           :value="item.value"
           :description="item.description"
           :status="item.status"
         />
-
-        <article v-if="etfSummaryCard" class="info-card home-summary-mini-card rounded-[1.5rem] border border-slate-200/70 bg-white/90 shadow-[0_18px_42px_rgba(15,23,42,0.08)] ring-1 ring-white/75 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
-          <div class="home-summary-mini-copy flex h-full flex-col justify-between gap-3">
-            <p class="info-card-title">{{ etfSummaryCard.title }}</p>
-            <p class="info-card-value">{{ etfSummaryCard.value }}</p>
-            <p class="info-card-note">{{ etfSummaryCard.description }}</p>
-          </div>
-        </article>
-
-        <article class="info-card home-summary-mini-card home-freshness-summary-card rounded-[1.5rem] border border-slate-200/70 bg-white/90 shadow-[0_18px_42px_rgba(15,23,42,0.08)] ring-1 ring-white/75 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
-          <div class="home-summary-mini-copy flex h-full flex-col justify-between gap-3">
-            <p class="info-card-title">資料狀態</p>
-            <DataFreshnessBadge
-              :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
-              :market-date="liveMarketDate ?? dashboard?.marketDate"
-              size="compact"
-              variant="panel"
-            />
-          </div>
-        </article>
       </section>
 
       <section v-if="topThemeCards.length" class="home-topic-radar-strip">

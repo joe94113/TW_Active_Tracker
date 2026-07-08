@@ -509,7 +509,10 @@ function getBarValueY(value) {
           </div>
 
           <p class="modal-thesis">{{ selectedStock.thesis }}</p>
-          <p :id="`disposition-modal-hint-${selectedStock.code}`" class="modal-open-hint">點擊彈窗開啟個股頁面</p>
+          <div class="modal-action-row">
+            <p :id="`disposition-modal-hint-${selectedStock.code}`" class="modal-open-hint">點擊彈窗空白處也可另開個股頁。</p>
+            <button type="button" class="modal-open-button" @click.stop="openSelectedStockPage">開啟個股頁</button>
+          </div>
         </section>
       </div>
     </Teleport>
@@ -798,7 +801,7 @@ function getBarValueY(value) {
   color: inherit;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 14px 28px rgba(20, 41, 61, 0.06);
+  box-shadow: none;
   transition:
     transform var(--ease-standard),
     border-color var(--ease-standard),
@@ -809,7 +812,7 @@ function getBarValueY(value) {
 .disposition-card:focus-visible {
   transform: translateY(-2px);
   border-color: rgba(11, 105, 155, 0.28);
-  box-shadow: var(--surface-hover-shadow);
+  box-shadow: 0 14px 30px rgba(20, 41, 61, 0.08);
   outline: none;
 }
 
@@ -923,9 +926,9 @@ function getBarValueY(value) {
   gap: 5px;
   min-width: 0;
   padding: 11px;
-  border: 1px solid currentColor;
+  border: 1px solid color-mix(in srgb, currentColor 42%, transparent);
   border-radius: 8px;
-  background: color-mix(in srgb, currentColor 8%, transparent);
+  background: color-mix(in srgb, currentColor 5%, transparent);
 }
 
 .timeline-item span {
@@ -1153,10 +1156,41 @@ function getBarValueY(value) {
 }
 
 .modal-open-hint {
-  margin: -6px 0 0;
-  color: var(--brand);
+  margin: 0;
+  color: var(--text-soft);
   font-size: 0.82rem;
   font-weight: 900;
+}
+
+.modal-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 2px;
+}
+
+.modal-open-button {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+  color: #fff;
+  font-weight: 950;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(11, 105, 155, 0.2);
+  transition:
+    transform var(--ease-standard),
+    box-shadow var(--ease-standard);
+}
+
+.modal-open-button:hover,
+.modal-open-button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 34px rgba(11, 105, 155, 0.26);
+  outline: none;
 }
 
 .empty-state {
@@ -1270,6 +1304,11 @@ function getBarValueY(value) {
   .modal-close-button {
     justify-self: start;
   }
+
+  .modal-action-row {
+    display: grid;
+    justify-items: start;
+  }
 }
 </style>
 
@@ -1327,9 +1366,7 @@ html[data-theme="dark"] .disposition-radar-page .disposition-column {
 html[data-theme="dark"] .disposition-radar-page .disposition-card {
   border-color: rgba(148, 163, 184, 0.13);
   background: linear-gradient(180deg, rgba(24, 36, 52, 0.98), rgba(13, 24, 38, 0.98));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.035),
-    0 16px 36px rgba(0, 0, 0, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
 html[data-theme="dark"] .disposition-radar-page .disposition-card:hover,
@@ -1337,7 +1374,7 @@ html[data-theme="dark"] .disposition-radar-page .disposition-card:focus-visible 
   border-color: rgba(125, 211, 252, 0.24);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.045),
-    0 22px 46px rgba(0, 0, 0, 0.32);
+    0 16px 34px rgba(0, 0, 0, 0.28);
 }
 
 html[data-theme="dark"] .disposition-radar-page .case-ribbon {
@@ -1357,5 +1394,15 @@ html[data-theme="dark"] .disposition-radar-page .modal-chart-wrap,
 html[data-theme="dark"] .disposition-radar-page .empty-state {
   border-color: rgba(148, 163, 184, 0.14);
   background: rgba(9, 18, 30, 0.82);
+}
+
+html[data-theme="dark"] .disposition-radar-page .modal-open-hint {
+  color: #9fb2c5;
+}
+
+html[data-theme="dark"] .disposition-radar-page .modal-open-button {
+  background: linear-gradient(135deg, #38bdf8, #0b699b);
+  color: #06111c;
+  box-shadow: 0 16px 34px rgba(56, 189, 248, 0.16);
 }
 </style>

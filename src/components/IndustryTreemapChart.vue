@@ -34,6 +34,8 @@ const palette = computed(() => {
     downLow: isDark ? [52, 136, 110] : [92, 176, 135],
     downHigh: isDark ? [63, 220, 160] : [16, 126, 82],
     neutral: isDark ? [99, 196, 255] : [11, 105, 155],
+    activityLow: isDark ? [43, 111, 174] : [120, 184, 222],
+    activityHigh: isDark ? [103, 201, 255] : [11, 105, 155],
     textStrong: isDark ? '#f2f7fb' : '#10202d',
     textSoft: isDark ? '#b8c7d8' : '#597086',
     border: isDark ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.94)',
@@ -45,7 +47,7 @@ const palette = computed(() => {
 
 const colorScale = computed(() => {
   const changes = props.industries
-    .map((industry) => Math.abs(normalizeNumber(industry.avgChangePercent) ?? 0))
+    .map((industry) => Math.abs(getColorMetricValue(industry)))
     .filter((value) => value > 0);
   const max = Math.max(...changes, 1);
   const min = Math.min(...changes, max);
@@ -59,13 +61,18 @@ const colorScale = computed(() => {
 
 const colorIntensityByIndustry = computed(() => {
   const map = new Map();
+  const hasActivityTone = props.industries.some((industry) => industry.metricTone === 'activity');
   const changes = props.industries.map((industry) => ({
     name: industry.industryName || '未分類',
-    changePercent: normalizeNumber(industry.avgChangePercent) ?? 0,
+    changePercent: getColorMetricValue(industry),
   }));
 
-  setSignedIntensity(map, changes.filter((item) => item.changePercent > 0));
-  setSignedIntensity(map, changes.filter((item) => item.changePercent < 0));
+  if (hasActivityTone) {
+    setSignedIntensity(map, changes);
+  } else {
+    setSignedIntensity(map, changes.filter((item) => item.changePercent > 0));
+    setSignedIntensity(map, changes.filter((item) => item.changePercent < 0));
+  }
 
   return map;
 });
@@ -75,10 +82,15 @@ const chartData = computed(() =>
     const changePercent = normalizeNumber(industry.avgChangePercent) ?? 0;
     const tradeValue = normalizeNumber(industry.totalTradeValue) ?? 0;
     const heatScore = normalizeNumber(industry.heatScore) ?? 0;
+    const metricValue = normalizeNumber(industry.metricValue) ?? changePercent;
+    const metricColorValue = getColorMetricValue(industry);
+    const metricTone = industry.metricTone === 'activity' ? 'activity' : 'signed';
+    const metricLabel = industry.metricLabel ?? '平均漲跌';
+    const metricText = industry.metricText ?? formatPercent(metricValue);
     const breadthPercent = normalizeNumber(industry.breadthPercent) ?? (
       industry.stockCount ? ((industry.advancingCount ?? 0) / industry.stockCount) * 100 : 0
     );
-    const color = getTileColor(changePercent, industry.industryName || '未分類');
+    const color = getTileColor(metricColorValue, industry.industryName || '未分類', metricTone);
 
     return {
       name: industry.industryName || '未分類',
@@ -88,6 +100,12 @@ const chartData = computed(() =>
       changePercent,
       heatScore,
       tradeValue,
+      metricValue,
+      metricColorValue,
+      metricTone,
+      metricLabel,
+      metricText,
+      metricLegendLabel: industry.metricLegendLabel ?? metricLabel,
       breadthPercent,
       advancingCount: industry.advancingCount ?? 0,
       stockCount: industry.stockCount ?? 0,
@@ -108,9 +126,11 @@ const chartData = computed(() =>
 const accessibleItems = computed(() =>
   chartData.value.map((item) => ({
     key: item.industryName,
-    text: `${item.rank}. ${item.industryName}，平均漲跌 ${formatPercent(item.changePercent)}，成交值 ${formatAmount(item.tradeValue)}`,
+    text: `${item.rank}. ${item.industryName}，${item.metricLabel} ${item.metricText}，成交值 ${formatAmount(item.tradeValue)}`,
   })),
 );
+const isActivityMetric = computed(() => chartData.value.some((item) => item.metricTone === 'activity'));
+const legendMetricLabel = computed(() => chartData.value[0]?.metricLegendLabel ?? '漲跌幅');
 
 watch([chartData, themeMode], () => {
   nextTick(renderChart);
@@ -275,7 +295,7 @@ function formatLabel(params) {
   const data = params.data ?? {};
   const lines = [
     data.industryName ?? data.name,
-    formatPercent(data.changePercent),
+    data.metricText ?? formatPercent(data.changePercent),
   ];
 
   if (Number(data.rank) <= 6) {
@@ -303,7 +323,7 @@ function formatTooltip(params) {
       <span style="font-size:12px;color:${palette.value.textSoft};">#${escapeHtml(formatNumber(data.rank))}</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:12px;">
-      ${tooltipMetric('平均漲跌', formatPercent(data.changePercent), Number(data.changePercent ?? 0) >= 0 ? '#f97361' : '#39c88f')}
+      ${tooltipMetric(data.metricLabel ?? '平均漲跌', data.metricText ?? formatPercent(data.changePercent), metricColor(data))}
       ${tooltipMetric('強度分數', formatNumber(Math.round(Number(data.heatScore ?? 0))))}
       ${tooltipMetric('上漲家數', `${escapeHtml(formatNumber(data.advancingCount))} / ${escapeHtml(formatNumber(data.stockCount))}`)}
       ${tooltipMetric('成交值', formatAmount(data.tradeValue))}
@@ -319,7 +339,12 @@ function tooltipMetric(label, value, color = palette.value.textStrong) {
   </div>`;
 }
 
-function getTileColor(value, industryName) {
+function metricColor(data) {
+  if (data.metricTone === 'activity') return palette.value.isDark ? '#8fd8ff' : '#0b699b';
+  return Number(data.metricColorValue ?? data.changePercent ?? 0) >= 0 ? '#f97361' : '#39c88f';
+}
+
+function getTileColor(value, industryName, tone = 'signed') {
   const number = Number(value);
   const colors = palette.value;
   const scale = colorScale.value;
@@ -329,11 +354,13 @@ function getTileColor(value, industryName) {
   const intensity = Math.max(relativeIntensity, rankedIntensity);
   const contrast = 0.08 + intensity * 0.92;
   const channel =
-    number > 0
-      ? mixRgb(colors.upLow, colors.upHigh, contrast)
-      : number < 0
-        ? mixRgb(colors.downLow, colors.downHigh, contrast)
-        : colors.neutral;
+    tone === 'activity'
+      ? mixRgb(colors.activityLow, colors.activityHigh, contrast)
+      : number > 0
+        ? mixRgb(colors.upLow, colors.upHigh, contrast)
+        : number < 0
+          ? mixRgb(colors.downLow, colors.downHigh, contrast)
+          : colors.neutral;
   const alpha = colors.isDark ? 0.82 : 0.92;
 
   return {
@@ -341,6 +368,10 @@ function getTileColor(value, industryName) {
     text: '#ffffff',
     shadow: colors.isDark ? 'rgba(0, 0, 0, 0.34)' : 'rgba(78, 20, 16, 0.28)',
   };
+}
+
+function getColorMetricValue(industry) {
+  return normalizeNumber(industry.metricColorValue ?? industry.metricValue ?? industry.avgChangePercent) ?? 0;
 }
 
 function setSignedIntensity(map, items) {
@@ -376,9 +407,16 @@ function escapeHtml(value) {
 <template>
   <div class="industry-treemap-card" role="img" aria-label="市場產業熱力圖">
     <div class="industry-treemap-legend" aria-hidden="true">
-      <span><i class="is-down"></i>下跌</span>
-      <span><i class="is-up-soft"></i>小漲</span>
-      <span><i class="is-up-strong"></i>強漲</span>
+      <template v-if="isActivityMetric">
+        <span><i class="is-activity-low"></i>{{ legendMetricLabel }}低</span>
+        <span><i class="is-activity-mid"></i>{{ legendMetricLabel }}中</span>
+        <span><i class="is-activity-high"></i>{{ legendMetricLabel }}高</span>
+      </template>
+      <template v-else>
+        <span><i class="is-down"></i>下跌</span>
+        <span><i class="is-up-soft"></i>小漲</span>
+        <span><i class="is-up-strong"></i>強漲</span>
+      </template>
       <b>面積 = 成交值</b>
     </div>
     <div v-if="chartData.length" ref="chartHost" class="industry-treemap-host"></div>
@@ -457,6 +495,18 @@ function escapeHtml(value) {
 
 .industry-treemap-legend .is-up-strong {
   background: linear-gradient(90deg, #d16f62, #b83022);
+}
+
+.industry-treemap-legend .is-activity-low {
+  background: linear-gradient(90deg, #78b8de, #65a9d0);
+}
+
+.industry-treemap-legend .is-activity-mid {
+  background: linear-gradient(90deg, #65a9d0, #2f86bd);
+}
+
+.industry-treemap-legend .is-activity-high {
+  background: linear-gradient(90deg, #2f86bd, #0b699b);
 }
 
 .industry-treemap-empty {

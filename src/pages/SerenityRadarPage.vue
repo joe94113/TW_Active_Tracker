@@ -71,6 +71,24 @@ const heroCards = computed(() => [
   },
 ]);
 
+const boundaryCards = computed(() => [
+  {
+    label: '產品定位',
+    title: '外部觀點觀察',
+    note: '這頁整理美股 AI / 半導體供應鏈公開觀點，和台股雷達分開解讀。',
+  },
+  {
+    label: '資料來源',
+    title: sourceDisplayName.value,
+    note: '站內保存摘要、分類、代號、貼文 ID 與原文連結，不保存完整貼文。',
+  },
+  {
+    label: '使用邊界',
+    title: '非投資建議',
+    note: '觀點方向只代表公開貼文脈絡，仍需搭配財報、價格與風險控管。',
+  },
+]);
+
 const sourceStatusText = computed(() => {
   if (sourceStatus.value === 'ready') return `已連接 ${sourceDisplayName.value}`;
   if (sourceStatus.value === 'pending_token') return '等待 X API token';
@@ -111,6 +129,9 @@ const setupMessage = computed(() => {
 
 const recentPosts = computed(() => dataset.value?.recentPosts ?? []);
 const performanceRows = computed(() => dataset.value?.performanceRows ?? []);
+const performanceBySymbol = computed(
+  () => new Map(performanceRows.value.map((row) => [String(row.symbol ?? '').trim().toUpperCase(), row])),
+);
 const sortedPerformanceRows = computed(() =>
   [...performanceRows.value].sort((left, right) => {
     const leftReturn = numberOrNull(left.returnSinceMention);
@@ -128,6 +149,30 @@ const sortedPerformanceRows = computed(() =>
 );
 const quotedPerformanceCount = computed(
   () => performanceRows.value.filter((row) => numberOrNull(row.currentPrice) !== null).length,
+);
+const latestMentionRows = computed(() =>
+  timeframeStocks.value
+    .map((stock) => {
+      const latest = latestHistory(stock);
+      const symbol = String(stock?.symbol ?? '').trim().toUpperCase();
+
+      return {
+        stock,
+        latest,
+        performance: performanceBySymbol.value.get(symbol) ?? null,
+      };
+    })
+    .filter((row) => row.latest)
+    .sort((left, right) => {
+      const leftTime = new Date(left.latest?.date ?? 0).getTime();
+      const rightTime = new Date(right.latest?.date ?? 0).getTime();
+
+      return (
+        (Number.isFinite(rightTime) ? rightTime : 0) - (Number.isFinite(leftTime) ? leftTime : 0) ||
+        (right.stock?.mentionCount ?? 0) - (left.stock?.mentionCount ?? 0)
+      );
+    })
+    .slice(0, 8),
 );
 
 onMounted(async () => {
@@ -305,6 +350,92 @@ function performanceClass(value) {
               {{ item.label }}
             </button>
           </div>
+        </div>
+      </section>
+
+      <section v-if="latestMentionRows.length" class="panel serenity-action-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">最新提及清單</h2>
+            <p class="panel-subtitle">先看最新被點名的標的、目前方向、提及後表現與原文入口。</p>
+          </div>
+          <span class="meta-chip">{{ timeframe?.label ?? '日' }}檢視</span>
+        </div>
+
+        <div class="serenity-action-table-shell">
+          <table class="serenity-action-table">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>方向</th>
+                <th>最新觀點</th>
+                <th>提及後</th>
+                <th>原文</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="row in latestMentionRows"
+                :key="`latest-${row.stock.symbol}`"
+                :class="stanceClass(row.stock.stance)"
+              >
+                <td>
+                  <div class="serenity-action-symbol">
+                    <strong>{{ row.stock.symbol }}</strong>
+                    <span>{{ row.performance?.company || row.performance?.exchange || 'US' }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="stance-badge" :class="stanceClass(row.stock.stance)">
+                    {{ stanceLabel(row.stock.stance) }}
+                  </span>
+                  <small>{{ formatNumber(row.stock.mentionCount) }} 次提及</small>
+                </td>
+                <td>
+                  <p class="serenity-action-summary">{{ row.latest.summary }}</p>
+                  <small>{{ formatDate(row.latest.date) }}</small>
+                </td>
+                <td>
+                  <strong class="performance-return" :class="performanceClass(row.performance?.returnSinceMention)">
+                    {{ formatSignedPercent(row.performance?.returnSinceMention) }}
+                  </strong>
+                  <small v-if="row.performance?.currentPrice">
+                    現價 {{ formatPrice(row.performance.currentPrice, row.performance.currentCurrency || row.performance.currency) }}
+                  </small>
+                </td>
+                <td>
+                  <a
+                    v-if="row.latest.postUrl"
+                    class="source-link"
+                    :href="row.latest.postUrl"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    開啟
+                  </a>
+                  <span v-else class="muted">--</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel serenity-boundary-panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">外部觀點邊界</h2>
+            <p class="panel-subtitle">把美股供應鏈觀點放在研究輔助層，不和台股主雷達訊號混在一起。</p>
+          </div>
+          <span class="meta-chip">US Supply Chain</span>
+        </div>
+
+        <div class="serenity-boundary-grid">
+          <article v-for="card in boundaryCards" :key="card.label" class="serenity-boundary-card">
+            <span>{{ card.label }}</span>
+            <strong>{{ card.title }}</strong>
+            <p>{{ card.note }}</p>
+          </article>
         </div>
       </section>
 
@@ -587,6 +718,48 @@ function performanceClass(value) {
   font-weight: 800;
 }
 
+.serenity-boundary-panel {
+  overflow: hidden;
+  border-color: rgba(11, 105, 155, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 251, 255, 0.95));
+}
+
+.serenity-boundary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.serenity-boundary-card {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.serenity-boundary-card span {
+  color: var(--brand);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.serenity-boundary-card strong {
+  color: var(--page-text);
+  font-size: 1.02rem;
+}
+
+.serenity-boundary-card p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
 .serenity-controls {
   display: flex;
   flex-wrap: wrap;
@@ -766,6 +939,8 @@ function performanceClass(value) {
   gap: 14px;
   padding: 18px;
   border-left: 4px solid var(--neutral);
+  box-shadow: none;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
 }
 
 .serenity-stock-card.is-bullish {
@@ -868,6 +1043,23 @@ html[data-theme="dark"] .serenity-hero {
     var(--surface-strong);
 }
 
+html[data-theme="dark"] .serenity-boundary-panel {
+  border-color: rgba(148, 163, 184, 0.14);
+  background:
+    linear-gradient(180deg, rgba(13, 22, 34, 0.96), rgba(8, 15, 24, 0.92));
+}
+
+html[data-theme="dark"] .serenity-boundary-card {
+  border-color: rgba(148, 163, 184, 0.14);
+  background: rgba(9, 18, 30, 0.82);
+}
+
+html[data-theme="dark"] .serenity-stock-card {
+  border-color: rgba(148, 163, 184, 0.14);
+  background: rgba(9, 18, 30, 0.72);
+  box-shadow: none;
+}
+
 html[data-theme="dark"] .serenity-segment button.is-active,
 html[data-theme="dark"] .source-link {
   color: var(--brand-deep);
@@ -880,7 +1072,8 @@ html[data-theme="dark"] .serenity-performance-table tbody tr:hover {
 @media (max-width: 1080px) {
   .serenity-hero,
   .serenity-stock-grid,
-  .serenity-compliance-grid {
+  .serenity-compliance-grid,
+  .serenity-boundary-grid {
     grid-template-columns: 1fr;
   }
 

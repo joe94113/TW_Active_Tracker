@@ -52,6 +52,7 @@ export function buildIndustryPulse(stockList = [], themeRadar = null) {
         dualBuyCount: 0,
         activeEtfCount: 0,
         dualGrowthCount: 0,
+        absoluteChangeTotal: 0,
       });
     }
 
@@ -76,6 +77,7 @@ export function buildIndustryPulse(stockList = [], themeRadar = null) {
     bucket.dualBuyCount += foreign5Day > 0 && trust5Day > 0 ? 1 : 0;
     bucket.activeEtfCount += activeEtfCount > 0 ? 1 : 0;
     bucket.dualGrowthCount += stock?.monthlyRevenueDualGrowth ? 1 : 0;
+    bucket.absoluteChangeTotal += Math.abs(changePercent);
   }
 
   const industries = [...industryMap.values()]
@@ -87,6 +89,7 @@ export function buildIndustryPulse(stockList = [], themeRadar = null) {
       const avgReturn20 = count
         ? bucket.stocks.reduce((sum, stock) => sum + (toNumber(stock.return20) ?? 0), 0) / count
         : 0;
+      const avgAbsChangePercent = count ? bucket.absoluteChangeTotal / count : 0;
       const breadthRatio = count ? (bucket.advancingCount - bucket.decliningCount) / count : 0;
       const heatScore =
         avgChangePercent * 16 +
@@ -106,6 +109,7 @@ export function buildIndustryPulse(stockList = [], themeRadar = null) {
         industryName: bucket.industryName,
         stockCount: count,
         avgChangePercent,
+        avgAbsChangePercent,
         avgReturn20,
         breadthRatio,
         totalTradeValue: bucket.totalTradeValue,

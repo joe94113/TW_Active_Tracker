@@ -13,6 +13,29 @@ import { createStockRoute } from '../lib/stockRouting';
 const { dashboard, stockSearchList, manifest, isLoading, errorMessage, loadGlobalData } = useGlobalData();
 
 const activePulseTab = ref('industries');
+const activeHeatmapMetric = ref('change');
+const heatmapMetricOptions = [
+  {
+    key: 'change',
+    label: '漲跌幅',
+    hint: '紅漲綠跌',
+  },
+  {
+    key: 'trade',
+    label: '成交值',
+    hint: '資金集中',
+  },
+  {
+    key: 'heat',
+    label: '強度',
+    hint: '綜合分數',
+  },
+  {
+    key: 'volatility',
+    label: '波動',
+    hint: '平均震幅',
+  },
+];
 const pulse = computed(() => buildIndustryPulse(stockSearchList.value, dashboard.value?.題材雷達));
 const hasData = computed(() => Boolean(pulse.value.topIndustries.length || pulse.value.suddenMoves.length));
 const strongestIndustry = computed(() => pulse.value.summary?.strongestIndustry ?? null);
@@ -45,6 +68,7 @@ const heatmapTiles = computed(() => {
   const maxTradeValue = Math.max(...pulse.value.topIndustries.map((industry) => Number(industry.totalTradeValue ?? 0)), 1);
 
   return pulse.value.topIndustries.slice(0, 12).map((industry, index) => {
+    const metric = getHeatmapMetric(industry);
     const tradeWeight = Number(industry.totalTradeValue ?? 0) / maxTradeValue;
     const span =
       index <= 1 || tradeWeight >= 0.72
@@ -61,6 +85,12 @@ const heatmapTiles = computed(() => {
       rank: index + 1,
       span,
       breadthPercent,
+      metricLabel: metric.label,
+      metricValue: metric.value,
+      metricText: metric.text,
+      metricTone: metric.tone,
+      metricColorValue: metric.colorValue,
+      metricLegendLabel: metric.legendLabel,
       tone: getHeatmapTone(industry.avgChangePercent, industry.heatScore),
     };
   });
@@ -125,6 +155,60 @@ function formatHeatScore(value) {
   return Number.isFinite(score) ? formatNumber(Math.round(score)) : '-';
 }
 
+function getHeatmapMetric(industry) {
+  if (activeHeatmapMetric.value === 'trade') {
+    const value = Number(industry.totalTradeValue ?? 0);
+    return {
+      label: '成交值',
+      value,
+      text: formatAmount(value),
+      tone: 'activity',
+      colorValue: value,
+      legendLabel: '成交值',
+    };
+  }
+
+  if (activeHeatmapMetric.value === 'heat') {
+    const value = Number(industry.heatScore ?? 0);
+    return {
+      label: '強度分數',
+      value,
+      text: formatHeatScore(value),
+      tone: 'activity',
+      colorValue: value,
+      legendLabel: '強度',
+    };
+  }
+
+  if (activeHeatmapMetric.value === 'volatility') {
+    const value = Number(industry.avgAbsChangePercent ?? Math.abs(industry.avgChangePercent ?? 0));
+    return {
+      label: '平均波動',
+      value,
+      text: formatPercent(value),
+      tone: 'activity',
+      colorValue: value,
+      legendLabel: '波動',
+    };
+  }
+
+  const value = Number(industry.avgChangePercent ?? 0);
+  return {
+    label: '平均漲跌',
+    value,
+    text: formatPercent(value),
+    tone: 'signed',
+    colorValue: value,
+    legendLabel: '漲跌幅',
+  };
+}
+
+function setHeatmapMetric(metric) {
+  if (heatmapMetricOptions.some((item) => item.key === metric)) {
+    activeHeatmapMetric.value = metric;
+  }
+}
+
 function setPulseTab(tab) {
   activePulseTab.value = tab;
 }
@@ -181,6 +265,25 @@ function setPulseTab(tab) {
             <p class="panel-subtitle">用平均漲跌、上漲家數占比與成交值權重，把今天資金最集中的產業放大呈現。</p>
           </div>
           <span class="meta-chip">{{ formatNumber(heatmapTiles.length, 0) }} 個產業</span>
+        </div>
+
+        <div class="industry-heatmap-toolbar" aria-label="熱力圖指標切換">
+          <div class="industry-heatmap-segment" role="tablist" aria-label="熱力圖指標">
+            <button
+              v-for="option in heatmapMetricOptions"
+              :key="option.key"
+              type="button"
+              :class="{ 'is-active': activeHeatmapMetric === option.key }"
+              :aria-selected="activeHeatmapMetric === option.key"
+              @click="setHeatmapMetric(option.key)"
+            >
+              <strong>{{ option.label }}</strong>
+              <span>{{ option.hint }}</span>
+            </button>
+          </div>
+          <p>
+            面積固定代表成交值；顏色會依目前指標切換。漲跌幅使用台股慣例：紅色代表上漲，綠色代表下跌。
+          </p>
         </div>
 
         <div class="industry-heatmap-summary">

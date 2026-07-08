@@ -3,13 +3,16 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { useGlobalData } from './composables/useGlobalData';
 import GlobalStockSearch from './components/GlobalStockSearch.vue';
+import DataFreshnessBadge from './components/DataFreshnessBadge.vue';
+import { getDataFreshnessStatus } from './lib/dataFreshness';
 
 const route = useRoute();
-const { manifest, loadGlobalData } = useGlobalData();
+const { dashboard, manifest, loadGlobalData } = useGlobalData();
 
 const isCompactHeader = ref(false);
 const isMoreMenuOpen = ref(false);
 const moreMenuQuery = ref('');
+const recentMorePaths = ref([]);
 const desktopMoreMenuRef = ref(null);
 const desktopMoreTriggerRef = ref(null);
 const desktopMoreSearchRef = ref(null);
@@ -25,6 +28,7 @@ let colorSchemeQuery = null;
 let colorSchemeHandler = null;
 
 const THEME_STORAGE_KEY = 'tw-active-tracker-theme';
+const MORE_RECENT_STORAGE_KEY = 'tw-active-tracker-more-recent-paths';
 const HEADER_COMPACT_QUERY = '(max-width: 900px)';
 
 const primaryNavigationItems = [
@@ -176,6 +180,43 @@ const moreMenuSections = [
 
 const secondaryNavigationByPath = new Map(secondaryNavigationItems.map((item) => [item.path, item]));
 
+function normalizeMorePath(path) {
+  const text = String(path ?? '').trim();
+  if (!text || text === '/') return null;
+
+  const exact = secondaryNavigationByPath.get(text);
+  if (exact) return exact.path;
+
+  return secondaryNavigationItems.find((item) => text.startsWith(`${item.path}/`))?.path ?? null;
+}
+
+function readRecentMorePaths() {
+  if (typeof window === 'undefined') return;
+
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(MORE_RECENT_STORAGE_KEY) ?? '[]');
+    recentMorePaths.value = Array.isArray(parsed)
+      ? parsed.map(normalizeMorePath).filter(Boolean).slice(0, 3)
+      : [];
+  } catch {
+    recentMorePaths.value = [];
+  }
+}
+
+function rememberMorePath(path) {
+  const normalizedPath = normalizeMorePath(path);
+  if (!normalizedPath) return;
+
+  recentMorePaths.value = [
+    normalizedPath,
+    ...recentMorePaths.value.filter((item) => item !== normalizedPath),
+  ].slice(0, 3);
+
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(MORE_RECENT_STORAGE_KEY, JSON.stringify(recentMorePaths.value));
+  }
+}
+
 function formatGeneratedAt(value) {
   if (!value) {
     return '資料整理中';
@@ -269,6 +310,49 @@ const siteIconHref = `${import.meta.env.BASE_URL}favicon.svg`;
 const isMoreActive = computed(() => secondaryNavigationItems.some((item) => isActiveRoute(item.path)));
 const themeToggleLabel = computed(() => (resolvedTheme.value === 'dark' ? '日間' : '夜間'));
 const themeToggleHint = computed(() => (resolvedTheme.value === 'dark' ? '切換為淺色模式' : '切換為深色模式'));
+const globalMarketDate = computed(
+  () =>
+    dashboard.value?.市場總覽?.即時狀態?.marketDate ??
+    dashboard.value?.市場總覽?.盤後資料日期 ??
+    dashboard.value?.市場總覽?.資料日期 ??
+    manifest.value?.generatedAtLocalDate ??
+    null,
+);
+const globalDataFreshness = computed(() =>
+  getDataFreshnessStatus({
+    generatedAt: dashboard.value?.generatedAt ?? manifest.value?.generatedAt,
+    marketDate: globalMarketDate.value,
+  }),
+);
+const globalFreshnessMessage = computed(() => {
+  if (globalDataFreshness.value.isStale) {
+    return `目前資料日停在 ${globalDataFreshness.value.marketDate ?? '未知日期'}，全站已視為歷史回看，推播與選股判讀請保守使用。`;
+  }
+
+  if (globalDataFreshness.value.isWarning) {
+    return '資料已超過盤中更新容忍時間，下一輪排程成功後會自動恢復正常。';
+  }
+
+  return '資料時間可用，頁面訊號仍以公開資料整理為研究參考。';
+});
+const globalStatusItems = computed(() => [
+  {
+    label: '資料日',
+    value: globalDataFreshness.value.marketDate ?? '整理中',
+  },
+  {
+    label: '最近整理',
+    value: generatedAtText.value,
+  },
+  {
+    label: '判讀模式',
+    value: globalDataFreshness.value.isStale
+      ? '歷史回看'
+      : globalDataFreshness.value.isWarning
+        ? '等待更新'
+        : '今日可用',
+  },
+]);
 const normalizedMoreMenuQuery = computed(() => moreMenuQuery.value.trim().toLowerCase());
 const filteredSecondaryNavigationItems = computed(() => {
   const query = normalizedMoreMenuQuery.value;
@@ -290,6 +374,41 @@ const featuredMoreItems = computed(() =>
   featuredMorePaths
     .map((path) => secondaryNavigationByPath.get(path))
     .filter((item) => item && filteredSecondaryNavigationPaths.value.has(item.path)),
+);
+const mobileRecentMoreItems = computed(() =>
+  recentMorePaths.value
+    .map((path) => secondaryNavigationByPath.get(path))
+    .filter((item) => item && filteredSecondaryNavigationPaths.value.has(item.path)),
+);
+const recommendedMorePaths = computed(() => {
+  if (route.path === '/') {
+    return ['/favorites-health', '/industry-pulse', '/scanner'];
+  }
+
+  if (route.path.startsWith('/stocks/')) {
+    return ['/favorites-health', '/scanner', '/disposition-radar'];
+  }
+
+  if (route.path.startsWith('/industry-pulse') || route.path.startsWith('/themes')) {
+    return ['/radar', '/scanner', '/market-buzz'];
+  }
+
+  if (route.path.startsWith('/serenity-radar')) {
+    return ['/global-markets', '/themes', '/event-stats'];
+  }
+
+  return ['/radar', '/industry-pulse', '/event-stats'];
+});
+const mobileRecommendedMoreItems = computed(() =>
+  recommendedMorePaths.value
+    .map((path) => secondaryNavigationByPath.get(path))
+    .filter(
+      (item) =>
+        item &&
+        filteredSecondaryNavigationPaths.value.has(item.path) &&
+        !mobileRecentMoreItems.value.some((recentItem) => recentItem.path === item.path),
+    )
+    .slice(0, 3),
 );
 const moreMenuGroups = computed(() => {
   const assignedPaths = new Set();
@@ -347,6 +466,9 @@ onMounted(() => {
     if (storedTheme === 'light' || storedTheme === 'dark') {
       themePreference.value = storedTheme;
     }
+
+    readRecentMorePaths();
+    rememberMorePath(route.path);
   }
   applyTheme();
 
@@ -422,6 +544,7 @@ onBeforeUnmount(() => {
 watch(
   () => route.path,
   () => {
+    rememberMorePath(route.path);
     closeMoreMenu();
   },
 );
@@ -582,6 +705,33 @@ watch(
       </div>
     </header>
 
+    <section
+      v-if="manifest"
+      class="global-data-status"
+      :class="[`is-${globalDataFreshness.tone}`, { 'is-attention': globalDataFreshness.isWarning }]"
+      aria-label="全站資料狀態"
+    >
+      <div class="global-data-status-copy">
+        <span>資料狀態</span>
+        <strong>{{ globalDataFreshness.label }}</strong>
+        <p>{{ globalFreshnessMessage }}</p>
+      </div>
+      <div class="global-data-status-metrics" aria-label="資料狀態細節">
+        <div v-for="item in globalStatusItems" :key="item.label" class="global-data-status-metric">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+        </div>
+      </div>
+      <div class="global-data-status-side">
+        <DataFreshnessBadge
+          :generated-at="dashboard?.generatedAt ?? manifest?.generatedAt"
+          :market-date="globalMarketDate"
+          size="compact"
+        />
+        <RouterLink class="global-data-status-link" to="/event-stats">查看更新紀錄</RouterLink>
+      </div>
+    </section>
+
     <main class="app-main mx-auto w-full">
       <RouterView />
     </main>
@@ -658,17 +808,119 @@ watch(
           更多
         </button>
 
-        <div v-if="isMoreMenuOpen" class="mobile-more-panel">
-          <RouterLink
-            v-for="item in secondaryNavigationItems"
-            :key="`mobile-more-${item.path}`"
-            :to="item.path"
-            class="mobile-more-link"
-            :class="{ 'is-active': isActiveRoute(item.path) }"
-            @click="closeMoreMenu"
-          >
-            {{ item.label }}
-          </RouterLink>
+        <div v-if="isMoreMenuOpen" class="mobile-more-panel" role="dialog" aria-label="工具導覽">
+          <div class="mobile-more-panel-head">
+            <div>
+              <strong>工具導覽</strong>
+              <span>{{ filteredSecondaryNavigationItems.length }} 個入口，已依任務分組</span>
+            </div>
+            <button type="button" class="mobile-more-close" aria-label="關閉工具導覽" @click="closeMoreMenu">
+              關閉
+            </button>
+          </div>
+
+          <label class="more-menu-search mobile-more-search">
+            <span>搜尋</span>
+            <input
+              v-model="moreMenuQuery"
+              type="search"
+              autocomplete="off"
+              aria-label="搜尋工具導覽"
+              placeholder="輸入處置、ETF、分點..."
+              @keydown.stop
+            />
+          </label>
+
+          <div class="mobile-more-scroll">
+            <section v-if="mobileRecentMoreItems.length" class="mobile-more-section is-priority">
+              <div class="mobile-more-section-head">
+                <strong>最近使用</strong>
+                <span>先回到你剛剛用過的工具。</span>
+              </div>
+              <div class="mobile-more-link-grid">
+                <RouterLink
+                  v-for="item in mobileRecentMoreItems"
+                  :key="`mobile-recent-${item.path}`"
+                  :to="item.path"
+                  class="mobile-more-card is-featured"
+                  :class="{ 'is-active': isActiveRoute(item.path) }"
+                  @click="closeMoreMenu"
+                >
+                  <span class="more-menu-card-tag">{{ item.tag }}</span>
+                  <span class="mobile-more-card-copy">
+                    <strong>{{ item.label }}</strong>
+                    <small>{{ item.description }}</small>
+                  </span>
+                </RouterLink>
+              </div>
+            </section>
+
+            <section v-if="mobileRecommendedMoreItems.length" class="mobile-more-section is-priority">
+              <div class="mobile-more-section-head">
+                <strong>此頁建議</strong>
+                <span>依目前頁面挑出下一步最常用入口。</span>
+              </div>
+              <div class="mobile-more-link-grid">
+                <RouterLink
+                  v-for="item in mobileRecommendedMoreItems"
+                  :key="`mobile-recommended-${item.path}`"
+                  :to="item.path"
+                  class="mobile-more-card"
+                  :class="{ 'is-active': isActiveRoute(item.path) }"
+                  @click="closeMoreMenu"
+                >
+                  <span class="more-menu-card-tag">{{ item.tag }}</span>
+                  <span class="mobile-more-card-copy">
+                    <strong>{{ item.label }}</strong>
+                    <small>{{ item.description }}</small>
+                  </span>
+                </RouterLink>
+              </div>
+            </section>
+
+            <section v-if="featuredMoreItems.length" class="mobile-more-featured" aria-label="常用入口">
+              <RouterLink
+                v-for="item in featuredMoreItems"
+                :key="`mobile-featured-${item.path}`"
+                :to="item.path"
+                class="mobile-more-card is-featured"
+                :class="{ 'is-active': isActiveRoute(item.path) }"
+                @click="closeMoreMenu"
+              >
+                <span class="more-menu-card-tag">{{ item.tag }}</span>
+                <strong>{{ item.label }}</strong>
+              </RouterLink>
+            </section>
+
+            <section
+              v-for="group in moreMenuGroups"
+              :key="`mobile-group-${group.title}`"
+              class="mobile-more-section"
+            >
+              <div class="mobile-more-section-head">
+                <strong>{{ group.title }}</strong>
+                <span>{{ group.subtitle }}</span>
+              </div>
+              <div class="mobile-more-link-grid">
+                <RouterLink
+                  v-for="item in group.items"
+                  :key="`mobile-more-${group.title}-${item.path}`"
+                  :to="item.path"
+                  class="mobile-more-card"
+                  :class="{ 'is-active': isActiveRoute(item.path) }"
+                  @click="closeMoreMenu"
+                >
+                  <span class="more-menu-card-tag">{{ item.tag }}</span>
+                  <span class="mobile-more-card-copy">
+                    <strong>{{ item.label }}</strong>
+                    <small>{{ item.description }}</small>
+                  </span>
+                </RouterLink>
+              </div>
+            </section>
+
+            <p v-if="!moreMenuGroups.length" class="more-menu-empty">沒有找到符合的入口</p>
+          </div>
         </div>
       </div>
     </nav>
