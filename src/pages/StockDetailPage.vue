@@ -1,1927 +1,439 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
-import { useStockDetail } from '../composables/useStockDetail';
-import { useStockComparisonSeries } from '../composables/useStockComparisonSeries';
+import {
+  ArrowLeftIcon,
+  BookmarkIcon,
+  CalendarDaysIcon,
+  ChartBarIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  StarIcon,
+} from '@heroicons/vue/24/outline';
+import StatusCard from '../components/StatusCard.vue';
+import HolderStructureChart from '../components/HolderStructureChart.vue';
+import IntradayChart from '../components/IntradayChart.vue';
+import StockNewsPanel from '../components/StockNewsPanel.vue';
+import TechnicalChart from '../components/TechnicalChart.vue';
 import { useFavoriteStocks } from '../composables/useFavoriteStocks';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useLiveStockSnapshot } from '../composables/useLiveStockSnapshot';
-import { useRecentStocks } from '../composables/useRecentStocks';
 import { useSeoMeta } from '../composables/useSeoMeta';
-import StatusCard from '../components/StatusCard.vue';
-import InfoCard from '../components/InfoCard.vue';
-import StockFinancialOverview from '../components/StockFinancialOverview.vue';
-import IntradayChart from '../components/IntradayChart.vue';
-import TechnicalChart from '../components/TechnicalChart.vue';
-import HolderStructureChart from '../components/HolderStructureChart.vue';
-import IntradayChipFlowChart from '../components/IntradayChipFlowChart.vue';
-import EventCalendarLinks from '../components/EventCalendarLinks.vue';
-import StockNewsPanel from '../components/StockNewsPanel.vue';
-import { createStockRoute } from '../lib/stockRouting';
+import { useStockDetail } from '../composables/useStockDetail';
+import { useTomorrowWatchCodes } from '../composables/useTomorrowWatchCodes';
 import { getDataFreshnessStatus } from '../lib/dataFreshness';
-import { buildKeyPriceZones, buildLargeHolderCostZone, buildStockEventCalendar, buildSupportResistance } from '../lib/stockInsights';
-import { buildStockEventPerformance } from '../lib/stockEventPerformance';
+import { hasFiniteNumber, hasItems, hasText, toFiniteNumber, uniqueBy } from '../lib/dataAvailability';
+import { formatAmount, formatDate, formatLots, formatNumber, formatPercent, formatPriceDelta } from '../lib/formatters';
+import { buildLargeHolderCostZone, buildStockEventCalendar } from '../lib/stockInsights';
 import { buildOverheatWarnings, buildStockHealthScore } from '../lib/stockHealth';
-import { buildPageUrl, createBreadcrumbJsonLd } from '../lib/seo';
-import { buildIndustryValuationIndex, computeIndustryValuation, describeValuation } from '../lib/industryValuation';
-import { scoreVolumeQuality } from '../lib/volumeQuality';
-import { detectPatterns } from '../lib/patternDetection';
-import { aggregateSignalConfidence, describeConfidence } from '../lib/signalConfidence';
-import { buildEarningsIndex, findNextEarnings, buildEarningsRiskBadge, buildProductEventIndex, findUpcomingThemeEvents } from '../lib/marketCalendar';
-import { buildInsiderHoldingsIndex, classifyInsiderTrend } from '../lib/insiderHoldings';
-import { computeAvgTradeValue, classifyLiquidity, formatTradeValue } from '../lib/liquidity';
-import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
-import {
-  formatDate,
-  formatAmount,
-  formatLots,
-  formatNumber,
-  formatPercent,
-  formatPriceDelta,
-} from '../lib/formatters';
 
 const route = useRoute();
-const stockCode = ref(String(route.params.code ?? ''));
-const activeStockTab = ref('overview');
-const stockTabs = [
-  { key: 'overview', label: '重點' },
-  { key: 'charts', label: '圖表' },
-  { key: 'chips', label: '籌碼' },
-  { key: 'financials', label: '財務' },
-  { key: 'news', label: '新聞' },
-];
-
-watch(
-  () => route.params.code,
-  (value) => {
-    stockCode.value = String(value ?? '');
-    activeStockTab.value = 'overview';
-  },
-);
-
-function focusStockTab(tabKey) {
-  activeStockTab.value = tabKey;
-
-  if (typeof window === 'undefined') return;
-
-  window.requestAnimationFrame(() => {
-    const target = document.querySelector('.stock-tabbar');
-
-    if (!target) {
-      return;
-    }
-
-    const topOffset = window.innerWidth <= 640 ? 92 : 108;
-    const top = window.scrollY + target.getBoundingClientRect().top - topOffset;
-    window.scrollTo({ top, behavior: 'smooth' });
-  });
-}
+const stockCode = computed(() => String(route.params.code ?? '').trim());
+const activeTab = ref('overview');
 
 const { detail, isLoading, isEnhancing, errorMessage } = useStockDetail(stockCode);
-const {
-  dashboard,
-  stockList,
-  stockSearchList,
-  earningsCalendar,
-  productEvents,
-  insiderHoldings,
-  signalConfidenceStats,
-  manifest: globalManifest,
-  loadGlobalData,
-} = useGlobalData();
+const { snapshot, isLoading: isSnapshotLoading, refresh } = useLiveStockSnapshot(stockCode);
+const { loadGlobalData } = useGlobalData();
 const { isFavorite, toggleFavorite } = useFavoriteStocks();
-const { snapshot: liveSnapshot, isLoading: isLiveSnapshotLoading } = useLiveStockSnapshot(stockCode, { refreshIntervalMs: 45000 });
-const { pushRecentStock } = useRecentStocks();
+const { isWatched, toggleWatch } = useTomorrowWatchCodes();
 
-const companyProfile = computed(() => detail.value?.公司概況 ?? null);
-const holderDistribution = computed(() => detail.value?.持股分散 ?? null);
-const institutionalFlows = computed(() => detail.value?.法人買賣 ?? null);
-const institutionalFlowDays = computed(() => institutionalFlows.value?.days ?? []);
-const institutionalFlowCoverage = computed(() => {
-  const coverage = institutionalFlows.value?.coverage ?? {};
-  const expectedDays = coverage.expectedDays ?? 5;
-  const actualDays = coverage.actualDays ?? institutionalFlowDays.value.length;
-  const marketLabel = coverage.market ?? '上市櫃';
+onMounted(loadGlobalData);
 
-  if (actualDays >= expectedDays && actualDays >= 5) {
-    return {
-      tone: 'ok',
-      title: '法人序列完整',
-      message: `已取得${marketLabel}近 ${actualDays} 個交易日法人買賣超。`,
-    };
-  }
-
-  if (actualDays > 0) {
-    const missingText = (coverage.missingDates ?? []).slice(0, 3).map(formatDate).join('、');
-    return {
-      tone: 'partial',
-      title: '法人資料部分取得',
-      message: `目前取得 ${actualDays}/${expectedDays} 個交易日。${missingText ? `缺少 ${missingText}，` : ''}更新排程會再從 TWSE / TPEx 補齊。`,
-    };
-  }
-
-  return {
-    tone: 'empty',
-    title: '法人資料尚未取得',
-    message: '這檔可能是上櫃、特殊標的，或官方當日資料尚未公布；每日更新會從 TWSE / TPEx 重新補資料。',
-  };
-});
-const marginSnapshot = computed(() => detail.value?.融資融券 ?? null);
-const activeEtfExposure = computed(() => detail.value?.主動ETF曝光 ?? null);
-const industryComparison = computed(() => detail.value?.同產業比較 ?? null);
-const selectionSignals = computed(() => detail.value?.交易提醒 ?? null);
-const foreignTargetPrice = computed(() => detail.value?.foreignTargetPrice ?? null);
-const isTracked = computed(() => isFavorite(stockCode.value));
-const technicalSignals = computed(() => detail.value?.technicalSignals ?? []);
-const foreignTargetPriceItems = computed(() => foreignTargetPrice.value?.items ?? []);
-const selectionAlertItems = computed(() => selectionSignals.value?.alerts ?? []);
+const latestSummary = computed(() => detail.value?.最新摘要 ?? {});
 const latestIndicators = computed(() => detail.value?.最新指標 ?? {});
-const indicatorSettings = computed(() => detail.value?.indicatorSettings ?? {});
-const comparisonCandidateCodes = computed(() =>
-  (industryComparison.value?.leaders ?? [])
-    .map((item) => item.code)
-    .filter((code) => code && code !== stockCode.value)
-    .slice(0, 5),
-);
-const {
-  comparisonSeries,
-  isLoading: isComparisonSeriesLoading,
-} = useStockComparisonSeries(comparisonCandidateCodes);
+const institutional = computed(() => detail.value?.法人買賣 ?? null);
+const institutionalDays = computed(() => institutional.value?.days ?? []);
+const institutionalSummary = computed(() => institutional.value?.summary ?? {});
+const priceRows = computed(() => detail.value?.歷史資料 ?? []);
+const recentRows = computed(() => priceRows.value.slice(-5).reverse());
 
-const laggardText = computed(() =>
-  (industryComparison.value?.laggards ?? [])
-    .filter((item) => item.code !== stockCode.value)
-    .map((item) => `${item.code} ${item.name}`)
-    .join('、'),
-);
-
-const heroPills = computed(() => [
-  companyProfile.value?.產業名稱 ?? '上市股票',
-  `資料日 ${formatDate(liveSnapshot.value?.marketDate ?? stockSearchSummary.value?.priceDate ?? detail.value?.priceDate)}`,
-  `法人五日 ${formatLots(institutionalFlows.value?.summary?.total5Day)}`,
-  `ETF 持有 ${formatNumber(activeEtfExposure.value?.count)}`,
-]);
-
-const stockSearchSummary = computed(() =>
-  (stockSearchList.value ?? []).find((item) => String(item?.code ?? '') === stockCode.value) ?? null,
-);
-
-const holderDistributionSnapshot = computed(() => {
-  if (holderDistribution.value) {
-    return holderDistribution.value;
-  }
-
-  if (!stockSearchSummary.value) {
-    return null;
-  }
-
-  return {
-    date: stockSearchSummary.value.priceDate ?? detail.value?.priceDate ?? null,
-    largeHolderRatio: stockSearchSummary.value.largeHolderRatio ?? null,
-    retailRatio: stockSearchSummary.value.retailRatio ?? null,
-    largeHolderRatioDelta: null,
-    retailRatioDelta: null,
-  };
-});
-
-const latestMarketDate = computed(() => dashboard.value?.市場總覽?.即時狀態?.marketDate ?? dashboard.value?.市場總覽?.資料日期 ?? null);
-
-const stockGlobalFreshness = computed(() =>
-  getDataFreshnessStatus({
-    generatedAt: dashboard.value?.generatedAt ?? globalManifest.value?.generatedAt,
-    marketDate: latestMarketDate.value ?? globalManifest.value?.generatedAtLocalDate,
-  }),
-);
-
-const detailFreshness = computed(() => {
-  const detailDate = detail.value?.priceDate ?? null;
-  const summaryDate = stockSearchSummary.value?.priceDate ?? null;
-  const marketDate = liveSnapshot.value?.marketDate ?? latestMarketDate.value ?? summaryDate ?? detailDate ?? null;
-  const referenceDate = summaryDate ?? detailDate ?? marketDate;
-
-  if (!referenceDate || !marketDate) {
-    return {
-      marketDate,
-      detailDate,
-      summaryDate,
-      referenceDate,
-      isCurrent: true,
-      isStale: false,
-      staleDays: 0,
-      warningMessage: '',
-    };
-  }
-
-  const marketTimestamp = new Date(`${marketDate}T00:00:00+08:00`).getTime();
-  const detailTimestamp = new Date(`${referenceDate}T00:00:00+08:00`).getTime();
-  const staleDays = Number.isFinite(marketTimestamp) && Number.isFinite(detailTimestamp)
-    ? Math.max(0, Math.round((marketTimestamp - detailTimestamp) / 86400000))
-    : 0;
-  const isStale = staleDays > 0 || stockGlobalFreshness.value.isStale;
-
-  return {
-    marketDate,
-    detailDate,
-    summaryDate,
-    referenceDate,
-    isCurrent: !isStale,
-    isStale,
-    staleDays: Math.max(staleDays, stockGlobalFreshness.value.daysOld ?? 0),
-    warningMessage: isStale
-      ? stockGlobalFreshness.value.isStale
-        ? `全站資料日停在 ${formatDate(stockGlobalFreshness.value.marketDate ?? marketDate)}，已超過今日交易日；這頁先當歷史回看，關鍵價位、技術圖與支撐壓力請保守看待。`
-        : `完整技術明細目前停在 ${formatDate(referenceDate)}，最新盤後摘要已用 ${formatDate(marketDate)} 覆蓋；關鍵價位、技術圖與支撐壓力請保守看待。`
-      : `個股明細已更新到 ${formatDate(marketDate)}。`,
-  };
-});
-
-const displayQuote = computed(() => {
-  const latestSummary = detail.value?.最新摘要 ?? {};
-  const latestSearchSummary = stockSearchSummary.value ?? {};
-
-  return {
-    close: liveSnapshot.value?.lastPrice ?? latestSearchSummary.close ?? latestSummary.close ?? null,
-    change: liveSnapshot.value?.change ?? latestSearchSummary.change ?? latestSummary.change ?? null,
-    changePercent: liveSnapshot.value?.changePercent ?? latestSearchSummary.changePercent ?? latestSummary.changePercent ?? null,
-    return20: latestSearchSummary.return20 ?? latestSummary.return20 ?? null,
-    return60: latestSearchSummary.return60 ?? latestSummary.return60 ?? null,
-    volume: liveSnapshot.value?.volume ?? latestSearchSummary.volume ?? latestSummary.volume ?? null,
-  };
-});
-
-const heroAlertSignals = computed(() => technicalSignals.value.slice(0, 3));
-const isLiveFallback = computed(() => detail.value?.kind === 'live');
-const liveSnapshotCards = computed(() => [
-  {
-    title: '即時成交',
-    value: formatNumber(liveSnapshot.value?.lastPrice),
-    description: `${formatPriceDelta(liveSnapshot.value?.change)} / ${formatPercent(liveSnapshot.value?.changePercent)}`,
-    status:
-      (liveSnapshot.value?.change ?? 0) > 0
-        ? 'up'
-        : (liveSnapshot.value?.change ?? 0) < 0
-          ? 'down'
-          : 'normal',
-  },
-  {
-    title: '今日區間',
-    value: `${formatNumber(liveSnapshot.value?.low)} - ${formatNumber(liveSnapshot.value?.high)}`,
-    description: `開盤 ${formatNumber(liveSnapshot.value?.open)}`,
-  },
-  {
-    title: '累計量',
-    value: formatLots(liveSnapshot.value?.volume),
-    description: `更新 ${formatDate(liveSnapshot.value?.marketDate)}`,
-  },
-]);
-
-const keyPriceZones = computed(() => buildKeyPriceZones(detail.value));
-const supportResistance = computed(() => buildSupportResistance(detail.value));
-const largeHolderCostZone = computed(() => buildLargeHolderCostZone(detail.value, holderDistributionSnapshot.value));
-const stockEventCalendar = computed(() => buildStockEventCalendar(detail.value));
-const stockEventPerformance = computed(() => buildStockEventPerformance(detail.value));
-const stockHealthScore = computed(() => buildStockHealthScore(detail.value, {
-  currentClose: displayQuote.value.close,
-  industryValuation: industryValuation.value,
-  signalConfidence: signalConfidence.value?.aggregate ?? null,
-  volumeQualityScore: volumeQuality.value?.score ?? null,
-  dailyTradeValue: dailyTradeValue.value,
-  liquidityTier: liquidityTier.value,
-  hasMarginSurge:
-    (detail.value?.融資融券?.marginUsage ?? 0) >= 40 ||
-    (detail.value?.融資融券?.marginChange ?? 0) >= 800000,
+const displayQuote = computed(() => ({
+  price: toFiniteNumber(snapshot.value?.lastPrice) ?? toFiniteNumber(latestSummary.value.close),
+  change: toFiniteNumber(snapshot.value?.change) ?? toFiniteNumber(latestSummary.value.change),
+  changePercent: toFiniteNumber(snapshot.value?.changePercent) ?? toFiniteNumber(latestSummary.value.changePercent),
+  volume: toFiniteNumber(snapshot.value?.volumeShares) ?? toFiniteNumber(latestSummary.value.volume),
+  marketDate: snapshot.value?.marketDate ?? detail.value?.priceDate ?? null,
+  updatedAt: snapshot.value?.updatedAt ?? detail.value?.generatedAt ?? null,
+  source: snapshot.value?.sourceLabel ?? detail.value?.資料來源?.[0] ?? null,
 }));
-const overheatWarnings = computed(() => buildOverheatWarnings(detail.value, { currentClose: displayQuote.value.close }));
 
-// === 新增：產業估值、量能品質、型態、訊號可信度、財報、內部人 ===
-const industryValuationIndex = computed(() => buildIndustryValuationIndex(stockList.value ?? []));
-const industryValuation = computed(() => {
-  const industryName = companyProfile.value?.產業名稱 ?? null;
-  return computeIndustryValuation(
-    { industryName, peRatio: detail.value?.評價面?.本益比, pbRatio: detail.value?.評價面?.股價淨值比, dividendYield: detail.value?.評價面?.殖利率 },
-    industryValuationIndex.value,
-  );
-});
-const industryValuationText = computed(() => describeValuation(industryValuation.value));
+const freshness = computed(() => getDataFreshnessStatus({
+  generatedAt: displayQuote.value.updatedAt,
+  marketDate: displayQuote.value.marketDate,
+}));
 
-const historicalBars = computed(() => detail.value?.歷史資料 ?? []);
-const volumeQuality = computed(() => {
-  const volumes = historicalBars.value
-    .map((bar) => Number(bar?.volume ?? 0))
-    .filter((value) => Number.isFinite(value));
-  if (volumes.length < 5) return null;
-  return scoreVolumeQuality(volumes.slice(-20));
-});
+const largeHolderCostZone = computed(() => buildLargeHolderCostZone(detail.value));
+const health = computed(() => buildStockHealthScore(detail.value, {
+  currentClose: displayQuote.value.price,
+}));
+const overheatWarnings = computed(() => buildOverheatWarnings(detail.value, {
+  currentClose: displayQuote.value.price,
+}));
 
-const patternSignals = computed(() => detectPatterns(historicalBars.value));
+const eventItems = computed(() => uniqueBy([
+  ...buildStockEventCalendar(detail.value),
+  ...(detail.value?.交易提醒?.alerts ?? []).map((item) => ({
+    date: item.date,
+    label: item.title,
+    note: item.note ?? item.detail,
+    tone: item.tone,
+  })),
+], (item) => `${item.date}-${item.label}`));
 
-const signalConfidence = computed(() =>
-  aggregateSignalConfidence(technicalSignals.value, signalConfidenceStats.value),
-);
+const tabs = computed(() => [
+  { key: 'overview', label: '重點', show: true },
+  { key: 'charts', label: '走勢', show: hasItems(detail.value?.歷史資料) || hasItems(detail.value?.盤中走勢?.points) },
+  { key: 'chips', label: '法人籌碼', show: hasItems(detail.value?.法人買賣?.days) || hasItems(detail.value?.持股分散?.bands) },
+  { key: 'valuation', label: '估值', show: Boolean(detail.value?.評價面 || detail.value?.財務資料) },
+  { key: 'events', label: '事件', show: eventItems.value.length > 0 },
+].filter((item) => item.show));
 
-const dailyTradeValue = computed(() =>
-  computeAvgTradeValue({
-    close: displayQuote.value.close,
-    volume: displayQuote.value.volume,
-    turnover: detail.value?.最新摘要?.turnover,
-    sparkline20: detail.value?.歷史資料?.slice(-20).map((b) => b.close) ?? null,
-  }),
-);
-const liquidityTier = computed(() => classifyLiquidity(dailyTradeValue.value));
-
-const earningsIndex = computed(() => buildEarningsIndex(earningsCalendar.value));
-const nextEarnings = computed(() => findNextEarnings(stockCode.value, earningsIndex.value, new Date()));
-const earningsRiskBadge = computed(() => buildEarningsRiskBadge(nextEarnings.value));
-
-const productEventIndex = computed(() => buildProductEventIndex(productEvents.value));
-const upcomingThemeEvents = computed(() => {
-  const industryName = companyProfile.value?.產業名稱;
-  if (!industryName) return [];
-  return findUpcomingThemeEvents(industryName, productEventIndex.value, new Date(), 60);
-});
-
-const insiderIndex = computed(() => buildInsiderHoldingsIndex(insiderHoldings.value));
-const insiderTrend = computed(() => classifyInsiderTrend(stockCode.value, insiderIndex.value));
-const recentViewedStocks = computed(() => []);
-const stockSeo = computed(() => {
-  const stockName = detail.value?.name ?? companyProfile.value?.公司名稱 ?? stockCode.value;
-  const industryName = companyProfile.value?.產業名稱 ? `${companyProfile.value.產業名稱}個股` : '台股個股';
-  const signalText = technicalSignals.value.slice(0, 3).join('、');
-  const priceDateText = detail.value?.priceDate ? `資料截至 ${formatDate(detail.value.priceDate)}。` : '';
-  const description = `${stockName}（${stockCode.value}）${industryName}研究頁，整合技術分析、法人籌碼、持股分級、財務面、關鍵價位與最近新聞。${signalText ? ` 目前重點訊號：${signalText}。` : ''}${priceDateText}`;
-
-  return {
-    title: `${stockName} ${stockCode.value} 技術分析與籌碼面`,
-    description,
-    routePath: `/stocks/${stockCode.value}`,
-    keywords: [stockCode.value, stockName, '台股', '技術分析', '法人籌碼', '財務分析', '支撐壓力', '外資目標價'],
-    jsonLd: [
-      createBreadcrumbJsonLd([
-        { name: '台股主動通', url: buildPageUrl('/') },
-        { name: stockName, url: buildPageUrl(`/stocks/${stockCode.value}`) },
-      ]),
-    ],
-  };
-});
-
-useSeoMeta(stockSeo);
-
-onMounted(() => {
-  void loadGlobalData();
-});
-
-function formatHolderDeltaSummary(value) {
-  if (value === null || value === undefined) return '暫無前次比較';
-  if (Math.abs(value) < 0.005) return '較前次持平';
-  return `較前次 ${formatPercent(value)}`;
-}
-
-const summaryCards = computed(() => {
-  const latestSummary = displayQuote.value;
-  const holderSummary = holderDistribution.value ?? {};
-
-  return [
-    {
-      title: liveSnapshot.value?.lastPrice ? '最新價' : '收盤價',
-      value: formatNumber(latestSummary.close),
-      description: `日變動 ${formatPriceDelta(latestSummary.change)} / ${formatPercent(latestSummary.changePercent)}`,
-      status: (latestSummary.change ?? 0) > 0 ? 'up' : (latestSummary.change ?? 0) < 0 ? 'down' : 'normal',
-    },
-    {
-      title: '20 日報酬',
-      value: formatPercent(latestSummary.return20),
-      description: `60 日報酬 ${formatPercent(latestSummary.return60)}`,
-    },
-    {
-      title: '大戶持股比',
-      value: formatPercent(holderSummary.largeHolderRatio),
-      description: `400 張以上，${formatHolderDeltaSummary(holderSummary.largeHolderRatioDelta)}`,
-    },
-    {
-      title: '散戶持股比',
-      value: formatPercent(holderSummary.retailRatio),
-      description: `10 張以下，${formatHolderDeltaSummary(holderSummary.retailRatioDelta)}`,
-    },
-  ];
-});
-
-const quickCards = computed(() => [
-  {
-    title: '五日法人合計',
-    value: formatLots(institutionalFlows.value?.summary?.total5Day),
-    description: `外資 ${formatLots(institutionalFlows.value?.summary?.foreign5Day)}`,
-    status:
-      (institutionalFlows.value?.summary?.total5Day ?? 0) > 0
-        ? 'up'
-        : (institutionalFlows.value?.summary?.total5Day ?? 0) < 0
-          ? 'down'
-          : 'normal',
-  },
-  {
-    title: '融資餘額',
-    value: formatLots(marginSnapshot.value?.marginToday),
-    description: `日增減 ${formatLots(marginSnapshot.value?.marginChange)}`,
-    status:
-      (marginSnapshot.value?.marginChange ?? 0) > 0
-        ? 'up'
-        : (marginSnapshot.value?.marginChange ?? 0) < 0
-          ? 'down'
-          : 'normal',
-  },
-  {
-    title: '融券餘額',
-    value: formatLots(marginSnapshot.value?.shortToday),
-    description: `日增減 ${formatLots(marginSnapshot.value?.shortChange)}`,
-    status:
-      (marginSnapshot.value?.shortChange ?? 0) > 0
-        ? 'up'
-        : (marginSnapshot.value?.shortChange ?? 0) < 0
-          ? 'down'
-          : 'normal',
-  },
-  {
-    title: '主動 ETF 持有數',
-    value: formatNumber(activeEtfExposure.value?.count),
-    description:
-      activeEtfExposure.value?.items?.[0]
-        ? `最高權重 ${activeEtfExposure.value.items[0].etfName} ${formatPercent(activeEtfExposure.value.items[0].weight)}`
-        : '目前不在已整理主動 ETF 核心持股',
-  },
-]);
-
-const technicalQuickCards = computed(() => {
-  const latestSummary = detail.value?.最新摘要 ?? {};
-  const maMedium = latestIndicators.value.maMedium ?? latestIndicators.value.ma20 ?? null;
-  const maLong = latestIndicators.value.maLong ?? latestIndicators.value.ma60 ?? null;
-  const rsi = latestIndicators.value.rsi ?? latestIndicators.value.rsi14 ?? null;
-  const kValue = latestIndicators.value.stochasticK ?? latestIndicators.value.k9 ?? null;
-  const dValue = latestIndicators.value.stochasticD ?? latestIndicators.value.d9 ?? null;
-  const macdHist = latestIndicators.value.macdHist ?? null;
-
-  const movingAverageDescription =
-    latestSummary.close !== null && maMedium !== null && maLong !== null
-      ? latestSummary.close > maMedium && maMedium > maLong
-        ? '收盤仍站在中長均之上'
-        : latestSummary.close < maMedium && maMedium < maLong
-          ? '收盤落在中長均之下'
-          : '股價與中長均線交錯整理'
-      : '均線資料整理中';
-
-  return [
-    {
-      title: '均線位置',
-      value:
-        maMedium !== null && maLong !== null
-          ? `MA${indicatorSettings.value.maMediumPeriod ?? 20} / MA${indicatorSettings.value.maLongPeriod ?? 60}`
-          : '-',
-      description: movingAverageDescription,
-      status:
-        latestSummary.close !== null && maMedium !== null && maLong !== null
-          ? latestSummary.close > maMedium && maMedium > maLong
-            ? 'up'
-            : latestSummary.close < maMedium && maMedium < maLong
-              ? 'down'
-              : 'normal'
-          : 'normal',
-    },
-    {
-      title: `RSI${indicatorSettings.value.rsiPeriod ?? 14}`,
-      value: formatNumber(rsi),
-      description: rsi !== null ? (rsi >= 70 ? '偏熱區' : rsi <= 30 ? '偏低區' : '中性區間') : 'RSI 資料整理中',
-      status: rsi !== null ? (rsi <= 30 ? 'up' : rsi >= 70 ? 'down' : 'normal') : 'normal',
-    },
-    {
-      title: 'KD 指標',
-      value: `K ${formatNumber(kValue)} / D ${formatNumber(dValue)}`,
-      description:
-        kValue !== null && dValue !== null
-          ? kValue > dValue
-            ? 'K 值在 D 值上方'
-            : kValue < dValue
-              ? 'K 值在 D 值下方'
-              : 'K、D 交會'
-          : 'KD 資料整理中',
-      status:
-        kValue !== null && dValue !== null
-          ? kValue > dValue
-            ? 'up'
-            : kValue < dValue
-              ? 'down'
-              : 'normal'
-          : 'normal',
-    },
-    {
-      title: 'MACD 柱體',
-      value: formatNumber(macdHist),
-      description:
-        macdHist !== null
-          ? macdHist > 0
-            ? '動能仍偏多'
-            : macdHist < 0
-              ? '動能偏弱'
-              : '多空分水嶺'
-          : 'MACD 資料整理中',
-      status: macdHist !== null ? (macdHist > 0 ? 'up' : macdHist < 0 ? 'down' : 'normal') : 'normal',
-    },
-  ];
-});
-
-const technicalNarrative = computed(() => {
-  const latestSummary = detail.value?.最新摘要 ?? {};
-  const maMedium = latestIndicators.value.maMedium ?? latestIndicators.value.ma20 ?? null;
-  const maLong = latestIndicators.value.maLong ?? latestIndicators.value.ma60 ?? null;
-  const macdHist = latestIndicators.value.macdHist ?? null;
-  const narratives = [];
-
-  if (latestSummary.close !== null && maMedium !== null && maLong !== null) {
-    if (latestSummary.close > maMedium && maMedium > maLong) {
-      narratives.push('價格結構目前維持在中長均線之上，波段節奏仍偏強。');
-    } else if (latestSummary.close < maMedium && maMedium < maLong) {
-      narratives.push('價格結構仍壓在中長均線下方，若沒有新量能配合，隔日容易先走整理。');
-    } else {
-      narratives.push('價格正在均線密集區整理，後續比較需要看量價與族群同步性。');
-    }
-  }
-
-  if (macdHist !== null) {
-    narratives.push(macdHist > 0 ? 'MACD 柱體仍在正值區，短線動能還沒完全退潮。': macdHist < 0 ? 'MACD 柱體仍在負值區，搶短時要留意反彈後再度轉弱。': 'MACD 柱體貼近零軸，代表方向感還不夠明確。');
-  }
-
-  if (technicalSignals.value.length) {
-    narratives.push(`目前最值得先看的是「${technicalSignals.value[0].title}」訊號。`);
-  }
-
-  return narratives.slice(0, 3);
-});
-
-const stockDecisionBrief = computed(() => {
-  const score = stockHealthScore.value.totalScore ?? 0;
-  const heatWarning = overheatWarnings.value[0] ?? null;
-  const hasRisk = Boolean(heatWarning) || detailFreshness.value.isStale;
-  const tone =
-    detailFreshness.value.isStale
-      ? 'warning'
-      : score >= 75 && !hasRisk
-        ? 'up'
-        : score <= 45 || heatWarning?.tone === 'risk'
-          ? 'down'
-          : 'normal';
-  const title =
-    tone === 'warning'
-      ? '先當歷史資料回看'
-      : tone === 'up'
-        ? '偏多觀察，等量價確認'
-        : tone === 'down'
-          ? '先避開追價'
-          : '等待訊號更明確';
-  const summary =
-    tone === 'warning'
-      ? '完整明細或市場資料不是最新交易日，先用來回顧結構，不建議當作今日追價依據。'
-      : stockHealthScore.value.summary ?? '先看價格、籌碼與風險是否同向，再決定要不要往下研究。';
-  const strongSections = (stockHealthScore.value.sections ?? [])
-    .slice()
-    .sort((left, right) => (right.score ?? 0) - (left.score ?? 0))
-    .slice(0, 2)
-    .map((item) => `${item.label}：${item.note}`);
-  const reasons = [
-    ...strongSections,
-    technicalNarrative.value[0],
-    signalConfidence.value?.aggregate ? `訊號可信度：${describeConfidence(signalConfidence.value.aggregate).label}` : null,
-  ]
-    .filter(Boolean)
-    .slice(0, 3);
-  const risks = [
-    detailFreshness.value.isStale ? detailFreshness.value.warningMessage : null,
-    heatWarning ? heatWarning.note : null,
-    liquidityTier.value?.label ? `流動性：${liquidityTier.value.label}，日均成交值 ${formatTradeValue(dailyTradeValue.value)}` : null,
-    largeHolderCostZone.value?.status === 'below' ? '股價目前跌回大戶成本帶下方，需等重新站回再提高信心。' : null,
-  ]
-    .filter(Boolean)
-    .slice(0, 3);
-
-  return {
-    tone,
-    title,
-    summary,
-    scoreLabel: `${stockHealthScore.value.grade} / ${score}`,
-    reasons: reasons.length ? reasons : ['資料仍在整理，先從技術快讀與籌碼頁確認結構。'],
-    risks: risks.length ? risks : ['目前沒有明顯過熱警訊，但仍要等量價與籌碼同步確認。'],
-  };
-});
-
-const stockScoreWeights = {
-  technical: 28,
-  chip: 24,
-  fundamental: 20,
-  theme: 14,
-  risk: 14,
-};
-
-const stockScoreBreakdown = computed(() =>
-  (stockHealthScore.value.sections ?? []).map((item) => {
-    const score = Number(item.score ?? 0);
-    const weight = stockScoreWeights[item.key] ?? 0;
-
+const decision = computed(() => {
+  if (freshness.value.isStale) {
     return {
-      ...item,
-      score,
-      weight,
-      width: `${Math.max(4, Math.min(100, score))}%`,
-      contribution: Math.round((score * weight) / 100),
+      title: '資料日回看：暫不做今日判斷',
+      note: `目前最新可確認資料為 ${formatDate(displayQuote.value.marketDate)}，以下內容只用來回看當日狀態。`,
+      tone: 'neutral',
     };
-  }),
-);
+  }
 
-const stockSignalTraceItems = computed(() => {
-  const confidence = signalConfidence.value?.aggregate ?? null;
-  const confidenceDescription = confidence !== null ? describeConfidence(confidence) : null;
-  const topSignal = technicalSignals.value[0] ?? null;
-  const heatWarning = overheatWarnings.value[0] ?? null;
-
-  return [
-    {
-      key: 'freshness',
-      label: '資料基準',
-      value: detailFreshness.value.isStale ? `延遲 ${detailFreshness.value.staleDays} 天` : '最新',
-      note: detailFreshness.value.warningMessage,
-      tone: detailFreshness.value.isStale ? 'warning' : 'info',
-    },
-    {
-      key: 'confidence',
-      label: '訊號可信度',
-      value: confidence !== null ? `${Math.round(confidence * 100)}%` : '等待統計',
-      note: confidenceDescription?.label ?? '目前沒有足夠訊號可建立可信度。',
-      tone: confidenceDescription?.tone ?? 'normal',
-    },
-    {
-      key: 'technical',
-      label: '主要技術訊號',
-      value: topSignal?.title ?? '未出現明確訊號',
-      note: technicalNarrative.value[0] ?? '先看均線、量能與支撐壓力是否同步。',
-      tone: topSignal?.tone ?? 'normal',
-    },
-    {
-      key: 'risk',
-      label: '風險追蹤',
-      value: heatWarning?.badgeLabel ?? (detailFreshness.value.isStale ? '資料風險' : '尚可'),
-      note: heatWarning?.note ?? (detailFreshness.value.isStale ? detailFreshness.value.warningMessage : '目前沒有明顯過熱警訊。'),
-      tone: heatWarning ? getSelectionAlertTone(heatWarning.tone) : detailFreshness.value.isStale ? 'warning' : 'info',
-    },
-  ];
+  const total = health.value?.totalScore ?? 50;
+  const risk = health.value?.sections?.find((item) => item.key === 'risk')?.score ?? 50;
+  if (total >= 70 && risk >= 55) {
+    return { title: '今日看法：偏多，但不宜追高', note: health.value.summary, tone: 'positive' };
+  }
+  if (total <= 48 || risk < 45) {
+    return { title: '今日看法：偏弱，先等止穩', note: health.value.summary, tone: 'negative' };
+  }
+  return { title: '今日看法：中性，等訊號更明確', note: health.value.summary, tone: 'neutral' };
 });
 
-function getPriceZoneTone(role) {
-  if (role === 'support') return 'support';
-  if (role === 'resistance') return 'resistance';
-  return 'reference';
-}
+const supportingReasons = computed(() => {
+  const items = [
+    ...(detail.value?.觀察摘要 ?? []),
+    ...(health.value?.sections ?? []).filter((item) => item.score >= 58).map((item) => item.summary),
+  ];
+  return [...new Set(items.filter(hasText))].slice(0, 3);
+});
 
-function getPriceZoneLabel(role) {
-  if (role === 'support') return '支撐觀察';
-  if (role === 'resistance') return '壓力觀察';
-  return '目前參考';
-}
+const riskReasons = computed(() => {
+  const items = [
+    ...overheatWarnings.value.map((item) => item.note ?? item.title),
+    ...(detail.value?.technicalSignals ?? []).filter((item) => item.tone === 'down').map((item) => item.description ?? item.title),
+  ];
+  return [...new Set(items.filter(hasText))].slice(0, 3);
+});
 
-function getEventStatusLabel(status) {
-  if (status === 'recent') return '最近事件';
-  if (status === 'upcoming') return '接下來';
-  return '參考點';
-}
+const actionReferences = computed(() => [
+  hasFiniteNumber(latestIndicators.value.ma20 ?? latestIndicators.value.maMedium)
+    ? { label: 'MA20 觀察線', value: formatNumber(latestIndicators.value.ma20 ?? latestIndicators.value.maMedium), tone: 'safe' }
+    : null,
+  hasFiniteNumber(latestIndicators.value.ma60 ?? latestIndicators.value.maLong)
+    ? { label: 'MA60 中期線', value: formatNumber(latestIndicators.value.ma60 ?? latestIndicators.value.maLong), tone: 'info' }
+    : null,
+  largeHolderCostZone.value
+    ? {
+        label: '推估大戶成本帶',
+        value: `${formatNumber(largeHolderCostZone.value.low)} - ${formatNumber(largeHolderCostZone.value.high)}`,
+        tone: largeHolderCostZone.value.status === 'below' ? 'risk' : 'safe',
+      }
+    : null,
+].filter(Boolean));
 
-function getEventStatusTone(status) {
-  if (status === 'recent') return 'recent';
-  if (status === 'upcoming') return 'upcoming';
-  return 'event-reference';
-}
+const institutionalRows = computed(() => [
+  hasFiniteNumber(institutionalSummary.value.foreign5Day)
+    ? { label: '外資近 5 日', value: institutionalSummary.value.foreign5Day }
+    : null,
+  hasFiniteNumber(institutionalSummary.value.investmentTrust5Day)
+    ? { label: '投信近 5 日', value: institutionalSummary.value.investmentTrust5Day }
+    : null,
+  hasFiniteNumber(institutionalSummary.value.dealer5Day)
+    ? { label: '自營商近 5 日', value: institutionalSummary.value.dealer5Day }
+    : null,
+  hasFiniteNumber(institutionalSummary.value.total5Day)
+    ? { label: '三大法人合計', value: institutionalSummary.value.total5Day }
+    : null,
+].filter(Boolean));
 
-function getSelectionAlertTone(tone) {
-  if (tone === 'risk') return 'risk';
-  if (tone === 'warning') return 'warning';
-  return 'info';
-}
+const valuationRows = computed(() => {
+  const valuation = detail.value?.評價面 ?? {};
+  const monthly = detail.value?.財務資料?.月營收 ?? {};
+  const income = detail.value?.財務資料?.綜合損益表 ?? {};
+  const balance = detail.value?.財務資料?.資產負債表 ?? {};
+  return [
+    hasFiniteNumber(valuation.本益比) ? { label: '本益比', value: `${formatNumber(valuation.本益比)} 倍` } : null,
+    hasFiniteNumber(valuation.殖利率) ? { label: '現金殖利率', value: formatPercent(valuation.殖利率) } : null,
+    hasFiniteNumber(valuation.股價淨值比) ? { label: '股價淨值比', value: `${formatNumber(valuation.股價淨值比)} 倍` } : null,
+    hasFiniteNumber(monthly.年增率) ? { label: '月營收年增', value: formatPercent(monthly.年增率), date: monthly.資料年月 } : null,
+    hasFiniteNumber(income.每股盈餘) ? { label: '最新季 EPS', value: formatNumber(income.每股盈餘), date: `${income.年度 ?? ''} Q${income.季別 ?? ''}`.trim() } : null,
+    hasFiniteNumber(balance.負債比) ? { label: '負債比', value: formatPercent(balance.負債比), date: balance.出表日期 } : null,
+  ].filter(Boolean);
+});
 
-function getHealthTone(score) {
-  if (score >= 75) return 'up';
-  if (score <= 45) return 'down';
-  return 'normal';
-}
+const companyTags = computed(() => [
+  detail.value?.公司概況?.產業名稱,
+  detail.value?.公司概況?.市場別,
+].filter(hasText));
 
-function getCostZoneTone(status) {
-  if (status === 'below') return 'down';
-  if (status === 'above') return 'warning';
-  return 'up';
-}
+const dailyInstitutionRows = computed(() => institutionalDays.value.slice(0, 10));
 
-function getCostZoneStatusLabel(status) {
-  if (status === 'above') return '股價在成本帶上方';
-  if (status === 'below') return '股價跌回成本帶下方';
-  return '股價正在成本帶附近';
-}
-
-function formatEventDistance(dateText) {
-  const targetDate = new Date(`${dateText}T00:00:00`);
-
-  if (Number.isNaN(targetDate.getTime())) {
-    return '日期整理中';
-  }
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const diffDays = Math.round((targetDate.getTime() - today.getTime()) / 86400000);
-
-  if (diffDays === 0) {
-    return '今天';
-  }
-
-  if (diffDays > 0) {
-    return `${diffDays} 天後`;
-  }
-
-  return `${Math.abs(diffDays)} 天前`;
-}
-
-function formatViewedAt(dateText) {
-  const viewedDate = new Date(dateText);
-
-  if (Number.isNaN(viewedDate.getTime())) {
-    return '剛剛';
-  }
-
-  return viewedDate.toLocaleString('zh-TW', {
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
-
-watch(
-  () => detail.value?.code,
-  (code) => {
-    if (!code) return;
-    pushRecentStock({
-      code,
-      name: detail.value?.name ?? stockCode.value,
-    });
-  },
-  { immediate: true },
-);
+useSeoMeta(() => ({
+  title: detail.value?.name ? `${stockCode.value} ${detail.value.name} | 個股觀察` : '個股觀察',
+  description: '整合價格、走勢、法人、持股與財務的個股觀察頁。',
+}));
 </script>
 
 <template>
-  <section class="page-shell stock-detail-page">
-    <div class="page-hero compact">
-      <div>
-        <p class="page-kicker">個股明細</p>
-        <h1 class="page-title">{{ detail?.name ?? stockCode }}</h1>
-        <p class="page-text">
-          這頁把個股技術面、法人買賣超、集保持股分級、官方估值與財務資料整合在一起，方便快速做盤後觀察。
-        </p>
-        <div class="hero-feature-row">
-          <span v-for="item in heroPills" :key="item" class="hero-feature-pill">{{ item }}</span>
-        </div>
-      </div>
-      <div class="hero-side-actions">
-        <span class="meta-chip">代號 {{ stockCode }}</span>
-        <span
-          v-if="liveSnapshot?.lastPrice"
-          class="meta-chip"
-          :class="{ 'text-up': (liveSnapshot?.change ?? 0) > 0, 'text-down': (liveSnapshot?.change ?? 0) < 0 }"
-        >
-          即時 {{ formatNumber(liveSnapshot.lastPrice) }}
-        </span>
-        <span
-          v-if="detailFreshness.referenceDate"
-          class="meta-chip"
-          :class="{ 'is-warning': detailFreshness.isStale }"
-        >
-          {{ detailFreshness.isStale ? `明細延遲 ${detailFreshness.staleDays} 天` : '明細最新' }}
-        </span>
-        <span v-if="isEnhancing" class="meta-chip">補抓遠端日線中</span>
-        <button
-          type="button"
-          class="favorite-toggle hero-favorite-toggle"
-          :class="{ 'is-active': isTracked }"
-          @click="toggleFavorite(stockCode)"
-        >
-          {{ isTracked ? '已加入自選' : '加入自選' }}
-        </button>
-        <div v-if="heroAlertSignals.length" class="hero-alert-stack">
-          <article
-            v-for="signal in heroAlertSignals"
-            :key="`hero-${signal.key}`"
-            class="hero-alert-card"
-            :class="signal.tone ? `is-${signal.tone}` : ''"
-          >
-            <strong>{{ signal.title }}</strong>
-            <p>{{ signal.description }}</p>
-          </article>
-        </div>
-      </div>
+  <section class="investor-page stock-detail-redesign">
+    <div class="stock-back-row">
+      <RouterLink to="/entry-radar" class="ir-button"><ArrowLeftIcon />返回卡位雷達</RouterLink>
     </div>
 
     <StatusCard
       :is-loading="isLoading"
       :error-message="errorMessage"
       :has-data="Boolean(detail)"
-      empty-message="這檔個股目前沒有可顯示的靜態明細資料。"
+      empty-message="找不到這檔股票的可確認資料。"
     />
 
-    <template v-if="detail">
-      <section class="stock-decision-panel" :class="`is-${stockDecisionBrief.tone}`">
-        <div class="stock-decision-main">
-          <span>今日結論</span>
-          <strong>{{ stockDecisionBrief.title }}</strong>
-          <p>{{ stockDecisionBrief.summary }}</p>
-          <small>體檢 {{ stockDecisionBrief.scoreLabel }}</small>
-        </div>
-
-        <div class="stock-decision-lanes">
-          <article class="stock-decision-lane">
-            <span>主要理由</span>
-            <ul>
-              <li v-for="item in stockDecisionBrief.reasons" :key="`reason-${item}`">{{ item }}</li>
-            </ul>
-          </article>
-
-          <article class="stock-decision-lane">
-            <span>風險條件</span>
-            <ul>
-              <li v-for="item in stockDecisionBrief.risks" :key="`risk-${item}`">{{ item }}</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="stock-decision-actions">
-          <button type="button" class="secondary-action-button" @click="focusStockTab('charts')">看圖表</button>
-          <button type="button" class="secondary-action-button" @click="focusStockTab('chips')">看籌碼</button>
-          <a class="secondary-action-button" href="#score-explain">查看分數拆解</a>
-          <button
-            type="button"
-            class="primary-action-button"
-            :class="{ 'is-active': isTracked }"
-            @click="toggleFavorite(stockCode)"
-          >
-            {{ isTracked ? '已加入自選' : '加入自選' }}
-          </button>
-        </div>
-      </section>
-
-      <section id="score-explain" class="panel stock-explain-panel">
-        <div class="panel-header">
+    <template v-if="detail && !isLoading">
+      <header class="stock-hero">
+        <div class="stock-hero-main">
           <div>
-            <h2 class="panel-title">分數拆解與訊號追蹤</h2>
-            <p class="panel-subtitle">把總分拆回技術、籌碼、基本面、題材與風險，並留下目前決策依據。</p>
+            <div class="ir-stock-identity stock-title-row">
+              <h1>{{ stockCode }} {{ detail.name }}</h1>
+              <span v-for="tag in companyTags" :key="tag" class="ir-badge">{{ tag }}</span>
+            </div>
+            <p class="ir-muted">資料日 {{ formatDate(displayQuote.marketDate) }}<span v-if="displayQuote.source"> · {{ displayQuote.source }}</span></p>
           </div>
-          <span class="meta-chip">可追溯</span>
-        </div>
 
-        <div class="stock-explain-grid">
-          <article class="stock-score-breakdown">
-            <div class="stock-explain-section-head">
-              <strong>分數權重</strong>
-              <span>總分 {{ stockHealthScore.totalScore }} / 100</span>
-            </div>
-
-            <div class="stock-score-row" v-for="item in stockScoreBreakdown" :key="`score-${item.key}`">
-              <div class="stock-score-row-head">
-                <span>{{ item.label }}</span>
-                <strong>{{ item.score }}</strong>
-              </div>
-              <div class="stock-score-track" :class="`is-${item.tone}`">
-                <i :style="{ width: item.width }"></i>
-              </div>
-              <div class="stock-score-row-foot">
-                <small>權重 {{ item.weight }}%</small>
-                <small>貢獻約 {{ item.contribution }} 分</small>
-              </div>
-              <p>{{ item.note }}</p>
-            </div>
-          </article>
-
-          <article class="stock-trace-list">
-            <div class="stock-explain-section-head">
-              <strong>決策追蹤</strong>
-              <span>{{ formatDate(detailFreshness.referenceDate ?? detailFreshness.marketDate) }}</span>
-            </div>
-
-            <div
-              v-for="item in stockSignalTraceItems"
-              :key="`trace-${item.key}`"
-              class="stock-trace-item"
-              :class="`is-${item.tone}`"
-            >
-              <span>{{ item.label }}</span>
-              <strong>{{ item.value }}</strong>
-              <p>{{ item.note }}</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel stock-freshness-panel" :class="{ 'is-warning': detailFreshness.isStale }">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">資料新鮮度</h2>
-            <p class="panel-subtitle">
-              {{ detailFreshness.warningMessage }}
-            </p>
+          <div v-if="hasFiniteNumber(displayQuote.price)" class="stock-price-block">
+            <span>股價</span><strong>{{ formatNumber(displayQuote.price) }}</strong>
           </div>
-          <span class="meta-chip">{{ detailFreshness.marketDate ? `市場日 ${formatDate(detailFreshness.marketDate)}` : '等待市場資料' }}</span>
-        </div>
 
-        <div class="stock-freshness-grid">
-          <article class="stock-freshness-item">
-            <span>完整明細</span>
-            <strong>{{ formatDate(detailFreshness.detailDate ?? detailFreshness.referenceDate) }}</strong>
-          </article>
-          <article class="stock-freshness-item">
-            <span>最新摘要</span>
-            <strong>{{ formatDate(detailFreshness.summaryDate ?? detailFreshness.marketDate) }}</strong>
-          </article>
-          <article class="stock-freshness-item">
-            <span>使用中報價</span>
-            <strong>{{ liveSnapshot?.marketDate ? `即時 ${formatDate(liveSnapshot.marketDate)}` : formatDate(stockSearchSummary?.priceDate ?? detailFreshness.referenceDate) }}</strong>
-          </article>
-        </div>
-      </section>
-
-      <nav class="mobile-section-nav stock-mobile-nav" aria-label="個股研究捷徑">
-        <a class="mobile-section-link" href="#quote">報價</a>
-        <a class="mobile-section-link" href="#signals">技術</a>
-        <a class="mobile-section-link" href="#chart">圖表</a>
-        <a class="mobile-section-link" href="#news">新聞</a>
-        <a class="mobile-section-link" href="#financials">財務</a>
-      </nav>
-
-      <nav
-        class="stock-tabbar rounded-[1.55rem] border border-slate-200/70 bg-white/88 p-2 shadow-[0_18px_42px_rgba(15,23,42,0.08)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70"
-        aria-label="個股頁籤"
-      >
-        <button
-          v-for="tab in stockTabs"
-          :key="tab.key"
-          type="button"
-          class="stock-tabbar-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[1rem] px-4 py-3 text-sm font-semibold tracking-tight transition-all duration-200"
-          :class="{ 'is-active': activeStockTab === tab.key }"
-          @click="focusStockTab(tab.key)"
-        >
-          {{ tab.label }}
-        </button>
-      </nav>
-
-      <section
-        id="quote"
-        v-show="activeStockTab === 'overview'"
-        v-if="isLiveFallback || liveSnapshot?.lastPrice"
-        class="panel"
-      >
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">即時快照</h2>
-            <p class="panel-subtitle">
-              {{ isLiveFallback ? '這檔股票來自即時補資料，部分籌碼與財務欄位仍會逐步補齊。' : '盤中用即時行情校正靜態資料，避免只看收盤後快照。' }}
-            </p>
+          <div v-if="hasFiniteNumber(displayQuote.changePercent)" class="stock-price-block">
+            <span>當日漲跌</span>
+            <strong :class="displayQuote.changePercent >= 0 ? 'ir-text-up' : 'ir-text-down'">
+              {{ formatPriceDelta(displayQuote.change) }} ({{ formatPercent(displayQuote.changePercent) }})
+            </strong>
           </div>
-          <span class="meta-chip">{{ isLiveSnapshotLoading ? '更新中' : (liveSnapshot?.updatedAt ? liveSnapshot.updatedAt.replace('T', ' ').slice(5, 16) : '即時資料') }}</span>
-        </div>
 
-        <section class="card-grid compact-summary-grid">
-          <InfoCard
-            v-for="item in liveSnapshotCards"
-            :key="`live-${item.title}`"
-            :title="item.title"
-            :value="item.value"
-            :description="item.description"
-            :status="item.status"
-          />
-        </section>
-      </section>
-
-      <section v-show="activeStockTab === 'overview'" class="card-grid compact-summary-grid">
-        <InfoCard
-          v-for="item in summaryCards"
-          :key="item.title"
-          :title="item.title"
-          :value="item.value"
-          :description="item.description"
-          :status="item.status"
-        />
-      </section>
-
-      <section v-show="activeStockTab === 'overview'" class="card-grid compact-summary-grid">
-        <InfoCard
-          v-for="item in quickCards"
-          :key="`quick-${item.title}`"
-          :title="item.title"
-          :value="item.value"
-          :description="item.description"
-          :status="item.status"
-        />
-      </section>
-
-      <section id="signals" v-show="activeStockTab === 'overview'" class="panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">技術分析快讀</h2>
-            <p class="panel-subtitle">先看結構、再看指標與訊號，不用先打開完整圖表也能快速判斷強弱。</p>
+          <div class="ir-action-row stock-hero-actions">
+            <button type="button" class="ir-icon-button" :class="{ 'is-active': isFavorite(stockCode) }" :title="isFavorite(stockCode) ? '移出自選' : '加入自選'" @click="toggleFavorite(stockCode)"><StarIcon /></button>
+            <button type="button" class="ir-button" :class="{ 'is-primary': isWatched(stockCode) }" @click="toggleWatch(stockCode)">
+              <BookmarkIcon />{{ isWatched(stockCode) ? '已加入明日觀察' : '加入明日觀察' }}
+            </button>
+            <button type="button" class="ir-icon-button" title="更新即時價格" :disabled="isSnapshotLoading" @click="refresh"><ChartBarIcon /></button>
           </div>
         </div>
 
-        <section class="card-grid stock-technical-cards">
-          <InfoCard
-            v-for="item in technicalQuickCards"
-            :key="`technical-${item.title}`"
-            :title="item.title"
-            :value="item.value"
-            :description="item.description"
-            :status="item.status"
-          />
-        </section>
-
-        <div v-if="technicalSignals.length" class="stock-technical-signal-list">
-          <article
-            v-for="signal in technicalSignals"
-            :key="signal.key"
-            class="stock-technical-signal"
-            :class="signal.tone ? `is-${signal.tone}` : ''"
-          >
-            <div class="stock-technical-signal-head">
-              <strong>{{ signal.title }}</strong>
-              <span class="meta-chip">{{ signal.importance >= 3 ? '高優先' : signal.importance === 2 ? '留意' : '觀察' }}</span>
-            </div>
-            <p>{{ signal.description }}</p>
-          </article>
-        </div>
-
-        <ul v-if="technicalNarrative.length" class="bullet-list compact">
-          <li v-for="item in technicalNarrative" :key="item">{{ item }}</li>
-        </ul>
-      </section>
-
-      <section v-show="activeStockTab === 'overview'" class="dual-grid">
-        <article class="panel insight-panel stock-health-panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">個股體檢分數</h2>
-              <p class="panel-subtitle">把技術、籌碼、基本面、題材與風險壓成同一張總表，先看能不能追，再看值不值得等。</p>
-            </div>
-            <span class="meta-chip" :class="`is-${getHealthTone(stockHealthScore.totalScore)}`">
-              {{ stockHealthScore.grade }} / {{ stockHealthScore.totalScore }}
-            </span>
+        <div class="stock-decision" :class="`is-${decision.tone}`">
+          <div class="stock-decision-summary">
+            <div class="decision-icon"><ChartBarIcon /></div>
+            <div><h2>{{ decision.title }}</h2><p>{{ decision.note }}</p></div>
           </div>
 
-          <div class="stock-health-hero">
-            <div>
-              <p class="stock-health-label">總分</p>
-              <div class="stock-health-total">
-                <strong>{{ stockHealthScore.totalScore }}</strong>
-                <span>/ 100</span>
-              </div>
-            </div>
-            <p class="stock-health-summary">{{ stockHealthScore.summary }}</p>
-          </div>
-
-          <div class="stock-health-grid">
-            <article
-              v-for="item in stockHealthScore.sections"
-              :key="item.key"
-              class="stock-health-item"
-              :class="`is-${item.tone}`"
-            >
-              <div class="stock-health-item-head">
-                <strong>{{ item.label }}</strong>
-                <span class="status-badge" :class="`is-${item.tone}`">{{ item.score }}</span>
-              </div>
-              <p class="stock-health-note">{{ item.note }}</p>
-            </article>
-          </div>
-        </article>
-
-        <article class="panel insight-panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">過熱 / 追價風險</h2>
-              <p class="panel-subtitle">這張卡專門幫你看有沒有買在山頭上的風險，先排除最危險的追價情境。</p>
-            </div>
-          </div>
-
-          <div v-if="overheatWarnings.length" class="selection-alert-list">
-            <article
-              v-for="item in overheatWarnings"
-              :key="item.key"
-              class="selection-alert-card"
-              :class="`is-${getSelectionAlertTone(item.tone)}`"
-            >
-              <div class="selection-alert-head">
-                <strong>{{ item.title }}</strong>
-                <span class="status-badge" :class="`is-${getSelectionAlertTone(item.tone)}`">{{ item.badgeLabel }}</span>
-              </div>
-              <p>{{ item.note }}</p>
-              <p v-if="item.detail" class="muted">{{ item.detail }}</p>
-            </article>
-          </div>
-          <div v-else class="empty-state compact">
-            <strong>目前沒有明顯過熱警示</strong>
-            <p>這不代表明天一定會漲，只是代表目前沒有看到特別明顯的追價風險，可以配合支撐壓力和量價節奏分批觀察。</p>
-          </div>
-        </article>
-      </section>
-
-      <!-- 新增：進階分析面板（產業估值、量能、型態、訊號可信度、財報、內部人） -->
-      <section v-show="activeStockTab === 'overview'" class="dual-grid advanced-insight-grid">
-        <article class="panel insight-panel insight-panel-primary">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">進階結構分析</h2>
-              <p class="panel-subtitle">同產業估值百分位、量能品質、型態與技術訊號可信度，一次看清楚目前狀態。</p>
-            </div>
-          </div>
-
-          <div class="advanced-metric-grid">
-            <div class="advanced-metric-cell">
-              <span class="muted">產業相對估值</span>
-              <strong>{{ industryValuationText ?? '資料不足' }}</strong>
-              <p v-if="industryValuation.peerCount" class="muted small">
-                同產業樣本 {{ industryValuation.peerCount }} 檔
-                <template v-if="industryValuation.peRelative">
-                  · PE / 產業中位 = {{ industryValuation.peRelative.toFixed(2) }}x
-                </template>
-              </p>
-            </div>
-            <div class="advanced-metric-cell">
-              <span class="muted">量能品質</span>
-              <strong v-if="volumeQuality">
-                {{ volumeQuality.score }} / 100 · {{ volumeQuality.label }}
-              </strong>
-              <strong v-else>—</strong>
-              <p v-if="volumeQuality" class="muted small">
-                5 日 / 20 日均量比
-                <template v-if="volumeQuality.ratio5to20">
-                  {{ volumeQuality.ratio5to20.toFixed(2) }}x
-                </template>
-                · 最大單日占比 {{ volumeQuality.maxShare ? Math.round(volumeQuality.maxShare * 100) : '-' }}%
-              </p>
-            </div>
-            <div class="advanced-metric-cell">
-              <span class="muted">技術訊號可信度</span>
-              <strong :class="`text-${describeConfidence(signalConfidence.aggregate).tone}`">
-                {{ Math.round(signalConfidence.aggregate * 100) }}% · {{ describeConfidence(signalConfidence.aggregate).label }}
-              </strong>
-              <p class="muted small">
-                依歷史後續 20 日表現動態加權；訊號越多且獨立，信心度越高
-              </p>
-            </div>
-            <div class="advanced-metric-cell">
-              <span class="muted">流動性</span>
-              <strong>
-                {{ formatTradeValue(dailyTradeValue) }}
-                <template v-if="liquidityTier?.label"> · {{ liquidityTier.label }}</template>
-              </strong>
-              <p class="muted small">近日成交值（元）</p>
-            </div>
-          </div>
-
-          <div v-if="patternSignals.length" class="stock-technical-signal-list advanced-pattern-list">
-            <article
-              v-for="pattern in patternSignals"
-              :key="pattern.key"
-              class="stock-technical-signal"
-              :class="pattern.tone ? `is-${pattern.tone}` : ''"
-            >
-              <div class="stock-technical-signal-head">
-                <strong>型態：{{ pattern.title }}</strong>
-                <span class="meta-chip">信心 {{ pattern.confidence }}</span>
-              </div>
-              <p>{{ pattern.note }}</p>
-            </article>
-          </div>
-        </article>
-
-        <article class="panel insight-panel insight-panel-secondary">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">事件與內部人</h2>
-              <p class="panel-subtitle">下次財報、題材催化事件與董監持股變動，幫你把時間維度也考進來。</p>
-            </div>
-          </div>
-
-          <div class="selection-alert-list advanced-alert-list">
-            <article
-              v-if="earningsRiskBadge"
-              class="selection-alert-card"
-              :class="`is-${earningsRiskBadge.tone}`"
-            >
-              <div class="selection-alert-head">
-                <strong>{{ earningsRiskBadge.title }}</strong>
-                <span class="status-badge" :class="`is-${earningsRiskBadge.tone}`">財報</span>
-              </div>
-              <p v-if="earningsRiskBadge.note">{{ earningsRiskBadge.note }}</p>
-              <p v-if="nextEarnings?.expectedDate" class="muted">預計公告日：{{ formatDate(nextEarnings.expectedDate) }}{{ nextEarnings.quarter ? ` · ${nextEarnings.quarter}` : '' }}</p>
-            </article>
-
-            <article
-              v-for="event in upcomingThemeEvents.slice(0, 3)"
-              :key="event.slug"
-              class="selection-alert-card"
-              :class="`is-${event.tone === 'up' ? 'info' : event.tone}`"
-            >
-              <div class="selection-alert-head">
-                <strong>{{ event.title }}</strong>
-                <span class="status-badge is-info">題材催化</span>
-              </div>
-              <p>{{ event.note || '同產業相關事件。' }}</p>
-              <EventCalendarLinks
-                :title="event.title"
-                :start-date="event.startDate"
-                :end-date="event.endDate || event.startDate"
-                :note="event.note || `${companyProfile?.產業名稱 ?? '相關產業'} 題材催化事件`"
-                source-name="題材催化事件"
-                :url="event.url || ''"
-                :location="event.location || ''"
-                compact
-              />
-              <p class="muted">
-                {{ formatDate(event.startDate) }}
-                <template v-if="event.daysUntil >= 0">· 距今 {{ event.daysUntil }} 天</template>
-                <template v-else>· 進行中 / 剛結束</template>
-                <template v-if="event.url"> · <a :href="event.url" target="_blank" rel="noopener">活動官網</a></template>
-              </p>
-            </article>
-
-            <article
-              v-if="insiderTrend.signal"
-              class="selection-alert-card"
-              :class="`is-${insiderTrend.signal.tone}`"
-            >
-              <div class="selection-alert-head">
-                <strong>{{ insiderTrend.signal.title }}</strong>
-                <span class="status-badge" :class="`is-${insiderTrend.signal.tone}`">內部人</span>
-              </div>
-              <p>{{ insiderTrend.signal.note }}</p>
-              <p v-if="insiderTrend.record?.reportMonth" class="muted">資料月份：{{ insiderTrend.record.reportMonth }}</p>
-            </article>
-
-            <div v-if="!earningsRiskBadge && !upcomingThemeEvents.length && !insiderTrend.signal" class="empty-state compact">
-              <strong>近期沒有特別的時間面事件</strong>
-              <p>若有財報公告日、題材展會或內部人異動，這裡會自動更新。</p>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section v-show="activeStockTab === 'overview'" class="dual-grid">
-        <article class="panel insight-panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">交易提醒</h2>
-              <p class="panel-subtitle">把官方公告裡對隔日交易最有影響的風險與事件先拉出來。</p>
-            </div>
-            <span v-if="selectionSignals?.asOfDate" class="meta-chip">資料日 {{ formatDate(selectionSignals.asOfDate) }}</span>
-          </div>
-
-          <div v-if="selectionAlertItems.length" class="selection-alert-list">
-            <article
-              v-for="item in selectionAlertItems"
-              :key="item.key"
-              class="selection-alert-card"
-              :class="`is-${getSelectionAlertTone(item.tone)}`"
-            >
-              <div class="selection-alert-head">
-                <strong>{{ item.title }}</strong>
-                <span class="status-badge" :class="`is-${getSelectionAlertTone(item.tone)}`">{{ item.badgeLabel }}</span>
-              </div>
-              <p>{{ item.note }}</p>
-              <p v-if="item.detail" class="muted">{{ item.detail }}</p>
-              <div class="selection-alert-foot">
-                <span>{{ item.date ? formatDate(item.date) : '官方公告整理' }}</span>
-                <span v-if="item.footnote">{{ item.footnote }}</span>
-              </div>
-            </article>
-          </div>
-          <div v-else class="empty-state compact">
-            <strong>目前沒有額外交易提醒</strong>
-            <p>若官方公告出現處置、注意累計、變更交易或除權息事件，這裡會自動補上。</p>
-          </div>
-        </article>
-
-        <article class="panel insight-panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">事件日曆</h2>
-              <p class="panel-subtitle">把月營收、季報、股利事件與 ETF 揭露時間拉出來，方便預先安排觀察。</p>
-            </div>
-          </div>
-
-          <div v-if="stockEventCalendar.length" class="event-list">
-            <article v-for="item in stockEventCalendar" :key="item.key" class="event-item">
-              <div class="event-main">
-                <div class="price-zone-head">
-                  <strong>{{ item.label }}</strong>
-                  <span class="status-badge" :class="`is-${getEventStatusTone(item.status)}`">{{ getEventStatusLabel(item.status) }}</span>
-                </div>
-                <p class="event-note">{{ item.note }}</p>
-              </div>
-              <EventCalendarLinks
-                :title="`${stockCode} ${detail?.name ?? companyProfile?.公司名稱 ?? ''}｜${item.label}`"
-                :start-date="item.date"
-                :end-date="item.date"
-                :note="item.note"
-                source-name="台股主動通事件日曆"
-                compact
-              />
-              <div class="event-side">
-                <strong class="event-date">{{ formatDate(item.date) }}</strong>
-                <span class="muted">{{ formatEventDistance(item.date) }}</span>
-              </div>
-            </article>
-          </div>
-          <div v-else class="empty-state compact">
-            <strong>事件日曆還沒有足夠資料</strong>
-            <p>月營收、季報、股利事件或 ETF 揭露資料補齊後會顯示在這裡。</p>
-          </div>
-        </article>
-      </section>
-
-      <section v-show="activeStockTab === 'overview'" class="dual-grid">
-        <article class="panel insight-panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">關鍵價位區</h2>
-              <p class="panel-subtitle">把近期高低點和中長均線拉在一起，先看隔日容易有反應的位置。</p>
-            </div>
-          </div>
-
-          <div v-if="keyPriceZones.length" class="price-zone-list">
-            <article
-              v-for="item in keyPriceZones"
-              :key="item.key"
-              class="price-zone-card"
-              :class="`is-${getPriceZoneTone(item.role)}`"
-            >
-              <div class="price-zone-head">
-                <strong>{{ item.label }}</strong>
-                <span class="status-badge" :class="`is-${getPriceZoneTone(item.role)}`">{{ getPriceZoneLabel(item.role) }}</span>
-              </div>
-              <p class="price-zone-value">{{ formatNumber(item.value) }}</p>
-            </article>
-          </div>
-          <div v-else class="empty-state compact">
-            <strong>關鍵價位還在整理</strong>
-            <p v-if="isEnhancing">正在補抓遠端日線資料，抓到完整 K 線後會自動補上價位區。</p>
-            <p v-else>通常是目前只有即時報價，還沒有抓到足夠的日線歷史，所以暫時無法建立價位區。</p>
-          </div>
-        </article>
-
-        <article class="panel insight-panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">支撐壓力帶</h2>
-              <p class="panel-subtitle">用價位加上緩衝區間，幫你先看明天容易測試的支撐與壓力。</p>
-            </div>
-          </div>
-
-          <div class="support-resistance-grid">
-            <section class="support-resistance-column">
-              <div class="support-resistance-head">
-                <strong>上方壓力</strong>
-                <span class="muted">靠近上緣時留意追價風險</span>
-              </div>
-              <div v-if="supportResistance.resistances.length" class="support-resistance-list">
-                <article
-                  v-for="item in supportResistance.resistances"
-                  :key="`resistance-${item.key}`"
-                  class="support-resistance-item is-resistance"
-                >
-                  <div class="price-zone-head">
-                    <strong>{{ item.label }}</strong>
-                    <span class="meta-chip">{{ formatPercent(item.distancePercent) }}</span>
-                  </div>
-                  <p class="support-resistance-value">{{ formatNumber(item.low) }} - {{ formatNumber(item.high) }}</p>
-                </article>
-              </div>
-              <p v-else class="muted">
-                {{ isEnhancing ? '正在補抓遠端日線資料，完成後會自動回填上方壓力。' : '目前沒有足夠的上方壓力資料，通常代表這次載入的是即時快照或日線樣本不足。' }}
-              </p>
-            </section>
-
-            <section class="support-resistance-column">
-              <div class="support-resistance-head">
-                <strong>下方支撐</strong>
-                <span class="muted">回測區間時留意量能是否守住</span>
-              </div>
-              <div v-if="supportResistance.supports.length" class="support-resistance-list">
-                <article
-                  v-for="item in supportResistance.supports"
-                  :key="`support-${item.key}`"
-                  class="support-resistance-item is-support"
-                >
-                  <div class="price-zone-head">
-                    <strong>{{ item.label }}</strong>
-                    <span class="meta-chip">{{ formatPercent(item.distancePercent) }}</span>
-                  </div>
-                  <p class="support-resistance-value">{{ formatNumber(item.low) }} - {{ formatNumber(item.high) }}</p>
-                </article>
-              </div>
-              <p v-else class="muted">
-                {{ isEnhancing ? '正在補抓遠端日線資料，完成後會自動回填下方支撐。' : '目前沒有足夠的下方支撐資料，通常代表這次載入的是即時快照或日線樣本不足。' }}
-              </p>
-            </section>
-          </div>
-        </article>
-      </section>
-
-      <section v-show="activeStockTab === 'overview'" class="panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">外資目標價摘要</h2>
-            <p class="panel-subtitle">
-              從近 {{ foreignTargetPrice?.recentDays ?? 7 }} 天新聞整理券商／外資喊價，先看市場對這檔股票的預期區間。
-            </p>
-          </div>
-          <span class="meta-chip">新聞整理</span>
-        </div>
-
-        <template v-if="foreignTargetPrice?.itemCount">
-          <section class="comparison-stat-grid">
-            <article class="comparison-stat-card">
-              <p class="comparison-stat-label">最新目標價</p>
-              <p class="comparison-stat-value">{{ formatNumber(foreignTargetPrice.latestTargetPrice) }}</p>
-              <p class="comparison-stat-note">
-                {{ foreignTargetPrice.latestBroker ?? '市場摘要' }}
-              </p>
-            </article>
-
-            <article class="comparison-stat-card">
-              <p class="comparison-stat-label">目標價區間</p>
-              <p class="comparison-stat-value">
-                {{ formatNumber(foreignTargetPrice.lowestTargetPrice) }} - {{ formatNumber(foreignTargetPrice.highestTargetPrice) }}
-              </p>
-              <p class="comparison-stat-note">近 {{ foreignTargetPrice.recentDays }} 天新聞提及</p>
-            </article>
-
-            <article class="comparison-stat-card">
-              <p class="comparison-stat-label">平均目標價</p>
-              <p class="comparison-stat-value">{{ formatNumber(foreignTargetPrice.averageTargetPrice) }}</p>
-              <p class="comparison-stat-note">共 {{ formatNumber(foreignTargetPrice.itemCount, 0) }} 則目標價敘述</p>
-            </article>
-
-            <article class="comparison-stat-card">
-              <p class="comparison-stat-label">相對現價空間</p>
-              <p
-                class="comparison-stat-value"
-                :class="{
-                  'text-up': (foreignTargetPrice.premiumToClose ?? 0) > 0,
-                  'text-down': (foreignTargetPrice.premiumToClose ?? 0) < 0,
-                }"
-              >
-                {{ formatPercent(foreignTargetPrice.premiumToClose) }}
-              </p>
-              <p class="comparison-stat-note">以最新目標價對照目前顯示股價</p>
-            </article>
+          <section v-if="supportingReasons.length" class="decision-column">
+            <strong>支持理由</strong>
+            <p v-for="item in supportingReasons" :key="item"><CheckCircleIcon />{{ item }}</p>
           </section>
 
-          <ul class="bullet-list compact">
-            <li>{{ foreignTargetPrice.note }}</li>
-            <li>資料來自近 {{ foreignTargetPrice.recentDays }} 天新聞整理，屬市場資訊摘要，不代表官方共識目標價。</li>
-          </ul>
-
-          <div class="table-wrap">
-            <table class="data-table compact-table">
-              <thead>
-                <tr>
-                  <th>日期</th>
-                  <th>券商 / 外資</th>
-                  <th>目標價</th>
-                  <th>動作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in foreignTargetPriceItems" :key="`${item.link}-${item.targetPrice}`">
-                  <td>{{ formatDate(item.publishedAt) }}</td>
-                  <td>{{ item.broker }}</td>
-                  <td>{{ formatNumber(item.targetPrice) }}</td>
-                  <td>{{ item.action }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </template>
-        <div v-else class="empty-state compact">
-          <strong>近期沒有可參考的外資目標價整理</strong>
-          <p>近 {{ foreignTargetPrice?.recentDays ?? 7 }} 天新聞裡若出現券商或外資明確喊價，這裡會自動補上。</p>
+          <section v-if="riskReasons.length || freshness.isStale" class="decision-column">
+            <strong>風險提醒</strong>
+            <p v-for="item in riskReasons" :key="item"><ExclamationTriangleIcon />{{ item }}</p>
+            <p v-if="freshness.isStale"><ExclamationTriangleIcon />資料已過期，不可當作當日追價依據。</p>
+          </section>
         </div>
-      </section>
+      </header>
 
-      <section v-show="activeStockTab === 'overview'" class="panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">事件後表現統計</h2>
-            <p class="panel-subtitle">不只看事件日期，直接回看過去 8 次月營收 / 財報觀察窗之後的 3 / 5 / 10 日平均表現。</p>
-          </div>
-          <span class="meta-chip">歷史回放</span>
-        </div>
+      <nav class="ir-tabs stock-tabs" aria-label="個股分頁">
+        <button v-for="tab in tabs" :key="tab.key" type="button" class="ir-tab" :class="{ 'is-active': activeTab === tab.key }" @click="activeTab = tab.key">{{ tab.label }}</button>
+      </nav>
 
-        <div v-if="stockEventPerformance.length" class="event-performance-grid">
-          <article v-for="entry in stockEventPerformance" :key="entry.key" class="sub-panel event-performance-card">
-            <div class="event-performance-head">
-              <div>
-                <strong>{{ entry.title }}</strong>
-                <p class="muted">{{ entry.note }}</p>
+      <template v-if="activeTab === 'overview'">
+        <div class="stock-overview-grid">
+          <TechnicalChart v-if="priceRows.length" :data="detail" :holder-cost-zone="largeHolderCostZone" :title="`${detail.name} 股價走勢`" />
+
+          <aside class="stock-side-stack">
+            <section v-if="actionReferences.length" class="ir-surface ir-section">
+              <div class="ir-section-head"><h2>行動參考</h2></div>
+              <div class="ir-list">
+                <div v-for="item in actionReferences" :key="item.label" class="ir-list-row action-reference-row">
+                  <span>{{ item.label }}</span><strong :class="`ir-text-${item.tone}`">{{ item.value }}</strong>
+                </div>
               </div>
-              <span class="meta-chip">樣本 {{ formatNumber(entry.sampleCount, 0) }}</span>
-            </div>
+              <p v-if="largeHolderCostZone" class="ir-note holder-zone-note">{{ largeHolderCostZone.note }}</p>
+            </section>
 
-            <div class="comparison-stat-grid compact-grid">
-              <article v-for="horizon in [3, 5, 10]" :key="`${entry.key}-${horizon}`" class="comparison-stat-card">
-                <p class="comparison-stat-label">{{ horizon }} 日平均</p>
-                <p
-                  class="comparison-stat-value"
-                  :class="{
-                    'text-up': (entry.metrics[horizon]?.averageReturn ?? 0) > 0,
-                    'text-down': (entry.metrics[horizon]?.averageReturn ?? 0) < 0,
-                  }"
-                >
-                  {{ formatPercent(entry.metrics[horizon]?.averageReturn) }}
-                </p>
-                <p class="comparison-stat-note">
-                  勝率 {{ formatPercent(entry.metrics[horizon]?.winRate) }} / 樣本 {{ formatNumber(entry.metrics[horizon]?.sampleCount, 0) }}
-                </p>
-              </article>
-            </div>
+            <section v-if="institutionalRows.length" class="ir-surface ir-section">
+              <div class="ir-section-head"><div><h2>法人籌碼</h2><p>近 5 個有資料交易日，單位：股</p></div></div>
+              <div class="ir-list">
+                <div v-for="item in institutionalRows" :key="item.label" class="ir-list-row action-reference-row">
+                  <span>{{ item.label }}</span><strong :class="item.value >= 0 ? 'ir-text-up' : 'ir-text-down'">{{ formatAmount(item.value) }}</strong>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </div>
 
-            <div class="table-wrap">
-              <table class="data-table compact-table">
-                <thead>
-                  <tr>
-                    <th>事件日期</th>
-                    <th>觀察起點</th>
-                    <th>3 日</th>
-                    <th>5 日</th>
-                    <th>10 日</th>
-                  </tr>
-                </thead>
+        <div class="stock-bottom-grid">
+          <section v-if="eventItems.length" class="ir-surface ir-section">
+            <div class="ir-section-head"><h2>近期事件</h2></div>
+            <div class="ir-list">
+              <div v-for="item in eventItems.slice(0, 4)" :key="`${item.date}-${item.label}`" class="ir-list-row event-row">
+                <CalendarDaysIcon /><div><strong>{{ item.label }}</strong><p v-if="item.note" class="ir-note">{{ item.note }}</p></div><time v-if="item.date">{{ formatDate(item.date) }}</time>
+              </div>
+            </div>
+          </section>
+
+          <section v-if="recentRows.length" class="ir-surface ir-section recent-table-section">
+            <div class="ir-section-head"><h2>近 5 日關鍵變化</h2></div>
+            <div class="ir-table-wrap">
+              <table class="ir-table recent-price-table">
+                <thead><tr><th>日期</th><th class="is-number">收盤</th><th class="is-number">漲跌</th><th class="is-number">成交量</th></tr></thead>
                 <tbody>
-                  <tr v-for="sample in entry.samples" :key="`${entry.key}-${sample.eventDate}`">
-                    <td>{{ formatDate(sample.eventDate) }}</td>
-                    <td>{{ formatDate(sample.tradeDate) }}</td>
-                    <td :class="{ 'text-up': (sample.horizons[3]?.returnPercent ?? 0) > 0, 'text-down': (sample.horizons[3]?.returnPercent ?? 0) < 0 }">
-                      {{ formatPercent(sample.horizons[3]?.returnPercent) }}
-                    </td>
-                    <td :class="{ 'text-up': (sample.horizons[5]?.returnPercent ?? 0) > 0, 'text-down': (sample.horizons[5]?.returnPercent ?? 0) < 0 }">
-                      {{ formatPercent(sample.horizons[5]?.returnPercent) }}
-                    </td>
-                    <td :class="{ 'text-up': (sample.horizons[10]?.returnPercent ?? 0) > 0, 'text-down': (sample.horizons[10]?.returnPercent ?? 0) < 0 }">
-                      {{ formatPercent(sample.horizons[10]?.returnPercent) }}
-                    </td>
+                  <tr v-for="row in recentRows" :key="row.date">
+                    <td>{{ formatDate(row.date) }}</td><td class="is-number">{{ formatNumber(row.close) }}</td>
+                    <td class="is-number" :class="row.changePercent >= 0 ? 'ir-text-up' : 'ir-text-down'">{{ formatPercent(row.changePercent) }}</td>
+                    <td class="is-number">{{ formatLots(row.volume) }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </article>
+          </section>
         </div>
-        <div v-else class="empty-state compact">
-          <strong>事件後表現樣本還不夠</strong>
-          <p>如果這檔股票的歷史價格或事件樣本不夠，這裡會先保留空白；等累積更多資料後會自動補齊。</p>
-        </div>
-      </section>
+      </template>
 
-      <section id="news" v-show="activeStockTab === 'news'" class="page-section-anchor">
-        <StockNewsPanel :code="stockCode" :stock-name="detail?.name ?? stockCode" />
-      </section>
+      <template v-else-if="activeTab === 'charts'">
+        <TechnicalChart v-if="priceRows.length" :data="detail" :holder-cost-zone="largeHolderCostZone" :title="`${detail.name} 中期走勢`" />
+        <IntradayChart v-if="detail?.盤中走勢?.points?.length" :data="detail.盤中走勢" :title="`${detail.name} 盤中走勢`" />
+      </template>
 
-      <section v-if="false && recentViewedStocks.length" class="panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">最近瀏覽</h2>
-            <p class="panel-subtitle">回看你最近研究過的股票，不用再重找一次。</p>
-          </div>
-        </div>
-
-        <div class="recent-stocks-grid compact">
-          <article
-            v-for="item in recentViewedStocks"
-            :key="`recent-${item.code}`"
-            class="favorite-card recent-stock-card"
-          >
-            <div class="recent-stock-head">
-              <div class="favorite-title-block">
-                <p class="ticker-code">{{ item.code }}</p>
-                <RouterLink class="favorite-title" :to="createStockRoute(item.code)">{{ item.name }}</RouterLink>
-              </div>
-              <span class="recent-stock-time">最後查看 {{ formatViewedAt(item.viewedAt) }}</span>
-            </div>
-            <div class="favorite-metrics">
-              <span>快速回到個股頁</span>
-              <span class="signal-pill">延續剛剛的研究脈絡</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="chips" v-show="activeStockTab === 'chips'" class="dual-grid page-section-anchor">
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">同產業比較 / 同族群強弱</h2>
-              <p class="panel-subtitle">
-                {{ industryComparison?.industryName ?? companyProfile?.產業名稱 ?? '同產業資料整理中' }}
-                <template v-if="industryComparison?.peerCount">・追蹤池共 {{ industryComparison.peerCount }} 檔</template>
-              </p>
-            </div>
-          </div>
-
-          <template v-if="industryComparison">
-            <div class="comparison-stat-grid">
-              <article class="comparison-stat-card">
-                <p class="comparison-stat-label">20 日相對排名</p>
-                <p class="comparison-stat-value">
-                  {{ formatNumber(industryComparison.rank20Day) }} / {{ formatNumber(industryComparison.peerCount) }}
-                </p>
-                <p class="comparison-stat-note">族群平均 20 日報酬 {{ formatPercent(industryComparison.averageReturn20) }}</p>
-              </article>
-
-              <article class="comparison-stat-card">
-                <p class="comparison-stat-label">單日強弱排序</p>
-                <p class="comparison-stat-value">
-                  {{ formatNumber(industryComparison.rankDaily) }} / {{ formatNumber(industryComparison.peerCount) }}
-                </p>
-                <p class="comparison-stat-note">族群平均日變動 {{ formatPercent(industryComparison.averageChangePercent) }}</p>
-              </article>
-            </div>
-
-            <ul class="bullet-list compact">
-              <li v-for="item in industryComparison.觀察摘要 ?? []" :key="item">{{ item }}</li>
-              <li v-if="laggardText">目前相對落後的同族群標的有：{{ laggardText }}</li>
-            </ul>
-          </template>
-
-          <p v-else class="muted">這檔個股目前還沒有足夠的同產業追蹤資料可以比較。</p>
-        </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">同族群領先名單</h2>
-              <p class="panel-subtitle">依近 20 日報酬排序，搭配單日強弱與法人五日淨流向</p>
-            </div>
-          </div>
-
-          <div v-if="industryComparison?.leaders?.length" class="table-wrap">
-            <table class="data-table compact-table">
-              <thead>
-                <tr>
-                  <th>代號</th>
-                  <th>名稱</th>
-                  <th>20 日</th>
-                  <th>日變動</th>
-                  <th>法人五日</th>
-                </tr>
-              </thead>
+      <template v-else-if="activeTab === 'chips'">
+        <HolderStructureChart v-if="detail?.持股分散?.bands?.length" :data="detail.持股分散" />
+        <section v-if="dailyInstitutionRows.length" class="ir-surface ir-section">
+          <div class="ir-section-head"><div><h2>法人逐日買賣超</h2><p>單位：股</p></div></div>
+          <div class="ir-table-wrap">
+            <table class="ir-table chip-table">
+              <thead><tr><th>日期</th><th class="is-number">外資</th><th class="is-number">投信</th><th class="is-number">自營商</th><th class="is-number">合計</th></tr></thead>
               <tbody>
-                <tr
-                  v-for="item in industryComparison.leaders"
-                  :key="item.code"
-                  :class="{ 'comparison-row-active': item.code === stockCode }"
-                >
-                  <td><RouterLink class="code-link" :to="createStockRoute(item.code)">{{ item.code }}</RouterLink></td>
-                  <td>{{ item.name }}</td>
-                  <td :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
-                    {{ formatPercent(item.return20) }}
-                  </td>
-                  <td :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
-                    {{ formatPercent(item.changePercent) }}
-                  </td>
-                  <td :class="{ 'text-up': (item.total5Day ?? 0) > 0, 'text-down': (item.total5Day ?? 0) < 0 }">
-                    {{ formatLots(item.total5Day) }}
-                  </td>
+                <tr v-for="row in dailyInstitutionRows" :key="row.date">
+                  <td>{{ formatDate(row.date) }}</td>
+                  <td class="is-number" :class="row.foreign >= 0 ? 'ir-text-up' : 'ir-text-down'">{{ formatAmount(row.foreign) }}</td>
+                  <td class="is-number" :class="row.investmentTrust >= 0 ? 'ir-text-up' : 'ir-text-down'">{{ formatAmount(row.investmentTrust) }}</td>
+                  <td class="is-number" :class="row.dealer >= 0 ? 'ir-text-up' : 'ir-text-down'">{{ formatAmount(row.dealer) }}</td>
+                  <td class="is-number" :class="row.total >= 0 ? 'ir-text-up' : 'ir-text-down'">{{ formatAmount(row.total) }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
+        </section>
+      </template>
 
-          <p v-else class="muted">同族群比較清單尚未建立完成。</p>
-        </article>
-      </section>
-      <section id="chart" v-show="activeStockTab === 'charts'" class="page-section-anchor chart-stack">
-        <IntradayChart
-          v-if="detail?.['盤中走勢']"
-          :data="detail['盤中走勢']"
-          title="個股盤中分時圖"
-        />
-
-        <IntradayChipFlowChart
-          v-if="detail?.['盤中走勢']"
-          :data="detail['盤中走勢']"
-          title="盤中大戶 / 散戶估算圖"
-        />
-
-        <TechnicalChart
-          :data="detail"
-          :holder-cost-zone="largeHolderCostZone"
-          :comparison-series="comparisonSeries"
-          :comparison-loading="isComparisonSeriesLoading"
-          title="個股技術分析圖表"
-        />
-      </section>
-
-      <HolderStructureChart
-        v-show="activeStockTab === 'chips'"
-        v-if="detail?.持股分散"
-        :data="detail.持股分散"
-        title="個股大戶 / 散戶拆解圖表"
-      />
-
-      <section id="financials" v-show="activeStockTab === 'financials'" class="page-section-anchor">
-        <StockFinancialOverview :data="detail" />
-      </section>
-
-      <section v-show="activeStockTab === 'chips'" class="dual-grid">
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">籌碼觀察</h2>
-              <p class="panel-subtitle">最近 {{ detail?.法人買賣?.days?.length ?? 0 }} 個有資料交易日</p>
-            </div>
+      <template v-else-if="activeTab === 'valuation'">
+        <section v-if="valuationRows.length" class="ir-surface ir-section">
+          <div class="ir-section-head"><div><h2>估值與基本面</h2><p>只列出目前有資料的項目</p></div></div>
+          <div class="valuation-grid">
+            <article v-for="item in valuationRows" :key="item.label" class="valuation-item">
+              <span>{{ item.label }}</span><strong>{{ item.value }}</strong><small v-if="item.date">{{ item.date }}</small>
+            </article>
           </div>
-          <ul class="bullet-list">
-            <li v-for="item in detail?.觀察摘要 ?? []" :key="item">{{ item }}</li>
-          </ul>
-        </article>
+        </section>
+        <section v-if="detail?.財務資料?.觀察摘要?.length" class="ir-surface ir-section">
+          <div class="ir-section-head"><h2>財務觀察</h2></div>
+          <div class="ir-list"><p v-for="item in detail.財務資料.觀察摘要" :key="item" class="ir-list-row">{{ item }}</p></div>
+        </section>
+      </template>
 
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">融資融券觀察</h2>
-              <p class="panel-subtitle">信用交易籌碼快照 {{ formatDate(detail?.融資融券?.date) }}</p>
-            </div>
+      <template v-else-if="activeTab === 'events'">
+        <section v-if="eventItems.length" class="ir-surface ir-section">
+          <div class="ir-section-head"><h2>公司與交易事件</h2></div>
+          <div class="ir-list">
+            <article v-for="item in eventItems" :key="`${item.date}-${item.label}`" class="ir-list-row event-detail-row">
+              <time v-if="item.date">{{ formatDate(item.date) }}</time><div><strong>{{ item.label }}</strong><p v-if="item.note" class="ir-note">{{ item.note }}</p></div>
+            </article>
           </div>
-          <ul class="bullet-list compact">
-            <li>融資餘額：{{ formatLots(detail?.融資融券?.marginToday) }}</li>
-            <li>融資使用率：{{ formatPercent(detail?.融資融券?.marginUsage) }}</li>
-            <li>融券餘額：{{ formatLots(detail?.融資融券?.shortToday) }}</li>
-            <li>券資比：{{ formatPercent(detail?.融資融券?.shortToMarginRatio) }}</li>
-            <li v-for="item in detail?.融資融券?.觀察摘要 ?? []" :key="item">{{ item }}</li>
-            <li v-if="!(detail?.融資融券?.觀察摘要?.length)">這檔個股目前沒有可用的融資融券補充資料。</li>
-          </ul>
-        </article>
-      </section>
+        </section>
+        <StockNewsPanel :code="stockCode" :stock-name="detail.name" />
+      </template>
 
-      <section v-show="activeStockTab === 'chips'" class="dual-grid">
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">主動 ETF 持有曝光</h2>
-              <p class="panel-subtitle">目前有 {{ detail?.主動ETF曝光?.count ?? 0 }} 檔已整理 ETF 持有</p>
-            </div>
-          </div>
-          <div v-if="detail?.主動ETF曝光?.items?.length" class="table-wrap">
-            <table class="data-table compact-table">
-              <thead>
-                <tr>
-                  <th>ETF</th>
-                  <th>權重</th>
-                  <th>排名</th>
-                  <th>揭露日</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in detail?.主動ETF曝光?.items ?? []" :key="`${item.etfCode}-${item.rank}`">
-                  <td>{{ item.etfCode }} {{ item.etfName }}</td>
-                  <td>{{ formatPercent(item.weight) }}</td>
-                  <td>#{{ formatNumber(item.rank) }}</td>
-                  <td>{{ formatDate(item.disclosureDate) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p v-else class="muted">這檔個股目前不在已整理主動式 ETF 的核心持股清單裡。</p>
-        </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">大戶主要成本區間</h2>
-              <p class="panel-subtitle">
-                {{ largeHolderCostZone ? `近 ${largeHolderCostZone.lookbackDays} 個交易日價量推估` : '資料不足時會以下一輪 TWSE / TDCC 更新後補強' }}
-              </p>
-            </div>
-          </div>
-          <div v-if="largeHolderCostZone" class="holder-cost-panel">
-            <div class="holder-cost-hero" :class="`is-${getCostZoneTone(largeHolderCostZone.status)}`">
-              <p class="holder-cost-label">推估成本帶</p>
-              <strong>{{ formatNumber(largeHolderCostZone.low) }} - {{ formatNumber(largeHolderCostZone.high) }}</strong>
-              <p class="holder-cost-summary">{{ largeHolderCostZone.summary }}</p>
-            </div>
-
-            <div class="holder-cost-grid">
-              <article class="holder-cost-item">
-                <span>目前位置</span>
-                <strong>{{ getCostZoneStatusLabel(largeHolderCostZone.status) }}</strong>
-                <small>
-                  與成本中樞 {{ formatPriceDelta(largeHolderCostZone.distancePercent) }}%
-                </small>
-              </article>
-              <article class="holder-cost-item">
-                <span>大戶持股比</span>
-                <strong>{{ formatPercent(largeHolderCostZone.largeHolderRatio) }}</strong>
-                <small>400 張以上大戶</small>
-              </article>
-              <article class="holder-cost-item">
-                <span>散戶持股比</span>
-                <strong>{{ formatPercent(largeHolderCostZone.retailRatio) }}</strong>
-                <small>10 張以下散戶</small>
-              </article>
-              <article class="holder-cost-item">
-                <span>推估可信度</span>
-                <strong>{{ formatNumber(largeHolderCostZone.confidence) }} / 100</strong>
-                <small>資料日 {{ formatDate(largeHolderCostZone.asOfDate) }}</small>
-              </article>
-            </div>
-
-            <ul class="bullet-list compact">
-              <li>{{ largeHolderCostZone.note }}</li>
-              <li>股價站在成本帶上方時，大戶優勢較強；跌回帶下方時先觀察是否重新站回。</li>
-              <li>若靜態資料不足，排程會優先用 TWSE 日線與下一輪 TDCC 週資料補齊。</li>
-            </ul>
-          </div>
-          <ul v-else class="bullet-list compact">
-            <li>目前這檔股票的歷史日線或持股分散資料還不夠，暫時無法估大戶成本帶。</li>
-            <li>排程會優先補抓 TWSE 日線與 TDCC 週資料，更新後這裡會自動帶出區間。</li>
-          </ul>
-        </article>
-      </section>
-
-      <section v-show="activeStockTab === 'chips'" class="dual-grid">
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">近五日法人序列</h2>
-              <p class="panel-subtitle">外資、投信、自營商</p>
-            </div>
-          </div>
-          <div
-            v-if="institutionalFlowCoverage.tone !== 'ok'"
-            class="institutional-coverage-note"
-            :class="`is-${institutionalFlowCoverage.tone}`"
-          >
-            <strong>{{ institutionalFlowCoverage.title }}</strong>
-            <p>{{ institutionalFlowCoverage.message }}</p>
-          </div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>日期</th>
-                  <th>外資</th>
-                  <th>投信</th>
-                  <th>自營商</th>
-                  <th>三大法人</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in detail?.法人買賣?.days ?? []" :key="item.date">
-                  <td>{{ formatDate(item.date) }}</td>
-                  <td :class="{ 'text-up': (item.foreign ?? 0) > 0, 'text-down': (item.foreign ?? 0) < 0 }">{{ formatLots(item.foreign) }}</td>
-                  <td :class="{ 'text-up': (item.investmentTrust ?? 0) > 0, 'text-down': (item.investmentTrust ?? 0) < 0 }">{{ formatLots(item.investmentTrust) }}</td>
-                  <td :class="{ 'text-up': (item.dealer ?? 0) > 0, 'text-down': (item.dealer ?? 0) < 0 }">{{ formatLots(item.dealer) }}</td>
-                  <td :class="{ 'text-up': (item.total ?? 0) > 0, 'text-down': (item.total ?? 0) < 0 }">{{ formatLots(item.total) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">持股分級細項</h2>
-              <p class="panel-subtitle">最新 TDCC 級距資料</p>
-            </div>
-          </div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>級距</th>
-                  <th>人數</th>
-                  <th>股數</th>
-                  <th>占比</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in detail?.持股分散?.bands ?? []" :key="item.level">
-                  <td>{{ item.label }}</td>
-                  <td>{{ formatAmount(item.holders) }}</td>
-                  <td>{{ formatLots(item.shares) }}</td>
-                  <td>{{ formatPercent(item.ratio) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-      </section>
+      <p v-if="isEnhancing" class="ir-data-note">正在補充目前可取得的即時資料，已顯示區塊不會使用假數字。</p>
     </template>
   </section>
 </template>
+
+<style scoped>
+.stock-detail-redesign { gap: 12px; }
+.stock-back-row { min-height: 38px; }
+.stock-hero { display: grid; gap: 12px; }
+.stock-hero-main { display: grid; grid-template-columns: minmax(280px, 1.5fr) repeat(2, minmax(150px, .55fr)) auto; align-items: center; gap: 24px; padding: 4px 2px 10px; }
+.stock-title-row { flex-wrap: wrap; gap: 9px; }
+.stock-title-row h1 { margin: 0; color: var(--ir-text); font-size: clamp(1.55rem, 2.3vw, 2.15rem); line-height: 1.2; }
+.stock-price-block { display: grid; gap: 4px; }
+.stock-price-block span { color: var(--ir-soft); font-size: .74rem; font-weight: 800; }
+.stock-price-block strong { color: var(--ir-text); font-size: 1.55rem; font-variant-numeric: tabular-nums; }
+.stock-hero-actions { justify-content: flex-end; }
+.stock-decision { display: grid; grid-template-columns: minmax(310px, 1.2fr) repeat(2, minmax(240px, 1fr)); border: 1px solid var(--ir-line); border-left: 4px solid var(--ir-brand); border-radius: 8px; background: var(--ir-surface); }
+.stock-decision.is-positive { border-left-color: var(--up); }
+.stock-decision.is-negative { border-left-color: var(--down); }
+.stock-decision-summary, .decision-column { min-width: 0; padding: 18px 20px; }
+.stock-decision-summary { display: flex; align-items: center; gap: 16px; }
+.decision-icon { display: grid; width: 54px; height: 54px; flex: 0 0 auto; place-items: center; border: 2px solid currentColor; border-radius: 50%; color: var(--ir-brand); }
+.decision-icon svg { width: 28px; }
+.stock-decision-summary h2 { margin: 0 0 6px; color: var(--ir-text); font-size: 1.22rem; }
+.stock-decision-summary p, .decision-column p { margin: 0; color: var(--ir-soft); font-size: .8rem; line-height: 1.5; }
+.decision-column { border-left: 1px solid var(--ir-line); }
+.decision-column > strong { display: block; margin-bottom: 8px; color: var(--ir-text); font-size: .8rem; }
+.decision-column p { display: flex; align-items: flex-start; gap: 7px; margin-top: 7px; }
+.decision-column svg { width: 16px; flex: 0 0 auto; color: var(--ir-brand); }
+.stock-tabs { min-height: 48px; border-bottom: 1px solid var(--ir-line); }
+.stock-tabs .ir-tab { min-width: 88px; border-width: 0 0 2px; border-radius: 0; }
+.stock-overview-grid { display: grid; grid-template-columns: minmax(0, 2.15fr) minmax(280px, 1fr); gap: 12px; align-items: start; }
+.stock-overview-grid :deep(.chart-info-strip), .stock-overview-grid :deep(.chart-toolbar), .stock-overview-grid :deep(.chart-parameter-panel) { display: none; }
+.stock-side-stack { display: grid; gap: 12px; }
+.action-reference-row { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+.action-reference-row > span { color: var(--ir-soft); font-size: .78rem; }
+.holder-zone-note { margin-top: 10px; }
+.stock-bottom-grid { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.6fr); gap: 12px; }
+.event-row { grid-template-columns: 20px minmax(0, 1fr) auto; align-items: start; }
+.event-row > svg { width: 18px; color: var(--ir-brand); }
+.event-row time, .event-detail-row time { color: var(--ir-soft); font-size: .74rem; white-space: nowrap; }
+.recent-price-table { min-width: 520px; }
+.valuation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); border: 1px solid var(--ir-line); border-radius: 7px; }
+.valuation-item { display: grid; gap: 5px; padding: 16px; border-right: 1px solid var(--ir-line); }
+.valuation-item:last-child { border-right: 0; }
+.valuation-item span, .valuation-item small { color: var(--ir-soft); font-size: .72rem; }
+.valuation-item strong { color: var(--ir-text); font-size: 1.2rem; }
+.event-detail-row { grid-template-columns: 110px minmax(0, 1fr); }
+
+@media (max-width: 1100px) {
+  .stock-hero-main { grid-template-columns: 1fr 1fr; }
+  .stock-hero-actions { justify-content: flex-start; }
+  .stock-decision { grid-template-columns: 1fr 1fr; }
+  .stock-decision-summary { grid-column: 1 / -1; }
+  .stock-overview-grid { grid-template-columns: 1fr; }
+  .stock-side-stack { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 720px) {
+  .stock-hero-main { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .stock-hero-main > :first-child, .stock-hero-actions { grid-column: 1 / -1; }
+  .stock-price-block strong { font-size: 1.22rem; }
+  .stock-decision { grid-template-columns: 1fr; }
+  .stock-decision-summary { grid-column: auto; align-items: flex-start; }
+  .decision-column { border-top: 1px solid var(--ir-line); border-left: 0; }
+  .stock-side-stack, .stock-bottom-grid { grid-template-columns: 1fr; }
+  .valuation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .valuation-item { border-bottom: 1px solid var(--ir-line); }
+  .recent-price-table { min-width: 0; }
+  .recent-price-table th:nth-child(4), .recent-price-table td:nth-child(4) { display: none; }
+}
+
+@media (max-width: 460px) {
+  .stock-hero-main { grid-template-columns: 1fr; }
+  .stock-hero-main > *, .stock-hero-actions { grid-column: auto; }
+  .stock-hero-actions .ir-button { flex: 1; }
+  .valuation-grid { grid-template-columns: 1fr; }
+  .event-detail-row { grid-template-columns: 1fr; }
+}
+</style>

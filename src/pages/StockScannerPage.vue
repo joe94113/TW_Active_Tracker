@@ -1,23 +1,33 @@
-﻿<script setup>
+<script setup>
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
-import StatusCard from '../components/StatusCard.vue';
+import {
+  ArrowPathIcon,
+  ArrowTrendingUpIcon,
+  BoltIcon,
+  ChartBarIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  MagnifyingGlassIcon,
+  ShieldCheckIcon,
+  StarIcon,
+  UserGroupIcon,
+} from '@heroicons/vue/24/outline';
 import DataFreshnessBadge from '../components/DataFreshnessBadge.vue';
+import StatusCard from '../components/StatusCard.vue';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
-import { fetchJson } from '../lib/api';
-import {
-  DEFAULT_SCANNER_FILTERS,
-  LIQUIDITY_MIN_OPTIONS,
-  buildScannerContext,
-  createScannerRow,
-  filterScannerRows,
-  sortScannerRows,
-} from '../lib/stockScanner';
+import { useTomorrowWatchCodes } from '../composables/useTomorrowWatchCodes';
+import { hasFiniteNumber, hasText } from '../lib/dataAvailability';
 import { formatDate, formatLots, formatNumber, formatPercent } from '../lib/formatters';
 import { buildEarningsIndex } from '../lib/marketCalendar';
 import { buildInsiderHoldingsIndex } from '../lib/insiderHoldings';
 import { createStockRoute } from '../lib/stockRouting';
+import {
+  buildScannerContext,
+  createScannerRow,
+  sortScannerRows,
+} from '../lib/stockScanner';
 import { mergeStockUniverse } from '../lib/stockUniverse';
 
 const {
@@ -31,852 +41,817 @@ const {
   errorMessage,
   loadGlobalData,
 } = useGlobalData();
+const { isWatched, toggleWatch } = useTomorrowWatchCodes();
 
-const replayHistory = ref(null);
-const isReplayLoading = ref(false);
-const replayError = ref('');
+const strategyOptions = [
+  {
+    key: 'institutional',
+    label: '法人正在買',
+    icon: UserGroupIcon,
+    description: '近 5 日外資或投信有買超資料',
+  },
+  {
+    key: 'turning',
+    label: '剛轉強',
+    icon: ArrowTrendingUpIcon,
+    description: '均線或主要技術訊號轉強',
+  },
+  {
+    key: 'volume',
+    label: '成交量放大',
+    icon: ChartBarIcon,
+    description: '量能品質分數較高且有成交資料',
+  },
+  {
+    key: 'lowRisk',
+    label: '波動較小',
+    icon: ShieldCheckIcon,
+    description: '排除處置與明顯過熱警示',
+  },
+];
 
-const filters = reactive({ ...DEFAULT_SCANNER_FILTERS });
-const scannerViewMode = ref('compact');
-const isScannerFiltersCollapsed = ref(false);
-
-const liquidityOptions = LIQUIDITY_MIN_OPTIONS.map((option) => ({
-  ...option,
-  label:
-    option.value === 0
-      ? '不限成交值'
-      : option.value === 5_000_000
-        ? '至少 500 萬'
-        : option.value === 10_000_000
-          ? '至少 1,000 萬'
-          : option.value === 30_000_000
-            ? '至少 3,000 萬'
-            : option.value === 100_000_000
-              ? '至少 1 億'
-              : '至少 5 億',
-}));
+const activeStrategy = ref('institutional');
+const selectedCode = ref('');
+const showMore = ref(false);
+const filters = reactive({
+  query: '',
+  positiveInstitutional: true,
+  positiveTrend: false,
+  qualityVolume: false,
+  excludeRisk: true,
+});
 
 const universe = computed(() => mergeStockUniverse(stockList.value, stockSearchList.value));
-const latestReplaySnapshot = computed(() => {
-  const snapshots = Array.isArray(replayHistory.value?.snapshots) ? replayHistory.value.snapshots : [];
-  return [...snapshots]
-    .filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(String(item?.marketDate ?? '')))
-    .sort((left, right) => String(right.marketDate).localeCompare(String(left.marketDate)))[0] ?? null;
-});
-const nextDayCodeSet = computed(
-  () =>
-    new Set(
-      [
-        ...(latestReplaySnapshot.value?.stable ?? []),
-        ...(latestReplaySnapshot.value?.aggressive ?? []),
-      ].map((item) => String(item?.code ?? '').trim()),
-    ),
-);
-
-const earningsIndex = computed(() => buildEarningsIndex(earningsCalendar.value));
-const insiderIndex = computed(() => buildInsiderHoldingsIndex(insiderHoldings.value));
-
 const scannerContext = computed(() =>
   buildScannerContext({
     universe: universe.value,
     stockDetailMap: null,
     signalConfidenceData: signalConfidenceStats.value,
-    earningsIndex: earningsIndex.value,
-    insiderIndex: insiderIndex.value,
+    earningsIndex: buildEarningsIndex(earningsCalendar.value),
+    insiderIndex: buildInsiderHoldingsIndex(insiderHoldings.value),
   }),
 );
-
 const scannerRows = computed(() =>
-  sortScannerRows(universe.value.map((item) => createScannerRow(item, nextDayCodeSet.value, scannerContext.value))),
+  sortScannerRows(universe.value.map((item) => createScannerRow(item, new Set(), scannerContext.value))),
 );
+const hasData = computed(() => scannerRows.value.length > 0);
 
-const filteredRows = computed(() => filterScannerRows(scannerRows.value, filters).slice(0, 80));
-const topFilteredRows = computed(() => filteredRows.value.slice(0, 10));
-const hasUniverse = computed(() => universe.value.length > 0);
-
-const factorRankRows = computed(() =>
-  scannerRows.value.map((row) => ({
-    row,
-    profile: buildFactorProfile(row),
-  })),
-);
-
-const topFactorRows = computed(() =>
-  [...factorRankRows.value]
-    .filter((item) => item.profile.risk >= 45 && item.profile.liquidityOk)
-    .sort((left, right) => right.profile.total - left.profile.total)
-    .slice(0, 6),
-);
-
-const riskFactorRows = computed(() =>
-  [...factorRankRows.value]
-    .filter((item) => item.profile.risk < 58 || item.profile.warningLevel >= 2)
-    .sort((left, right) => right.profile.warningLevel - left.profile.warningLevel || right.profile.total - left.profile.total)
-    .slice(0, 4),
-);
-
-const weakFactorRows = computed(() =>
-  [...factorRankRows.value]
-    .filter((item) => item.profile.total < 58 || item.profile.trend < 45 || item.profile.flow < 42)
-    .sort((left, right) => left.profile.total - right.profile.total)
-    .slice(0, 4),
-);
-
-const factorSummaryCards = computed(() => [
-  {
-    label: '多因子高分',
-    value: formatNumber(topFactorRows.value.length),
-    note: topFactorRows.value[0] ? `${topFactorRows.value[0].row.code} ${topFactorRows.value[0].row.name}` : '等待候選',
-    tone: 'up',
-  },
-  {
-    label: '風險降權',
-    value: formatNumber(riskFactorRows.value.length),
-    note: riskFactorRows.value[0] ? `${riskFactorRows.value[0].row.code} ${riskFactorRows.value[0].row.name}` : '暫無明顯風險',
-    tone: 'warning',
-  },
-  {
-    label: '弱勢避開',
-    value: formatNumber(weakFactorRows.value.length),
-    note: weakFactorRows.value[0] ? `${weakFactorRows.value[0].row.code} ${weakFactorRows.value[0].row.name}` : '暫無弱勢名單',
-    tone: 'down',
-  },
-  {
-    label: '納入評分',
-    value: formatNumber(factorRankRows.value.length),
-    note: '趨勢 / 籌碼 / 品質 / 風控',
-    tone: 'info',
-  },
-]);
-
-const overviewCards = computed(() => [
-  {
-    title: '可掃描股票',
-    value: formatNumber(universe.value.length),
-    note: '已整合個股摘要、月營收、法人與訊號可信度。',
-  },
-  {
-    title: '符合條件',
-    value: formatNumber(filteredRows.value.length),
-    note: '依目前條件排序後，最多先顯示 80 檔。',
-  },
-  {
-    title: '月營收雙增',
-    value: formatNumber(scannerRows.value.filter((item) => item.monthlyRevenueDualGrowth).length),
-    note: 'MoM 與 YoY 同時往上，代表營收節奏有加速。',
-  },
-  {
-    title: '站上 MA240',
-    value: formatNumber(scannerRows.value.filter((item) => item.maStackCrossedAbove240 || item.maBullStack).length),
-    note: 'MA5 / 10 / 20 站上 MA240，偏向中期結構轉強。',
-  },
-]);
-
-const heroSummaryItems = computed(() => [
-  {
-    label: '資料日',
-    value: formatDate(manifest.value?.generatedAtLocalDate) || '尚未整理',
-    note: '先確認這次掃描用的是哪一天的個股與法人資料。',
-  },
-  {
-    label: '回放基準',
-    value: latestReplaySnapshot.value?.marketDate ? formatDate(latestReplaySnapshot.value.marketDate) : '樣本累積中',
-    note: '用最近一次盤後觀察名單來比對隔日與後續表現。',
-  },
-  {
-    label: 'ETF 涵蓋',
-    value: `${formatNumber(universe.value.filter((item) => (item.activeEtfCount ?? 0) > 0).length)} 檔`,
-    note: '先知道哪些股票同時被主動式 ETF 關注。',
-  },
-]);
-
-const pageSeo = computed(() => ({
-  title: '選股條件篩選器',
-  description: '把月營收、法人買盤、技術面、流動性與風險條件整合在同一頁，快速挑出比較可交易的台股名單。',
-  routePath: '/scanner',
-  keywords: ['台股選股', '條件篩選器', '月營收雙增', '法人連買', 'MA240', '選股雷達'],
+const strategyRows = computed(() => scannerRows.value.filter((row) => {
+  if (activeStrategy.value === 'institutional') {
+    return (row.foreign5Day ?? 0) > 0 || (row.investmentTrust5Day ?? 0) > 0;
+  }
+  if (activeStrategy.value === 'turning') {
+    return Boolean(row.maStackCrossedAbove240 || row.maBullStack || row.topSignalTone === 'up' || row.topPattern?.tone === 'up');
+  }
+  if (activeStrategy.value === 'volume') {
+    return hasFiniteNumber(row.volumeQualityScore) && row.volumeQualityScore >= 60
+      && hasFiniteNumber(row.avgTradeValue ?? row.dailyTradeValue);
+  }
+  return !row.isRisk && (row.warnings?.length ?? 0) <= 1 && (row.healthScore ?? 0) >= 58;
 }));
 
-useSeoMeta(pageSeo);
+const filteredRows = computed(() => {
+  const query = filters.query.trim().toLowerCase();
 
-onMounted(async () => {
-  await loadGlobalData();
-  await loadReplayHistory();
+  return strategyRows.value.filter((row) => {
+    if (query) {
+      const haystack = [row.code, row.name, row.industryName, row.themeTitle, row.topSignalTitle]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      if (!haystack.includes(query)) return false;
+    }
+    if (filters.positiveInstitutional && (row.foreign5Day ?? 0) <= 0 && (row.investmentTrust5Day ?? 0) <= 0) return false;
+    if (filters.positiveTrend && (row.return20 ?? 0) <= 0 && !row.maBullStack && row.topSignalTone !== 'up') return false;
+    if (filters.qualityVolume && (!hasFiniteNumber(row.volumeQualityScore) || row.volumeQualityScore < 60)) return false;
+    if (filters.excludeRisk && row.isRisk) return false;
+    return true;
+  });
+});
+
+const displayedRows = computed(() => filteredRows.value.slice(0, showMore.value ? 12 : 6));
+const selectedRow = computed(() =>
+  filteredRows.value.find((row) => row.code === selectedCode.value) ?? displayedRows.value[0] ?? null,
+);
+const activeStrategyOption = computed(() =>
+  strategyOptions.find((item) => item.key === activeStrategy.value) ?? strategyOptions[0],
+);
+const dataDate = computed(() =>
+  selectedRow.value?.priceDate ?? manifest.value?.generatedAtLocalDate ?? null,
+);
+
+const selectedReasons = computed(() => {
+  const row = selectedRow.value;
+  if (!row) return [];
+
+  return [
+    (row.foreign5Day ?? 0) > 0
+      ? { key: 'foreign', icon: UserGroupIcon, label: '外資買超', value: formatLots(row.foreign5Day), note: '近 5 日累計' }
+      : null,
+    (row.investmentTrust5Day ?? 0) > 0
+      ? { key: 'trust', icon: UserGroupIcon, label: '投信買超', value: formatLots(row.investmentTrust5Day), note: '近 5 日累計' }
+      : null,
+    row.maStackCrossedAbove240
+      ? { key: 'ma-cross', icon: ArrowTrendingUpIcon, label: '均線剛轉強', value: '站上 MA240', note: '短中期均線同步站上長期均線' }
+      : row.maBullStack
+        ? { key: 'ma-stack', icon: ArrowTrendingUpIcon, label: '趨勢偏多', value: '均線多頭', note: '短中期均線維持在 MA240 上方' }
+        : null,
+    hasFiniteNumber(row.volumeQualityScore)
+      ? { key: 'volume', icon: ChartBarIcon, label: '量能品質', value: `${formatNumber(row.volumeQualityScore, 0)} 分`, note: row.volumeQuality?.label ?? '依近期成交量穩定度計算' }
+      : null,
+    row.monthlyRevenueDualGrowth
+      ? { key: 'revenue', icon: BoltIcon, label: '營收動能', value: '月增、年增', note: row.monthlyRevenueDate ? `資料日 ${formatDate(row.monthlyRevenueDate)}` : '最新月營收同向成長' }
+      : null,
+    (row.activeEtfCount ?? 0) > 0
+      ? { key: 'etf', icon: CheckCircleIcon, label: '主動 ETF', value: `${formatNumber(row.activeEtfCount, 0)} 檔持有`, note: '依已整理持股揭露資料' }
+      : null,
+  ].filter(Boolean).slice(0, 3);
+});
+
+const selectedWarnings = computed(() => {
+  const row = selectedRow.value;
+  if (!row) return [];
+  return [
+    ...(row.warnings ?? []).map((item) => item?.title ?? item?.note ?? item).filter(hasText),
+    row.hasMarginSurge ? '融資使用明顯增加，短線波動可能放大。' : null,
+    (row.return20 ?? 0) > 25 ? `近 20 日已上漲 ${formatPercent(row.return20)}，留意追高風險。` : null,
+  ].filter(Boolean).slice(0, 2);
+});
+
+const selectedConclusion = computed(() => {
+  if (!selectedRow.value) return '目前沒有足夠資料可判斷。';
+  if (!selectedReasons.value.length) return '目前可用的支持訊號不多，先放在後段觀察。';
+  if (selectedWarnings.value.length) return '有支持訊號，但仍有風險需要先確認。';
+  return '目前有多項資料同向，可列入優先觀察。';
 });
 
 watch(
-  () => manifest.value?.stockRadarHistoryPath,
-  async () => {
-    await loadReplayHistory();
+  () => displayedRows.value.map((row) => row.code).join(','),
+  () => {
+    if (!displayedRows.value.some((row) => row.code === selectedCode.value)) {
+      selectedCode.value = displayedRows.value[0]?.code ?? '';
+    }
   },
+  { immediate: true },
 );
 
-async function loadReplayHistory() {
-  const historyPath = manifest.value?.stockRadarHistoryPath;
-  if (!historyPath) {
-    replayHistory.value = null;
-    return;
-  }
+useSeoMeta(computed(() => ({
+  title: '條件掃描',
+  description: '用法人、趨勢、量能與風險條件找出台股觀察名單，並直接查看每檔入選原因。',
+  routePath: '/scanner',
+  keywords: ['台股條件掃描', '法人買超', '剛轉強', '量能放大', '低風險選股'],
+})));
 
-  isReplayLoading.value = true;
-  replayError.value = '';
+onMounted(() => {
+  loadGlobalData();
+});
 
-  try {
-    replayHistory.value = await fetchJson(historyPath);
-  } catch (error) {
-    replayHistory.value = null;
-    replayError.value = error instanceof Error ? error.message : '選股回放資料讀取失敗';
-  } finally {
-    isReplayLoading.value = false;
-  }
+function applyStrategy(key) {
+  activeStrategy.value = key;
+  showMore.value = false;
+  filters.positiveInstitutional = key === 'institutional';
+  filters.positiveTrend = key === 'turning';
+  filters.qualityVolume = key === 'volume';
+  filters.excludeRisk = key !== 'volume';
 }
 
 function resetFilters() {
-  Object.assign(filters, DEFAULT_SCANNER_FILTERS);
+  filters.query = '';
+  applyStrategy(activeStrategy.value);
 }
 
-function formatTradeValue(value) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) return '-';
-  if (Math.abs(number) >= 100000000) return `${(number / 100000000).toFixed(2)} 億`;
-  if (Math.abs(number) >= 10000) return `${(number / 10000).toFixed(0)} 萬`;
-  return formatNumber(number);
+function riskLabel(row) {
+  if (row.isRisk || (row.warnings?.length ?? 0) >= 3) return { label: '高', tone: 'risk' };
+  if ((row.warnings?.length ?? 0) >= 2 || (row.healthScore ?? 100) < 50) return { label: '中高', tone: 'warning' };
+  if ((row.warnings?.length ?? 0) === 1 || row.hasMarginSurge) return { label: '中', tone: 'warning' };
+  return { label: '低', tone: 'safe' };
 }
 
-function getWarningTone(item) {
-  if (item.topWarningTitle && item.warningTone === 'risk') return 'risk';
-  if (item.topWarningTitle && item.warningTone === 'warning') return 'warning';
-  return 'info';
-}
-
-function formatPercentile(value) {
-  if (value === null || !Number.isFinite(Number(value))) return '資料不足';
-  return `產業內第 ${Math.round(Number(value))} 百分位`;
-}
-
-function getConfidenceLabel(value) {
-  const confidence = Number(value);
-  if (!Number.isFinite(confidence)) return { text: '資料不足', tone: 'info' };
-  if (confidence >= 0.75) return { text: '訊號偏強', tone: 'up' };
-  if (confidence >= 0.55) return { text: '訊號中等', tone: 'normal' };
-  if (confidence >= 0.35) return { text: '先列觀察', tone: 'warning' };
-  return { text: '可信度偏弱', tone: 'down' };
-}
-
-function getValuationLabel(row) {
-  const percentile = Number(row.pePercentile);
-  if (!Number.isFinite(percentile)) return '估值資料不足';
-  if (percentile <= 30) return '估值偏低';
-  if (percentile <= 45) return '估值不算貴';
-  if (percentile >= 80) return '估值偏高';
-  return '估值中性';
-}
-
-function getLiquidityLabel(row) {
-  const tradeValue = Number(row.avgTradeValue ?? row.dailyTradeValue);
-  if (!Number.isFinite(tradeValue)) return '成交值資料不足';
-  if (tradeValue >= 500000000) return '流動性高';
-  if (tradeValue >= 100000000) return '流動性佳';
-  if (tradeValue >= 30000000) return '流動性正常';
-  if (tradeValue >= 10000000) return '流動性偏弱';
-  return '流動性不足';
-}
-
-function toFiniteNumber(value, fallback = 0) {
-  const number = Number(value);
-  return Number.isFinite(number) ? number : fallback;
-}
-
-function clampFactorScore(value) {
-  return Math.max(0, Math.min(100, Math.round(value)));
-}
-
-function scoreTradeValue(value) {
-  const tradeValue = toFiniteNumber(value, 0);
-  if (tradeValue >= 500000000) return 14;
-  if (tradeValue >= 100000000) return 10;
-  if (tradeValue >= 30000000) return 6;
-  if (tradeValue >= 10000000) return 2;
-  if (tradeValue >= 5000000) return -2;
-  return -8;
-}
-
-function scoreInstitutionalFlow(value) {
-  const lots = toFiniteNumber(value, 0) / 1000;
-  if (lots === 0) return 0;
-  const direction = lots > 0 ? 1 : -1;
-  const magnitude = Math.min(22, Math.log10(Math.abs(lots) + 1) * 6);
-  return direction * magnitude;
-}
-
-function buildFactorProfile(row) {
-  const return20 = toFiniteNumber(row.return20, 0);
-  const changePercent = toFiniteNumber(row.changePercent, 0);
-  const foreign5Day = toFiniteNumber(row.foreign5Day, 0);
-  const trust5Day = toFiniteNumber(row.investmentTrust5Day, 0);
-  const activeEtfCount = toFiniteNumber(row.activeEtfCount, 0);
-  const healthScore = toFiniteNumber(row.healthScore, 50);
-  const signalConfidence = toFiniteNumber(row.signalConfidence, 0);
-  const volumeQuality = toFiniteNumber(row.volumeQualityScore, 50);
-  const pePercentile = Number(row.pePercentile);
-  const industryRankPct = Number(row.industryRankPct);
-  const tradeValue = toFiniteNumber(row.avgTradeValue ?? row.dailyTradeValue, 0);
-  const warningCount = row.warnings?.length ?? 0;
-  const topSignalTone = row.topSignalTone ?? row.topPattern?.tone ?? 'normal';
-  const topWarningTone = row.warningTone ?? 'info';
-
-  const trend = clampFactorScore(
-    46 +
-      Math.max(Math.min(return20, 32), -28) * 0.72 +
-      Math.max(Math.min(changePercent, 9), -9) * 1.45 +
-      (row.maStackCrossedAbove240 ? 11 : row.maBullStack ? 7 : 0) +
-      (topSignalTone === 'up' ? 8 : topSignalTone === 'down' ? -8 : 0) +
-      (volumeQuality - 50) * 0.18,
-  );
-
-  const flow = clampFactorScore(
-    48 +
-      scoreInstitutionalFlow(foreign5Day + trust5Day) +
-      ((foreign5Day > 0 && trust5Day > 0) ? 9 : 0) +
-      activeEtfCount * 5 +
-      (row.isNextDayWatch ? 5 : 0) -
-      ((foreign5Day < 0 && trust5Day < 0) ? 8 : 0),
-  );
-
-  const valuationBonus = Number.isFinite(pePercentile)
-    ? pePercentile <= 30
-      ? 8
-      : pePercentile <= 45
-        ? 4
-        : pePercentile >= 85
-          ? -10
-          : 0
-    : -2;
-
-  const industryBonus = Number.isFinite(industryRankPct)
-    ? industryRankPct <= 25
-      ? 8
-      : industryRankPct <= 45
-        ? 4
-        : industryRankPct >= 80
-          ? -7
-          : 0
-    : 0;
-
-  const quality = clampFactorScore(
-    healthScore * 0.56 +
-      24 +
-      (row.monthlyRevenueDualGrowth ? 9 : 0) +
-      signalConfidence * 14 +
-      scoreTradeValue(tradeValue) +
-      valuationBonus +
-      industryBonus,
-  );
-
-  const overheatPenalty =
-    Math.max(return20 - 34, 0) * 0.45 +
-    Math.max(changePercent - 7, 0) * 1.2 +
-    (row.hasMarginSurge ? 13 : 0);
-
-  const risk = clampFactorScore(
-    92 -
-      warningCount * 10 -
-      (row.isRisk ? 28 : 0) -
-      (topWarningTone === 'risk' ? 12 : topWarningTone === 'warning' ? 7 : 0) -
-      overheatPenalty +
-      Math.min(scoreTradeValue(tradeValue), 8),
-  );
-
-  const total = clampFactorScore(trend * 0.32 + flow * 0.26 + quality * 0.24 + risk * 0.18);
-  const warningLevel = (row.isRisk ? 2 : 0) + warningCount + (row.hasMarginSurge ? 1 : 0) + (risk < 45 ? 2 : risk < 58 ? 1 : 0);
-  const liquidityOk = tradeValue >= 10000000;
-
-  const reasons = [
-    row.maStackCrossedAbove240 ? '剛站上 MA240' : row.maBullStack ? '均線多頭' : null,
-    foreign5Day > 0 && trust5Day > 0 ? '雙法人買超' : foreign5Day > 0 ? '外資買超' : trust5Day > 0 ? '投信買超' : null,
-    row.monthlyRevenueDualGrowth ? '月營收雙增' : null,
-    activeEtfCount > 0 ? `ETF ${formatNumber(activeEtfCount)} 檔持有` : null,
-    signalConfidence >= 0.6 ? '訊號可信度高' : null,
-    Number.isFinite(industryRankPct) && industryRankPct <= 35 ? '產業相對強勢' : null,
-  ].filter(Boolean);
-
-  const cautions = [
-    row.isRisk ? '注意 / 處置 / 變更交易' : null,
-    row.hasMarginSurge ? '融資偏熱' : null,
-    warningCount >= 2 ? '過熱警示偏多' : null,
-    tradeValue < 10000000 ? '流動性不足' : null,
-    return20 < -8 ? '20 日轉弱' : null,
-    flow < 42 ? '籌碼偏弱' : null,
-  ].filter(Boolean);
-
-  return {
-    total,
-    trend,
-    flow,
-    quality,
-    risk,
-    warningLevel,
-    liquidityOk,
-    reasons: reasons.slice(0, 3),
-    cautions: cautions.slice(0, 3),
-  };
-}
-
-function getFactorTone(profile) {
-  if (profile.risk < 45 || profile.warningLevel >= 3) return 'warning';
-  if (profile.total >= 72) return 'up';
-  if (profile.total >= 62) return 'normal';
-  return 'down';
-}
-
-function getFactorBars(profile) {
+function matchingReasons(row) {
   return [
-    { label: '趨勢', value: profile.trend },
-    { label: '籌碼', value: profile.flow },
-    { label: '品質', value: profile.quality },
-    { label: '風控', value: profile.risk },
-  ];
-}
-
-function buildReasonChips(row) {
-  const chips = [];
-
-  if (row.monthlyRevenueDualGrowth) chips.push('月營收雙增');
-  if (row.maStackCrossedAbove240) chips.push('MA 剛站上 MA240');
-  else if (row.maBullStack) chips.push('MA5/10/20 在 MA240 上方');
-  if ((row.foreign5Day ?? 0) > 0 && (row.investmentTrust5Day ?? 0) > 0) chips.push('雙法人連買');
-  else if ((row.foreign5Day ?? 0) > 0) chips.push('外資偏多');
-  else if ((row.investmentTrust5Day ?? 0) > 0) chips.push('投信偏多');
-  if ((row.activeEtfCount ?? 0) > 0) chips.push(`主動式 ETF ${row.activeEtfCount} 檔`);
-  if (row.isNextDayWatch) chips.push('列入隔日觀察');
-  return chips;
+    (row.foreign5Day ?? 0) > 0 ? '外資買超' : null,
+    (row.investmentTrust5Day ?? 0) > 0 ? '投信買超' : null,
+    row.maStackCrossedAbove240 ? '均線剛轉強' : row.maBullStack ? '均線偏多' : null,
+    hasFiniteNumber(row.volumeQualityScore) && row.volumeQualityScore >= 60 ? '量能穩定' : null,
+    row.monthlyRevenueDualGrowth ? '月營收雙增' : null,
+  ].filter(Boolean).slice(0, 2);
 }
 </script>
 
 <template>
-  <section class="page-shell scanner-page">
+  <section class="page-shell investor-page scanner-redesign-page">
     <StatusCard
-      :is-loading="isLoading || isReplayLoading"
-      :error-message="replayError || errorMessage"
-      :has-data="hasUniverse"
-      empty-message="選股條件篩選器資料尚未整理完成。"
+      :is-loading="isLoading"
+      :error-message="errorMessage"
+      :has-data="hasData"
+      empty-message="目前沒有可用的選股資料。"
     />
 
-    <template v-if="hasUniverse">
-      <section class="page-hero compact scanner-page-hero">
-        <div class="hero-copy">
-          <span class="hero-kicker">Stock Scanner</span>
-          <h1>選股條件篩選器</h1>
-          <p class="page-subtitle">先用條件把股票池縮小，再去看哪些股票同時具備趨勢、量能、籌碼與風險控管條件。</p>
-          <div class="hero-summary-grid scanner-hero-summary-grid">
-            <article
-              v-for="item in heroSummaryItems"
-              :key="item.label"
-              class="hero-summary-card"
-            >
-              <span class="hero-summary-label">{{ item.label }}</span>
-              <strong class="hero-summary-value">{{ item.value }}</strong>
-              <p class="hero-summary-note">{{ item.note }}</p>
-            </article>
-          </div>
+    <template v-if="hasData">
+      <header class="ir-page-heading scanner-heading">
+        <div>
+          <h1>條件掃描</h1>
+          <p>先選你今天想找的股票，再查看入選原因與風險。</p>
         </div>
-
-        <aside class="scanner-hero-board">
-          <div class="scanner-overview-grid">
-            <article v-for="card in overviewCards.slice(0, 2)" :key="card.title" class="scanner-overview-card">
-              <span class="scanner-overview-label">{{ card.title }}</span>
-              <strong>{{ card.value }}</strong>
-              <p>{{ card.note }}</p>
-            </article>
-          </div>
+        <div class="scanner-heading-meta">
+          <span v-if="dataDate">資料日期 {{ formatDate(dataDate) }}</span>
           <DataFreshnessBadge
             :generated-at="manifest?.generatedAt"
-            :market-date="manifest?.generatedAtLocalDate"
+            :market-date="dataDate"
             size="compact"
             variant="inline"
           />
-        </aside>
-      </section>
-
-      <section class="panel scanner-priority-panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">今日符合條件 Top 10</h2>
-            <p class="panel-subtitle">先看目前條件篩出的前段名單，再決定要不要加嚴籌碼、趨勢或風險條件。</p>
-          </div>
-          <span class="meta-chip">前 {{ formatNumber(topFilteredRows.length) }} / {{ formatNumber(filteredRows.length) }} 檔</span>
         </div>
+      </header>
 
-        <div class="scanner-priority-filter-row">
-          <label class="scanner-filter-field">
-            <span>股票 / 題材快搜</span>
-            <input v-model="filters.query" type="text" placeholder="例如 2454、CPO、PCB" />
-          </label>
-          <label class="scanner-filter-field">
-            <span>產業或題材</span>
-            <input v-model="filters.themeOnly" type="text" placeholder="例如 矽光子、重電" />
-          </label>
-          <button type="button" class="ghost-button" @click="resetFilters">回復預設</button>
-        </div>
+      <div class="ir-stepper" aria-label="條件掃描步驟">
+        <div class="ir-step"><span class="ir-step-index">1</span><span>選策略</span></div>
+        <div class="ir-step"><span class="ir-step-index">2</span><span>微調條件</span></div>
+        <div class="ir-step is-active"><span class="ir-step-index">3</span><span>查看結果</span></div>
+      </div>
 
-        <div v-if="topFilteredRows.length" class="scanner-priority-list">
-          <RouterLink
-            v-for="(row, index) in topFilteredRows"
-            :key="`priority-${row.code}`"
-            class="scanner-priority-card"
-            :to="createStockRoute(row.code)"
-          >
-            <span class="scanner-priority-rank">#{{ index + 1 }}</span>
-            <div class="scanner-priority-main">
-              <strong>{{ row.code }} {{ row.name }}</strong>
-              <span>{{ row.industryName || row.themeTitle || '未分類產業' }}</span>
-            </div>
-            <div class="scanner-priority-signal">
-              <b :class="row.changePercent > 0 ? 'text-up' : row.changePercent < 0 ? 'text-down' : ''">
-                {{ formatPercent(row.changePercent) }}
-              </b>
-              <small>體檢 {{ formatNumber(row.healthScore) }}</small>
-            </div>
-            <div class="scanner-priority-chips">
-              <span v-for="chip in buildReasonChips(row).slice(0, 3)" :key="`priority-${row.code}-${chip}`" class="meta-chip">
-                {{ chip }}
-              </span>
-              <span class="meta-chip" :class="`is-${getConfidenceLabel(row.signalConfidence).tone}`">
-                {{ getConfidenceLabel(row.signalConfidence).text }}
-              </span>
-            </div>
-          </RouterLink>
-        </div>
-
-        <div v-else class="empty-state compact">
-          <strong>目前沒有符合條件的股票</strong>
-          <p>先放寬快搜或題材條件，再用下方進階篩選逐步加嚴。</p>
-        </div>
-      </section>
-
-      <section class="panel scanner-factor-panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="panel-title">多因子強弱排行榜</h2>
-            <p class="panel-subtitle">把趨勢、籌碼、品質與風控合併排序，先看全市場最值得打開個股頁的候選，以及需要降權的弱勢名單。</p>
-          </div>
-          <span class="meta-chip">{{ formatNumber(factorRankRows.length) }} 檔</span>
-        </div>
-
-        <div class="scanner-factor-summary-grid">
-          <article
-            v-for="card in factorSummaryCards"
-            :key="card.label"
-            class="scanner-factor-summary-card"
-            :class="`is-${card.tone}`"
-          >
-            <span>{{ card.label }}</span>
-            <strong>{{ card.value }}</strong>
-            <p>{{ card.note }}</p>
-          </article>
-        </div>
-
-        <div class="scanner-factor-board">
-          <div class="scanner-factor-main">
-            <div class="scanner-factor-section-head">
-              <div>
-                <h3>高分候選</h3>
-                <p>分數同時看動能、法人、基本品質與風險扣分。</p>
-              </div>
-            </div>
-
-            <div class="scanner-factor-main-list">
-              <RouterLink
-                v-for="(item, index) in topFactorRows"
-                :key="`factor-top-${item.row.code}`"
-                class="scanner-factor-card"
-                :class="`is-${getFactorTone(item.profile)}`"
-                :to="createStockRoute(item.row.code)"
-              >
-                <div class="scanner-factor-card-head">
-                  <span class="scanner-factor-rank">#{{ index + 1 }}</span>
-                  <span class="scanner-factor-score">{{ formatNumber(item.profile.total) }}</span>
-                </div>
-                <strong>{{ item.row.code }} {{ item.row.name }}</strong>
-                <p>{{ item.row.industryName || item.row.themeTitle || '未分類產業' }}</p>
-                <div class="scanner-factor-bars">
-                  <div
-                    v-for="bar in getFactorBars(item.profile)"
-                    :key="`${item.row.code}-${bar.label}`"
-                    class="scanner-factor-bar"
-                  >
-                    <span>{{ bar.label }}</span>
-                    <div class="scanner-factor-bar-track">
-                      <i :style="{ width: `${bar.value}%` }"></i>
-                    </div>
-                    <strong>{{ formatNumber(bar.value) }}</strong>
-                  </div>
-                </div>
-                <div class="scanner-factor-chip-row">
-                  <span v-for="reason in item.profile.reasons" :key="`${item.row.code}-${reason}`" class="meta-chip">{{ reason }}</span>
-                </div>
-              </RouterLink>
-            </div>
-          </div>
-
-          <div class="scanner-factor-side">
-            <section class="scanner-factor-mini-section">
-              <div class="scanner-factor-section-head">
-                <div>
-                  <h3>風險降權</h3>
-                  <p>分數不一定差，但風控分或警示扣分較重。</p>
-                </div>
-              </div>
-              <div class="scanner-factor-mini-list">
-                <RouterLink
-                  v-for="item in riskFactorRows"
-                  :key="`factor-risk-${item.row.code}`"
-                  class="scanner-factor-mini-card is-warning"
-                  :to="createStockRoute(item.row.code)"
-                >
-                  <div>
-                    <strong>{{ item.row.code }} {{ item.row.name }}</strong>
-                    <span>{{ item.profile.cautions[0] || item.row.topWarningTitle || '風險分偏低' }}</span>
-                  </div>
-                  <b>{{ formatNumber(item.profile.risk) }}</b>
-                </RouterLink>
-              </div>
-            </section>
-
-            <section class="scanner-factor-mini-section">
-              <div class="scanner-factor-section-head">
-                <div>
-                  <h3>弱勢避開</h3>
-                  <p>趨勢或籌碼分數偏弱，先放到觀察名單後段。</p>
-                </div>
-              </div>
-              <div class="scanner-factor-mini-list">
-                <RouterLink
-                  v-for="item in weakFactorRows"
-                  :key="`factor-weak-${item.row.code}`"
-                  class="scanner-factor-mini-card is-down"
-                  :to="createStockRoute(item.row.code)"
-                >
-                  <div>
-                    <strong>{{ item.row.code }} {{ item.row.name }}</strong>
-                    <span>{{ item.profile.cautions[0] || '多因子分數偏弱' }}</span>
-                  </div>
-                  <b>{{ formatNumber(item.profile.total) }}</b>
-                </RouterLink>
-              </div>
-            </section>
-          </div>
-        </div>
-      </section>
-
-      <section class="scanner-layout">
-        <aside class="scanner-filter-sidebar">
-          <section class="panel scanner-filter-panel" :class="{ 'is-collapsed': isScannerFiltersCollapsed }">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">篩選條件</h2>
-                <p class="panel-subtitle">先用條件把股票池縮小，再看每檔卡片是不是同時具備趨勢、成交值和籌碼支持。</p>
-              </div>
-              <div class="scanner-filter-actions">
-                <button
-                  type="button"
-                  class="ghost-button"
-                  :aria-expanded="String(!isScannerFiltersCollapsed)"
-                  @click="isScannerFiltersCollapsed = !isScannerFiltersCollapsed"
-                >
-                  {{ isScannerFiltersCollapsed ? '展開條件' : '收合條件' }}
-                </button>
-                <button type="button" class="ghost-button" @click="resetFilters">回復預設</button>
-              </div>
-            </div>
-
-            <div v-show="!isScannerFiltersCollapsed" class="scanner-filter-stack">
-              <section class="scanner-filter-section">
-                <div class="scanner-filter-section-head">
-                  <strong>快速定位</strong>
-                  <span>先縮小股票池，再決定要不要加嚴條件。</span>
-                </div>
-                <div class="scanner-filter-grid">
-                  <label class="scanner-filter-field is-wide">
-                    <span>股票代號 / 名稱 / 題材</span>
-                    <input v-model="filters.query" type="text" placeholder="例如 2454、CPO、PCB" />
-                  </label>
-
-                  <label class="scanner-filter-field is-wide">
-                    <span>只看特定題材或產業</span>
-                    <input v-model="filters.themeOnly" type="text" placeholder="例如 矽光子、重電、PCB" />
-                  </label>
-                </div>
-              </section>
-
-              <section class="scanner-filter-section">
-                <div class="scanner-filter-section-head">
-                  <strong>趨勢與籌碼</strong>
-                  <span>用月營收、均線與法人買盤先找出比較像剛轉強的股票。</span>
-                </div>
-                <div class="scanner-filter-check-grid">
-                  <label class="scanner-check"><input v-model="filters.dualBuy" type="checkbox" /> 外資與投信同步買超</label>
-                  <label class="scanner-check"><input v-model="filters.foreignBuy" type="checkbox" /> 外資近 5 日偏多</label>
-                  <label class="scanner-check"><input v-model="filters.trustBuy" type="checkbox" /> 投信近 5 日偏多</label>
-                  <label class="scanner-check"><input v-model="filters.activeEtf" type="checkbox" /> 有主動式 ETF 持有</label>
-                  <label class="scanner-check"><input v-model="filters.revenueDualGrowth" type="checkbox" /> 月營收 MoM / YoY 同增</label>
-                  <label class="scanner-check"><input v-model="filters.maStackAbove240" type="checkbox" /> MA5 / 10 / 20 站上 MA240</label>
-                  <label class="scanner-check"><input v-model="filters.bullishSignal" type="checkbox" /> 只看偏多技術訊號</label>
-                  <label class="scanner-check"><input v-model="filters.nextDayOnly" type="checkbox" /> 只看隔日觀察清單交集</label>
-                </div>
-              </section>
-
-              <section class="scanner-filter-section">
-                <div class="scanner-filter-section-head">
-                  <strong>品質與風險</strong>
-                  <span>排掉太熱、太差或訊號可信度偏低的股票，保留比較可交易的名單。</span>
-                </div>
-                <div class="scanner-filter-check-grid">
-                  <label class="scanner-check"><input v-model="filters.healthyOnly" type="checkbox" /> 只看體檢分數 62 以上</label>
-                  <label class="scanner-check"><input v-model="filters.coolOnly" type="checkbox" /> 排除過熱股票</label>
-                  <label class="scanner-check"><input v-model="filters.excludeRisk" type="checkbox" /> 排除注意、處置、變更交易</label>
-                  <label class="scanner-check"><input v-model="filters.excludeMarginSurge" type="checkbox" /> 排除融資過熱</label>
-                  <label class="scanner-check"><input v-model="filters.industryCheap" type="checkbox" /> 只看產業相對便宜</label>
-                  <label class="scanner-check"><input v-model="filters.industryStrong" type="checkbox" /> 只看產業相對強勢</label>
-                  <label class="scanner-check"><input v-model="filters.highConfidenceSignal" type="checkbox" /> 只看高可信度訊號</label>
-                </div>
-              </section>
-
-              <section class="scanner-filter-section">
-                <div class="scanner-filter-section-head">
-                  <strong>流動性</strong>
-                  <span>確認成交值夠不夠，避免挑到有訊號但不好交易的股票。</span>
-                </div>
-                <div class="scanner-filter-grid">
-                  <label class="scanner-check scanner-check-wide">
-                    <input v-model="filters.minLiquidity" type="checkbox" />
-                    只看流動性達標
-                  </label>
-                  <label v-if="filters.minLiquidity" class="scanner-filter-field">
-                    <span>最低日均成交值</span>
-                    <select v-model.number="filters.minTradeValue" class="scanner-filter-select">
-                      <option v-for="option in liquidityOptions" :key="option.value" :value="option.value">{{ option.label }}</option>
-                    </select>
-                  </label>
-                </div>
-              </section>
-            </div>
-          </section>
-        </aside>
-
-        <section class="panel scanner-result-panel">
-          <div class="panel-header">
+      <section class="scanner-workspace">
+        <aside class="ir-surface ir-section scanner-strategy-panel">
+          <div class="ir-section-head">
             <div>
-              <h2 class="panel-title">符合條件的股票</h2>
-              <p class="panel-subtitle">排序會先考慮體檢分數、訊號可信度、產業相對估值與量能品質，目的不是找最熱門，而是找比較可交易的名單。</p>
-            </div>
-            <div class="scanner-result-actions">
-              <div class="scanner-view-switch" role="tablist" aria-label="切換結果顯示密度">
-                <button
-                  type="button"
-                  :class="{ 'is-active': scannerViewMode === 'compact' }"
-                  :aria-selected="scannerViewMode === 'compact'"
-                  @click="scannerViewMode = 'compact'"
-                >
-                  精簡
-                </button>
-                <button
-                  type="button"
-                  :class="{ 'is-active': scannerViewMode === 'detail' }"
-                  :aria-selected="scannerViewMode === 'detail'"
-                  @click="scannerViewMode = 'detail'"
-                >
-                  詳細
-                </button>
-              </div>
-              <span class="meta-chip">{{ formatNumber(filteredRows.length) }} 檔</span>
+              <h2>我今天想找</h2>
+              <p>{{ activeStrategyOption.description }}</p>
             </div>
           </div>
 
-          <div v-if="filteredRows.length" class="scanner-result-list">
-            <RouterLink
-              v-for="row in filteredRows"
-              :key="row.code"
-              class="scanner-result-card"
-              :class="{ 'is-compact': scannerViewMode === 'compact' }"
-              :to="createStockRoute(row.code)"
+          <div class="scanner-strategy-list">
+            <button
+              v-for="option in strategyOptions"
+              :key="option.key"
+              type="button"
+              class="scanner-strategy-button"
+              :class="{ 'is-active': activeStrategy === option.key }"
+              @click="applyStrategy(option.key)"
             >
-              <div class="scanner-result-head">
-                <div>
-                  <strong>{{ row.code }} {{ row.name }}</strong>
-                  <div class="scanner-result-meta">
-                    <span>{{ row.industryName || '未分類產業' }}</span>
-                    <span v-if="row.themeTitle">・{{ row.themeTitle }}</span>
-                    <span v-if="row.topSignalTitle">・{{ row.topSignalTitle }}</span>
-                  </div>
-                </div>
-                <div class="scanner-result-score">
-                  <span class="status-badge" :class="`is-${row.healthTone}`">體檢 {{ formatNumber(row.healthScore) }}</span>
-                  <span :class="row.changePercent > 0 ? 'text-up' : row.changePercent < 0 ? 'text-down' : ''">
-                    {{ formatPercent(row.changePercent) }}
-                  </span>
-                </div>
-              </div>
+              <component :is="option.icon" />
+              <span>{{ option.label }}</span>
+              <CheckCircleIcon v-if="activeStrategy === option.key" class="strategy-check" />
+            </button>
+          </div>
 
-              <div class="scanner-result-chips">
-                <span v-for="chip in buildReasonChips(row)" :key="`${row.code}-${chip}`" class="meta-chip">{{ chip }}</span>
-                <span class="meta-chip" :class="`is-${getConfidenceLabel(row.signalConfidence).tone}`">
-                  {{ getConfidenceLabel(row.signalConfidence).text }}
+          <div class="scanner-filter-block">
+            <strong>調整條件</strong>
+            <label class="ir-field">
+              <span>搜尋股票或產業</span>
+              <span class="scanner-search-field">
+                <MagnifyingGlassIcon />
+                <input v-model="filters.query" class="ir-input" type="search" placeholder="例如 2330、半導體" />
+              </span>
+            </label>
+            <label class="ir-check"><input v-model="filters.positiveInstitutional" type="checkbox" />近 5 日法人買超</label>
+            <label class="ir-check"><input v-model="filters.positiveTrend" type="checkbox" />趨勢資料偏多</label>
+            <label class="ir-check"><input v-model="filters.qualityVolume" type="checkbox" />量能品質 60 分以上</label>
+            <label class="ir-check"><input v-model="filters.excludeRisk" type="checkbox" />排除處置與高風險</label>
+            <button type="button" class="ir-button is-primary" @click="resetFilters">
+              <ArrowPathIcon />重新篩選
+            </button>
+          </div>
+        </aside>
+
+        <section class="ir-surface scanner-result-panel">
+          <div class="ir-section scanner-result-headline">
+            <div>
+              <h2>最符合 {{ formatNumber(filteredRows.length, 0) }} 檔</h2>
+              <p>依目前策略排序，先顯示 {{ formatNumber(displayedRows.length, 0) }} 檔。</p>
+            </div>
+            <button
+              v-if="filteredRows.length > 6"
+              type="button"
+              class="ir-button"
+              @click="showMore = !showMore"
+            >
+              {{ showMore ? '收回前 6 檔' : '查看更多' }}
+            </button>
+          </div>
+
+          <div v-if="displayedRows.length" class="scanner-ranked-list" role="listbox" aria-label="條件掃描結果">
+            <article
+              v-for="(row, index) in displayedRows"
+              :key="row.code"
+              class="scanner-ranked-row"
+              :class="{ 'is-selected': selectedRow?.code === row.code }"
+              role="option"
+              :aria-selected="selectedRow?.code === row.code"
+              tabindex="0"
+              @click="selectedCode = row.code"
+              @keydown.enter="selectedCode = row.code"
+            >
+              <span class="ir-rank" :class="{ 'is-top': index < 3 }">{{ index + 1 }}</span>
+              <RouterLink class="scanner-stock-link" :to="createStockRoute(row.code)" @click.stop>
+                <strong>{{ row.code }}</strong>
+                <span>{{ row.name }}</span>
+              </RouterLink>
+              <div class="scanner-row-price">
+                <strong v-if="hasFiniteNumber(row.close)">{{ formatNumber(row.close) }}</strong>
+                <span
+                  v-if="hasFiniteNumber(row.changePercent)"
+                  :class="row.changePercent > 0 ? 'ir-text-up' : row.changePercent < 0 ? 'ir-text-down' : ''"
+                >
+                  {{ row.changePercent > 0 ? '▲' : row.changePercent < 0 ? '▼' : '' }} {{ formatPercent(Math.abs(row.changePercent)) }}
                 </span>
-                <span class="meta-chip">{{ getValuationLabel(row) }}</span>
-                <span class="meta-chip">{{ getLiquidityLabel(row) }}</span>
-                <span v-if="row.topWarningTitle" class="meta-chip" :class="`is-${getWarningTone(row)}`">{{ row.topWarningTitle }}</span>
               </div>
+              <div class="scanner-row-reasons">
+                <span v-for="reason in matchingReasons(row)" :key="`${row.code}-${reason}`">
+                  <CheckCircleIcon />{{ reason }}
+                </span>
+                <span v-if="!matchingReasons(row).length" class="ir-muted">目前可用訊號較少</span>
+              </div>
+              <span class="ir-status" :class="`is-${riskLabel(row).tone}`">風險 {{ riskLabel(row).label }}</span>
+              <button
+                type="button"
+                class="ir-row-action"
+                :class="{ 'is-active': isWatched(row.code) }"
+                :aria-label="isWatched(row.code) ? `從明日觀察移除 ${row.name}` : `加入明日觀察 ${row.name}`"
+                @click.stop="toggleWatch(row.code)"
+              >
+                <StarIcon />
+              </button>
+            </article>
+          </div>
 
-              <div v-if="scannerViewMode === 'detail'" class="radar-stock-metrics scanner-result-metrics">
-                <div>
-                  <span>收盤價</span>
-                  <strong>{{ formatNumber(row.close) }}</strong>
-                </div>
-                <div>
-                  <span>20 日表現</span>
-                  <strong :class="(row.return20 ?? 0) > 0 ? 'text-up' : (row.return20 ?? 0) < 0 ? 'text-down' : ''">
-                    {{ formatPercent(row.return20) }}
-                  </strong>
-                </div>
-                <div>
-                  <span>外資 5 日</span>
-                  <strong>{{ formatLots(row.foreign5Day) }}</strong>
-                </div>
-                <div>
-                  <span>投信 5 日</span>
-                  <strong>{{ formatLots(row.investmentTrust5Day) }}</strong>
-                </div>
-                <div>
-                  <span>日均成交值</span>
-                  <strong>{{ formatTradeValue(row.avgTradeValue ?? row.dailyTradeValue) }}</strong>
-                </div>
-                <div>
-                  <span>產業估值</span>
-                  <strong>{{ formatPercentile(row.pePercentile) }}</strong>
-                </div>
-                <div>
-                  <span>月營收</span>
-                  <strong>{{ row.monthlyRevenueDualGrowth ? 'MoM / YoY 同增' : row.monthlyRevenueDate ? formatDate(row.monthlyRevenueDate) : '資料不足' }}</strong>
-                </div>
-                <div>
-                  <span>MA240 結構</span>
-                  <strong>
-                    {{ row.maStackCrossedAbove240 ? '剛站上長期均線' : row.maBullStack ? '均線在 MA240 上方' : '尚未確認' }}
-                  </strong>
-                </div>
-              </div>
-              <div v-else class="scanner-result-note">
-                收盤 {{ formatNumber(row.close) }}｜20 日 {{ formatPercent(row.return20) }}｜外資 {{ formatLots(row.foreign5Day) }}｜投信 {{ formatLots(row.investmentTrust5Day) }}
-              </div>
-            </RouterLink>
-          </div>
-          <div v-else class="empty-state compact">
+          <div v-else class="ir-empty">
             <strong>目前沒有符合條件的股票</strong>
-            <p>可以先放寬成交值或風險條件，或改看單一題材，找還沒走遠但剛有訊號的股票。</p>
+            <span>放寬一項條件，或改用其他策略再查看。</span>
           </div>
+
+          <p class="ir-note scanner-source-note">只顯示目前資料中實際存在的價格、法人、量能與風險訊號。</p>
         </section>
+
+        <aside class="ir-surface ir-section scanner-detail-panel">
+          <template v-if="selectedRow">
+            <div class="scanner-detail-heading">
+              <div>
+                <span>為什麼入選</span>
+                <h2>{{ selectedRow.code }} {{ selectedRow.name }}</h2>
+              </div>
+              <button
+                type="button"
+                class="ir-icon-button"
+                :class="{ 'is-active': isWatched(selectedRow.code) }"
+                :aria-label="isWatched(selectedRow.code) ? '從明日觀察移除' : '加入明日觀察'"
+                @click="toggleWatch(selectedRow.code)"
+              >
+                <StarIcon />
+              </button>
+            </div>
+
+            <div v-if="hasFiniteNumber(selectedRow.close)" class="scanner-detail-quote">
+              <span>股價</span>
+              <strong>{{ formatNumber(selectedRow.close) }}</strong>
+              <b
+                v-if="hasFiniteNumber(selectedRow.changePercent)"
+                :class="selectedRow.changePercent > 0 ? 'ir-text-up' : selectedRow.changePercent < 0 ? 'ir-text-down' : ''"
+              >
+                {{ selectedRow.changePercent > 0 ? '▲' : selectedRow.changePercent < 0 ? '▼' : '' }}
+                {{ formatPercent(Math.abs(selectedRow.changePercent)) }}
+              </b>
+            </div>
+
+            <div class="ir-data-note">
+              <ArrowTrendingUpIcon class="ir-inline-icon" />
+              <span>{{ selectedConclusion }}</span>
+            </div>
+
+            <section v-if="selectedReasons.length" class="scanner-detail-section">
+              <h3>入選依據</h3>
+              <div class="scanner-evidence-list">
+                <article v-for="reason in selectedReasons" :key="reason.key">
+                  <component :is="reason.icon" />
+                  <div>
+                    <strong>{{ reason.label }}</strong>
+                    <span>{{ reason.note }}</span>
+                  </div>
+                  <b>{{ reason.value }}</b>
+                </article>
+              </div>
+            </section>
+
+            <section v-if="selectedWarnings.length" class="scanner-detail-section">
+              <h3>需要留意</h3>
+              <div class="scanner-warning-list">
+                <p v-for="warning in selectedWarnings" :key="warning">
+                  <ExclamationTriangleIcon />{{ warning }}
+                </p>
+              </div>
+            </section>
+
+            <button type="button" class="ir-button is-primary scanner-watch-button" @click="toggleWatch(selectedRow.code)">
+              <StarIcon />{{ isWatched(selectedRow.code) ? '已加入明日觀察' : '加入明日觀察' }}
+            </button>
+            <RouterLink class="ir-button" :to="createStockRoute(selectedRow.code)">查看個股</RouterLink>
+          </template>
+        </aside>
       </section>
     </template>
   </section>
 </template>
+
+<style scoped>
+.scanner-heading-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ir-soft);
+  font-size: 0.76rem;
+}
+
+.scanner-workspace {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr) 330px;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.scanner-strategy-panel,
+.scanner-detail-panel {
+  align-self: start;
+}
+
+.scanner-strategy-list,
+.scanner-filter-block,
+.scanner-ranked-list,
+.scanner-detail-panel,
+.scanner-evidence-list,
+.scanner-warning-list,
+.scanner-detail-section {
+  display: grid;
+}
+
+.scanner-strategy-list {
+  gap: 7px;
+}
+
+.scanner-strategy-button {
+  display: grid;
+  grid-template-columns: 24px 1fr 20px;
+  align-items: center;
+  gap: 9px;
+  min-height: 52px;
+  padding: 0 11px;
+  border: 1px solid var(--ir-line);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ir-text);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-align: left;
+  cursor: pointer;
+}
+
+.scanner-strategy-button > svg {
+  width: 23px;
+  height: 23px;
+  color: var(--ir-soft);
+}
+
+.scanner-strategy-button .strategy-check {
+  width: 19px;
+  height: 19px;
+}
+
+.scanner-strategy-button.is-active {
+  border-color: var(--ir-brand);
+  color: var(--ir-brand);
+  background: var(--ir-row-hover);
+}
+
+.scanner-strategy-button.is-active > svg {
+  color: var(--ir-brand);
+}
+
+.scanner-filter-block {
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ir-line);
+}
+
+.scanner-search-field {
+  position: relative;
+  display: block;
+}
+
+.scanner-search-field > svg {
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+  color: var(--ir-soft);
+}
+
+.scanner-search-field .ir-input {
+  padding-left: 35px;
+}
+
+.scanner-result-panel {
+  overflow: hidden;
+}
+
+.scanner-result-headline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--ir-line);
+}
+
+.scanner-result-headline h2,
+.scanner-result-headline p {
+  margin: 0;
+}
+
+.scanner-result-headline h2 {
+  color: var(--ir-text);
+  font-size: 1.06rem;
+}
+
+.scanner-result-headline p {
+  margin-top: 4px;
+  color: var(--ir-soft);
+  font-size: 0.76rem;
+}
+
+.scanner-ranked-row {
+  display: grid;
+  grid-template-columns: 38px minmax(105px, 1.05fr) minmax(94px, 0.8fr) minmax(160px, 1.4fr) 68px 40px;
+  align-items: center;
+  gap: 9px;
+  min-height: 83px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--ir-line);
+  cursor: pointer;
+}
+
+.scanner-ranked-row.is-selected {
+  box-shadow: inset 3px 0 0 var(--ir-brand);
+  background: var(--ir-row-hover);
+}
+
+.scanner-stock-link {
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.scanner-stock-link strong,
+.scanner-stock-link span {
+  display: block;
+}
+
+.scanner-stock-link strong {
+  color: var(--ir-text);
+  font-size: 1rem;
+}
+
+.scanner-stock-link span {
+  margin-top: 3px;
+  color: var(--ir-soft);
+  font-size: 0.76rem;
+}
+
+.scanner-row-price {
+  display: grid;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.scanner-row-price strong {
+  color: var(--ir-text);
+}
+
+.scanner-row-price span {
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.scanner-row-reasons {
+  display: grid;
+  gap: 4px;
+}
+
+.scanner-row-reasons > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ir-soft);
+  font-size: 0.74rem;
+}
+
+.scanner-row-reasons svg {
+  width: 16px;
+  height: 16px;
+  color: var(--down);
+}
+
+.scanner-source-note {
+  padding: 10px 12px;
+}
+
+.scanner-detail-panel {
+  gap: 14px;
+}
+
+.scanner-detail-heading,
+.scanner-detail-quote,
+.scanner-evidence-list article,
+.scanner-warning-list p {
+  display: flex;
+  align-items: center;
+}
+
+.scanner-detail-heading,
+.scanner-detail-quote {
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.scanner-detail-heading span {
+  color: var(--ir-soft);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.scanner-detail-heading h2 {
+  margin: 4px 0 0;
+  color: var(--ir-text);
+  font-size: 1.25rem;
+}
+
+.scanner-detail-quote {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ir-line);
+}
+
+.scanner-detail-quote span {
+  color: var(--ir-soft);
+  font-size: 0.75rem;
+}
+
+.scanner-detail-quote strong {
+  color: var(--ir-text);
+  font-size: 1.3rem;
+}
+
+.scanner-detail-quote b {
+  margin-left: auto;
+  font-size: 0.84rem;
+}
+
+.scanner-detail-section {
+  gap: 9px;
+}
+
+.scanner-detail-section h3 {
+  margin: 0;
+  color: var(--ir-text);
+  font-size: 0.9rem;
+}
+
+.scanner-evidence-list {
+  border: 1px solid var(--ir-line);
+  border-radius: 7px;
+}
+
+.scanner-evidence-list article {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  gap: 8px;
+  padding: 10px;
+  border-bottom: 1px solid var(--ir-line);
+}
+
+.scanner-evidence-list article:last-child {
+  border-bottom: 0;
+}
+
+.scanner-evidence-list svg {
+  width: 21px;
+  height: 21px;
+  color: var(--down);
+}
+
+.scanner-evidence-list strong,
+.scanner-evidence-list span {
+  display: block;
+}
+
+.scanner-evidence-list strong {
+  color: var(--ir-text);
+  font-size: 0.78rem;
+}
+
+.scanner-evidence-list span {
+  margin-top: 2px;
+  color: var(--ir-soft);
+  font-size: 0.68rem;
+}
+
+.scanner-evidence-list b {
+  color: var(--ir-text);
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+.scanner-warning-list {
+  gap: 7px;
+}
+
+.scanner-warning-list p {
+  gap: 7px;
+  margin: 0;
+  color: var(--ir-soft);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.scanner-warning-list svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: var(--large);
+}
+
+.scanner-watch-button {
+  width: 100%;
+  margin-top: auto;
+}
+
+@media (max-width: 1180px) {
+  .scanner-workspace {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .scanner-detail-panel {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scanner-detail-heading,
+  .scanner-detail-quote,
+  .scanner-detail-panel > .ir-data-note,
+  .scanner-detail-panel > .ir-button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 820px) {
+  .scanner-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .scanner-strategy-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scanner-filter-block {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scanner-filter-block > strong,
+  .scanner-filter-block > .ir-field,
+  .scanner-filter-block > .ir-button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .scanner-heading-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .scanner-ranked-row {
+    grid-template-columns: 34px minmax(0, 1fr) auto 38px;
+    min-height: 98px;
+  }
+
+  .scanner-row-price {
+    text-align: right;
+  }
+
+  .scanner-row-reasons {
+    grid-column: 2 / 4;
+  }
+
+  .scanner-ranked-row > .ir-status {
+    grid-column: 2;
+  }
+
+  .scanner-detail-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .scanner-detail-panel > * {
+    grid-column: 1 !important;
+  }
+}
+</style>

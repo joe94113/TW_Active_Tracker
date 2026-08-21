@@ -22,6 +22,7 @@ const BrokerBranchRadarPage = () => import('./pages/BrokerBranchRadarPage.vue');
 const WatchboardPage = () => import('./pages/WatchboardPage.vue');
 const IndustryPulsePage = () => import('./pages/IndustryPulsePage.vue');
 const GlobalMarketsPage = () => import('./pages/GlobalMarketsPage.vue');
+const AsianCurrencyWatchPage = () => import('./pages/AsianCurrencyWatchPage.vue');
 const MarketBuzzPage = () => import('./pages/MarketBuzzPage.vue');
 const SerenityRadarPage = () => import('./pages/SerenityRadarPage.vue');
 
@@ -47,6 +48,7 @@ export const ROUTE_NAME = {
   WATCHBOARD: 'watchboard',
   INDUSTRY_PULSE: 'industry-pulse',
   GLOBAL_MARKETS: 'global-markets',
+  ASIAN_CURRENCY_WATCH: 'asian-currency-watch',
   MARKET_BUZZ: 'market-buzz',
   SERENITY_RADAR: 'serenity-radar',
 };
@@ -197,6 +199,15 @@ const router = createRouter({
       meta: {
         title: '國際盤 / 原物料 / 外匯儀表板',
         description: '把國際股指、原油、黃金與外匯放在同一頁，盤前先看全球風向再判斷台股節奏。',
+      },
+    },
+    {
+      path: '/asian-currency-watch',
+      name: ROUTE_NAME.ASIAN_CURRENCY_WATCH,
+      component: AsianCurrencyWatchPage,
+      meta: {
+        title: '台股每日亞幣觀察',
+        description: '集中查看日圓、韓元、人民幣、台幣、外資買賣超、NASDAQ 與美國 10 年期公債殖利率。',
       },
     },
     {

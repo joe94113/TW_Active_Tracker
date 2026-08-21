@@ -15,6 +15,7 @@
     "line:webhook:deploy": "npx wrangler deploy"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "echarts": "^6.1.0",
     "lightweight-charts": "^5.1.0",
     "vue": "^3.5.13",

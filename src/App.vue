@@ -92,6 +92,12 @@ secondaryNavigationItems.push(
     description: '把美股、亞洲股市、原油、黃金與外匯放在同一頁，盤前先看全球風向。',
   },
   {
+    label: '每日亞幣',
+    path: '/asian-currency-watch',
+    tag: '匯率',
+    description: '集中看日圓、韓元、人民幣、台幣、外資、NASDAQ 與美債殖利率。',
+  },
+  {
     label: '新聞熱度',
     path: '/market-buzz',
     tag: '熱度',
@@ -159,7 +165,7 @@ const moreMenuSections = [
   {
     title: '市場總覽',
     subtitle: '盤前盤後先看風向',
-    paths: ['/global-markets', '/futures', '/industry-pulse', '/market-buzz', '/official-radar'],
+    paths: ['/global-markets', '/asian-currency-watch', '/futures', '/industry-pulse', '/market-buzz', '/official-radar'],
   },
   {
     title: '個股工具',
@@ -395,6 +401,14 @@ const recommendedMorePaths = computed(() => {
 
   if (route.path.startsWith('/serenity-radar')) {
     return ['/global-markets', '/themes', '/event-stats'];
+  }
+
+  if (route.path.startsWith('/global-markets')) {
+    return ['/asian-currency-watch', '/futures', '/industry-pulse'];
+  }
+
+  if (route.path.startsWith('/asian-currency-watch')) {
+    return ['/global-markets', '/futures', '/industry-pulse'];
   }
 
   return ['/radar', '/industry-pulse', '/event-stats'];

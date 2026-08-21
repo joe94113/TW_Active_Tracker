@@ -29,8 +29,22 @@ const GLOBAL_MARKET_SECTIONS = [
     items: [
       { symbol: 'USDTWD=X', label: '美元 / 台幣', shortLabel: '美元兌台幣' },
       { symbol: 'USDJPY=X', label: '美元 / 日圓', shortLabel: '美元兌日圓' },
+      { symbol: 'USDKRW=X', label: '美元 / 韓元', shortLabel: '美元兌韓元' },
+      { symbol: 'USDCNY=X', label: '美元 / 人民幣', shortLabel: '美元兌人民幣' },
       { symbol: 'EURUSD=X', label: '歐元 / 美元', shortLabel: '歐元兌美元' },
       { symbol: 'GBPUSD=X', label: '英鎊 / 美元', shortLabel: '英鎊兌美元' },
+    ],
+  },
+  {
+    key: 'rates',
+    title: '美債殖利率',
+    items: [
+      {
+        symbol: '^TNX',
+        label: '美國 10 年期公債殖利率',
+        shortLabel: '美債 10Y',
+        unit: 'percent',
+      },
     ],
   },
 ];
@@ -79,8 +93,10 @@ function buildSeriesItem(config, rows = []) {
     symbol: config.symbol,
     label: config.label,
     shortLabel: config.shortLabel,
+    unit: config.unit ?? 'number',
     close,
     change,
+    changeBasisPoints: config.unit === 'percent' && change !== null ? change * 100 : null,
     changePercent,
     return5,
     return20,

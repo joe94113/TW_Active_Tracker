@@ -1,406 +1,617 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
+import {
+  ArrowRightIcon,
+  ArrowTrendingDownIcon,
+  ArrowTrendingUpIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  StarIcon,
+} from '@heroicons/vue/24/outline';
 import StatusCard from '../components/StatusCard.vue';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
+import { useTomorrowWatchCodes } from '../composables/useTomorrowWatchCodes';
 import { fetchJson } from '../lib/api';
+import { hasFiniteNumber, hasText, uniqueBy } from '../lib/dataAvailability';
+import { formatDate, formatLots, formatNumber, formatPercent } from '../lib/formatters';
 import { createStockRoute } from '../lib/stockRouting';
-import {
-  formatDate,
-  formatLots,
-  formatNumber,
-  formatPercent,
-} from '../lib/formatters';
 
-const { manifest, isLoading: isGlobalLoading, errorMessage: globalErrorMessage, loadGlobalData } = useGlobalData();
-
+const { manifest, isLoading: isGlobalLoading, errorMessage: globalError, loadGlobalData } = useGlobalData();
+const { isWatched, toggleWatch } = useTomorrowWatchCodes();
 const entryRadar = ref(null);
 const isEntryLoading = ref(false);
 const entryError = ref('');
+const activeCategory = ref('all');
+const activeSort = ref('score');
+const selectedCode = ref('');
 
-const sectionConfigs = [
-  {
-    key: 'freshStarters',
-    title: '剛轉強',
-    description: '量能還沒完全放大、股價先墊高，適合盯下一段放量確認。',
-    emptyMessage: '今天沒有特別明顯的量縮轉強名單。',
-  },
-  {
-    key: 'nearBreakouts',
-    title: '整理待突破',
-    description: '箱型壓縮、均線收斂、距離前高不遠，適合隔日盯量價。',
-    emptyMessage: '今天沒有特別明顯的整理待突破名單。',
-  },
-  {
-    key: 'institutionalTurns',
-    title: '法人剛轉買',
-    description: '外資或投信剛從賣轉買，較適合放進第一批觀察清單。',
-    emptyMessage: '今天沒有明顯的法人剛轉買名單。',
-  },
-  {
-    key: 'themeIgnition',
-    title: '題材剛升溫',
-    description: '近 5 / 10 日資金明顯轉往該主題，適合先看龍頭與補漲節奏。',
-    emptyMessage: '今天沒有明顯升溫的新主線題材。',
-  },
-  {
-    key: 'catchUpCandidates',
-    title: '補漲候選',
-    description: '族群龍頭已先動，但這些個股漲幅還沒完全跟上。',
-    emptyMessage: '今天沒有特別明顯的補漲候選。',
-  },
+const categoryDefinitions = [
+  { key: 'all', label: '全部' },
+  { key: 'institutionalTurns', label: '法人先買' },
+  { key: 'freshStarters', label: '量價轉強' },
+  { key: 'nearBreakouts', label: '整理待突破' },
+  { key: 'catchUpCandidates', label: '低檔回升' },
+  { key: 'themeIgnition', label: '題材升溫' },
 ];
 
-const entrySections = computed(() =>
-  sectionConfigs.map((section) => ({
-    ...section,
-    items: entryRadar.value?.sections?.[section.key] ?? [],
-  })),
+const allItems = computed(() => uniqueBy(
+  Object.values(entryRadar.value?.sections ?? {}).flatMap((items) => Array.isArray(items) ? items : []),
+  (item) => item.code,
+));
+
+const categories = computed(() => categoryDefinitions
+  .map((category) => ({
+    ...category,
+    count: category.key === 'all'
+      ? allItems.value.length
+      : (entryRadar.value?.sections?.[category.key] ?? []).length,
+  }))
+  .filter((category) => category.key === 'all' || category.count > 0));
+
+const categoryItems = computed(() => {
+  const source = activeCategory.value === 'all'
+    ? allItems.value
+    : uniqueBy(entryRadar.value?.sections?.[activeCategory.value] ?? [], (item) => item.code);
+
+  return [...source].sort((left, right) => {
+    if (activeSort.value === 'foreign') return (right.foreign5Day ?? -Infinity) - (left.foreign5Day ?? -Infinity);
+    if (activeSort.value === 'risk') return riskScore(left) - riskScore(right);
+    return (right.score ?? right.healthScore ?? 0) - (left.score ?? left.healthScore ?? 0);
+  });
+});
+
+const displayedItems = computed(() => categoryItems.value.slice(0, 7));
+const topOpportunities = computed(() => [...allItems.value]
+  .sort((left, right) => (right.score ?? right.healthScore ?? 0) - (left.score ?? left.healthScore ?? 0))
+  .slice(0, 3));
+const selectedItem = computed(() =>
+  categoryItems.value.find((item) => item.code === selectedCode.value) ?? displayedItems.value[0] ?? topOpportunities.value[0] ?? null,
+);
+const hasData = computed(() => Boolean(entryRadar.value && allItems.value.length));
+const effectiveError = computed(() => entryError.value || globalError.value);
+
+const selectedReasons = computed(() => {
+  const item = selectedItem.value;
+  if (!item) return [];
+  return [
+    hasText(item.note) ? item.note : null,
+    (item.foreign5Day ?? 0) > 0 ? `外資近 5 日買超 ${formatLots(item.foreign5Day)}` : null,
+    (item.investmentTrust5Day ?? 0) > 0 ? `投信近 5 日買超 ${formatLots(item.investmentTrust5Day)}` : null,
+    ...(item.metrics ?? []).map((metric) => `${metric.label} ${metric.value}`).filter(hasText),
+    ...(item.tags ?? []).filter(hasText),
+  ].filter(Boolean).slice(0, 3);
+});
+
+const selectedWarning = computed(() => {
+  const item = selectedItem.value;
+  if (!item) return null;
+  if (hasText(item.topWarningTitle)) return item.topWarningTitle;
+  if ((item.return20 ?? 0) > 25) return `近 20 日已上漲 ${formatPercent(item.return20)}，留意追高風險。`;
+  return null;
+});
+
+watch(
+  () => displayedItems.value.map((item) => item.code).join(','),
+  () => {
+    if (!displayedItems.value.some((item) => item.code === selectedCode.value)) {
+      selectedCode.value = displayedItems.value[0]?.code ?? '';
+    }
+  },
+  { immediate: true },
 );
 
-const heroCards = computed(() => {
-  const spotlight = entryRadar.value?.spotlight ?? {};
+watch(
+  () => manifest.value?.entryRadarPath,
+  () => loadEntryRadar(),
+);
 
-  return [
-    {
-      key: 'fresh',
-      label: '剛轉強',
-      value: formatNumber(spotlight.freshStarterCount, 0),
-      note: '先看量縮轉強與股價墊高。',
-    },
-    {
-      key: 'breakout',
-      label: '待突破',
-      value: formatNumber(spotlight.nearBreakoutCount, 0),
-      note: '離前高不遠，適合盯放量長紅。',
-    },
-    {
-      key: 'institutional',
-      label: '法人剛轉買',
-      value: formatNumber(spotlight.institutionalTurnCount, 0),
-      note: '外資或投信剛進場初段。',
-    },
-    {
-      key: 'theme',
-      label: '主線題材',
-      value: spotlight.topThemeTitle ?? '等待新主線',
-      note: '近 5 / 10 日明顯升溫的題材。',
-    },
-  ];
-});
-
-const themeHistoryCards = computed(() => {
-  const themeHistory = entryRadar.value?.themeHistory ?? {};
-
-  return [
-    {
-      key: 'warming5',
-      title: '5 日升溫',
-      items: themeHistory.warming5 ?? [],
-      empty: '近 5 日沒有明顯升溫題材。',
-    },
-    {
-      key: 'warming10',
-      title: '10 日升溫',
-      items: themeHistory.warming10 ?? [],
-      empty: '近 10 日沒有明顯升溫題材。',
-    },
-  ];
-});
-
-const pageSeo = computed(() => ({
-  title: '起漲卡位雷達',
-  description: '用量縮轉強、整理待突破、法人剛轉買、題材剛升溫與補漲候選，快速找出台股剛起漲的標的。',
+useSeoMeta(computed(() => ({
+  title: '卡位雷達',
+  description: '找出可能提早轉強、值得先觀察的台股，並查看入選理由與風險。',
   routePath: '/entry-radar',
-  keywords: ['起漲卡位雷達', '量縮轉強', '整理待突破', '法人剛轉買', '補漲候選', '題材剛升溫'],
-}));
-
-useSeoMeta(pageSeo);
-
-const effectiveErrorMessage = computed(() => entryError.value || globalErrorMessage.value);
-const hasData = computed(() => Boolean(entryRadar.value));
+  keywords: ['卡位雷達', '法人先買', '量價轉強', '整理待突破', '台股觀察'],
+})));
 
 onMounted(async () => {
   await loadGlobalData();
   await loadEntryRadar();
 });
 
-watch(
-  () => manifest.value?.entryRadarPath,
-  async () => {
-    await loadEntryRadar();
-  },
-);
-
 async function loadEntryRadar() {
-  const entryRadarPath = manifest.value?.entryRadarPath;
-
-  if (!entryRadarPath) {
+  const path = manifest.value?.entryRadarPath;
+  if (!path) {
+    entryRadar.value = null;
     return;
   }
 
   isEntryLoading.value = true;
   entryError.value = '';
-
   try {
-    entryRadar.value = await fetchJson(entryRadarPath);
+    entryRadar.value = await fetchJson(path);
   } catch (error) {
     entryRadar.value = null;
-    entryError.value = error instanceof Error ? error.message : '起漲卡位雷達載入失敗';
+    entryError.value = error instanceof Error ? error.message : '卡位雷達載入失敗';
   } finally {
     isEntryLoading.value = false;
   }
 }
 
-function getSectionAnchor(key) {
-  return `entry-${key}`;
+function riskScore(item) {
+  return (item?.warningCount ?? 0) * 30 + Math.max(0, 60 - (item?.healthScore ?? 60));
 }
 
-function formatTargetPrice(item) {
-  if (item?.foreignTargetPrice === null || item?.foreignTargetPrice === undefined || item.foreignTargetPrice <= 0) {
-    return '暫無';
-  }
-
-  const premiumText =
-    item?.premiumToTarget === null || item?.premiumToTarget === undefined ? '' : ` / ${formatPercent(item.premiumToTarget)}`;
-
-  return `${formatNumber(item.foreignTargetPrice)}${premiumText}`;
+function riskLabel(item) {
+  const score = riskScore(item);
+  if (score >= 60) return { label: '高', tone: 'risk' };
+  if (score >= 25) return { label: '中', tone: 'warning' };
+  return { label: '低', tone: 'safe' };
 }
 
-function getItemTone(item) {
-  if (item?.topSignalTone === 'up') return 'up';
-  if ((item?.changePercent ?? 0) < 0) return 'down';
-  return 'info';
-}
-
-function getHealthTone(item) {
-  if ((item?.healthScore ?? 0) >= 75) return 'up';
-  if ((item?.healthScore ?? 0) <= 45) return 'down';
-  return 'normal';
-}
-
-function getWarningTone(item) {
-  if (item?.topWarningTone === 'risk') return 'risk';
-  if (item?.topWarningTone === 'warning') return 'warning';
-  return 'info';
-}
-
-function getSummaryLine(item) {
-  const parts = [
-    item?.themeTitle ? `題材 ${item.themeTitle}` : null,
-    item?.industryName ? `產業 ${item.industryName}` : null,
-    item?.topSignalTitle ? item.topSignalTitle : null,
-  ].filter(Boolean);
-
-  return parts.join('｜');
+function signalLabel(item) {
+  return item?.topSignalTitle ?? item?.label ?? item?.tags?.[0] ?? null;
 }
 </script>
 
 <template>
-  <section class="page-shell">
+  <section class="page-shell investor-page entry-redesign-page">
     <StatusCard
       :is-loading="isGlobalLoading || isEntryLoading"
-      :error-message="effectiveErrorMessage"
+      :error-message="effectiveError"
       :has-data="hasData"
-      empty-message="起漲卡位雷達資料尚未整理完成。"
+      empty-message="目前沒有可用的卡位雷達資料。"
     />
 
-    <template v-if="entryRadar">
-      <section class="page-hero compact entry-radar-hero rounded-[2rem] border border-slate-200/70 bg-white/90 p-6 shadow-[0_28px_90px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
-        <div class="hero-copy space-y-5">
-          <span class="hero-kicker">Early Entry Radar</span>
-          <h1>起漲卡位雷達</h1>
-          <p>先抓剛起漲、還沒走太遠的候選，再配題材輪動與法人轉向，縮小明日優先觀察名單。</p>
-          <div class="theme-radar-summary">
-            <span class="theme-observation-chip">資料日 {{ formatDate(entryRadar.marketDate) }}</span>
-            <span
-              v-for="(item, index) in entryRadar.observations ?? []"
-              :key="`entry-observation-${index}`"
-              class="theme-observation-chip"
-            >
-              {{ item }}
-            </span>
+    <template v-if="hasData">
+      <header class="ir-page-heading">
+        <div>
+          <h1>卡位雷達</h1>
+          <p>找出可能提早轉強、值得先觀察的股票。</p>
+        </div>
+        <span class="ir-badge">資料日 {{ formatDate(entryRadar.marketDate) }}</span>
+      </header>
+
+      <section v-if="topOpportunities.length" class="ir-surface ir-section entry-top-section">
+        <div class="ir-section-head">
+          <div>
+            <h2>今日 {{ formatNumber(topOpportunities.length, 0) }} 個機會</h2>
+            <p>先看目前資料中訊號最集中的股票。</p>
           </div>
         </div>
-
-        <aside class="entry-radar-board rounded-[1.6rem] border border-slate-200/70 bg-slate-50/75 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-900/72 dark:ring-slate-800/70">
-          <div class="entry-radar-spotlight-grid">
-            <article
-              v-for="card in heroCards"
-              :key="card.key"
-              class="entry-radar-spotlight-card rounded-[1.35rem] border border-slate-200/70 bg-white/85 shadow-[0_16px_36px_rgba(15,23,42,0.08)] ring-1 ring-white/70 dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70"
+        <div class="entry-top-list">
+          <button
+            v-for="(item, index) in topOpportunities"
+            :key="`top-${item.code}`"
+            type="button"
+            class="entry-top-row"
+            :class="{ 'is-selected': selectedItem?.code === item.code }"
+            @click="selectedCode = item.code"
+          >
+            <span class="ir-rank is-top">{{ index + 1 }}</span>
+            <span class="entry-top-stock"><strong>{{ item.code }} {{ item.name }}</strong><small>{{ item.industryName || item.themeTitle }}</small></span>
+            <span v-if="hasFiniteNumber(item.close)" class="ir-number entry-top-price">{{ formatNumber(item.close) }}</span>
+            <span
+              v-if="hasFiniteNumber(item.changePercent)"
+              class="entry-top-change"
+              :class="item.changePercent > 0 ? 'ir-text-up' : item.changePercent < 0 ? 'ir-text-down' : ''"
             >
-              <span class="theme-spotlight-label">{{ card.label }}</span>
-              <strong>{{ card.value }}</strong>
-              <p>{{ card.note }}</p>
-            </article>
-          </div>
-        </aside>
+              <ArrowTrendingUpIcon v-if="item.changePercent > 0" />
+              <ArrowTrendingDownIcon v-else-if="item.changePercent < 0" />
+              {{ formatPercent(Math.abs(item.changePercent)) }}
+            </span>
+            <span class="entry-top-reason">{{ item.note || signalLabel(item) }}</span>
+            <span class="ir-status" :class="`is-${riskLabel(item).tone}`">風險 {{ riskLabel(item).label }}</span>
+          </button>
+        </div>
       </section>
 
-      <nav class="mobile-section-nav radar-section-nav" aria-label="起漲卡位雷達快速導覽">
-        <a
-          v-for="section in entrySections"
-          :key="section.key"
-          class="section-chip"
-          :href="`#${getSectionAnchor(section.key)}`"
-        >
-          {{ section.title }}
-        </a>
-      </nav>
-
-      <section class="entry-radar-layout">
-        <div class="entry-radar-main">
-          <section
-            v-for="section in entrySections"
-            :id="getSectionAnchor(section.key)"
-            :key="section.key"
-            class="panel entry-radar-section"
+      <section class="entry-controls">
+        <div class="ir-tabs" role="tablist" aria-label="卡位雷達分類">
+          <button
+            v-for="category in categories"
+            :key="category.key"
+            type="button"
+            class="ir-tab"
+            :class="{ 'is-active': activeCategory === category.key }"
+            @click="activeCategory = category.key"
           >
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">{{ section.title }}</h2>
-                <p class="panel-subtitle">{{ section.description }}</p>
-              </div>
-            </div>
+            {{ category.label }} {{ category.count }}
+          </button>
+        </div>
+        <label class="entry-sort">
+          <span>排序</span>
+          <select v-model="activeSort" class="ir-select">
+            <option value="score">綜合優先</option>
+            <option value="foreign">法人買超</option>
+            <option value="risk">風險較低</option>
+          </select>
+        </label>
+      </section>
 
-            <div v-if="section.items.length" class="entry-card-grid">
-              <RouterLink
-                v-for="item in section.items"
-                :key="`${section.key}-${item.code}`"
-                class="entry-stock-card"
-                :class="`is-${getItemTone(item)}`"
-                :to="createStockRoute(item.code)"
-              >
-                <div class="entry-stock-head">
-                  <div>
-                    <div class="entry-stock-title-row">
-                      <strong>{{ item.code }} {{ item.name }}</strong>
-                      <div class="entry-stock-chip-row">
-                        <span class="meta-chip">{{ item.label }}</span>
-                        <span v-if="item.healthScore" class="meta-chip" :class="`is-${getHealthTone(item)}`">
-                          體檢 {{ item.healthScore }}
-                        </span>
-                      </div>
-                    </div>
-                    <p class="muted">{{ getSummaryLine(item) || '台股個股' }}</p>
-                  </div>
-                  <div class="entry-stock-price">
-                    <strong>{{ formatNumber(item.close) }}</strong>
-                    <span :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
-                      {{ formatPercent(item.changePercent) }}
+      <section class="entry-workspace">
+        <div class="ir-surface entry-table-panel">
+          <div v-if="displayedItems.length" class="ir-table-wrap">
+            <table class="ir-table entry-table">
+              <thead>
+                <tr>
+                  <th class="is-center">排名</th>
+                  <th>股票</th>
+                  <th class="is-number">今日漲跌</th>
+                  <th class="is-number">外資 5 日</th>
+                  <th class="is-number">成交量</th>
+                  <th>轉強訊號</th>
+                  <th class="is-center">風險</th>
+                  <th class="is-center">追蹤</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(item, index) in displayedItems"
+                  :key="item.code"
+                  :class="{ 'is-selected': selectedItem?.code === item.code }"
+                  tabindex="0"
+                  @click="selectedCode = item.code"
+                  @keydown.enter="selectedCode = item.code"
+                >
+                  <td class="is-center"><span class="ir-rank" :class="{ 'is-top': index < 3 }">{{ index + 1 }}</span></td>
+                  <td>
+                    <RouterLink :to="createStockRoute(item.code)" @click.stop>
+                      <span class="ir-stock-code">{{ item.code }} {{ item.name }}</span>
+                      <span v-if="item.industryName || item.themeTitle" class="ir-stock-name">{{ item.industryName || item.themeTitle }}</span>
+                    </RouterLink>
+                  </td>
+                  <td class="is-number">
+                    <span
+                      v-if="hasFiniteNumber(item.changePercent)"
+                      class="entry-table-change"
+                      :class="item.changePercent > 0 ? 'ir-text-up' : item.changePercent < 0 ? 'ir-text-down' : ''"
+                    >
+                      <ArrowTrendingUpIcon v-if="item.changePercent > 0" />
+                      <ArrowTrendingDownIcon v-else-if="item.changePercent < 0" />
+                      {{ formatPercent(Math.abs(item.changePercent)) }}
                     </span>
-                  </div>
-                </div>
-
-                <p class="entry-stock-note">{{ item.note }}</p>
-
-                <div v-if="item.topWarningTitle" class="entry-warning-chip-row">
-                  <span class="status-badge" :class="`is-${getWarningTone(item)}`">
-                    {{ item.topWarningTitle }}
-                  </span>
-                  <span class="muted">先確認不是追在短線偏熱的位置。</span>
-                </div>
-
-                <div class="entry-stock-metric-grid">
-                  <div class="entry-stock-metric">
-                    <span>20 日</span>
-                    <strong :class="{ 'text-up': (item.return20 ?? 0) > 0, 'text-down': (item.return20 ?? 0) < 0 }">
-                      {{ formatPercent(item.return20) }}
-                    </strong>
-                  </div>
-                  <div class="entry-stock-metric">
-                    <span>外資 5 日</span>
-                    <strong :class="{ 'text-up': (item.foreign5Day ?? 0) > 0, 'text-down': (item.foreign5Day ?? 0) < 0 }">
-                      {{ formatLots(item.foreign5Day) }}
-                    </strong>
-                  </div>
-                  <div class="entry-stock-metric">
-                    <span>投信 5 日</span>
-                    <strong :class="{ 'text-up': (item.investmentTrust5Day ?? 0) > 0, 'text-down': (item.investmentTrust5Day ?? 0) < 0 }">
-                      {{ formatLots(item.investmentTrust5Day) }}
-                    </strong>
-                  </div>
-                  <div class="entry-stock-metric">
-                    <span>外資目標價</span>
-                    <strong>{{ formatTargetPrice(item) }}</strong>
-                  </div>
-                  <div class="entry-stock-metric">
-                    <span>體檢等級</span>
-                    <strong>{{ item.healthGrade ?? '-' }}</strong>
-                  </div>
-                </div>
-
-                <div v-if="item.metrics?.length" class="entry-stock-metrics-row">
-                  <span v-for="metric in item.metrics" :key="`${section.key}-${item.code}-${metric.label}`" class="keyword-pill">
-                    {{ metric.label }} {{ metric.value }}
-                  </span>
-                </div>
-
-                <div v-if="item.tags?.length" class="tag-row">
-                  <span v-for="tag in item.tags" :key="`${section.key}-${item.code}-${tag}`" class="keyword-pill">
-                    {{ tag }}
-                  </span>
-                </div>
-              </RouterLink>
-            </div>
-
-            <div v-else class="empty-state compact">
-              <strong>{{ section.title }}今天沒有明顯候選</strong>
-              <p>{{ section.emptyMessage }}</p>
-            </div>
-          </section>
+                  </td>
+                  <td class="is-number"><span v-if="hasFiniteNumber(item.foreign5Day)">{{ formatLots(item.foreign5Day) }}</span></td>
+                  <td class="is-number"><span v-if="hasFiniteNumber(item.volume)">{{ formatLots(item.volume) }}</span></td>
+                  <td><span v-if="signalLabel(item)">{{ signalLabel(item) }}</span></td>
+                  <td class="is-center"><span class="ir-status" :class="`is-${riskLabel(item).tone}`">{{ riskLabel(item).label }}</span></td>
+                  <td class="is-center">
+                    <button
+                      type="button"
+                      class="ir-row-action"
+                      :class="{ 'is-active': isWatched(item.code) }"
+                      :aria-label="isWatched(item.code) ? `從明日觀察移除 ${item.name}` : `加入明日觀察 ${item.name}`"
+                      @click.stop="toggleWatch(item.code)"
+                    >
+                      <StarIcon />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div v-else class="ir-empty">
+            <strong>這個分類目前沒有資料</strong>
+            <span>可切換其他分類查看。</span>
+          </div>
         </div>
 
-        <aside class="entry-radar-sidebar">
-          <article class="panel entry-sidebar-card">
-            <div class="panel-header">
+        <aside class="ir-surface ir-section entry-detail-panel">
+          <template v-if="selectedItem">
+            <div class="entry-detail-heading">
               <div>
-                <h2 class="panel-title">題材輪動快看</h2>
-                <p class="panel-subtitle">先看近 5 / 10 日哪個題材在升溫</p>
+                <h2>{{ selectedItem.code }} {{ selectedItem.name }}</h2>
+                <p>為什麼值得先看</p>
               </div>
-              <span class="meta-chip">{{ formatNumber(entryRadar.themeHistory?.snapshotCount, 0) }} 筆快照</span>
+              <button
+                type="button"
+                class="ir-icon-button"
+                :class="{ 'is-active': isWatched(selectedItem.code) }"
+                :aria-label="isWatched(selectedItem.code) ? '從明日觀察移除' : '加入明日觀察'"
+                @click="toggleWatch(selectedItem.code)"
+              >
+                <StarIcon />
+              </button>
             </div>
 
-            <div class="entry-theme-summary">
-              <article v-for="card in themeHistoryCards" :key="card.key" class="sub-panel entry-theme-history-card">
-                <span class="theme-spotlight-label">{{ card.title }}</span>
-                <div v-if="card.items.length" class="entry-theme-history-list">
-                  <div v-for="item in card.items" :key="`${card.key}-${item.slug}`" class="entry-theme-history-item">
-                    <strong>{{ item.title }}</strong>
-                    <span class="text-up">{{ formatNumber(item.delta, 0) }}</span>
-                    <p class="muted">{{ item.leaderCode ? `龍頭 ${item.leaderCode} ${item.leaderName}` : '先看題材頁完整拆解' }}</p>
-                  </div>
-                </div>
-                <p v-else class="muted">{{ card.empty }}</p>
-              </article>
+            <div v-if="hasText(selectedItem.note)" class="ir-data-note">
+              <ArrowTrendingUpIcon class="ir-inline-icon" />
+              <span>{{ selectedItem.note }}</span>
             </div>
-          </article>
 
-          <article class="panel entry-sidebar-card">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">卡位研究順序</h2>
-                <p class="panel-subtitle">先看起漲，再回頭確認風險與題材</p>
+            <section v-if="selectedReasons.length" class="entry-detail-section">
+              <h3>支持理由</h3>
+              <div class="entry-reason-list">
+                <p v-for="reason in selectedReasons" :key="reason"><CheckCircleIcon />{{ reason }}</p>
               </div>
-            </div>
+            </section>
 
-            <ol class="theme-playbook-list">
-              <li>先看量縮轉強與整理待突破，確認是不是剛起漲、還沒走太遠。</li>
-              <li>再看法人剛轉買，避免追到只有技術面、沒有資金跟進的股票。</li>
-              <li>如果題材剛升溫，先看龍頭，再看補漲，不要一開始就去接最弱的尾端股。</li>
-              <li>最後進個股頁確認外資目標價、事件後表現統計與風險提醒。</li>
-            </ol>
+            <section v-if="selectedWarning" class="entry-detail-section">
+              <h3>風險提示</h3>
+              <p class="entry-warning"><ExclamationTriangleIcon />{{ selectedWarning }}</p>
+            </section>
 
-            <div class="theme-page-links">
-              <RouterLink class="ghost-button" to="/themes">看完整題材頁</RouterLink>
-              <RouterLink class="ghost-button" to="/radar">看選股雷達</RouterLink>
-              <RouterLink class="ghost-button" to="/classroom">看股票小教室</RouterLink>
-            </div>
-          </article>
+            <button type="button" class="ir-button is-primary" @click="toggleWatch(selectedItem.code)">
+              <StarIcon />{{ isWatched(selectedItem.code) ? '已加入明日觀察' : '加入明日觀察' }}
+            </button>
+            <RouterLink class="ir-button" :to="createStockRoute(selectedItem.code)">
+              查看個股<ArrowRightIcon />
+            </RouterLink>
+          </template>
         </aside>
       </section>
     </template>
   </section>
 </template>
+
+<style scoped>
+.entry-top-list,
+.entry-detail-panel,
+.entry-detail-section,
+.entry-reason-list {
+  display: grid;
+}
+
+.entry-top-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--ir-line);
+  border-radius: 7px;
+}
+
+.entry-top-row {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 0;
+  border-right: 1px solid var(--ir-line);
+  background: transparent;
+  color: var(--ir-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.entry-top-row:last-child {
+  border-right: 0;
+}
+
+.entry-top-row.is-selected {
+  background: var(--ir-row-hover);
+}
+
+.entry-top-stock {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.entry-top-price {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  font-weight: 900;
+}
+
+.entry-top-change {
+  display: inline-flex;
+  grid-column: 2;
+  grid-row: 2;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.entry-top-change svg,
+.entry-table-change svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
+.entry-table-change {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+}
+
+.entry-top-stock strong,
+.entry-top-stock small {
+  display: block;
+}
+
+.entry-top-stock strong {
+  overflow: hidden;
+  color: var(--ir-text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entry-top-stock small {
+  margin-top: 2px;
+  color: var(--ir-soft);
+  font-size: 0.68rem;
+}
+
+.entry-top-reason {
+  grid-column: 2 / -1;
+  grid-row: 3;
+  color: var(--ir-soft);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.entry-top-row > .ir-status {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.entry-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.entry-sort {
+  display: flex;
+  align-items: center;
+  flex: 0 0 230px;
+  gap: 8px;
+  color: var(--ir-soft);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.entry-sort .ir-select {
+  min-height: 36px;
+}
+
+.entry-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 14px;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+}
+
+.entry-table-panel {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.entry-table th:nth-child(1) { width: 62px; }
+.entry-table th:nth-child(2) { width: 165px; }
+.entry-table th:nth-child(3) { width: 100px; }
+.entry-table th:nth-child(4) { width: 105px; }
+.entry-table th:nth-child(5) { width: 105px; }
+.entry-table th:nth-child(7) { width: 65px; }
+.entry-table th:nth-child(8) { width: 56px; }
+
+.entry-detail-panel {
+  gap: 14px;
+}
+
+.entry-detail-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.entry-detail-heading h2,
+.entry-detail-heading p,
+.entry-detail-section h3,
+.entry-reason-list p,
+.entry-warning {
+  margin: 0;
+}
+
+.entry-detail-heading h2 {
+  color: var(--ir-text);
+  font-size: 1.25rem;
+}
+
+.entry-detail-heading p {
+  margin-top: 3px;
+  color: var(--ir-soft);
+  font-size: 0.78rem;
+}
+
+.entry-detail-section {
+  gap: 8px;
+}
+
+.entry-detail-section h3 {
+  color: var(--ir-text);
+  font-size: 0.88rem;
+}
+
+.entry-reason-list {
+  gap: 8px;
+}
+
+.entry-reason-list p,
+.entry-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: var(--ir-soft);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.entry-reason-list svg,
+.entry-warning svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.entry-reason-list svg {
+  color: var(--down);
+}
+
+.entry-warning svg {
+  color: var(--large);
+}
+
+@media (max-width: 1100px) {
+  .entry-top-list {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-top-row {
+    border-right: 0;
+    border-bottom: 1px solid var(--ir-line);
+  }
+
+  .entry-top-row:last-child {
+    border-bottom: 0;
+  }
+
+  .entry-workspace {
+    display: block;
+  }
+
+  .entry-detail-panel {
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .entry-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .entry-sort {
+    flex-basis: auto;
+  }
+
+  .entry-table {
+    min-width: 0;
+  }
+
+  .entry-table th:nth-child(1), .entry-table td:nth-child(1),
+  .entry-table th:nth-child(4), .entry-table td:nth-child(4),
+  .entry-table th:nth-child(5), .entry-table td:nth-child(5),
+  .entry-table th:nth-child(6), .entry-table td:nth-child(6) {
+    display: none;
+  }
+
+  .entry-table th:nth-child(2) { width: 44%; }
+  .entry-table th:nth-child(3) { width: 25%; }
+  .entry-table th:nth-child(7) { width: 15%; }
+  .entry-table th:nth-child(8) { width: 16%; }
+  .entry-table th, .entry-table td { padding-inline: 7px; }
+  .entry-table tbody tr.is-selected td:nth-child(2) { box-shadow: inset 3px 0 0 var(--ir-brand); }
+}
+</style>

@@ -347,7 +347,7 @@ const overlaySignature = computed(() =>
   overlayOptions.value.map((item) => `${item.key}:${overlayState[item.key] ? '1' : '0'}`).join('|'),
 );
 const chartSubtitle = computed(
-  () => `${activeRangeConfig.value.description}，已整合 K 線、量能、十字線同步 hover、可調指標參數與多檔比較疊圖。`,
+  () => `${activeRangeConfig.value.description}，把價格、成交量與常用指標放在一起，方便先看趨勢，再找進出場節奏。`,
 );
 
 const rangeReturn = computed(() => {
@@ -476,7 +476,7 @@ const uiChartLevelStats = computed(() => [
       ? `${nextUpcomingEvent.value.label} ${formatDate(nextUpcomingEvent.value.date)}`
       : '-',
   },
-]);
+].filter((item) => item.value !== '-'));
 
 const uiActiveEventHeadline = computed(() => (hoveredKey.value && activeEventEntries.value.length ? '對應事件' : '事件焦點'));
 const uiChartFootnote = computed(() => {

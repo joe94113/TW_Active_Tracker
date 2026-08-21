@@ -1832,6 +1832,21 @@ async function fetchKgiRedemptionHtml(etf, fundId) {
   return response.text();
 }
 
+async function fetchKgiDetailHtml(fundId) {
+  const url = `https://www.kgifund.com.tw/Fund/Detail?fundID=${encodeURIComponent(fundId)}`;
+  const response = await requestWithRetry(url, {
+    headers: {
+      'user-agent': 使用者代理,
+      'accept-language': 'zh-TW,zh;q=0.9',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    },
+  }, {
+    標籤: `凱基 ETF ${fundId} 基金詳細頁`,
+  });
+
+  return response.text();
+}
+
 function extractHtmlInputValue(html, id) {
   const escapedId = String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const match = html.match(new RegExp(`<input[^>]*id=["']${escapedId}["'][^>]*value=["']([^"']*)`, 'i'));
@@ -1878,17 +1893,15 @@ function parseKgiHoldingTable(html) {
   return sortHoldings(holdings);
 }
 
-async function fetchKgiSnapshot(etf) {
-  const fundId = etf.providerConfig?.fundId;
-
-  if (!fundId) {
-    throw new Error('凱基 ETF 缺少 fundId 設定');
-  }
-
-  const html = await fetchKgiRedemptionHtml(etf, fundId);
+function parseKgiSnapshotHtml(etf, html, {
+  disclosureDateInputId,
+  aumKeyword,
+  navKeyword,
+  unitsKeyword,
+} = {}) {
   const summaryRows = parseKgiSummaryRows(html);
   const holdings = parseKgiHoldingTable(html);
-  const disclosureDate = extractHtmlInputValue(html, 'DataDate');
+  const disclosureDate = extractHtmlInputValue(html, disclosureDateInputId);
 
   if (!disclosureDate || !holdings.length) {
     throw new Error('凱基 ETF 申購買回清單解析失敗');
@@ -1896,11 +1909,48 @@ async function fetchKgiSnapshot(etf) {
 
   return buildEtfSnapshot(etf, {
     disclosureDate,
-    aum: toNumber(findSummaryValue(summaryRows, '基金淨資產價值')),
-    nav: toNumber(findSummaryValue(summaryRows, '每受益權單位淨資產價值')),
-    units: toNumber(findSummaryValue(summaryRows, '已發行受益權單位總數')),
+    aum: toNumber(findSummaryValue(summaryRows, aumKeyword)),
+    nav: toNumber(findSummaryValue(summaryRows, navKeyword)),
+    units: toNumber(findSummaryValue(summaryRows, unitsKeyword)),
     holdings,
   });
+}
+
+async function fetchKgiSnapshot(etf) {
+  const fundId = etf.providerConfig?.fundId;
+
+  if (!fundId) {
+    throw new Error('凱基 ETF 缺少 fundId 設定');
+  }
+
+  try {
+    const html = await fetchKgiRedemptionHtml(etf, fundId);
+    return parseKgiSnapshotHtml(etf, html, {
+      disclosureDateInputId: 'DataDate',
+      aumKeyword: '基金淨資產價值',
+      navKeyword: '每受益權單位淨資產價值',
+      unitsKeyword: '已發行受益權單位總數',
+    });
+  } catch (primaryError) {
+    console.warn(
+      `[凱基 ETF 備援] ${fundId} 申購買回清單無法使用，改讀基金詳細頁：${getErrorSummary(primaryError)}`,
+    );
+
+    try {
+      const html = await fetchKgiDetailHtml(fundId);
+      return parseKgiSnapshotHtml(etf, html, {
+        disclosureDateInputId: 'LatestNAVDate',
+        aumKeyword: '基金淨值資產價值',
+        navKeyword: '基金每單位淨值',
+        unitsKeyword: '基金在外流通單位數',
+      });
+    } catch (fallbackError) {
+      throw new AggregateError(
+        [primaryError, fallbackError],
+        `凱基 ETF ${fundId} 主要來源與備援來源皆失敗：${getErrorSummary(primaryError)}；${getErrorSummary(fallbackError)}`,
+      );
+    }
+  }
 }
 
 async function fetchJpmorganSnapshot(etf) {
@@ -4238,6 +4288,15 @@ function buildInstitutionalTracker(日資料清單) {
     throw new Error('三大法人資料暫時無法取得');
   }
 
+  const 每日法人合計 = 日資料清單.map((day) => ({
+    日期: day.日期,
+    外資買賣超: day.資料.reduce((total, item) => total + (toNumber(item.外資買賣超) ?? 0), 0),
+    投信買賣超: day.資料.reduce((total, item) => total + (toNumber(item.投信買賣超) ?? 0), 0),
+    自營商買賣超: day.資料.reduce((total, item) => total + (toNumber(item.自營商買賣超) ?? 0), 0),
+    三大法人買賣超: day.資料.reduce((total, item) => total + (toNumber(item.三大法人買賣超) ?? 0), 0),
+    上市檔數: day.來源統計?.上市 ?? 0,
+    上櫃檔數: day.來源統計?.上櫃 ?? 0,
+  }));
   const 外資連買 = buildConsecutiveInstitutionalBuys(日資料清單, '外資買賣超');
   const 投信連買 = buildConsecutiveInstitutionalBuys(日資料清單, '投信買賣超');
   const 雙法人同買超 = buildDualInstitutionalBuys(日資料清單, 外資連買, 投信連買);
@@ -4266,6 +4325,7 @@ function buildInstitutionalTracker(日資料清單) {
       上市: item.來源統計?.上市 ?? 0,
       上櫃: item.來源統計?.上櫃 ?? 0,
     })),
+    每日法人合計,
     外資連買,
     投信連買,
     雙法人同買超,
@@ -6430,6 +6490,7 @@ async function main() {
     trackedEtfs: 追蹤ETF清單,
     latestOverview: 追蹤ETF清單.map((etf) => {
       const result = successes.find((item) => item.etf.code === etf.code);
+      const failure = failures.find((item) => item.code === etf.code);
       const detailAvailability = result?.snapshot ? 'full' : 'market';
       return {
         code: etf.code,
@@ -6448,6 +6509,8 @@ async function main() {
         trackingMessage:
           result?.cacheNote
             ? `官方來源暫時無法更新，先沿用最近一次成功快取：${result.cacheNote}`
+            : failure
+              ? `官方來源暫時無法更新，且目前沒有可用快取：${failure.message}`
             : etf.trackingStatus === '已串接'
               ? '官方來源每日同步'
               : '官方持股來源待串接',
@@ -6499,7 +6562,9 @@ async function main() {
   await writeJson(path.join(資料目錄, 'manifest.json'), manifest);
 
   if (failures.length) {
-    process.exitCode = 1;
+    console.warn(
+      `[部分 ETF 更新失敗] ${failures.length} 檔 ETF 無法取得官方快照；失敗明細已寫入 manifest.failedEtfs，其餘資料照常完成。`,
+    );
   }
 }
 
