@@ -2,6 +2,7 @@ import { discoverEmergingTopics } from './emerging-theme-radar.mjs';
 import { stripHtml } from '../../src/lib/newsKeywords.js';
 
 const RECENT_NEWS_DAYS = 7;
+const MAX_THEME_TOPICS = 20;
 
 const TOPIC_DEFINITIONS = [
   {
@@ -66,6 +67,29 @@ const TOPIC_DEFINITIONS = [
     aliases: ['重電', '電網', '電力', '變壓器', 'EMS'],
     searchQuery: '(重電 OR 電網 OR 電力 OR 變壓器 OR EMS) 台股',
     coreStocks: ['1519', '1503', '1513', '1514', '2371'],
+  },
+  {
+    slug: 'shipping',
+    title: '航運 / 海空運',
+    aliases: [
+      '航運',
+      '航運股',
+      '海運',
+      '貨櫃',
+      '貨櫃航運',
+      '貨櫃三雄',
+      '散裝',
+      '散裝航運',
+      '運價',
+      'SCFI',
+      'BDI',
+      '航空',
+      '客運',
+      '貨運',
+    ],
+    searchQuery: '(航運 OR 航運股 OR 海運 OR 貨櫃航運 OR 貨櫃三雄 OR 散裝航運 OR SCFI OR BDI OR 航空) 台股',
+    coreStocks: ['2603', '2609', '2615', '2606', '2637', '2610', '2618', '2645'],
+    maxRelatedStocks: 8,
   },
   {
     slug: 'silicon-wafer',
@@ -624,7 +648,7 @@ export function buildThemeRadar({
           right.score - left.score ||
           String(left.code).localeCompare(String(right.code)),
       )
-      .slice(0, 5);
+      .slice(0, topic.maxRelatedStocks ?? 5);
 
     const hotCount = relatedStocks.filter((item) => hotRankMap.has(item.code) || strongRankMap.has(item.code)).length;
     const institutionalCount = relatedStocks.filter((item) => (item.total5Day ?? 0) > 0).length;
@@ -672,7 +696,7 @@ export function buildThemeRadar({
 
   const topics = [...curatedTopics, ...emergingTopics]
     .sort((left, right) => right.score - left.score || left.title.localeCompare(right.title, 'zh-Hant'))
-    .slice(0, 16);
+    .slice(0, MAX_THEME_TOPICS);
 
   return {
     generatedAt,

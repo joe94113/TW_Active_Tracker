@@ -238,44 +238,15 @@ function getCoverageText(item) {
     />
 
     <template v-if="hasData">
-      <section class="page-hero compact broker-radar-hero">
-        <div class="hero-copy">
-          <span class="hero-kicker">Winning Broker Branch Radar</span>
-          <h1>勝率分點雷達</h1>
-          <p>
-            先從站上偏強或值得追蹤的股票，回頭看哪些券商分點最近做得最好，再整理出它們正在偏多、偏空的台股。這頁不是單看分點買賣超，而是把分點績效、技術面、法人面和流動性一起看。
-          </p>
-          <div class="theme-radar-summary">
-            <span class="theme-observation-chip">資料日期 {{ formatDate(brokerRadar.marketDate) }}</span>
-            <span class="theme-observation-chip">候選股 {{ formatNumber(brokerRadar.summary?.candidateStockCount ?? 0) }} 檔</span>
-            <span class="theme-observation-chip">成功覆蓋 {{ formatNumber(brokerRadar.summary?.stockCoverageCount ?? 0) }} 檔</span>
-            <span v-if="brokerRadar.historicalSummary?.snapshotCount" class="theme-observation-chip">
-              分點回看 {{ formatNumber(brokerRadar.historicalSummary.snapshotCount) }} 個交易日
-            </span>
-            <span
-              v-if="brokerRadar.historicalSummary?.bestWinRateBranch?.horizon5?.winRate !== null && brokerRadar.historicalSummary?.bestWinRateBranch?.horizon5?.winRate !== undefined"
-              class="theme-observation-chip"
-            >
-              5 日勝率最佳 {{ brokerRadar.historicalSummary.bestWinRateBranch.name }}
-              {{ formatPercent(brokerRadar.historicalSummary.bestWinRateBranch.horizon5.winRate) }}
-            </span>
-            <span
-              v-for="(item, index) in brokerRadar.observations ?? []"
-              :key="`broker-observation-${index}`"
-              class="theme-observation-chip"
-            >
-              {{ item }}
-            </span>
-          </div>
+      <section class="panel compact-page-heading broker-radar-heading">
+        <div>
+          <h1>勝率分點</h1>
+          <p>資料日 {{ formatDate(brokerRadar.marketDate) }}，先看推薦股票，再挑想追蹤的分點。</p>
         </div>
-
-        <aside class="broker-radar-hero-board">
-          <article v-for="card in spotlightCards" :key="card.key" class="theme-spotlight-card">
-            <span class="theme-spotlight-label">{{ card.label }}</span>
-            <strong>{{ card.value }}</strong>
-            <p>{{ card.note }}</p>
-          </article>
-        </aside>
+        <div class="compact-page-summary">
+          <strong>{{ formatNumber(activeRecommendedStocks.length) }} 檔推薦</strong>
+          <span>分點偏多、趨勢與法人條件較完整。</span>
+        </div>
       </section>
 
       <section class="panel broker-branch-filter-panel">

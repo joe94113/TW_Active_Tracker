@@ -300,10 +300,6 @@ function getReplayGroupLabel(groupKey) {
   return groupKey === 'stable' ? '穩健型' : '積極型';
 }
 
-function getReplayGroupIcon(groupKey) {
-  return groupKey === 'stable' ? '🛡' : '🔥';
-}
-
 function isReplayDetailActive(groupKey, horizon) {
   return activeReplayDetail.value.groupKey === groupKey && activeReplayDetail.value.horizon === horizon;
 }
@@ -327,7 +323,7 @@ function getReplayMetricClass(value) {
     <template v-if="hasRadarData">
       <section class="page-hero compact radar-page-hero rounded-[2rem] border border-slate-200/70 bg-white/90 p-6 shadow-[0_28px_90px_rgba(15,23,42,0.10)] ring-1 ring-white/80 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-950/78 dark:ring-slate-800/70">
         <div class="hero-copy space-y-5">
-          <span class="hero-kicker">Selection Radar</span>
+          <span class="hero-kicker">今日精選</span>
           <h1>選股雷達</h1>
           <p class="max-w-3xl text-balance leading-7 text-slate-600 dark:text-slate-300">
             把技術突破、籌碼偏多、整理待發、估值支撐與風險排除整理成同一頁，再搭配題材輪動和每日回放，方便你盤後快速縮小選股範圍。
@@ -400,7 +396,7 @@ function getReplayMetricClass(value) {
             <span>{{ section.title }}</span>
             <small>{{ formatNumber(section.items.length, 0) }} 檔</small>
           </button>
-          <button type="button" class="section-chip" @click="scrollToRadarPanel('radar-replay')">選股回放</button>
+          <button type="button" class="section-chip" @click="scrollToRadarPanel('radar-replay')">歷史表現</button>
           <button type="button" class="section-chip" @click="scrollToRadarPanel('radar-themes')">題材輪動</button>
         </div>
       </section>
@@ -434,6 +430,12 @@ function getReplayMetricClass(value) {
                     <p class="muted">{{ item.industryName || '台股個股' }}</p>
                   </div>
                   <div class="radar-stock-side">
+                    <div v-if="item.close !== null && item.close !== undefined" class="radar-stock-market">
+                      <strong>{{ formatNumber(item.close) }}</strong>
+                      <span :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
+                        {{ formatPercent(item.changePercent) }}
+                      </span>
+                    </div>
                     <span v-if="getRiskBadge(item)" class="status-badge is-risk">{{ getRiskBadge(item) }}</span>
                     <div v-else class="radar-stock-chip-stack">
                       <span class="meta-chip">{{ formatNumber(item.score, 0) }} 分</span>
@@ -477,7 +479,7 @@ function getReplayMetricClass(value) {
           <section id="radar-replay" class="panel radar-section-panel">
             <div class="panel-header">
               <div>
-                <h2 class="panel-title">選股回放 / 模擬名單</h2>
+                <h2 class="panel-title">歷史表現</h2>
                 <p class="panel-subtitle">每天盤後把穩健型 / 積極型存一份，再回看 3 / 5 / 10 個交易日表現，確認哪套規則更適合目前盤勢。</p>
               </div>
               <span class="meta-chip">近 {{ formatNumber(replayOverview.snapshotCount, 0) }} 日</span>
@@ -492,7 +494,7 @@ function getReplayMetricClass(value) {
                 :class="{ 'is-active': isReplayDetailActive('stable', horizon) }"
                 @click="setReplayDetail('stable', horizon)"
               >
-                <p class="theme-brief-kicker">🛡 穩健型 {{ horizon }} 日</p>
+                <p class="theme-brief-kicker">穩健型 {{ horizon }} 日</p>
                 <strong :class="getReplayMetricClass(replayOverview.groups.stable[horizon].averageReturn)">
                   {{ formatPercent(replayOverview.groups.stable[horizon].averageReturn) }}
                 </strong>
@@ -509,7 +511,7 @@ function getReplayMetricClass(value) {
                 :class="{ 'is-active': isReplayDetailActive('aggressive', horizon) }"
                 @click="setReplayDetail('aggressive', horizon)"
               >
-                <p class="theme-brief-kicker">🔥 積極型 {{ horizon }} 日</p>
+                <p class="theme-brief-kicker">積極型 {{ horizon }} 日</p>
                 <strong :class="getReplayMetricClass(replayOverview.groups.aggressive[horizon].averageReturn)">
                   {{ formatPercent(replayOverview.groups.aggressive[horizon].averageReturn) }}
                 </strong>
@@ -523,7 +525,7 @@ function getReplayMetricClass(value) {
             <section v-if="replayOverview.snapshotCount" class="sub-panel replay-detail-panel">
               <div class="inline-panel-header">
                 <div>
-                  <p class="theme-brief-kicker">{{ getReplayGroupIcon(activeReplayDetail.groupKey) }} 回放明細</p>
+                  <p class="theme-brief-kicker">{{ getReplayGroupLabel(activeReplayDetail.groupKey) }}明細</p>
                   <h3>{{ replayDetailLabel }}</h3>
                   <p class="muted">依進場日期由近到遠排列，方便檢查每一筆樣本是否真的符合你的交易直覺。</p>
                 </div>
@@ -593,12 +595,12 @@ function getReplayMetricClass(value) {
             </div>
 
             <div v-else-if="!isReplayLoading && !replayError" class="empty-state compact">
-              <strong>選股回放還在累積樣本</strong>
-              <p>系統會在每天盤後把穩健型 / 積極型名單存下來，之後就能逐步回看 3 / 5 / 10 日表現。</p>
+              <strong>歷史表現還在累積</strong>
+              <p>每天盤後會保留穩健型與積極型名單，之後可回看 3、5、10 日表現。</p>
             </div>
 
             <div v-else-if="replayError" class="empty-state compact">
-              <strong>選股回放暫時載入失敗</strong>
+              <strong>歷史表現暫時載入失敗</strong>
               <p>{{ replayError }}</p>
             </div>
           </section>

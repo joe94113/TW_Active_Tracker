@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
+import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 import InfoCard from '../components/InfoCard.vue';
 import StatusCard from '../components/StatusCard.vue';
 import EventCalendarLinks from '../components/EventCalendarLinks.vue';
@@ -182,14 +183,36 @@ onMounted(() => {
           <article class="panel">
             <div class="panel-header">
               <div>
-                <h2 class="panel-title">今天先避開的官方風險股</h2>
+                <h2 class="panel-title">先避開的官方風險股</h2>
                 <p class="panel-subtitle">依處置、變更交易、注意股的優先順序排序，先把不適合追價的名單看一遍。</p>
               </div>
               <span class="meta-chip">{{ formatNumber(featuredRiskItems.length) }} 檔</span>
             </div>
 
-            <div v-if="featuredRiskItems.length" class="table-wrap">
-              <table class="data-table">
+            <template v-if="featuredRiskItems.length">
+              <div class="official-risk-mobile-list">
+                <RouterLink
+                  v-for="item in featuredRiskItems"
+                  :key="`risk-mobile-${item.code}`"
+                  :to="createStockRoute(item.code)"
+                  class="official-risk-mobile-card"
+                >
+                  <div class="official-risk-mobile-main">
+                    <div>
+                      <strong>{{ item.code }} {{ item.name }}</strong>
+                      <span class="status-badge" :class="`is-${item.alertTone}`">{{ item.alertLabel }}</span>
+                    </div>
+                    <strong :class="{ 'text-up': (item.changePercent ?? 0) > 0, 'text-down': (item.changePercent ?? 0) < 0 }">
+                      {{ formatPercent(item.changePercent) }}
+                    </strong>
+                  </div>
+                  <p>{{ item.topSelectionSignalTitle ?? item.topSignalTitle ?? '先確認量能與交易限制，再決定是否觀察。' }}</p>
+                  <ChevronRightIcon aria-hidden="true" />
+                </RouterLink>
+              </div>
+
+              <div class="table-wrap official-risk-desktop-table">
+                <table class="data-table">
                 <thead>
                   <tr>
                     <th>股票</th>
@@ -213,10 +236,11 @@ onMounted(() => {
                     <td class="muted">{{ item.topSelectionSignalTitle ?? item.topSignalTitle ?? '先確認量能與撮合規則，再決定是否觀察。' }}</td>
                   </tr>
                 </tbody>
-              </table>
-            </div>
+                </table>
+              </div>
+            </template>
             <div v-else class="empty-state">
-              <strong>今天沒有明顯的官方風險股</strong>
+              <strong>目前沒有明顯的官方風險股</strong>
               <p>代表這批官方公告沒有出現需要優先避開的名單，但還是要搭配量價與籌碼一起判斷。</p>
             </div>
           </article>
@@ -249,7 +273,7 @@ onMounted(() => {
                 </RouterLink>
               </div>
               <div v-else class="empty-state is-compact">
-                <strong>今天沒有更高優先的異常交易名單</strong>
+                <strong>目前沒有更高優先的異常交易名單</strong>
                 <p>如果沒有處置或變更交易，代表這一塊相對單純，重點可以放回題材與技術面。</p>
               </div>
             </article>

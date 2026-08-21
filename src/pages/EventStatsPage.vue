@@ -182,7 +182,7 @@ function buildEventReading(entry) {
 </script>
 
 <template>
-  <section class="page-shell">
+  <section class="page-shell event-stats-page">
     <StatusCard
       :is-loading="isLoading || isDetailLoading"
       :error-message="detailError || errorMessage"
@@ -191,31 +191,12 @@ function buildEventReading(entry) {
     />
 
     <template v-if="hasData">
-      <section class="page-hero compact radar-page-hero event-stats-page-hero">
-        <div class="hero-copy">
-          <span class="hero-kicker">Event Performance</span>
-          <h1>事件後表現統計</h1>
-          <p>不只看月營收、財報日期，直接回看過去 8 次事件後 3 / 5 / 10 日平均表現，幫你判斷這檔股常常是延續還是利多出盡。</p>
-          <div class="theme-radar-summary">
-            <span class="theme-observation-chip">先選一檔股票</span>
-            <span v-if="selectedStock" class="theme-observation-chip">{{ selectedStock.code }} {{ selectedStock.name }}</span>
-          </div>
+      <section class="panel compact-page-heading event-stats-page-heading">
+        <div>
+          <h1>事件統計</h1>
+          <p>先選一檔股票，再看月營收與財報公布後 3、5、10 日的歷史表現。</p>
         </div>
-
-        <aside class="radar-hero-board event-stats-hero-board">
-          <div class="radar-spotlight-grid event-stats-hero-grid">
-            <article
-              v-for="card in eventOverviewCards.length ? eventOverviewCards : [{ title: '事件摘要', value: '等待選股', note: '先從左邊選一檔股票，頁面會自動整理月營收與財報事件反應。', tone: 'neutral' }]"
-              :key="card.title"
-              class="radar-spotlight-card event-stats-hero-card"
-              :class="`is-${card.tone}`"
-            >
-              <span class="theme-spotlight-label">{{ card.title }}</span>
-              <strong>{{ card.value }}</strong>
-              <p>{{ card.note }}</p>
-            </article>
-          </div>
-        </aside>
+        <span v-if="selectedStock" class="meta-chip">{{ selectedStock.code }} {{ selectedStock.name }}</span>
       </section>
 
       <section class="event-stats-stack">

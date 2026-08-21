@@ -231,7 +231,7 @@ function toneClass(value) {
     <template v-if="hasData">
       <section class="page-hero compact radar-page-hero asian-currency-hero">
         <div class="hero-copy">
-          <span class="hero-kicker">Taiwan Daily Asia FX Watch</span>
+          <span class="hero-kicker">盤勢背景</span>
           <h1>台股每日亞幣觀察</h1>
           <p class="page-subtitle">
             每天把亞幣、外資、NASDAQ 與美債放在一起看，先判斷台股面對的順風多，還是壓力多。
@@ -499,6 +499,14 @@ function toneClass(value) {
 
 .asian-currency-hero {
   align-items: stretch;
+  padding: 20px 22px;
+  border-radius: 8px;
+  background: var(--surface-strong);
+  box-shadow: none;
+}
+
+.asian-currency-hero h1 {
+  font-size: 1.8rem;
 }
 
 .asian-currency-hero-board {
@@ -511,7 +519,7 @@ function toneClass(value) {
   --bias-color: #6b7c8d;
   display: grid;
   gap: 0.9rem;
-  margin-top: 1.2rem;
+  margin-top: 0.85rem;
   padding: 1rem;
   border: 1px solid rgba(16, 32, 45, 0.12);
   border-left: 4px solid var(--bias-color);
@@ -567,7 +575,7 @@ function toneClass(value) {
 
 .bias-verdict-row > strong {
   color: var(--bias-color);
-  font-size: 2rem;
+  font-size: 1.55rem;
   line-height: 1.05;
   letter-spacing: 0;
 }
@@ -995,6 +1003,19 @@ function toneClass(value) {
 }
 
 @media (max-width: 760px) {
+  .asian-currency-hero {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .asian-currency-hero h1 {
+    font-size: 1.42rem;
+  }
+
+  .asian-currency-hero-board {
+    display: none;
+  }
+
   .bias-factor-grid,
   .asian-currency-grid,
   .asian-context-grid {
@@ -1013,7 +1034,12 @@ function toneClass(value) {
   }
 
   .bias-quick-facts {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .bias-quick-facts > div {
+    padding: 0.48rem;
   }
 
   .factor-value-row {

@@ -73,59 +73,35 @@ const heroCards = computed(() => [
 
 const boundaryCards = computed(() => [
   {
-    label: '產品定位',
-    title: '外部觀點觀察',
-    note: '這頁整理美股 AI / 半導體供應鏈公開觀點，和台股雷達分開解讀。',
+    label: '市場範圍',
+    title: '僅限美股',
+    note: '內容聚焦美股 AI 與半導體供應鏈，不和台股訊號混在一起。',
   },
   {
     label: '資料來源',
     title: sourceDisplayName.value,
-    note: '站內保存摘要、分類、代號、貼文 ID 與原文連結，不保存完整貼文。',
+    note: '每筆觀點保留公開來源連結，方便回看原文。',
   },
   {
-    label: '使用邊界',
-    title: '非投資建議',
-    note: '觀點方向只代表公開貼文脈絡，仍需搭配財報、價格與風險控管。',
+    label: '使用提醒',
+    title: '觀點不是買賣訊號',
+    note: '仍需搭配財報、價格與風險控管。',
   },
 ]);
 
 const sourceStatusText = computed(() => {
-  if (sourceStatus.value === 'ready') return `已連接 ${sourceDisplayName.value}`;
-  if (sourceStatus.value === 'pending_token') return '等待 X API token';
-  if (sourceStatus.value === 'access_required') return '等待 X API access';
-  if (sourceStatus.value === 'invalid_token') return 'Bearer Token 無效';
-  if (sourceStatus.value === 'credits_depleted') return 'X API credits 已用完';
-  if (sourceStatus.value === 'forbidden') return 'X API 拒絕存取';
-  return sourceStatus.value;
+  if (sourceStatus.value === 'ready') return '資料已更新';
+  return '資料暫時無法更新';
 });
 
 const sourceError = computed(() => dataset.value?.source?.error ?? null);
 const setupTitle = computed(() => {
-  if (sourceStatus.value === 'access_required') return 'X API access 尚未開通';
-  if (sourceStatus.value === 'invalid_token') return 'Bearer Token 需要重新確認';
-  if (sourceStatus.value === 'credits_depleted') return 'X API credits 已用完';
-  if (sourceStatus.value === 'forbidden') return 'X API 權限不足';
-  return '資料源待接上';
+  return '資料暫時無法更新';
 });
 const setupMessage = computed(() => {
-  if (sourceStatus.value === 'access_required') {
-    return '這個 App 需要先掛到 X Developer Project，並取得可讀公開貼文的 API access。處理好後重新執行 npm run serenity:update。';
-  }
-
-  if (sourceStatus.value === 'invalid_token') {
-    return '請重新複製 App-Only Authentication 的 Bearer Token，確認沒有多貼空白或使用到 OAuth 1.0 token。';
-  }
-
-  if (sourceStatus.value === 'credits_depleted') {
-    return 'X API 已接受這個 Project/App，但目前 credits 不足。請到 X Developer Console 購買或補足 credits，或降低抓取頁數與頻率後再執行 npm run serenity:update。';
-  }
-
-  if (sourceStatus.value === 'forbidden') {
-    return '目前 token 可以被識別，但 API 權限不足。請檢查 Developer Console 的 Project、App、plan 或 credits。';
-  }
-
-  return '這一頁已經準備好接官方 X API。設定 X_BEARER_TOKEN 後執行 npm run serenity:update，就會產生正式雷達資料。';
+  return '目前沒有可顯示的新資料，恢復後會更新本頁。';
 });
+const sourceUpdatedAt = computed(() => dataset.value?.source?.upstreamUpdatedAt ?? dataset.value?.generatedAt ?? null);
 
 const recentPosts = computed(() => dataset.value?.recentPosts ?? []);
 const performanceRows = computed(() => dataset.value?.performanceRows ?? []);
@@ -212,6 +188,21 @@ function formatRange(frame) {
   return `${formatDate(frame.startDate)} - ${formatDate(frame.endDate)}`;
 }
 
+function formatDateTime(value) {
+  if (!value) return '尚未更新';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return formatDate(value);
+  return date.toLocaleString('zh-TW', {
+    timeZone: 'Asia/Taipei',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+}
+
 function numberOrNull(value) {
   const number = Number(value);
   return Number.isFinite(number) ? number : null;
@@ -280,13 +271,27 @@ function performanceClass(value) {
     />
 
     <template v-if="dataset">
-      <section class="page-hero compact serenity-hero">
+      <section class="panel serenity-hero serenity-hero-redesign">
         <div class="hero-copy">
-          <span class="hero-kicker">US AI Supply Chain Watch</span>
-          <h1>Serenity 觀點雷達</h1>
+          <div class="serenity-scope-row">
+            <span class="serenity-market-scope">美股限定</span>
+            <span>AI 與半導體供應鏈</span>
+          </div>
+          <h1>Serenity 觀點</h1>
           <p class="page-subtitle">
-            追蹤 Serenity 公開貼文中提到的美股 AI / 半導體供應鏈標的，將每次提及整理為多頭、空頭或中立，並保留原文連結供回看。
+            整理公開貼文中的多頭、空頭與中立觀點，並保留原文連結。
           </p>
+
+          <div class="serenity-source-meta">
+            <div>
+              <span>來源</span>
+              <strong>{{ sourceDisplayName }}</strong>
+            </div>
+            <div>
+              <span>本頁獨立更新</span>
+              <strong>{{ formatDateTime(sourceUpdatedAt) }}</strong>
+            </div>
+          </div>
 
           <div class="hero-summary-grid serenity-summary-grid">
             <article
@@ -301,10 +306,10 @@ function performanceClass(value) {
           </div>
         </div>
 
-        <aside class="serenity-source-card">
-          <span class="source-pill" :class="{ 'is-ready': isReady }">{{ sourceStatusText }}</span>
+        <aside class="serenity-source-card serenity-source-card-compact">
+          <span v-if="!isReady" class="source-pill">{{ sourceStatusText }}</span>
           <strong>@{{ dataset.influencer?.handle }}</strong>
-          <p>{{ dataset.influencer?.focus }}</p>
+          <p>Serenity 公開觀點來源</p>
           <a
             class="source-link"
             :href="dataset.influencer?.profileUrl"
@@ -313,7 +318,6 @@ function performanceClass(value) {
           >
             開啟 X 個人頁
           </a>
-          <small>更新：{{ dataset.generatedAt ? formatDate(dataset.generatedAt) : '尚未匯入' }}</small>
         </aside>
       </section>
 
@@ -366,7 +370,7 @@ function performanceClass(value) {
           <table class="serenity-action-table">
             <thead>
               <tr>
-                <th>Ticker</th>
+                <th>代號</th>
                 <th>方向</th>
                 <th>最新觀點</th>
                 <th>提及後</th>
@@ -427,7 +431,7 @@ function performanceClass(value) {
             <h2 class="panel-title">外部觀點邊界</h2>
             <p class="panel-subtitle">把美股供應鏈觀點放在研究輔助層，不和台股主雷達訊號混在一起。</p>
           </div>
-          <span class="meta-chip">US Supply Chain</span>
+          <span class="meta-chip">美股供應鏈</span>
         </div>
 
         <div class="serenity-boundary-grid">
@@ -450,33 +454,6 @@ function performanceClass(value) {
           </div>
         </div>
 
-        <div v-if="sourceError" class="serenity-error-note">
-          <strong>{{ sourceError.title }}</strong>
-          <p>{{ sourceError.detail }}</p>
-          <a
-            v-if="sourceError.registrationUrl"
-            :href="sourceError.registrationUrl"
-            target="_blank"
-            rel="noreferrer"
-          >
-            開啟 X Project 說明
-          </a>
-        </div>
-
-        <div class="serenity-compliance-grid">
-          <article class="sub-panel">
-            <strong>合規來源</strong>
-            <p>使用 X API v2 user timeline，不做網頁 HTML 爬取，也不繞過 rate limit。</p>
-          </article>
-          <article class="sub-panel">
-            <strong>內容保存</strong>
-            <p>站內只保存摘要、分類、股票代號、貼文 ID、互動數與原文連結，不搬完整貼文。</p>
-          </article>
-          <article class="sub-panel">
-            <strong>分類方式</strong>
-            <p>第一版用關鍵字判斷多空，之後可以再接 LLM 做更細的語意判讀。</p>
-          </article>
-        </div>
       </section>
 
       <section
@@ -485,7 +462,7 @@ function performanceClass(value) {
       >
         <div class="panel-header">
           <div>
-            <h2 class="panel-title">Performance 參考表</h2>
+            <h2 class="panel-title">提及後表現</h2>
             <p class="panel-subtitle">對照 TrackSerenity 追蹤的提及價、目前價與提及後報酬率。</p>
           </div>
           <span class="meta-chip">
@@ -497,13 +474,13 @@ function performanceClass(value) {
           <table class="serenity-performance-table">
             <thead>
               <tr>
-                <th>Rank</th>
-                <th>Ticker</th>
-                <th>Company</th>
+                <th>排名</th>
+                <th>代號</th>
+                <th>公司</th>
                 <th>提及日</th>
                 <th>提及價</th>
                 <th>目前價</th>
-                <th>Return</th>
+                <th>報酬</th>
               </tr>
             </thead>
             <tbody>

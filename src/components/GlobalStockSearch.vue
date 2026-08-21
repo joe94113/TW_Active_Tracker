@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 import { useGlobalData } from '../composables/useGlobalData';
 import { searchRemoteStocks } from '../lib/liveStockApi';
 import { createStockRoute, isStockCode } from '../lib/stockRouting';
@@ -8,7 +9,7 @@ import { formatNumber, formatPercent } from '../lib/formatters';
 
 const router = useRouter();
 const route = useRoute();
-const { stockList, stockSearchList, loadGlobalData } = useGlobalData();
+const { stockList, stockSearchList, etfOverviewList, loadGlobalData } = useGlobalData();
 
 const hostRef = ref(null);
 const query = ref('');
@@ -53,6 +54,19 @@ function isUsableName(name, code) {
 const localSearchUniverse = computed(() => {
   const map = new Map();
 
+  for (const item of etfOverviewList.value ?? []) {
+    const code = normalizeCode(item?.code);
+    if (!code) continue;
+    map.set(code, {
+      ...item,
+      code,
+      name: isUsableName(item?.name, code) ? item.name : code,
+      assetType: 'etf',
+      hasLocalDetail: true,
+      topSignalTitle: item.providerLabel ?? '',
+    });
+  }
+
   for (const item of stockSearchList.value ?? []) {
     const code = normalizeCode(item?.code);
     if (!code) continue;
@@ -89,7 +103,7 @@ const localMatches = computed(() => {
     .slice(0, 6)
     .map((item) => ({
       ...item,
-      searchSource: item.hasLocalDetail ? '站內完整資料' : '站內索引',
+      searchSource: item.assetType === 'etf' ? 'ETF' : item.hasLocalDetail ? '完整資料' : '搜尋結果',
       hasLocalDetail: Boolean(item.hasLocalDetail),
     }));
 });
@@ -114,7 +128,7 @@ const directLookup = computed(() => {
   return {
     code: normalizedCode,
     name: `直接查看 ${normalizedCode}`,
-    searchSource: '輸入代號前往',
+    searchSource: '直接前往',
     hasLocalDetail: false,
   };
 });
@@ -143,7 +157,7 @@ watch(normalizedQuery, (keyword) => {
     try {
       remoteMatches.value = (await searchRemoteStocks(keyword, { limit: 8 })).map((item) => ({
         ...item,
-        searchSource: '即時 API 搜尋',
+        searchSource: '最新搜尋',
         hasLocalDetail: false,
       }));
     } catch {
@@ -165,7 +179,7 @@ onBeforeUnmount(() => {
 });
 
 function openResult(item) {
-  router.push(createStockRoute(item.code));
+  router.push(item.assetType === 'etf' ? `/etfs/${item.code}` : createStockRoute(item.code));
   isOpen.value = false;
   query.value = '';
 }
@@ -188,10 +202,7 @@ function submitSearch() {
   <div ref="hostRef" class="global-search">
     <div class="global-search-box" :class="{ 'is-open': isOpen }">
       <span class="global-search-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="7"></circle>
-          <path d="M20 20l-3.2-3.2"></path>
-        </svg>
+        <MagnifyingGlassIcon />
       </span>
       <input
         v-model="query"
@@ -263,7 +274,7 @@ function submitSearch() {
         </div>
       </button>
 
-      <p v-if="isRemoteLoading" class="global-search-status">正在補抓遠端資料…</p>
+      <p v-if="isRemoteLoading" class="global-search-status">正在搜尋…</p>
       <p v-else-if="query.trim().length >= 2 && !mergedMatches.length && !directLookup" class="global-search-status">
         找不到符合結果，試著輸入 4 碼代號，或改用股票名稱關鍵字。
       </p>

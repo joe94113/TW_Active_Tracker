@@ -6,16 +6,32 @@ import { useSeoMeta } from '../composables/useSeoMeta';
 const quickStartCards = [
   {
     title: '先看大盤',
-    body: '先確認今天是偏多、偏空，還是震盪。大盤很弱時，個股再漂亮也容易被拖下來。',
+    body: '先判斷大盤偏多、偏空或震盪。',
   },
   {
     title: '再看主線題材',
-    body: '先找市場資金正在看的題材，例如 CPO、PCB、AI 伺服器。主線題材裡的股票，比較容易有續航力。',
+    body: '確認資金正集中在哪些題材。',
   },
   {
     title: '最後才挑個股',
-    body: '同一個題材裡，再挑籌碼、技術面、基本面都比較順的股票，不要一看到漲就衝。',
+    body: '再比較趨勢、籌碼與追價風險。',
   },
+];
+
+const classroomSections = [
+  ['classroom-steps', '研究順序'],
+  ['classroom-charts', '看圖教學'],
+  ['classroom-checklist', '實戰清單'],
+  ['classroom-style-guide', '選股風格'],
+  ['classroom-case-study', '案例拆解'],
+  ['classroom-quiz', '小測驗'],
+  ['classroom-chart-practice', '看圖練習'],
+  ['classroom-technical', '技術面'],
+  ['classroom-fundamental', '基本面'],
+  ['classroom-chip', '籌碼面'],
+  ['classroom-risk', '風控'],
+  ['classroom-futures', '期貨'],
+  ['classroom-glossary', '名詞速查'],
 ];
 
 const researchSteps = [
@@ -484,6 +500,13 @@ function revealChartPracticeAnswer(index) {
   chartPracticeRevealed.value[index] = true;
 }
 
+function scrollToClassroomSection(sectionId) {
+  document.getElementById(sectionId)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  });
+}
+
 useSeoMeta(pageSeo);
 </script>
 
@@ -491,13 +514,9 @@ useSeoMeta(pageSeo);
   <section class="page-shell classroom-page">
     <section class="page-hero compact classroom-page-hero">
       <div class="hero-copy">
-        <span class="hero-kicker">Beginner Guide</span>
+        <span class="hero-kicker">投資入門</span>
         <h1>股票小教室</h1>
-        <p>
-          這頁不是教你背公式，而是教你怎麼用最簡單的方法先看懂市場。你會看到
-          RSI 是什麼、量縮價漲是什麼、內外盤怎麼看、五日線十日線怎麼用、微台指和期貨是什麼，
-          還會搭配假的趨勢圖和真實案例，讓你直接看圖理解。
-        </p>
+        <p>先學會看市場方向、個股趨勢與風險，再往下理解技術面、籌碼和基本面。</p>
         <div class="theme-radar-summary">
           <span class="theme-observation-chip">技術面</span>
           <span class="theme-observation-chip">基本面</span>
@@ -521,19 +540,15 @@ useSeoMeta(pageSeo);
     </section>
 
     <nav class="mobile-section-nav classroom-nav" aria-label="股票小教室段落導覽">
-      <a class="section-chip" href="#classroom-steps">研究順序</a>
-      <a class="section-chip" href="#classroom-charts">看圖教學</a>
-      <a class="section-chip" href="#classroom-checklist">實戰清單</a>
-      <a class="section-chip" href="#classroom-style-guide">選股風格</a>
-      <a class="section-chip" href="#classroom-case-study">案例拆解</a>
-      <a class="section-chip" href="#classroom-quiz">小測驗</a>
-      <a class="section-chip" href="#classroom-chart-practice">看圖練習</a>
-      <a class="section-chip" href="#classroom-technical">技術面</a>
-      <a class="section-chip" href="#classroom-fundamental">基本面</a>
-      <a class="section-chip" href="#classroom-chip">籌碼面</a>
-      <a class="section-chip" href="#classroom-risk">風控</a>
-      <a class="section-chip" href="#classroom-futures">期貨</a>
-      <a class="section-chip" href="#classroom-glossary">名詞速查</a>
+      <button
+        v-for="[sectionId, label] in classroomSections"
+        :key="sectionId"
+        type="button"
+        class="section-chip"
+        @click="scrollToClassroomSection(sectionId)"
+      >
+        {{ label }}
+      </button>
     </nav>
 
     <section id="classroom-steps" class="panel classroom-panel">
@@ -547,7 +562,7 @@ useSeoMeta(pageSeo);
       <div class="classroom-step-grid">
         <article v-for="item in researchSteps" :key="item.step" class="classroom-step-card">
           <div class="classroom-step-head">
-            <span class="classroom-step-index">STEP {{ item.step }}</span>
+            <span class="classroom-step-index">步驟 {{ item.step }}</span>
             <strong>{{ item.title }}</strong>
           </div>
           <p>{{ item.body }}</p>
@@ -686,7 +701,7 @@ useSeoMeta(pageSeo);
       <div class="classroom-practice-grid">
         <article v-for="(item, index) in quizQuestions" :key="item.prompt" class="sub-panel classroom-practice-card">
           <div class="classroom-practice-head">
-            <span class="classroom-step-index">QUIZ {{ index + 1 }}</span>
+              <span class="classroom-step-index">題目 {{ index + 1 }}</span>
             <strong>{{ item.prompt }}</strong>
           </div>
 

@@ -2,13 +2,10 @@
 
 ## Scope
 
-- Scanner option 3
-- Entry Radar
-- Stock Detail
-- Home
-- Tomorrow Watchlist
-- Global Markets
+- Five investor centers: Self, Scanner, Official Trading, Themes, and ETF
 - Daily Asia Currency Watch
+- Futures, Event Stats, Broker Branches, Classroom, and Serenity
+- Home, Entry Radar, Stock Detail, Tomorrow Watchlist, and Global Markets
 
 ## Visual Comparison
 
@@ -50,11 +47,44 @@ The implementation keeps the selected dark, compact investor dashboard direction
 - Currency, market, stock and institutional fields render only when a real value exists.
 - Future data updates include USD/KRW, USD/CNY and US 10Y collection support.
 
+## Center Redesign Comparison
+
+- Selected reference: `C:\Users\user\.codex\generated_images\01a01e8a-4b9e-7a80-a264-ac1d6d4c7b20\exec-22fac8fd-d71e-476e-a247-59f0ba587f00.png`
+- Final five-center first-viewport comparison: `artifacts/center-redesign-2026-08-21/design-comparison-focus-final.png`
+- Full-view comparison from the previous pass: `artifacts/center-redesign-2026-08-21/design-comparison-pass-2.png`
+- Final focused Scanner comparison: `artifacts/center-redesign-2026-08-21/focused-comparison-pass-4.png`
+- Desktop Scanner: `artifacts/center-redesign-2026-08-21/desktop-scanner-final-neutral.png`
+- Desktop ETF Center: `artifacts/center-redesign-2026-08-21/desktop-etf-final.png`
+- Priority-page mobile board: `artifacts/center-redesign-2026-08-21/priority-pages-mobile-final.png`
+- Core-flow mobile board: `artifacts/center-redesign-2026-08-21/core-flow-mobile-final.png`
+
+Reference board is 1487 x 1058 px. Each implementation screen was checked at 390 x 844 CSS px and normalized to 297 x 643 px for the first-viewport comparison. Desktop checks used 1440 x 900 CSS px. The dark theme and 2026-06-15 historical-review state were kept consistent.
+
+## Center Redesign Findings
+
+- Pass 1 P1: global header and stale-data banner consumed the center first viewport. Fixed with a compact center header on mobile.
+- Pass 1 P1: Official Trading used a wide table on mobile. Fixed with scan-friendly stock rows.
+- Pass 2 P2: Scanner and ETF cards carried too much detail. Mobile cards now keep the price, change, and one decision reason.
+- Pass 2 P2: Scanner cards drifted into a large green surface. Fixed with neutral cards and a thin semantic edge.
+- Pass 3 P2: Scanner still showed category controls before recommendations. System Recommendation now presents the top three real candidates first.
+- No remaining P0, P1, or P2 visual issues.
+- Accepted P3 differences: the real empty Self Center state, real stock counts, and preservation of the product's existing bottom navigation.
+
+## Center Interaction Checks
+
+- Center tabs, theme toggle, legacy redirects, stock search, and ETF search: passed.
+- Scanner System Recommendation opens the selected stock detail: passed.
+- ETF search routes `00980A` to its real detail page: passed.
+- Seventeen audited mobile pages have no page-level horizontal overflow.
+- Fresh browser session across Self, Scanner, and ETF Center: zero console errors.
+- Daily Asia Currency Watch shows `暫不判斷` when the historical context is incomplete.
+
 ## Verification
 
 - `npm run build`: passed.
 - `node --check scripts/lib/global-markets.mjs`: passed.
 - `node --check scripts/update-data.mjs`: passed.
 - `git diff --check`: passed (line-ending notices only).
+- Preview remains available at `http://127.0.0.1:4178/`.
 
 final result: passed

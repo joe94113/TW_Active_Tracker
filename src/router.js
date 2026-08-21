@@ -2,29 +2,30 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import { applySeoMeta } from './lib/seo';
 
 const HomePage = () => import('./pages/HomePage.vue');
-const EtfOverlapPage = () => import('./pages/EtfOverlapPage.vue');
-const EtfListPage = () => import('./pages/EtfListPage.vue');
+const EtfCenterPage = () => import('./pages/EtfCenterPage.vue');
 const EtfDetailPage = () => import('./pages/EtfDetailPage.vue');
 const StockDetailPage = () => import('./pages/StockDetailPage.vue');
-const ThemeRadarPage = () => import('./pages/ThemeRadarPage.vue');
+const ThemeCenterPage = () => import('./pages/ThemeCenterPage.vue');
 const FuturesPage = () => import('./pages/FuturesPage.vue');
-const StockRadarPage = () => import('./pages/StockRadarPage.vue');
+const StockScannerCenterPage = () => import('./pages/StockScannerCenterPage.vue');
 const StockClassroomPage = () => import('./pages/StockClassroomPage.vue');
 const EntryRadarPage = () => import('./pages/EntryRadarPage.vue');
-const HighDividendEtfFlowPage = () => import('./pages/HighDividendEtfFlowPage.vue');
 const TomorrowWatchlistPage = () => import('./pages/TomorrowWatchlistPage.vue');
-const FavoritesHealthPage = () => import('./pages/FavoritesHealthPage.vue');
-const StockScannerPage = () => import('./pages/StockScannerPage.vue');
+const SelfCenterPage = () => import('./pages/SelfCenterPage.vue');
 const EventStatsPage = () => import('./pages/EventStatsPage.vue');
-const OfficialRadarPage = () => import('./pages/OfficialRadarPage.vue');
-const DispositionRadarPage = () => import('./pages/DispositionRadarPage.vue');
+const OfficialCenterPage = () => import('./pages/OfficialCenterPage.vue');
 const BrokerBranchRadarPage = () => import('./pages/BrokerBranchRadarPage.vue');
-const WatchboardPage = () => import('./pages/WatchboardPage.vue');
-const IndustryPulsePage = () => import('./pages/IndustryPulsePage.vue');
 const GlobalMarketsPage = () => import('./pages/GlobalMarketsPage.vue');
 const AsianCurrencyWatchPage = () => import('./pages/AsianCurrencyWatchPage.vue');
-const MarketBuzzPage = () => import('./pages/MarketBuzzPage.vue');
 const SerenityRadarPage = () => import('./pages/SerenityRadarPage.vue');
+
+function redirectWithView(path, view) {
+  return (to) => ({
+    path,
+    query: { ...to.query, view },
+    hash: to.hash,
+  });
+}
 
 export const ROUTE_NAME = {
   HOME: 'home',
@@ -39,6 +40,7 @@ export const ROUTE_NAME = {
   ENTRY_RADAR: 'entry-radar',
   HIGH_DIVIDEND_ETF_FLOW: 'high-dividend-etf-flow',
   TOMORROW_WATCHLIST: 'tomorrow-watchlist',
+  SELF_CENTER: 'self-center',
   FAVORITES_HEALTH: 'favorites-health',
   STOCK_SCANNER: 'stock-scanner',
   EVENT_STATS: 'event-stats',
@@ -67,20 +69,15 @@ const router = createRouter({
     },
     {
       path: '/etf-overlap',
-      name: ROUTE_NAME.ETF_OVERLAP,
-      component: EtfOverlapPage,
-      meta: {
-        title: 'ETF 重疊持股觀察',
-        description: '快速比較主動式 ETF 與熱門股票的重疊持股、權重分布與市場風向。',
-      },
+      redirect: redirectWithView('/etfs', 'overlap'),
     },
     {
       path: '/etfs',
       name: ROUTE_NAME.ETF_LIST,
-      component: EtfListPage,
+      component: EtfCenterPage,
       meta: {
-        title: '主動式 ETF 清單',
-        description: '瀏覽台股主動式 ETF 清單、最新持股揭露、前一日異動與技術面快覽。',
+        title: 'ETF 中心',
+        description: '集中查看 ETF 清單、持股重疊與高股息 ETF 換股方向。',
       },
     },
     {
@@ -104,12 +101,7 @@ const router = createRouter({
     },
     {
       path: '/high-dividend-etfs',
-      name: ROUTE_NAME.HIGH_DIVIDEND_ETF_FLOW,
-      component: HighDividendEtfFlowPage,
-      meta: {
-        title: '高股息 ETF 換股雷達',
-        description: '用官方高股息 ETF 名單、最近揭露資料與共識加碼 / 減碼清單，快速看高息與收益型 ETF 最近把資金移到哪些台股。',
-      },
+      redirect: redirectWithView('/etfs', 'dividend'),
     },
     {
       path: '/watchlist',
@@ -122,20 +114,24 @@ const router = createRouter({
     },
     {
       path: '/favorites-health',
-      name: ROUTE_NAME.FAVORITES_HEALTH,
-      component: FavoritesHealthPage,
+      redirect: redirectWithView('/self-center', 'health'),
+    },
+    {
+      path: '/self-center',
+      name: ROUTE_NAME.SELF_CENTER,
+      component: SelfCenterPage,
       meta: {
-        title: '自選股健檢中心',
-        description: '把自選股的健康分數、追價風險、五日籌碼與事件後表現集中整理。',
+        title: '自選中心',
+        description: '集中查看自選股的即時表現、籌碼與健康檢查。',
       },
     },
     {
       path: '/scanner',
       name: ROUTE_NAME.STOCK_SCANNER,
-      component: StockScannerPage,
+      component: StockScannerCenterPage,
       meta: {
-        title: '選股條件篩選器',
-        description: '用外資、投信、題材、健康度與隔日觀察條件快速掃描台股候選名單。',
+        title: '條件掃描',
+        description: '用自訂條件或今日精選快速查看符合條件的台股。',
       },
     },
     {
@@ -149,20 +145,15 @@ const router = createRouter({
     },
     {
       path: '/disposition-radar',
-      name: ROUTE_NAME.DISPOSITION_RADAR,
-      component: DispositionRadarPage,
-      meta: {
-        title: '處置股雷達',
-        description: '用進處置前 10 天與處置期間的主力籌碼變化，分辨主力鎖籌碼、護盤套牢、倒貨與避開不碰的處置股型態。',
-      },
+      redirect: redirectWithView('/official-radar', 'disposition'),
     },
     {
       path: '/official-radar',
       name: ROUTE_NAME.OFFICIAL_RADAR,
-      component: OfficialRadarPage,
+      component: OfficialCenterPage,
       meta: {
-        title: '官方交易雷達',
-        description: '把處置股、變更交易、注意股與即將除息事件集中整理，先看哪些股票需要避開、哪些事件值得提前觀察。',
+        title: '官方交易',
+        description: '集中查看官方風險名單、處置期間籌碼與近期事件。',
       },
     },
     {
@@ -176,21 +167,11 @@ const router = createRouter({
     },
     {
       path: '/watchboard',
-      name: ROUTE_NAME.WATCHBOARD,
-      component: WatchboardPage,
-      meta: {
-        title: '自選股即時看盤面板',
-        description: '把自選股集中放在同一頁，看價格、漲跌、雙法人、題材與風險，盤中盤後都能快速掃描。',
-      },
+      redirect: redirectWithView('/self-center', 'watch'),
     },
     {
       path: '/industry-pulse',
-      name: ROUTE_NAME.INDUSTRY_PULSE,
-      component: IndustryPulsePage,
-      meta: {
-        title: '產業即時動向 / 瞬間波動',
-        description: '用最新盤後資料整理產業升溫排行與突然放量的股票，幫你找隔日優先觀察的方向。',
-      },
+      redirect: redirectWithView('/themes', 'industry'),
     },
     {
       path: '/global-markets',
@@ -212,12 +193,7 @@ const router = createRouter({
     },
     {
       path: '/market-buzz',
-      name: ROUTE_NAME.MARKET_BUZZ,
-      component: MarketBuzzPage,
-      meta: {
-        title: '熱門新聞關鍵詞 + 市場熱度',
-        description: '整理近期熱門新聞關鍵詞、題材熱度與話題股，快速判斷市場最近在關注什麼。',
-      },
+      redirect: redirectWithView('/themes', 'news'),
     },
     {
       path: '/serenity-radar',
@@ -230,12 +206,7 @@ const router = createRouter({
     },
     {
       path: '/radar',
-      name: ROUTE_NAME.STOCK_RADAR,
-      component: StockRadarPage,
-      meta: {
-        title: '選股雷達',
-        description: '把技術突破、籌碼偏多、整理待發、題材輪動與風險排除整理成同一頁的選股工作台。',
-      },
+      redirect: redirectWithView('/scanner', 'recommended'),
     },
     {
       path: '/classroom',
@@ -249,10 +220,10 @@ const router = createRouter({
     {
       path: '/themes',
       name: ROUTE_NAME.THEME_RADAR,
-      component: ThemeRadarPage,
+      component: ThemeCenterPage,
       meta: {
-        title: '資金題材雷達',
-        description: '用題材強度排行、龍頭股與補漲股拆開看台股近期資金輪動，快速找到值得深挖的題材與個股。',
+        title: '資金題材',
+        description: '集中查看題材排行、產業熱度與新聞熱度。',
       },
     },
     {

@@ -40,7 +40,7 @@ const filteredList = computed(() => {
       </div>
     </div>
 
-    <section class="panel">
+    <section class="panel etf-filter-panel">
       <div class="panel-header">
         <div>
           <h2 class="panel-title">ETF 篩選</h2>

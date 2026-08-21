@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { useGlobalData } from './composables/useGlobalData';
 import GlobalStockSearch from './components/GlobalStockSearch.vue';
@@ -30,152 +30,106 @@ let colorSchemeHandler = null;
 const THEME_STORAGE_KEY = 'tw-active-tracker-theme';
 const MORE_RECENT_STORAGE_KEY = 'tw-active-tracker-more-recent-paths';
 const HEADER_COMPACT_QUERY = '(max-width: 900px)';
+const INVESTOR_CENTER_PATHS = new Set([
+  '/self-center',
+  '/scanner',
+  '/official-radar',
+  '/themes',
+  '/etfs',
+]);
 
 const primaryNavigationItems = [
   { label: '首頁', path: '/' },
   { label: '卡位雷達', path: '/entry-radar' },
   { label: '資金題材', path: '/themes' },
-  { label: '主動式 ETF', path: '/etfs' },
+  { label: 'ETF 中心', path: '/etfs' },
 ];
+
+const isInvestorCenterRoute = computed(() => INVESTOR_CENTER_PATHS.has(route.path));
 
 const secondaryNavigationItems = [
   {
-    label: '選股雷達',
-    path: '/radar',
+    label: '自選中心',
+    path: '/self-center',
+    tag: '自選',
+    description: '集中查看自選股的漲跌、籌碼與健康狀況。',
+  },
+  {
+    label: '條件掃描',
+    path: '/scanner',
     tag: '選股',
-    description: '把技術突破、籌碼偏多、整理待發與風險排除集中整理成選股工作台。',
+    description: '用自訂條件或今日精選快速縮小名單。',
+  },
+  {
+    label: '官方交易',
+    path: '/official-radar',
+    tag: '風險',
+    description: '查看注意股、處置籌碼與近期事件。',
   },
   {
     label: '股票小教室',
     path: '/classroom',
     tag: '教學',
-    description: '用簡單易懂的方式看懂 RSI、量價、均線、內外盤與期貨。',
+    description: '用簡單方式看懂量價、均線、籌碼與期貨。',
   },
   {
     label: '期貨籌碼',
     path: '/futures',
     tag: '觀察',
-    description: '集中查看小台、微台、法人未平倉與期貨日線節奏。',
+    description: '查看小台、微台與法人未平倉方向。',
   },
   {
-    label: 'ETF 重疊',
-    path: '/etf-overlap',
-    tag: '交叉',
-    description: '快速比對熱門 ETF 重疊持股，找出族群共識與集中方向。',
-  },
-];
-
-secondaryNavigationItems.push({
-  label: '高息 ETF',
-  path: '/high-dividend-etfs',
-  tag: '換股',
-  description: '集中看高股息 / 收益型 ETF 最近在買進或賣出哪些台股，順著 ETF 換股方向找標的。',
-});
-
-secondaryNavigationItems.push(
-  {
-    label: '自選看盤',
-    path: '/watchboard',
-    tag: '自選',
-    description: '把自選股集中在同一頁，看價格、雙法人、題材與風險，盤中盤後都能快速掃描。',
-  },
-  {
-    label: '產業脈動',
-    path: '/industry-pulse',
-    tag: '產業',
-    description: '先看哪個產業升溫，再看哪些股票今天突然放量或波動加大。',
-  },
-  {
-    label: '國際盤',
+    label: '國際市場',
     path: '/global-markets',
     tag: '全球',
-    description: '把美股、亞洲股市、原油、黃金與外匯放在同一頁，盤前先看全球風向。',
+    description: '查看美股、亞洲股市、原油、黃金與外匯。',
   },
   {
     label: '每日亞幣',
     path: '/asian-currency-watch',
     tag: '匯率',
-    description: '集中看日圓、韓元、人民幣、台幣、外資、NASDAQ 與美債殖利率。',
+    description: '查看亞幣、外資、NASDAQ 與美債殖利率。',
   },
   {
-    label: '新聞熱度',
-    path: '/market-buzz',
-    tag: '熱度',
-    description: '整理近期熱門新聞關鍵詞、題材熱度與話題股，快速抓市場最近在看什麼。',
-  },
-  {
-    label: '隔日觀察',
+    label: '明日觀察',
     path: '/watchlist',
     tag: '盤後',
-    description: '把明日盤勢、穩健型、積極型與剛轉強名單整理在同一頁。',
-  },
-  {
-    label: '自選健檢',
-    path: '/favorites-health',
-    tag: '自選',
-    description: '集中看自選股的健康分數、過熱風險、五日籌碼與事件表現。',
-  },
-  {
-    label: '條件掃描',
-    path: '/scanner',
-    tag: '掃描',
-    description: '用外資、投信、題材、健康度與隔日觀察條件快速篩選台股。',
+    description: '查看明日盤勢與優先觀察名單。',
   },
   {
     label: '事件統計',
     path: '/event-stats',
     tag: '統計',
-    description: '整理月營收、法說、財報與除息後的歷史反應，幫助判斷交易節奏。',
+    description: '查看月營收、法說、財報與除息後表現。',
   },
-);
-
-secondaryNavigationItems.push({
-  label: '處置股雷達',
-  path: '/disposition-radar',
-  tag: '處置',
-  description: '對比進處置前 10 天與處置期間的主力買賣超，辨識真吃貨、護盤套牢與倒貨股。',
-});
-
-secondaryNavigationItems.push({
-  label: '官方交易雷達',
-  path: '/official-radar',
-  tag: '風險',
-  description: '集中看處置股、變更交易、注意股與即將除息事件，盤後先確認哪些股票需要避開、哪些事件值得提前留意。',
-});
-
-secondaryNavigationItems.push({
-  label: '勝率分點雷達',
-  path: '/broker-branches',
-  tag: '分點',
-  description: '整理勝率高的券商分點最近偏多、偏空與推薦台股，直接看分點資金最近卡位了哪些股票。',
-});
-
-secondaryNavigationItems.push({
-  label: 'Serenity 觀點雷達',
-  path: '/serenity-radar',
-  tag: '美股 AI',
-  description: '追蹤 Serenity 公開貼文提及的 AI 與半導體供應鏈美股，整理多頭、空頭與中立觀點變化。',
-});
+  {
+    label: '勝率分點',
+    path: '/broker-branches',
+    tag: '分點',
+    description: '查看近期表現較穩定的券商分點動向。',
+  },
+  {
+    label: 'Serenity 觀點',
+    path: '/serenity-radar',
+    tag: '美股',
+    description: '查看美股 AI 與半導體供應鏈觀點。',
+  },
+];
 
 const allNavigationItems = [...primaryNavigationItems, ...secondaryNavigationItems];
 
-const featuredMorePaths = ['/radar', '/disposition-radar', '/watchboard', '/favorites-health'];
+const featuredMorePaths = ['/self-center', '/scanner', '/official-radar', '/global-markets'];
 
 const moreMenuSections = [
   {
     title: '市場總覽',
     subtitle: '盤前盤後先看風向',
-    paths: ['/global-markets', '/asian-currency-watch', '/futures', '/industry-pulse', '/market-buzz', '/official-radar'],
+    paths: ['/global-markets', '/asian-currency-watch', '/futures', '/official-radar'],
   },
   {
     title: '個股工具',
-    subtitle: '選股、掃描與籌碼追蹤',
-    paths: ['/radar', '/scanner', '/disposition-radar', '/broker-branches', '/watchboard', '/favorites-health', '/watchlist'],
-  },
-  {
-    title: 'ETF 工具',
-    subtitle: '成分、重疊與換股方向',
-    paths: ['/etf-overlap', '/high-dividend-etfs'],
+    subtitle: '自選、選股與籌碼',
+    paths: ['/self-center', '/scanner', '/broker-branches', '/watchlist'],
   },
   {
     title: '研究與紀錄',
@@ -316,6 +270,13 @@ const siteIconHref = `${import.meta.env.BASE_URL}favicon.svg`;
 const isMoreActive = computed(() => secondaryNavigationItems.some((item) => isActiveRoute(item.path)));
 const themeToggleLabel = computed(() => (resolvedTheme.value === 'dark' ? '日間' : '夜間'));
 const themeToggleHint = computed(() => (resolvedTheme.value === 'dark' ? '切換為淺色模式' : '切換為深色模式'));
+
+provide('themeControl', {
+  resolvedTheme,
+  toggleTheme,
+  themeToggleHint,
+});
+
 const globalMarketDate = computed(
   () =>
     dashboard.value?.市場總覽?.即時狀態?.marketDate ??
@@ -332,14 +293,14 @@ const globalDataFreshness = computed(() =>
 );
 const globalFreshnessMessage = computed(() => {
   if (globalDataFreshness.value.isStale) {
-    return `目前資料日停在 ${globalDataFreshness.value.marketDate ?? '未知日期'}，全站已視為歷史回看，推播與選股判讀請保守使用。`;
+    return `目前資料停在 ${globalDataFreshness.value.marketDate ?? '未知日期'}，本頁僅供回看，不作為今日選股依據。`;
   }
 
   if (globalDataFreshness.value.isWarning) {
-    return '資料已超過盤中更新容忍時間，下一輪排程成功後會自動恢復正常。';
+    return '資料尚在更新，請稍後再確認最新數值。';
   }
 
-  return '資料時間可用，頁面訊號仍以公開資料整理為研究參考。';
+  return '資料已更新，內容僅供研究參考。';
 });
 const globalStatusItems = computed(() => [
   {
@@ -351,7 +312,7 @@ const globalStatusItems = computed(() => [
     value: generatedAtText.value,
   },
   {
-    label: '判讀模式',
+    label: '資料用途',
     value: globalDataFreshness.value.isStale
       ? '歷史回看'
       : globalDataFreshness.value.isWarning
@@ -388,15 +349,15 @@ const mobileRecentMoreItems = computed(() =>
 );
 const recommendedMorePaths = computed(() => {
   if (route.path === '/') {
-    return ['/favorites-health', '/industry-pulse', '/scanner'];
+    return ['/self-center', '/scanner', '/global-markets'];
   }
 
   if (route.path.startsWith('/stocks/')) {
-    return ['/favorites-health', '/scanner', '/disposition-radar'];
+    return ['/self-center', '/scanner', '/official-radar'];
   }
 
-  if (route.path.startsWith('/industry-pulse') || route.path.startsWith('/themes')) {
-    return ['/radar', '/scanner', '/market-buzz'];
+  if (route.path.startsWith('/themes')) {
+    return ['/scanner', '/official-radar', '/event-stats'];
   }
 
   if (route.path.startsWith('/serenity-radar')) {
@@ -404,14 +365,14 @@ const recommendedMorePaths = computed(() => {
   }
 
   if (route.path.startsWith('/global-markets')) {
-    return ['/asian-currency-watch', '/futures', '/industry-pulse'];
+    return ['/asian-currency-watch', '/futures', '/official-radar'];
   }
 
   if (route.path.startsWith('/asian-currency-watch')) {
-    return ['/global-markets', '/futures', '/industry-pulse'];
+    return ['/global-markets', '/futures', '/official-radar'];
   }
 
-  return ['/radar', '/industry-pulse', '/event-stats'];
+  return ['/scanner', '/global-markets', '/event-stats'];
 });
 const mobileRecommendedMoreItems = computed(() =>
   recommendedMorePaths.value
@@ -446,7 +407,7 @@ const moreMenuGroups = computed(() => {
   if (uncategorizedItems.length) {
     groups.push({
       title: '其他工具',
-      subtitle: '近期新增入口',
+      subtitle: '其他可用頁面',
       items: uncategorizedItems,
     });
   }
@@ -565,7 +526,7 @@ watch(
 </script>
 
 <template>
-  <div class="app-shell min-h-screen">
+  <div class="app-shell min-h-screen" :class="{ 'has-investor-center': isInvestorCenterRoute }">
     <header class="app-header">
       <div class="app-topbar">
         <div class="brand-chip">
@@ -607,11 +568,11 @@ watch(
               :style="moreMenuPanelStyle"
             >
               <div class="more-menu-panel-head">
-                <div>
-                  <strong>工具總覽</strong>
-                  <span>快速切換盤勢、選股、ETF 與研究頁面</span>
-                </div>
-                <span class="more-menu-count">{{ filteredSecondaryNavigationItems.length }} 個入口</span>
+              <div>
+                <strong>工具總覽</strong>
+                <span>快速找到想看的市場與選股頁面</span>
+              </div>
+                <span class="more-menu-count">{{ filteredSecondaryNavigationItems.length }} 個頁面</span>
               </div>
 
               <label class="more-menu-search">
@@ -628,7 +589,7 @@ watch(
               </label>
 
               <div class="more-menu-scroll">
-                <section v-if="featuredMoreItems.length" class="more-menu-featured" aria-label="常用入口">
+                <section v-if="featuredMoreItems.length" class="more-menu-featured" aria-label="常用頁面">
                   <RouterLink
                     v-for="item in featuredMoreItems"
                     :key="`desktop-more-featured-${item.path}`"
@@ -672,7 +633,7 @@ watch(
                   </section>
                 </div>
 
-                <p v-else class="more-menu-empty">沒有找到符合的入口</p>
+                <p v-else class="more-menu-empty">沒有找到符合的頁面</p>
               </div>
             </div>
           </div>
@@ -754,7 +715,7 @@ watch(
       <div class="footer-topline">
         <div class="footer-identity">
           <RouterLink class="footer-brand" to="/">台股主動通</RouterLink>
-          <p class="footer-text">把市場節奏、選股與研究入口整理成同一個工作台。</p>
+          <p class="footer-text">把每天要看的市場、選股與研究資料整理在一起。</p>
         </div>
 
         <nav class="footer-link-row" aria-label="頁面導覽">
@@ -826,7 +787,7 @@ watch(
           <div class="mobile-more-panel-head">
             <div>
               <strong>工具導覽</strong>
-              <span>{{ filteredSecondaryNavigationItems.length }} 個入口，已依任務分組</span>
+              <span>{{ filteredSecondaryNavigationItems.length }} 個頁面</span>
             </div>
             <button type="button" class="mobile-more-close" aria-label="關閉工具導覽" @click="closeMoreMenu">
               關閉
@@ -871,8 +832,8 @@ watch(
 
             <section v-if="mobileRecommendedMoreItems.length" class="mobile-more-section is-priority">
               <div class="mobile-more-section-head">
-                <strong>此頁建議</strong>
-                <span>依目前頁面挑出下一步最常用入口。</span>
+                <strong>接著可看</strong>
+                <span>和目前內容相關的頁面。</span>
               </div>
               <div class="mobile-more-link-grid">
                 <RouterLink
@@ -892,7 +853,7 @@ watch(
               </div>
             </section>
 
-            <section v-if="featuredMoreItems.length" class="mobile-more-featured" aria-label="常用入口">
+            <section v-if="featuredMoreItems.length" class="mobile-more-featured" aria-label="常用頁面">
               <RouterLink
                 v-for="item in featuredMoreItems"
                 :key="`mobile-featured-${item.path}`"
@@ -933,7 +894,7 @@ watch(
               </div>
             </section>
 
-            <p v-if="!moreMenuGroups.length" class="more-menu-empty">沒有找到符合的入口</p>
+            <p v-if="!moreMenuGroups.length" class="more-menu-empty">沒有找到符合的頁面</p>
           </div>
         </div>
       </div>

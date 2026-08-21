@@ -1,70 +1,12 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import StatusCard from '../components/StatusCard.vue';
 import { useGlobalData } from '../composables/useGlobalData';
 import { useSeoMeta } from '../composables/useSeoMeta';
 import { fetchJson } from '../lib/api';
 import { formatNumber } from '../lib/formatters';
 import { createStockRoute } from '../lib/stockRouting';
-
-const mockDispositionStocks = [
-  {
-    code: '2455',
-    name: '全新',
-    caseCode: 'A',
-    caseTitle: '真．主力鎖籌碼',
-    group: '主力吃貨區',
-    statusMinutes: 20,
-    daysToExit: 4,
-    preDispositionNetLots: 5200,
-    duringDispositionNetLots: 1280,
-    priceTrend: [91.2, 95.8, 101.5, 104.2, 102.8, 105.6, 103.9, 106.2],
-    priceNote: '高檔震盪',
-    thesis: '處置前先卡位，處置中仍續買，籌碼沒有鬆掉。',
-  },
-  {
-    code: '8027',
-    name: '鈦昇',
-    caseCode: 'B',
-    caseTitle: '主力護盤套牢',
-    group: '主力吃貨區',
-    statusMinutes: 5,
-    daysToExit: 2,
-    preDispositionNetLots: 4860,
-    duringDispositionNetLots: 260,
-    priceTrend: [138, 134, 129, 123, 119, 114, 109, 105],
-    priceNote: '一路走弱',
-    thesis: '處置前大買，處置中只微幅承接，價格卻一路往下。',
-  },
-  {
-    code: '3374',
-    name: '精材',
-    caseCode: 'C',
-    caseTitle: '倒貨主力',
-    group: '主力倒貨區',
-    statusMinutes: 20,
-    daysToExit: 5,
-    preDispositionNetLots: 6100,
-    duringDispositionNetLots: -2360,
-    priceTrend: [188, 194, 205, 211, 207, 199, 192, 184],
-    priceNote: '高檔轉弱',
-    thesis: '處置前大買拉抬，進處置後主力反手賣出。',
-  },
-  {
-    code: '6438',
-    name: '迅得',
-    caseCode: 'D',
-    caseTitle: '避開不碰',
-    group: '主力倒貨區',
-    statusMinutes: 5,
-    daysToExit: 7,
-    preDispositionNetLots: -1850,
-    duringDispositionNetLots: -920,
-    priceTrend: [121, 117, 115, 112, 110, 106, 101, 98],
-    priceNote: '題材退潮',
-    thesis: '處置前已經賣，處置中繼續賣，主力沒有留下來接。',
-  },
-];
 
 const { manifest, loadGlobalData } = useGlobalData();
 const router = useRouter();
@@ -78,11 +20,8 @@ const CHART_POSITIVE_HEIGHT = 74;
 const CHART_NEGATIVE_HEIGHT = 58;
 
 const sourceStocks = computed(() => {
-  const items = dispositionRadar.value?.items ?? [];
-  return items.length ? items : mockDispositionStocks;
+  return dispositionRadar.value?.items ?? [];
 });
-
-const isUsingMockData = computed(() => !(dispositionRadar.value?.items ?? []).length);
 
 const accumulationStocks = computed(() =>
   sourceStocks.value
@@ -100,7 +39,7 @@ const radarViews = computed(() => [
   {
     key: 'accumulation',
     tone: 'up',
-    eyebrow: 'Accumulation',
+    eyebrow: '買超增加',
     label: '主力吃貨區',
     title: '主力吃貨區',
     sortLabel: '買超由高到低',
@@ -110,7 +49,7 @@ const radarViews = computed(() => [
   {
     key: 'distribution',
     tone: 'down',
-    eyebrow: 'Distribution',
+    eyebrow: '賣超增加',
     label: '主力倒貨區',
     title: '主力倒貨區',
     sortLabel: '賣超由高到低',
@@ -127,16 +66,15 @@ const activeStocks = computed(() => activeRadarView.value?.stocks ?? []);
 
 const dataStatusLabel = computed(() => {
   if (isRadarLoading.value) return '載入中';
-  if (!isUsingMockData.value) return '即時處置';
-  return 'Mock';
+  return sourceStocks.value.length ? '官方名單' : '尚無資料';
 });
 
 const dataStatusNote = computed(() => {
-  if (!isUsingMockData.value) {
+  if (sourceStocks.value.length) {
     return `官方處置 ${formatNumber(dispositionRadar.value?.summary?.activeCount ?? sourceStocks.value.length)} 檔`;
   }
 
-  return radarError.value ? '真實資料讀取失敗' : '介面範例';
+  return radarError.value ? '資料讀取失敗' : '目前沒有可顯示的名單';
 });
 
 const pageSeo = computed(() => ({
@@ -308,7 +246,7 @@ function getBarValueY(value) {
   <section class="page-shell disposition-radar-page">
     <section class="disposition-hero">
       <div class="disposition-hero-copy">
-        <span class="hero-kicker">Disposition Chip Radar</span>
+        <span class="hero-kicker">處置期間籌碼</span>
         <h1>處置股雷達</h1>
         <p>「進處置前」與「處置期間」主力籌碼雙軌對照，先分辨真吃貨、護盤套牢、倒貨與該避開的題材股。</p>
       </div>
@@ -323,14 +261,22 @@ function getBarValueY(value) {
           <strong>{{ distributionStocks.length }}</strong>
         </div>
         <div class="hero-metric">
-          <span>資料型態</span>
+          <span>資料狀態</span>
           <strong>{{ dataStatusLabel }}</strong>
           <small>{{ dataStatusNote }}</small>
         </div>
       </div>
     </section>
 
+    <StatusCard
+      :is-loading="isRadarLoading"
+      :error-message="radarError"
+      :has-data="Boolean(sourceStocks.length)"
+      empty-message="目前沒有可顯示的處置籌碼資料。"
+    />
+
     <section
+      v-if="sourceStocks.length"
       class="radar-board"
       aria-label="處置期間主力買賣超對比"
       @keydown.left.prevent="shiftActiveView(-1)"
@@ -391,7 +337,6 @@ function getBarValueY(value) {
             :class="`is-${getTone(stock.duringDispositionNetLots)}`"
             @click="openDetail(stock)"
           >
-            <span class="case-ribbon">{{ stock.caseCode }}</span>
             <span class="rank-pill">#{{ index + 1 }}</span>
             <div class="card-topline">
               <div>
@@ -461,7 +406,7 @@ function getBarValueY(value) {
         >
           <header class="modal-header">
             <div>
-              <p class="eyebrow">Chip Flow Detail</p>
+              <p class="eyebrow">主力籌碼比較</p>
               <h2 :id="`disposition-modal-${selectedStock.code}`">{{ selectedStock.code }} {{ selectedStock.name }}</h2>
               <span>{{ selectedStock.caseCode }}｜{{ selectedStock.caseTitle }}</span>
             </div>
