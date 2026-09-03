@@ -18,6 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -34,8 +35,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Capture checkout data baseline
+        run: node scripts/validate-data-quality.mjs --write-baseline "$RUNNER_TEMP/data-quality-baseline.json"
+
       - name: Refresh static market data
-        run: npm run data:update
+        run: |
+          for attempt in 1 2; do
+            echo "data:update attempt ${attempt}/2"
+            if npm run data:update; then
+              exit 0
+            fi
+            if [ "${attempt}" -eq 2 ]; then
+              echo "data:update failed after ${attempt} attempts"
+              exit 1
+            fi
+            echo "Transient update failure; cooling down for 180 seconds before the final attempt."
+            sleep 180
+          done
+
+      - name: Validate refreshed data quality
+        run: node scripts/validate-data-quality.mjs --baseline "$RUNNER_TEMP/data-quality-baseline.json"
 
       - name: Build site
         run: npm run build

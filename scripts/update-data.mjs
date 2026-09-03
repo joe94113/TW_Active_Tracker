@@ -31,6 +31,7 @@ import { buildSelectionRadar } from './lib/selection-radar.mjs';
 import { buildEntryRadar } from './lib/entry-radar.mjs';
 import { buildWatchGroups } from './lib/watch-groups.mjs';
 import { buildBrokerBranchRadar } from './lib/broker-branch-radar.mjs';
+import { createResilientRequester } from './lib/resilient-request.mjs';
 import {
   buildEarningsCalendar,
   buildProductEvents,
@@ -64,6 +65,18 @@ const 台北時間格式器 = new Intl.DateTimeFormat('zh-TW', {
 });
 const 預設請求逾時毫秒 = 20000;
 const 預設請求重試次數 = 3;
+const 韌性請求 = createResilientRequester({
+  hostPolicies: {
+    'openapi.twse.com.tw': { concurrency: 2, minIntervalMs: 250, jitterMs: 150 },
+    'www.twse.com.tw': { concurrency: 1, minIntervalMs: 350, jitterMs: 200 },
+    'mis.twse.com.tw': { concurrency: 1, minIntervalMs: 300, jitterMs: 150 },
+    'www.tpex.org.tw': { concurrency: 2, minIntervalMs: 300, jitterMs: 200 },
+    'openapi.taifex.com.tw': { concurrency: 1, minIntervalMs: 350, jitterMs: 150 },
+    'www.taifex.com.tw': { concurrency: 1, minIntervalMs: 600, jitterMs: 250 },
+    'opendata.tdcc.com.tw': { concurrency: 1, minIntervalMs: 250, jitterMs: 100 },
+    'joe94113.github.io': { concurrency: 6, minIntervalMs: 20, jitterMs: 20 },
+  },
+});
 const 高股息ETF關鍵字 = ['高息', '高股息', '入息', '收益', '豐收', '鑫收'];
 const 主動ETF單股一般上限 = 10;
 const 主動ETF單股接近一般上限線 = 8;
@@ -653,23 +666,55 @@ async function writeJson(filePath, value) {
   }
 }
 
-async function readDeployedOrLocalJson(relativePath) {
+async function readDeployedOrLocalJson(
+  relativePath,
+  { remoteTimeoutMs = 預設請求逾時毫秒, remoteAttempts = 預設請求重試次數, remoteCircuit = null } = {},
+) {
   const normalizedPath = String(relativePath ?? '').replaceAll('\\', '/').replace(/^\/+/, '');
 
   if (!normalizedPath) {
     return null;
   }
 
-  try {
-    return await fetchJson(new URL(normalizedPath, 已部署站台網址).toString());
-  } catch {
-    const localPath = path.join(根目錄, normalizedPath);
-    return readJsonIfExists(localPath);
+  if (!remoteCircuit?.open) {
+    try {
+      const result = await requestWithRetry(new URL(normalizedPath, 已部署站台網址).toString(), {
+        headers: {
+          'user-agent': 使用者代理,
+          'accept-language': 'zh-TW,zh;q=0.9',
+          accept: 'application/json, text/plain, */*',
+        },
+      }, {
+        標籤: `已部署快取 ${normalizedPath}`,
+        逾時毫秒: remoteTimeoutMs,
+        重試次數: remoteAttempts,
+        回應類型: 'json',
+      });
+      if (remoteCircuit) remoteCircuit.consecutiveFailures = 0;
+      return result;
+    } catch (error) {
+      const status = Number(error?.status ?? 0);
+      const serviceFailure = !status || status === 408 || status === 429 || status >= 500;
+      if (remoteCircuit && serviceFailure) {
+        remoteCircuit.consecutiveFailures = (remoteCircuit.consecutiveFailures ?? 0) + 1;
+        const threshold = Math.max(1, Number(remoteCircuit.failureThreshold) || 2);
+        if (remoteCircuit.consecutiveFailures >= threshold) {
+          remoteCircuit.open = true;
+          if (!remoteCircuit.reported) {
+            remoteCircuit.reported = true;
+            console.warn(`[部署快取熔斷] ${getErrorSummary(error)}；其餘檔案改讀 checkout 快取`);
+          }
+        }
+      }
+    }
   }
+
+  const localPath = path.join(根目錄, normalizedPath);
+  return readJsonIfExists(localPath);
 }
 
 async function fetchHtml(url) {
-  const response = await requestWithRetry(url, {
+  const buffer = await requestWithRetry(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
@@ -677,9 +722,10 @@ async function fetchHtml(url) {
     },
   }, {
     標籤: url,
+    回應類型: 'array-buffer',
   });
 
-  const bytes = new Uint8Array(await response.arrayBuffer());
+  const bytes = new Uint8Array(buffer);
   const utf8 = new TextDecoder('utf-8').decode(bytes);
   const big5 = new TextDecoder('big5').decode(bytes);
   const markers = ['condition-date', '基金淨資產價值', '已發行受益權單位總數', '基金資產', '股票', '股票代碼'];
@@ -689,7 +735,7 @@ async function fetchHtml(url) {
 }
 
 async function fetchText(url, accept = 'text/plain, text/html, application/xml;q=0.9, */*;q=0.8') {
-  const response = await requestWithRetry(url, {
+  return requestWithRetry(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
@@ -697,9 +743,8 @@ async function fetchText(url, accept = 'text/plain, text/html, application/xml;q
     },
   }, {
     標籤: url,
+    回應類型: 'text',
   });
-
-  return response.text();
 }
 
 function cleanTwseFieldText(value) {
@@ -797,6 +842,21 @@ async function fetchTwseAfterTradingValuation(date) {
     PEratio: row[5],
     PBratio: row[6],
     Date: payload?.date ?? date,
+  }));
+}
+
+async function fetchTwseMarketCadenceMonth(date) {
+  const payload = await fetchJson(
+    `https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date=${date}&response=json`,
+  );
+  if (payload?.stat !== 'OK' || !Array.isArray(payload?.data)) return [];
+  return payload.data.map((row) => ({
+    Date: row?.[0],
+    TradeVolume: row?.[1],
+    TradeValue: row?.[2],
+    Transaction: row?.[3],
+    TAIEX: row?.[4],
+    Change: row?.[5],
   }));
 }
 
@@ -1006,7 +1066,7 @@ async function fetchTopicNewsBatch(topics, concurrency = 4) {
 }
 
 async function fetchNomuraSnapshot(etf) {
-  const response = await fetch('https://www.nomurafunds.com.tw/API/ETFAPI/api/Fund/GetFundAssets', {
+  const payload = await requestWithRetry('https://www.nomurafunds.com.tw/API/ETFAPI/api/Fund/GetFundAssets', {
     method: 'POST',
     headers: {
       'user-agent': 使用者代理,
@@ -1017,13 +1077,10 @@ async function fetchNomuraSnapshot(etf) {
       referer: etf.sourceUrl,
     },
     body: JSON.stringify({ FundID: etf.code, SearchDate: null }),
+  }, {
+    標籤: `野村 ETF ${etf.code}`,
+    回應類型: 'json',
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const payload = await response.json();
   const entries = payload?.Entries ?? payload?.entries ?? null;
   const data = entries?.Data ?? entries?.data ?? payload?.Data ?? payload?.data ?? null;
   const fundAsset = payload?.FundAssets ?? payload?.Data?.FundAssets ?? payload?.fundAssets ?? data?.FundAsset ?? data?.fundAsset;
@@ -1170,7 +1227,7 @@ function stripDecodedHtmlTags(value) {
 }
 
 async function createAllianzApiSession(referer) {
-  const response = await fetch('https://etf.allianzgi.com.tw/webapi/api/AntiForgery/GetAntiForgeryToken', {
+  const { data: payload, response } = await requestWithRetry('https://etf.allianzgi.com.tw/webapi/api/AntiForgery/GetAntiForgeryToken', {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
@@ -1178,13 +1235,10 @@ async function createAllianzApiSession(referer) {
       origin: 'https://etf.allianzgi.com.tw',
       referer,
     },
+  }, {
+    標籤: '安聯 ETF 防偽權杖',
+    回應類型: 'json-with-response',
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const payload = await response.json();
   const token = compactText(payload?.token);
   const cookieHeader = mergeSetCookieHeaders(response.headers.getSetCookie?.() ?? []);
 
@@ -1197,7 +1251,7 @@ async function createAllianzApiSession(referer) {
 
 async function postAllianzJson(apiPath, body, referer, session = null) {
   const auth = session ?? (await createAllianzApiSession(referer));
-  const response = await fetch(`https://etf.allianzgi.com.tw/webapi/api${apiPath}`, {
+  return requestWithRetry(`https://etf.allianzgi.com.tw/webapi/api${apiPath}`, {
     method: 'POST',
     headers: {
       'user-agent': 使用者代理,
@@ -1211,13 +1265,10 @@ async function postAllianzJson(apiPath, body, referer, session = null) {
       'x-xsrf-token': auth.token,
     },
     body: JSON.stringify(body),
+  }, {
+    標籤: `安聯 ETF ${apiPath}`,
+    回應類型: 'json',
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  return response.json();
 }
 
 function parseAllianzHoldingTable(tables) {
@@ -1339,31 +1390,37 @@ async function fetchAllianceBernsteinSnapshot(etf) {
 }
 
 async function fetchUnityEtfPage(url) {
-  const firstResponse = await fetch(url, {
-    redirect: 'manual',
-    headers: {
-      'user-agent': 使用者代理,
-      'accept-language': 'zh-TW,zh;q=0.9',
-      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  const firstResponse = await requestWithRetry(
+    url,
+    {
+      redirect: 'manual',
+      headers: {
+        'user-agent': 使用者代理,
+        'accept-language': 'zh-TW,zh;q=0.9',
+        accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      },
     },
-  });
+    {
+      標籤: `統一 ETF cookie bootstrap ${url}`,
+      接受回應: (response) => response.ok || (response.status >= 300 && response.status < 400),
+    },
+  );
 
   const cookieHeader = mergeSetCookieHeaders(firstResponse.headers.getSetCookie?.() ?? []);
+  await firstResponse.body?.cancel?.().catch(() => {});
 
-  const secondResponse = await fetch(url, {
-    headers: {
-      'user-agent': 使用者代理,
-      'accept-language': 'zh-TW,zh;q=0.9',
-      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      ...(cookieHeader ? { cookie: cookieHeader } : {}),
+  return requestWithRetry(
+    url,
+    {
+      headers: {
+        'user-agent': 使用者代理,
+        'accept-language': 'zh-TW,zh;q=0.9',
+        accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        ...(cookieHeader ? { cookie: cookieHeader } : {}),
+      },
     },
-  });
-
-  if (!secondResponse.ok) {
-    throw new Error(`HTTP ${secondResponse.status} ${secondResponse.statusText}`);
-  }
-
-  return secondResponse.text();
+    { 標籤: `統一 ETF 持股頁 ${url}`, 回應類型: 'text' },
+  );
 }
 
 function parseUnityHiddenData(html, id) {
@@ -1810,7 +1867,7 @@ async function fetchCathaySnapshot(etf) {
 }
 
 async function fetchKgiRedemptionHtml(etf, fundId) {
-  const response = await requestWithRetry('https://www.kgifund.com.tw/Fund/RedemptionVC', {
+  return requestWithRetry('https://www.kgifund.com.tw/Fund/RedemptionVC', {
     method: 'POST',
     headers: {
       'user-agent': 使用者代理,
@@ -1827,14 +1884,13 @@ async function fetchKgiRedemptionHtml(etf, fundId) {
     }),
   }, {
     標籤: `凱基 ETF ${fundId} 申購買回清單`,
+    回應類型: 'text',
   });
-
-  return response.text();
 }
 
 async function fetchKgiDetailHtml(fundId) {
   const url = `https://www.kgifund.com.tw/Fund/Detail?fundID=${encodeURIComponent(fundId)}`;
-  const response = await requestWithRetry(url, {
+  return requestWithRetry(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
@@ -1842,9 +1898,8 @@ async function fetchKgiDetailHtml(fundId) {
     },
   }, {
     標籤: `凱基 ETF ${fundId} 基金詳細頁`,
+    回應類型: 'text',
   });
-
-  return response.text();
 }
 
 function extractHtmlInputValue(html, id) {
@@ -1960,19 +2015,19 @@ async function fetchJpmorganSnapshot(etf) {
     throw new Error('摩根 ETF 缺少 xlsxUrl 設定');
   }
 
-  const response = await fetch(xlsxUrl, {
-    headers: {
-      'user-agent': 使用者代理,
-      'accept-language': 'zh-TW,zh;q=0.9',
-      referer: etf.sourceUrl,
+  const workbookBuffer = await requestWithRetry(
+    xlsxUrl,
+    {
+      headers: {
+        'user-agent': 使用者代理,
+        'accept-language': 'zh-TW,zh;q=0.9',
+        referer: etf.sourceUrl,
+      },
     },
-  });
+    { 標籤: `摩根 ETF XLSX ${xlsxUrl}`, 回應類型: 'array-buffer' },
+  );
 
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const workbook = XLSX.read(Buffer.from(await response.arrayBuffer()), { type: 'buffer' });
+  const workbook = XLSX.read(Buffer.from(workbookBuffer), { type: 'buffer' });
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
   const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, defval: null });
   const summaryHeaderIndex = rows.findIndex((row) => row?.[0] === 'Record Type' && row.includes('Fund Ticker'));
@@ -2050,20 +2105,42 @@ async function updateSingleEtf(etf) {
   const latestPath = path.join(etfDir, 'latest.json');
   const previousPath = path.join(etfDir, 'previous.json');
   const diffPath = path.join(etfDir, 'diff-latest.json');
+  const deployedBasePath = `data/etfs/${etf.code}`;
   let snapshot;
 
   try {
     snapshot = await fetchEtfSnapshot(etf);
   } catch (error) {
-    const cachedLatest = await readJsonIfExists(latestPath);
-    const cachedDiff = await readJsonIfExists(diffPath);
+    const [cachedLatest, cachedPrevious, cachedDiff] = await Promise.all([
+      readDeployedOrLocalJson(`${deployedBasePath}/latest.json`),
+      readDeployedOrLocalJson(`${deployedBasePath}/previous.json`),
+      readDeployedOrLocalJson(`${deployedBasePath}/diff-latest.json`),
+    ]);
 
-    if (cachedLatest && cachedDiff) {
+    if (cachedLatest) {
+      const reason = error instanceof Error ? error.message : String(error);
+      const fallbackSnapshot = {
+        ...cachedLatest,
+        stale: true,
+        sourceHealth: {
+          status: 'stale',
+          source: 'deployed-cache',
+          dataDate: cachedLatest.disclosureDate ?? null,
+          reason,
+        },
+      };
+      const fallbackDiff = cachedDiff ?? createHoldingDiff(cachedPrevious, cachedLatest);
+      await Promise.all([
+        writeJson(latestPath, fallbackSnapshot),
+        cachedPrevious ? writeJson(previousPath, cachedPrevious) : Promise.resolve(),
+        writeJson(diffPath, fallbackDiff),
+      ]);
+      await cleanupLegacyHistoryFiles(etf.code);
       return {
         etf,
-        snapshot: cachedLatest,
-        diff: cachedDiff,
-        cacheNote: error instanceof Error ? error.message : String(error),
+        snapshot: fallbackSnapshot,
+        diff: fallbackDiff,
+        cacheNote: reason,
       };
     }
 
@@ -2074,19 +2151,64 @@ async function updateSingleEtf(etf) {
   snapshot = {
     ...snapshot,
     disclosureDate,
+    stale: false,
+    sourceHealth: {
+      status: 'healthy',
+      source: 'official-provider',
+      dataDate: disclosureDate,
+      fetchedAt: getCurrentIso(),
+    },
   };
-  const existingLatest = await readJsonIfExists(latestPath);
-  let previousSnapshot = await readJsonIfExists(previousPath);
+  const [existingLatest, existingPrevious, existingDiff] = await Promise.all([
+    readDeployedOrLocalJson(`${deployedBasePath}/latest.json`),
+    readDeployedOrLocalJson(`${deployedBasePath}/previous.json`),
+    readDeployedOrLocalJson(`${deployedBasePath}/diff-latest.json`),
+  ]);
+  let previousSnapshot = existingPrevious;
+
+  if (
+    existingLatest &&
+    normalizeDate(existingLatest.disclosureDate) &&
+    disclosureDate &&
+    normalizeDate(existingLatest.disclosureDate) > disclosureDate
+  ) {
+    const cacheNote = `官方來源回傳日期 ${disclosureDate}，落後已部署快照 ${existingLatest.disclosureDate}`;
+    const fallbackSnapshot = {
+      ...existingLatest,
+      stale: true,
+      sourceHealth: {
+        status: 'stale',
+        source: 'deployed-cache',
+        dataDate: existingLatest.disclosureDate,
+        reason: cacheNote,
+      },
+    };
+    const fallbackDiff = existingDiff ?? createHoldingDiff(existingPrevious, existingLatest);
+    await Promise.all([
+      writeJson(latestPath, fallbackSnapshot),
+      existingPrevious ? writeJson(previousPath, existingPrevious) : Promise.resolve(),
+      writeJson(diffPath, fallbackDiff),
+    ]);
+    await cleanupLegacyHistoryFiles(etf.code);
+    return {
+      etf,
+      snapshot: fallbackSnapshot,
+      diff: fallbackDiff,
+      cacheNote,
+    };
+  }
 
   if (existingLatest && normalizeDate(existingLatest.disclosureDate) !== disclosureDate) {
     previousSnapshot = existingLatest;
-    await writeJson(previousPath, existingLatest);
   }
 
   const diff = createHoldingDiff(previousSnapshot, snapshot);
 
-  await writeJson(latestPath, snapshot);
-  await writeJson(diffPath, diff);
+  await Promise.all([
+    writeJson(latestPath, snapshot),
+    previousSnapshot ? writeJson(previousPath, previousSnapshot) : Promise.resolve(),
+    writeJson(diffPath, diff),
+  ]);
   await cleanupLegacyHistoryFiles(etf.code);
 
   return { etf, snapshot, diff, cacheNote: null };
@@ -2190,66 +2312,30 @@ function getErrorSummary(error) {
   return String(error);
 }
 
-function isRetryableRequestError(error) {
-  const status = Number(error?.status ?? error?.cause?.status ?? 0);
-
-  if (status === 408 || status === 429 || status >= 500) {
-    return true;
-  }
-
-  const code = String(getErrorCode(error) ?? '').toUpperCase();
-
-  if (
-    code === 'UND_ERR_CONNECT_TIMEOUT' ||
-    code === 'UND_ERR_HEADERS_TIMEOUT' ||
-    code === 'UND_ERR_BODY_TIMEOUT' ||
-    code === 'ETIMEDOUT' ||
-    code === 'ECONNRESET' ||
-    code === 'EAI_AGAIN' ||
-    code === 'ENOTFOUND'
-  ) {
-    return true;
-  }
-
-  const message = String(error?.message ?? '').toLowerCase();
-  return message.includes('fetch failed') || message.includes('timeout');
-}
-
-async function requestWithRetry(url, options = {}, { 標籤 = url, 逾時毫秒 = 預設請求逾時毫秒, 重試次數 = 預設請求重試次數 } = {}) {
-  let lastError = null;
-
-  for (let attempt = 1; attempt <= 重試次數; attempt += 1) {
-    try {
-      const response = await fetch(url, {
-        ...options,
-        signal: options.signal ?? AbortSignal.timeout(逾時毫秒),
-      });
-
-      if (!response.ok) {
-        const error = new Error(`HTTP ${response.status} ${response.statusText}`);
-        error.status = response.status;
-        throw error;
-      }
-
-      return response;
-    } catch (error) {
-      lastError = error;
-
-      if (attempt >= 重試次數 || !isRetryableRequestError(error)) {
-        throw error;
-      }
-
-      const 等待毫秒 = Math.min(1200 * 2 ** (attempt - 1), 5000);
-      console.warn(`[請求重試 ${attempt}/${重試次數 - 1}] ${標籤}：${getErrorSummary(error)}，${等待毫秒}ms 後重試`);
-      await delay(等待毫秒);
-    }
-  }
-
-  throw lastError ?? new Error(`無法完成請求：${標籤}`);
+async function requestWithRetry(
+  url,
+  options = {},
+  {
+    標籤 = url,
+    逾時毫秒 = 預設請求逾時毫秒,
+    重試次數 = 預設請求重試次數,
+    回應類型 = 'response',
+    接受回應,
+  } = {},
+) {
+  return 韌性請求({
+    url,
+    options,
+    label: 標籤,
+    timeoutMs: 逾時毫秒,
+    attempts: 重試次數,
+    responseType: 回應類型,
+    ...(接受回應 ? { acceptResponse: 接受回應 } : {}),
+  });
 }
 
 async function fetchJson(url) {
-  const response = await requestWithRetry(url, {
+  return requestWithRetry(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
@@ -2257,9 +2343,8 @@ async function fetchJson(url) {
     },
   }, {
     標籤: url,
+    回應類型: 'json',
   });
-
-  return response.json();
 }
 
 function isHighDividendEtfName(name) {
@@ -2268,7 +2353,7 @@ function isHighDividendEtfName(name) {
 }
 
 async function fetchTextData(url, options = {}) {
-  const response = await requestWithRetry(url, {
+  return requestWithRetry(url, {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
@@ -2277,13 +2362,12 @@ async function fetchTextData(url, options = {}) {
     ...options,
   }, {
     標籤: url,
+    回應類型: 'text',
   });
-
-  return response.text();
 }
 
 async function postJson(url, body, referer) {
-  const response = await requestWithRetry(url, {
+  return requestWithRetry(url, {
     method: 'POST',
     headers: {
       'user-agent': 使用者代理,
@@ -2296,9 +2380,8 @@ async function postJson(url, body, referer) {
     body: JSON.stringify(body),
   }, {
     標籤: url,
+    回應類型: 'json',
   });
-
-  return response.json();
 }
 
 async function fetchJsonOrFallback(url, fallbackValue, 錯誤標籤 = url) {
@@ -2855,16 +2938,35 @@ async function fetchYahooIntradaySeries(代號清單) {
   };
 }
 
-async function fetchFuturesDailyBars(商品代碼, 優先日期 = null, monthCount = 6) {
+async function fetchFuturesDailyBars(商品代碼, 優先日期 = null, monthCount = 6, { 舊歷史資料 = [] } = {}) {
   const 行情代碼映射 = {
     MXF: 'MTX',
     TMF: 'TMF',
   };
   const 行情代碼 = 行情代碼映射[商品代碼] ?? 商品代碼;
   const 結束日期 = 優先日期 ? new Date(`${優先日期}T12:00:00+08:00`) : new Date();
-  const 開始日期 = new Date(結束日期);
-  開始日期.setMonth(開始日期.getMonth() - monthCount);
+  const 完整區間開始 = new Date(結束日期);
+  完整區間開始.setMonth(完整區間開始.getMonth() - monthCount);
   const 依日期索引 = new Map();
+  const 結束日期文字 = formatTaipeiDate(結束日期);
+
+  for (const row of 舊歷史資料 ?? []) {
+    const date = normalizeDate(row?.date);
+    if (!date || date < formatTaipeiDate(完整區間開始) || date > 結束日期文字) continue;
+    依日期索引.set(date, { ...row, date });
+  }
+
+  const 舊資料末日 = [...依日期索引.keys()].sort().at(-1) ?? null;
+  if (舊資料末日 && 舊資料末日 >= 結束日期文字) {
+    return addDailyChangeFields([...依日期索引.values()]);
+  }
+
+  const 開始日期 = 舊資料末日
+    ? addDays(new Date(`${舊資料末日}T12:00:00+08:00`), -3)
+    : new Date(完整區間開始);
+  if (開始日期 < 完整區間開始) {
+    開始日期.setTime(完整區間開始.getTime());
+  }
 
   for (let 區間起點 = new Date(開始日期); 區間起點 <= 結束日期; ) {
     const 區間終點 = addDays(區間起點, 27);
@@ -2872,7 +2974,7 @@ async function fetchFuturesDailyBars(商品代碼, 優先日期 = null, monthCou
       區間終點.setTime(結束日期.getTime());
     }
 
-    const response = await fetch('https://www.taifex.com.tw/cht/3/futDataDown', {
+    const buffer = await requestWithRetry('https://www.taifex.com.tw/cht/3/futDataDown', {
       method: 'POST',
       headers: {
         'user-agent': 使用者代理,
@@ -2888,13 +2990,12 @@ async function fetchFuturesDailyBars(商品代碼, 優先日期 = null, monthCou
         commodity_id: 行情代碼,
         commodity_id2: '',
       }).toString(),
+    }, {
+      標籤: `${商品代碼} ${formatTaifexDownloadDate(區間起點)}-${formatTaifexDownloadDate(區間終點)} 期貨行情`,
+      回應類型: 'array-buffer',
     });
 
-    if (!response.ok) {
-      throw new Error(`${商品代碼} 行情下載失敗：HTTP ${response.status} ${response.statusText}`);
-    }
-
-    const csvText = new TextDecoder('big5').decode(await response.arrayBuffer());
+    const csvText = new TextDecoder('big5').decode(buffer);
     const [header, ...rows] = parseCsvText(csvText);
 
     if (!header?.length) {
@@ -3115,19 +3216,16 @@ const 持股分級標籤 = {
 };
 
 async function fetchTdccHoldingDistributionIndex() {
-  const response = await fetch('https://opendata.tdcc.com.tw/getOD.ashx?id=1-5', {
+  const text = await requestWithRetry('https://opendata.tdcc.com.tw/getOD.ashx?id=1-5', {
     headers: {
       'user-agent': 使用者代理,
       'accept-language': 'zh-TW,zh;q=0.9',
       accept: 'text/csv,*/*',
     },
+  }, {
+    標籤: 'TDCC 持股分級資料',
+    回應類型: 'text',
   });
-
-  if (!response.ok) {
-    throw new Error(`TDCC HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const text = await response.text();
   const lines = text.trim().split(/\r?\n/).slice(1);
   const map = new Map();
 
@@ -3159,7 +3257,20 @@ async function fetchTdccHoldingDistributionIndex() {
 }
 
 function buildHoldingDistributionSummary(entry, previousSummary = null) {
-  if (!entry) return null;
+  if (!entry) {
+    return previousSummary
+      ? {
+          ...previousSummary,
+          stale: true,
+          sourceHealth: {
+            status: 'stale',
+            source: 'deployed-cache',
+            dataDate: previousSummary.date ?? null,
+            reason: 'TDCC 本次資料暫時無法取得',
+          },
+        }
+      : null;
+  }
 
   const bands = entry.bands;
   const retailRatio = bands
@@ -3511,7 +3622,7 @@ function buildMarketObservationSummary({ 大盤摘要, 近五日節奏, 熱門�
   return 摘要.slice(0, 5);
 }
 
-async function fetchMarketOverview(優先日期 = null) {
+async function fetchMarketOverview(優先日期 = null, 既有市場總覽 = null) {
   const 查詢日期物件 = createTaipeiNoonDate(優先日期);
   const 今日查詢字串 = formatDateQuery(查詢日期物件);
   const [
@@ -3555,7 +3666,20 @@ async function fetchMarketOverview(優先日期 = null) {
   const breadthRows = 盤後總覽結果?.breadthRows?.length ? 盤後總覽結果.breadthRows : breadthRowsOpenApi;
 
   const 指數卡片 = buildIndexCardData(indexRows);
-  const 近五日節奏 = [...trendRows]
+  let 節奏原始列 = [...trendRows];
+  let 節奏補充來源 = null;
+  if (new Set(節奏原始列.map((item) => convertRocDateToIso(item?.Date)).filter(Boolean)).size < 5) {
+    const 前月月底 = new Date(查詢日期物件);
+    前月月底.setDate(0);
+    try {
+      const 前月節奏列 = await fetchTwseMarketCadenceMonth(formatDateQuery(前月月底));
+      節奏原始列 = [...前月節奏列, ...節奏原始列];
+      if (前月節奏列.length) 節奏補充來源 = 'twse-afterTrading-fmtqik-previous-month';
+    } catch (error) {
+      console.warn(`[市場節奏補充略過] ${getErrorSummary(error)}`);
+    }
+  }
+  const 端點近五日節奏 = 節奏原始列
     .map((item) => ({
       日期: convertRocDateToIso(item.Date),
       指數: toNumber(item.TAIEX),
@@ -3564,24 +3688,46 @@ async function fetchMarketOverview(優先日期 = null) {
       成交值: toNumber(item.TradeValue),
       成交筆數: toNumber(item.Transaction),
     }))
+    .filter((item) => item.日期)
     .sort((left, right) => left.日期.localeCompare(right.日期))
     .slice(-5);
-  if (盤後總覽結果?.date && 盤後總覽結果.marketStats && !近五日節奏.some((item) => item.日期 === 盤後總覽結果.date)) {
+  const 端點節奏日期 = new Set(端點近五日節奏.map((item) => item.日期));
+  const 近五日節奏索引 = new Map(
+    (既有市場總覽?.近五日節奏 ?? [])
+      .filter((item) => normalizeDate(item?.日期))
+      .map((item) => [normalizeDate(item.日期), { ...item, 日期: normalizeDate(item.日期) }]),
+  );
+  for (const item of 端點近五日節奏) {
+    近五日節奏索引.set(item.日期, item);
+  }
+  const 近五日節奏 = [...近五日節奏索引.values()]
+    .sort((left, right) => left.日期.localeCompare(right.日期))
+    .slice(-5);
+  if (盤後總覽結果?.date && 盤後總覽結果.marketStats) {
     const 加權指數列 = indexRows.find((item) => /發行量加權股價指數/.test(item['指數'] ?? item['報酬指數'] ?? ''));
     const 漲跌方向 = parseTwseChangeDirection(加權指數列?.['漲跌(+/-)'] ?? 加權指數列?.['漲跌']);
-    近五日節奏.push({
+    const 盤後當日節奏 = {
       日期: 盤後總覽結果.date,
       指數: toNumber(加權指數列?.['收盤指數']),
       漲跌點數: toNumber(`${漲跌方向 === '-' ? '-' : ''}${加權指數列?.['漲跌點數'] ?? ''}`),
       成交量: 盤後總覽結果.marketStats.成交量,
       成交值: 盤後總覽結果.marketStats.成交值,
       成交筆數: 盤後總覽結果.marketStats.成交筆數,
-    });
+    };
+    const 既有當日索引 = 近五日節奏.findIndex((item) => item.日期 === 盤後總覽結果.date);
+    if (既有當日索引 >= 0) {
+      近五日節奏[既有當日索引] = 盤後當日節奏;
+    } else {
+      近五日節奏.push(盤後當日節奏);
+    }
     近五日節奏.sort((left, right) => left.日期.localeCompare(right.日期));
     while (近五日節奏.length > 5) {
       近五日節奏.shift();
     }
   }
+  const 沿用節奏日期 = 近五日節奏
+    .map((item) => item.日期)
+    .filter((date) => !端點節奏日期.has(date) && date !== 盤後總覽結果?.date);
 
   const 最新大盤 = 近五日節奏.at(-1) ?? {};
   const 盤中原始資料 = [...intradayRows].reverse().find((item) => item.AccTradeValue) ?? intradayRows.at(-1) ?? {};
@@ -3729,6 +3875,15 @@ async function fetchMarketOverview(優先日期 = null) {
     const 即時時間 = 即時狀態.updatedTime ? ` ${即時狀態.updatedTime}` : '';
     觀察摘要.unshift(`盤中即時資料已更新到 ${即時狀態.marketDate}${即時時間}，以下排行與摘要基底仍沿用 ${盤後資料日期} 的盤後資料。`);
   }
+  const 市場缺少資料集 = [
+    !indexRows.length ? '上市指數' : null,
+    !stockRows.length ? '上市個股行情' : null,
+    !tpexDailyRows?.length ? '上櫃個股行情' : null,
+    !valuationRows.length ? '估值' : null,
+    !breadthRows.length ? '市場廣度' : null,
+    !近五日節奏.length ? '市場節奏' : null,
+  ].filter(Boolean);
+  const 市場來源狀態 = 市場缺少資料集.length || 沿用節奏日期.length ? 'partial' : 'healthy';
 
   return {
     市場總覽: {
@@ -3758,6 +3913,19 @@ async function fetchMarketOverview(優先日期 = null) {
       成交排行,
       強勢股,
       近五日節奏,
+      stale: 市場來源狀態 !== 'healthy',
+      sourceHealth: {
+        status: 市場來源狀態,
+        source: 'twse-tpex-market-data',
+        dataDate: 盤後資料日期,
+        missingDatasets: 市場缺少資料集,
+        marketCadence: {
+          status: 沿用節奏日期.length ? 'stale' : 'healthy',
+          source: 沿用節奏日期.length ? 'deployed-dashboard+twse' : 'twse-fmtqik',
+          cachedDates: 沿用節奏日期,
+          supplementalSource: 節奏補充來源,
+        },
+      },
       觀察摘要,
       資料說明: [
         'TWSE OpenAPI：MI_INDEX、MI_5MINS、FMTQIK、MI_INDEX20、STOCK_DAY_ALL、twtazu_od、MI_QFIIS_cat、MI_QFIIS_sort_20',
@@ -4030,6 +4198,8 @@ async function fetchStockFinancialIndex() {
   ]);
   const 公司基本資料列 = [...上市公司基本資料列, ...上櫃公司基本資料列];
   const 月營收列 = [...上市月營收列, ...上櫃月營收列];
+  const 有效綜合損益資料組 = 綜合損益資料組.filter((item) => Array.isArray(item?.rows) && item.rows.length);
+  const 有效資產負債資料組 = 資產負債資料組.filter((item) => Array.isArray(item?.rows) && item.rows.length);
 
   const 公司概況索引 = new Map(
     公司基本資料列
@@ -4044,7 +4214,7 @@ async function fetchStockFinancialIndex() {
   );
 
   const 綜合損益索引 = new Map();
-  for (const 資料組 of 綜合損益資料組) {
+  for (const 資料組 of 有效綜合損益資料組) {
     for (const row of 資料組.rows ?? []) {
       const code = compactText(row['公司代號']);
       if (!isCommonStockCode(code)) continue;
@@ -4053,7 +4223,7 @@ async function fetchStockFinancialIndex() {
   }
 
   const 資產負債索引 = new Map();
-  for (const 資料組 of 資產負債資料組) {
+  for (const 資料組 of 有效資產負債資料組) {
     for (const row of 資料組.rows ?? []) {
       const code = compactText(row['公司代號']);
       if (!isCommonStockCode(code)) continue;
@@ -4061,31 +4231,40 @@ async function fetchStockFinancialIndex() {
     }
   }
 
+  const 缺少資料集 = [
+    !上市公司基本資料列.length ? '上市公司基本資料' : null,
+    !上櫃公司基本資料列.length ? '上櫃公司基本資料' : null,
+    !上市月營收列.length ? '上市公司月營收' : null,
+    !上櫃月營收列.length ? '上櫃公司月營收' : null,
+    有效綜合損益資料組.length < 上市公司綜合損益端點.length ? '部分綜合損益表' : null,
+    有效資產負債資料組.length < 上市公司資產負債端點.length ? '部分資產負債表' : null,
+  ].filter(Boolean);
+  const 可用資料集數 =
+    Number(Boolean(上市公司基本資料列.length)) +
+    Number(Boolean(上櫃公司基本資料列.length)) +
+    Number(Boolean(上市月營收列.length)) +
+    Number(Boolean(上櫃月營收列.length)) +
+    有效綜合損益資料組.length +
+    有效資產負債資料組.length;
+
   return {
     公司概況索引,
     月營收索引,
     綜合損益索引,
     資產負債索引,
+    sourceHealth: {
+      status: 缺少資料集.length ? (可用資料集數 ? 'partial' : 'unavailable') : 'healthy',
+      source: 'twse-tpex-openapi',
+      missingDatasets: 缺少資料集,
+      fallback: 缺少資料集.length ? 'deployed-stock-detail' : null,
+    },
   };
 }
 
 async function fetchTwseInstitutionalDaily(date) {
-  const response = await fetch(
+  const payload = await fetchJson(
     `https://www.twse.com.tw/rwd/zh/fund/T86?date=${formatDateQuery(date)}&selectType=ALLBUT0999&response=json`,
-    {
-      headers: {
-        'user-agent': 使用者代理,
-        'accept-language': 'zh-TW,zh;q=0.9',
-        accept: 'application/json, text/plain, */*',
-      },
-    },
   );
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const payload = JSON.parse(await response.text());
   if (payload.stat !== 'OK' || !Array.isArray(payload.data)) {
     return null;
   }
@@ -4232,7 +4411,11 @@ async function fetchRecentInstitutionalTrading(個股索引, 目標交易日數 
   const 起始日 = createTaipeiNoonDate(優先日期);
   const 最大回看自然日 = Math.max(12, 目標交易日數 * 2 + 10);
 
-  for (let offset = 0; offset <= 最大回看自然日 && 日資料清單.length < 目標交易日數; offset += 1) {
+  for (
+    let offset = 0;
+    offset <= 最大回看自然日 && 日資料清單.filter((day) => day.完整性 === 'complete').length < 目標交易日數;
+    offset += 1
+  ) {
     const candidate = new Date(起始日);
     candidate.setDate(candidate.getDate() - offset);
     const [上市結果, 上櫃結果] = await Promise.allSettled([
@@ -4269,10 +4452,21 @@ async function fetchRecentInstitutionalTrading(個股索引, 目標交易日數 
 
     if (!資料.length) continue;
 
+    const 缺少市場 = [
+      !上市Payload || !上市資料.length ? '上市' : null,
+      !上櫃Payload || !上櫃資料.length ? '上櫃' : null,
+    ].filter(Boolean);
+    const 完整性 = 缺少市場.length ? 'partial' : 'complete';
+    if (完整性 === 'partial') {
+      console.warn(`[法人資料不完整] ${normalizeDate(candidate.toISOString())} 缺少${缺少市場.join('、')}，不納入跨市場合計與連買統計`);
+    }
+
     日資料清單.push({
       日期: convertRocDateToIso(上市Payload?.date ?? 上櫃Payload?.date) ?? normalizeDate(candidate.toISOString()),
       資料,
       索引: 資料索引,
+      完整性,
+      缺少市場,
       來源統計: {
         上市: 上市資料.length,
         上櫃: 上櫃資料.length,
@@ -4324,6 +4518,8 @@ function buildInstitutionalTracker(日資料清單) {
       日期: item.日期,
       上市: item.來源統計?.上市 ?? 0,
       上櫃: item.來源統計?.上櫃 ?? 0,
+      完整性: item.完整性 ?? 'complete',
+      缺少市場: item.缺少市場 ?? [],
     })),
     每日法人合計,
     外資連買,
@@ -4383,7 +4579,7 @@ function parseFuturesInstitutionRow(rowHtml) {
 }
 
 async function fetchFuturesContractData(queryDate, commodityId) {
-  const response = await fetch('https://www.taifex.com.tw/cht/3/futContractsDate', {
+  const html = await requestWithRetry('https://www.taifex.com.tw/cht/3/futContractsDate', {
     method: 'POST',
     headers: {
       'user-agent': 使用者代理,
@@ -4400,13 +4596,10 @@ async function fetchFuturesContractData(queryDate, commodityId) {
       queryDate,
       commodityId,
     }).toString(),
+  }, {
+    標籤: `TAIFEX HTML ${commodityId} ${queryDate}`,
+    回應類型: 'text',
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const html = await response.text();
   const match = html.match(
     /<td class="sheet-sticky serial-1" rowspan="3"[\s\S]*?<div[^>]*>\s*(\d+)\s*<\/div><\/td>\s*<td class="sheet-sticky serial-2" rowspan="3"[\s\S]*?<div[^>]*>\s*([^<]+?)\s*<\/div><\/td>([\s\S]*?)<\/TR>\s*<TR class="12bk">([\s\S]*?)<\/TR>\s*<TR class="12bk">([\s\S]*?)<\/TR>/i,
   );
@@ -4420,6 +4613,104 @@ async function fetchFuturesContractData(queryDate, commodityId) {
     契約名稱: stripHtmlTags(match[2]),
     法人資料: [match[3], match[4], match[5]].map(parseFuturesInstitutionRow).filter(Boolean),
   };
+}
+
+const TAIFEX法人期貨OpenApi網址 =
+  'https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersDetailsOfFuturesContractsBytheDate';
+
+function buildTaifexInstitutionRow(row) {
+  const 身份原文 = compactText(row?.Item);
+  return {
+    身份別: 身份原文 === '外資及陸資' ? '外資' : 身份原文,
+    交易多方口數: toNumber(row?.['TradingVolume(Long)']),
+    交易多方契約金額: toNumber(row?.['TradingValue(Long)(Thousands)']),
+    交易空方口數: toNumber(row?.['TradingVolume(Short)']),
+    交易空方契約金額: toNumber(row?.['TradingValue(Short)(Thousands)']),
+    交易淨口數: toNumber(row?.['TradingVolume(Net)']),
+    交易淨契約金額: toNumber(row?.['TradingValue(Net)(Thousands)']),
+    未平倉多方口數: toNumber(row?.['OpenInterest(Long)']),
+    未平倉多方契約金額: toNumber(row?.['ContractValueofOpenInterest(Long)(Thousands)']),
+    未平倉空方口數: toNumber(row?.['OpenInterest(Short)']),
+    未平倉空方契約金額: toNumber(row?.['ContractValueofOpenInterest(Short)(Thousands)']),
+    未平倉淨口數: toNumber(row?.['OpenInterest(Net)']),
+    未平倉淨契約金額: toNumber(row?.['ContractValueofOpenInterest(Net)(Thousands)']),
+  };
+}
+
+async function fetchFuturesOpenApiData(優先日期 = null) {
+  const payload = await fetchJson(TAIFEX法人期貨OpenApi網址);
+  const rows = Array.isArray(payload) ? payload : payload?.data;
+  if (!Array.isArray(rows) || !rows.length) {
+    throw new Error('TAIFEX OpenAPI 期貨法人資料為空');
+  }
+
+  const 優先日期文字 = normalizeDate(優先日期);
+  const 可用日期 = [...new Set(rows.map((row) => normalizeDate(row?.Date)).filter(Boolean))]
+    .filter((date) => !優先日期文字 || date <= 優先日期文字)
+    .sort()
+    .reverse();
+  const 資料日期 = 可用日期[0] ?? null;
+  if (!資料日期) {
+    throw new Error(`TAIFEX OpenAPI 沒有不晚於 ${優先日期文字 ?? '目標日'} 的資料`);
+  }
+
+  const 契約設定 = [
+    { 商品代碼: 'MXF', 契約名稱: '小型臺指期貨' },
+    { 商品代碼: 'TMF', 契約名稱: '微型臺指期貨' },
+  ];
+  const 契約列表 = 契約設定.map((contract) => {
+    const 法人資料 = rows
+      .filter(
+        (row) =>
+          normalizeDate(row?.Date) === 資料日期 &&
+          compactText(row?.ContractCode) === contract.契約名稱,
+      )
+      .map(buildTaifexInstitutionRow)
+      .filter((item) => item.身份別);
+
+    const 缺少身份 = ['自營商', '投信', '外資'].filter(
+      (identity) => !法人資料.some((item) => item.身份別 === identity),
+    );
+    if (缺少身份.length) {
+      throw new Error(`TAIFEX OpenAPI ${contract.契約名稱} 缺少${缺少身份.join('、')}資料`);
+    }
+
+    return { ...contract, 法人資料 };
+  });
+
+  return {
+    資料日期,
+    契約列表,
+    source: 'taifex-openapi',
+  };
+}
+
+async function fetchFuturesLegacyData(優先日期 = null) {
+  const 起始日期 = 優先日期 ? new Date(`${優先日期}T12:00:00+08:00`) : new Date();
+  let 最後錯誤 = null;
+
+  for (let offset = 0; offset < 6; offset += 1) {
+    const candidate = new Date(起始日期);
+    candidate.setDate(candidate.getDate() - offset);
+    const 查詢日期 = formatTaifexDateText(formatTaipeiDate(candidate));
+
+    try {
+      const 小型臺指 = await fetchFuturesContractData(查詢日期, 'MXF');
+      const 微型臺指 = await fetchFuturesContractData(查詢日期, 'TMF');
+      return {
+        資料日期: 查詢日期.replaceAll('/', '-'),
+        契約列表: [小型臺指, 微型臺指],
+        source: 'taifex-html-fallback',
+      };
+    } catch (error) {
+      最後錯誤 = error;
+      if ([401, 403].includes(Number(error?.status ?? 0))) {
+        throw error;
+      }
+    }
+  }
+
+  throw 最後錯誤 ?? new Error('TAIFEX HTML 期貨籌碼資料暫時無法取得');
 }
 
 function buildFuturesObservationAdvice(契約資料) {
@@ -4455,72 +4746,157 @@ function buildFuturesObservationAdvice(契約資料) {
   };
 }
 
-async function fetchFuturesChipData(優先日期) {
-  const 起始日期 = 優先日期 ? new Date(`${優先日期}T12:00:00+08:00`) : new Date();
+async function fetchFuturesChipData(優先日期, 既有期貨籌碼 = null) {
+  const 錯誤清單 = [];
+  let 基礎資料 = null;
 
-  for (let offset = 0; offset < 6; offset += 1) {
-    const candidate = new Date(起始日期);
-    candidate.setDate(candidate.getDate() - offset);
-    const 查詢日期 = formatTaifexDateText(formatTaipeiDate(candidate));
+  try {
+    基礎資料 = await fetchFuturesOpenApiData(優先日期);
+  } catch (error) {
+    錯誤清單.push(`OpenAPI: ${getErrorSummary(error)}`);
+    console.warn(`[期貨 OpenAPI 改走 HTML fallback] ${getErrorSummary(error)}`);
+  }
 
+  if (!基礎資料) {
     try {
-      const 契約列表 = await Promise.all([
-        fetchFuturesContractData(查詢日期, 'MXF'),
-        fetchFuturesContractData(查詢日期, 'TMF'),
-      ]);
-      const 技術資料列表 = await Promise.all(
-        契約列表.map(async (item) => {
-          try {
-            return buildTechnicalAnalysisData({
+      基礎資料 = await fetchFuturesLegacyData(優先日期);
+    } catch (error) {
+      錯誤清單.push(`HTML fallback: ${getErrorSummary(error)}`);
+      console.warn(`[期貨 HTML fallback 失敗] ${getErrorSummary(error)}`);
+    }
+  }
+
+  if (!基礎資料) {
+    const reason = 錯誤清單.join('；') || 'TAIFEX 期貨籌碼來源暫時無法取得';
+    if (既有期貨籌碼?.契約列表?.length) {
+      return {
+        ...既有期貨籌碼,
+        stale: true,
+        sourceHealth: {
+          status: 'stale',
+          source: 'deployed-cache',
+          dataDate: 既有期貨籌碼.資料日期 ?? null,
+          reason,
+        },
+        資料說明: [...new Set([
+          ...(既有期貨籌碼.資料說明 ?? []),
+          `本次更新失敗，沿用已部署快照：${reason}`,
+        ])],
+      };
+    }
+
+    return {
+      資料日期: null,
+      契約列表: [],
+      整體建議: [],
+      stale: true,
+      sourceHealth: { status: 'unavailable', source: null, dataDate: null, reason },
+      資料說明: [`期貨籌碼暫時無法取得：${reason}`],
+    };
+  }
+
+  const 新資料日期 = normalizeDate(基礎資料.資料日期);
+  const 既有資料日期 = normalizeDate(既有期貨籌碼?.資料日期);
+  if (既有期貨籌碼?.契約列表?.length && 新資料日期 && 既有資料日期 > 新資料日期) {
+    const reason = `TAIFEX 本次回傳 ${新資料日期}，落後已部署快照 ${既有資料日期}`;
+    const 回退說明 = `本次未覆蓋較新快照：${reason}`;
+    return {
+      ...既有期貨籌碼,
+      stale: true,
+      sourceHealth: {
+        status: 'stale',
+        source: 'deployed-cache',
+        dataDate: 既有資料日期,
+        reason,
+      },
+      資料說明: [...new Set([...(既有期貨籌碼.資料說明 ?? []), 回退說明])],
+    };
+  }
+
+  const 既有契約索引 = new Map(
+    (既有期貨籌碼?.契約列表 ?? []).map((item) => [item.商品代碼, item]),
+  );
+  let 技術資料沿用數 = 0;
+  const 強化後契約列表 = await Promise.all(
+    基礎資料.契約列表.map(async (item) => {
+      const 既有技術面資料 = 既有契約索引.get(item.商品代碼)?.技術面資料 ?? null;
+      let 技術面資料;
+
+      try {
+        技術面資料 = buildTechnicalAnalysisData({
+          code: item.商品代碼,
+          name: item.契約名稱,
+          kind: 'futures',
+          歷史資料: await fetchFuturesDailyBars(item.商品代碼, 基礎資料.資料日期, 6, {
+            舊歷史資料: 既有技術面資料?.歷史資料 ?? [],
+          }),
+        });
+        技術面資料.stale = false;
+        技術面資料.sourceHealth = {
+          status: 'healthy',
+          source: 'taifex-daily-market-download',
+          dataDate: 技術面資料.priceDate ?? 基礎資料.資料日期,
+        };
+      } catch (error) {
+        技術資料沿用數 += 1;
+        const reason = getErrorSummary(error);
+        技術面資料 = 既有技術面資料?.歷史資料?.length
+          ? {
+              ...既有技術面資料,
+              stale: true,
+              sourceHealth: {
+                status: 'stale',
+                source: 'deployed-cache',
+                dataDate: 既有技術面資料.priceDate ?? null,
+                reason,
+              },
+            }
+          : {
               code: item.商品代碼,
               name: item.契約名稱,
               kind: 'futures',
-              歷史資料: await fetchFuturesDailyBars(item.商品代碼, 查詢日期.replaceAll('/', '-'), 6),
-            });
-          } catch (error) {
-            return {
-              code: item.商品代碼,
-              name: item.契約名稱,
-              kind: 'futures',
-              priceDate: 查詢日期.replaceAll('/', '-'),
+              priceDate: 基礎資料.資料日期,
               generatedAt: getCurrentIso(),
               歷史資料: [],
               最新摘要: {},
               最新指標: {},
-              觀察摘要: [`${item.契約名稱} 技術資料暫時無法更新：${error instanceof Error ? error.message : String(error)}`],
+              stale: true,
+              sourceHealth: { status: 'unavailable', source: null, dataDate: null, reason },
+              觀察摘要: [`${item.契約名稱} 技術資料暫時無法更新：${reason}`],
               資料來源: ['TAIFEX 期貨每日交易行情下載'],
             };
-          }
-        }),
-      );
-
-      const 強化後契約列表 = 契約列表.map((item, index) => ({
-        ...item,
-        行情代碼: item.商品代碼 === 'MXF' ? 'MTX' : item.商品代碼,
-        技術面資料: 技術資料列表[index],
-        ...buildFuturesObservationAdvice(item),
-      }));
-
-      const 整體建議 = 強化後契約列表.map((item) => `${item.契約名稱}：${item.觀察建議.at(-1)}`);
+      }
 
       return {
-        資料日期: 查詢日期.replaceAll('/', '-'),
-        契約列表: 強化後契約列表,
-        整體建議,
-        資料說明: [
-          '資料來源：臺灣期貨交易所三大法人區分各商品每日交易資訊。',
-          '技術走勢來源：臺灣期貨交易所期貨每日交易行情下載。',
-          '以小型臺指期貨與微型臺指期貨作為散戶常見觀察標的，內容僅供籌碼研究參考。',
-        ],
+        ...item,
+        行情代碼: item.商品代碼 === 'MXF' ? 'MTX' : item.商品代碼,
+        技術面資料,
+        ...buildFuturesObservationAdvice(item),
       };
-    } catch (error) {
-      if (offset === 5) {
-        throw error;
-      }
-    }
-  }
+    }),
+  );
+  const sourceStatus = 基礎資料.source === 'taifex-openapi' && !技術資料沿用數 ? 'healthy' : 'partial';
 
-  throw new Error('期貨籌碼資料暫時無法取得');
+  return {
+    資料日期: 基礎資料.資料日期,
+    契約列表: 強化後契約列表,
+    整體建議: 強化後契約列表.map((item) => `${item.契約名稱}：${item.觀察建議.at(-1)}`),
+    stale: false,
+    sourceHealth: {
+      status: sourceStatus,
+      source: 基礎資料.source,
+      dataDate: 基礎資料.資料日期,
+      technicalHistoryStaleCount: 技術資料沿用數,
+      fallbackErrors: 錯誤清單,
+    },
+    資料說明: [
+      基礎資料.source === 'taifex-openapi'
+        ? '資料來源：臺灣期貨交易所 OpenAPI 三大法人區分各期貨契約每日交易資訊。'
+        : '資料來源：臺灣期貨交易所三大法人區分各商品每日交易資訊（HTML fallback）。',
+      '技術走勢來源：臺灣期貨交易所期貨每日交易行情下載；優先沿用已部署歷史，只補最近缺口。',
+      '以小型臺指期貨與微型臺指期貨作為散戶常見觀察標的，內容僅供籌碼研究參考。',
+    ],
+  };
 }
 
 function buildActiveEtfOverview(successes, pending) {
@@ -4534,6 +4910,34 @@ function buildActiveEtfOverview(successes, pending) {
       disclosureDate: item.snapshot.disclosureDate,
     })),
     待串接ETF: pending,
+  };
+}
+
+function isHealthyBrokerBranchSnapshot(snapshot) {
+  const blockedStatuses = new Set(['failed', 'unavailable']);
+  return Boolean(
+    snapshot &&
+    !blockedStatuses.has(snapshot?.sourceHealth?.status) &&
+    snapshot?.coverage?.qualityGate?.shouldReplaceExisting !== false &&
+    (snapshot?.summary?.stockCoverageCount ?? 0) > 0 &&
+    Array.isArray(snapshot?.topBranches) &&
+    snapshot.topBranches.length > 0,
+  );
+}
+
+function markBrokerBranchCache(snapshot, { marketDate, stale, reason }) {
+  return {
+    ...snapshot,
+    stale,
+    sourceHealth: {
+      ...(snapshot?.sourceHealth ?? {}),
+      status: stale ? 'stale' : 'healthy',
+      source: 'deployed-cache',
+      dataDate: snapshot?.marketDate ?? null,
+      requestedMarketDate: marketDate ?? null,
+      cacheHit: true,
+      ...(reason ? { reason } : {}),
+    },
   };
 }
 
@@ -5915,7 +6319,7 @@ function buildDispositionRadarData({ 選股輔助資料集, stockDetailList, sto
 
 async function writeEtfMarketData(追蹤清單, tdcc索引) {
   for (const etf of 追蹤清單) {
-    const 舊資料 = await readJsonIfExists(path.join(ETF資料目錄, etf.code, 'market.json'));
+    const 舊資料 = await readDeployedOrLocalJson(`data/etfs/${etf.code}/market.json`);
     try {
       const [歷史資料, 盤中走勢] = await Promise.all([
         fetchSecurityDailyBars(etf.code, 6),
@@ -5937,6 +6341,17 @@ async function writeEtfMarketData(追蹤清單, tdcc索引) {
       await writeJson(path.join(ETF資料目錄, etf.code, 'market.json'), 市場資料);
     } catch (error) {
       if (舊資料) {
+        await writeJson(path.join(ETF資料目錄, etf.code, 'market.json'), {
+          ...舊資料,
+          generatedAt: getCurrentIso(),
+          stale: true,
+          sourceHealth: {
+            status: 'stale',
+            source: 'deployed-etf-market',
+            dataDate: 舊資料.priceDate ?? null,
+            reason: `ETF 技術資料本次無法更新：${error instanceof Error ? error.message : String(error)}`,
+          },
+        });
         continue;
       }
 
@@ -5961,9 +6376,34 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
   const 股票資料目錄 = path.join(資料目錄, 'stocks');
   await mkdir(股票資料目錄, { recursive: true });
   const 待寫入資料 = [];
+  const 需要部署快取 =
+    財務索引.sourceHealth?.status !== 'healthy' ||
+    其他索引.法人資料沿用 ||
+    其他索引.TDCC資料沿用;
+  const 部署舊資料索引 = new Map();
+
+  if (需要部署快取) {
+    const remoteCircuit = { open: false, consecutiveFailures: 0, failureThreshold: 2, reported: false };
+    let cursor = 0;
+    const worker = async () => {
+      while (cursor < 候選清單.length) {
+        const item = 候選清單[cursor];
+        cursor += 1;
+        const previous = await readDeployedOrLocalJson(`data/stocks/${item.code}.json`, {
+          remoteTimeoutMs: 5000,
+          remoteAttempts: 1,
+          remoteCircuit,
+        });
+        部署舊資料索引.set(item.code, previous);
+      }
+    };
+    await Promise.all(Array.from({ length: Math.min(6, 候選清單.length || 1) }, () => worker()));
+  }
 
   for (const item of 候選清單) {
-    const 舊資料 = await readJsonIfExists(path.join(股票資料目錄, `${item.code}.json`));
+    const 舊資料 = !需要部署快取
+      ? await readJsonIfExists(path.join(股票資料目錄, `${item.code}.json`))
+      : 部署舊資料索引.get(item.code) ?? null;
 
     try {
       const 市場個股資料 = 其他索引.市場個股索引?.get(item.code) ?? null;
@@ -5980,17 +6420,43 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
         console.warn(`[股票分時沿用快取] ${item.code} ${error instanceof Error ? error.message : String(error)}`);
       }
 
-      const 法人買賣 = buildStockInstitutionalDetail(item.code, 日資料清單);
+      const 本次法人買賣 = buildStockInstitutionalDetail(item.code, 日資料清單);
+      const 法人買賣 = 其他索引.法人資料沿用 && 舊資料?.法人買賣
+        ? {
+            ...舊資料.法人買賣,
+            stale: true,
+            sourceHealth: {
+              status: 'stale',
+              source: 'deployed-stock-detail',
+              dataDate: 舊資料.法人買賣?.days?.[0]?.date ?? null,
+              reason: 其他索引.法人資料沿用原因 ?? '法人日報本次無法完整更新',
+            },
+          }
+        : {
+            ...本次法人買賣,
+            stale: false,
+            sourceHealth: {
+              status: 本次法人買賣.coverage?.isComplete ? 'healthy' : 'partial',
+              source: 'twse-tpex-daily-reports',
+              dataDate: 本次法人買賣.days?.[0]?.date ?? null,
+            },
+          };
       const 持股分散 = buildHoldingDistributionSummary(tdcc索引.get(item.code), 舊資料?.持股分散 ?? null);
       const 融資融券 = 其他索引.融資融券索引.get(item.code) ?? null;
       const 主動ETF曝光 = 其他索引.主動ETF曝光索引.get(item.code) ?? null;
       const 交易提醒 = buildStockSelectionSignals(其他索引.選股輔助資料集, item.code);
       const 個股新聞 = 其他索引.個股新聞索引?.get(item.code) ?? null;
-      const 公司概況原始 = 財務索引.公司概況索引.get(item.code) ?? null;
-      const 月營收 = 財務索引.月營收索引.get(item.code) ?? null;
-      const 綜合損益表 = 財務索引.綜合損益索引.get(item.code) ?? null;
-      const 資產負債表 = 財務索引.資產負債索引.get(item.code) ?? null;
-      const 評價面 = 財務索引.評價索引.get(item.code) ?? null;
+      const 公司概況原始 = 財務索引.公司概況索引.get(item.code) ?? 舊資料?.公司概況 ?? null;
+      const 月營收 = 財務索引.月營收索引.get(item.code) ?? 舊資料?.財務資料?.月營收 ?? null;
+      const 綜合損益表 = 財務索引.綜合損益索引.get(item.code) ?? 舊資料?.財務資料?.綜合損益表 ?? null;
+      const 資產負債表 = 財務索引.資產負債索引.get(item.code) ?? 舊資料?.財務資料?.資產負債表 ?? null;
+      const 評價面 = 財務索引.評價索引.get(item.code) ?? 舊資料?.評價面 ?? null;
+      const 使用財務快取 = Boolean(
+        (!財務索引.公司概況索引.has(item.code) && 舊資料?.公司概況) ||
+        (!財務索引.月營收索引.has(item.code) && 舊資料?.財務資料?.月營收) ||
+        (!財務索引.綜合損益索引.has(item.code) && 舊資料?.財務資料?.綜合損益表) ||
+        (!財務索引.資產負債索引.has(item.code) && 舊資料?.財務資料?.資產負債表)
+      );
       const 公司概況 =
         公司概況原始 || 月營收
           ? {
@@ -6022,6 +6488,15 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
                 '財務與公司基本資料來源：TWSE / TPEx OpenAPI（上市櫃公司基本資料、月營收、綜合損益表、資產負債表）。',
                 '估值欄位來源：TWSE BWIBBU_ALL 與 TPEx tpex_mainboard_peratio_analysis。',
               ],
+              stale: 使用財務快取,
+              sourceHealth: 使用財務快取
+                ? {
+                    status: 'stale',
+                    source: 'deployed-stock-detail',
+                    dataDate: 月營收?.出表日期 ?? 綜合損益表?.出表日期 ?? 資產負債表?.出表日期 ?? null,
+                    missingDatasets: 財務索引.sourceHealth?.missingDatasets ?? [],
+                  }
+                : { status: 'healthy', source: 'twse-tpex-openapi' },
             }
           : null;
       const 顯示名稱 = item.name ?? 公司概況?.公司簡稱 ?? 公司概況?.公司名稱 ?? item.code;
@@ -6044,7 +6519,10 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
         觀察摘要.push(`最近 ${法人摘要天數} 個交易日三大法人合計賣超 ${Math.abs(法人買賣.summary.total5Day).toLocaleString('zh-TW')} 股。`);
       }
 
-      if (持股分散?.largeHolderRatioDelta !== null) {
+      if (
+        Number.isFinite(持股分散?.largeHolderRatioDelta) &&
+        Number.isFinite(持股分散?.largeHolderRatio)
+      ) {
         觀察摘要.push(
           `大戶持股比 ${持股分散.largeHolderRatio.toFixed(2)}%，相較前次 ${持股分散.largeHolderRatioDelta >= 0 ? '增加' : '減少'} ${Math.abs(持股分散.largeHolderRatioDelta).toFixed(2)} 個百分點。`,
         );
@@ -6132,7 +6610,51 @@ async function writeStockDetailData(候選清單, 日資料清單, tdcc索引, �
         }),
       });
     } catch (error) {
-      console.error(`[股票略過] ${item.code}`, error instanceof Error ? error.message : String(error));
+      const 錯誤訊息 = error instanceof Error ? error.message : String(error);
+      const 快取資料 = 需要部署快取
+        ? 舊資料
+        : await readDeployedOrLocalJson(`data/stocks/${item.code}.json`, {
+            remoteTimeoutMs: 5000,
+            remoteAttempts: 1,
+          });
+
+      if (快取資料) {
+        const 顯示名稱 = 快取資料.name ?? item.name ?? item.code;
+        const 快取回退資料 = {
+          ...快取資料,
+          generatedAt: getCurrentIso(),
+          stale: true,
+          sourceHealth: {
+            status: 'stale',
+            source: 'deployed-stock-detail',
+            dataDate: 快取資料.priceDate ?? null,
+            reason: `個股資料本次無法更新：${錯誤訊息}`,
+          },
+        };
+        待寫入資料.push({
+          code: item.code,
+          name: 顯示名稱,
+          filePath: path.join(股票資料目錄, `${item.code}.json`),
+          data: 快取回退資料,
+          summary: buildStockSummaryData({
+            code: item.code,
+            name: 顯示名稱,
+            公司概況: 快取資料.公司概況 ?? null,
+            財務資料: 快取資料.財務資料 ?? null,
+            技術資料: 快取資料,
+            法人買賣: 快取資料.法人買賣 ?? null,
+            持股分散: 快取資料.持股分散 ?? null,
+            融資融券: 快取資料.融資融券 ?? null,
+            主動ETF曝光: 快取資料.主動ETF曝光 ?? null,
+            交易提醒: 快取資料.交易提醒 ?? null,
+            外資目標價: 快取資料.foreignTargetPrice ?? null,
+          }),
+        });
+        console.warn(`[股票沿用快取] ${item.code} ${錯誤訊息}`);
+        continue;
+      }
+
+      console.error(`[股票略過] ${item.code}`, 錯誤訊息);
     }
   }
 
@@ -6181,7 +6703,11 @@ async function main() {
     try {
       const result = await updateSingleEtf(etf);
       successes.push(result);
-      console.log(`[完成] ${etf.code} ${result.snapshot.disclosureDate}`);
+      if (result.cacheNote) {
+        console.warn(`[ETF 沿用快取] ${etf.code} ${result.snapshot.disclosureDate}：${result.cacheNote}`);
+      } else {
+        console.log(`[完成] ${etf.code} ${result.snapshot.disclosureDate}`);
+      }
     } catch (error) {
       failures.push({
         code: etf.code,
@@ -6195,36 +6721,102 @@ async function main() {
 
   const 現在 = new Date();
   const 指定市場查詢日期 = resolveConfiguredMarketDate();
-  const 既有儀表板 = await readJsonIfExists(path.join(資料目錄, 'dashboard.json'));
-  const { 市場總覽, 全部個股, 個股索引, 評價索引 } = await fetchMarketOverview(指定市場查詢日期);
-  const { 公司概況索引, 月營收索引, 綜合損益索引, 資產負債索引 } = await fetchStockFinancialIndex();
+  const 既有儀表板 = await readDeployedOrLocalJson('data/dashboard.json');
+  const { 市場總覽, 全部個股, 個股索引, 評價索引 } = await fetchMarketOverview(
+    指定市場查詢日期,
+    既有儀表板?.市場總覽 ?? null,
+  );
+  const {
+    公司概況索引,
+    月營收索引,
+    綜合損益索引,
+    資產負債索引,
+    sourceHealth: 財務來源健康,
+  } = await fetchStockFinancialIndex();
   const 選股輔助資料集 = await fetchStockSelectionSupportData(市場總覽.資料日期);
   let 日資料清單 = [];
   let 明細法人日資料清單 = [];
+  let 完整法人日資料清單 = [];
   let 法人追蹤;
 
   try {
     明細法人日資料清單 = await fetchRecentInstitutionalTrading(個股索引, 20, 市場總覽.資料日期 ?? 指定市場查詢日期);
-    日資料清單 = 明細法人日資料清單.slice(0, 5);
+    const 部分法人日資料 = 明細法人日資料清單.filter((item) => item.完整性 === 'partial');
+    完整法人日資料清單 = 明細法人日資料清單.filter((item) => item.完整性 !== 'partial');
+    日資料清單 = 完整法人日資料清單.slice(0, 5);
     法人追蹤 = buildInstitutionalTracker(日資料清單);
+    法人追蹤.stale = false;
+    法人追蹤.sourceHealth = {
+      status: 部分法人日資料.length ? 'partial' : 'healthy',
+      source: 'twse-tpex-daily-reports',
+      dataDate: 法人追蹤.資料日期,
+      partialDates: 部分法人日資料.map((item) => ({
+        date: item.日期,
+        missingMarkets: item.缺少市場 ?? [],
+      })),
+    };
   } catch (error) {
     明細法人日資料清單 = [];
-    法人追蹤 = 既有儀表板?.法人追蹤 ?? {
-      資料日期: null,
-      回溯交易日: [],
-      外資連買: [],
-      投信連買: [],
-      土洋對作: [],
-      觀察摘要: ['法人日報暫時無法更新，先沿用前一次成功快照或改以技術面觀察。'],
-      資料說明: [],
+    完整法人日資料清單 = [];
+    const reason = error instanceof Error ? error.message : String(error);
+    法人追蹤 = {
+      ...(既有儀表板?.法人追蹤 ?? {
+        資料日期: null,
+        回溯交易日: [],
+        外資連買: [],
+        投信連買: [],
+        土洋對作: [],
+        觀察摘要: ['法人日報暫時無法更新，先沿用前一次成功快照或改以技術面觀察。'],
+        資料說明: [],
+      }),
+      stale: true,
+      sourceHealth: {
+        status: 既有儀表板?.法人追蹤 ? 'stale' : 'unavailable',
+        source: 既有儀表板?.法人追蹤 ? 'deployed-cache' : null,
+        dataDate: 既有儀表板?.法人追蹤?.資料日期 ?? null,
+        reason,
+      },
     };
     法人追蹤.資料說明 = [
       ...(法人追蹤.資料說明 ?? []),
-      `本次更新未能重新抓取 TWSE / TPEx 法人日報：${error instanceof Error ? error.message : String(error)}`,
+      `本次更新未能重新抓取 TWSE / TPEx 法人日報：${reason}`,
     ];
   }
-  const 期貨籌碼 = await fetchFuturesChipData(市場總覽.即時狀態?.marketDate ?? 市場總覽.資料日期);
-  const tdcc索引 = await fetchTdccHoldingDistributionIndex();
+  const 期貨籌碼 = await fetchFuturesChipData(
+    市場總覽.即時狀態?.marketDate ?? 市場總覽.資料日期,
+    既有儀表板?.期貨籌碼 ?? null,
+  ).catch((error) => {
+    const reason = `未預期的期貨更新錯誤：${getErrorSummary(error)}`;
+    console.warn(`[期貨資料保護性 fallback] ${reason}`);
+    return 既有儀表板?.期貨籌碼
+      ? {
+          ...既有儀表板.期貨籌碼,
+          stale: true,
+          sourceHealth: {
+            status: 'stale',
+            source: 'deployed-cache',
+            dataDate: 既有儀表板.期貨籌碼.資料日期 ?? null,
+            reason,
+          },
+        }
+      : {
+          資料日期: null,
+          契約列表: [],
+          整體建議: [],
+          stale: true,
+          sourceHealth: { status: 'unavailable', source: null, dataDate: null, reason },
+          資料說明: [reason],
+        };
+  });
+  let tdcc索引 = new Map();
+  let TDCC來源健康 = { status: 'healthy', source: 'tdcc-open-data' };
+  try {
+    tdcc索引 = await fetchTdccHoldingDistributionIndex();
+  } catch (error) {
+    const reason = getErrorSummary(error);
+    console.warn(`[TDCC 沿用快取] ${reason}`);
+    TDCC來源健康 = { status: 'unavailable', source: 'tdcc-open-data', reason };
+  }
 
   for (const result of successes) {
     result.snapshot = fixEtfSnapshotText(result.snapshot, result.etf, 個股索引);
@@ -6301,12 +6893,13 @@ async function main() {
   });
   const 資料市場日 = 市場總覽?.即時狀態?.marketDate ?? 市場總覽?.資料日期 ?? null;
   const 產生時間 = getCurrentIso(現在);
-  const { summaries: 個股摘要清單, details: 個股明細清單 } = await writeStockDetailData(個股候選清單, 明細法人日資料清單.length ? 明細法人日資料清單 : 日資料清單, tdcc索引, {
+  const { summaries: 個股摘要清單, details: 個股明細清單 } = await writeStockDetailData(個股候選清單, 完整法人日資料清單.length ? 完整法人日資料清單 : 日資料清單, tdcc索引, {
     評價索引,
     公司概況索引,
     月營收索引,
     綜合損益索引,
     資產負債索引,
+    sourceHealth: 財務來源健康,
   }, {
     市場個股索引,
     市場資料日期: 市場總覽?.即時狀態?.marketDate ?? 市場總覽?.資料日期 ?? null,
@@ -6314,6 +6907,9 @@ async function main() {
     選股輔助資料集,
     主動ETF曝光索引,
     個股新聞索引,
+    法人資料沿用: ['stale', 'unavailable'].includes(法人追蹤.sourceHealth?.status),
+    法人資料沿用原因: 法人追蹤.sourceHealth?.reason ?? null,
+    TDCC資料沿用: TDCC來源健康.status !== 'healthy',
   });
   const 訊號可信度資料 = buildSignalConfidenceStats({
     stockDetails: 個股明細清單,
@@ -6399,19 +6995,104 @@ async function main() {
       selectionRadar: 選股雷達資料,
       themeHistory: 題材輪動歷史,
     });
-  const 分點勝率雷達 = await buildBrokerBranchRadar({
-    stockMetaList: 股票搜尋索引,
-    selectionRadar: 選股雷達資料,
-    entryRadar: 起漲卡位雷達,
-    themeRadar: 題材雷達,
-    generatedAt: 產生時間,
-    marketDate: 資料市場日,
-    fetchHtml: fetchHtml,
-  });
+  const 已部署分點勝率雷達 = await readDeployedOrLocalJson('data/radar/broker-branches.json');
+  const 已部署分點健康 = isHealthyBrokerBranchSnapshot(已部署分點勝率雷達);
+  const 強制每日重抓 = /^(?:1|true|yes)$/i.test(String(process.env.FORCE_DAILY_REFRESH ?? ''));
+  const 台北小時 = Number(formatTaipeiTime(現在).split(':')[0]);
+  const 已過收盤資料緩衝 = Number.isFinite(台北小時) && 台北小時 >= 14;
+  let 分點勝率雷達;
+
+  if (已部署分點健康 && 已部署分點勝率雷達.marketDate === 資料市場日) {
+    分點勝率雷達 = markBrokerBranchCache(已部署分點勝率雷達, {
+      marketDate: 資料市場日,
+      stale: false,
+      reason: '同一市場日已有健康快照，略過重複抓取',
+    });
+    console.log(`[分點雷達沿用] ${資料市場日} 已有健康快照`);
+  } else if (!已過收盤資料緩衝 && !強制每日重抓) {
+    分點勝率雷達 = 已部署分點健康
+      ? markBrokerBranchCache(已部署分點勝率雷達, {
+          marketDate: 資料市場日,
+          stale: 已部署分點勝率雷達.marketDate !== 資料市場日,
+          reason: '台北時間 14:00 前不重抓日資料；收盤後再更新',
+        })
+      : {
+          generatedAt: 產生時間,
+          marketDate: null,
+          summary: {
+            candidateStockCount: 0,
+            stockCoverageCount: 0,
+            branchCount: 0,
+            recommendedCount: 0,
+            recentBuyCount: 0,
+            recentSellCount: 0,
+            scoutStockCount: 0,
+          },
+          observations: ['分點日資料將於台北時間收盤後更新。'],
+          candidateStocks: [],
+          topBranches: [],
+          recommendations: [],
+          recentBuyLeaders: [],
+          recentSellLeaders: [],
+          stale: true,
+          sourceHealth: {
+            status: 'unavailable',
+            source: null,
+            dataDate: null,
+            requestedMarketDate: 資料市場日,
+            reason: '目前沒有可沿用快照，且尚未到收盤後更新時段',
+          },
+        };
+  } else {
+    try {
+      const 新分點勝率雷達 = await buildBrokerBranchRadar({
+        stockMetaList: 股票搜尋索引,
+        selectionRadar: 選股雷達資料,
+        entryRadar: 起漲卡位雷達,
+        themeRadar: 題材雷達,
+        generatedAt: 產生時間,
+        marketDate: 資料市場日,
+        fetchHtml: fetchHtml,
+      });
+
+      if (!isHealthyBrokerBranchSnapshot(新分點勝率雷達) && 已部署分點健康) {
+        分點勝率雷達 = markBrokerBranchCache(已部署分點勝率雷達, {
+          marketDate: 資料市場日,
+          stale: true,
+          reason: '本次分點來源覆蓋不足，沿用已部署健康快照',
+        });
+      } else {
+        分點勝率雷達 = {
+          ...新分點勝率雷達,
+          stale: !isHealthyBrokerBranchSnapshot(新分點勝率雷達),
+          sourceHealth: {
+            ...(新分點勝率雷達?.sourceHealth ?? {}),
+            status: isHealthyBrokerBranchSnapshot(新分點勝率雷達) ? 'healthy' : 'partial',
+            source: 新分點勝率雷達?.sourceHealth?.source ?? 'broker-branch-sources',
+            dataDate: 新分點勝率雷達?.marketDate ?? 資料市場日,
+          },
+        };
+      }
+    } catch (error) {
+      const reason = getErrorSummary(error);
+      分點勝率雷達 = 已部署分點健康
+        ? markBrokerBranchCache(已部署分點勝率雷達, { marketDate: 資料市場日, stale: true, reason })
+        : {
+            generatedAt: 產生時間,
+            marketDate: 資料市場日,
+            summary: { stockCoverageCount: 0, branchCount: 0 },
+            observations: [`分點資料暫時無法取得：${reason}`],
+            candidateStocks: [],
+            topBranches: [],
+            stale: true,
+            sourceHealth: { status: 'unavailable', source: null, dataDate: null, reason },
+          };
+    }
+  }
   const 既有分點回放 = await readDeployedOrLocalJson('data/radar/broker-branches-history.json');
   const 分點回放歷史 = mergeBrokerBranchHistory({
     existingHistory: 既有分點回放,
-    marketDate: 資料市場日,
+    marketDate: 分點勝率雷達.marketDate ?? 資料市場日,
     generatedAt: 產生時間,
     brokerRadar: 分點勝率雷達,
     detailList: 個股明細清單,
@@ -6449,9 +7130,32 @@ async function main() {
     detailList: 個股明細清單,
     priceLookup: new Map(強化個股摘要清單.map((item) => [item.code, item])),
   });
+  const ETF快取結果 = successes.filter((item) => item.cacheNote || item.snapshot?.stale);
+  const ETF來源健康 = {
+    status: failures.length || ETF快取結果.length ? (successes.length ? 'partial' : 'unavailable') : 'healthy',
+    source: 'official-providers',
+    freshCount: successes.length - ETF快取結果.length,
+    staleCount: ETF快取結果.length,
+    failedCount: failures.length,
+    staleCodes: ETF快取結果.map((item) => item.etf.code),
+  };
+  主動ETF總覽.stale = ETF來源健康.status !== 'healthy';
+  主動ETF總覽.sourceHealth = ETF來源健康;
+  const 資料來源健康 = {
+    market: 市場總覽.sourceHealth ?? { status: 'healthy', source: 'twse-tpex-market-data' },
+    etf: ETF來源健康,
+    financial: 財務來源健康,
+    institutional: 法人追蹤.sourceHealth,
+    futures: 期貨籌碼.sourceHealth,
+    brokerBranches: 分點勝率雷達資料.sourceHealth,
+    tdcc: TDCC來源健康,
+  };
+  const 有降級資料來源 = Object.values(資料來源健康).some((item) => item?.status !== 'healthy');
   const dashboard = {
     appName: '台股主動通',
     generatedAt: 產生時間,
+    stale: 有降級資料來源,
+    sourceHealth: 資料來源健康,
     市場總覽,
     法人追蹤,
     期貨籌碼,
@@ -6466,6 +7170,8 @@ async function main() {
   const manifest = {
     appName: '台股主動通',
     generatedAt: 產生時間,
+    stale: 有降級資料來源,
+    sourceHealth: 資料來源健康,
     generatedAtLocalDate: formatTaipeiDate(現在),
     generatedAtLocalTime: formatTaipeiTime(現在),
     dashboardPath: 'data/dashboard.json',
@@ -6503,6 +7209,10 @@ async function main() {
         trackingStatus: etf.trackingStatus,
         detailAvailability,
         disclosureDate: result?.snapshot.disclosureDate ?? null,
+        stale: result?.snapshot?.stale ?? Boolean(failure),
+        sourceHealth: result?.snapshot?.sourceHealth ?? (failure
+          ? { status: 'unavailable', source: null, dataDate: null, reason: failure.message }
+          : null),
         nav: result?.snapshot.nav ?? null,
         aum: result?.snapshot.aum ?? null,
         holdingsCount: result?.snapshot.holdingsCount ?? 0,

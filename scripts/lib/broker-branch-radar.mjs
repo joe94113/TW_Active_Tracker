@@ -6,6 +6,30 @@ const TOP_BRANCH_LIMIT = 10;
 const CANDIDATE_STOCK_LIMIT = 28;
 const SCOUT_STOCK_LIMIT_PER_MARKET = 18;
 const SCOUT_MOMENTUM_LIMIT_PER_MARKET = 10;
+const BROKER_SOURCE_KEYS = ['histock', 'fubon', 'cmoney'];
+const DEFAULT_SOURCE_REQUEST_POLICY = Object.freeze({
+  timeoutMs: 10000,
+  maxAttempts: 2,
+  baseBackoffMs: 1200,
+  maxBackoffMs: 10000,
+  maxRetryAfterMs: 30000,
+  histockMinIntervalMs: 350,
+  histockJitterMs: 250,
+  histockCircuitThreshold: 2,
+  histockCircuitCooldownMs: 60000,
+});
+const COVERAGE_GATE_MINIMUM_RATIO = 0.8;
+const PRIMARY_SOURCE_GATE_MINIMUM_RATIO = 0.8;
+const BRANCH_SOURCE_GATE_MINIMUM_RATIO = 0.8;
+const BLOCK_PAGE_PATTERNS = [
+  /<title[^>]*>\s*just a moment(?:\.{3})?\s*<\/title>/i,
+  /\bcf-chl-[a-z0-9_-]+/i,
+  /attention required!?\s*\|\s*cloudflare/i,
+  /\bcloudflare ray id\b/i,
+  /\benable javascript and cookies to continue\b/i,
+  /\bchecking your browser before accessing\b/i,
+  /\baccess denied\b/i,
+];
 const HISTOCK_HEADERS = {
   'user-agent': 'Mozilla/5.0',
   'accept-language': 'zh-TW,zh;q=0.9',
@@ -573,14 +597,8 @@ function parseFubonDjStockBranchRows(html, code) {
     .filter(Boolean);
 }
 
-async function fetchTwseActiveQuotes() {
-  const response = await fetch('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL');
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const rows = await response.json();
+async function fetchTwseActiveQuotes(fetchJson) {
+  const rows = await fetchJson('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL');
   return rows
     .map((row) => {
       const code = String(row?.Code ?? '').trim();
@@ -618,14 +636,8 @@ function parseSignedOtcChange(value) {
   return text.startsWith('-') ? -Math.abs(numeric) : Math.abs(numeric);
 }
 
-async function fetchTpexActiveQuotes() {
-  const response = await fetch('https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes');
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const rows = await response.json();
+async function fetchTpexActiveQuotes(fetchJson) {
+  const rows = await fetchJson('https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes');
   return rows
     .map((row) => {
       const code = String(row?.SecuritiesCompanyCode ?? '').trim();
@@ -1156,40 +1168,631 @@ function buildWatchlistBranchDetails(branchRecentPages, stockMap, candidateStock
     .slice(0, TOP_BRANCH_LIMIT);
 }
 
-async function fetchHiStockHtml(url) {
-  const response = await fetch(url, {
-    headers: HISTOCK_HEADERS,
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+class BrokerSourceRequestError extends Error {
+  constructor(code, { status = null, retryable = false, retryAfterMs = null, skipped = false, cause = null } = {}) {
+    super(status ? `${code} (HTTP ${status})` : code, cause ? { cause } : undefined);
+    this.name = 'BrokerSourceRequestError';
+    this.code = code;
+    this.status = status;
+    this.retryable = retryable;
+    this.retryAfterMs = retryAfterMs;
+    this.skipped = skipped;
   }
-
-  return response.text();
 }
 
-async function fetchCMoneyHtml(url) {
-  const response = await fetch(url, {
-    headers: CMONEY_HEADERS,
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-
-  return response.text();
+function defaultSleep(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
-async function fetchFubonDjHtml(url) {
-  const response = await fetch(url, {
-    headers: FUBON_DJ_HEADERS,
-  });
+function normalizePositiveInteger(value, fallback, minimum = 0) {
+  const number = Number(value);
+  return Number.isFinite(number) ? Math.max(minimum, Math.round(number)) : fallback;
+}
 
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+function resolveBrokerSourceRuntime(runtime = {}) {
+  const fetchImpl = runtime.fetch ?? globalThis.fetch;
+
+  if (typeof fetchImpl !== 'function') {
+    throw new TypeError('buildBrokerBranchRadar requires a fetch implementation');
   }
 
-  return new TextDecoder('big5').decode(await response.arrayBuffer());
+  const clockNow =
+    typeof runtime.clock === 'function'
+      ? runtime.clock
+      : typeof runtime.clock?.now === 'function'
+        ? () => runtime.clock.now()
+        : () => Date.now();
+  const policyOverrides = runtime.policy ?? {};
+  const policy = {
+    timeoutMs: normalizePositiveInteger(
+      policyOverrides.timeoutMs,
+      DEFAULT_SOURCE_REQUEST_POLICY.timeoutMs,
+      1,
+    ),
+    maxAttempts: normalizePositiveInteger(
+      policyOverrides.maxAttempts,
+      DEFAULT_SOURCE_REQUEST_POLICY.maxAttempts,
+      1,
+    ),
+    baseBackoffMs: normalizePositiveInteger(
+      policyOverrides.baseBackoffMs,
+      DEFAULT_SOURCE_REQUEST_POLICY.baseBackoffMs,
+    ),
+    maxBackoffMs: normalizePositiveInteger(
+      policyOverrides.maxBackoffMs,
+      DEFAULT_SOURCE_REQUEST_POLICY.maxBackoffMs,
+    ),
+    maxRetryAfterMs: normalizePositiveInteger(
+      policyOverrides.maxRetryAfterMs,
+      DEFAULT_SOURCE_REQUEST_POLICY.maxRetryAfterMs,
+    ),
+    histockMinIntervalMs: normalizePositiveInteger(
+      policyOverrides.histockMinIntervalMs,
+      DEFAULT_SOURCE_REQUEST_POLICY.histockMinIntervalMs,
+    ),
+    histockJitterMs: normalizePositiveInteger(
+      policyOverrides.histockJitterMs,
+      DEFAULT_SOURCE_REQUEST_POLICY.histockJitterMs,
+    ),
+    histockCircuitThreshold: normalizePositiveInteger(
+      policyOverrides.histockCircuitThreshold,
+      DEFAULT_SOURCE_REQUEST_POLICY.histockCircuitThreshold,
+      1,
+    ),
+    histockCircuitCooldownMs: normalizePositiveInteger(
+      policyOverrides.histockCircuitCooldownMs,
+      DEFAULT_SOURCE_REQUEST_POLICY.histockCircuitCooldownMs,
+    ),
+  };
+
+  policy.maxBackoffMs = Math.max(policy.baseBackoffMs, policy.maxBackoffMs);
+
+  return {
+    fetch: fetchImpl,
+    sleep: typeof runtime.sleep === 'function' ? runtime.sleep : defaultSleep,
+    random: typeof runtime.random === 'function' ? runtime.random : Math.random,
+    now: clockNow,
+    logger: runtime.logger ?? console,
+    policy,
+  };
+}
+
+function retryAfterMilliseconds(value, now) {
+  const text = String(value ?? '').trim();
+
+  if (!text) return null;
+
+  const seconds = Number(text);
+  if (Number.isFinite(seconds) && seconds >= 0) {
+    return Math.ceil(seconds * 1000);
+  }
+
+  const timestamp = Date.parse(text);
+  return Number.isFinite(timestamp) ? Math.max(0, timestamp - now()) : null;
+}
+
+function isRetryableHttpStatus(status) {
+  return status === 408 || status === 429 || status >= 500;
+}
+
+function sourceFailureCode(error) {
+  const code = String(error?.code ?? '').trim().toUpperCase();
+  if (/^[A-Z][A-Z0-9_]{0,39}$/.test(code)) return code;
+
+  const status = Number(error?.status);
+  if (Number.isInteger(status) && status >= 100 && status <= 599) return `HTTP_${status}`;
+
+  return 'REQUEST_FAILED';
+}
+
+function assertNotBlockPage(html) {
+  const sample = String(html ?? '').slice(0, 250000);
+
+  if (BLOCK_PAGE_PATTERNS.some((pattern) => pattern.test(sample))) {
+    throw new BrokerSourceRequestError('BLOCK_PAGE');
+  }
+
+  return html;
+}
+
+function assertExpectedSourcePage(html, patterns) {
+  assertNotBlockPage(html);
+  const sample = String(html ?? '').slice(0, 500000);
+  if (!patterns.some((pattern) => pattern.test(sample))) {
+    throw new BrokerSourceRequestError('UNEXPECTED_PAGE');
+  }
+  return html;
+}
+
+async function fetchWithTimeout(fetchImpl, url, options, timeoutMs) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetchImpl(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    return {
+      response,
+      clearRequestTimeout: () => clearTimeout(timeout),
+    };
+  } catch (error) {
+    clearTimeout(timeout);
+    if (controller.signal.aborted || error?.name === 'AbortError') {
+      throw new BrokerSourceRequestError('TIMEOUT', { retryable: true, cause: error });
+    }
+
+    if (error instanceof BrokerSourceRequestError) throw error;
+    throw new BrokerSourceRequestError('NETWORK_ERROR', { retryable: true, cause: error });
+  }
+}
+
+function assertCircuitAvailable(hostState, now) {
+  const currentTime = now();
+
+  if (hostState.openUntil > currentTime) {
+    throw new BrokerSourceRequestError('CIRCUIT_OPEN', { skipped: true });
+  }
+
+  if (hostState.openUntil > 0) {
+    hostState.openUntil = 0;
+    hostState.consecutiveBlockedResponses = 0;
+  }
+}
+
+function recordHostResponse(hostState, status, retryAfterMs, runtime) {
+  if (!hostState) return false;
+
+  const circuitFailure = status === 408 || status === 429 || status >= 500;
+  if (status !== 403 && !circuitFailure) {
+    hostState.consecutiveBlockedResponses = 0;
+    return false;
+  }
+
+  hostState.consecutiveBlockedResponses += 1;
+  const shouldOpen =
+    status === 403 ||
+    hostState.consecutiveBlockedResponses >= runtime.policy.histockCircuitThreshold ||
+    Number(retryAfterMs ?? 0) > runtime.policy.maxRetryAfterMs;
+
+  if (shouldOpen) {
+    hostState.openUntil =
+      runtime.now() + Math.max(runtime.policy.histockCircuitCooldownMs, Number(retryAfterMs ?? 0));
+  }
+
+  return shouldOpen;
+}
+
+function recordHostTransportFailure(hostState, error, runtime) {
+  if (!hostState || !['TIMEOUT', 'NETWORK_ERROR'].includes(error?.code)) return false;
+  hostState.consecutiveBlockedResponses += 1;
+  if (hostState.consecutiveBlockedResponses < runtime.policy.histockCircuitThreshold) return false;
+  hostState.openUntil = runtime.now() + runtime.policy.histockCircuitCooldownMs;
+  return true;
+}
+
+async function requestBrokerSourceBody({ runtime, url, headers, decode, validate, hostState = null }) {
+  const { policy } = runtime;
+
+  for (let attempt = 1; attempt <= policy.maxAttempts; attempt += 1) {
+    let clearRequestTimeout = null;
+    try {
+      if (hostState) assertCircuitAvailable(hostState, runtime.now);
+
+      const pendingResponse = await fetchWithTimeout(runtime.fetch, url, { headers }, policy.timeoutMs);
+      const response = pendingResponse.response;
+      clearRequestTimeout = pendingResponse.clearRequestTimeout;
+      const status = Number(response?.status ?? 0);
+      const ok = response?.ok ?? (status >= 200 && status < 300);
+
+      if (!ok) {
+        const retryAfterMs = retryAfterMilliseconds(response?.headers?.get?.('retry-after'), runtime.now);
+        const circuitOpened = recordHostResponse(hostState, status, retryAfterMs, runtime);
+        await response?.body?.cancel?.().catch(() => {});
+        throw new BrokerSourceRequestError(`HTTP_${status || 'ERROR'}`, {
+          status: status || null,
+          retryable:
+            isRetryableHttpStatus(status) &&
+            !circuitOpened &&
+            Number(retryAfterMs ?? 0) <= policy.maxRetryAfterMs,
+          retryAfterMs,
+        });
+      }
+
+      try {
+        const body = await decode(response);
+        validate?.(body);
+        recordHostResponse(hostState, status, null, runtime);
+        clearRequestTimeout?.();
+        return body;
+      } catch (error) {
+        if (error instanceof BrokerSourceRequestError) {
+          if (['BLOCK_PAGE', 'UNEXPECTED_PAGE'].includes(error.code) && hostState) {
+            recordHostResponse(hostState, 403, null, runtime);
+          }
+          throw error;
+        }
+
+        if (error?.name === 'AbortError') {
+          throw new BrokerSourceRequestError('TIMEOUT', { retryable: true, cause: error });
+        }
+
+        throw new BrokerSourceRequestError('RESPONSE_READ_FAILED', { retryable: true, cause: error });
+      }
+    } catch (error) {
+      const normalizedError =
+        error instanceof BrokerSourceRequestError
+          ? error
+          : new BrokerSourceRequestError('REQUEST_FAILED', { retryable: false, cause: error });
+
+      clearRequestTimeout?.();
+      if (recordHostTransportFailure(hostState, normalizedError, runtime)) {
+        normalizedError.retryable = false;
+      }
+
+      if (!normalizedError.retryable || attempt >= policy.maxAttempts) {
+        throw normalizedError;
+      }
+
+      const exponentialBackoff = Math.min(
+        policy.maxBackoffMs,
+        policy.baseBackoffMs * 2 ** (attempt - 1),
+      );
+      await runtime.sleep(Math.max(exponentialBackoff, Number(normalizedError.retryAfterMs ?? 0)));
+    }
+  }
+
+  throw new BrokerSourceRequestError('REQUEST_FAILED');
+}
+
+function createBrokerSourceClient(runtimeOverrides = {}) {
+  const runtime = resolveBrokerSourceRuntime(runtimeOverrides);
+  const sourceHosts = new Map();
+
+  const getHostState = (url) => {
+    const host = new URL(url).host;
+    const existing = sourceHosts.get(host);
+    if (existing) return existing;
+
+    const state = {
+      tail: Promise.resolve(),
+      nextStartAt: 0,
+      consecutiveBlockedResponses: 0,
+      openUntil: 0,
+    };
+    sourceHosts.set(host, state);
+    return state;
+  };
+
+  const scheduleHiStockRequest = (url, request) => {
+    const hostState = getHostState(url);
+    const scheduled = hostState.tail.then(async () => {
+      assertCircuitAvailable(hostState, runtime.now);
+
+      const waitMs = Math.max(0, hostState.nextStartAt - runtime.now());
+      if (waitMs > 0) await runtime.sleep(waitMs);
+
+      assertCircuitAvailable(hostState, runtime.now);
+      const randomValue = Math.min(0.999999, Math.max(0, Number(runtime.random()) || 0));
+      hostState.nextStartAt =
+        runtime.now() + runtime.policy.histockMinIntervalMs + Math.round(randomValue * runtime.policy.histockJitterMs);
+      return request(hostState);
+    });
+
+    hostState.tail = scheduled.then(
+      () => undefined,
+      () => undefined,
+    );
+    return scheduled;
+  };
+
+  return {
+    runtime,
+    fetchJson(url) {
+      return requestBrokerSourceBody({
+        runtime,
+        url,
+        headers: { accept: 'application/json,text/plain;q=0.9,*/*;q=0.5' },
+        decode: async (response) => {
+          try {
+            return await response.json();
+          } catch (error) {
+            throw new BrokerSourceRequestError('INVALID_JSON', { retryable: true, cause: error });
+          }
+        },
+        validate: (value) => {
+          if (!Array.isArray(value)) {
+            throw new BrokerSourceRequestError('UNEXPECTED_PAYLOAD', { retryable: true });
+          }
+        },
+        hostState: getHostState(url),
+      });
+    },
+    fetchHiStockHtml(url) {
+      const expectedPatterns = url.includes('/brokerprofit.aspx')
+        ? [/\bCPHB1_bt1_g\b/i, /brokerprofit\.aspx/i]
+        : [/var\s+jsonDatas\s*=/i, /class=["'][^"']*\btb-stock\b[^"']*\btbChip\b/i];
+      return scheduleHiStockRequest(url, (hostState) =>
+        requestBrokerSourceBody({
+          runtime,
+          url,
+          headers: HISTOCK_HEADERS,
+          decode: (response) => response.text(),
+          validate: (html) => assertExpectedSourcePage(html, expectedPatterns),
+          hostState,
+        }),
+      );
+    },
+    fetchCMoneyHtml(url) {
+      return requestBrokerSourceBody({
+        runtime,
+        url,
+        headers: CMONEY_HEADERS,
+        decode: (response) => response.text(),
+        validate: (html) => assertExpectedSourcePage(html, [
+          /\/forum\/stock\/\d+\?s=broker/i,
+          /(?:券商分點|主力進出)/i,
+        ]),
+        hostState: getHostState(url),
+      });
+    },
+    fetchFubonDjHtml(url) {
+      return requestBrokerSourceBody({
+        runtime,
+        url,
+        headers: FUBON_DJ_HEADERS,
+        decode: async (response) => new TextDecoder('big5').decode(await response.arrayBuffer()),
+        validate: (html) => assertExpectedSourcePage(html, [
+          /\bzco_[0-9a-z]+\.djhtm\b/i,
+          /class=["']t4t1["']/i,
+          /主力進出/i,
+        ]),
+        hostState: getHostState(url),
+      });
+    },
+  };
+}
+
+function sanitizeHealthTarget(target = {}) {
+  return {
+    code: String(target.code ?? '').trim().slice(0, 12),
+    name: compactText(target.name).slice(0, 80),
+  };
+}
+
+function createSourceHealthTracker() {
+  const state = Object.fromEntries(
+    BROKER_SOURCE_KEYS.map((source) => [
+      source,
+      {
+        attempted: 0,
+        succeeded: 0,
+        failed: 0,
+        skipped: 0,
+        failureCodes: {},
+        failedStocks: [],
+        skippedStocks: [],
+        failedBranches: [],
+        skippedBranches: [],
+      },
+    ]),
+  );
+
+  const record = (source, target, outcome, error = null) => {
+    const sourceState = state[source];
+    if (!sourceState) return;
+
+    if (outcome === 'succeeded') {
+      sourceState.attempted += 1;
+      sourceState.succeeded += 1;
+      return;
+    }
+
+    const errorCode = sourceFailureCode(error);
+    sourceState.failureCodes[errorCode] = (sourceState.failureCodes[errorCode] ?? 0) + 1;
+    const item = {
+      ...sanitizeHealthTarget(target),
+      errorCode,
+    };
+    const targetType = target?.type === 'branch' ? 'Branches' : 'Stocks';
+
+    if (outcome === 'skipped') {
+      sourceState.skipped += 1;
+      sourceState[`skipped${targetType}`].push(item);
+      return;
+    }
+
+    sourceState.attempted += 1;
+    sourceState.failed += 1;
+    sourceState[`failed${targetType}`].push(item);
+  };
+
+  return {
+    success(source, target) {
+      record(source, target, 'succeeded');
+    },
+    error(source, target, error) {
+      record(source, target, error?.skipped ? 'skipped' : 'failed', error);
+    },
+    snapshot() {
+      return Object.fromEntries(
+        BROKER_SOURCE_KEYS.map((source) => {
+          const sourceState = state[source];
+          const sortTargets = (items) =>
+            [...items].sort((left, right) =>
+              left.code.localeCompare(right.code) || left.errorCode.localeCompare(right.errorCode),
+            );
+
+          return [
+            source,
+            {
+              attempted: sourceState.attempted,
+              succeeded: sourceState.succeeded,
+              failed: sourceState.failed,
+              skipped: sourceState.skipped,
+              requestCount: sourceState.attempted + sourceState.skipped,
+              failureCodes: Object.fromEntries(
+                Object.entries(sourceState.failureCodes).sort(([left], [right]) => left.localeCompare(right)),
+              ),
+              failedStocks: sortTargets(sourceState.failedStocks),
+              skippedStocks: sortTargets(sourceState.skippedStocks),
+              failedBranches: sortTargets(sourceState.failedBranches),
+              skippedBranches: sortTargets(sourceState.skippedBranches),
+            },
+          ];
+        }),
+      );
+    },
+  };
+}
+
+function createStockSourceOutcomes(stocks = []) {
+  return new Map(
+    stocks.map((stock) => [
+      stock.code,
+      {
+        code: stock.code,
+        name: stock.name,
+        sources: Object.fromEntries(BROKER_SOURCE_KEYS.map((source) => [source, null])),
+      },
+    ]),
+  );
+}
+
+function recordStockSourceOutcome(outcomes, stock, source, outcome, error = null) {
+  const entry = outcomes.get(stock.code);
+  if (!entry) return;
+
+  entry.sources[source] = {
+    status: outcome,
+    ...(error ? { errorCode: sourceFailureCode(error) } : {}),
+  };
+}
+
+function ratio(numerator, denominator) {
+  return denominator > 0 ? Number((numerator / denominator).toFixed(4)) : 0;
+}
+
+function buildStockSourceCoverage(stocks, outcomes, sourceHealth) {
+  const requestedStockCount = stocks.length;
+  const sourceCounts = Object.fromEntries(
+    BROKER_SOURCE_KEYS.map((source) => [
+      source,
+      { attempted: 0, succeeded: 0, failed: 0, skipped: 0 },
+    ]),
+  );
+  const missingStocks = [];
+  const failedStocks = [];
+  const skippedStocks = [];
+  let attemptedStockCount = 0;
+  let succeededStockCount = 0;
+  let completeStockCount = 0;
+  let partialStockCount = 0;
+
+  for (const stock of stocks) {
+    const entry = outcomes.get(stock.code);
+    const sourceEntries = BROKER_SOURCE_KEYS.map((source) => [
+      source,
+      entry?.sources?.[source] ?? { status: 'skipped', errorCode: 'NOT_ATTEMPTED' },
+    ]);
+    const attemptedSources = sourceEntries.filter(([, item]) => ['succeeded', 'failed'].includes(item.status));
+    const succeededSources = sourceEntries.filter(([, item]) => item.status === 'succeeded');
+    const failedSources = sourceEntries.filter(([, item]) => item.status === 'failed');
+
+    if (attemptedSources.length) attemptedStockCount += 1;
+
+    for (const [source, item] of sourceEntries) {
+      if (item.status === 'succeeded') {
+        sourceCounts[source].attempted += 1;
+        sourceCounts[source].succeeded += 1;
+      } else if (item.status === 'failed') {
+        sourceCounts[source].attempted += 1;
+        sourceCounts[source].failed += 1;
+      } else {
+        sourceCounts[source].skipped += 1;
+      }
+    }
+
+    if (succeededSources.length === BROKER_SOURCE_KEYS.length) {
+      succeededStockCount += 1;
+      completeStockCount += 1;
+      continue;
+    }
+
+    if (succeededSources.length) {
+      succeededStockCount += 1;
+      partialStockCount += 1;
+    } else if (failedSources.length) {
+      failedStocks.push(sanitizeHealthTarget(stock));
+    } else {
+      skippedStocks.push(sanitizeHealthTarget(stock));
+    }
+
+    missingStocks.push({
+      ...sanitizeHealthTarget(stock),
+      missingSources: sourceEntries
+        .filter(([, item]) => item.status !== 'succeeded')
+        .map(([source, item]) => ({
+          source,
+          status: item.status,
+          errorCode: item.errorCode ?? 'NOT_ATTEMPTED',
+        })),
+    });
+  }
+
+  const coverageRatio = ratio(succeededStockCount, requestedStockCount);
+  const completeRatio = ratio(completeStockCount, requestedStockCount);
+  const primarySourceSuccessRatio = ratio(sourceCounts.histock.succeeded, requestedStockCount);
+  const failedBranchCount = sourceHealth?.histock?.failedBranches?.length ?? 0;
+  const skippedBranchCount = sourceHealth?.histock?.skippedBranches?.length ?? 0;
+  const requestedBranchCount = BROKER_BRANCH_WATCHLIST.length;
+  const branchSourceSuccessRatio = ratio(
+    Math.max(0, requestedBranchCount - failedBranchCount - skippedBranchCount),
+    requestedBranchCount,
+  );
+  const qualityGateReasons = [];
+
+  if (requestedStockCount === 0) qualityGateReasons.push('NO_STOCKS_REQUESTED');
+  if (coverageRatio < COVERAGE_GATE_MINIMUM_RATIO) qualityGateReasons.push('STOCK_COVERAGE_BELOW_THRESHOLD');
+  if (primarySourceSuccessRatio < PRIMARY_SOURCE_GATE_MINIMUM_RATIO) {
+    qualityGateReasons.push('PRIMARY_SOURCE_COVERAGE_BELOW_THRESHOLD');
+  }
+  if (branchSourceSuccessRatio < BRANCH_SOURCE_GATE_MINIMUM_RATIO) {
+    qualityGateReasons.push('BRANCH_SOURCE_COVERAGE_BELOW_THRESHOLD');
+  }
+
+  const shouldReplaceExisting = qualityGateReasons.length === 0;
+
+  return {
+    requestedStockCount,
+    attemptedStockCount,
+    succeededStockCount,
+    failedStockCount: failedStocks.length,
+    skippedStockCount: skippedStocks.length,
+    completeStockCount,
+    partialStockCount,
+    coverageRatio,
+    completeRatio,
+    requestedBranchCount,
+    branchSourceSuccessRatio,
+    sourceCounts,
+    missingStocks,
+    failedStocks,
+    skippedStocks,
+    qualityGate: {
+      status: shouldReplaceExisting ? (completeRatio >= COVERAGE_GATE_MINIMUM_RATIO ? 'pass' : 'degraded') : 'fail',
+      shouldReplaceExisting,
+      recommendation: shouldReplaceExisting ? 'replace' : 'preserve-existing',
+      minimumCoverageRatio: COVERAGE_GATE_MINIMUM_RATIO,
+      minimumPrimarySourceSuccessRatio: PRIMARY_SOURCE_GATE_MINIMUM_RATIO,
+      minimumBranchSourceSuccessRatio: BRANCH_SOURCE_GATE_MINIMUM_RATIO,
+      observedCoverageRatio: coverageRatio,
+      observedPrimarySourceSuccessRatio: primarySourceSuccessRatio,
+      observedBranchSourceSuccessRatio: branchSourceSuccessRatio,
+      reasons: qualityGateReasons,
+    },
+  };
 }
 
 function mergeWatchedBranchRows(...rowGroups) {
@@ -1207,14 +1810,24 @@ function mergeWatchedBranchRows(...rowGroups) {
   return [...merged.values()];
 }
 
-export async function buildBrokerBranchRadar({
-  stockMetaList = [],
-  selectionRadar = null,
-  entryRadar = null,
-  themeRadar = null,
-  generatedAt,
-  marketDate,
-}) {
+/**
+ * Builds the radar through one dependency seam. Production callers can omit the
+ * second argument; tests may inject fetch, sleep, random, clock, logger and policy.
+ */
+export async function buildBrokerBranchRadar(
+  {
+    stockMetaList = [],
+    selectionRadar = null,
+    entryRadar = null,
+    themeRadar = null,
+    generatedAt,
+    marketDate,
+  },
+  runtimeOverrides = {},
+) {
+  const sourceClient = createBrokerSourceClient(runtimeOverrides);
+  const { runtime } = sourceClient;
+  const sourceHealthTracker = createSourceHealthTracker();
   const baseStockMap = buildStockMap(stockMetaList);
   const candidateStocks = buildCandidateStocks({
     stockMetaList,
@@ -1223,12 +1836,12 @@ export async function buildBrokerBranchRadar({
     themeRadar,
   });
   const [twseQuotes, tpexQuotes] = await Promise.all([
-    fetchTwseActiveQuotes().catch((error) => {
-      console.warn(`[TWSE 活躍股略過] ${error?.message ?? error}`);
+    fetchTwseActiveQuotes(sourceClient.fetchJson).catch((error) => {
+      runtime.logger.warn(`[TWSE 活躍股略過] ${error?.message ?? error}`);
       return [];
     }),
-    fetchTpexActiveQuotes().catch((error) => {
-      console.warn(`[TPEx 活躍股略過] ${error?.message ?? error}`);
+    fetchTpexActiveQuotes(sourceClient.fetchJson).catch((error) => {
+      runtime.logger.warn(`[TPEx 活躍股略過] ${error?.message ?? error}`);
       return [];
     }),
   ]);
@@ -1243,9 +1856,14 @@ export async function buildBrokerBranchRadar({
   const branchRecentPages = await mapInBatches(
     BROKER_BRANCH_WATCHLIST,
     async (candidate) => {
+      const target = { type: 'branch', code: candidate.bno, name: candidate.name };
+
       try {
-        const html = await fetchHiStockHtml(`https://histock.tw/stock/brokerprofit.aspx?bno=${candidate.bno}`);
+        const html = await sourceClient.fetchHiStockHtml(
+          `https://histock.tw/stock/brokerprofit.aspx?bno=${candidate.bno}`,
+        );
         const rows = parseBranchStockRows(html);
+        sourceHealthTracker.success('histock', target);
 
         return {
           bno: candidate.bno,
@@ -1253,49 +1871,79 @@ export async function buildBrokerBranchRadar({
           rows,
         };
       } catch (error) {
-        console.warn(`[券商分點略過] ${candidate.name}：${error?.message ?? error}`);
+        sourceHealthTracker.error('histock', target, error);
+        runtime.logger.warn(`[券商分點略過] ${candidate.name}：${sourceFailureCode(error)}`);
         return null;
       }
     },
     4,
   );
   const enrichedScoutStocks = mergeScoutStocks(scoutStocks, buildBranchScoutStocks(branchRecentPages, stockMap));
+  const stockSourceOutcomes = createStockSourceOutcomes(enrichedScoutStocks);
   const stockBranchPages = await mapInBatches(
     enrichedScoutStocks,
     async (stock) => {
-      try {
-        const histockHtml = await fetchHiStockHtml(`https://histock.tw/stock/branch.aspx?day=14&no=${stock.code}`);
-        const histockRows = parseStockDailyBranchRows(histockHtml, stock.code).filter((row) =>
-          WATCHED_BRANCH_CODE_SET.has(row.bno),
-        );
-        let fubonRows = [];
-        let cmoneyRows = [];
-
+      const target = { type: 'stock', code: stock.code, name: stock.name };
+      const loadRows = async ({ source, label, fetchHtml, parseRows }) => {
         try {
-          const fubonHtml = await fetchFubonDjHtml(`https://fubon-ebrokerdj.fbs.com.tw/z/zc/zco/zco_${stock.code}.djhtm`);
-          fubonRows = parseFubonDjStockBranchRows(fubonHtml, stock.code).filter((row) => WATCHED_BRANCH_CODE_SET.has(row.bno));
+          const html = await fetchHtml();
+          let rows;
+
+          try {
+            rows = parseRows(html).filter((row) => WATCHED_BRANCH_CODE_SET.has(row.bno));
+          } catch (error) {
+            throw new BrokerSourceRequestError('PARSE_ERROR', { cause: error });
+          }
+
+          sourceHealthTracker.success(source, target);
+          recordStockSourceOutcome(stockSourceOutcomes, stock, source, 'succeeded');
+          return rows;
         } catch (error) {
-          console.warn(`[富邦分點略過] ${stock.code} ${stock.name}｜${error?.message ?? error}`);
+          sourceHealthTracker.error(source, target, error);
+          recordStockSourceOutcome(
+            stockSourceOutcomes,
+            stock,
+            source,
+            error?.skipped ? 'skipped' : 'failed',
+            error,
+          );
+          runtime.logger.warn(`[${label}略過] ${stock.code} ${stock.name}｜${sourceFailureCode(error)}`);
+          return [];
         }
+      };
 
-        try {
-          const cmoneyHtml = await fetchCMoneyHtml(`https://www.cmoney.tw/forum/stock/${stock.code}?s=broker`);
-          cmoneyRows = parseCMoneyStockBranchRows(cmoneyHtml, stock.code).filter((row) => WATCHED_BRANCH_CODE_SET.has(row.bno));
-        } catch (error) {
-          console.warn(`[CMoney 分點略過] ${stock.code} ${stock.name}｜${error?.message ?? error}`);
-        }
+      const [histockRows, fubonRows, cmoneyRows] = await Promise.all([
+        loadRows({
+          source: 'histock',
+          label: 'HiStock 分點',
+          fetchHtml: () =>
+            sourceClient.fetchHiStockHtml(`https://histock.tw/stock/branch.aspx?day=14&no=${stock.code}`),
+          parseRows: (html) => parseStockDailyBranchRows(html, stock.code),
+        }),
+        loadRows({
+          source: 'fubon',
+          label: '富邦分點',
+          fetchHtml: () =>
+            sourceClient.fetchFubonDjHtml(
+              `https://fubon-ebrokerdj.fbs.com.tw/z/zc/zco/zco_${stock.code}.djhtm`,
+            ),
+          parseRows: (html) => parseFubonDjStockBranchRows(html, stock.code),
+        }),
+        loadRows({
+          source: 'cmoney',
+          label: 'CMoney 分點',
+          fetchHtml: () => sourceClient.fetchCMoneyHtml(`https://www.cmoney.tw/forum/stock/${stock.code}?s=broker`),
+          parseRows: (html) => parseCMoneyStockBranchRows(html, stock.code),
+        }),
+      ]);
 
-        const rows = mergeWatchedBranchRows(histockRows, fubonRows, cmoneyRows);
+      const rows = mergeWatchedBranchRows(histockRows, fubonRows, cmoneyRows);
 
-        return {
-          code: stock.code,
-          name: stock.name,
-          rows,
-        };
-      } catch (error) {
-        console.warn(`[分點日報略過] ${stock.code} ${stock.name}｜${error?.message ?? error}`);
-        return null;
-      }
+      return {
+        code: stock.code,
+        name: stock.name,
+        rows,
+      };
     },
     4,
   );
@@ -1330,11 +1978,15 @@ export async function buildBrokerBranchRadar({
 
   const branchDetails = buildWatchlistBranchDetails(mergedBranchPages, stockMap, candidateStocks);
   const { recommendedStocks, recentBuyFocus, recentSellFocus } = buildRecommendedStocks(branchDetails, stockMap);
+  const sourceHealth = sourceHealthTracker.snapshot();
+  const coverage = buildStockSourceCoverage(enrichedScoutStocks, stockSourceOutcomes, sourceHealth);
 
   return {
     generatedAt,
     marketDate,
     sourceName: 'HiStock 券商分點觀察池 + 富邦證券主力買賣超 + CMoney 當日分點表',
+    sourceHealth,
+    coverage,
     summary: {
       candidateStockCount: candidateStocks.length,
       stockCoverageCount: branchDetails.reduce(
