@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Refresh event data snapshot
-        run: npm run data:update || echo "data:update completed with partial upstream failures"
+        run: npm run data:update
 
       - name: Send Telegram event alert
         run: node scripts/send-telegram-event-alert.mjs
