@@ -160,10 +160,17 @@ test('keeps timeout and retry coverage active while consuming a response body', 
       return {
         ok: true,
         status: 200,
-        text: () => new Promise((resolve, reject) => {
+        text: () => new Promise((_, reject) => {
+          const keepAlive = setTimeout(
+            () => reject(new Error('request body did not observe the timeout signal')),
+            1000,
+          );
           options.signal.addEventListener(
             'abort',
-            () => reject(Object.assign(new Error('body aborted'), { name: 'AbortError' })),
+            () => {
+              clearTimeout(keepAlive);
+              reject(Object.assign(new Error('body aborted'), { name: 'AbortError' }));
+            },
             { once: true },
           );
         }),
