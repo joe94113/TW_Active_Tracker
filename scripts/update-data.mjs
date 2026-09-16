@@ -33,6 +33,11 @@ import { buildWatchGroups } from './lib/watch-groups.mjs';
 import { buildBrokerBranchRadar } from './lib/broker-branch-radar.mjs';
 import { createResilientRequester } from './lib/resilient-request.mjs';
 import {
+  getFuturesSnapshotInstitutionIssues,
+  hasCompleteFuturesSnapshot,
+  pickFirstCompleteFuturesInstitutionSnapshot,
+} from './lib/futures-quality.mjs';
+import {
   buildEarningsCalendar,
   buildProductEvents,
   buildInsiderHoldings,
@@ -4649,8 +4654,7 @@ async function fetchFuturesOpenApiData(優先日期 = null) {
     .filter((date) => !優先日期文字 || date <= 優先日期文字)
     .sort()
     .reverse();
-  const 資料日期 = 可用日期[0] ?? null;
-  if (!資料日期) {
+  if (!可用日期.length) {
     throw new Error(`TAIFEX OpenAPI 沒有不晚於 ${優先日期文字 ?? '目標日'} 的資料`);
   }
 
@@ -4658,30 +4662,36 @@ async function fetchFuturesOpenApiData(優先日期 = null) {
     { 商品代碼: 'MXF', 契約名稱: '小型臺指期貨' },
     { 商品代碼: 'TMF', 契約名稱: '微型臺指期貨' },
   ];
-  const 契約列表 = 契約設定.map((contract) => {
-    const 法人資料 = rows
-      .filter(
-        (row) =>
-          normalizeDate(row?.Date) === 資料日期 &&
-          compactText(row?.ContractCode) === contract.契約名稱,
-      )
-      .map(buildTaifexInstitutionRow)
-      .filter((item) => item.身份別);
+  const 候選快照 = 可用日期.map((資料日期) => ({
+    資料日期,
+    契約列表: 契約設定.map((contract) => ({
+      ...contract,
+      法人資料: rows
+        .filter(
+          (row) =>
+            normalizeDate(row?.Date) === 資料日期 &&
+            compactText(row?.ContractCode) === contract.契約名稱,
+        )
+        .map(buildTaifexInstitutionRow)
+        .filter((item) => item.身份別),
+    })),
+  }));
+  const 完整快照 = pickFirstCompleteFuturesInstitutionSnapshot(候選快照);
 
-    const 缺少身份 = ['自營商', '投信', '外資'].filter(
-      (identity) => !法人資料.some((item) => item.身份別 === identity),
+  if (!完整快照) {
+    const 最新快照 = 候選快照[0];
+    const issues = getFuturesSnapshotInstitutionIssues(最新快照);
+    throw new Error(
+      `TAIFEX OpenAPI ${最新快照?.資料日期 ?? '最新日期'} 資料尚未完整：${issues.join('、')}`,
     );
-    if (缺少身份.length) {
-      throw new Error(`TAIFEX OpenAPI ${contract.契約名稱} 缺少${缺少身份.join('、')}資料`);
-    }
-
-    return { ...contract, 法人資料 };
-  });
+  }
 
   return {
-    資料日期,
-    契約列表,
+    ...完整快照,
     source: 'taifex-openapi',
+    fallbackFromDate: 完整快照.資料日期 === 候選快照[0]?.資料日期
+      ? null
+      : 候選快照[0]?.資料日期 ?? null,
   };
 }
 
@@ -4697,11 +4707,17 @@ async function fetchFuturesLegacyData(優先日期 = null) {
     try {
       const 小型臺指 = await fetchFuturesContractData(查詢日期, 'MXF');
       const 微型臺指 = await fetchFuturesContractData(查詢日期, 'TMF');
-      return {
+      const 快照 = {
         資料日期: 查詢日期.replaceAll('/', '-'),
         契約列表: [小型臺指, 微型臺指],
         source: 'taifex-html-fallback',
+        fallbackFromDate: offset > 0 ? formatTaipeiDate(起始日期) : null,
       };
+      const issues = getFuturesSnapshotInstitutionIssues(快照);
+      if (issues.length) {
+        throw new Error(`TAIFEX HTML ${快照.資料日期} 資料尚未完整：${issues.join('、')}`);
+      }
+      return 快照;
     } catch (error) {
       最後錯誤 = error;
       if ([401, 403].includes(Number(error?.status ?? 0))) {
@@ -4749,6 +4765,7 @@ function buildFuturesObservationAdvice(契約資料) {
 async function fetchFuturesChipData(優先日期, 既有期貨籌碼 = null) {
   const 錯誤清單 = [];
   let 基礎資料 = null;
+  const 既有期貨資料完整 = hasCompleteFuturesSnapshot(既有期貨籌碼);
 
   try {
     基礎資料 = await fetchFuturesOpenApiData(優先日期);
@@ -4768,7 +4785,7 @@ async function fetchFuturesChipData(優先日期, 既有期貨籌碼 = null) {
 
   if (!基礎資料) {
     const reason = 錯誤清單.join('；') || 'TAIFEX 期貨籌碼來源暫時無法取得';
-    if (既有期貨籌碼?.契約列表?.length) {
+    if (既有期貨資料完整) {
       return {
         ...既有期貨籌碼,
         stale: true,
@@ -4797,7 +4814,7 @@ async function fetchFuturesChipData(優先日期, 既有期貨籌碼 = null) {
 
   const 新資料日期 = normalizeDate(基礎資料.資料日期);
   const 既有資料日期 = normalizeDate(既有期貨籌碼?.資料日期);
-  if (既有期貨籌碼?.契約列表?.length && 新資料日期 && 既有資料日期 > 新資料日期) {
+  if (既有期貨資料完整 && 新資料日期 && 既有資料日期 > 新資料日期) {
     const reason = `TAIFEX 本次回傳 ${新資料日期}，落後已部署快照 ${既有資料日期}`;
     const 回退說明 = `本次未覆蓋較新快照：${reason}`;
     return {
@@ -4875,17 +4892,21 @@ async function fetchFuturesChipData(優先日期, 既有期貨籌碼 = null) {
       };
     }),
   );
-  const sourceStatus = 基礎資料.source === 'taifex-openapi' && !技術資料沿用數 ? 'healthy' : 'partial';
+  const 使用較舊完整資料 = Boolean(基礎資料.fallbackFromDate);
+  const sourceStatus = 基礎資料.source === 'taifex-openapi' && !技術資料沿用數 && !使用較舊完整資料
+    ? 'healthy'
+    : 'partial';
 
   return {
     資料日期: 基礎資料.資料日期,
     契約列表: 強化後契約列表,
     整體建議: 強化後契約列表.map((item) => `${item.契約名稱}：${item.觀察建議.at(-1)}`),
-    stale: false,
+    stale: 使用較舊完整資料,
     sourceHealth: {
       status: sourceStatus,
       source: 基礎資料.source,
       dataDate: 基礎資料.資料日期,
+      fallbackFromDate: 基礎資料.fallbackFromDate ?? null,
       technicalHistoryStaleCount: 技術資料沿用數,
       fallbackErrors: 錯誤清單,
     },
@@ -4893,6 +4914,9 @@ async function fetchFuturesChipData(優先日期, 既有期貨籌碼 = null) {
       基礎資料.source === 'taifex-openapi'
         ? '資料來源：臺灣期貨交易所 OpenAPI 三大法人區分各期貨契約每日交易資訊。'
         : '資料來源：臺灣期貨交易所三大法人區分各商品每日交易資訊（HTML fallback）。',
+      ...(使用較舊完整資料
+        ? [`${基礎資料.fallbackFromDate} 資料尚未完整，暫用 ${基礎資料.資料日期} 的完整期貨快照。`]
+        : []),
       '技術走勢來源：臺灣期貨交易所期貨每日交易行情下載；優先沿用已部署歷史，只補最近缺口。',
       '以小型臺指期貨與微型臺指期貨作為散戶常見觀察標的，內容僅供籌碼研究參考。',
     ],
@@ -6788,7 +6812,7 @@ async function main() {
   ).catch((error) => {
     const reason = `未預期的期貨更新錯誤：${getErrorSummary(error)}`;
     console.warn(`[期貨資料保護性 fallback] ${reason}`);
-    return 既有儀表板?.期貨籌碼
+    return hasCompleteFuturesSnapshot(既有儀表板?.期貨籌碼)
       ? {
           ...既有儀表板.期貨籌碼,
           stale: true,

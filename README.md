@@ -103,7 +103,7 @@ node scripts/validate-data-quality.mjs
 ### 執行測試與建置
 
 ```bash
-node --test scripts/lib/resilient-request.test.mjs scripts/lib/broker-branch-radar.test.mjs
+npm test
 npm run build
 npm run preview
 ```

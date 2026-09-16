@@ -1,5 +1,10 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import {
+  getFuturesContractIssues,
+  getFuturesSnapshotIssues,
+  REQUIRED_FUTURES_CONTRACT_CODES,
+} from './lib/futures-quality.mjs';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -127,16 +132,17 @@ function buildMetrics({ manifest, dashboard, stockIndex = null }, source) {
   const futuresContracts = Array.isArray(futuresOverview?.['契約列表'])
     ? futuresOverview['契約列表']
     : [];
-  const completeFuturesContracts = futuresContracts.filter((item) => {
-    const institutions = Array.isArray(item?.['法人資料']) ? item['法人資料'] : [];
-    const identities = new Set(institutions.map((row) => row?.['身份別']));
-    const completeIdentities = ['自營商', '投信', '外資'].every((identity) => identities.has(identity));
-    const numericDataIsUsable = institutions.every((row) =>
-      Number.isFinite(row?.['交易淨口數']) && Number.isFinite(row?.['未平倉淨口數']),
-    );
-    const technicalHistory = item?.['技術面資料']?.['歷史資料'];
-    return completeIdentities && numericDataIsUsable && Array.isArray(technicalHistory) && technicalHistory.length >= 20;
-  });
+  const futuresContractQuality = futuresContracts.map((item) => ({
+    item,
+    issues: getFuturesContractIssues(item),
+  }));
+  const completeFuturesContracts = futuresContractQuality
+    .filter(
+      (entry) =>
+        REQUIRED_FUTURES_CONTRACT_CODES.includes(entry.item?.['商品代碼']) &&
+        entry.issues.length === 0,
+    )
+    .map((entry) => entry.item);
 
   return {
     source,
@@ -155,6 +161,7 @@ function buildMetrics({ manifest, dashboard, stockIndex = null }, source) {
     futuresContractCount: new Set(
       completeFuturesContracts.map((item) => item?.['商品代碼'] || item?.['契約名稱']).filter(Boolean),
     ).size,
+    futuresContractIssues: getFuturesSnapshotIssues(futuresOverview),
     etfCount: etfCounts.length > 0 ? Math.min(...etfCounts) : 0,
     stockCount: stockCounts.length > 0 ? Math.min(...stockCounts) : 0,
     validPriceCount,
@@ -316,9 +323,12 @@ function validateMetrics(candidate, baseline, thresholds) {
     );
   }
   if (candidate.futuresContractCount < minimumFuturesContracts) {
+    const issueSummary = candidate.futuresContractIssues?.length
+      ? ` Details: ${candidate.futuresContractIssues.join('; ')}.`
+      : '';
     errors.push(
       `Futures coverage has ${candidate.futuresContractCount} complete contracts; `
-      + `at least ${minimumFuturesContracts} are required.`,
+      + `at least ${minimumFuturesContracts} are required.${issueSummary}`,
     );
   }
 

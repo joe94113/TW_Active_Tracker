@@ -35,6 +35,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run tests
+        run: npm test
+
       - name: Capture checkout data baseline
         run: node scripts/validate-data-quality.mjs --write-baseline "$RUNNER_TEMP/data-quality-baseline.json"
 
