@@ -32,6 +32,16 @@ import { buildEntryRadar } from './lib/entry-radar.mjs';
 import { buildWatchGroups } from './lib/watch-groups.mjs';
 import { buildBrokerBranchRadar } from './lib/broker-branch-radar.mjs';
 import { createResilientRequester } from './lib/resilient-request.mjs';
+import { createDeployedCacheReader } from './lib/deployed-cache.mjs';
+import {
+  fetchMegaProviderData,
+  fetchTaishinProviderData,
+} from './lib/etf-provider-sources.mjs';
+import {
+  getUsableCachedSnapshot,
+  requireCurrentOrPastSnapshotDate,
+  selectCacheFallback,
+} from './lib/etf-snapshot-policy.mjs';
 import {
   getFuturesSnapshotInstitutionIssues,
   hasCompleteFuturesSnapshot,
@@ -80,6 +90,7 @@ const 韌性請求 = createResilientRequester({
     'www.taifex.com.tw': { concurrency: 1, minIntervalMs: 600, jitterMs: 250 },
     'opendata.tdcc.com.tw': { concurrency: 1, minIntervalMs: 250, jitterMs: 100 },
     'joe94113.github.io': { concurrency: 6, minIntervalMs: 20, jitterMs: 20 },
+    'r.jina.ai': { concurrency: 1, minIntervalMs: 1000, jitterMs: 250 },
   },
 });
 const 高股息ETF關鍵字 = ['高息', '高股息', '入息', '收益', '豐收', '鑫收'];
@@ -671,52 +682,24 @@ async function writeJson(filePath, value) {
   }
 }
 
-async function readDeployedOrLocalJson(
-  relativePath,
-  { remoteTimeoutMs = 預設請求逾時毫秒, remoteAttempts = 預設請求重試次數, remoteCircuit = null } = {},
-) {
-  const normalizedPath = String(relativePath ?? '').replaceAll('\\', '/').replace(/^\/+/, '');
-
-  if (!normalizedPath) {
-    return null;
-  }
-
-  if (!remoteCircuit?.open) {
-    try {
-      const result = await requestWithRetry(new URL(normalizedPath, 已部署站台網址).toString(), {
-        headers: {
-          'user-agent': 使用者代理,
-          'accept-language': 'zh-TW,zh;q=0.9',
-          accept: 'application/json, text/plain, */*',
-        },
-      }, {
-        標籤: `已部署快取 ${normalizedPath}`,
-        逾時毫秒: remoteTimeoutMs,
-        重試次數: remoteAttempts,
-        回應類型: 'json',
-      });
-      if (remoteCircuit) remoteCircuit.consecutiveFailures = 0;
-      return result;
-    } catch (error) {
-      const status = Number(error?.status ?? 0);
-      const serviceFailure = !status || status === 408 || status === 429 || status >= 500;
-      if (remoteCircuit && serviceFailure) {
-        remoteCircuit.consecutiveFailures = (remoteCircuit.consecutiveFailures ?? 0) + 1;
-        const threshold = Math.max(1, Number(remoteCircuit.failureThreshold) || 2);
-        if (remoteCircuit.consecutiveFailures >= threshold) {
-          remoteCircuit.open = true;
-          if (!remoteCircuit.reported) {
-            remoteCircuit.reported = true;
-            console.warn(`[部署快取熔斷] ${getErrorSummary(error)}；其餘檔案改讀 checkout 快取`);
-          }
-        }
-      }
-    }
-  }
-
-  const localPath = path.join(根目錄, normalizedPath);
-  return readJsonIfExists(localPath);
-}
+const readDeployedOrLocalJson = createDeployedCacheReader({
+  baseUrl: 已部署站台網址,
+  defaultTimeoutMs: 預設請求逾時毫秒,
+  defaultAttempts: 預設請求重試次數,
+  fetchRemoteJson: (url, { relativePath, timeoutMs, attempts }) => requestWithRetry(url, {
+    headers: {
+      'user-agent': 使用者代理,
+      'accept-language': 'zh-TW,zh;q=0.9',
+      accept: 'application/json, text/plain, */*',
+    },
+  }, {
+    標籤: `已部署快取 ${relativePath}`,
+    逾時毫秒: timeoutMs,
+    重試次數: attempts,
+    回應類型: 'json',
+  }),
+  readLocalJson: (relativePath) => readJsonIfExists(path.join(根目錄, 'public', relativePath)),
+});
 
 async function fetchHtml(url) {
   const buffer = await requestWithRetry(url, {
@@ -1609,55 +1592,16 @@ async function fetchCtbcSnapshot(etf) {
 }
 
 async function fetchTaishinSnapshot(etf) {
-  const html = await fetchHtml(etf.sourceUrl);
-  const disclosureDate =
-    html.match(/id="PUB_DATE"[^>]*value="([^"]+)"/)?.[1] ??
-    html.match(/id="DATA_DATE"[^>]*value="([^"]+)"/)?.[1];
-  const 所有欄位 = new Map(
-    Array.from(
-      html.matchAll(/<th>\s*([\s\S]*?)\s*<\/th>\s*<td>\s*([\s\S]*?)\s*<\/td>/g),
-      (match) => [stripHtmlTags(match[1]), stripHtmlTags(match[2])],
-    ),
-  );
-
-  const aum = toNumber(所有欄位.get('基金淨資產價值(元)'));
-  const nav = toNumber(所有欄位.get('每受益權單位淨資產價值(元)'));
-  const units = toNumber(所有欄位.get('已發行受益權單位總數(單位)') ?? 所有欄位.get('已發行受益權單位總數'));
-  const holdings = sortHoldings(
-    Array.from(
-      html.matchAll(
-        /<tr>\s*<td>\s*([A-Z0-9 ]+)\s*<\/td>\s*<td>\s*([^<]+?)\s*<\/td>\s*<td>\s*([\d,.-]+)\s*<\/td>\s*<td>\s*([\d.]+)%\s*<\/td>\s*<\/tr>/gms,
-      ),
-      (match) => ({
-        code: compactText(match[1]).replace(/\s+TT$/i, ''),
-        name: compactText(match[2]),
-        shares: toNumber(match[3]),
-        weight: toNumber(match[4]),
-      }),
-    ).filter((item) => item.code && item.name),
-  );
-
-  if (!disclosureDate || !holdings.length) {
-    throw new Error('台新 ETF 持股解析失敗');
-  }
-
-  return {
+  const result = await fetchTaishinProviderData({
     code: etf.code,
-    name: etf.name,
-    fullName: etf.fullName,
-    provider: etf.provider,
-    providerLabel: etf.providerLabel,
-    sourceName: etf.sourceName,
     sourceUrl: etf.sourceUrl,
-    trackingStatus: etf.trackingStatus,
-    disclosureDate: normalizeDate(disclosureDate),
-    aum,
-    nav,
-    units,
-    holdingsCount: holdings.length,
-    holdings,
-    fetchedAt: getCurrentIso(),
-  };
+    targetDate: formatTaipeiDate(new Date()),
+    fetchHtml,
+  });
+  if (result.fallbackReason) {
+    console.warn(`[台新 ETF 來源備援] ${etf.code}：${result.fallbackReason}`);
+  }
+  return buildEtfSnapshot(etf, { ...result.data, retrievalTransport: result.transport });
 }
 
 async function fetchYuantaSnapshot(etf) {
@@ -1800,36 +1744,29 @@ async function fetchFirstGoldSnapshot(etf) {
 }
 
 async function fetchMegaSnapshot(etf) {
-  const html = await fetchHtml(etf.sourceUrl);
-  const 資產欄位 = new Map(
-    Array.from(
-      html.matchAll(/<div class="si-title">\s*([\s\S]*?)\s*<\/div>\s*<div class="si-amount">\s*([\d,.-]+)\s*<\/div>/g),
-      (match) => [stripHtmlTags(match[1]), stripHtmlTags(match[2])],
-    ),
-  );
-  const holdings = Array.from(
-    html.matchAll(
-      /<div class="common-mobile-table">[\s\S]*?<div class="item-title">股票代號<\/div>\s*<div class="item-content">([\s\S]*?)<\/div>\s*<\/div>\s*<div class="common-table-item">[\s\S]*?<div class="item-title">股票名稱<\/div>\s*<div class="item-content">([\s\S]*?)<\/div>\s*<\/div>\s*<div class="common-table-item">[\s\S]*?<div class="item-title">股數<\/div>\s*<div class="item-content">([\s\S]*?)<\/div>\s*<\/div>\s*<div class="common-table-item">[\s\S]*?<div class="item-title">持股權重<\/div>\s*<div class="item-content">([\d.,\s%-]+)<\/div>/g,
-    ),
-    (match) => ({
-      code: stripHtmlTags(match[1]),
-      name: stripHtmlTags(match[2]),
-      shares: toNumber(match[3]),
-      weight: toNumber(match[4]),
+  const result = await fetchMegaProviderData({
+    code: etf.code,
+    sourceUrl: etf.sourceUrl,
+    fetchDirectHtml: fetchHtml,
+    fetchReaderHtml: (sourceUrl) => requestWithRetry(`https://r.jina.ai/${sourceUrl}`, {
+      headers: {
+        accept: 'text/html',
+        dnt: '1',
+        'x-target-selector': '.etfin-content, #asset_div, #fund_content_list_1, #fund_content_list_1_mobile, #more1',
+        'x-no-cache': 'true',
+        'x-respond-with': 'html',
+      },
+    }, {
+      標籤: `兆豐 ETF Reader ${sourceUrl}`,
+      逾時毫秒: 30000,
+      重試次數: 2,
+      回應類型: 'text',
     }),
-  ).filter((item) => item.code && item.name);
-
-  if (!holdings.length) {
-    throw new Error('兆豐 ETF 持股解析失敗');
-  }
-
-  return buildEtfSnapshot(etf, {
-    disclosureDate: html.match(/資料來源：[^，]+，\s*(\d{4}\/\d{2}\/\d{2})/)?.[1],
-    aum: toNumber(資產欄位.get('淨資產價值')),
-    nav: toNumber(資產欄位.get('每單位淨值')),
-    units: toNumber(資產欄位.get('在外流通單位數')),
-    holdings,
   });
+  if (result.fallbackReason) {
+    console.warn(`[兆豐 ETF Reader 備援] ${etf.code}：${result.fallbackReason}`);
+  }
+  return buildEtfSnapshot(etf, { ...result.data, retrievalTransport: result.transport });
 }
 
 async function fetchCathaySnapshot(etf) {
@@ -2105,39 +2042,55 @@ async function cleanupLegacyHistoryFiles(code) {
   await rm(path.join(etfDir, 'snapshots'), { recursive: true, force: true });
 }
 
-async function updateSingleEtf(etf) {
+async function updateSingleEtf(etf, deployedCacheOptions = {}) {
   const etfDir = path.join(ETF資料目錄, etf.code);
   const latestPath = path.join(etfDir, 'latest.json');
   const previousPath = path.join(etfDir, 'previous.json');
   const diffPath = path.join(etfDir, 'diff-latest.json');
   const deployedBasePath = `data/etfs/${etf.code}`;
+  const taipeiToday = formatTaipeiDate(new Date());
   let snapshot;
 
   try {
     snapshot = await fetchEtfSnapshot(etf);
+    const disclosureDate = requireCurrentOrPastSnapshotDate(
+      snapshot.disclosureDate,
+      taipeiToday,
+      '官方來源',
+    );
+    snapshot = { ...snapshot, disclosureDate };
   } catch (error) {
-    const [cachedLatest, cachedPrevious, cachedDiff] = await Promise.all([
-      readDeployedOrLocalJson(`${deployedBasePath}/latest.json`),
-      readDeployedOrLocalJson(`${deployedBasePath}/previous.json`),
-      readDeployedOrLocalJson(`${deployedBasePath}/diff-latest.json`),
+    const [cachedLatest, cachedPrevious] = await Promise.all([
+      readDeployedOrLocalJson(`${deployedBasePath}/latest.json`, deployedCacheOptions),
+      readDeployedOrLocalJson(`${deployedBasePath}/previous.json`, deployedCacheOptions),
     ]);
+    const fallback = selectCacheFallback({
+      latest: cachedLatest,
+      previous: cachedPrevious,
+      today: taipeiToday,
+    });
 
-    if (cachedLatest) {
+    if (fallback) {
       const reason = error instanceof Error ? error.message : String(error);
+      const cacheNote = fallback.selected === 'previous'
+        ? `${reason}；latest 快取日期無效，改用 previous 快取`
+        : reason;
       const fallbackSnapshot = {
-        ...cachedLatest,
+        ...fallback.snapshot,
         stale: true,
         sourceHealth: {
           status: 'stale',
           source: 'deployed-cache',
-          dataDate: cachedLatest.disclosureDate ?? null,
-          reason,
+          dataDate: fallback.snapshot.disclosureDate,
+          reason: cacheNote,
         },
       };
-      const fallbackDiff = cachedDiff ?? createHoldingDiff(cachedPrevious, cachedLatest);
+      const fallbackDiff = createHoldingDiff(fallback.comparisonSnapshot, fallback.snapshot);
       await Promise.all([
         writeJson(latestPath, fallbackSnapshot),
-        cachedPrevious ? writeJson(previousPath, cachedPrevious) : Promise.resolve(),
+        fallback.comparisonSnapshot
+          ? writeJson(previousPath, fallback.comparisonSnapshot)
+          : rm(previousPath, { force: true }),
         writeJson(diffPath, fallbackDiff),
       ]);
       await cleanupLegacyHistoryFiles(etf.code);
@@ -2145,14 +2098,14 @@ async function updateSingleEtf(etf) {
         etf,
         snapshot: fallbackSnapshot,
         diff: fallbackDiff,
-        cacheNote: reason,
+        cacheNote,
       };
     }
 
     throw error;
   }
 
-  const disclosureDate = clampTaipeiDateToToday(snapshot.disclosureDate);
+  const disclosureDate = snapshot.disclosureDate;
   snapshot = {
     ...snapshot,
     disclosureDate,
@@ -2162,20 +2115,21 @@ async function updateSingleEtf(etf) {
       source: 'official-provider',
       dataDate: disclosureDate,
       fetchedAt: getCurrentIso(),
+      ...(snapshot.retrievalTransport ? { retrievalTransport: snapshot.retrievalTransport } : {}),
     },
   };
-  const [existingLatest, existingPrevious, existingDiff] = await Promise.all([
-    readDeployedOrLocalJson(`${deployedBasePath}/latest.json`),
-    readDeployedOrLocalJson(`${deployedBasePath}/previous.json`),
-    readDeployedOrLocalJson(`${deployedBasePath}/diff-latest.json`),
+  const [rawExistingLatest, rawExistingPrevious] = await Promise.all([
+    readDeployedOrLocalJson(`${deployedBasePath}/latest.json`, deployedCacheOptions),
+    readDeployedOrLocalJson(`${deployedBasePath}/previous.json`, deployedCacheOptions),
   ]);
-  let previousSnapshot = existingPrevious;
+  const existingLatest = getUsableCachedSnapshot(rawExistingLatest, taipeiToday);
+  const existingPrevious = getUsableCachedSnapshot(rawExistingPrevious, taipeiToday);
+  let previousSnapshot =
+    existingPrevious?.disclosureDate < disclosureDate ? existingPrevious : null;
 
   if (
     existingLatest &&
-    normalizeDate(existingLatest.disclosureDate) &&
-    disclosureDate &&
-    normalizeDate(existingLatest.disclosureDate) > disclosureDate
+    existingLatest.disclosureDate > disclosureDate
   ) {
     const cacheNote = `官方來源回傳日期 ${disclosureDate}，落後已部署快照 ${existingLatest.disclosureDate}`;
     const fallbackSnapshot = {
@@ -2188,10 +2142,14 @@ async function updateSingleEtf(etf) {
         reason: cacheNote,
       },
     };
-    const fallbackDiff = existingDiff ?? createHoldingDiff(existingPrevious, existingLatest);
+    const comparisonSnapshot =
+      existingPrevious?.disclosureDate < existingLatest.disclosureDate ? existingPrevious : null;
+    const fallbackDiff = createHoldingDiff(comparisonSnapshot, existingLatest);
     await Promise.all([
       writeJson(latestPath, fallbackSnapshot),
-      existingPrevious ? writeJson(previousPath, existingPrevious) : Promise.resolve(),
+      comparisonSnapshot
+        ? writeJson(previousPath, comparisonSnapshot)
+        : rm(previousPath, { force: true }),
       writeJson(diffPath, fallbackDiff),
     ]);
     await cleanupLegacyHistoryFiles(etf.code);
@@ -2203,7 +2161,7 @@ async function updateSingleEtf(etf) {
     };
   }
 
-  if (existingLatest && normalizeDate(existingLatest.disclosureDate) !== disclosureDate) {
+  if (existingLatest && existingLatest.disclosureDate !== disclosureDate) {
     previousSnapshot = existingLatest;
   }
 
@@ -2211,7 +2169,9 @@ async function updateSingleEtf(etf) {
 
   await Promise.all([
     writeJson(latestPath, snapshot),
-    previousSnapshot ? writeJson(previousPath, previousSnapshot) : Promise.resolve(),
+    previousSnapshot
+      ? writeJson(previousPath, previousSnapshot)
+      : rm(previousPath, { force: true }),
     writeJson(diffPath, diff),
   ]);
   await cleanupLegacyHistoryFiles(etf.code);
@@ -2225,13 +2185,6 @@ function formatTaipeiDate(date) {
 
 function formatTaipeiTime(date) {
   return 台北時間格式器.format(date);
-}
-
-function clampTaipeiDateToToday(value, now = new Date()) {
-  const normalized = normalizeDate(value);
-  if (!normalized) return null;
-  const today = formatTaipeiDate(now);
-  return normalized > today ? today : normalized;
 }
 
 function convertRocDateToIso(value) {
@@ -2563,7 +2516,10 @@ function applyMisSnapshotToRankItem(item, snapshotMap) {
   };
 }
 
-function buildEtfSnapshot(etf, { disclosureDate, aum = null, nav = null, units = null, holdings = [] }) {
+function buildEtfSnapshot(
+  etf,
+  { disclosureDate, aum = null, nav = null, units = null, holdings = [], retrievalTransport = null },
+) {
   const 排序後持股 = sortHoldings(holdings);
 
   return {
@@ -2582,6 +2538,7 @@ function buildEtfSnapshot(etf, { disclosureDate, aum = null, nav = null, units =
     holdingsCount: 排序後持股.length,
     holdings: 排序後持股,
     fetchedAt: getCurrentIso(),
+    ...(retrievalTransport ? { retrievalTransport } : {}),
   };
 }
 
@@ -6341,9 +6298,9 @@ function buildDispositionRadarData({ 選股輔助資料集, stockDetailList, sto
   };
 }
 
-async function writeEtfMarketData(追蹤清單, tdcc索引) {
+async function writeEtfMarketData(追蹤清單, tdcc索引, deployedCacheOptions = {}) {
   for (const etf of 追蹤清單) {
-    const 舊資料 = await readDeployedOrLocalJson(`data/etfs/${etf.code}/market.json`);
+    const 舊資料 = await readDeployedOrLocalJson(`data/etfs/${etf.code}/market.json`, deployedCacheOptions);
     try {
       const [歷史資料, 盤中走勢] = await Promise.all([
         fetchSecurityDailyBars(etf.code, 6),
@@ -6708,6 +6665,11 @@ async function main() {
   const successes = [];
   const failures = [];
   const pending = [];
+  const etfDeployedCacheOptions = {
+    remoteTimeoutMs: 5000,
+    remoteAttempts: 1,
+    remoteCircuit: { open: false, consecutiveFailures: 0, failureThreshold: 2, reported: false },
+  };
 
   for (const etf of 追蹤ETF清單) {
     if (etf.trackingStatus !== '已串接') {
@@ -6725,7 +6687,7 @@ async function main() {
     }
 
     try {
-      const result = await updateSingleEtf(etf);
+      const result = await updateSingleEtf(etf, etfDeployedCacheOptions);
       successes.push(result);
       if (result.cacheNote) {
         console.warn(`[ETF 沿用快取] ${etf.code} ${result.snapshot.disclosureDate}：${result.cacheNote}`);
@@ -6850,7 +6812,7 @@ async function main() {
     await writeJson(path.join(ETF資料目錄, result.etf.code, 'diff-latest.json'), result.diff);
   }
 
-  await writeEtfMarketData(追蹤ETF清單, tdcc索引);
+  await writeEtfMarketData(追蹤ETF清單, tdcc索引, etfDeployedCacheOptions);
   const 個股候選清單 = buildSecurityCandidateList({ 市場總覽, 法人追蹤, ETF結果: successes, 全部個股, 選股輔助資料集 });
   let 市場個股索引 = new Map(
     [...個股索引.entries()].map(([code, item]) => [
